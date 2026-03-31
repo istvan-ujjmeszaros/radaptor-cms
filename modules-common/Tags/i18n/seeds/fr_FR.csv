@@ -1,0 +1,14 @@
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
+tags,field.context.label,,fr_FR,Context,Contexte,0,Contexte
+tags,field.description.label,,fr_FR,"Tag description","Description de l'étiquette",0,"Description de l'étiquette"
+tags,field.name.explanation,,fr_FR,"No spaces, short and concise. Do not create synonyms for existing tags.","Sans espaces, court et concis. Ne créez pas de synonymes pour les étiquettes existantes.",0,"Sans espaces, court et concis. Ne créez pas de synonymes pour les étiquettes existantes."
+tags,field.name.label,,fr_FR,"Tag name","Nom de l'étiquette",0,"Nom de l'étiquette"
+tags,field.type.explanation,,fr_FR,"Select the tag type","Sélectionner le type d'étiquette",0,"Sélectionner le type d'étiquette"
+tags,field.type.label,,fr_FR,Type,Type,0,Type
+tags,form.name,,fr_FR,Tag,Étiquette,0,Étiquette
+tags,form.title_create,,fr_FR,"New tag","Nouvelle étiquette",0,"Nouvelle étiquette"
+tags,form.title_edit,,fr_FR,"Edit tag","Modifier l'étiquette",0,"Modifier l'étiquette"
+tags,list.title,,fr_FR,Tags,Étiquettes,0,Étiquettes
+tags,saved,,fr_FR,"Tags saved","Étiquettes enregistrées",0,"Étiquettes enregistrées"
+tags,updated,,fr_FR,"Tag updated","Étiquette mise à jour",0,"Étiquette mise à jour"
+tags,validation.name_max_length,,fr_FR,"Tag name must not exceed 255 characters","Le nom de l'étiquette ne doit pas dépasser 255 caractères",0,"Le nom de l'étiquette ne doit pas dépasser 255 caractères"

@@ -1,0 +1,49 @@
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
+import_export,action.export_csv,,hu_HU,"Export CSV","CSV exportálása",0,"CSV exportálása"
+import_export,action.preview_import,,hu_HU,"Preview import","Import előnézet",0,"Import előnézet"
+import_export,action.run_import,,hu_HU,"Run import","Import futtatása",0,"Import futtatása"
+import_export,dataset.i18n_translations.description,,hu_HU,"Export and import translation rows as CSV.","Fordítási sorok exportálása és importálása CSV formátumban.",0,"Fordítási sorok exportálása és importálása CSV formátumban."
+import_export,dataset.i18n_translations.name,,hu_HU,"I18n translations","I18n fordítások",0,"I18n fordítások"
+import_export,error.dataset_not_found,,hu_HU,"Import/export dataset not found.","Az import/export adatkészlet nem található.",0,"Az import/export adatkészlet nem található."
+import_export,error.file_read,,hu_HU,"Unable to read the uploaded CSV file.","A feltöltött CSV fájl nem olvasható.",0,"A feltöltött CSV fájl nem olvasható."
+import_export,error.file_required,,hu_HU,"Please select a CSV file to import.","Válassz ki egy importálandó CSV fájlt.",0,"Válassz ki egy importálandó CSV fájlt."
+import_export,error.invalid_format,,hu_HU,"Invalid format","Érvénytelen formátum",0,"Érvénytelen formátum"
+import_export,error.invalid_mode,,hu_HU,"Invalid import mode.","Érvénytelen import mód.",0,"Érvénytelen import mód."
+import_export,error.locale_required,,hu_HU,"Locale is required for export.","Az exporthoz locale megadása kötelező.",0,"Az exporthoz locale megadása kötelező."
+import_export,export.title,,hu_HU,"Export CSV","CSV export",0,"CSV export"
+import_export,field.dataset.label,,hu_HU,Dataset,Adatkészlet,0,Adatkészlet
+import_export,field.expect_locale.any,,hu_HU,"Any locale in file","Bármely locale a fájlban",0,"Bármely locale a fájlban"
+import_export,field.expect_locale.help,,hu_HU,"Optional for insert_new and upsert. Sync should normally set this explicitly and always uses a single-locale scope, even when importing wide CSV.","Az insert_new és az upsert esetén opcionális. Sync módban célszerű ezt megadni, és ott mindig egyetlen locale-szelet használható, még wide CSV import esetén is.",0,"Az insert_new és az upsert esetén opcionális. Sync módban célszerű ezt megadni, és ott mindig egyetlen locale-szelet használható, még wide CSV import esetén is."
+import_export,field.expect_locale.label,,hu_HU,"Expected locale","Elvárt locale",0,"Elvárt locale"
+import_export,field.file.help,,hu_HU,"Upload a CSV file exported from the same dataset.","Tölts fel egy ugyanebből az adatkészletből exportált CSV fájlt.",0,"Tölts fel egy ugyanebből az adatkészletből exportált CSV fájlt."
+import_export,field.file.label,,hu_HU,"CSV file","CSV fájl",0,"CSV fájl"
+import_export,field.format.help,,hu_HU,"Normalized keeps one row per locale. Wide groups locales into text:<locale> columns.","A normalizált formátum locale-onként egy sort tart meg. A széles formátum a locale-okat text:<locale> oszlopokba rendezi.",0,"A normalizált formátum locale-onként egy sort tart meg. A széles formátum a locale-okat text:<locale> oszlopokba rendezi."
+import_export,field.format.label,,hu_HU,Format,Formátum,0,Formátum
+import_export,field.locale.all,,hu_HU,"All locales","Összes locale",0,"Összes locale"
+import_export,field.locale.help,,hu_HU,"Leave empty to export all locales, or choose one locale for a smaller file. Wide format puts locale values into text:<locale> columns.","Hagyd üresen az összes locale exportálásához, vagy válassz egy locale-t a kisebb fájlhoz. A széles formátum a locale értékeket text:<locale> oszlopokba teszi.",0,"Hagyd üresen az összes locale exportálásához, vagy válassz egy locale-t a kisebb fájlhoz. A széles formátum a locale értékeket text:<locale> oszlopokba teszi."
+import_export,field.locale.label,,hu_HU,Locale,"Nyelvi környezet",0,"Nyelvi környezet"
+import_export,field.mode.help,,hu_HU,"Sync is destructive: it deletes rows missing from the imported locale slice and only supports single-locale files.","A sync destruktív: törli az importált locale-szeletből hiányzó sorokat, és csak egyetlen locale-t tartalmazó fájlt támogat.",0,"A sync destruktív: törli az importált locale-szeletből hiányzó sorokat, és csak egyetlen locale-t tartalmazó fájlt támogat."
+import_export,field.mode.label,,hu_HU,"Import mode","Import mód",0,"Import mód"
+import_export,format.auto,,hu_HU,Auto-detect,"Automatikus felismerés",0,"Automatikus felismerés"
+import_export,format.normalized,,hu_HU,Normalized,Normalizált,0,Normalizált
+import_export,format.wide,,hu_HU,Wide,Széles,0,Széles
+import_export,import.title,,hu_HU,"Import CSV","CSV import",0,"CSV import"
+import_export,mode.insert_new,,hu_HU,"Insert new only","Csak újak beszúrása",0,"Csak újak beszúrása"
+import_export,mode.sync,,hu_HU,"Sync locale slice","Locale-szelet szinkronizálása",0,"Locale-szelet szinkronizálása"
+import_export,mode.upsert,,hu_HU,"Upsert existing","Meglévők frissítése is",0,"Meglévők frissítése is"
+import_export,result.deleted,,hu_HU,Deleted,Törölve,0,Törölve
+import_export,result.detected_locale,,hu_HU,"Detected locale","Észlelt locale",0,"Észlelt locale"
+import_export,result.detected_locales,,hu_HU,"Detected locales","Észlelt locale-ok",0,"Észlelt locale-ok"
+import_export,result.dry_run_summary,,hu_HU,"Dry-run summary for {dataset}.","Dry-run összegzés ennél: {dataset}.",0,"Dry-run összegzés ennél: {dataset}."
+import_export,result.error_summary,,hu_HU,"Import finished with errors for {dataset}.","Az import hibákkal fejeződött be ennél: {dataset}.",0,"Az import hibákkal fejeződött be ennél: {dataset}."
+import_export,result.format,,hu_HU,Format,Formátum,0,Formátum
+import_export,result.imported,,hu_HU,Imported,Importálva,0,Importálva
+import_export,result.inserted,,hu_HU,Inserted,Beszúrva,0,Beszúrva
+import_export,result.mode,,hu_HU,Mode,Mód,0,Mód
+import_export,result.processed,,hu_HU,Processed,Feldolgozva,0,Feldolgozva
+import_export,result.skipped,,hu_HU,Skipped,Kihagyva,0,Kihagyva
+import_export,result.success_summary,,hu_HU,"Import completed successfully for {dataset}.","Az import sikeresen befejeződött ennél: {dataset}.",0,"Az import sikeresen befejeződött ennél: {dataset}."
+import_export,result.updated,,hu_HU,Updated,Frissítve,0,Frissítve
+import_export,workbench.description,,hu_HU,"Export data to CSV or import CSV files into registered datasets.","Adatok exportálása CSV-be vagy CSV fájlok importálása a regisztrált adatkészletekbe.",0,"Adatok exportálása CSV-be vagy CSV fájlok importálása a regisztrált adatkészletekbe."
+import_export,workbench.no_datasets,,hu_HU,"No import/export datasets are available.","Nincsenek elérhető import/export adatkészletek.",0,"Nincsenek elérhető import/export adatkészletek."
+import_export,workbench.title,,hu_HU,"Import / Export","Import / Export",0,"Import / Export"

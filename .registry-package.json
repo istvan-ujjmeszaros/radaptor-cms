@@ -1,0 +1,9 @@
+{
+  "package": "radaptor/core/cms",
+  "type": "core",
+  "id": "cms",
+  "version": "0.1.0",
+  "dependencies": {
+    "radaptor/core/framework": "^0.1.0"
+  }
+}

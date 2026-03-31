@@ -1,0 +1,49 @@
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
+import_export,action.export_csv,,zh_Hans_CN,"Export CSV","导出 CSV",0,"导出 CSV"
+import_export,action.preview_import,,zh_Hans_CN,"Preview import",预览导入,0,预览导入
+import_export,action.run_import,,zh_Hans_CN,"Run import",运行导入,0,运行导入
+import_export,dataset.i18n_translations.description,,zh_Hans_CN,"Export and import translation rows as CSV.","以 CSV 格式导出和导入翻译行。",0,"以 CSV 格式导出和导入翻译行。"
+import_export,dataset.i18n_translations.name,,zh_Hans_CN,"I18n translations",国际化翻译,0,国际化翻译
+import_export,error.dataset_not_found,,zh_Hans_CN,"Import/export dataset not found.",未找到导入/导出数据集。,0,未找到导入/导出数据集。
+import_export,error.file_read,,zh_Hans_CN,"Unable to read the uploaded CSV file.","无法读取上传的 CSV 文件。",0,"无法读取上传的 CSV 文件。"
+import_export,error.file_required,,zh_Hans_CN,"Please select a CSV file to import.","请选择要导入的 CSV 文件。",0,"请选择要导入的 CSV 文件。"
+import_export,error.invalid_format,,zh_Hans_CN,"Invalid format",无效格式,0,无效格式
+import_export,error.invalid_mode,,zh_Hans_CN,"Invalid import mode.",无效的导入模式。,0,无效的导入模式。
+import_export,error.locale_required,,zh_Hans_CN,"Locale is required for export.",导出时必须指定语言。,0,导出时必须指定语言。
+import_export,export.title,,zh_Hans_CN,"Export CSV","导出 CSV",0,"导出 CSV"
+import_export,field.dataset.label,,zh_Hans_CN,Dataset,数据集,0,数据集
+import_export,field.expect_locale.any,,zh_Hans_CN,"Any locale in file",文件中的任意语言,0,文件中的任意语言
+import_export,field.expect_locale.help,,zh_Hans_CN,"Optional for insert_new and upsert. Sync should normally set this explicitly and always uses a single-locale scope, even when importing wide CSV.","对于 insert_new 和 upsert 为可选。Sync 通常应明确设置此项，并始终使用单语言范围，即使在导入宽格式 CSV 时也是如此。",0,"对于 insert_new 和 upsert 为可选。Sync 通常应明确设置此项，并始终使用单语言范围，即使在导入宽格式 CSV 时也是如此。"
+import_export,field.expect_locale.label,,zh_Hans_CN,"Expected locale",预期语言,0,预期语言
+import_export,field.file.help,,zh_Hans_CN,"Upload a CSV file exported from the same dataset.","上传从同一数据集导出的 CSV 文件。",0,"上传从同一数据集导出的 CSV 文件。"
+import_export,field.file.label,,zh_Hans_CN,"CSV file","CSV 文件",0,"CSV 文件"
+import_export,field.format.help,,zh_Hans_CN,"Normalized keeps one row per locale. Wide groups locales into text:<locale> columns.","标准化格式每种语言保留一行。宽格式将语言分组到 text:<locale> 列中。",0,"标准化格式每种语言保留一行。宽格式将语言分组到 text:<locale> 列中。"
+import_export,field.format.label,,zh_Hans_CN,Format,格式,0,格式
+import_export,field.locale.all,,zh_Hans_CN,"All locales",所有语言,0,所有语言
+import_export,field.locale.help,,zh_Hans_CN,"Leave empty to export all locales, or choose one locale for a smaller file. Wide format puts locale values into text:<locale> columns.","留空以导出所有语言，或选择一种语言以获得较小的文件。宽格式将语言值放入 text:<locale> 列。",0,"留空以导出所有语言，或选择一种语言以获得较小的文件。宽格式将语言值放入 text:<locale> 列。"
+import_export,field.locale.label,,zh_Hans_CN,Locale,语言,0,语言
+import_export,field.mode.help,,zh_Hans_CN,"Sync is destructive: it deletes rows missing from the imported locale slice and only supports single-locale files.",同步具有破坏性：它会删除导入语言片段中缺少的行，且仅支持单语言文件。,0,同步具有破坏性：它会删除导入语言片段中缺少的行，且仅支持单语言文件。
+import_export,field.mode.label,,zh_Hans_CN,"Import mode",导入模式,0,导入模式
+import_export,format.auto,,zh_Hans_CN,Auto-detect,自动检测,0,自动检测
+import_export,format.normalized,,zh_Hans_CN,Normalized,标准化,0,标准化
+import_export,format.wide,,zh_Hans_CN,Wide,宽格式,0,宽格式
+import_export,import.title,,zh_Hans_CN,"Import CSV","导入 CSV",0,"导入 CSV"
+import_export,mode.insert_new,,zh_Hans_CN,"Insert new only",仅插入新项,0,仅插入新项
+import_export,mode.sync,,zh_Hans_CN,"Sync locale slice",同步语言片段,0,同步语言片段
+import_export,mode.upsert,,zh_Hans_CN,"Upsert existing",更新或插入,0,更新或插入
+import_export,result.deleted,,zh_Hans_CN,Deleted,已删除,0,已删除
+import_export,result.detected_locale,,zh_Hans_CN,"Detected locale",检测到的语言,0,检测到的语言
+import_export,result.detected_locales,,zh_Hans_CN,"Detected locales",检测到的语言,0,检测到的语言
+import_export,result.dry_run_summary,,zh_Hans_CN,"Dry-run summary for {dataset}.","{dataset} 的模拟运行摘要。",0,"{dataset} 的模拟运行摘要。"
+import_export,result.error_summary,,zh_Hans_CN,"Import finished with errors for {dataset}.","{dataset} 导入完成但有错误。",0,"{dataset} 导入完成但有错误。"
+import_export,result.format,,zh_Hans_CN,Format,格式,0,格式
+import_export,result.imported,,zh_Hans_CN,Imported,已导入,0,已导入
+import_export,result.inserted,,zh_Hans_CN,Inserted,已插入,0,已插入
+import_export,result.mode,,zh_Hans_CN,Mode,模式,0,模式
+import_export,result.processed,,zh_Hans_CN,Processed,已处理,0,已处理
+import_export,result.skipped,,zh_Hans_CN,Skipped,已跳过,0,已跳过
+import_export,result.success_summary,,zh_Hans_CN,"Import completed successfully for {dataset}.","{dataset} 导入成功完成。",0,"{dataset} 导入成功完成。"
+import_export,result.updated,,zh_Hans_CN,Updated,已更新,0,已更新
+import_export,workbench.description,,zh_Hans_CN,"Export data to CSV or import CSV files into registered datasets.","将数据导出为 CSV 或将 CSV 文件导入已注册的数据集。",0,"将数据导出为 CSV 或将 CSV 文件导入已注册的数据集。"
+import_export,workbench.no_datasets,,zh_Hans_CN,"No import/export datasets are available.",没有可用的导入/导出数据集。,0,没有可用的导入/导出数据集。
+import_export,workbench.title,,zh_Hans_CN,"Import / Export","导入 / 导出",0,"导入 / 导出"

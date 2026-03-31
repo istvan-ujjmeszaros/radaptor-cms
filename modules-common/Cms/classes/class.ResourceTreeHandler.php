@@ -1,0 +1,867 @@
+<?php
+
+class ResourceTreeHandler extends ResourceAcl
+{
+	public const int MAXIMUM_ALLOWED_INLINE_SIZE_FOR_UNKNOWN = 10485760;   // 10MB
+
+	private static array $_resizable_resources = [];
+
+	public static function getPathFromId(int $resource_id): string
+	{
+		$data = ResourceTreeHandler::getResourceTreeEntryDataById($resource_id);
+
+		if (is_null($data)) {
+			return '';
+		}
+
+		$path = $data['path'] . $data['resource_name'];
+
+		if ($path === '/') {
+			return $path;
+		}
+
+		// Only add trailing slash for folders, not for files (which have extensions)
+		$hasExtension = str_contains($data['resource_name'], '.');
+
+		if ($hasExtension) {
+			return $path;
+		}
+
+		return $path . '/';
+	}
+
+	public static function getFolderId(int $resource_id): int
+	{
+		$data = ResourceTreeHandler::getResourceTreeEntryDataById($resource_id);
+
+		if ($data['node_type'] == 'folder') {
+			return $data['node_id'];
+		} else {
+			return $data['parent_id'] != 0 ? ResourceTreeHandler::getFolderId((int)$data['parent_id']) : 0;
+		}
+	}
+
+	public static function getPathVariations(string $folder): array
+	{
+		$exploded_folders = explode('/', $folder);
+
+		foreach ($exploded_folders as $key => $folder) {
+			if ($folder == '') {
+				unset($exploded_folders[$key]);
+			}
+		}
+
+		$exploded_folders = array_values($exploded_folders);
+
+		$path_variations = [];
+
+		for ($i = 0; $i < count($exploded_folders); ++$i) {
+			$path_variation = '/';
+
+			for ($j = 1; $j <= $i; ++$j) {
+				$path_variation .= $exploded_folders[$j - 1] . '/';
+			}
+
+			$path_variations[] = [
+				'path' => $path_variation,
+				'resource_name' => $exploded_folders[$j - 1],
+			];
+		}
+
+		return $path_variations;
+	}
+
+	public static function getResourceTree(int $parent_id, bool $skip_acl_check = false): array
+	{
+		$return = NestedSet::getChildren('resource_tree', $parent_id, [
+			'resource_name',
+			'node_type',
+			'catcher_page',
+		], 'node_type=\'folder\' DESC, lft ASC');
+
+		if ($skip_acl_check) {
+			return $return;
+		}
+
+		foreach ($return as $key => $value) {
+			if (!ResourceAcl::canAccessResource($value['node_id'], ResourceAcl::_ACL_LIST)) {
+				unset($return[$key]);
+			}
+		}
+
+		return $return;
+	}
+
+	public static function setDownloadHeader(int $file_size, string $save_name): void
+	{
+		WebpageView::header("Pragma: 0");
+		WebpageView::header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+		WebpageView::header("Cache-Control: private");
+		WebpageView::header("Content-type: application/force-download");
+		WebpageView::header("Content-Transfer-Encoding: Binary");
+		WebpageView::header("Content-length: $file_size");
+		WebpageView::header("Content-disposition: attachment; filename=\"$save_name\"");
+	}
+
+	public static function setInlineHeader(int $file_size, string $save_name, string $mime = 'unknown'): void
+	{
+		if ($mime == 'unknown') {
+			if ($file_size > self::MAXIMUM_ALLOWED_INLINE_SIZE_FOR_UNKNOWN) {
+				self::setDownloadHeader($file_size, $save_name);
+
+				return;
+			}
+		} else {
+			WebpageView::header("Content-type: {$mime}");
+		}
+
+		WebpageView::header("Content-Transfer-Encoding: Binary");
+		WebpageView::header("Content-length: {$file_size}");
+		WebpageView::header("Content-disposition: inline; filename=\"{$save_name}\"");
+		WebpageView::header('Accept-Ranges: bytes');
+	}
+
+	public static function getResourceTreeEntryIdFromUrl(?string $domain_context = null): ?int
+	{
+		$domain_context ??= Config::APP_DOMAIN_CONTEXT->value();
+
+		$folder = Request::_GET('folder');
+		$resource = Request::_GET('resource');
+
+		$node_id = self::_getResourceTreeEntryIdFromNamedResource($folder, $resource, $domain_context);
+
+		// átméretezett képek, pl /mappa/kep.150x150.jpg == /mappa/kep.jpg(átméretezve 150x150-re)
+		if (is_null($node_id)) {
+			$node_data = self::_getResizableResourceTreeEntryIdFromNamedResource($folder, $resource, $domain_context);
+
+			if ($node_data) {
+				self::$_resizable_resources[$node_data['node_id']] = $node_data['resize_data'];
+				$node_id = $node_data['node_id'];
+			}
+		}
+
+		// elfogó oldal keresése
+		if (is_null($node_id)) {
+			$node_id = self::_getClosestCatchableResourceTreeEntryId($folder, $domain_context);
+		}
+
+		return $node_id;
+	}
+
+	public static function getResourceTreeEntryDataById(int $resource_id): ?array
+	{
+		$cached = Cache::get(self::class, $resource_id);
+
+		if (!is_null($cached)) {
+			return $cached;
+		}
+
+		$return = NestedSet::getNodeInfo('resource_tree', $resource_id);
+
+		return Cache::set(self::class, $resource_id, $return);
+	}
+
+	public static function getDomainContextForResourceTreeEntryData(array $resource_data): string
+	{
+		$query = "SELECT resource_name FROM resource_tree WHERE lft < ? AND rgt > ? ORDER BY lft LIMIT 1";
+
+		return DbHelper::selectOneColumnFromQuery(
+			$query,
+			[$resource_data['lft'], $resource_data['rgt']]
+		);
+	}
+
+	public static function getResourceTreeEntryData(string $folder, string $resource_name, ?string $domain_context = null): ?array
+	{
+		$domain_context ??= Config::APP_DOMAIN_CONTEXT->value();
+
+		$query_domain_context = "SELECT node_id FROM resource_tree WHERE node_type='root' AND resource_name=?";
+		$stmt_domain_context = Db::instance()->prepare($query_domain_context);
+		$stmt_domain_context->execute([$domain_context]);
+
+		$rs_domain_context = $stmt_domain_context->fetch(PDO::FETCH_ASSOC);
+
+		if ($rs_domain_context === false) {
+			return null;
+		}
+
+		$node = self::getResourceTreeEntryDataById($rs_domain_context['node_id']);
+
+		if (is_null($node)) {
+			return null;
+		}
+
+		if ($folder !== '/') {
+			$folder = str_replace('//', '/', '/' . $folder . '/');
+		}
+
+		$stmt = Db::instance()
+				  ->prepare("SELECT * FROM resource_tree WHERE resource_name=? AND path=? AND lft > ? AND rgt < ? LIMIT 1");
+		$stmt->execute([
+			$resource_name,
+			$folder,
+			$node['lft'],
+			$node['rgt'],
+		]);
+
+		$rs = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		if ($rs === false) {
+			return null;
+		}
+
+		return $rs;
+	}
+
+	private static function _getResourceTreeEntryIdFromNamedResource(string $folder, string $resource_name, ?string $domain_context = null): ?int
+	{
+		$domain_context ??= Config::APP_DOMAIN_CONTEXT->value();
+
+		$rs = self::getResourceTreeEntryData($folder, $resource_name, $domain_context);
+
+		if (!is_array($rs)) {
+			return null;
+		}
+
+		return $rs['node_id'];
+	}
+
+	private static function _getResizableResourceTreeEntryIdFromNamedResource(string $folder, string $resource_name, ?string $domain_context = null): ?array
+	{
+		$domain_context ??= Config::APP_DOMAIN_CONTEXT->value();
+
+		$exploded_resource_name = explode('.', $resource_name);
+
+		if (count($exploded_resource_name) < 3) {
+			return null;
+		}
+
+		$resize_data = $exploded_resource_name[count($exploded_resource_name) - 2];
+
+		unset($exploded_resource_name[count($exploded_resource_name) - 2]);
+
+		$genuine_resource_name = implode('.', $exploded_resource_name);
+
+		$rs = self::getResourceTreeEntryData($folder, $genuine_resource_name, $domain_context);
+
+		if (is_null($rs)) {
+			return null;
+		}
+
+		return [
+			'node_id' => $rs['node_id'],
+			'resize_data' => $resize_data,
+		];
+	}
+
+	public static function getResizeTreeEntryData(int $node_id): string
+	{
+		return self::$_resizable_resources[$node_id] ?? '';
+	}
+
+	private static function _getClosestCatchableResourceTreeEntryId(string $folder, ?string $domain_context = null): ?int
+	{
+		$domain_context ??= Config::APP_DOMAIN_CONTEXT->value();
+
+		$path_variations = self::getPathVariations($folder);
+		$path_variations = array_reverse($path_variations);
+
+		foreach ($path_variations as $path_variation) {
+			$data = self::getResourceTreeEntryData($path_variation['path'], $path_variation['resource_name'], $domain_context);
+
+			if (isset($data['catcher_page']) && $data['catcher_page'] > 0) {
+				return $data['catcher_page'];
+			}
+		}
+
+		$root = self::getResourceTreeEntryDataById(self::getDomainRoot($domain_context));
+
+		if ($root['catcher_page']) {
+			return $root['catcher_page'];
+		}
+
+		return null;
+	}
+
+	public static function getDomainRoot(string $domain): ?int
+	{
+		$query = "SELECT node_id FROM resource_tree WHERE node_type='root' AND resource_name=? LIMIT 1";
+
+		return DbHelper::selectOneColumnFromQuery(
+			$query,
+			[$domain]
+		);
+	}
+
+	public static function createResourceTreeEntryFromPath(string $folder, string $resource_name, string $resource_type, ?string $layout_name = null): ?int
+	{
+		$path_variations = self::getPathVariations($folder);
+
+		// először létrehozzuk a hiányzó mappákat az útvonalhoz
+		$last_parent_id = self::getDomainRoot(Config::APP_DOMAIN_CONTEXT->value());
+
+		if (is_null($last_parent_id)) {
+			$savedata = [
+				'node_type' => 'root',
+				'resource_name' => Config::APP_DOMAIN_CONTEXT->value(),
+			];
+
+			$last_parent_id = self::addResourceEntry($savedata);
+
+			if (is_null($last_parent_id)) {
+				return null;
+			}
+
+			SystemMessages::_warning("Domain created in root: " . Config::APP_DOMAIN_CONTEXT->value());
+		}
+
+		foreach ($path_variations as $path_variation) {
+			$page_data = self::getResourceTreeEntryData($path_variation['path'], $path_variation['resource_name']);
+
+			if (is_null($page_data)) {
+				$savedata = [
+					'node_type' => 'folder',
+					'path' => $path_variation['path'],
+					'resource_name' => $path_variation['resource_name'],
+				];
+
+				$last_parent_id = self::addResourceEntry($savedata, $last_parent_id);
+			} elseif ($page_data['node_type'] == $resource_type) {
+				// érvénytelen útvonal (pl.: /index/valami/ nem jó, ha már van /index.html),
+				// mert nem létezhet azonos névvel weboldal és mappa is!
+				return null;
+			} else {
+				$last_parent_id = $page_data['node_id'];
+			}
+		}
+
+		// utána létrehozzuk a weboldalt
+		$savedata = [
+			'node_type' => 'webpage',
+			'path' => $folder,
+			'resource_name' => $resource_name,
+			'layout' => $layout_name,
+		];
+
+		return self::addResourceEntry($savedata, $last_parent_id);
+	}
+
+	public static function drop404(string $message = ''): never
+	{
+		if (Kernel::getEnvironment() === 'test') {
+			Kernel::abort('drop404: ' . $message);
+		}
+
+		WebpageView::header("HTTP/1.0 404 Not Found");
+		echo "404 - NINCS ILYEN OLDAL!<br>\n" . $message;
+
+		if ($message != '') {
+			exit;
+		}
+
+		if (Config::DEV_APP_DEBUG_INFO->value() && Roles::hasRole(RoleList::ROLE_SYSTEM_DEVELOPER)) {
+			var_dump(Request::getGET());
+			var_dump('CLI?:', defined('RADAPTOR_CLI'));
+
+			if (defined('RADAPTOR_CLI')) {
+				var_dump(EventResolver::getEventHandlerFromCommandline());
+			} else {
+				var_dump(EventResolver::getEventHandlerFromUrl());
+			}
+
+			echo "<pre style='background:#fff;color:#333;padding:10px;margin:10px;text-align:left;'>";
+			echo "<strong>Stack trace:</strong>\n";
+			debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+			echo "</pre>";
+		}
+
+		if (!Roles::hasRole(RoleList::ROLE_CONTENT_ADMIN)) {
+			exit;
+		}
+
+		// WebpageView used only to resolve the theme and provide iTreeBuildContext
+		$view = new WebpageView();
+		$renderer = new HtmlTreeRenderer(
+			theme: $view->getTheme(),
+			lang_id: Kernel::getLocale(),
+		);
+		$renderer->registerLibrary(LibrariesCommon::__ADMIN_SITE);
+		$renderer->registerLibrary('SYSTEMMESSAGES');
+		$renderer->registerLibrary('QTIP');
+		$renderer->registerLibrary('WIDGETTYPE_FORM');
+
+		// Build the form tree using $view as iTreeBuildContext
+		$form = Form::factory('WebpageFromPath', 'wpfp', $view);
+		$fragment = $renderer->render($form->buildTree());
+
+		// Emit after render so any form-registered assets are included
+		echo $renderer->getCss();
+		echo $renderer->getJsTop();
+		echo '
+<style>
+    img {
+        display:inline-block;
+        vertical-align:middle;
+    }
+</style>
+<div class="content">
+<div class="content-full">
+';
+		echo $fragment;
+
+		echo $renderer->getJs();
+		echo '
+<script type="text/javascript">
+    renderSystemMessages();
+</script>
+';
+		echo $renderer->fetchClosingHtml();
+
+		exit;
+	}
+
+	public static function drop403(): never
+	{
+		if (Kernel::getEnvironment() === 'test') {
+			Kernel::abort('drop403');
+		}
+
+		WebpageView::header("HTTP/1.0 403 Forbidden");
+		echo e(t('cms.resource.view_forbidden')) . "<br>\n";
+
+		exit;
+	}
+
+	public static function drop400(string $message = ''): never
+	{
+		if (Kernel::getEnvironment() === 'test') {
+			Kernel::abort('drop400: ' . $message);
+		}
+
+		WebpageView::header("HTTP/1.1 400 Bad Request");
+		echo "400 - BAD REQUEST!<br>\n";
+
+		if (Kernel::getEnvironment() === 'development') {
+			echo $message . "<br>\n";
+		}
+
+		exit;
+	}
+
+	public static function getResourceTreeEntryName(int $resource_id): string
+	{
+		$resource_data = self::getResourceTreeEntryDataById($resource_id);
+
+		return is_array($resource_data) ? $resource_data['path'] . $resource_data['resource_name'] : '';
+	}
+
+	private static function sanitizeResourceTreeEntryNameInSavedata(array &$savedata, string $dsn = ''): void
+	{
+		if (isset($savedata['resource_name'])) {
+			$savedata['resource_name'] = Helpers::sanitize($savedata['resource_name']);
+
+			if ($savedata['resource_name'] === '') {
+				$savedata['resource_name'] = DbHelper::getNextAutoIncrementId('resource_tree', $dsn);
+			}
+		}
+	}
+
+	/**
+	 * Splits the provided data array into resource-related data and attribute-related data.
+	 *
+	 * This method takes an array of data and separates it into two arrays:
+	 * one for resource-related data (such as 'node_id', 'resource_name', etc.)
+	 * and another for the remaining attribute-related data. The result is an array
+	 * containing both of these arrays.
+	 *
+	 * @param array $savedata The data to be split into resource and attribute data.
+	 * @return array An array containing two arrays: the first with resource-related data and the second with attribute-related data.
+	 */
+	private static function splitResourceAndAttributesData(array $savedata): array
+	{
+		$resource_keys = array_flip([
+			'node_id',
+			'resource_name',
+			'catcher_page',
+			'comment',
+			'node_type',
+			'path',
+			'is_inheriting_acl',
+		]);
+
+		$resource_savedata = array_intersect_key($savedata, $resource_keys);
+		$attribute_savedata = array_diff_key($savedata, $resource_keys);
+
+		return [
+			$resource_savedata,
+			$attribute_savedata,
+		];
+	}
+
+	public static function updateResourceTreeEntry(array $savedata, int $resource_id): int
+	{
+		$resource_data = ResourceTreeHandler::getResourceTreeEntryDataById($resource_id);
+
+		if (is_null($resource_data)) {
+			return 0;
+		}
+
+		self::sanitizeResourceTreeEntryNameInSavedata($savedata);
+		self::makeResourceEntryNameUniqueInSavedata($resource_data['parent_id'], $savedata, $resource_id);
+
+		[$resource_savedata, $attribute_savedata] = self::splitResourceAndAttributesData($savedata);
+
+		$resource_savedata['node_id'] = $resource_id;
+
+		if (isset($attribute_savedata['catcher_page'])) {
+			if ($attribute_savedata['catcher_page']) {
+				self::setAsCatcherPage($resource_id);
+			} else {
+				self::clearCatcherPage($resource_id);
+			}
+		}
+
+		$return = DbHelper::updateHelper('resource_tree', $resource_savedata);
+
+		$return2 = AttributeHandler::addAttribute(new AttributeResourceIdentifier(ResourceNames::RESOURCE_DATA, (string) $resource_id), $attribute_savedata);
+
+		self::rebuildPath($resource_savedata['node_id']);
+
+		return $return + $return2;
+	}
+
+	public static function addResourceEntry(array $savedata, int $parent_id = 0): ?int
+	{
+		self::sanitizeResourceTreeEntryNameInSavedata($savedata);
+		self::makeResourceEntryNameUniqueInSavedata($parent_id, $savedata);
+
+		[$resource_savedata, $attribute_savedata] = self::splitResourceAndAttributesData($savedata);
+
+		try {
+			$new_id = NestedSet::addNode('resource_tree', $parent_id, $resource_savedata);
+
+			if (!is_null($new_id)) {
+				AttributeHandler::addAttribute(new AttributeResourceIdentifier(ResourceNames::RESOURCE_DATA, (string) $new_id), $attribute_savedata);
+			}
+		} catch (Exception $e) {
+			SystemMessages::_error($e->getMessage());
+
+			return null;
+		}
+
+		if (isset($attribute_savedata['catcher_page']) && $attribute_savedata['catcher_page']) {
+			self::setAsCatcherPage($new_id);
+		}
+
+		self::rebuildPath($new_id);
+
+		return $new_id;
+	}
+
+	private static function makeResourceEntryNameUniqueInSavedata(int $parent_id, array &$savedata, ?int $update_id = null): void
+	{
+		if ($update_id == 0) {
+			$update = false;
+		} else {
+			$update = true;
+		}
+
+		if ($update) {
+			$query = <<<SQL
+					SELECT
+						node_id
+					FROM
+						resource_tree
+					WHERE parent_id = ?
+						AND node_id <> ?
+						AND resource_name = ?
+					LIMIT 1
+				SQL;
+		} else {
+			$query = <<<SQL
+					SELECT
+						node_id
+					FROM
+						resource_tree
+					WHERE parent_id = ?
+						AND resource_name = ?
+					LIMIT 1
+				SQL;
+		}
+
+		$stmt = Db::instance()->prepare($query);
+
+		$pathinfo = pathinfo((string)$savedata['resource_name']);
+		$extension = isset($pathinfo['extension']) ? '.' . $pathinfo['extension'] : '';
+
+		$i = 0;
+
+		do {
+			$name = $pathinfo['filename'];
+
+			if ($i > 0) {
+				$name = $name . "({$i})";
+			}
+
+			if ($update) {
+				$stmt->execute([
+					$parent_id,
+					$update_id,
+					$name . $extension,
+				]);
+			} else {
+				$stmt->execute([
+					$parent_id,
+					$name . $extension,
+				]);
+			}
+
+			$rs = $stmt->fetchAll();
+			++$i;
+		} while (count($rs) > 0);
+
+		$savedata['resource_name'] = $name . $extension;
+	}
+
+	public static function rebuildPath(int $from_node_id = 0): int
+	{
+		return NestedSet::rebuildPath('resource_tree', $from_node_id);
+	}
+
+	public static function deleteResourceEntry(int $resource_id): bool
+	{
+		if (!ResourceAcl::canAccessResource($resource_id, ResourceAcl::_ACL_DELETE)) {
+			return false;
+		}
+
+		self::clearCatcherPage($resource_id);
+
+		Cache::flush();
+
+		return NestedSet::deleteNode('resource_tree', $resource_id);
+	}
+
+	public static function deleteResourceEntriesRecursive(int $resource_id): array
+	{
+		$folder_count = 0;
+		$webpage_count = 0;
+		$erroneous_count = 0;
+
+		// 0. lekérjük az adott id-jű node adatait
+		$node_data = NestedSet::getNodeInfo('resource_tree', $resource_id);
+
+		$lft = $node_data['lft'];
+		$rgt = $node_data['rgt'];
+
+		if ($rgt - $lft == 1) {
+			$success = ResourceTreeHandler::deleteResourceEntry($resource_id);
+
+			if ($success && $node_data['node_type'] == 'webpage') {
+				++$webpage_count;
+			} elseif ($success && $node_data['node_type'] == 'folder') {
+				++$folder_count;
+			} else {
+				++$erroneous_count;
+			}
+		} else {
+			// 1. Lekérjük az alatta lévő node-okat, (rgt-lft) szerint rendezve
+			$stmt = Db::instance()
+					  ->prepare("SELECT node_id, node_type, (rgt-lft) AS rgtlft FROM resource_tree WHERE lft >= ? AND rgt <= ? ORDER BY rgtlft ASC");
+			$stmt->execute([
+				$lft,
+				$rgt,
+			]);
+
+			$rs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+			foreach ($rs as $node) {
+				$data = ResourceTreeHandler::getResourceTreeEntryDataById($node['node_id']);
+
+				if ($data['rgt'] - $data['lft'] != 1) {
+					++$erroneous_count;
+
+					continue;
+				}
+
+				switch ($node['node_type']) {
+					case 'webpage':
+
+						$success = ResourceTreeHandler::deleteResourceEntry($node['node_id']);
+
+						if ($success) {
+							++$webpage_count;
+						} else {
+							++$erroneous_count;
+						}
+
+						break;
+
+					case 'folder':
+					default:
+
+						$success = ResourceTreeHandler::deleteResourceEntry($node['node_id']);
+
+						if ($success) {
+							++$folder_count;
+						} else {
+							++$erroneous_count;
+						}
+
+						break;
+				}
+			}
+		}
+
+		if ($erroneous_count + $folder_count + $webpage_count > 0) {
+			$success = true;
+		} else {
+			$success = false;
+		}
+
+		return ([
+			'success' => $success,
+			'erroneous' => $erroneous_count,
+			'folder' => $folder_count,
+			'webpage' => $webpage_count,
+		]);
+	}
+
+	public static function getIndexpageNodeId(int $containing_folder_resource_id): ?int
+	{
+		return self::getPageInFolder($containing_folder_resource_id, 'index.html');
+	}
+
+	public static function getPageInFolder(int $containing_folder_resource_id, string $page_name): ?int
+	{
+		$query = "SELECT node_id FROM resource_tree WHERE parent_id=? AND resource_name=? LIMIT 1";
+		$stmt = Db::instance()->prepare($query);
+		$stmt->execute([
+			$containing_folder_resource_id,
+			$page_name,
+		]);
+
+		$rs = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		return $rs['node_id'] ?? null;
+	}
+
+	public static function setAsCatcherPage(int $resource_id): void
+	{
+		$page_data = self::getResourceTreeEntryDataById($resource_id);
+
+		if (!$page_data) {
+			return;
+		}
+
+		$parent_id = $page_data['parent_id'];
+
+		/*
+		// töröljük a korábbi elfogó oldalnál a beállítást
+		$query = "UPDATE resource_tree SET catcher_page=NULL WHERE node_id IN (SELECT node_id FROM (SELECT node_id FROM resource_tree) WHERE node_type='webpage' AND parent_id=? AND node_id <> ?)";
+		$stmt = Db::instance()->prepare($query);
+		$stmt->execute(array($parent_id, $catcher_page_id));
+		*/
+
+		// frissítjük a szülő mappán az elfogó oldal azonosítót
+		$query = "UPDATE resource_tree SET catcher_page=? WHERE node_id=?";
+		$stmt = Db::instance()->prepare($query);
+		$stmt->execute([
+			$resource_id,
+			$parent_id,
+		]);
+
+		Cache::flush();
+	}
+
+	public static function checkParentHasCatcherPage(int $resource_id): bool
+	{
+		$page_data = self::getResourceTreeEntryDataById($resource_id);
+
+		if (is_null($page_data)) {
+			return false;
+		}
+
+		$parent_id = $page_data['parent_id'];
+
+		$parent_data = self::getResourceTreeEntryDataById($parent_id);
+
+		if (is_null($parent_data)) {
+			return false;
+		}
+
+		return $parent_data['catcher_page'] > 0;
+	}
+
+	public static function clearCatcherPage(int $resource_id): void
+	{
+		// töröljük a korábbi elfogó oldalnál a beállítást
+		$query = "UPDATE resource_tree SET catcher_page=NULL WHERE node_type='folder' AND catcher_page=?";
+		$stmt = Db::instance()->prepare($query);
+		$stmt->execute([$resource_id]);
+
+		Cache::flush();
+	}
+
+	public static function moveResourceEntryToPosition(int $resource_id, int $parent_id, int $position): bool
+	{
+		$move = NestedSet::moveToPosition('resource_tree', $resource_id, $parent_id, $position);
+
+		self::rebuildPath($resource_id);
+
+		return $move;
+	}
+
+	public static function getResourceListForSelect(string $resource_type, bool $use_index_html = true): array
+	{
+		$query = "SELECT * FROM resource_tree WHERE node_type=? ORDER BY path, resource_name";
+
+		$stmt = Db::instance()->prepare($query);
+		$stmt->execute([$resource_type]);
+
+		$resource_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		$return[] = [
+			'inputtype' => 'option',
+			'value' => '',
+			'label' => '-- Ne legyen linkelve --',
+		];
+
+		foreach ($resource_list as $resource) {
+			if (!ResourceAcl::canAccessResource($resource['node_id'], ResourceAcl::_ACL_LIST)) {
+				continue;
+			}
+
+			if ($use_index_html || $resource['resource_name'] != 'index.html') {
+				$label = $resource['path'] . '/' . $resource['resource_name'];
+			} else {
+				$label = $resource['path'] . '/';
+			}
+
+			$label = str_replace('//', '/', $label);
+			$return[] = [
+				'inputtype' => 'option',
+				'value' => $resource['node_id'],
+				'label' => $label,
+			];
+		}
+
+		return $return;
+	}
+
+	public static function getResourceIdFromConnectionId(int $connection_id): ?int
+	{
+		return DbHelper::selectOneColumnFromQuery(
+			"SELECT page_id FROM widget_connections WHERE connection_id=? LIMIT 1;",
+			[$connection_id]
+		);
+	}
+
+	public static function setNoCacheHeaders(): void
+	{
+		header("Expires: Tue, 03 Jul 2001 06:00:00 GMT");
+		header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+		header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+		header("Cache-Control: post-check=0, pre-check=0", false);
+		header("Pragma: no-cache");
+	}
+}

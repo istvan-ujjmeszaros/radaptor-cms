@@ -1,0 +1,14 @@
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
+tags,field.context.label,,es_ES,Context,Contexto,0,Contexto
+tags,field.description.label,,es_ES,"Tag description","Descripción de la etiqueta",0,"Descripción de la etiqueta"
+tags,field.name.explanation,,es_ES,"No spaces, short and concise. Do not create synonyms for existing tags.","Sin espacios, corto y conciso. No cree sinónimos para etiquetas existentes.",0,"Sin espacios, corto y conciso. No cree sinónimos para etiquetas existentes."
+tags,field.name.label,,es_ES,"Tag name","Nombre de la etiqueta",0,"Nombre de la etiqueta"
+tags,field.type.explanation,,es_ES,"Select the tag type","Seleccionar el tipo de etiqueta",0,"Seleccionar el tipo de etiqueta"
+tags,field.type.label,,es_ES,Type,Tipo,0,Tipo
+tags,form.name,,es_ES,Tag,Etiqueta,0,Etiqueta
+tags,form.title_create,,es_ES,"New tag","Nueva etiqueta",0,"Nueva etiqueta"
+tags,form.title_edit,,es_ES,"Edit tag","Editar etiqueta",0,"Editar etiqueta"
+tags,list.title,,es_ES,Tags,Etiquetas,0,Etiquetas
+tags,saved,,es_ES,"Tags saved","Etiquetas guardadas",0,"Etiquetas guardadas"
+tags,updated,,es_ES,"Tag updated","Etiqueta actualizada",0,"Etiqueta actualizada"
+tags,validation.name_max_length,,es_ES,"Tag name must not exceed 255 characters","El nombre de la etiqueta no debe superar los 255 caracteres",0,"El nombre de la etiqueta no debe superar los 255 caracteres"

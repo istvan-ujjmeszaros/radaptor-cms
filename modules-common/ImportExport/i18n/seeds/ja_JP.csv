@@ -1,0 +1,49 @@
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
+import_export,action.export_csv,,ja_JP,"Export CSV",CSVをエクスポート,0,CSVをエクスポート
+import_export,action.preview_import,,ja_JP,"Preview import",インポートをプレビュー,0,インポートをプレビュー
+import_export,action.run_import,,ja_JP,"Run import",インポートを実行,0,インポートを実行
+import_export,dataset.i18n_translations.description,,ja_JP,"Export and import translation rows as CSV.",翻訳行をCSVでエクスポート・インポートします。,0,翻訳行をCSVでエクスポート・インポートします。
+import_export,dataset.i18n_translations.name,,ja_JP,"I18n translations",i18n翻訳,0,i18n翻訳
+import_export,error.dataset_not_found,,ja_JP,"Import/export dataset not found.",インポート/エクスポートデータセットが見つかりません。,0,インポート/エクスポートデータセットが見つかりません。
+import_export,error.file_read,,ja_JP,"Unable to read the uploaded CSV file.",アップロードされたCSVファイルを読み込めません。,0,アップロードされたCSVファイルを読み込めません。
+import_export,error.file_required,,ja_JP,"Please select a CSV file to import.",インポートするCSVファイルを選択してください。,0,インポートするCSVファイルを選択してください。
+import_export,error.invalid_format,,ja_JP,"Invalid format",無効なフォーマット,0,無効なフォーマット
+import_export,error.invalid_mode,,ja_JP,"Invalid import mode.",無効なインポートモードです。,0,無効なインポートモードです。
+import_export,error.locale_required,,ja_JP,"Locale is required for export.",エクスポートにはロケールが必要です。,0,エクスポートにはロケールが必要です。
+import_export,export.title,,ja_JP,"Export CSV",CSVをエクスポート,0,CSVをエクスポート
+import_export,field.dataset.label,,ja_JP,Dataset,データセット,0,データセット
+import_export,field.expect_locale.any,,ja_JP,"Any locale in file",ファイル内の任意のロケール,0,ファイル内の任意のロケール
+import_export,field.expect_locale.help,,ja_JP,"Optional for insert_new and upsert. Sync should normally set this explicitly and always uses a single-locale scope, even when importing wide CSV.",insert_newとupsertではオプションです。Syncは通常これを明示的に設定し、ワイドCSVのインポート時でも常に単一ロケールスコープを使用します。,0,insert_newとupsertではオプションです。Syncは通常これを明示的に設定し、ワイドCSVのインポート時でも常に単一ロケールスコープを使用します。
+import_export,field.expect_locale.label,,ja_JP,"Expected locale",想定ロケール,0,想定ロケール
+import_export,field.file.help,,ja_JP,"Upload a CSV file exported from the same dataset.",同じデータセットからエクスポートされたCSVファイルをアップロードしてください。,0,同じデータセットからエクスポートされたCSVファイルをアップロードしてください。
+import_export,field.file.label,,ja_JP,"CSV file",CSVファイル,0,CSVファイル
+import_export,field.format.help,,ja_JP,"Normalized keeps one row per locale. Wide groups locales into text:<locale> columns.",正規化形式はロケールごとに1行を保持します。ワイド形式はロケールをtext:<locale>列にグループ化します。,0,正規化形式はロケールごとに1行を保持します。ワイド形式はロケールをtext:<locale>列にグループ化します。
+import_export,field.format.label,,ja_JP,Format,フォーマット,0,フォーマット
+import_export,field.locale.all,,ja_JP,"All locales",すべてのロケール,0,すべてのロケール
+import_export,field.locale.help,,ja_JP,"Leave empty to export all locales, or choose one locale for a smaller file. Wide format puts locale values into text:<locale> columns.",空欄にするとすべてのロケールをエクスポートします。1つ選択するとファイルサイズを小さくできます。ワイド形式ではロケール値をtext:<locale>列に配置します。,0,空欄にするとすべてのロケールをエクスポートします。1つ選択するとファイルサイズを小さくできます。ワイド形式ではロケール値をtext:<locale>列に配置します。
+import_export,field.locale.label,,ja_JP,Locale,ロケール,0,ロケール
+import_export,field.mode.help,,ja_JP,"Sync is destructive: it deletes rows missing from the imported locale slice and only supports single-locale files.",同期は破壊的です：インポートされたロケールスライスに存在しない行を削除し、単一ロケールファイルのみをサポートします。,0,同期は破壊的です：インポートされたロケールスライスに存在しない行を削除し、単一ロケールファイルのみをサポートします。
+import_export,field.mode.label,,ja_JP,"Import mode",インポートモード,0,インポートモード
+import_export,format.auto,,ja_JP,Auto-detect,自動検出,0,自動検出
+import_export,format.normalized,,ja_JP,Normalized,正規化,0,正規化
+import_export,format.wide,,ja_JP,Wide,ワイド,0,ワイド
+import_export,import.title,,ja_JP,"Import CSV",CSVをインポート,0,CSVをインポート
+import_export,mode.insert_new,,ja_JP,"Insert new only",新規のみ挿入,0,新規のみ挿入
+import_export,mode.sync,,ja_JP,"Sync locale slice",ロケールスライスを同期,0,ロケールスライスを同期
+import_export,mode.upsert,,ja_JP,"Upsert existing",更新または挿入,0,更新または挿入
+import_export,result.deleted,,ja_JP,Deleted,削除済み,0,削除済み
+import_export,result.detected_locale,,ja_JP,"Detected locale",検出されたロケール,0,検出されたロケール
+import_export,result.detected_locales,,ja_JP,"Detected locales",検出されたロケール,0,検出されたロケール
+import_export,result.dry_run_summary,,ja_JP,"Dry-run summary for {dataset}.","{dataset} のシミュレーション結果。",0,"{dataset} のシミュレーション結果。"
+import_export,result.error_summary,,ja_JP,"Import finished with errors for {dataset}.","{dataset} のインポートがエラーで終了しました。",0,"{dataset} のインポートがエラーで終了しました。"
+import_export,result.format,,ja_JP,Format,フォーマット,0,フォーマット
+import_export,result.imported,,ja_JP,Imported,インポート済み,0,インポート済み
+import_export,result.inserted,,ja_JP,Inserted,挿入済み,0,挿入済み
+import_export,result.mode,,ja_JP,Mode,モード,0,モード
+import_export,result.processed,,ja_JP,Processed,処理済み,0,処理済み
+import_export,result.skipped,,ja_JP,Skipped,スキップ済み,0,スキップ済み
+import_export,result.success_summary,,ja_JP,"Import completed successfully for {dataset}.","{dataset} のインポートが完了しました。",0,"{dataset} のインポートが完了しました。"
+import_export,result.updated,,ja_JP,Updated,更新済み,0,更新済み
+import_export,workbench.description,,ja_JP,"Export data to CSV or import CSV files into registered datasets.",データをCSVにエクスポート、またはCSVを登録済みデータセットにインポートします。,0,データをCSVにエクスポート、またはCSVを登録済みデータセットにインポートします。
+import_export,workbench.no_datasets,,ja_JP,"No import/export datasets are available.",インポート/エクスポートデータセットがありません。,0,インポート/エクスポートデータセットがありません。
+import_export,workbench.title,,ja_JP,"Import / Export","インポート / エクスポート",0,"インポート / エクスポート"

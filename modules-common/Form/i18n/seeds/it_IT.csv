@@ -1,0 +1,71 @@
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
+form,admin_menu_item.description,,it_IT,"Admin menu item","Voce menu admin",0,"Voce menu admin"
+form,admin_menu_item.name,,it_IT,"Admin menu item","Voce menu admin",0,"Voce menu admin"
+form,blog.description,,it_IT,"Blog post","Articolo blog",0,"Articolo blog"
+form,blog.name,,it_IT,"Blog post","Articolo blog",0,"Articolo blog"
+form,close_page.close_window,,it_IT,"Close this window!","Chiudi questa finestra!",0,"Chiudi questa finestra!"
+form,close_page.title,,it_IT,"Close page","Chiudi pagina",0,"Chiudi pagina"
+form,company.description,,it_IT,Company,Azienda,0,Azienda
+form,company.name,,it_IT,Company,Azienda,0,Azienda
+form,contact_person.description,,it_IT,"Contact person","Persona di contatto",0,"Persona di contatto"
+form,contact_person.name,,it_IT,"Contact person","Persona di contatto",0,"Persona di contatto"
+form,form_settings.description,,it_IT,"Select which form to display","Seleziona quale modulo visualizzare",0,"Seleziona quale modulo visualizzare"
+form,form_settings.name,,it_IT,"Form settings","Impostazioni modulo",0,"Impostazioni modulo"
+form,form_settings.title,,it_IT,"Select form","Seleziona modulo",0,"Seleziona modulo"
+form,js_tree_settings.description,,it_IT,"Select which tree to display","Seleziona quale albero visualizzare",0,"Seleziona quale albero visualizzare"
+form,js_tree_settings.name,,it_IT,"Tree settings","Impostazioni albero",0,"Impostazioni albero"
+form,js_tree_settings.title,,it_IT,"Select tree","Seleziona albero",0,"Seleziona albero"
+form,main_menu_item.description,,it_IT,"Main menu item","Voce menu principale",0,"Voce menu principale"
+form,main_menu_item.name,,it_IT,"Main menu item","Voce menu principale",0,"Voce menu principale"
+form,plain_html.description,,it_IT,"HTML code (embed)","Codice HTML (incorporato)",0,"Codice HTML (incorporato)"
+form,plain_html.name,,it_IT,"HTML code (embed)","Codice HTML (incorporato)",0,"Codice HTML (incorporato)"
+form,project_state.description,,it_IT,"Project status","Stato progetto",0,"Stato progetto"
+form,project_state.name,,it_IT,"Project status","Stato progetto",0,"Stato progetto"
+form,project.description,,it_IT,Project,Progetto,0,Progetto
+form,project.name,,it_IT,Project,Progetto,0,Progetto
+form,rich_text_select.description,,it_IT,"Select text content","Seleziona contenuto testo",0,"Seleziona contenuto testo"
+form,rich_text_select.name,,it_IT,"Select text content","Seleziona contenuto testo",0,"Seleziona contenuto testo"
+form,rich_text.description,,it_IT,"Text content","Contenuto testo",0,"Contenuto testo"
+form,rich_text.name,,it_IT,"Text content","Contenuto testo",0,"Contenuto testo"
+form,role.description,,it_IT,Role,Ruolo,0,Ruolo
+form,role.name,,it_IT,Role,Ruolo,0,Ruolo
+form,tag.description,,it_IT,Tag,Etichetta,0,Etichetta
+form,tag.name,,it_IT,Tag,Etichetta,0,Etichetta
+form,theme_selector.description,,it_IT,"Select which theme renders each layout","Seleziona quale tema renderizza ogni layout",0,"Seleziona quale tema renderizza ogni layout"
+form,theme_selector.name,,it_IT,"Theme selection","Selezione tema",0,"Selezione tema"
+form,theme_selector.title,,it_IT,"Select themes for layouts","Seleziona temi per i layout",0,"Seleziona temi per i layout"
+form,ticket_priority.description,,it_IT,"Ticket priority","Priorità ticket",0,"Priorità ticket"
+form,ticket_priority.name,,it_IT,"Ticket priority","Priorità ticket",0,"Priorità ticket"
+form,ticket_state.description,,it_IT,"Ticket status","Stato ticket",0,"Stato ticket"
+form,ticket_state.name,,it_IT,"Ticket status","Stato ticket",0,"Stato ticket"
+form,ticket_type.description,,it_IT,"Ticket type","Tipo ticket",0,"Tipo ticket"
+form,ticket_type.name,,it_IT,"Ticket type","Tipo ticket",0,"Tipo ticket"
+form,ticket.description,,it_IT,Ticket,Ticket,0,Ticket
+form,ticket.name,,it_IT,Ticket,Ticket,0,Ticket
+form,time_tracker_entry.description,,it_IT,"Time entry","Registrazione tempo",0,"Registrazione tempo"
+form,time_tracker_entry.name,,it_IT,"Time entry","Registrazione tempo",0,"Registrazione tempo"
+form,user_login.description,,it_IT,Login,Accedi,0,Accedi
+form,user_login.name,,it_IT,Login,Accedi,0,Accedi
+form,user_signup.description,,it_IT,"Sign up",Registrati,0,Registrati
+form,user_signup.name,,it_IT,"Sign up",Registrati,0,Registrati
+form,user.description,,it_IT,User,Utente,0,Utente
+form,user.name,,it_IT,User,Utente,0,Utente
+form,usergroup.description,,it_IT,"User group","Gruppo utenti",0,"Gruppo utenti"
+form,usergroup.name,,it_IT,"User group","Gruppo utenti",0,"Gruppo utenti"
+form,validation.max_length,,it_IT,"Maximum {max} characters","Massimo {max} caratteri",0,"Massimo {max} caratteri"
+form,validation.required,,it_IT,Required,Obbligatorio,0,Obbligatorio
+form,webpage_domain.description,,it_IT,"Domain properties","Proprietà dominio",0,"Proprietà dominio"
+form,webpage_domain.name,,it_IT,"Domain properties","Proprietà dominio",0,"Proprietà dominio"
+form,webpage_file.description,,it_IT,"File properties","Proprietà file",0,"Proprietà file"
+form,webpage_file.name,,it_IT,"File properties","Proprietà file",0,"Proprietà file"
+form,webpage_folder.description,,it_IT,"Website folder properties","Proprietà cartella sito web",0,"Proprietà cartella sito web"
+form,webpage_folder.name,,it_IT,"Website folder properties","Proprietà cartella sito web",0,"Proprietà cartella sito web"
+form,webpage_from_path.description,,it_IT,"Create webpage from path","Crea pagina web dal percorso",0,"Crea pagina web dal percorso"
+form,webpage_from_path.name,,it_IT,"Create webpage from path","Crea pagina web dal percorso",0,"Crea pagina web dal percorso"
+form,webpage_page.description,,it_IT,"Webpage properties","Proprietà pagina web",0,"Proprietà pagina web"
+form,webpage_page.name,,it_IT,"Webpage properties","Proprietà pagina web",0,"Proprietà pagina web"
+form,widget_connection_params.description,,it_IT,"Display settings for a content box","Impostazioni visualizzazione blocco contenuto",0,"Impostazioni visualizzazione blocco contenuto"
+form,widget_connection_params.name,,it_IT,"Content box display settings","Impostazioni visualizzazione blocco contenuto",0,"Impostazioni visualizzazione blocco contenuto"
+form,widget_connection_settings.description,,it_IT,"Configure width and row placement for the content box","Configura larghezza e posizione nella riga del blocco contenuto",0,"Configura larghezza e posizione nella riga del blocco contenuto"
+form,widget_connection_settings.name,,it_IT,"Content formatting","Formattazione contenuto",0,"Formattazione contenuto"
+form,widget_connection_settings.title,,it_IT,"Content formatting","Formattazione contenuto",0,"Formattazione contenuto"

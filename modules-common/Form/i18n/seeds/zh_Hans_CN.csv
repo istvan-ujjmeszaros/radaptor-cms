@@ -1,0 +1,71 @@
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
+form,admin_menu_item.description,,zh_Hans_CN,"Admin menu item",管理员菜单项,0,管理员菜单项
+form,admin_menu_item.name,,zh_Hans_CN,"Admin menu item",管理员菜单项,0,管理员菜单项
+form,blog.description,,zh_Hans_CN,"Blog post",博客文章,0,博客文章
+form,blog.name,,zh_Hans_CN,"Blog post",博客文章,0,博客文章
+form,close_page.close_window,,zh_Hans_CN,"Close this window!",关闭此窗口！,0,关闭此窗口！
+form,close_page.title,,zh_Hans_CN,"Close page",关闭页面,0,关闭页面
+form,company.description,,zh_Hans_CN,Company,公司,0,公司
+form,company.name,,zh_Hans_CN,Company,公司,0,公司
+form,contact_person.description,,zh_Hans_CN,"Contact person",联系人,0,联系人
+form,contact_person.name,,zh_Hans_CN,"Contact person",联系人,0,联系人
+form,form_settings.description,,zh_Hans_CN,"Select which form to display",选择要显示的表单,0,选择要显示的表单
+form,form_settings.name,,zh_Hans_CN,"Form settings",表单设置,0,表单设置
+form,form_settings.title,,zh_Hans_CN,"Select form",选择表单,0,选择表单
+form,js_tree_settings.description,,zh_Hans_CN,"Select which tree to display",选择要显示的树,0,选择要显示的树
+form,js_tree_settings.name,,zh_Hans_CN,"Tree settings",树设置,0,树设置
+form,js_tree_settings.title,,zh_Hans_CN,"Select tree",选择树,0,选择树
+form,main_menu_item.description,,zh_Hans_CN,"Main menu item",主菜单项,0,主菜单项
+form,main_menu_item.name,,zh_Hans_CN,"Main menu item",主菜单项,0,主菜单项
+form,plain_html.description,,zh_Hans_CN,"HTML code (embed)","HTML 代码（嵌入）",0,"HTML 代码（嵌入）"
+form,plain_html.name,,zh_Hans_CN,"HTML code (embed)","HTML 代码（嵌入）",0,"HTML 代码（嵌入）"
+form,project_state.description,,zh_Hans_CN,"Project status",项目状态,0,项目状态
+form,project_state.name,,zh_Hans_CN,"Project status",项目状态,0,项目状态
+form,project.description,,zh_Hans_CN,Project,项目,0,项目
+form,project.name,,zh_Hans_CN,Project,项目,0,项目
+form,rich_text_select.description,,zh_Hans_CN,"Select text content",选择文本内容,0,选择文本内容
+form,rich_text_select.name,,zh_Hans_CN,"Select text content",选择文本内容,0,选择文本内容
+form,rich_text.description,,zh_Hans_CN,"Text content",文本内容,0,文本内容
+form,rich_text.name,,zh_Hans_CN,"Text content",文本内容,0,文本内容
+form,role.description,,zh_Hans_CN,Role,角色,0,角色
+form,role.name,,zh_Hans_CN,Role,角色,0,角色
+form,tag.description,,zh_Hans_CN,Tag,标签,0,标签
+form,tag.name,,zh_Hans_CN,Tag,标签,0,标签
+form,theme_selector.description,,zh_Hans_CN,"Select which theme renders each layout",选择每种布局使用的主题,0,选择每种布局使用的主题
+form,theme_selector.name,,zh_Hans_CN,"Theme selection",主题选择,0,主题选择
+form,theme_selector.title,,zh_Hans_CN,"Select themes for layouts",为布局选择主题,0,为布局选择主题
+form,ticket_priority.description,,zh_Hans_CN,"Ticket priority",工单优先级,0,工单优先级
+form,ticket_priority.name,,zh_Hans_CN,"Ticket priority",工单优先级,0,工单优先级
+form,ticket_state.description,,zh_Hans_CN,"Ticket status",工单状态,0,工单状态
+form,ticket_state.name,,zh_Hans_CN,"Ticket status",工单状态,0,工单状态
+form,ticket_type.description,,zh_Hans_CN,"Ticket type",工单类型,0,工单类型
+form,ticket_type.name,,zh_Hans_CN,"Ticket type",工单类型,0,工单类型
+form,ticket.description,,zh_Hans_CN,Ticket,工单,0,工单
+form,ticket.name,,zh_Hans_CN,Ticket,工单,0,工单
+form,time_tracker_entry.description,,zh_Hans_CN,"Time entry",时间记录,0,时间记录
+form,time_tracker_entry.name,,zh_Hans_CN,"Time entry",时间记录,0,时间记录
+form,user_login.description,,zh_Hans_CN,Login,登录,0,登录
+form,user_login.name,,zh_Hans_CN,Login,登录,0,登录
+form,user_signup.description,,zh_Hans_CN,"Sign up",注册,0,注册
+form,user_signup.name,,zh_Hans_CN,"Sign up",注册,0,注册
+form,user.description,,zh_Hans_CN,User,用户,0,用户
+form,user.name,,zh_Hans_CN,User,用户,0,用户
+form,usergroup.description,,zh_Hans_CN,"User group",用户组,0,用户组
+form,usergroup.name,,zh_Hans_CN,"User group",用户组,0,用户组
+form,validation.max_length,,zh_Hans_CN,"Maximum {max} characters","最多 {max} 个字符",0,"最多 {max} 个字符"
+form,validation.required,,zh_Hans_CN,Required,必填,0,必填
+form,webpage_domain.description,,zh_Hans_CN,"Domain properties",域属性,0,域属性
+form,webpage_domain.name,,zh_Hans_CN,"Domain properties",域属性,0,域属性
+form,webpage_file.description,,zh_Hans_CN,"File properties",文件属性,0,文件属性
+form,webpage_file.name,,zh_Hans_CN,"File properties",文件属性,0,文件属性
+form,webpage_folder.description,,zh_Hans_CN,"Website folder properties",网站文件夹属性,0,网站文件夹属性
+form,webpage_folder.name,,zh_Hans_CN,"Website folder properties",网站文件夹属性,0,网站文件夹属性
+form,webpage_from_path.description,,zh_Hans_CN,"Create webpage from path",从路径创建网页,0,从路径创建网页
+form,webpage_from_path.name,,zh_Hans_CN,"Create webpage from path",从路径创建网页,0,从路径创建网页
+form,webpage_page.description,,zh_Hans_CN,"Webpage properties",网页属性,0,网页属性
+form,webpage_page.name,,zh_Hans_CN,"Webpage properties",网页属性,0,网页属性
+form,widget_connection_params.description,,zh_Hans_CN,"Display settings for a content box",内容框的显示设置,0,内容框的显示设置
+form,widget_connection_params.name,,zh_Hans_CN,"Content box display settings",内容框显示设置,0,内容框显示设置
+form,widget_connection_settings.description,,zh_Hans_CN,"Configure width and row placement for the content box",配置内容框的宽度和行位置,0,配置内容框的宽度和行位置
+form,widget_connection_settings.name,,zh_Hans_CN,"Content formatting",内容格式,0,内容格式
+form,widget_connection_settings.title,,zh_Hans_CN,"Content formatting",内容格式,0,内容格式

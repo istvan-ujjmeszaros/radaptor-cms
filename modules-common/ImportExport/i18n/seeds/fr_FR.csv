@@ -1,0 +1,49 @@
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
+import_export,action.export_csv,,fr_FR,"Export CSV","Exporter CSV",0,"Exporter CSV"
+import_export,action.preview_import,,fr_FR,"Preview import","Aperçu de l'importation",0,"Aperçu de l'importation"
+import_export,action.run_import,,fr_FR,"Run import","Lancer l'importation",0,"Lancer l'importation"
+import_export,dataset.i18n_translations.description,,fr_FR,"Export and import translation rows as CSV.","Exporter et importer des lignes de traduction au format CSV.",0,"Exporter et importer des lignes de traduction au format CSV."
+import_export,dataset.i18n_translations.name,,fr_FR,"I18n translations","Traductions i18n",0,"Traductions i18n"
+import_export,error.dataset_not_found,,fr_FR,"Import/export dataset not found.","Ensemble de données d'importation/exportation introuvable.",0,"Ensemble de données d'importation/exportation introuvable."
+import_export,error.file_read,,fr_FR,"Unable to read the uploaded CSV file.","Impossible de lire le fichier CSV téléversé.",0,"Impossible de lire le fichier CSV téléversé."
+import_export,error.file_required,,fr_FR,"Please select a CSV file to import.","Veuillez sélectionner un fichier CSV à importer.",0,"Veuillez sélectionner un fichier CSV à importer."
+import_export,error.invalid_format,,fr_FR,"Invalid format","Format invalide",0,"Format invalide"
+import_export,error.invalid_mode,,fr_FR,"Invalid import mode.","Mode d'importation invalide.",0,"Mode d'importation invalide."
+import_export,error.locale_required,,fr_FR,"Locale is required for export.","La langue est obligatoire pour l'exportation.",0,"La langue est obligatoire pour l'exportation."
+import_export,export.title,,fr_FR,"Export CSV","Exporter CSV",0,"Exporter CSV"
+import_export,field.dataset.label,,fr_FR,Dataset,"Ensemble de données",0,"Ensemble de données"
+import_export,field.expect_locale.any,,fr_FR,"Any locale in file","Toute langue dans le fichier",0,"Toute langue dans le fichier"
+import_export,field.expect_locale.help,,fr_FR,"Optional for insert_new and upsert. Sync should normally set this explicitly and always uses a single-locale scope, even when importing wide CSV.","Facultatif pour insert_new et upsert. Sync doit normalement définir cela explicitement et utilise toujours une portée à langue unique, même lors de l'importation de CSV large.",0,"Facultatif pour insert_new et upsert. Sync doit normalement définir cela explicitement et utilise toujours une portée à langue unique, même lors de l'importation de CSV large."
+import_export,field.expect_locale.label,,fr_FR,"Expected locale","Langue attendue",0,"Langue attendue"
+import_export,field.file.help,,fr_FR,"Upload a CSV file exported from the same dataset.","Téléversez un fichier CSV exporté depuis le même ensemble de données.",0,"Téléversez un fichier CSV exporté depuis le même ensemble de données."
+import_export,field.file.label,,fr_FR,"CSV file","Fichier CSV",0,"Fichier CSV"
+import_export,field.format.help,,fr_FR,"Normalized keeps one row per locale. Wide groups locales into text:<locale> columns.","Normalisé conserve une ligne par langue. Large regroupe les langues dans des colonnes text:<langue>.",0,"Normalisé conserve une ligne par langue. Large regroupe les langues dans des colonnes text:<langue>."
+import_export,field.format.label,,fr_FR,Format,Format,0,Format
+import_export,field.locale.all,,fr_FR,"All locales","Toutes les langues",0,"Toutes les langues"
+import_export,field.locale.help,,fr_FR,"Leave empty to export all locales, or choose one locale for a smaller file. Wide format puts locale values into text:<locale> columns.","Laissez vide pour exporter toutes les langues, ou choisissez une langue pour un fichier plus petit. Le format large place les valeurs de langue dans les colonnes text:<langue>.",0,"Laissez vide pour exporter toutes les langues, ou choisissez une langue pour un fichier plus petit. Le format large place les valeurs de langue dans les colonnes text:<langue>."
+import_export,field.locale.label,,fr_FR,Locale,Langue,0,Langue
+import_export,field.mode.help,,fr_FR,"Sync is destructive: it deletes rows missing from the imported locale slice and only supports single-locale files.","La synchronisation est destructive : elle supprime les lignes manquantes dans la tranche de langue importée et ne prend en charge que les fichiers à langue unique.",0,"La synchronisation est destructive : elle supprime les lignes manquantes dans la tranche de langue importée et ne prend en charge que les fichiers à langue unique."
+import_export,field.mode.label,,fr_FR,"Import mode","Mode d'importation",0,"Mode d'importation"
+import_export,format.auto,,fr_FR,Auto-detect,"Détection automatique",0,"Détection automatique"
+import_export,format.normalized,,fr_FR,Normalized,Normalisé,0,Normalisé
+import_export,format.wide,,fr_FR,Wide,Large,0,Large
+import_export,import.title,,fr_FR,"Import CSV","Importer CSV",0,"Importer CSV"
+import_export,mode.insert_new,,fr_FR,"Insert new only","Insérer uniquement les nouveaux",0,"Insérer uniquement les nouveaux"
+import_export,mode.sync,,fr_FR,"Sync locale slice","Synchroniser la tranche de langue",0,"Synchroniser la tranche de langue"
+import_export,mode.upsert,,fr_FR,"Upsert existing","Mettre à jour ou insérer",0,"Mettre à jour ou insérer"
+import_export,result.deleted,,fr_FR,Deleted,Supprimé,0,Supprimé
+import_export,result.detected_locale,,fr_FR,"Detected locale","Langue détectée",0,"Langue détectée"
+import_export,result.detected_locales,,fr_FR,"Detected locales","Langues détectées",0,"Langues détectées"
+import_export,result.dry_run_summary,,fr_FR,"Dry-run summary for {dataset}.","Résumé de simulation pour {dataset}.",0,"Résumé de simulation pour {dataset}."
+import_export,result.error_summary,,fr_FR,"Import finished with errors for {dataset}.","Importation terminée avec des erreurs pour {dataset}.",0,"Importation terminée avec des erreurs pour {dataset}."
+import_export,result.format,,fr_FR,Format,Format,0,Format
+import_export,result.imported,,fr_FR,Imported,Importé,0,Importé
+import_export,result.inserted,,fr_FR,Inserted,Inséré,0,Inséré
+import_export,result.mode,,fr_FR,Mode,Mode,0,Mode
+import_export,result.processed,,fr_FR,Processed,Traité,0,Traité
+import_export,result.skipped,,fr_FR,Skipped,Ignoré,0,Ignoré
+import_export,result.success_summary,,fr_FR,"Import completed successfully for {dataset}.","Importation réussie pour {dataset}.",0,"Importation réussie pour {dataset}."
+import_export,result.updated,,fr_FR,Updated,"Mis à jour",0,"Mis à jour"
+import_export,workbench.description,,fr_FR,"Export data to CSV or import CSV files into registered datasets.","Exporter des données vers CSV ou importer des fichiers CSV dans des ensembles de données enregistrés.",0,"Exporter des données vers CSV ou importer des fichiers CSV dans des ensembles de données enregistrés."
+import_export,workbench.no_datasets,,fr_FR,"No import/export datasets are available.","Aucun ensemble de données d'importation/exportation n'est disponible.",0,"Aucun ensemble de données d'importation/exportation n'est disponible."
+import_export,workbench.title,,fr_FR,"Import / Export","Importation / Exportation",0,"Importation / Exportation"

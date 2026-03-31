@@ -72,7 +72,7 @@ class LibrariesSoAdmin extends LibrariesCommon
 	 * Stimulus auto-loader (ES module) - SoAdmin-specific copy.
 	 */
 	public const string STIMULUS_LOADER = '
-		module:/assets/themes/so-admin/js/stimulus-loader.js,
+		module:/assets/packages/themes/so-admin/js/stimulus-loader.js,
 	';
 
 	/**
@@ -128,9 +128,9 @@ class LibrariesSoAdmin extends LibrariesCommon
 	public const string __ADMIN_SITE = '
 		COMMON,
 		JQUERY_UI_10,
-		/assets/themes/so-admin/admin-site/css-reset/html5-boilerplate.css,
-		/assets/themes/so-admin/admin-site/admin-site/admin-site.css,
-		/assets/themes/so-admin/admin-site/buttons.css,
+		/assets/packages/themes/so-admin/admin-site/css-reset/html5-boilerplate.css,
+		/assets/packages/themes/so-admin/admin-site/admin-site/admin-site.css,
+		/assets/packages/themes/so-admin/admin-site/buttons.css,
 	';
 
 	/**
@@ -145,7 +145,7 @@ class LibrariesSoAdmin extends LibrariesCommon
 	 * Override __COMMON_ADMIN to use local admin.css with glossy red styling.
 	 */
 	public const string __COMMON_ADMIN = '
-		/assets/themes/so-admin/css/admin.css,
+		/assets/packages/themes/so-admin/css/admin.css,
 	';
 
 	/**
@@ -153,7 +153,7 @@ class LibrariesSoAdmin extends LibrariesCommon
 	 */
 	public const string __ADMIN_USERLIST = '
 		DATATABLES_FILTER,
-		/assets/themes/so-admin/admin-site/js/widgettype.userList.js,
+		/assets/packages/themes/so-admin/admin-site/js/widgettype.userList.js,
 	';
 
 	/**
@@ -161,7 +161,7 @@ class LibrariesSoAdmin extends LibrariesCommon
 	 */
 	public const string __ADMIN_BLOGLIST = '
 		DATATABLES_FILTER,
-		/assets/themes/so-admin/admin-site/js/widgettype.blogList.js,
+		/assets/packages/themes/so-admin/admin-site/js/widgettype.blogList.js,
 	';
 
 	/**
@@ -169,7 +169,7 @@ class LibrariesSoAdmin extends LibrariesCommon
 	 */
 	public const string __ADMIN_RESOURCE_ACL_SELECTOR = '
 		DATATABLES_FILTER,
-		/assets/themes/so-admin/admin-site/js/widgettype.resourceAclSelector.js,
+		/assets/packages/themes/so-admin/admin-site/js/widgettype.resourceAclSelector.js,
 	';
 
 	/**
@@ -180,7 +180,7 @@ class LibrariesSoAdmin extends LibrariesCommon
 		JQUERY_UI_10,
 		COMBOBOX,
 		QTIP,
-		/assets/themes/so-admin/js/widget-edit.js,
+		/assets/packages/themes/so-admin/js/widget-edit.js,
 	';
 
 	/**

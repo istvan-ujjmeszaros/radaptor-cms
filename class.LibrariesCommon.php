@@ -7,66 +7,66 @@ class LibrariesCommon
         COMMON,
         JQUERY_UI_10,
         JQUERY_HOVERINTENT,
-        /assets/themes/so-admin/admin-site/css-reset/html5-boilerplate.css,
-        /assets/themes/so-admin/admin-site/admin-site/admin-site.css,
-        /assets/themes/so-admin/admin-site/buttons.css,
+        /assets/packages/themes/so-admin/admin-site/css-reset/html5-boilerplate.css,
+        /assets/packages/themes/so-admin/admin-site/admin-site/admin-site.css,
+        /assets/packages/themes/so-admin/admin-site/buttons.css,
     ';
 	public const string _ADMIN_DROPDOWN = '
         COMMON,
         /assets/_common/libraries/anylinkmenu/anylinkmenu.css,
         /assets/_common/libraries/anylinkmenu/anylinkmenu.js,
-        /assets/themes/so-admin/admin-site/admin_dropdown.css,
+        /assets/packages/themes/so-admin/admin-site/admin_dropdown.css,
     ';
 	public const string _SDUI_STATUSMESSAGE = '
         /assets/_common/css/sdui-status.css,
     ';
 	public const string __ADMIN_USERLIST = '
         DATATABLES_FILTER,
-        /assets/themes/so-admin/admin-site/js/widgettype.userList.js,
+        /assets/packages/themes/so-admin/admin-site/js/widgettype.userList.js,
     ';
 	public const string __ADMIN_BLOGLIST = '
         DATATABLES_FILTER,
-        /assets/themes/so-admin/admin-site/js/widgettype.blogList.js,
+        /assets/packages/themes/so-admin/admin-site/js/widgettype.blogList.js,
     ';
 	public const string __ADMIN_RESOURCE_ACL_SELECTOR = '
         DATATABLES_FILTER,
         DATATABLES_CUSTOMAPI,
-        /assets/themes/so-admin/admin-site/js/widgettype.resourceAclSelector.js,
+        /assets/packages/themes/so-admin/admin-site/js/widgettype.resourceAclSelector.js,
     ';
 	public const string __ADMIN_USERGROUPS = '
         JSTREE,
-        /assets/themes/so-admin/admin-site/js/jstree.usergroups.js,
+        /assets/packages/themes/so-admin/admin-site/js/jstree.usergroups.js,
     ';
 	public const string __ADMIN_USERGROUP_SELECTOR = '
         JSTREE,
-        /assets/themes/so-admin/admin-site/js/jstree.usergroupSelector.js,
+        /assets/packages/themes/so-admin/admin-site/js/jstree.usergroupSelector.js,
     ';
 	public const string __ADMIN_ROLES = '
         JSTREE,
-        /assets/themes/so-admin/admin-site/js/jstree.roles.js,
+        /assets/packages/themes/so-admin/admin-site/js/jstree.roles.js,
     ';
 	public const string __ADMIN_ROLE_SELECTOR = '
         JSTREE,
-        /assets/themes/so-admin/admin-site/js/jstree.roleSelector.js,
+        /assets/packages/themes/so-admin/admin-site/js/jstree.roleSelector.js,
     ';
 	public const string __ADMIN_RESOURCES = '
         JSTREE,
-        /assets/themes/so-admin/admin-site/js/jstree.resources.js,
+        /assets/packages/themes/so-admin/admin-site/js/jstree.resources.js,
     ';
 	public const string __ADMIN_MAINMENU = '
         JSTREE,
-        /assets/themes/so-admin/admin-site/js/jstree.mainmenu.js,
+        /assets/packages/themes/so-admin/admin-site/js/jstree.mainmenu.js,
     ';
 	public const string __ADMIN_FOOTERMENU = '
         JSTREE,
-        /assets/themes/so-admin/admin-site/js/jstree.footermenu.js,
+        /assets/packages/themes/so-admin/admin-site/js/jstree.footermenu.js,
     ';
 	public const string __ADMIN_ADMINMENU = '
         JSTREE,
-        /assets/themes/so-admin/admin-site/js/jstree.adminmenu.js,
+        /assets/packages/themes/so-admin/admin-site/js/jstree.adminmenu.js,
     ';
 	public const string __COMMON_ADMIN = '
-        /assets/themes/so-admin/admin-site/admin.css,
+        /assets/packages/themes/so-admin/admin-site/admin.css,
     ';
 	public const string COMMON = '
         JQUERY,

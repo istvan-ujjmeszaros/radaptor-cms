@@ -375,18 +375,21 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 
 		if ($this->theme !== null) {
 			$theme_slug = $this->theme::getSlug();
+			$theme_assets_base = $this->_getThemeAssetsBase($theme_slug);
+			$stimulus_assets_base = $this->_getStimulusAssetsBase($theme_slug);
+			$stimulus_controllers_dir = DEPLOY_ROOT . 'public/www' . $stimulus_assets_base . '/controllers';
 
 			$radaptor_config = [
 				'current_theme' => [
 					'slug' => $theme_slug,
 					'assets' => [
-						'base' => "/assets/{$theme_slug}",
+						'base' => $theme_assets_base,
 					],
 				],
 				'stimulus' => [
 					'controllers' => [
-						'base' => "/assets/radaptor-portal-admin/controllers",
-						'version' => (string) max(array_map('filemtime', glob(DEPLOY_ROOT . 'public/www/assets/radaptor-portal-admin/controllers/*.js') ?: [0])),
+						'base' => $stimulus_assets_base . '/controllers',
+						'version' => (string) max(array_map('filemtime', glob($stimulus_controllers_dir . '/*.js') ?: [0])),
 						'loaded' => new \stdClass(),
 					],
 				],
@@ -577,7 +580,9 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 	 */
 	private function _buildControllerImportMap(): array
 	{
-		$controllersDir = DEPLOY_ROOT . 'public/www/assets/radaptor-portal-admin/controllers';
+		$theme_slug = $this->theme !== null ? $this->theme::getSlug() : 'radaptor-portal-admin';
+		$stimulus_assets_base = $this->_getStimulusAssetsBase($theme_slug);
+		$controllersDir = DEPLOY_ROOT . 'public/www' . $stimulus_assets_base . '/controllers';
 
 		if (!is_dir($controllersDir)) {
 			return [];
@@ -588,21 +593,42 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 		foreach (glob($controllersDir . '/*.js') as $file) {
 			$basename = basename($file);
 			$mtime = filemtime($file);
-			$path = "/assets/radaptor-portal-admin/controllers/{$basename}";
+			$path = $stimulus_assets_base . "/controllers/{$basename}";
 			$map[$path] = "{$path}?v={$mtime}";
 		}
 
-		$jsHelpersDir = DEPLOY_ROOT . 'public/www/assets/radaptor-portal-admin/js';
+		$jsHelpersDir = DEPLOY_ROOT . 'public/www' . $stimulus_assets_base . '/js';
 
 		if (is_dir($jsHelpersDir)) {
 			foreach (glob($jsHelpersDir . '/*.js') as $file) {
 				$basename = basename($file);
-				$path = "/assets/radaptor-portal-admin/js/{$basename}";
+				$path = $stimulus_assets_base . "/js/{$basename}";
 				$map[$path] = "{$path}?v=" . filemtime($file);
 			}
 		}
 
 		return $map;
+	}
+
+	private function _getThemeAssetsBase(string $theme_slug): string
+	{
+		return "/assets/packages/themes/{$theme_slug}";
+	}
+
+	private function _getStimulusAssetsBase(string $theme_slug): string
+	{
+		foreach ([
+			"/assets/packages/{$theme_slug}",
+			"/assets/packages/themes/{$theme_slug}",
+		] as $candidate) {
+			$base_dir = DEPLOY_ROOT . 'public/www' . $candidate;
+
+			if (is_dir($base_dir . '/controllers') || is_dir($base_dir . '/js')) {
+				return $candidate;
+			}
+		}
+
+		return "/assets/packages/{$theme_slug}";
 	}
 
 	/**

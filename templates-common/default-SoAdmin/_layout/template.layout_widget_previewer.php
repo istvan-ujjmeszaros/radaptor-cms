@@ -1,6 +1,6 @@
 <?php assert(isset($this) && $this instanceof Template); ?>
-<?php $this->registerLibrary(LibrariesCommon::__ADMIN_SITE); ?>
-<?php $this->registerLibrary(LibrariesSoAdmin::STIMULUS_LOADER); ?>
+<?php $this->registerLibrary('__ADMIN_SITE'); ?>
+<?php $this->registerLibrary('STIMULUS_LOADER'); ?>
 <?php
 $lang = (string)($this->props['lang'] ?? 'en');
 $site_name = (string)($this->props['site_name'] ?? Config::APP_SITE_NAME->value());

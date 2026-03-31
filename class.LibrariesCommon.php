@@ -120,6 +120,11 @@ class LibrariesCommon
         /assets/_common/libraries/jquery-qtip/2.0.0pre/jquery.qtip.min.js,
         /assets/_common/libraries/jquery-qtip/2.0.0pre/jquery.qtip.css,
     ';
+	public const string TIPPY = '
+        js:https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js,
+        js:https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.min.js,
+        css:https://unpkg.com/tippy.js@6/dist/tippy.css,
+    ';
 	public const string DATATABLES = '
         JQUERY,
         /assets/_common/libraries/jquery-datatables/1.9.1/media/css/datatables-colreorder.css,

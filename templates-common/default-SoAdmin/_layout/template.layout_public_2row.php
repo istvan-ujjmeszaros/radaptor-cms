@@ -174,7 +174,9 @@
 
 <?php if (SystemMessages::countSystemMessages() > 0): ?>
 	<script type="text/javascript">
-		renderSystemMessages();
+		if (typeof renderSystemMessages === 'function') {
+			renderSystemMessages();
+		}
 	</script>
 <?php endif; ?>
 <?= $this->fetchSlot('page_chrome'); ?>

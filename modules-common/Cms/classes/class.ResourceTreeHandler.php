@@ -287,10 +287,16 @@ class ResourceTreeHandler extends ResourceAcl
 	{
 		$query = "SELECT node_id FROM resource_tree WHERE node_type='root' AND resource_name=? LIMIT 1";
 
-		return DbHelper::selectOneColumnFromQuery(
+		$root_id = DbHelper::selectOneColumnFromQuery(
 			$query,
 			[$domain]
 		);
+
+		if ($root_id === false || $root_id === null) {
+			return null;
+		}
+
+		return (int) $root_id;
 	}
 
 	public static function createResourceTreeEntryFromPath(string $folder, string $resource_name, string $resource_type, ?string $layout_name = null): ?int
@@ -298,21 +304,10 @@ class ResourceTreeHandler extends ResourceAcl
 		$path_variations = self::getPathVariations($folder);
 
 		// először létrehozzuk a hiányzó mappákat az útvonalhoz
-		$last_parent_id = self::getDomainRoot(Config::APP_DOMAIN_CONTEXT->value());
+		$last_parent_id = self::ensureDomainRoot(Config::APP_DOMAIN_CONTEXT->value());
 
 		if (is_null($last_parent_id)) {
-			$savedata = [
-				'node_type' => 'root',
-				'resource_name' => Config::APP_DOMAIN_CONTEXT->value(),
-			];
-
-			$last_parent_id = self::addResourceEntry($savedata);
-
-			if (is_null($last_parent_id)) {
-				return null;
-			}
-
-			SystemMessages::_warning("Domain created in root: " . Config::APP_DOMAIN_CONTEXT->value());
+			return null;
 		}
 
 		foreach ($path_variations as $path_variation) {
@@ -344,6 +339,83 @@ class ResourceTreeHandler extends ResourceAcl
 		];
 
 		return self::addResourceEntry($savedata, $last_parent_id);
+	}
+
+	private static function ensureDomainRoot(string $domain): ?int
+	{
+		$root_id = self::getDomainRoot($domain);
+
+		if (!is_null($root_id)) {
+			return (int) $root_id;
+		}
+
+		$existing_node_count = (int) DbHelper::selectOneColumnFromQuery(
+			"SELECT COUNT(*) FROM resource_tree"
+		);
+
+		if ($existing_node_count === 0) {
+			$savedata = [
+				'node_type' => 'root',
+				'resource_name' => $domain,
+			];
+
+			$root_id = self::addResourceEntry($savedata);
+
+			if (!is_null($root_id)) {
+				SystemMessages::_warning("Domain created in root: {$domain}");
+			}
+
+			return $root_id;
+		}
+
+		return self::wrapExistingTreeWithDomainRoot($domain);
+	}
+
+	private static function wrapExistingTreeWithDomainRoot(string $domain): ?int
+	{
+		$pdo = Db::instance();
+		$started_transaction = !$pdo->inTransaction();
+
+		try {
+			$max_rgt = (int) DbHelper::selectOneColumnFromQuery(
+				"SELECT COALESCE(MAX(rgt), 0) FROM resource_tree"
+			);
+
+			if ($started_transaction) {
+				$pdo->beginTransaction();
+			}
+
+			$pdo->exec("UPDATE resource_tree SET lft = lft + 1, rgt = rgt + 1");
+
+			$insert_root = $pdo->prepare(
+				"INSERT INTO resource_tree SET lft = 1, rgt = ?, parent_id = 0, node_type = 'root', resource_name = ?, path = '/'"
+			);
+			$insert_root->execute([$max_rgt + 2, $domain]);
+			$root_id = (int) $pdo->lastInsertId();
+
+			$update_children = $pdo->prepare(
+				"UPDATE resource_tree SET parent_id = ? WHERE parent_id = 0 AND node_id <> ?"
+			);
+			$update_children->execute([$root_id, $root_id]);
+
+			if ($started_transaction) {
+				$pdo->commit();
+			}
+		} catch (Throwable $e) {
+			if ($started_transaction && $pdo->inTransaction()) {
+				$pdo->rollBack();
+			}
+
+			SystemMessages::_error($e->getMessage());
+
+			return null;
+		}
+
+		Cache::flush();
+		self::rebuildPath($root_id);
+		SystemMessages::_warning("Domain wrapped around existing rootless tree: {$domain}");
+
+		return $root_id;
 	}
 
 	public static function drop404(string $message = ''): never
@@ -385,7 +457,7 @@ class ResourceTreeHandler extends ResourceAcl
 			theme: $view->getTheme(),
 			lang_id: Kernel::getLocale(),
 		);
-		$renderer->registerLibrary(LibrariesCommon::__ADMIN_SITE);
+		$renderer->registerLibrary('__ADMIN_SITE');
 		$renderer->registerLibrary('SYSTEMMESSAGES');
 		$renderer->registerLibrary('QTIP');
 		$renderer->registerLibrary('WIDGETTYPE_FORM');
@@ -412,7 +484,9 @@ class ResourceTreeHandler extends ResourceAcl
 		echo $renderer->getJs();
 		echo '
 <script type="text/javascript">
-    renderSystemMessages();
+    if (typeof renderSystemMessages === "function") {
+        renderSystemMessages();
+    }
 </script>
 ';
 		echo $renderer->fetchClosingHtml();

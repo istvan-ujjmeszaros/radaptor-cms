@@ -1,5 +1,5 @@
 <?php assert(isset($this) && $this instanceof Template); ?>
-<?php $this->registerLibrary(LibrariesSoAdmin::__ADMIN_SITE); ?>
+<?php $this->registerLibrary('__ADMIN_SITE'); ?>
 <?php
 $lang = (string)($this->props['lang'] ?? substr(Kernel::getLocale(), 0, 2));
 $administration_string = (string)($this->strings['admin.menu.section.administration'] ?? '');
@@ -51,7 +51,9 @@ $document_title = (string)($this->props['document_title'] ?? trim($administratio
 	<br class="cleaner">
 </div>
 <script type="text/javascript">
-	renderSystemMessages();
+	if (typeof renderSystemMessages === 'function') {
+		renderSystemMessages();
+	}
 </script>
 <?= $this->fetchSlot('page_chrome'); ?>
 <?= $this->getRenderer()->fetchClosingHtml(); ?>

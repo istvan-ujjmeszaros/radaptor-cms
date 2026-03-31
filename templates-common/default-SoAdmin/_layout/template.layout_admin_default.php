@@ -1,6 +1,6 @@
 <?php assert(isset($this) && $this instanceof Template); ?>
-<?php $this->registerLibrary(LibrariesSoAdmin::__ADMIN_SITE); ?>
-<?php $this->registerLibrary(LibrariesSoAdmin::STIMULUS_LOADER); ?>
+<?php $this->registerLibrary('__ADMIN_SITE'); ?>
+<?php $this->registerLibrary('STIMULUS_LOADER'); ?>
 <?php
 $lang = (string)($this->props['lang'] ?? substr(Kernel::getLocale(), 0, 2));
 $administration_string = (string)($this->strings['admin.menu.section.administration'] ?? '');
@@ -54,7 +54,9 @@ $administration_label = (string)($this->props['administration_label'] ?? $admini
 </div>
 <?= $this->getRenderer()->getJs(); ?>
 <script type="text/javascript">
-	renderSystemMessages();
+	if (typeof renderSystemMessages === 'function') {
+		renderSystemMessages();
+	}
 </script>
 <?= $this->fetchSlot('page_chrome'); ?>
 <?= $this->getRenderer()->fetchClosingHtml(); ?>

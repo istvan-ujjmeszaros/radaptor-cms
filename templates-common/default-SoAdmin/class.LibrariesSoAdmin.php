@@ -36,6 +36,13 @@ class LibrariesSoAdmin extends LibrariesCommon
 	';
 
 	/**
+	 * Legacy templates still register `JQUERY_UI`; keep it on the modern stack.
+	 */
+	public const string JQUERY_UI = '
+		JQUERY_UI_10,
+	';
+
+	/**
 	 * DataTables 2.2 from CDN - default theme CSS (not Bootstrap 5).
 	 */
 	public const string DATATABLES = '

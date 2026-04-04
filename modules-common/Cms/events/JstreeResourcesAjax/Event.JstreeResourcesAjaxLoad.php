@@ -6,13 +6,46 @@
  * Detects jsTree version from request parameters and returns
  * appropriately formatted JSON data.
  */
-class EventJstreeResourcesAjaxLoad extends AbstractEvent
+class EventJstreeResourcesAjaxLoad extends AbstractEvent implements iBrowserEventDocumentable
 {
 	public function authorize(PolicyContext $policyContext): PolicyDecision
 	{
 		return $policyContext->principal->inGroup(Usergroups::SYSTEMUSERGROUP_LOGGEDIN)
 			? PolicyDecision::allow()
 			: PolicyDecision::deny();
+	}
+
+	public static function describeBrowserEvent(): array
+	{
+		return [
+			'event_name' => 'jstree_resources_ajax.load',
+			'group' => 'Admin AJAX',
+			'name' => 'Load resource tree nodes',
+			'summary' => 'Returns jsTree payload for the CMS resource tree.',
+			'description' => 'Loads one resource-tree branch in jsTree-compatible JSON, with support for multiple request shapes.',
+			'request' => [
+				'method' => 'GET',
+				'params' => [
+					BrowserEventDocumentationHelper::param('node_id', 'query', 'string', false, 'Preferred node identifier for jsTree 3.x style calls.'),
+					BrowserEventDocumentationHelper::param('id', 'query', 'string', false, 'Fallback node identifier used by some jsTree flows.'),
+					BrowserEventDocumentationHelper::param('id_prefix', 'query', 'string', false, 'Optional DOM id prefix for generated node ids.'),
+					BrowserEventDocumentationHelper::param('shape_template', 'query', 'string', false, 'Optional response shape template override.'),
+				],
+			],
+			'response' => [
+				'kind' => 'json',
+				'content_type' => 'application/json',
+				'description' => 'Returns jsTree node data for the requested resource-tree parent.',
+			],
+			'authorization' => [
+				'visibility' => 'logged-in users',
+				'description' => 'Requires membership in the logged-in system usergroup.',
+			],
+			'notes' => BrowserEventDocumentationHelper::lines(
+				'Supports both node_id and id inputs to tolerate different jsTree client variants.'
+			),
+			'side_effects' => [],
+		];
 	}
 
 	public function run(): void

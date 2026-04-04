@@ -1,10 +1,41 @@
 <?php
 
-class EventResourceView extends AbstractEvent
+class EventResourceView extends AbstractEvent implements iBrowserEventDocumentable
 {
 	public function authorize(PolicyContext $policyContext): PolicyDecision
 	{
 		return PolicyDecision::allow();
+	}
+
+	public static function describeBrowserEvent(): array
+	{
+		return [
+			'event_name' => 'resource.view',
+			'group' => 'Runtime',
+			'name' => 'Render resource',
+			'summary' => 'Primary browser entrypoint that resolves the current resource and renders it or an access fallback.',
+			'description' => 'Handles normal page/file requests, applies resource ACL checks, and may render the configured login page or a 403/404 response instead of the requested resource.',
+			'request' => [
+				'method' => 'GET',
+				'params' => [],
+			],
+			'response' => [
+				'kind' => 'resource-output',
+				'content_type' => 'varies by resolved resource',
+				'description' => 'Renders webpage HTML, streams a file response, or emits a 403/404 fallback.',
+			],
+			'authorization' => [
+				'visibility' => 'public route with per-resource ACL',
+				'description' => 'The event itself is public, but the resolved resource may still be denied by resource ACL.',
+			],
+			'notes' => BrowserEventDocumentationHelper::lines(
+				'This is the default browser route. Url::getUrl(\'resource.view\') resolves to the site root.',
+				'Anonymous access to a protected webpage may render the login page as a same-URL fallback.'
+			),
+			'side_effects' => BrowserEventDocumentationHelper::lines(
+				'May toggle persistent-cache write behavior depending on whether the requested resource itself is viewable.'
+			),
+		];
 	}
 
 	private static function _setCacheHeaders(AbstractResourceType $resource): void

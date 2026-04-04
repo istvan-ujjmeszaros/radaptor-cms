@@ -2,9 +2,47 @@
 
 declare(strict_types=1);
 
-class EventImportExportImport extends AbstractEvent
+class EventImportExportImport extends AbstractEvent implements iBrowserEventDocumentable
 {
 	private ?AbstractImportExportDataset $_dataset = null;
+
+	public static function describeBrowserEvent(): array
+	{
+		return [
+			'event_name' => 'import_export.import',
+			'group' => 'Import / Export',
+			'name' => 'Import dataset CSV',
+			'summary' => 'Imports dataset CSV content and returns either JSON or a redirect flow.',
+			'description' => 'Resolves a dataset from POST, validates the uploaded CSV file, runs the dataset import, and reports the result through JSON or system messages.',
+			'request' => [
+				'method' => 'POST',
+				'params' => [
+					BrowserEventDocumentationHelper::param('dataset', 'body', 'string', true, 'Dataset key to import into.'),
+					BrowserEventDocumentationHelper::param('csv_file', 'file', 'uploaded-file', true, 'CSV upload payload.'),
+					BrowserEventDocumentationHelper::param('dry_run', 'body', 'string', false, 'When set to 1, perform a dry run.'),
+					BrowserEventDocumentationHelper::param('ajax', 'body', 'string', false, 'When set to 1, force JSON output.'),
+					BrowserEventDocumentationHelper::param('referer', 'body', 'string', false, 'Optional return URL for non-AJAX flows.'),
+				],
+			],
+			'response' => [
+				'kind' => 'json-or-redirect',
+				'content_type' => 'application/json or text/html',
+				'description' => 'Returns JSON for AJAX requests, otherwise redirects back with system messages.',
+			],
+			'authorization' => [
+				'visibility' => 'dataset-specific',
+				'description' => 'Allowed only when the resolved dataset exists and supports import.',
+			],
+			'notes' => BrowserEventDocumentationHelper::lines(
+				'Dataset-specific extra POST fields are forwarded as scalar options to the dataset importer.',
+				'The response shape changes depending on the AJAX detection rules or explicit ajax=1.'
+			),
+			'side_effects' => BrowserEventDocumentationHelper::lines(
+				'May insert, update, or delete data depending on the dataset and selected mode.',
+				'Queues system messages in non-AJAX flows.'
+			),
+		];
+	}
 
 	public function authorize(PolicyContext $policyContext): PolicyDecision
 	{

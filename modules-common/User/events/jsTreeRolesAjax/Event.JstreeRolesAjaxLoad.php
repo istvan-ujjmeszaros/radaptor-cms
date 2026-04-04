@@ -6,13 +6,44 @@
  * Detects jsTree version from request parameters and returns
  * appropriately formatted JSON data.
  */
-class EventJstreeRolesAjaxLoad extends AbstractEvent
+class EventJstreeRolesAjaxLoad extends AbstractEvent implements iBrowserEventDocumentable
 {
 	public function authorize(PolicyContext $policyContext): PolicyDecision
 	{
 		return ($policyContext->principal->hasRole(RoleList::ROLE_ROLES_ADMIN) || $policyContext->principal->hasRole(RoleList::ROLE_ROLES_VIEWER))
 			? PolicyDecision::allow()
 			: PolicyDecision::deny();
+	}
+
+	public static function describeBrowserEvent(): array
+	{
+		return [
+			'event_name' => 'jstree_roles_ajax.load',
+			'group' => 'Admin AJAX',
+			'name' => 'Load roles tree nodes',
+			'summary' => 'Returns jsTree payload for the roles hierarchy.',
+			'description' => 'Loads one roles-tree branch for browser-side jsTree rendering.',
+			'request' => [
+				'method' => 'GET',
+				'params' => [
+					BrowserEventDocumentationHelper::param('node_id', 'query', 'string', false, 'Preferred node identifier for jsTree 3.x style calls.'),
+					BrowserEventDocumentationHelper::param('id', 'query', 'string', false, 'Fallback node identifier used by some jsTree flows.'),
+					BrowserEventDocumentationHelper::param('id_prefix', 'query', 'string', false, 'Optional DOM id prefix for generated node ids.'),
+					BrowserEventDocumentationHelper::param('shape_template', 'query', 'string', false, 'Optional response shape template override.'),
+				],
+			],
+			'response' => [
+				'kind' => 'json',
+				'content_type' => 'application/json',
+				'description' => 'Returns jsTree node data for the requested role-tree parent.',
+			],
+			'authorization' => [
+				'visibility' => 'role:roles_admin or role:roles_viewer',
+				'description' => 'Requires either the roles admin or roles viewer role.',
+			],
+			'notes' => [],
+			'side_effects' => [],
+		];
 	}
 
 	public function run(): void

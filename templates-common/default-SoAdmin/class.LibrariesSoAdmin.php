@@ -128,6 +128,7 @@ class LibrariesSoAdmin extends LibrariesCommon
 	public const string __ADMIN_SITE = '
 		COMMON,
 		JQUERY_UI_10,
+		css:https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css,
 		/assets/packages/themes/so-admin/admin-site/css-reset/html5-boilerplate.css,
 		/assets/packages/themes/so-admin/admin-site/admin-site/admin-site.css,
 		/assets/packages/themes/so-admin/admin-site/buttons.css,

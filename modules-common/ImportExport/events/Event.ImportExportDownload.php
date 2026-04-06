@@ -2,9 +2,40 @@
 
 declare(strict_types=1);
 
-class EventImportExportDownload extends AbstractEvent
+class EventImportExportDownload extends AbstractEvent implements iBrowserEventDocumentable
 {
 	private ?AbstractImportExportDataset $_dataset = null;
+
+	public static function describeBrowserEvent(): array
+	{
+		return [
+			'event_name' => 'import_export.download',
+			'group' => 'Import / Export',
+			'name' => 'Download dataset export',
+			'summary' => 'Streams a CSV export for one import/export dataset.',
+			'description' => 'Resolves a dataset by key, collects scalar GET options, and returns the dataset export as a CSV download.',
+			'request' => [
+				'method' => 'GET',
+				'params' => [
+					BrowserEventDocumentationHelper::param('dataset', 'query', 'string', true, 'Dataset key to export.'),
+					BrowserEventDocumentationHelper::param('*', 'query', 'string', false, 'Additional scalar dataset-specific export options.'),
+				],
+			],
+			'response' => [
+				'kind' => 'file-download',
+				'content_type' => 'text/csv; charset=UTF-8',
+				'description' => 'Returns the generated CSV stream with a download filename.',
+			],
+			'authorization' => [
+				'visibility' => 'dataset-specific',
+				'description' => 'Allowed only when the resolved dataset exists and supports export.',
+			],
+			'notes' => BrowserEventDocumentationHelper::lines(
+				'The available option set depends on the selected dataset implementation.'
+			),
+			'side_effects' => [],
+		];
+	}
 
 	public function authorize(PolicyContext $policyContext): PolicyDecision
 	{

@@ -1,12 +1,49 @@
 <?php
 
-class EventI18nAjaxSave extends AbstractEvent
+class EventI18nAjaxSave extends AbstractEvent implements iBrowserEventDocumentable
 {
 	public function authorize(PolicyContext $policyContext): PolicyDecision
 	{
 		return Roles::hasRole(RoleList::ROLE_I18N_TRANSLATOR)
 			? PolicyDecision::allow()
 			: PolicyDecision::deny();
+	}
+
+	public static function describeBrowserEvent(): array
+	{
+		return [
+			'event_name' => 'i18n_ajax.save',
+			'group' => 'I18n',
+			'name' => 'Save one i18n translation row',
+			'summary' => 'Creates, updates, or deletes one translation row from the workbench.',
+			'description' => 'Persists one translation change and returns a JSON summary including whether the row is now missing or reviewed.',
+			'request' => [
+				'method' => 'POST',
+				'params' => [
+					BrowserEventDocumentationHelper::param('domain', 'body', 'string', true, 'Translation domain.'),
+					BrowserEventDocumentationHelper::param('key', 'body', 'string', true, 'Translation key.'),
+					BrowserEventDocumentationHelper::param('context', 'body', 'string', false, 'Optional message context.'),
+					BrowserEventDocumentationHelper::param('locale', 'body', 'string', true, 'Target locale code.'),
+					BrowserEventDocumentationHelper::param('text', 'body', 'string', true, 'New translation text; empty string deletes the translation.'),
+					BrowserEventDocumentationHelper::param('human_reviewed', 'body', 'string', false, 'Truth-y flag to mark the translation as human reviewed.'),
+				],
+			],
+			'response' => [
+				'kind' => 'json',
+				'content_type' => 'application/json',
+				'description' => 'Returns a JSON status payload describing the action that happened.',
+			],
+			'authorization' => [
+				'visibility' => 'role:i18n_translator',
+				'description' => 'Requires the i18n translator role.',
+			],
+			'notes' => BrowserEventDocumentationHelper::lines(
+				'Empty text deletes the translation instead of saving an empty string.'
+			),
+			'side_effects' => BrowserEventDocumentationHelper::lines(
+				'Inserts, updates, or deletes one translation record.'
+			),
+		];
 	}
 
 	public function run(): void

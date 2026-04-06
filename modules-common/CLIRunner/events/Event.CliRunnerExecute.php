@@ -10,8 +10,44 @@ declare(strict_types=1);
  *
  * URL: ?context=cliRunner&event=execute
  */
-class EventCliRunnerExecute extends AbstractEvent implements iAuthorizable
+class EventCliRunnerExecute extends AbstractEvent implements iAuthorizable, iBrowserEventDocumentable
 {
+	public static function describeBrowserEvent(): array
+	{
+		return [
+			'event_name' => 'cli_runner.execute',
+			'group' => 'Developer Tools',
+			'name' => 'Execute web-runnable CLI command',
+			'summary' => 'Runs one CLI command through the web runner and returns structured output.',
+			'description' => 'Accepts a CLI command slug plus optional arguments/options/flags and delegates to CLICommandWebRunner for execution.',
+			'request' => [
+				'method' => 'POST',
+				'params' => [
+					BrowserEventDocumentationHelper::param('command', 'body', 'string', true, 'CLI command slug registered as web-runnable.'),
+					BrowserEventDocumentationHelper::param('main_arg', 'body', 'string', false, 'Optional main positional argument.'),
+					BrowserEventDocumentationHelper::param('options', 'body', 'json-object', false, 'JSON-encoded named options map.'),
+					BrowserEventDocumentationHelper::param('flags', 'body', 'json-array', false, 'JSON-encoded list of flag names.'),
+					BrowserEventDocumentationHelper::param('extra_args', 'body', 'json-array', false, 'JSON-encoded list of extra positional arguments.'),
+				],
+			],
+			'response' => [
+				'kind' => 'json',
+				'content_type' => 'application/json',
+				'description' => 'Returns command output, JSON payload, exit code, duration, and error information.',
+			],
+			'authorization' => [
+				'visibility' => 'role:system_developer',
+				'description' => 'Requires the system developer role.',
+			],
+			'notes' => BrowserEventDocumentationHelper::lines(
+				'Only commands that are registered and marked web-runnable can be executed.'
+			),
+			'side_effects' => BrowserEventDocumentationHelper::lines(
+				'Executes a real CLI command and may mutate application state depending on that command.'
+			),
+		];
+	}
+
 	public function authorize(PolicyContext $policyContext): PolicyDecision
 	{
 		return Roles::hasRole(RoleList::ROLE_SYSTEM_DEVELOPER)

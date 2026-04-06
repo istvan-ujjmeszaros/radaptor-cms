@@ -88,7 +88,7 @@ class TemplateDebug extends TemplateList
 			$theme = $template->getRenderer()->getTheme();
 
 			if ($theme !== null) {
-				$themeName = $theme::getName();
+				$themeName = $theme::getThemeName();
 				// Check if this theme has a version of this template
 				$themedPath = ThemedTemplateList::getThemedTemplatePath($templateName, $themeName);
 				$isThemed = ($themedPath !== null);

@@ -62,12 +62,25 @@ abstract class AbstractThemeData extends Themes implements iThemeData, iListable
 	}
 
 	/**
+	 * Stable theme identifier derived from the class name.
+	 * Returns the suffix after "ThemeData" from the concrete class name.
+	 * Example: ThemeDataSoAdmin → 'SoAdmin', ThemeDataRadaptorPortalAdmin → 'RadaptorPortalAdmin'.
+	 *
+	 * Used for template key resolution (e.g. "sdui.form.SoAdmin").
+	 * Must not be translated — it is a stable code identifier.
+	 */
+	public static function getThemeName(): string
+	{
+		return substr(static::class, strlen('ThemeData'));
+	}
+
+	/**
 	 * Default slug derivation from theme name.
 	 * Converts PascalCase name to kebab-case.
 	 * Example: RadaptorPortalAdmin → radaptor-portal-admin.
 	 */
 	public static function getSlug(): string
 	{
-		return strtolower((string) preg_replace('/([a-z])([A-Z])/', '$1-$2', static::getName()));
+		return strtolower((string) preg_replace('/([a-z])([A-Z])/', '$1-$2', static::getThemeName()));
 	}
 }

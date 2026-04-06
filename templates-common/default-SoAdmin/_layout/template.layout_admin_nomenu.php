@@ -19,8 +19,6 @@ $document_title = (string)($this->props['document_title'] ?? trim($administratio
 	<?= $this->getRenderer()->getLibraryDebugInfo(); ?>
 	<?= $this->getRenderer()->getCss(); ?>
 
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
 	<?= $this->getRenderer()->getJsTop(); ?>
 	<?= $this->getRenderer()->getJs(); ?>
 	<!--link rel="stylesheet" href="debug.css" type="text/css"-->

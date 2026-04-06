@@ -112,7 +112,7 @@ class Template extends TemplateDebug
 
 	public function getTemplatePath(string $templateName): string
 	{
-		$theme_name = $this->_renderer?->getTheme()?->getName();
+		$theme_name = $this->_renderer?->getTheme()?->getThemeName();
 
 		if ($theme_name !== null) {
 			$themedPath = ThemedTemplateList::getThemedTemplatePath($templateName, $theme_name);

@@ -107,15 +107,19 @@ class CmsResourceSpecService
 			$update_data['layout'] = (string) $spec['layout'];
 		}
 
-		if (isset($spec['catcher'])) {
-			$update_data['catcher_page'] = $spec['catcher'] ? 1 : 0;
-		}
-
 		foreach ((array) ($spec['attributes'] ?? []) as $key => $value) {
 			$update_data[(string) $key] = $value;
 		}
 
 		ResourceTreeHandler::updateResourceTreeEntry($update_data, (int) $page['node_id']);
+
+		if (array_key_exists('catcher', $spec)) {
+			if ((bool) $spec['catcher']) {
+				ResourceTreeHandler::setAsCatcherPage((int) $page['node_id']);
+			} else {
+				ResourceTreeHandler::clearCatcherPage((int) $page['node_id']);
+			}
+		}
 
 		if (is_array($spec['acl'] ?? null)) {
 			self::syncAcl((int) $page['node_id'], $spec['acl']);
@@ -364,6 +368,20 @@ class CmsResourceSpecService
 		$targets = [];
 
 		if ($connection_id !== null) {
+			$connection = Widget::getConnectionData($connection_id);
+
+			if (!is_array($connection)) {
+				throw new RuntimeException("Widget connection not found: {$connection_id}");
+			}
+
+			if ((int) ($connection['page_id'] ?? 0) !== (int) $page['node_id']) {
+				throw new RuntimeException("Widget connection {$connection_id} does not belong to {$path}.");
+			}
+
+			if ((string) ($connection['slot_name'] ?? '') !== $slot_name) {
+				throw new RuntimeException("Widget connection {$connection_id} does not belong to slot {$slot_name}.");
+			}
+
 			$targets[] = $connection_id;
 		} else {
 			$connections = WidgetConnection::getWidgetsForSlot((int) $page['node_id'], $slot_name);

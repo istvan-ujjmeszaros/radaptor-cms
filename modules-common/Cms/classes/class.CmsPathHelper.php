@@ -13,10 +13,6 @@ class CmsPathHelper
 		$path = '/' . ltrim($path, '/');
 		$path = preg_replace('#/+#', '/', $path) ?? $path;
 
-		if ($path !== '/' && str_ends_with($path, '/index.html')) {
-			$path = substr($path, 0, -10) . '/';
-		}
-
 		return $path;
 	}
 
@@ -132,6 +128,10 @@ class CmsPathHelper
 
 		if ($normalized_path === '/') {
 			return self::resolveFolder('/');
+		}
+
+		if (str_ends_with($normalized_path, '/index.html')) {
+			return self::resolveWebpage($normalized_path) ?? self::resolveFolder($normalized_path);
 		}
 
 		if (str_ends_with($normalized_path, '/')) {

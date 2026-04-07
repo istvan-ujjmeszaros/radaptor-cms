@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://radaptor.com/schemas/cms-resource-spec.schema.json",
+  "title": "Radaptor CMS Resource Spec",
+  "type": "object",
+  "oneOf": [
+    {
+      "required": ["type", "path", "acl"],
+      "properties": {
+        "type": { "const": "folder" },
+        "path": { "type": "string" },
+        "acl": { "$ref": "#/$defs/aclSpec" }
+      },
+      "additionalProperties": false
+    },
+    {
+      "required": ["type", "path"],
+      "properties": {
+        "type": { "const": "webpage" },
+        "path": { "type": "string" },
+        "layout": { "type": ["string", "null"] },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": ["string", "number", "integer", "boolean", "null"]
+          }
+        },
+        "catcher": { "type": "boolean" },
+        "acl": { "$ref": "#/$defs/aclSpec" },
+        "slots": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/widgetSpec" }
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  ],
+  "$defs": {
+    "aclPermissions": {
+      "type": "object",
+      "properties": {
+        "view": { "type": "boolean" },
+        "list": { "type": "boolean" },
+        "create": { "type": "boolean" },
+        "edit": { "type": "boolean" },
+        "delete": { "type": "boolean" },
+        "publish": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "aclSpec": {
+      "type": "object",
+      "properties": {
+        "inherit": { "type": "boolean" },
+        "usergroups": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/aclPermissions" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "widgetSpec": {
+      "type": "object",
+      "required": ["widget"],
+      "properties": {
+        "widget": { "type": "string" },
+        "seq": { "type": "integer" },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": ["string", "number", "integer", "boolean", "null"]
+          }
+        },
+        "settings": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

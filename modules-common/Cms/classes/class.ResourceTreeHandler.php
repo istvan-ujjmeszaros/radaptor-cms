@@ -341,6 +341,48 @@ class ResourceTreeHandler extends ResourceAcl
 		return self::addResourceEntry($savedata, $last_parent_id);
 	}
 
+	public static function createFolderFromPath(string $path): ?int
+	{
+		$normalized_path = CmsPathHelper::splitFolderPath($path)['normalized_path'];
+
+		if ($normalized_path === '/') {
+			return self::ensureDomainRoot(Config::APP_DOMAIN_CONTEXT->value());
+		}
+
+		$path_variations = self::getPathVariations($normalized_path);
+		$last_parent_id = self::ensureDomainRoot(Config::APP_DOMAIN_CONTEXT->value());
+
+		if (is_null($last_parent_id)) {
+			return null;
+		}
+
+		foreach ($path_variations as $path_variation) {
+			$folder_data = self::getResourceTreeEntryData($path_variation['path'], $path_variation['resource_name']);
+
+			if ($folder_data === null) {
+				$last_parent_id = self::addResourceEntry([
+					'node_type' => 'folder',
+					'path' => $path_variation['path'],
+					'resource_name' => $path_variation['resource_name'],
+				], $last_parent_id);
+
+				if (!is_int($last_parent_id) || $last_parent_id <= 0) {
+					return null;
+				}
+
+				continue;
+			}
+
+			if (($folder_data['node_type'] ?? null) !== 'folder') {
+				return null;
+			}
+
+			$last_parent_id = (int) $folder_data['node_id'];
+		}
+
+		return $last_parent_id;
+	}
+
 	private static function ensureDomainRoot(string $domain): ?int
 	{
 		$root_id = self::getDomainRoot($domain);

@@ -272,7 +272,7 @@ class CmsResourceSpecService
 		}
 
 		self::replaceConnectionAttributes($connection_id, $attributes);
-		self::replaceConnectionSettings($connection_id, $settings);
+		self::replaceConnectionSettings($connection_id, $widget_name, $settings);
 
 		return self::getWidgetConnectionSnapshot($connection_id);
 	}

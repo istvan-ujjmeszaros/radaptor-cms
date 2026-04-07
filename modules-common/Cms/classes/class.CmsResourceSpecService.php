@@ -168,7 +168,7 @@ class CmsResourceSpecService
 
 		return [
 			'type' => 'webpage',
-			'path' => ResourceTreeHandler::getPathFromId($page_id),
+			'path' => Url::getSeoUrl($page_id, false) ?? ResourceTreeHandler::getPathFromId($page_id),
 			'layout' => $layout !== '' ? $layout : null,
 			'attributes' => $attributes,
 			'catcher' => (bool) ($page['catcher_page'] ?? false),
@@ -657,8 +657,23 @@ class CmsResourceSpecService
 
 	private static function getWidgetSettingsHandler(string $widget_name): ?string
 	{
-		if ($widget_name !== '' && class_exists($widget_name) && method_exists($widget_name, 'saveSettings') && method_exists($widget_name, 'getSettings')) {
-			return $widget_name;
+		if ($widget_name === '') {
+			return null;
+		}
+
+		$candidates = [];
+		$widget_class_name = 'Widget' . ucwords($widget_name);
+
+		if (class_exists($widget_class_name)) {
+			$candidates[] = preg_replace('/^Widget/', '', $widget_class_name) ?: '';
+		}
+
+		$candidates[] = $widget_name;
+
+		foreach (array_unique(array_filter($candidates, static fn (string $candidate): bool => $candidate !== '')) as $candidate) {
+			if (class_exists($candidate) && method_exists($candidate, 'saveSettings') && method_exists($candidate, 'getSettings')) {
+				return $candidate;
+			}
 		}
 
 		return null;

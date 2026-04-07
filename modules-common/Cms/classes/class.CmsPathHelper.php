@@ -112,11 +112,23 @@ class CmsPathHelper
 			return is_int($root_id) ? ResourceTreeHandler::getResourceTreeEntryDataById($root_id) : null;
 		}
 
-		return ResourceTreeHandler::getResourceTreeEntryData(
+		$resource = ResourceTreeHandler::getResourceTreeEntryData(
 			$parts['parent_path'],
 			$parts['resource_name'],
 			Config::APP_DOMAIN_CONTEXT->value()
 		);
+
+		if (!is_array($resource)) {
+			return null;
+		}
+
+		$node_type = (string) ($resource['node_type'] ?? '');
+
+		if (!in_array($node_type, ['folder', 'root'], true)) {
+			return null;
+		}
+
+		return $resource;
 	}
 
 	/**

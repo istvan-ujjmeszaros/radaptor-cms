@@ -171,6 +171,7 @@ class Widget extends WidgetList
 		$seq = $connection_data['seq'];
 		$page_id = (int) $connection_data['page_id'];
 		$widget_name = $connection_data['widget_name'];
+		$slot_name = (string) ($connection_data['slot_name'] ?? '');
 
 		// Check if the widget being removed is a catcher widget
 		$widgetClassname = 'Widget' . ucwords($widget_name);
@@ -188,13 +189,15 @@ class Widget extends WidgetList
 		AttributeHandler::deleteAttributes(new AttributeResourceIdentifier(ResourceNames::WIDGET_CONNECTION, (string) $connection_id));
 
 		$update_seq_query = "
-            UPDATE widget_connections
-            SET
-                seq = seq - 1
-            WHERE seq >= ?";
+	            UPDATE widget_connections
+	            SET
+	                seq = seq - 1
+	            WHERE page_id = ?
+	              AND slot_name = ?
+	              AND seq > ?";
 
 		$update_stmt = Db::instance()->prepare($update_seq_query);
-		$update_stmt->execute([$seq]);
+		$update_stmt->execute([$page_id, $slot_name, $seq]);
 
 		Cache::flush();
 

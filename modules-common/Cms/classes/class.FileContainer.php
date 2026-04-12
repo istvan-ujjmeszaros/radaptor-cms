@@ -37,8 +37,10 @@ abstract class FileContainer
 		$path = DEPLOY_ROOT . Config::PATH_UPLOADED_FILES_DIRECTORY->value() . '/' . $storage_folder_id . '/';
 
 		if (!file_exists($path)) {
-			@mkdir($path, 0o777, true);
+			@mkdir($path, Config::LINUX_FILE_MODE_DIRECTORY->value(), true);
 		}
+
+		self::_normalizeFilesystemPermissions($path, true);
 	}
 
 	/**
@@ -115,6 +117,8 @@ abstract class FileContainer
 			return false;
 		}
 
+		self::_normalizeFilesystemPermissions(FileContainer::realPath($md5_hash, $storage_folder_id), false);
+
 		Db::instance()->commit();
 
 		Cache::flush();
@@ -123,7 +127,6 @@ abstract class FileContainer
 	}
 
 	/**
-	 * TODO: Look into why this method is not in use. Are we actually deleting the removed files? Or do we need to come up with a logic?
 	 * Adott azonosítójú fájlt töröl az adatbázisból, és ha az adott fájlra már
 	 * nem hivatkozik több bejegyzés, akkor magát a tárolt fájlt is törli.
 	 *
@@ -142,7 +145,7 @@ abstract class FileContainer
 
 		$same_files = self::getDataFromMd5Hash($file_data['md5_hash']);
 
-		if (count($same_files) == 0) {
+		if ($same_files === false) {
 			// törölhetjük, mert erre a fájlra már csak ez a bejegyzés hivatkozott
 			$realPath = self::realPath($file_data['md5_hash'], $file_data['storage_folder_id']);
 
@@ -180,6 +183,18 @@ abstract class FileContainer
 		$stmt->execute([$md5_hash]);
 
 		return $stmt->fetch(PDO::FETCH_ASSOC);
+	}
+
+	private static function _normalizeFilesystemPermissions(string $path, bool $is_directory): void
+	{
+		if (!file_exists($path)) {
+			return;
+		}
+
+		@chmod(
+			$path,
+			$is_directory ? Config::LINUX_FILE_MODE_DIRECTORY->value() : Config::LINUX_FILE_MODE->value()
+		);
 	}
 
 	public static function forceDownload($file_id, $resize, $savename): void

@@ -136,6 +136,10 @@ class ResourceAcl
 
 	public static function canAccessResource(int $resource_id, string $operation): bool
 	{
+		if (CLITrustPolicy::isTrustedOperatorCli()) {
+			return true;
+		}
+
 		if (Roles::hasRole(RoleList::ROLE_SYSTEM_DEVELOPER) && Config::DEV_DEVELOPERS_CAN_ACCESS_ALL_RESOURCES->value() === true) {
 			return true;
 		}

@@ -34,16 +34,6 @@
  */
 class CmsResourceSpecService
 {
-	private const array RESERVED_WEBPAGE_ATTRIBUTE_KEYS = [
-		'node_id',
-		'resource_name',
-		'catcher_page',
-		'comment',
-		'node_type',
-		'path',
-		'is_inheriting_acl',
-		'layout',
-	];
 	private const array ACL_PERMISSION_TO_COLUMN = [
 		'view' => 'allow_view',
 		'list' => 'allow_list',
@@ -118,9 +108,6 @@ class CmsResourceSpecService
 		}
 
 		foreach ((array) ($spec['attributes'] ?? []) as $key => $value) {
-			if (in_array((string) $key, self::RESERVED_WEBPAGE_ATTRIBUTE_KEYS, true)) {
-				throw new InvalidArgumentException("Webpage attribute key '{$key}' is reserved.");
-			}
 			$update_data[(string) $key] = $value;
 		}
 
@@ -158,9 +145,7 @@ class CmsResourceSpecService
 
 		return [
 			'type' => 'folder',
-			'path' => (($folder['node_type'] ?? '') === 'root')
-				? '/'
-				: ResourceTreeHandler::getPathFromId((int) $folder['node_id']),
+			'path' => ResourceTreeHandler::getPathFromId((int) $folder['node_id']),
 			'acl' => self::exportAclSpec((int) $folder['node_id']),
 		];
 	}
@@ -188,7 +173,7 @@ class CmsResourceSpecService
 			'attributes' => $attributes,
 			'catcher' => (bool) ($page['catcher_page'] ?? false),
 			'acl' => self::exportAclSpec($page_id),
-			'slots' => self::exportWidgetSpecsBySlot($page_id),
+			'slots' => self::listWidgetsBySlot($page_id),
 		];
 	}
 
@@ -573,23 +558,6 @@ class CmsResourceSpecService
 					),
 					'settings' => self::getConnectionSettings($connection_id, $connection->getWidgetName()),
 				];
-			}
-		}
-
-		return $slots;
-	}
-
-	/**
-	 * @return array<string, list<CmsWidgetSpec>>
-	 */
-	private static function exportWidgetSpecsBySlot(int $page_id): array
-	{
-		$slots = self::listWidgetsBySlot($page_id);
-
-		foreach ($slots as $slot_name => $widgets) {
-			foreach ($widgets as $index => $widget) {
-				unset($widget['connection_id']);
-				$slots[$slot_name][$index] = $widget;
 			}
 		}
 

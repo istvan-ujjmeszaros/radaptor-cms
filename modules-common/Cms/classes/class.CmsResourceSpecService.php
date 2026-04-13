@@ -595,6 +595,7 @@ class CmsResourceSpecService
 
 		return $slots;
 	}
+
 	/**
 	 * @param array<string, scalar|null> $attributes
 	 */

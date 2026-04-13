@@ -33,9 +33,9 @@ class ResourceTypeRoot extends AbstractResourceType
 
 	public static function getDomainContextForResource($resource_id): string
 	{
-		$nodes = NestedSet::getParentNodes('resource_tree', $resource_id);
+		$nodes = ResourceTreeHandler::getParentNodes((int) $resource_id);
 
-		if (is_null($nodes)) {
+		if ($nodes === []) {
 			return '';
 		}
 

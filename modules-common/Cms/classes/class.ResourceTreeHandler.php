@@ -71,25 +71,48 @@ class ResourceTreeHandler extends ResourceAcl
 		return $path_variations;
 	}
 
-	public static function getResourceTree(int $parent_id, bool $skip_acl_check = false): array
+	public static function getResourceTree(int $parent_id): array
 	{
-		$return = NestedSet::getChildren('resource_tree', $parent_id, [
+		return self::filterChildrenByAcl(NestedSet::getChildren('resource_tree', $parent_id, [
 			'resource_name',
 			'node_type',
 			'catcher_page',
-		], 'node_type=\'folder\' DESC, lft ASC');
+		], 'node_type=\'folder\' DESC, lft ASC'));
+	}
 
-		if ($skip_acl_check) {
-			return $return;
-		}
+	public static function getResourceChildrenDetailed(int $parent_id): array
+	{
+		return self::filterChildrenByAcl(NestedSet::getChildren('resource_tree', $parent_id, [
+			'resource_name',
+			'node_type',
+			'path',
+			'is_inheriting_acl',
+			'catcher_page',
+		], 'node_type=\'folder\' DESC, lft ASC'));
+	}
 
-		foreach ($return as $key => $value) {
+	public static function countChildren(int $parent_id): int
+	{
+		return (int) DbHelper::selectOneColumnFromQuery(
+			"SELECT COUNT(1) FROM resource_tree WHERE parent_id=?",
+			[$parent_id]
+		);
+	}
+
+	public static function getParentNodes(int $resource_id): array
+	{
+		return NestedSet::getParentNodes('resource_tree', $resource_id) ?? [];
+	}
+
+	private static function filterChildrenByAcl(array $nodes): array
+	{
+		foreach ($nodes as $key => $value) {
 			if (!ResourceAcl::canAccessResource($value['node_id'], ResourceAcl::_ACL_LIST)) {
-				unset($return[$key]);
+				unset($nodes[$key]);
 			}
 		}
 
-		return $return;
+		return array_values($nodes);
 	}
 
 	public static function setDownloadHeader(int $file_size, string $save_name): void
@@ -750,21 +773,61 @@ class ResourceTreeHandler extends ResourceAcl
 			return false;
 		}
 
+		$resource_data = self::getResourceTreeEntryDataById($resource_id);
+
+		if (!is_array($resource_data)) {
+			return false;
+		}
+
+		$node_type = (string) ($resource_data['node_type'] ?? '');
+		$attribute_resource = new AttributeResourceIdentifier(ResourceNames::RESOURCE_DATA, (string) $resource_id);
+		$attributes = AttributeHandler::getAttributes($attribute_resource);
+		$file_id = $node_type === 'file' ? (int) ($attributes['file_id'] ?? 0) : 0;
+
 		self::clearCatcherPage($resource_id);
 
 		Cache::flush();
 
-		return NestedSet::deleteNode('resource_tree', $resource_id);
+		if (!NestedSet::deleteNode('resource_tree', $resource_id)) {
+			return false;
+		}
+
+		AttributeHandler::deleteAttributes($attribute_resource);
+
+		if ($node_type !== 'file' || $file_id <= 0) {
+			return true;
+		}
+
+		if (self::hasResourceReferencesForFileId($file_id)) {
+			return true;
+		}
+
+		if (FileContainer::getDataFromFileId($file_id) === false) {
+			return true;
+		}
+
+		return FileContainer::delFile($file_id);
 	}
 
 	public static function deleteResourceEntriesRecursive(int $resource_id): array
 	{
 		$folder_count = 0;
 		$webpage_count = 0;
+		$file_count = 0;
 		$erroneous_count = 0;
 
 		// 0. lekérjük az adott id-jű node adatait
-		$node_data = NestedSet::getNodeInfo('resource_tree', $resource_id);
+		$node_data = self::getResourceTreeEntryDataById($resource_id);
+
+		if (!is_array($node_data)) {
+			return ([
+				'success' => false,
+				'erroneous' => 1,
+				'folder' => 0,
+				'webpage' => 0,
+				'file' => 0,
+			]);
+		}
 
 		$lft = $node_data['lft'];
 		$rgt = $node_data['rgt'];
@@ -774,6 +837,8 @@ class ResourceTreeHandler extends ResourceAcl
 
 			if ($success && $node_data['node_type'] == 'webpage') {
 				++$webpage_count;
+			} elseif ($success && $node_data['node_type'] == 'file') {
+				++$file_count;
 			} elseif ($success && $node_data['node_type'] == 'folder') {
 				++$folder_count;
 			} else {
@@ -812,6 +877,18 @@ class ResourceTreeHandler extends ResourceAcl
 
 						break;
 
+					case 'file':
+
+						$success = ResourceTreeHandler::deleteResourceEntry($node['node_id']);
+
+						if ($success) {
+							++$file_count;
+						} else {
+							++$erroneous_count;
+						}
+
+						break;
+
 					case 'folder':
 					default:
 
@@ -828,7 +905,7 @@ class ResourceTreeHandler extends ResourceAcl
 			}
 		}
 
-		if ($erroneous_count + $folder_count + $webpage_count > 0) {
+		if ($erroneous_count + $folder_count + $webpage_count + $file_count > 0) {
 			$success = true;
 		} else {
 			$success = false;
@@ -839,6 +916,7 @@ class ResourceTreeHandler extends ResourceAcl
 			'erroneous' => $erroneous_count,
 			'folder' => $folder_count,
 			'webpage' => $webpage_count,
+			'file' => $file_count,
 		]);
 	}
 
@@ -970,6 +1048,24 @@ class ResourceTreeHandler extends ResourceAcl
 			"SELECT page_id FROM widget_connections WHERE connection_id=? LIMIT 1;",
 			[$connection_id]
 		);
+	}
+
+	private static function hasResourceReferencesForFileId(int $file_id): bool
+	{
+		$stmt = Db::instance()->prepare(
+			"SELECT 1
+			 FROM attributes
+			 WHERE resource_name=?
+			   AND param_name='file_id'
+			   AND param_value=?
+			 LIMIT 1"
+		);
+		$stmt->execute([
+			ResourceNames::RESOURCE_DATA,
+			(string) $file_id,
+		]);
+
+		return $stmt->fetch(PDO::FETCH_COLUMN) !== false;
 	}
 
 	public static function setNoCacheHeaders(): void

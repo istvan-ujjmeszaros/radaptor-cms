@@ -125,6 +125,10 @@ class LibrariesCommon
         js:https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.min.js,
         css:https://unpkg.com/tippy.js@6/dist/tippy.css,
     ';
+	public const string DROPZONE = '
+        css:https://unpkg.com/dropzone@5.9.3/dist/min/dropzone.min.css,
+        js:https://unpkg.com/dropzone@5.9.3/dist/min/dropzone.min.js,
+    ';
 	public const string DATATABLES = '
         JQUERY,
         /assets/_common/libraries/jquery-datatables/1.9.1/media/css/datatables-colreorder.css,

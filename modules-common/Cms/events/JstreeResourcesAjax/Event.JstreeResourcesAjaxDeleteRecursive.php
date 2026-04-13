@@ -23,6 +23,7 @@ class EventJstreeResourcesAjaxDeleteRecursive extends AbstractEvent
 
 		$total_folders = 0;
 		$total_webpages = 0;
+		$total_files = 0;
 		$total_errors = 0;
 		$deleted_names = [];
 		$last_parent_id = null;
@@ -42,6 +43,7 @@ class EventJstreeResourcesAjaxDeleteRecursive extends AbstractEvent
 			if ($deletion_response_data['success']) {
 				$total_folders += $deletion_response_data['folder'] ?? 0;
 				$total_webpages += $deletion_response_data['webpage'] ?? 0;
+				$total_files += $deletion_response_data['file'] ?? 0;
 				$total_errors += $deletion_response_data['erroneous'] ?? 0;
 				$deleted_names[] = $data['resource_name'] ?? t('common.unknown');
 			} else {
@@ -49,7 +51,7 @@ class EventJstreeResourcesAjaxDeleteRecursive extends AbstractEvent
 			}
 		}
 
-		$total_deleted = $total_folders + $total_webpages;
+		$total_deleted = $total_folders + $total_webpages + $total_files;
 
 		if ($total_errors > 0) {
 			SystemMessages::_error(t('cms.resource.delete_partial_error', ['count' => $total_errors]));
@@ -67,7 +69,10 @@ class EventJstreeResourcesAjaxDeleteRecursive extends AbstractEvent
 				if ($total_webpages > 0) {
 					$parts[] = t('cms.resource.page_count', ['count' => $total_webpages]);
 				}
-				$info_text = '<br><i>(' . implode(', ', $parts) . ')</i>';
+
+				if (!empty($parts)) {
+					$info_text = '<br><i>(' . implode(', ', $parts) . ')</i>';
+				}
 			}
 
 			if (count($deleted_names) === 1) {

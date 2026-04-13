@@ -44,7 +44,6 @@ class CmsResourceSpecService
 		'is_inheriting_acl',
 		'layout',
 	];
-
 	private const array ACL_PERMISSION_TO_COLUMN = [
 		'view' => 'allow_view',
 		'list' => 'allow_list',
@@ -122,7 +121,6 @@ class CmsResourceSpecService
 			if (in_array((string) $key, self::RESERVED_WEBPAGE_ATTRIBUTE_KEYS, true)) {
 				throw new InvalidArgumentException("Webpage attribute key '{$key}' is reserved.");
 			}
-
 			$update_data[(string) $key] = $value;
 		}
 
@@ -227,13 +225,7 @@ class CmsResourceSpecService
 			throw new RuntimeException("Resource not found: {$path}");
 		}
 
-		return NestedSet::getChildren('resource_tree', (int) $resource['node_id'], [
-			'resource_name',
-			'node_type',
-			'path',
-			'is_inheriting_acl',
-			'catcher_page',
-		], 'node_type=\'folder\' DESC, lft ASC');
+		return ResourceTreeHandler::getResourceChildrenDetailed((int) $resource['node_id']);
 	}
 
 	/**

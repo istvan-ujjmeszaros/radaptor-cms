@@ -12,6 +12,8 @@ class WidgetFileUpload extends AbstractWidget
 		return [
 			'widget.file_upload.name' => t('widget.file_upload.name'),
 			'cms.file_upload.destination_path' => t('cms.file_upload.destination_path'),
+			'cms.file.uploaded' => t('cms.file.uploaded'),
+			'cms.file.upload_error' => t('cms.file.upload_error'),
 			'common.upload' => t('common.upload'),
 		];
 	}

@@ -7,7 +7,8 @@ use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
 $finder = PhpCsFixer\Finder::create()
 	->files()
 	->name('*.php')
-	->in([__DIR__]);
+	->in([__DIR__])
+	->notPath('#/generators/#');
 
 $config = new PhpCsFixer\Config();
 

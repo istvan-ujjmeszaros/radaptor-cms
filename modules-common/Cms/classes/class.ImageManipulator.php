@@ -317,7 +317,7 @@ class ImageManipulator
 		$tmpImage = imagecreatetruecolor($this->_overlappedWidth, $this->_overlappedHeight);
 
 		if ($tmpImage === false) {
-			imagedestroy($this->originalImageResource); // Clean up original image resource
+			$this->originalImageResource = null; // Release original image reference
 			$this->error = self::ERROR_OUT_OF_MEMORY . " (line " . __LINE__ . ")";
 
 			return false;
@@ -340,15 +340,15 @@ class ImageManipulator
 			$this->originalWidth,
 			$this->originalHeight
 		)) {
-			imagedestroy($this->originalImageResource);
-			imagedestroy($tmpImage);
+			$this->originalImageResource = null;
+			$tmpImage = null;
 			$this->error = self::ERROR_OUT_OF_MEMORY . " (line " . __LINE__ . ")";
 
 			return false;
 		}
 
 		// Clean up the original image resource
-		imagedestroy($this->originalImageResource);
+		$this->originalImageResource = null;
 
 		// Create the final image resource based on the sizing method
 		switch ($this->_parameters['sizingMethod']) {
@@ -362,7 +362,7 @@ class ImageManipulator
 
 		// Check if image resource creation was successful
 		if (!$this->image_resource) {
-			imagedestroy($tmpImage);
+			$tmpImage = null;
 			$this->error = self::ERROR_OUT_OF_MEMORY . " (line " . __LINE__ . ")";
 
 			return false;
@@ -377,8 +377,8 @@ class ImageManipulator
 			case 'fit':
 			case 'stretch':
 				if (!imagecopy($this->image_resource, $tmpImage, 0, 0, 0, 0, $this->_finalWidth, $this->_finalHeight)) {
-					imagedestroy($this->image_resource);
-					imagedestroy($tmpImage);
+					$this->image_resource = null;
+					$tmpImage = null;
 					$this->error = self::ERROR_OUT_OF_MEMORY . " (line " . __LINE__ . ")";
 
 					return false;
@@ -391,8 +391,8 @@ class ImageManipulator
 				$yOffset = (int)abs(round(($this->_overlappedHeight - $this->_finalHeight) / 2));
 
 				if (!imagecopy($this->image_resource, $tmpImage, 0, 0, $xOffset, $yOffset, $this->_overlappedWidth, $this->_overlappedHeight)) {
-					imagedestroy($this->image_resource);
-					imagedestroy($tmpImage);
+					$this->image_resource = null;
+					$tmpImage = null;
 					$this->error = self::ERROR_OUT_OF_MEMORY . " (line " . __LINE__ . ")";
 
 					return false;
@@ -402,7 +402,7 @@ class ImageManipulator
 		}
 
 		// Clean up the temporary image
-		imagedestroy($tmpImage);
+		$tmpImage = null;
 
 		return true;
 	}
@@ -491,7 +491,7 @@ class ImageManipulator
 		}
 
 		// Replace the image resource with the boxed image
-		imagedestroy($this->image_resource);
+		$this->image_resource = null;
 		$this->image_resource = $tmpImage;
 
 		// Update the final dimensions to match the box
@@ -590,7 +590,6 @@ class ImageManipulator
 
 		// Optionally destroy the image resource to free up memory
 		if ($destroyImageResource && $this->image_resource) {
-			imagedestroy($this->image_resource);
 			$this->image_resource = null; // Reset the resource
 		}
 	}
@@ -656,7 +655,7 @@ class ImageManipulator
 		imagecopy($this->image_resource, $maskImage, 0, 0, 0, 0, $maskWidth, $maskHeight);
 
 		// Clean up the mask image resource
-		imagedestroy($maskImage);
+		$maskImage = null;
 
 		return true; // Mask applied successfully
 	}
@@ -672,13 +671,29 @@ class ImageManipulator
 			return false; // Early return if a previous error occurred
 		}
 
-		// Get watermark parameters (assuming they are stored in $this->_parameters)
-		$watermarkPath = $this->_parameters['watermark']['file'];
-		//$watermarkPosition = $this->_parameters['watermark']['position'];
-		// ... other watermark parameters (opacity, margin, etc.)
+		$watermark_config = $this->_parameters['watermark'] ?? null;
+
+		if (!is_array($watermark_config) || $watermark_config === []) {
+			$watermarks = $this->_parameters['watermarks'] ?? [];
+			$watermark_config = is_array($watermarks) ? reset($watermarks) : null;
+		}
+
+		if (!is_array($watermark_config) || $watermark_config === []) {
+			return true;
+		}
+
+		$watermarkPath = (string) ($watermark_config['file'] ?? '');
+
+		if ($watermarkPath === '' || !file_exists($watermarkPath)) {
+			return true;
+		}
 
 		// Load the watermark image
-		$watermark = imagecreatefrompng($watermarkPath); // Or appropriate function based on file type
+		$watermark = @imagecreatefrompng($watermarkPath); // Or appropriate function based on file type
+
+		if ($watermark === false) {
+			return true;
+		}
 
 		// ... (Calculate watermark position based on $watermarkPosition and other parameters)
 
@@ -686,7 +701,7 @@ class ImageManipulator
 		imagecopy($this->image_resource, $watermark, 0, 0, 0, 0, imagesx($watermark), imagesy($watermark));
 
 		// Clean up the watermark image resource
-		imagedestroy($watermark);
+		$watermark = null;
 
 		return true; // Watermark added successfully (or no watermark to add)
 	}
@@ -747,7 +762,7 @@ class ImageManipulator
 		// Ensure the cutter image matches the final dimensions of the resized image.
 		if ($width != $this->_finalWidth || $height != $this->_finalHeight) {
 			$this->error = self::ERROR_CUTTER_SIZE_NOT_MATCH;
-			imagedestroy($cutterImage); // Free up the cutter image resource
+			$cutterImage = null; // Release cutter image reference
 
 			return false;
 		}
@@ -788,7 +803,7 @@ class ImageManipulator
 		}
 
 		// Destroy the cutter image resource.
-		imagedestroy($cutterImage);
+		$cutterImage = null;
 
 		// Replace the original image resource with the temporary image.
 		$this->image_resource = $tempImage;

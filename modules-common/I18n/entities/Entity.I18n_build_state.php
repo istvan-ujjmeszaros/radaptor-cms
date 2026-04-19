@@ -59,10 +59,10 @@ class EntityI18n_build_state extends SQLEntity
 
 	/**
 	 * {@inheritDoc}
-	 * @param int|array<string, mixed> $id
+	 * @param int|string|array<string, mixed> $id
 	 * @param ShapeEntityI18n_build_state $data
 	 */
-	public static function updateById(int|array $id, array $data): static
+	public static function updateById(int|string|array $id, array $data): static
 	{
 		return parent::updateById($id, $data);
 	}

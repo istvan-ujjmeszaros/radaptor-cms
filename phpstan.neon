@@ -1,0 +1,22 @@
+parameters:
+	level: 0
+	bootstrapFiles:
+		- ../../../../bootstrap/bootstrap.testing.php
+	paths:
+		- modules-common/Cms/classes/class.CmsPathHelper.php
+		- modules-common/Cms/classes/class.CmsResourceSpecService.php
+		- modules-common/Cms/classes/class.ImageManipulator.php
+		- modules-common/Comment/entities/Entity.Comment.php
+		- modules-common/I18n/entities/Entity.I18n_build_state.php
+		- modules-common/I18n/entities/Entity.I18n_messag.php
+		- modules-common/I18n/entities/Entity.I18n_tm_entry.php
+		- modules-common/I18n/entities/Entity.I18n_translation.php
+		- modules-common/RichText/entities/Entity.Richtext.php
+		- modules-common/Tags/entities/Entity.Tag.php
+		- modules-common/Tags/entities/Entity.TagConnection.php
+	tmpDir: ../../../../tmp/phpstan-cms
+	dynamicConstantNames:
+		- USE_PERSISTENT_CACHE
+
+includes:
+	- ../../../../vendor/phpstan/phpstan/conf/bleedingEdge.neon

@@ -43,6 +43,11 @@ class CmsResourceSpecService
 		'publish' => 'allow_publish',
 	];
 
+	private const array RESERVED_WEBPAGE_ATTRIBUTE_KEYS = [
+		'resource_name' => true,
+		'layout' => true,
+	];
+
 	/**
 	 * @param CmsFolderSpec $spec
 	 */
@@ -107,7 +112,10 @@ class CmsResourceSpecService
 			$update_data['layout'] = (string) $spec['layout'];
 		}
 
-		foreach ((array) ($spec['attributes'] ?? []) as $key => $value) {
+		$attributes = (array) ($spec['attributes'] ?? []);
+		self::assertWebpageAttributesAllowed($attributes);
+
+		foreach ($attributes as $key => $value) {
 			$update_data[(string) $key] = $value;
 		}
 
@@ -143,9 +151,13 @@ class CmsResourceSpecService
 			throw new RuntimeException("Folder not found: {$path}");
 		}
 
+		$export_path = CmsPathHelper::normalizePath($path) === '/' || (string) ($folder['node_type'] ?? '') === 'root'
+			? '/'
+			: ResourceTreeHandler::getPathFromId((int) $folder['node_id']);
+
 		return [
 			'type' => 'folder',
-			'path' => ResourceTreeHandler::getPathFromId((int) $folder['node_id']),
+			'path' => $export_path,
 			'acl' => self::exportAclSpec((int) $folder['node_id']),
 		];
 	}
@@ -173,7 +185,7 @@ class CmsResourceSpecService
 			'attributes' => $attributes,
 			'catcher' => (bool) ($page['catcher_page'] ?? false),
 			'acl' => self::exportAclSpec($page_id),
-			'slots' => self::listWidgetsBySlot($page_id),
+			'slots' => self::listWidgetsBySlot($page_id, false),
 		];
 	}
 
@@ -540,7 +552,7 @@ class CmsResourceSpecService
 	/**
 	 * @return array<string, list<array<string, mixed>>>
 	 */
-	private static function listWidgetsBySlot(int $page_id): array
+	private static function listWidgetsBySlot(int $page_id, bool $include_connection_id = true): array
 	{
 		$slots = [];
 
@@ -549,8 +561,7 @@ class CmsResourceSpecService
 				$connection_id = $connection->getConnectionId();
 				$connection_data = Widget::getConnectionData($connection_id);
 
-				$slots[$slot_name][] = [
-					'connection_id' => $connection_id,
+				$widget_spec = [
 					'widget' => $connection->getWidgetName(),
 					'seq' => (int) ($connection_data['seq'] ?? 0),
 					'attributes' => AttributeHandler::getAttributes(
@@ -558,10 +569,30 @@ class CmsResourceSpecService
 					),
 					'settings' => self::getConnectionSettings($connection_id, $connection->getWidgetName()),
 				];
+
+				if ($include_connection_id) {
+					$widget_spec['connection_id'] = $connection_id;
+				}
+
+				$slots[$slot_name][] = $widget_spec;
 			}
 		}
 
 		return $slots;
+	}
+
+	/**
+	 * @param array<string, scalar|null> $attributes
+	 */
+	private static function assertWebpageAttributesAllowed(array $attributes): void
+	{
+		foreach (array_keys($attributes) as $key) {
+			$key = (string) $key;
+
+			if (isset(self::RESERVED_WEBPAGE_ATTRIBUTE_KEYS[$key])) {
+				throw new InvalidArgumentException("Webpage attribute key '{$key}' is reserved.");
+			}
+		}
 	}
 
 	/**

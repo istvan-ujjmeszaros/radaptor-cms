@@ -44,6 +44,10 @@ class ThemeBase
 
 	public static function getThemeNameForLayout($layout_name): string
 	{
+		if (!is_string($layout_name) || $layout_name === '') {
+			return '';
+		}
+
 		$data = AttributeHandler::getAttributeArray(new AttributeResourceIdentifier(self::_RESOURCENAME), [$layout_name]);
 
 		return $data[$layout_name] ?? '';

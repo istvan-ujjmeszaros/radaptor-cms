@@ -389,7 +389,7 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 				'stimulus' => [
 					'controllers' => [
 						'base' => $stimulus_assets_base . '/controllers',
-						'version' => (string) max(array_map('filemtime', glob($stimulus_controllers_dir . '/*.js') ?: [0])),
+						'version' => $this->_getStimulusControllersVersion($stimulus_controllers_dir),
 						'loaded' => new \stdClass(),
 					],
 				],
@@ -419,6 +419,19 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 		}
 
 		return $output;
+	}
+
+	private function _getStimulusControllersVersion(string $stimulus_controllers_dir): string
+	{
+		$controller_files = glob($stimulus_controllers_dir . '/*.js');
+
+		if ($controller_files === false || $controller_files === []) {
+			return '0';
+		}
+
+		$timestamps = array_map(static fn (string $path): int => (int) (filemtime($path) ?: 0), $controller_files);
+
+		return (string) max($timestamps ?: [0]);
 	}
 
 	public function getJsBottom(): string

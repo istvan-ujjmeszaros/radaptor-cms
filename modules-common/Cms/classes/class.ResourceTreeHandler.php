@@ -343,13 +343,19 @@ class ResourceTreeHandler extends ResourceAcl
 					'resource_name' => $path_variation['resource_name'],
 				];
 
-				$last_parent_id = self::addResourceEntry($savedata, $last_parent_id);
+				$created_id = self::addResourceEntry($savedata, $last_parent_id);
+
+				if (!is_numeric($created_id) || (int) $created_id <= 0) {
+					return null;
+				}
+
+				$last_parent_id = (int) $created_id;
 			} elseif ($page_data['node_type'] == $resource_type) {
 				// érvénytelen útvonal (pl.: /index/valami/ nem jó, ha már van /index.html),
 				// mert nem létezhet azonos névvel weboldal és mappa is!
 				return null;
 			} else {
-				$last_parent_id = $page_data['node_id'];
+				$last_parent_id = (int) $page_data['node_id'];
 			}
 		}
 
@@ -361,7 +367,13 @@ class ResourceTreeHandler extends ResourceAcl
 			'layout' => $layout_name,
 		];
 
-		return self::addResourceEntry($savedata, $last_parent_id);
+		$created_webpage_id = self::addResourceEntry($savedata, $last_parent_id);
+
+		if (!is_numeric($created_webpage_id) || (int) $created_webpage_id <= 0) {
+			return null;
+		}
+
+		return (int) $created_webpage_id;
 	}
 
 	public static function createFolderFromPath(string $path): ?int
@@ -389,9 +401,11 @@ class ResourceTreeHandler extends ResourceAcl
 					'resource_name' => $path_variation['resource_name'],
 				], $last_parent_id);
 
-				if (!is_int($last_parent_id) || $last_parent_id <= 0) {
+				if (!is_numeric($last_parent_id) || (int) $last_parent_id <= 0) {
 					return null;
 				}
+
+				$last_parent_id = (int) $last_parent_id;
 
 				continue;
 			}
@@ -678,15 +692,22 @@ class ResourceTreeHandler extends ResourceAcl
 
 		try {
 			$new_id = NestedSet::addNode('resource_tree', $parent_id, $resource_savedata);
-
-			if (!is_null($new_id)) {
-				AttributeHandler::addAttribute(new AttributeResourceIdentifier(ResourceNames::RESOURCE_DATA, (string) $new_id), $attribute_savedata);
-			}
 		} catch (Exception $e) {
 			SystemMessages::_error($e->getMessage());
 
 			return null;
 		}
+
+		if (!is_numeric($new_id) || (int) $new_id <= 0) {
+			return null;
+		}
+
+		$new_id = (int) $new_id;
+
+		AttributeHandler::addAttribute(
+			new AttributeResourceIdentifier(ResourceNames::RESOURCE_DATA, (string) $new_id),
+			$attribute_savedata
+		);
 
 		if (isset($attribute_savedata['catcher_page']) && $attribute_savedata['catcher_page']) {
 			self::setAsCatcherPage($new_id);

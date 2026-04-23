@@ -17,8 +17,6 @@ class WidgetTagList extends AbstractWidget
 			'tags.field.name.label' => t('tags.field.name.label'),
 			'tags.field.description.label' => t('tags.field.description.label'),
 			'common.actions' => t('common.actions'),
-			'project.form.name' => t('project.form.name'),
-			'ticket.form.name' => t('ticket.form.name'),
 			'common.unknown' => t('common.unknown'),
 			'common.edit' => t('common.edit'),
 			'datatable.info_filtered_html' => t('datatable.info_filtered_html'),

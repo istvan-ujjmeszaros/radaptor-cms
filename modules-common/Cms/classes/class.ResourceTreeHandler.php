@@ -659,8 +659,10 @@ class ResourceTreeHandler extends ResourceAcl
 			return 0;
 		}
 
-		self::sanitizeResourceTreeEntryNameInSavedata($savedata);
-		self::makeResourceEntryNameUniqueInSavedata($resource_data['parent_id'], $savedata, $resource_id);
+		if (array_key_exists('resource_name', $savedata)) {
+			self::sanitizeResourceTreeEntryNameInSavedata($savedata);
+			self::makeResourceEntryNameUniqueInSavedata($resource_data['parent_id'], $savedata, $resource_id);
+		}
 
 		[$resource_savedata, $attribute_savedata] = self::splitResourceAndAttributesData($savedata);
 
@@ -720,6 +722,10 @@ class ResourceTreeHandler extends ResourceAcl
 
 	private static function makeResourceEntryNameUniqueInSavedata(int $parent_id, array &$savedata, ?int $update_id = null): void
 	{
+		if (!array_key_exists('resource_name', $savedata)) {
+			return;
+		}
+
 		if ($update_id == 0) {
 			$update = false;
 		} else {

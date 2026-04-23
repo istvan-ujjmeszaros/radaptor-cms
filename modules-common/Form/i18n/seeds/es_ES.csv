@@ -1,71 +1,57 @@
 ﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
-form,admin_menu_item.description,,es_ES,"Admin menu item","Elemento del menú de administración",0,"Elemento del menú de administración"
-form,admin_menu_item.name,,es_ES,"Admin menu item","Elemento del menú de administración",0,"Elemento del menú de administración"
-form,blog.description,,es_ES,"Blog post","Entrada del blog",0,"Entrada del blog"
-form,blog.name,,es_ES,"Blog post","Entrada del blog",0,"Entrada del blog"
-form,close_page.close_window,,es_ES,"Close this window!","¡Cerrar esta ventana!",0,"¡Cerrar esta ventana!"
-form,close_page.title,,es_ES,"Close page","Cerrar página",0,"Cerrar página"
-form,company.description,,es_ES,Company,Empresa,0,Empresa
-form,company.name,,es_ES,Company,Empresa,0,Empresa
-form,contact_person.description,,es_ES,"Contact person","Persona de contacto",0,"Persona de contacto"
-form,contact_person.name,,es_ES,"Contact person","Persona de contacto",0,"Persona de contacto"
-form,form_settings.description,,es_ES,"Select which form to display","Seleccionar qué formulario mostrar",0,"Seleccionar qué formulario mostrar"
-form,form_settings.name,,es_ES,"Form settings","Configuración del formulario",0,"Configuración del formulario"
-form,form_settings.title,,es_ES,"Select form","Seleccionar formulario",0,"Seleccionar formulario"
-form,js_tree_settings.description,,es_ES,"Select which tree to display","Seleccionar qué árbol mostrar",0,"Seleccionar qué árbol mostrar"
-form,js_tree_settings.name,,es_ES,"Tree settings","Configuración del árbol",0,"Configuración del árbol"
-form,js_tree_settings.title,,es_ES,"Select tree","Seleccionar árbol",0,"Seleccionar árbol"
-form,main_menu_item.description,,es_ES,"Main menu item","Elemento del menú principal",0,"Elemento del menú principal"
-form,main_menu_item.name,,es_ES,"Main menu item","Elemento del menú principal",0,"Elemento del menú principal"
-form,plain_html.description,,es_ES,"HTML code (embed)","Código HTML (incrustado)",0,"Código HTML (incrustado)"
-form,plain_html.name,,es_ES,"HTML code (embed)","Código HTML (incrustado)",0,"Código HTML (incrustado)"
-form,project_state.description,,es_ES,"Project status","Estado del proyecto",0,"Estado del proyecto"
-form,project_state.name,,es_ES,"Project status","Estado del proyecto",0,"Estado del proyecto"
-form,project.description,,es_ES,Project,Proyecto,0,Proyecto
-form,project.name,,es_ES,Project,Proyecto,0,Proyecto
-form,rich_text_select.description,,es_ES,"Select text content","Seleccionar contenido de texto",0,"Seleccionar contenido de texto"
-form,rich_text_select.name,,es_ES,"Select text content","Seleccionar contenido de texto",0,"Seleccionar contenido de texto"
-form,rich_text.description,,es_ES,"Text content","Contenido de texto",0,"Contenido de texto"
-form,rich_text.name,,es_ES,"Text content","Contenido de texto",0,"Contenido de texto"
+form,admin_menu_item.description,,es_ES,Admin menu item,Elemento del menú de administración,0,Elemento del menú de administración
+form,admin_menu_item.name,,es_ES,Admin menu item,Elemento del menú de administración,0,Elemento del menú de administración
+form,blog.description,,es_ES,Blog post,Entrada del blog,0,Entrada del blog
+form,blog.name,,es_ES,Blog post,Entrada del blog,0,Entrada del blog
+form,close_page.close_window,,es_ES,Close this window!,¡Cerrar esta ventana!,0,¡Cerrar esta ventana!
+form,close_page.title,,es_ES,Close page,Cerrar página,0,Cerrar página
+form,form_settings.description,,es_ES,Select which form to display,Seleccionar qué formulario mostrar,0,Seleccionar qué formulario mostrar
+form,form_settings.name,,es_ES,Form settings,Configuración del formulario,0,Configuración del formulario
+form,form_settings.title,,es_ES,Select form,Seleccionar formulario,0,Seleccionar formulario
+form,js_tree_settings.description,,es_ES,Select which tree to display,Seleccionar qué árbol mostrar,0,Seleccionar qué árbol mostrar
+form,js_tree_settings.name,,es_ES,Tree settings,Configuración del árbol,0,Configuración del árbol
+form,js_tree_settings.title,,es_ES,Select tree,Seleccionar árbol,0,Seleccionar árbol
+form,main_menu_item.description,,es_ES,Main menu item,Elemento del menú principal,0,Elemento del menú principal
+form,main_menu_item.name,,es_ES,Main menu item,Elemento del menú principal,0,Elemento del menú principal
+form,plain_html.description,,es_ES,HTML code (embed),Código HTML (incrustado),0,Código HTML (incrustado)
+form,plain_html.name,,es_ES,HTML code (embed),Código HTML (incrustado),0,Código HTML (incrustado)
+form,rich_text_select.description,,es_ES,Select text content,Seleccionar contenido de texto,0,Seleccionar contenido de texto
+form,rich_text_select.name,,es_ES,Select text content,Seleccionar contenido de texto,0,Seleccionar contenido de texto
+form,rich_text.description,,es_ES,Text content,Contenido de texto,0,Contenido de texto
+form,rich_text.name,,es_ES,Text content,Contenido de texto,0,Contenido de texto
 form,role.description,,es_ES,Role,Rol,0,Rol
 form,role.name,,es_ES,Role,Rol,0,Rol
 form,tag.description,,es_ES,Tag,Etiqueta,0,Etiqueta
 form,tag.name,,es_ES,Tag,Etiqueta,0,Etiqueta
-form,theme_selector.description,,es_ES,"Select which theme renders each layout","Seleccionar qué tema renderiza cada diseño",0,"Seleccionar qué tema renderiza cada diseño"
-form,theme_selector.name,,es_ES,"Theme selection","Selección de tema",0,"Selección de tema"
-form,theme_selector.title,,es_ES,"Select themes for layouts","Seleccionar temas para los diseños",0,"Seleccionar temas para los diseños"
-form,ticket_priority.description,,es_ES,"Ticket priority","Prioridad del ticket",0,"Prioridad del ticket"
-form,ticket_priority.name,,es_ES,"Ticket priority","Prioridad del ticket",0,"Prioridad del ticket"
-form,ticket_state.description,,es_ES,"Ticket status","Estado del ticket",0,"Estado del ticket"
-form,ticket_state.name,,es_ES,"Ticket status","Estado del ticket",0,"Estado del ticket"
-form,ticket_type.description,,es_ES,"Ticket type","Tipo de ticket",0,"Tipo de ticket"
-form,ticket_type.name,,es_ES,"Ticket type","Tipo de ticket",0,"Tipo de ticket"
-form,ticket.description,,es_ES,Ticket,Ticket,0,Ticket
-form,ticket.name,,es_ES,Ticket,Ticket,0,Ticket
-form,time_tracker_entry.description,,es_ES,"Time entry","Registro de tiempo",0,"Registro de tiempo"
-form,time_tracker_entry.name,,es_ES,"Time entry","Registro de tiempo",0,"Registro de tiempo"
-form,user_login.description,,es_ES,Login,"Iniciar sesión",0,"Iniciar sesión"
-form,user_login.name,,es_ES,Login,"Iniciar sesión",0,"Iniciar sesión"
-form,user_signup.description,,es_ES,"Sign up",Registrarse,0,Registrarse
-form,user_signup.name,,es_ES,"Sign up",Registrarse,0,Registrarse
+form,theme_selector.description,,es_ES,Select which theme renders each layout,Seleccionar qué tema renderiza cada diseño,0,Seleccionar qué tema renderiza cada diseño
+form,theme_selector.name,,es_ES,Theme selection,Selección de tema,0,Selección de tema
+form,theme_selector.title,,es_ES,Select themes for layouts,Seleccionar temas para los diseños,0,Seleccionar temas para los diseños
+form,ticket_priority.description,,es_ES,Ticket priority,Prioridad del ticket,0,Prioridad del ticket
+form,ticket_priority.name,,es_ES,Ticket priority,Prioridad del ticket,0,Prioridad del ticket
+form,ticket_state.description,,es_ES,Ticket status,Estado del ticket,0,Estado del ticket
+form,ticket_state.name,,es_ES,Ticket status,Estado del ticket,0,Estado del ticket
+form,user_login.description,,es_ES,Login,Iniciar sesión,0,Iniciar sesión
+form,user_login.name,,es_ES,Login,Iniciar sesión,0,Iniciar sesión
+form,user_signup.description,,es_ES,Sign up,Registrarse,0,Registrarse
+form,user_signup.name,,es_ES,Sign up,Registrarse,0,Registrarse
 form,user.description,,es_ES,User,Usuario,0,Usuario
 form,user.name,,es_ES,User,Usuario,0,Usuario
-form,usergroup.description,,es_ES,"User group","Grupo de usuarios",0,"Grupo de usuarios"
-form,usergroup.name,,es_ES,"User group","Grupo de usuarios",0,"Grupo de usuarios"
-form,validation.max_length,,es_ES,"Maximum {max} characters","Máximo {max} caracteres",0,"Máximo {max} caracteres"
+form,usergroup.description,,es_ES,User group,Grupo de usuarios,0,Grupo de usuarios
+form,usergroup.name,,es_ES,User group,Grupo de usuarios,0,Grupo de usuarios
+form,validation.max_length,,es_ES,Maximum {max} characters,Máximo {max} caracteres,0,Máximo {max} caracteres
 form,validation.required,,es_ES,Required,Obligatorio,0,Obligatorio
-form,webpage_domain.description,,es_ES,"Domain properties","Propiedades del dominio",0,"Propiedades del dominio"
-form,webpage_domain.name,,es_ES,"Domain properties","Propiedades del dominio",0,"Propiedades del dominio"
-form,webpage_file.description,,es_ES,"File properties","Propiedades del archivo",0,"Propiedades del archivo"
-form,webpage_file.name,,es_ES,"File properties","Propiedades del archivo",0,"Propiedades del archivo"
-form,webpage_folder.description,,es_ES,"Website folder properties","Propiedades de la carpeta del sitio web",0,"Propiedades de la carpeta del sitio web"
-form,webpage_folder.name,,es_ES,"Website folder properties","Propiedades de la carpeta del sitio web",0,"Propiedades de la carpeta del sitio web"
-form,webpage_from_path.description,,es_ES,"Create webpage from path","Crear página web desde la ruta",0,"Crear página web desde la ruta"
-form,webpage_from_path.name,,es_ES,"Create webpage from path","Crear página web desde la ruta",0,"Crear página web desde la ruta"
-form,webpage_page.description,,es_ES,"Webpage properties","Propiedades de la página web",0,"Propiedades de la página web"
-form,webpage_page.name,,es_ES,"Webpage properties","Propiedades de la página web",0,"Propiedades de la página web"
-form,widget_connection_params.description,,es_ES,"Display settings for a content box","Configuración de visualización de un bloque de contenido",0,"Configuración de visualización de un bloque de contenido"
-form,widget_connection_params.name,,es_ES,"Content box display settings","Configuración de visualización del bloque de contenido",0,"Configuración de visualización del bloque de contenido"
-form,widget_connection_settings.description,,es_ES,"Configure width and row placement for the content box","Configurar el ancho y la posición en fila del bloque de contenido",0,"Configurar el ancho y la posición en fila del bloque de contenido"
-form,widget_connection_settings.name,,es_ES,"Content formatting","Formato del contenido",0,"Formato del contenido"
-form,widget_connection_settings.title,,es_ES,"Content formatting","Formato del contenido",0,"Formato del contenido"
+form,webpage_domain.description,,es_ES,Domain properties,Propiedades del dominio,0,Propiedades del dominio
+form,webpage_domain.name,,es_ES,Domain properties,Propiedades del dominio,0,Propiedades del dominio
+form,webpage_file.description,,es_ES,File properties,Propiedades del archivo,0,Propiedades del archivo
+form,webpage_file.name,,es_ES,File properties,Propiedades del archivo,0,Propiedades del archivo
+form,webpage_folder.description,,es_ES,Website folder properties,Propiedades de la carpeta del sitio web,0,Propiedades de la carpeta del sitio web
+form,webpage_folder.name,,es_ES,Website folder properties,Propiedades de la carpeta del sitio web,0,Propiedades de la carpeta del sitio web
+form,webpage_from_path.description,,es_ES,Create webpage from path,Crear página web desde la ruta,0,Crear página web desde la ruta
+form,webpage_from_path.name,,es_ES,Create webpage from path,Crear página web desde la ruta,0,Crear página web desde la ruta
+form,webpage_page.description,,es_ES,Webpage properties,Propiedades de la página web,0,Propiedades de la página web
+form,webpage_page.name,,es_ES,Webpage properties,Propiedades de la página web,0,Propiedades de la página web
+form,widget_connection_params.description,,es_ES,Display settings for a content box,Configuración de visualización de un bloque de contenido,0,Configuración de visualización de un bloque de contenido
+form,widget_connection_params.name,,es_ES,Content box display settings,Configuración de visualización del bloque de contenido,0,Configuración de visualización del bloque de contenido
+form,widget_connection_settings.description,,es_ES,Configure width and row placement for the content box,Configurar el ancho y la posición en fila del bloque de contenido,0,Configurar el ancho y la posición en fila del bloque de contenido
+form,widget_connection_settings.name,,es_ES,Content formatting,Formato del contenido,0,Formato del contenido
+form,widget_connection_settings.title,,es_ES,Content formatting,Formato del contenido,0,Formato del contenido

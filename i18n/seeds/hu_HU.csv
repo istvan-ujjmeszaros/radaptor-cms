@@ -7,317 +7,317 @@ admin,i18n.col.status,,hu_HU,Status,Állapot,0,Állapot
 admin,i18n.col.translation,,hu_HU,Translation,Fordítás,0,Fordítás
 admin,i18n.domain,,hu_HU,Domain,Domén,0,Domén
 admin,i18n.locale,,hu_HU,Locale,Nyelv,0,Nyelv
-admin,i18n.search_placeholder,,hu_HU,"Search source or translation","Keresés a forrásban vagy a fordításban",0,"Keresés a forrásban vagy a fordításban"
+admin,i18n.search_placeholder,,hu_HU,Search source or translation,Keresés a forrásban vagy a fordításban,0,Keresés a forrásban vagy a fordításban
 admin,i18n.status,,hu_HU,Status,Állapot,0,Állapot
-admin,i18n.status.ai_generated,,hu_HU,AI-generated,"AI által generált",0,"AI által generált"
+admin,i18n.status.ai_generated,,hu_HU,AI-generated,AI által generált,0,AI által generált
 admin,i18n.status.approved,,hu_HU,Approved,Jóváhagyva,0,Jóváhagyva
 admin,i18n.status.missing,,hu_HU,Missing,Hiányzik,0,Hiányzik
-admin,i18n.status.needs_review,,hu_HU,"Needs review",Ellenőrizendő,0,Ellenőrizendő
+admin,i18n.status.needs_review,,hu_HU,Needs review,Ellenőrizendő,0,Ellenőrizendő
 admin,i18n.status.translated,,hu_HU,Translated,Lefordítva,0,Lefordítva
-admin,i18n.title,,hu_HU,"Translation workbench","Fordítási műhely",0,"Fordítási műhely"
-admin,i18n.tm.exact_match_only,,hu_HU,"Exact-match suggestions only","Csak pontos egyezésű javaslatok",0,"Csak pontos egyezésű javaslatok"
-admin,i18n.tm.exact_matches,,hu_HU,"Exact matches","Pontos egyezések",0,"Pontos egyezések"
-admin,i18n.tm.exact_then_similar,,hu_HU,"Exact matches load first. Similar matches load afterwards.","A pontos egyezések azonnal betöltődnek, a hasonló találatok utána érkeznek.",0,"A pontos egyezések azonnal betöltődnek, a hasonló találatok utána érkeznek."
-admin,i18n.tm.no_exact_matches,,hu_HU,"No exact matches","Nincs pontos egyezés",0,"Nincs pontos egyezés"
-admin,i18n.tm.no_similar_matches,,hu_HU,"No similar matches","Nincsenek hasonló találatok",0,"Nincsenek hasonló találatok"
+admin,i18n.title,,hu_HU,Translation workbench,Fordítási műhely,0,Fordítási műhely
+admin,i18n.tm.exact_match_only,,hu_HU,Exact-match suggestions only,Csak pontos egyezésű javaslatok,0,Csak pontos egyezésű javaslatok
+admin,i18n.tm.exact_matches,,hu_HU,Exact matches,Pontos egyezések,0,Pontos egyezések
+admin,i18n.tm.exact_then_similar,,hu_HU,Exact matches load first. Similar matches load afterwards.,"A pontos egyezések azonnal betöltődnek, a hasonló találatok utána érkeznek.",0,"A pontos egyezések azonnal betöltődnek, a hasonló találatok utána érkeznek."
+admin,i18n.tm.no_exact_matches,,hu_HU,No exact matches,Nincs pontos egyezés,0,Nincs pontos egyezés
+admin,i18n.tm.no_similar_matches,,hu_HU,No similar matches,Nincsenek hasonló találatok,0,Nincsenek hasonló találatok
 admin,i18n.tm.origin,,hu_HU,Origin,Eredet,0,Eredet
-admin,i18n.tm.review_placeholders,,hu_HU,"Review placeholders","Ellenőrizd a helyőrzőket",0,"Ellenőrizd a helyőrzőket"
+admin,i18n.tm.review_placeholders,,hu_HU,Review placeholders,Ellenőrizd a helyőrzőket,0,Ellenőrizd a helyőrzőket
 admin,i18n.tm.safe,,hu_HU,Safe,Biztonságos,0,Biztonságos
-admin,i18n.tm.similar_matches,,hu_HU,"Similar matches","Hasonló találatok",0,"Hasonló találatok"
+admin,i18n.tm.similar_matches,,hu_HU,Similar matches,Hasonló találatok,0,Hasonló találatok
 admin,i18n.tm.similarity,,hu_HU,Similarity,Hasonlóság,0,Hasonlóság
-admin,i18n.tm.source_example,,hu_HU,"Source example",Forráspélda,0,Forráspélda
-admin,i18n.tm.title,,hu_HU,"Translation memory suggestions","Fordítási memória javaslatok",0,"Fordítási memória javaslatok"
-admin,menu.admin_menu,,hu_HU,"Admin menu","Admin menü",0,"Admin menü"
+admin,i18n.tm.source_example,,hu_HU,Source example,Forráspélda,0,Forráspélda
+admin,i18n.tm.title,,hu_HU,Translation memory suggestions,Fordítási memória javaslatok,0,Fordítási memória javaslatok
+admin,menu.admin_menu,,hu_HU,Admin menu,Admin menü,0,Admin menü
 admin,menu.blog,,hu_HU,Blog,Blog,0,Blog
-admin,menu.custom_menu,,hu_HU,"Custom menu","Egyéni menü",0,"Egyéni menü"
-admin,menu.home,,hu_HU,"Admin home","Admin kezdőoldal",0,"Admin kezdőoldal"
-admin,menu.import_export,,hu_HU,"Import / Export","Import / Export",0,"Import / Export"
+admin,menu.custom_menu,,hu_HU,Custom menu,Egyéni menü,0,Egyéni menü
+admin,menu.home,,hu_HU,Admin home,Admin kezdőoldal,0,Admin kezdőoldal
+admin,menu.import_export,,hu_HU,Import / Export,Import / Export,0,Import / Export
 admin,menu.phpinfo,,hu_HU,PHPinfo,PHPinfo,0,PHPinfo
-admin,menu.resource_tree,,hu_HU,"Website structure","Weboldal szerkezet",0,"Weboldal szerkezet"
+admin,menu.resource_tree,,hu_HU,Website structure,Weboldal szerkezet,0,Weboldal szerkezet
 admin,menu.roles,,hu_HU,Roles,Szerepek,0,Szerepek
 admin,menu.section.administration,,hu_HU,Administration,Adminisztráció,0,Adminisztráció
 admin,menu.section.configuration,,hu_HU,Configuration,Beállítások,0,Beállítások
 admin,menu.section.content,,hu_HU,Content,Tartalom,0,Tartalom
-admin,menu.section.developer_tools,,hu_HU,"Developer tools","Fejlesztői eszközök",0,"Fejlesztői eszközök"
-admin,menu.template_engines,,hu_HU,"Template engines",Sablonmotorok,0,Sablonmotorok
-admin,menu.theme_selector,,hu_HU,"Theme selection","Témák kiválasztása",0,"Témák kiválasztása"
+admin,menu.section.developer_tools,,hu_HU,Developer tools,Fejlesztői eszközök,0,Fejlesztői eszközök
+admin,menu.template_engines,,hu_HU,Template engines,Sablonmotorok,0,Sablonmotorok
+admin,menu.theme_selector,,hu_HU,Theme selection,Témák kiválasztása,0,Témák kiválasztása
 admin,menu.translations,,hu_HU,Translations,Fordítások,0,Fordítások
-admin,menu.usergroups,,hu_HU,"User groups","Felhasználói csoportok",0,"Felhasználói csoportok"
-admin,menu.widget_preview,,hu_HU,"Widget preview","Widget előnézet",0,"Widget előnézet"
-cms,admin_dropdown.edit_mode,,hu_HU,"Edit mode","Szerkesztő mód",0,"Szerkesztő mód"
+admin,menu.usergroups,,hu_HU,User groups,Felhasználói csoportok,0,Felhasználói csoportok
+admin,menu.widget_preview,,hu_HU,Widget preview,Widget előnézet,0,Widget előnézet
+cms,admin_dropdown.edit_mode,,hu_HU,Edit mode,Szerkesztő mód,0,Szerkesztő mód
 cms,admin_dropdown.edit_mode_off,,hu_HU,off,kikapcs,0,kikapcs
 cms,admin_dropdown.edit_mode_on,,hu_HU,on,bekapcs,0,bekapcs
 cms,admin_dropdown.seo,,hu_HU,SEO,SEO,0,SEO
-cms,admin_menu.form.name,,hu_HU,"Admin menu administration","Admin menü adminisztráció",0,"Admin menü adminisztráció"
-cms,admin_menu.form.title_create,,hu_HU,"Create admin menu item","Admin menüpont létrehozása",0,"Admin menüpont létrehozása"
-cms,admin_menu.form.title_edit,,hu_HU,"Edit admin menu item","Admin menüpont szerkesztése",0,"Admin menüpont szerkesztése"
+cms,admin_menu.form.name,,hu_HU,Admin menu administration,Admin menü adminisztráció,0,Admin menü adminisztráció
+cms,admin_menu.form.title_create,,hu_HU,Create admin menu item,Admin menüpont létrehozása,0,Admin menüpont létrehozása
+cms,admin_menu.form.title_edit,,hu_HU,Edit admin menu item,Admin menüpont szerkesztése,0,Admin menüpont szerkesztése
 cms,edit,,hu_HU,Edit,Szerkesztés,0,Szerkesztés
-cms,edit_mode.disabled,,hu_HU,"Edit mode disabled","Szerkesztő mód kikapcsolva!",0,"Szerkesztő mód kikapcsolva!"
-cms,edit_mode.enabled,,hu_HU,"Edit mode enabled","Szerkesztő mód bekapcsolva!",0,"Szerkesztő mód bekapcsolva!"
-cms,edit_mode.save_error,,hu_HU,"Error: Unable to save configuration","Váratlan hiba a konfiguráció mentése közben!",0,"Váratlan hiba a konfiguráció mentése közben!"
-cms,error.login_page_missing,,hu_HU,"Login page not found - create it manually","A bejelentkezési oldal nem található, hozd létre kézzel",0,"A bejelentkezési oldal nem található, hozd létre kézzel"
-cms,file_upload.destination_path,,hu_HU,"Destination path","Cél útvonal",0,"Cél útvonal"
-cms,file_upload.unknown_destination,,hu_HU,"Unknown destination path","Ismeretlen cél útvonal...",0,"Ismeretlen cél útvonal..."
-cms,file.missing_ref_id,,hu_HU,"Missing file reference","Hiányzó fájlhivatkozás",0,"Hiányzó fájlhivatkozás"
-cms,file.upload_error,,hu_HU,"Error: File upload failed","Hiba: Nem sikerült a fájl feltöltése",0,"Hiba: Nem sikerült a fájl feltöltése"
-cms,file.uploaded,,hu_HU,"File uploaded","Fájl feltöltve",0,"Fájl feltöltve"
-cms,form.field.form_id.explanation,,hu_HU,"Select from the predefined forms","Válassz az előre definiált űrlapok közül",0,"Válassz az előre definiált űrlapok közül"
+cms,edit_mode.disabled,,hu_HU,Edit mode disabled,Szerkesztő mód kikapcsolva!,0,Szerkesztő mód kikapcsolva!
+cms,edit_mode.enabled,,hu_HU,Edit mode enabled,Szerkesztő mód bekapcsolva!,0,Szerkesztő mód bekapcsolva!
+cms,edit_mode.save_error,,hu_HU,Error: Unable to save configuration,Váratlan hiba a konfiguráció mentése közben!,0,Váratlan hiba a konfiguráció mentése közben!
+cms,error.login_page_missing,,hu_HU,Login page not found - create it manually,"A bejelentkezési oldal nem található, hozd létre kézzel",0,"A bejelentkezési oldal nem található, hozd létre kézzel"
+cms,file_upload.destination_path,,hu_HU,Destination path,Cél útvonal,0,Cél útvonal
+cms,file_upload.unknown_destination,,hu_HU,Unknown destination path,Ismeretlen cél útvonal...,0,Ismeretlen cél útvonal...
+cms,file.missing_ref_id,,hu_HU,Missing file reference,Hiányzó fájlhivatkozás,0,Hiányzó fájlhivatkozás
+cms,file.upload_error,,hu_HU,Error: File upload failed,Hiba: Nem sikerült a fájl feltöltése,0,Hiba: Nem sikerült a fájl feltöltése
+cms,file.uploaded,,hu_HU,File uploaded,Fájl feltöltve,0,Fájl feltöltve
+cms,form.field.form_id.explanation,,hu_HU,Select from the predefined forms,Válassz az előre definiált űrlapok közül,0,Válassz az előre definiált űrlapok közül
 cms,form.field.form_id.label,,hu_HU,Form,Űrlap,0,Űrlap
-cms,form.missing_widget_id,,hu_HU,"Widget ID is missing","Hiányzik a widget azonosítója",0,"Hiányzik a widget azonosítója"
-cms,form.no_form_page_warning,,hu_HU,"Create at least one page with a blank form","Hozz létre legalább egy oldalt egy üres űrlappal",0,"Hozz létre legalább egy oldalt egy üres űrlappal"
-cms,form.no_id,,hu_HU,"No form ID given","Nincs űrlap-azonosító megadva",0,"Nincs űrlap-azonosító megadva"
-cms,form.settings_subtitle,,hu_HU,"Page: {page}","Weboldal: {page}",0,"Weboldal: {page}"
+cms,form.missing_widget_id,,hu_HU,Widget ID is missing,Hiányzik a widget azonosítója,0,Hiányzik a widget azonosítója
+cms,form.no_form_page_warning,,hu_HU,Create at least one page with a blank form,Hozz létre legalább egy oldalt egy üres űrlappal,0,Hozz létre legalább egy oldalt egy üres űrlappal
+cms,form.no_id,,hu_HU,No form ID given,Nincs űrlap-azonosító megadva,0,Nincs űrlap-azonosító megadva
+cms,form.settings_subtitle,,hu_HU,Page: {page},Weboldal: {page},0,Weboldal: {page}
 cms,library.folder,,hu_HU,Folder,Mappa,0,Mappa
 cms,library.resource,,hu_HU,Resource,Erőforrás,0,Erőforrás
-cms,library.unknown,,hu_HU,"Unknown library","Ismeretlen könyvtár",0,"Ismeretlen könyvtár"
-cms,menu.delete_confirm,,hu_HU,"Are you sure you want to delete this menu item?","Biztosan törölni szeretnéd ezt a menüpontot?",0,"Biztosan törölni szeretnéd ezt a menüpontot?"
-cms,menu.delete_failed,,hu_HU,"Delete failed","A törlés sikertelen",0,"A törlés sikertelen"
-cms,menu.delete_forbidden,,hu_HU,"Menu item deletion is not allowed: {name}","A menüpont törlése nem engedélyezett: {name}",0,"A menüpont törlése nem engedélyezett: {name}"
-cms,menu.delete_unknown_error,,hu_HU,"Error: An unknown error occurred while deleting the menu item","Hiba: ismeretlen hiba történt a menüpont törlése közben",0,"Hiba: ismeretlen hiba történt a menüpont törlése közben"
-cms,menu.deleted,,hu_HU,"Menu item deleted: {name}","Menüpont törölve: {name}",0,"Menüpont törölve: {name}"
-cms,menu.external_link,,hu_HU,"External link","Külső hivatkozás",0,"Külső hivatkozás"
-cms,menu.field.node_name.label,,hu_HU,"Display text","Megjelenő szöveg",0,"Megjelenő szöveg"
-cms,menu.field.page.explanation,,hu_HU,"Select the page this menu item points to","Válaszd ki, melyik oldalra mutasson ez a menüpont",0,"Válaszd ki, melyik oldalra mutasson ez a menüpont"
+cms,library.unknown,,hu_HU,Unknown library,Ismeretlen könyvtár,0,Ismeretlen könyvtár
+cms,menu.delete_confirm,,hu_HU,Are you sure you want to delete this menu item?,Biztosan törölni szeretnéd ezt a menüpontot?,0,Biztosan törölni szeretnéd ezt a menüpontot?
+cms,menu.delete_failed,,hu_HU,Delete failed,A törlés sikertelen,0,A törlés sikertelen
+cms,menu.delete_forbidden,,hu_HU,Menu item deletion is not allowed: {name},A menüpont törlése nem engedélyezett: {name},0,A menüpont törlése nem engedélyezett: {name}
+cms,menu.delete_unknown_error,,hu_HU,Error: An unknown error occurred while deleting the menu item,Hiba: ismeretlen hiba történt a menüpont törlése közben,0,Hiba: ismeretlen hiba történt a menüpont törlése közben
+cms,menu.deleted,,hu_HU,Menu item deleted: {name},Menüpont törölve: {name},0,Menüpont törölve: {name}
+cms,menu.external_link,,hu_HU,External link,Külső hivatkozás,0,Külső hivatkozás
+cms,menu.field.node_name.label,,hu_HU,Display text,Megjelenő szöveg,0,Megjelenő szöveg
+cms,menu.field.page.explanation,,hu_HU,Select the page this menu item points to,"Válaszd ki, melyik oldalra mutasson ez a menüpont",0,"Válaszd ki, melyik oldalra mutasson ez a menüpont"
 cms,menu.field.page.label,,hu_HU,Page,Oldal,0,Oldal
-cms,menu.field.type.external,,hu_HU,"Points to external page","Külső oldalra mutat",0,"Külső oldalra mutat"
-cms,menu.field.type.internal,,hu_HU,"Points to internal page","Belső oldalra mutat",0,"Belső oldalra mutat"
-cms,menu.field.type.label,,hu_HU,"Link type","Link típusa",0,"Link típusa"
-cms,menu.field.url.explanation,,hu_HU,"You can enter a custom URL (including mailto:// links)","Megadhatsz egyedi URL-t (beleértve a mailto:// linkeket)",0,"Megadhatsz egyedi URL-t (beleértve a mailto:// linkeket)"
-cms,menu.field.url.label,,hu_HU,"Custom URL","Egyedi URL",0,"Egyedi URL"
-cms,menu.form.name,,hu_HU,"Main menu item","Főmenü elem",0,"Főmenü elem"
-cms,menu.form.title_create,,hu_HU,"Create menu item","Menüpont létrehozása",0,"Menüpont létrehozása"
-cms,menu.form.title_edit,,hu_HU,"Edit menu item","Menüpont szerkesztése",0,"Menüpont szerkesztése"
-cms,menu.internal_link,,hu_HU,"Internal link","Belső hivatkozás",0,"Belső hivatkozás"
-cms,menu.move_error,,hu_HU,"Error: Unable to move menu item","Hiba: nem sikerült áthelyezni a menüpontot",0,"Hiba: nem sikerült áthelyezni a menüpontot"
-cms,menu.move_success,,hu_HU,"Menu item moved: {name}","Menüpont áthelyezve: {name}",0,"Menüpont áthelyezve: {name}"
-cms,menu.new_child,,hu_HU,"New submenu item","Új almenüpont",0,"Új almenüpont"
-cms,menu.new_item,,hu_HU,"New menu item","Új menüpont",0,"Új menüpont"
-cms,menu.no_link_configured,,hu_HU,"No link configured","Nincs link beállítva",0,"Nincs link beállítva"
-cms,menu.root,,hu_HU,"Main menu",Főmenü,0,Főmenü
-cms,menu.saved,,hu_HU,"Menu item saved","Menüpont mentve",0,"Menüpont mentve"
+cms,menu.field.type.external,,hu_HU,Points to external page,Külső oldalra mutat,0,Külső oldalra mutat
+cms,menu.field.type.internal,,hu_HU,Points to internal page,Belső oldalra mutat,0,Belső oldalra mutat
+cms,menu.field.type.label,,hu_HU,Link type,Link típusa,0,Link típusa
+cms,menu.field.url.explanation,,hu_HU,You can enter a custom URL (including mailto:// links),Megadhatsz egyedi URL-t (beleértve a mailto:// linkeket),0,Megadhatsz egyedi URL-t (beleértve a mailto:// linkeket)
+cms,menu.field.url.label,,hu_HU,Custom URL,Egyedi URL,0,Egyedi URL
+cms,menu.form.name,,hu_HU,Main menu item,Főmenü elem,0,Főmenü elem
+cms,menu.form.title_create,,hu_HU,Create menu item,Menüpont létrehozása,0,Menüpont létrehozása
+cms,menu.form.title_edit,,hu_HU,Edit menu item,Menüpont szerkesztése,0,Menüpont szerkesztése
+cms,menu.internal_link,,hu_HU,Internal link,Belső hivatkozás,0,Belső hivatkozás
+cms,menu.move_error,,hu_HU,Error: Unable to move menu item,Hiba: nem sikerült áthelyezni a menüpontot,0,Hiba: nem sikerült áthelyezni a menüpontot
+cms,menu.move_success,,hu_HU,Menu item moved: {name},Menüpont áthelyezve: {name},0,Menüpont áthelyezve: {name}
+cms,menu.new_child,,hu_HU,New submenu item,Új almenüpont,0,Új almenüpont
+cms,menu.new_item,,hu_HU,New menu item,Új menüpont,0,Új menüpont
+cms,menu.no_link_configured,,hu_HU,No link configured,Nincs link beállítva,0,Nincs link beállítva
+cms,menu.root,,hu_HU,Main menu,Főmenü,0,Főmenü
+cms,menu.saved,,hu_HU,Menu item saved,Menüpont mentve,0,Menüpont mentve
 cms,menu.selection_help,,hu_HU,"Select a menu item to edit it, or create a new one.","Válassz ki egy menüpontot a szerkesztéshez, vagy hozz létre újat.",0,"Válassz ki egy menüpontot a szerkesztéshez, vagy hozz létre újat."
-cms,menu.updated,,hu_HU,"Menu item updated","Menüpont frissítve",0,"Menüpont frissítve"
-cms,menu.validation.node_name_max_length,,hu_HU,"Display text must not exceed 255 characters","A megjelenő szöveg maximum 255 karakter lehet",0,"A megjelenő szöveg maximum 255 karakter lehet"
-cms,menu.validation.type_required,,hu_HU,"Choose whether the link points to an internal or external page","Válaszd ki, hogy belső vagy külső oldalra mutat a link",0,"Válaszd ki, hogy belső vagy külső oldalra mutat a link"
-cms,menu.validation.url_max_length,,hu_HU,"URL must not exceed 255 characters","Az URL maximum 255 karakter lehet",0,"Az URL maximum 255 karakter lehet"
-cms,menu.validation.url_required,,hu_HU,"Select a page or enter a URL","Válassz oldalt vagy adj meg URL-t",0,"Válassz oldalt vagy adj meg URL-t"
-cms,plainhtml.field.content.explanation,,hu_HU,"The HTML code you enter will appear on the website without modifications.","A megadott HTML kód módosítás nélkül jelenik meg a weboldalon.",0,"A megadott HTML kód módosítás nélkül jelenik meg a weboldalon."
-cms,plainhtml.field.content.label,,hu_HU,"HTML code","HTML kód",0,"HTML kód"
-cms,plainhtml.form.name,,hu_HU,"HTML code (embed)","HTML kód (beágyazás)",0,"HTML kód (beágyazás)"
-cms,plainhtml.form.title,,hu_HU,"Edit HTML content","HTML tartalom szerkesztése",0,"HTML tartalom szerkesztése"
-cms,plainhtml.not_set,,hu_HU,"Configure the content","Állítsd be a tartalmat",0,"Állítsd be a tartalmat"
-cms,resource_acl.acl_not_found,,hu_HU,"ACL entry not found: {id}","Az ACL bejegyzés nem található: {id}",0,"Az ACL bejegyzés nem található: {id}"
+cms,menu.updated,,hu_HU,Menu item updated,Menüpont frissítve,0,Menüpont frissítve
+cms,menu.validation.node_name_max_length,,hu_HU,Display text must not exceed 255 characters,A megjelenő szöveg maximum 255 karakter lehet,0,A megjelenő szöveg maximum 255 karakter lehet
+cms,menu.validation.type_required,,hu_HU,Choose whether the link points to an internal or external page,"Válaszd ki, hogy belső vagy külső oldalra mutat a link",0,"Válaszd ki, hogy belső vagy külső oldalra mutat a link"
+cms,menu.validation.url_max_length,,hu_HU,URL must not exceed 255 characters,Az URL maximum 255 karakter lehet,0,Az URL maximum 255 karakter lehet
+cms,menu.validation.url_required,,hu_HU,Select a page or enter a URL,Válassz oldalt vagy adj meg URL-t,0,Válassz oldalt vagy adj meg URL-t
+cms,plainhtml.field.content.explanation,,hu_HU,The HTML code you enter will appear on the website without modifications.,A megadott HTML kód módosítás nélkül jelenik meg a weboldalon.,0,A megadott HTML kód módosítás nélkül jelenik meg a weboldalon.
+cms,plainhtml.field.content.label,,hu_HU,HTML code,HTML kód,0,HTML kód
+cms,plainhtml.form.name,,hu_HU,HTML code (embed),HTML kód (beágyazás),0,HTML kód (beágyazás)
+cms,plainhtml.form.title,,hu_HU,Edit HTML content,HTML tartalom szerkesztése,0,HTML tartalom szerkesztése
+cms,plainhtml.not_set,,hu_HU,Configure the content,Állítsd be a tartalmat,0,Állítsd be a tartalmat
+cms,resource_acl.acl_not_found,,hu_HU,ACL entry not found: {id},Az ACL bejegyzés nem található: {id},0,Az ACL bejegyzés nem található: {id}
 cms,resource_acl.assign,,hu_HU,Assign,Hozzárendel,0,Hozzárendel
-cms,resource_acl.deleted,,hu_HU,"Assignment removed.","Hozzárendelés törölve.",0,"Hozzárendelés törölve."
-cms,resource_acl.error_ambiguous_subject,,hu_HU,"The name {name} matches both a user and a user group. Select the correct type from the list.","A(z) {name} névhez felhasználó és felhasználói csoport is tartozik. Válaszd ki a megfelelő típust a listából.",0,"A(z) {name} névhez felhasználó és felhasználói csoport is tartozik. Válaszd ki a megfelelő típust a listából."
-cms,resource_acl.error_ambiguous_subject_short,,hu_HU,"Ambiguous assignment","Nem egyértelmű a hozzárendelés",0,"Nem egyértelmű a hozzárendelés"
-cms,resource_acl.error_delete,,hu_HU,"Error: Unable to remove assignment.","Ismeretlen hiba a törlés közben!",0,"Ismeretlen hiba a törlés közben!"
-cms,resource_acl.error_missing_resource_id,,hu_HU,"Resource ID is missing","Hiányzik az erőforrás azonosítója",0,"Hiányzik az erőforrás azonosítója"
-cms,resource_acl.error_save,,hu_HU,"Error: Unable to save access settings.","Ismeretlen hiba a beállítás rögzítése közben!",0,"Ismeretlen hiba a beállítás rögzítése közben!"
-cms,resource_acl.error_subject_not_found,,hu_HU,"No user or user group found with the name {name}","Nem található a(z) {name} nevű felhasználó vagy felhasználói csoport",0,"Nem található a(z) {name} nevű felhasználó vagy felhasználói csoport"
-cms,resource_acl.error_subject_not_found_short,,hu_HU,"No matching subject found","Nem található a megadott névhez tartozó elem",0,"Nem található a megadott névhez tartozó elem"
+cms,resource_acl.deleted,,hu_HU,Assignment removed.,Hozzárendelés törölve.,0,Hozzárendelés törölve.
+cms,resource_acl.error_ambiguous_subject,,hu_HU,The name {name} matches both a user and a user group. Select the correct type from the list.,A(z) {name} névhez felhasználó és felhasználói csoport is tartozik. Válaszd ki a megfelelő típust a listából.,0,A(z) {name} névhez felhasználó és felhasználói csoport is tartozik. Válaszd ki a megfelelő típust a listából.
+cms,resource_acl.error_ambiguous_subject_short,,hu_HU,Ambiguous assignment,Nem egyértelmű a hozzárendelés,0,Nem egyértelmű a hozzárendelés
+cms,resource_acl.error_delete,,hu_HU,Error: Unable to remove assignment.,Ismeretlen hiba a törlés közben!,0,Ismeretlen hiba a törlés közben!
+cms,resource_acl.error_missing_resource_id,,hu_HU,Resource ID is missing,Hiányzik az erőforrás azonosítója,0,Hiányzik az erőforrás azonosítója
+cms,resource_acl.error_save,,hu_HU,Error: Unable to save access settings.,Ismeretlen hiba a beállítás rögzítése közben!,0,Ismeretlen hiba a beállítás rögzítése közben!
+cms,resource_acl.error_subject_not_found,,hu_HU,No user or user group found with the name {name},Nem található a(z) {name} nevű felhasználó vagy felhasználói csoport,0,Nem található a(z) {name} nevű felhasználó vagy felhasználói csoport
+cms,resource_acl.error_subject_not_found_short,,hu_HU,No matching subject found,Nem található a megadott névhez tartozó elem,0,Nem található a megadott névhez tartozó elem
 cms,resource_acl.inherit_help,,hu_HU,"When inheritance is enabled, the parent folder's permissions also apply to this resource.","Ha az öröklés be van kapcsolva, a szülő mappa engedélyei is érvényesek erre az erőforrásra.",0,"Ha az öröklés be van kapcsolva, a szülő mappa engedélyei is érvényesek erre az erőforrásra."
-cms,resource_acl.inherit_label,,hu_HU,"Inherit permissions from parent folder","Engedélyek öröklése a szülő mappából",0,"Engedélyek öröklése a szülő mappából"
-cms,resource_acl.inherited_title,,hu_HU,"Inherited permissions","Örökölt engedélyek",0,"Örökölt engedélyek"
-cms,resource_acl.new_assignment,,hu_HU,"New assignment:","Új hozzárendelés:",0,"Új hozzárendelés:"
+cms,resource_acl.inherit_label,,hu_HU,Inherit permissions from parent folder,Engedélyek öröklése a szülő mappából,0,Engedélyek öröklése a szülő mappából
+cms,resource_acl.inherited_title,,hu_HU,Inherited permissions,Örökölt engedélyek,0,Örökölt engedélyek
+cms,resource_acl.new_assignment,,hu_HU,New assignment:,Új hozzárendelés:,0,Új hozzárendelés:
 cms,resource_acl.permission.create,,hu_HU,Create,Létrehozás,0,Létrehozás
 cms,resource_acl.permission.delete,,hu_HU,Delete,Törlés,0,Törlés
 cms,resource_acl.permission.edit,,hu_HU,Edit,Szerkesztés,0,Szerkesztés
 cms,resource_acl.permission.list,,hu_HU,List,Listázás,0,Listázás
 cms,resource_acl.permission.view,,hu_HU,View,Megjelenítés,0,Megjelenítés
-cms,resource_acl.resource_not_found,,hu_HU,"Resource not found: {id}","Az erőforrás nem található: {id}",0,"Az erőforrás nem található: {id}"
-cms,resource_acl.search_placeholder,,hu_HU,"Search for user or group...","Felhasználó vagy csoport keresése...",0,"Felhasználó vagy csoport keresése..."
+cms,resource_acl.resource_not_found,,hu_HU,Resource not found: {id},Az erőforrás nem található: {id},0,Az erőforrás nem található: {id}
+cms,resource_acl.search_placeholder,,hu_HU,Search for user or group...,Felhasználó vagy csoport keresése...,0,Felhasználó vagy csoport keresése...
 cms,resource_acl.specific_help,,hu_HU,"Specific permissions always apply, regardless of the inheritance setting.","A saját engedélyek mindig érvényesek, függetlenül az öröklés beállításától.",0,"A saját engedélyek mindig érvényesek, függetlenül az öröklés beállításától."
-cms,resource_acl.specific_title,,hu_HU,"Specific permissions","Saját engedélyek",0,"Saját engedélyek"
+cms,resource_acl.specific_title,,hu_HU,Specific permissions,Saját engedélyek,0,Saját engedélyek
 cms,resource_acl.subject,,hu_HU,Subject,Objektum,0,Objektum
 cms,resource_acl.title,,hu_HU,Access,Hozzáférés,0,Hozzáférés
-cms,resource_acl.unknown_subject_type,,hu_HU,"Unknown ACL subject type: {type}","Ismeretlen ACL alany típus: {type}",0,"Ismeretlen ACL alany típus: {type}"
-cms,resource_acl.unknown_type,,hu_HU,"Unknown ACL list type: {type}","Ismeretlen ACL lista típus: {type}",0,"Ismeretlen ACL lista típus: {type}"
-cms,resource_acl.usergroup_assignment.added,,hu_HU,"User group assigned to resource:<br>{group} -> {target}","Felhasználói csoport hozzárendelve az erőforráshoz:<br>{group} -> {target}",0,"Felhasználói csoport hozzárendelve az erőforráshoz:<br>{group} -> {target}"
-cms,resource_acl.usergroup_assignment.error_add,,hu_HU,"Error: Unable to assign user group to resource:<br>{group} -> {target}","Hiba: Nem sikerült hozzárendelni a felhasználói csoportot az erőforráshoz:<br>{group} -> {target}",0,"Hiba: Nem sikerült hozzárendelni a felhasználói csoportot az erőforráshoz:<br>{group} -> {target}"
-cms,resource_acl.usergroup_assignment.error_add_generic,,hu_HU,"Error: Unable to assign user group to resource.","Hiba: Nem sikerült hozzárendelni a felhasználói csoportot az erőforráshoz.",0,"Hiba: Nem sikerült hozzárendelni a felhasználói csoportot az erőforráshoz."
-cms,resource_acl.usergroup_assignment.error_remove,,hu_HU,"Error: Unable to remove user group from resource:<br>{group} -> {target}","Hiba: Nem sikerült eltávolítani a felhasználói csoportot az erőforrásról:<br>{group} -> {target}",0,"Hiba: Nem sikerült eltávolítani a felhasználói csoportot az erőforrásról:<br>{group} -> {target}"
-cms,resource_acl.usergroup_assignment.error_remove_generic,,hu_HU,"Error: Unable to remove user group from resource.","Hiba: Nem sikerült eltávolítani a felhasználói csoportot az erőforrásról.",0,"Hiba: Nem sikerült eltávolítani a felhasználói csoportot az erőforrásról."
-cms,resource_acl.usergroup_assignment.removed,,hu_HU,"User group assignment removed:<br>{group} -> {target}","Felhasználói csoport hozzárendelése törölve:<br>{group} -> {target}",0,"Felhasználói csoport hozzárendelése törölve:<br>{group} -> {target}"
-cms,resource_browser.create_index_page,,hu_HU,"Create index page!","Hozz létre index oldalt!",0,"Hozz létre index oldalt!"
-cms,resource_browser.delete_file_confirm,,hu_HU,"Are you sure you want to delete this file?","Biztosan törölni szeretnéd ezt a fájlt?",0,"Biztosan törölni szeretnéd ezt a fájlt?"
-cms,resource_browser.delete_folder_confirm,,hu_HU,"Are you sure you want to delete this folder and all its contents?","Biztosan törölni szeretnéd ezt a mappát és annak minden tartalmát?",0,"Biztosan törölni szeretnéd ezt a mappát és annak minden tartalmát?"
-cms,resource_browser.delete_invalid_confirm,,hu_HU,"Are you sure you want to delete this invalid entry?","Biztosan törölni szeretnéd ezt a hibás bejegyzést?",0,"Biztosan törölni szeretnéd ezt a hibás bejegyzést?"
-cms,resource_browser.delete_webpage_confirm,,hu_HU,"Are you sure you want to delete this webpage?","Biztosan törölni szeretnéd ezt a weboldalt?",0,"Biztosan törölni szeretnéd ezt a weboldalt?"
-cms,resource_browser.help_create,,hu_HU,"Create folders and webpages within them.","Hozz létre bennük mappákat és weboldalakat.",0,"Hozz létre bennük mappákat és weboldalakat."
-cms,resource_browser.help_move,,hu_HU,"Drag and drop to move items between folders.","Húzd át az elemeket a mappák közötti áthelyezéshez.",0,"Húzd át az elemeket a mappák közötti áthelyezéshez."
+cms,resource_acl.unknown_subject_type,,hu_HU,Unknown ACL subject type: {type},Ismeretlen ACL alany típus: {type},0,Ismeretlen ACL alany típus: {type}
+cms,resource_acl.unknown_type,,hu_HU,Unknown ACL list type: {type},Ismeretlen ACL lista típus: {type},0,Ismeretlen ACL lista típus: {type}
+cms,resource_acl.usergroup_assignment.added,,hu_HU,User group assigned to resource:<br>{group} -> {target},Felhasználói csoport hozzárendelve az erőforráshoz:<br>{group} -> {target},0,Felhasználói csoport hozzárendelve az erőforráshoz:<br>{group} -> {target}
+cms,resource_acl.usergroup_assignment.error_add,,hu_HU,Error: Unable to assign user group to resource:<br>{group} -> {target},Hiba: Nem sikerült hozzárendelni a felhasználói csoportot az erőforráshoz:<br>{group} -> {target},0,Hiba: Nem sikerült hozzárendelni a felhasználói csoportot az erőforráshoz:<br>{group} -> {target}
+cms,resource_acl.usergroup_assignment.error_add_generic,,hu_HU,Error: Unable to assign user group to resource.,Hiba: Nem sikerült hozzárendelni a felhasználói csoportot az erőforráshoz.,0,Hiba: Nem sikerült hozzárendelni a felhasználói csoportot az erőforráshoz.
+cms,resource_acl.usergroup_assignment.error_remove,,hu_HU,Error: Unable to remove user group from resource:<br>{group} -> {target},Hiba: Nem sikerült eltávolítani a felhasználói csoportot az erőforrásról:<br>{group} -> {target},0,Hiba: Nem sikerült eltávolítani a felhasználói csoportot az erőforrásról:<br>{group} -> {target}
+cms,resource_acl.usergroup_assignment.error_remove_generic,,hu_HU,Error: Unable to remove user group from resource.,Hiba: Nem sikerült eltávolítani a felhasználói csoportot az erőforrásról.,0,Hiba: Nem sikerült eltávolítani a felhasználói csoportot az erőforrásról.
+cms,resource_acl.usergroup_assignment.removed,,hu_HU,User group assignment removed:<br>{group} -> {target},Felhasználói csoport hozzárendelése törölve:<br>{group} -> {target},0,Felhasználói csoport hozzárendelése törölve:<br>{group} -> {target}
+cms,resource_browser.create_index_page,,hu_HU,Create index page!,Hozz létre index oldalt!,0,Hozz létre index oldalt!
+cms,resource_browser.delete_file_confirm,,hu_HU,Are you sure you want to delete this file?,Biztosan törölni szeretnéd ezt a fájlt?,0,Biztosan törölni szeretnéd ezt a fájlt?
+cms,resource_browser.delete_folder_confirm,,hu_HU,Are you sure you want to delete this folder and all its contents?,Biztosan törölni szeretnéd ezt a mappát és annak minden tartalmát?,0,Biztosan törölni szeretnéd ezt a mappát és annak minden tartalmát?
+cms,resource_browser.delete_invalid_confirm,,hu_HU,Are you sure you want to delete this invalid entry?,Biztosan törölni szeretnéd ezt a hibás bejegyzést?,0,Biztosan törölni szeretnéd ezt a hibás bejegyzést?
+cms,resource_browser.delete_webpage_confirm,,hu_HU,Are you sure you want to delete this webpage?,Biztosan törölni szeretnéd ezt a weboldalt?,0,Biztosan törölni szeretnéd ezt a weboldalt?
+cms,resource_browser.help_create,,hu_HU,Create folders and webpages within them.,Hozz létre bennük mappákat és weboldalakat.,0,Hozz létre bennük mappákat és weboldalakat.
+cms,resource_browser.help_move,,hu_HU,Drag and drop to move items between folders.,Húzd át az elemeket a mappák közötti áthelyezéshez.,0,Húzd át az elemeket a mappák közötti áthelyezéshez.
 cms,resource_browser.insert,,hu_HU,Insert,Beszúrás,0,Beszúrás
-cms,resource_browser.invalid_entry,,hu_HU,"Invalid entry","Hibás bejegyzés",0,"Hibás bejegyzés"
-cms,resource_browser.new_domain,,hu_HU,"New domain","Új domain",0,"Új domain"
-cms,resource_browser.preview_index_page,,hu_HU,"Preview (index page)","Megnéz (index oldalt)",0,"Megnéz (index oldalt)"
-cms,resource_browser.root_not_found,,hu_HU,"Root node not found for the resource tree","Nem található gyökérelem az erőforrásfához",0,"Nem található gyökérelem az erőforrásfához"
-cms,resource_browser.select_tree_item,,hu_HU,"Select an item from the tree","Válassz egy elemet a fából",0,"Válassz egy elemet a fából"
-cms,resource_browser.site_structure,,hu_HU,"Site structure","Weboldal szerkezet",0,"Weboldal szerkezet"
-cms,resource.delete_error,,hu_HU,"Error: Unable to delete resource(s)","Hiba: Nem sikerült törölni az erőforrásokat",0,"Hiba: Nem sikerült törölni az erőforrásokat"
-cms,resource.delete_failed,,hu_HU,"Delete failed","Sikertelen törlés",0,"Sikertelen törlés"
-cms,resource.delete_partial_error,,hu_HU,"{count} error(s) occurred during deletion","A törlés közben {count} hiba történt",0,"A törlés közben {count} hiba történt"
-cms,resource.deleted,,hu_HU,"Resource deleted","Az erőforrás törölve",0,"Az erőforrás törölve"
-cms,resource.deleted_multiple,,hu_HU,"Resources deleted","Az erőforrások törölve",0,"Az erőforrások törölve"
-cms,resource.folder_count,,hu_HU,"{count} folder(s)","{count} mappa",0,"{count} mappa"
-cms,resource.move_error,,hu_HU,"Error: Unable to move resource","Hiba történt az áthelyezés közben!",0,"Hiba történt az áthelyezés közben!"
-cms,resource.move_failed,,hu_HU,"Move failed","Sikertelen áthelyezés",0,"Sikertelen áthelyezés"
-cms,resource.moved,,hu_HU,"Resource moved","Sikeres áthelyezés!",0,"Sikeres áthelyezés!"
-cms,resource.page_count,,hu_HU,"{count} page(s)","{count} oldal",0,"{count} oldal"
+cms,resource_browser.invalid_entry,,hu_HU,Invalid entry,Hibás bejegyzés,0,Hibás bejegyzés
+cms,resource_browser.new_domain,,hu_HU,New domain,Új domain,0,Új domain
+cms,resource_browser.preview_index_page,,hu_HU,Preview (index page),Megnéz (index oldalt),0,Megnéz (index oldalt)
+cms,resource_browser.root_not_found,,hu_HU,Root node not found for the resource tree,Nem található gyökérelem az erőforrásfához,0,Nem található gyökérelem az erőforrásfához
+cms,resource_browser.select_tree_item,,hu_HU,Select an item from the tree,Válassz egy elemet a fából,0,Válassz egy elemet a fából
+cms,resource_browser.site_structure,,hu_HU,Site structure,Weboldal szerkezet,0,Weboldal szerkezet
+cms,resource.delete_error,,hu_HU,Error: Unable to delete resource(s),Hiba: Nem sikerült törölni az erőforrásokat,0,Hiba: Nem sikerült törölni az erőforrásokat
+cms,resource.delete_failed,,hu_HU,Delete failed,Sikertelen törlés,0,Sikertelen törlés
+cms,resource.delete_partial_error,,hu_HU,{count} error(s) occurred during deletion,A törlés közben {count} hiba történt,0,A törlés közben {count} hiba történt
+cms,resource.deleted,,hu_HU,Resource deleted,Az erőforrás törölve,0,Az erőforrás törölve
+cms,resource.deleted_multiple,,hu_HU,Resources deleted,Az erőforrások törölve,0,Az erőforrások törölve
+cms,resource.folder_count,,hu_HU,{count} folder(s),{count} mappa,0,{count} mappa
+cms,resource.move_error,,hu_HU,Error: Unable to move resource,Hiba történt az áthelyezés közben!,0,Hiba történt az áthelyezés közben!
+cms,resource.move_failed,,hu_HU,Move failed,Sikertelen áthelyezés,0,Sikertelen áthelyezés
+cms,resource.moved,,hu_HU,Resource moved,Sikeres áthelyezés!,0,Sikeres áthelyezés!
+cms,resource.page_count,,hu_HU,{count} page(s),{count} oldal,0,{count} oldal
 cms,resource.renamed,,hu_HU,Renamed,Átnevezve!,0,Átnevezve!
-cms,resource.view_forbidden,,hu_HU,"403 - You do not have permission to view this content!","403 - NINCS JOGOSULTSÁG A TARTALOM MEGTEKINTÉSÉRE!",0,"403 - NINCS JOGOSULTSÁG A TARTALOM MEGTEKINTÉSÉRE!"
-cms,richtext.assigned,,hu_HU,"Text content assigned","Szöveges tartalom hozzárendelve",0,"Szöveges tartalom hozzárendelve"
+cms,resource.view_forbidden,,hu_HU,403 - You do not have permission to view this content!,403 - NINCS JOGOSULTSÁG A TARTALOM MEGTEKINTÉSÉRE!,0,403 - NINCS JOGOSULTSÁG A TARTALOM MEGTEKINTÉSÉRE!
+cms,richtext.assigned,,hu_HU,Text content assigned,Szöveges tartalom hozzárendelve,0,Szöveges tartalom hozzárendelve
 cms,richtext.field.content.explanation,,hu_HU,"Format text freely, add images, and embed external content (e.g. YouTube). Use HTML view for embed codes.","Szabadon formázható szöveg, képekkel és külső beágyazásokkal. HTML nézetben végezhető beágyazás (pl. YouTube).",0,"Szabadon formázható szöveg, képekkel és külső beágyazásokkal. HTML nézetben végezhető beágyazás (pl. YouTube)."
 cms,richtext.field.content.label,,hu_HU,Content,Tartalom,0,Tartalom
-cms,richtext.field.name.explanation,,hu_HU,"Visible in the admin area only. Use this to identify the content when selecting it for display on public pages. Must be unique.","Csak az adminisztrátori területen látható. Erre a névre hivatkozva lehet kiválasztani a tartalmat a nyilvános oldalakhoz. Egyedinek kell lennie.",0,"Csak az adminisztrátori területen látható. Erre a névre hivatkozva lehet kiválasztani a tartalmat a nyilvános oldalakhoz. Egyedinek kell lennie."
-cms,richtext.field.name.label,,hu_HU,"Name (identifier)","Azonosító név",0,"Azonosító név"
-cms,richtext.field.name.unique_error,,hu_HU,"An information content item with this name already exists","Ezzel a névvel már szerepel információs tartalom az adatbázisban!",0,"Ezzel a névvel már szerepel információs tartalom az adatbázisban!"
-cms,richtext.field.title.explanation,,hu_HU,"Appears as a title above the text. Leave empty for no title.","A szöveg fölött jelenik meg. Hagyd üresen, ha nem kell cím.",0,"A szöveg fölött jelenik meg. Hagyd üresen, ha nem kell cím."
+cms,richtext.field.name.explanation,,hu_HU,Visible in the admin area only. Use this to identify the content when selecting it for display on public pages. Must be unique.,Csak az adminisztrátori területen látható. Erre a névre hivatkozva lehet kiválasztani a tartalmat a nyilvános oldalakhoz. Egyedinek kell lennie.,0,Csak az adminisztrátori területen látható. Erre a névre hivatkozva lehet kiválasztani a tartalmat a nyilvános oldalakhoz. Egyedinek kell lennie.
+cms,richtext.field.name.label,,hu_HU,Name (identifier),Azonosító név,0,Azonosító név
+cms,richtext.field.name.unique_error,,hu_HU,An information content item with this name already exists,Ezzel a névvel már szerepel információs tartalom az adatbázisban!,0,Ezzel a névvel már szerepel információs tartalom az adatbázisban!
+cms,richtext.field.title.explanation,,hu_HU,Appears as a title above the text. Leave empty for no title.,"A szöveg fölött jelenik meg. Hagyd üresen, ha nem kell cím.",0,"A szöveg fölött jelenik meg. Hagyd üresen, ha nem kell cím."
 cms,richtext.field.title.label,,hu_HU,Heading,Cím,0,Cím
-cms,richtext.form.name,,hu_HU,"Text content","Szöveges tartalom",0,"Szöveges tartalom"
-cms,richtext.form.title_create,,hu_HU,"Create text content","Szöveges tartalom létrehozása",0,"Szöveges tartalom létrehozása"
-cms,richtext.form.title_edit,,hu_HU,"Edit text content","Szöveges tartalom szerkesztése",0,"Szöveges tartalom szerkesztése"
-cms,richtext.not_set,,hu_HU,"No content chosen","Nincs tartalom kiválasztva",0,"Nincs tartalom kiválasztva"
-cms,richtext.saved,,hu_HU,"Content saved","Tartalom mentve",0,"Tartalom mentve"
-cms,richtext.select.form.title,,hu_HU,"Select text content","Szöveges tartalom kiválasztása",0,"Szöveges tartalom kiválasztása"
-cms,richtext.updated,,hu_HU,"Content updated","Tartalom frissítve",0,"Tartalom frissítve"
-cms,richtext.widget.choose,,hu_HU,"Select text content","Szöveges tartalom kiválasztása",0,"Szöveges tartalom kiválasztása"
-cms,richtext.widget.create,,hu_HU,"Create text content","Szöveges tartalom létrehozása",0,"Szöveges tartalom létrehozása"
-cms,richtext.widget.description,,hu_HU,"Freely editable text with images","Szabadon szerkeszthető szöveg, képekkel",0,"Szabadon szerkeszthető szöveg, képekkel"
-cms,richtext.widget.edit,,hu_HU,"Edit text content","Szöveges tartalom szerkesztése",0,"Szöveges tartalom szerkesztése"
-cms,richtext.widget.name,,hu_HU,"Editable text","Szerkeszthető szöveg",0,"Szerkeszthető szöveg"
-cms,tree.field.type.explanation,,hu_HU,"Select from the predefined trees","Válassz az előre definiált fák közül",0,"Válassz az előre definiált fák közül"
+cms,richtext.form.name,,hu_HU,Text content,Szöveges tartalom,0,Szöveges tartalom
+cms,richtext.form.title_create,,hu_HU,Create text content,Szöveges tartalom létrehozása,0,Szöveges tartalom létrehozása
+cms,richtext.form.title_edit,,hu_HU,Edit text content,Szöveges tartalom szerkesztése,0,Szöveges tartalom szerkesztése
+cms,richtext.not_set,,hu_HU,No content chosen,Nincs tartalom kiválasztva,0,Nincs tartalom kiválasztva
+cms,richtext.saved,,hu_HU,Content saved,Tartalom mentve,0,Tartalom mentve
+cms,richtext.select.form.title,,hu_HU,Select text content,Szöveges tartalom kiválasztása,0,Szöveges tartalom kiválasztása
+cms,richtext.updated,,hu_HU,Content updated,Tartalom frissítve,0,Tartalom frissítve
+cms,richtext.widget.choose,,hu_HU,Select text content,Szöveges tartalom kiválasztása,0,Szöveges tartalom kiválasztása
+cms,richtext.widget.create,,hu_HU,Create text content,Szöveges tartalom létrehozása,0,Szöveges tartalom létrehozása
+cms,richtext.widget.description,,hu_HU,Freely editable text with images,"Szabadon szerkeszthető szöveg, képekkel",0,"Szabadon szerkeszthető szöveg, képekkel"
+cms,richtext.widget.edit,,hu_HU,Edit text content,Szöveges tartalom szerkesztése,0,Szöveges tartalom szerkesztése
+cms,richtext.widget.name,,hu_HU,Editable text,Szerkeszthető szöveg,0,Szerkeszthető szöveg
+cms,tree.field.type.explanation,,hu_HU,Select from the predefined trees,Válassz az előre definiált fák közül,0,Válassz az előre definiált fák közül
 cms,tree.field.type.label,,hu_HU,Tree,Fa,0,Fa
-cms,tree.invalid_parent_id,,hu_HU,"Invalid parent ID","Érvénytelen szülő azonosító",0,"Érvénytelen szülő azonosító"
-cms,tree.missing_type,,hu_HU,"Missing tree type","Hiányzik a fa típusa",0,"Hiányzik a fa típusa"
-cms,tree.no_connection_id,,hu_HU,"No widget connection ID given","Hiányzik a widget kapcsolat azonosítója",0,"Hiányzik a widget kapcsolat azonosítója"
-cms,tree.select_menu_item,,hu_HU,"Select a menu item from the tree","Válassz ki egy menüpontot a fából",0,"Válassz ki egy menüpontot a fából"
-cms,tree.unknown_type,,hu_HU,"Unknown tree item type: {type}","Ismeretlen faelem típus: {type}",0,"Ismeretlen faelem típus: {type}"
-cms,webpage_domain.field.resource_name.explanation,,hu_HU,"Set this domain name in the DOMAIN_CONTEXT configuration so this domain and its child pages become active.","Az itt megadott domain nevet kell beállítani a DOMAIN_CONTEXT konfigurációs paraméterben ahhoz, hogy ez a domain és az aloldalai legyenek aktívak.",0,"Az itt megadott domain nevet kell beállítani a DOMAIN_CONTEXT konfigurációs paraméterben ahhoz, hogy ez a domain és az aloldalai legyenek aktívak."
-cms,webpage_domain.field.resource_name.label,,hu_HU,"Domain name","Domain név",0,"Domain név"
-cms,webpage_domain.title_create,,hu_HU,"Add new domain","Új domain hozzáadása",0,"Új domain hozzáadása"
-cms,webpage_domain.title_edit,,hu_HU,"Edit domain","Domain adatainak módosítása",0,"Domain adatainak módosítása"
+cms,tree.invalid_parent_id,,hu_HU,Invalid parent ID,Érvénytelen szülő azonosító,0,Érvénytelen szülő azonosító
+cms,tree.missing_type,,hu_HU,Missing tree type,Hiányzik a fa típusa,0,Hiányzik a fa típusa
+cms,tree.no_connection_id,,hu_HU,No widget connection ID given,Hiányzik a widget kapcsolat azonosítója,0,Hiányzik a widget kapcsolat azonosítója
+cms,tree.select_menu_item,,hu_HU,Select a menu item from the tree,Válassz ki egy menüpontot a fából,0,Válassz ki egy menüpontot a fából
+cms,tree.unknown_type,,hu_HU,Unknown tree item type: {type},Ismeretlen faelem típus: {type},0,Ismeretlen faelem típus: {type}
+cms,webpage_domain.field.resource_name.explanation,,hu_HU,Set this domain name in the DOMAIN_CONTEXT configuration so this domain and its child pages become active.,"Az itt megadott domain nevet kell beállítani a DOMAIN_CONTEXT konfigurációs paraméterben ahhoz, hogy ez a domain és az aloldalai legyenek aktívak.",0,"Az itt megadott domain nevet kell beállítani a DOMAIN_CONTEXT konfigurációs paraméterben ahhoz, hogy ez a domain és az aloldalai legyenek aktívak."
+cms,webpage_domain.field.resource_name.label,,hu_HU,Domain name,Domain név,0,Domain név
+cms,webpage_domain.title_create,,hu_HU,Add new domain,Új domain hozzáadása,0,Új domain hozzáadása
+cms,webpage_domain.title_edit,,hu_HU,Edit domain,Domain adatainak módosítása,0,Domain adatainak módosítása
 cms,webpage_file.field.resource_name.explanation,,hu_HU,"This is the file name used in the URL. Avoid accented characters and spaces, and keep the correct file extension.","Ez a fájl URL-ben is szereplő neve. Lehetőleg ne használj ékezetes karaktereket és szóközt, és hagyd meg a megfelelő kiterjesztést.",0,"Ez a fájl URL-ben is szereplő neve. Lehetőleg ne használj ékezetes karaktereket és szóközt, és hagyd meg a megfelelő kiterjesztést."
-cms,webpage_file.field.resource_name.label,,hu_HU,"SEO-friendly URL name","Keresőbarát URL név",0,"Keresőbarát URL név"
-cms,webpage_file.field.text.explanation,,hu_HU,"For images this may appear as a longer description below the title.","Képeknél ez lehet a hosszabb leírás a cím alatt.",0,"Képeknél ez lehet a hosszabb leírás a cím alatt."
+cms,webpage_file.field.resource_name.label,,hu_HU,SEO-friendly URL name,Keresőbarát URL név,0,Keresőbarát URL név
+cms,webpage_file.field.text.explanation,,hu_HU,For images this may appear as a longer description below the title.,Képeknél ez lehet a hosszabb leírás a cím alatt.,0,Képeknél ez lehet a hosszabb leírás a cím alatt.
 cms,webpage_file.field.text.label,,hu_HU,Description,Leírás,0,Leírás
-cms,webpage_file.field.title.explanation,,hu_HU,"For images this may appear below the image.","Képeknél ez lehet a kép alá írva.",0,"Képeknél ez lehet a kép alá írva."
+cms,webpage_file.field.title.explanation,,hu_HU,For images this may appear below the image.,Képeknél ez lehet a kép alá írva.,0,Képeknél ez lehet a kép alá írva.
 cms,webpage_file.field.title.label,,hu_HU,Title,Cím,0,Cím
-cms,webpage_file.title_edit,,hu_HU,"Edit file name","Fájl nevének módosítása",0,"Fájl nevének módosítása"
-cms,webpage_folder.field.resource_name.explanation,,hu_HU,"This is the real folder name used in the URL. Changing it later may cause visitors from search engines to see a 404 page.","Ez a mappa valós, URL-ben is szereplő neve. Ha később módosítod, akkor a keresőkből érkezők esetleg 404-es oldalt fognak látni.",0,"Ez a mappa valós, URL-ben is szereplő neve. Ha később módosítod, akkor a keresőkből érkezők esetleg 404-es oldalt fognak látni."
-cms,webpage_folder.field.resource_name.label,,hu_HU,"SEO-friendly folder URL name","Mappa keresőbarát URL név",0,"Mappa keresőbarát URL név"
-cms,webpage_folder.title_create,,hu_HU,"Create new folder","Új mappa létrehozása",0,"Új mappa létrehozása"
-cms,webpage_folder.title_edit,,hu_HU,"Edit folder","Mappa adatainak módosítása",0,"Mappa adatainak módosítása"
+cms,webpage_file.title_edit,,hu_HU,Edit file name,Fájl nevének módosítása,0,Fájl nevének módosítása
+cms,webpage_folder.field.resource_name.explanation,,hu_HU,This is the real folder name used in the URL. Changing it later may cause visitors from search engines to see a 404 page.,"Ez a mappa valós, URL-ben is szereplő neve. Ha később módosítod, akkor a keresőkből érkezők esetleg 404-es oldalt fognak látni.",0,"Ez a mappa valós, URL-ben is szereplő neve. Ha később módosítod, akkor a keresőkből érkezők esetleg 404-es oldalt fognak látni."
+cms,webpage_folder.field.resource_name.label,,hu_HU,SEO-friendly folder URL name,Mappa keresőbarát URL név,0,Mappa keresőbarát URL név
+cms,webpage_folder.title_create,,hu_HU,Create new folder,Új mappa létrehozása,0,Új mappa létrehozása
+cms,webpage_folder.title_edit,,hu_HU,Edit folder,Mappa adatainak módosítása,0,Mappa adatainak módosítása
 cms,webpage_from_path.subtitle,,hu_HU,"If you want to create this webpage, you can do it here. Before doing so, make sure the URL was not mistyped.","Ha létre kívánod hozni ezt a weboldalt, itt megteheted. Mielőtt ezt megteszed, ellenőrizd, hogy nem gépelted-e el a weboldal címét!",0,"Ha létre kívánod hozni ezt a weboldalt, itt megteheted. Mielőtt ezt megteszed, ellenőrizd, hogy nem gépelted-e el a weboldal címét!"
-cms,webpage_from_path.title,,hu_HU,"The requested webpage was not found!","A keresett weboldal nem található!",0,"A keresett weboldal nem található!"
+cms,webpage_from_path.title,,hu_HU,The requested webpage was not found!,A keresett weboldal nem található!,0,A keresett weboldal nem található!
 cms,webpage_page.field.description.explanation,,hu_HU,"Description meta tag, usually shown under the URL in search results.","Description meta tag, általában ez jelenik meg a találatokban a URL alatt.",0,"Description meta tag, általában ez jelenik meg a találatokban a URL alatt."
 cms,webpage_page.field.description.label,,hu_HU,Description,Leírás,0,Leírás
-cms,webpage_page.field.keywords.explanation,,hu_HU,"Keywords meta tag with comma-separated values.","Keywords meta tag, vesszővel elválasztott kulcsszavakkal.",0,"Keywords meta tag, vesszővel elválasztott kulcsszavakkal."
+cms,webpage_page.field.keywords.explanation,,hu_HU,Keywords meta tag with comma-separated values.,"Keywords meta tag, vesszővel elválasztott kulcsszavakkal.",0,"Keywords meta tag, vesszővel elválasztott kulcsszavakkal."
 cms,webpage_page.field.keywords.label,,hu_HU,Keywords,Kulcsszavak,0,Kulcsszavak
-cms,webpage_page.field.resource_name.explanation,,hu_HU,"This is the real URL name of the page. Change it later only when necessary.","Ez a dokumentum valós, URL-ben is szereplő neve. Csak indokolt esetben módosítsd utólag.",0,"Ez a dokumentum valós, URL-ben is szereplő neve. Csak indokolt esetben módosítsd utólag."
-cms,webpage_page.field.resource_name.label,,hu_HU,"SEO-friendly URL name","Keresőbarát URL név",0,"Keresőbarát URL név"
-cms,webpage_page.field.title.explanation,,hu_HU,"HTML title meta tag shown in the browser window title.","A böngésző ablak fejlécében látható title meta tag szövege.",0,"A böngésző ablak fejlécében látható title meta tag szövege."
+cms,webpage_page.field.resource_name.explanation,,hu_HU,This is the real URL name of the page. Change it later only when necessary.,"Ez a dokumentum valós, URL-ben is szereplő neve. Csak indokolt esetben módosítsd utólag.",0,"Ez a dokumentum valós, URL-ben is szereplő neve. Csak indokolt esetben módosítsd utólag."
+cms,webpage_page.field.resource_name.label,,hu_HU,SEO-friendly URL name,Keresőbarát URL név,0,Keresőbarát URL név
+cms,webpage_page.field.title.explanation,,hu_HU,HTML title meta tag shown in the browser window title.,A böngésző ablak fejlécében látható title meta tag szövege.,0,A böngésző ablak fejlécében látható title meta tag szövege.
 cms,webpage_page.field.title.label,,hu_HU,Title,Címsor,0,Címsor
-cms,webpage_page.title_create,,hu_HU,"Create new webpage","Új weboldal létrehozása",0,"Új weboldal létrehozása"
-cms,webpage_page.title_edit,,hu_HU,"Edit webpage","Weboldal adatainak módosítása",0,"Weboldal adatainak módosítása"
+cms,webpage_page.title_create,,hu_HU,Create new webpage,Új weboldal létrehozása,0,Új weboldal létrehozása
+cms,webpage_page.title_edit,,hu_HU,Edit webpage,Weboldal adatainak módosítása,0,Weboldal adatainak módosítása
 cms,webpage.create_for_params,,hu_HU,"Create a webpage for the following parameters: <br>{param_name}, {param_value}","Hozz létre weboldalt az alábbi paraméterekhez: <br>{param_name}, {param_value}",0,"Hozz létre weboldalt az alábbi paraméterekhez: <br>{param_name}, {param_value}"
-cms,webpage.create_for_widget,,hu_HU,"Create a webpage with the following content: <br><b>{widget}</b>","Hozz létre weboldalt az alábbi tartalommal: <br><b>{widget}</b>",0,"Hozz létre weboldalt az alábbi tartalommal: <br><b>{widget}</b>"
-cms,webpage.field.layout.explanation,,hu_HU,"The webpage layout structure determines where content elements can be placed on the page.","Az aktuális weboldal szerkezete határozza meg, hogy hova lehet tartalmi elemeket elhelyezni az oldalon.",0,"Az aktuális weboldal szerkezete határozza meg, hogy hova lehet tartalmi elemeket elhelyezni az oldalon."
-cms,webpage.field.layout.label,,hu_HU,"Page type",Oldaltípus,0,Oldaltípus
-cms,widget_connection_params.field.anchor.explanation,,hu_HU,"Anchor name that can be used in links to jump to this content on the page.","Horgony neve, amely hivatkozásokban használható arra, hogy az adott oldalon erre a tartalomra ugorjon az oldal.",0,"Horgony neve, amely hivatkozásokban használható arra, hogy az adott oldalon erre a tartalomra ugorjon az oldal."
+cms,webpage.create_for_widget,,hu_HU,Create a webpage with the following content: <br><b>{widget}</b>,Hozz létre weboldalt az alábbi tartalommal: <br><b>{widget}</b>,0,Hozz létre weboldalt az alábbi tartalommal: <br><b>{widget}</b>
+cms,webpage.field.layout.explanation,,hu_HU,The webpage layout structure determines where content elements can be placed on the page.,"Az aktuális weboldal szerkezete határozza meg, hogy hova lehet tartalmi elemeket elhelyezni az oldalon.",0,"Az aktuális weboldal szerkezete határozza meg, hogy hova lehet tartalmi elemeket elhelyezni az oldalon."
+cms,webpage.field.layout.label,,hu_HU,Page type,Oldaltípus,0,Oldaltípus
+cms,widget_connection_params.field.anchor.explanation,,hu_HU,Anchor name that can be used in links to jump to this content on the page.,"Horgony neve, amely hivatkozásokban használható arra, hogy az adott oldalon erre a tartalomra ugorjon az oldal.",0,"Horgony neve, amely hivatkozásokban használható arra, hogy az adott oldalon erre a tartalomra ugorjon az oldal."
 cms,widget_connection_params.field.anchor.label,,hu_HU,Anchor,Horgony,0,Horgony
-cms,widget_connection_params.field.float.clear,,hu_HU,"New row","Új sor",0,"Új sor"
-cms,widget_connection_params.field.float.explanation,,hu_HU,"Content box alignment. Floated elements can appear next to each other.","A tartalom doboz igazítása. Az úsztatott tartalmak egymás mellett jelenhetnek meg.",0,"A tartalom doboz igazítása. Az úsztatott tartalmak egymás mellett jelenhetnek meg."
+cms,widget_connection_params.field.float.clear,,hu_HU,New row,Új sor,0,Új sor
+cms,widget_connection_params.field.float.explanation,,hu_HU,Content box alignment. Floated elements can appear next to each other.,A tartalom doboz igazítása. Az úsztatott tartalmak egymás mellett jelenhetnek meg.,0,A tartalom doboz igazítása. Az úsztatott tartalmak egymás mellett jelenhetnek meg.
 cms,widget_connection_params.field.float.label,,hu_HU,Alignment,Igazítás,0,Igazítás
-cms,widget_connection_params.field.float.left,,hu_HU,"Floated left","Balra úsztatott",0,"Balra úsztatott"
-cms,widget_connection_params.field.float.left_clear,,hu_HU,"Floated left in new row","Balra úsztatott új sorban",0,"Balra úsztatott új sorban"
-cms,widget_connection_params.field.float.none,,hu_HU,"No special alignment","Nincs speciális igazítás",0,"Nincs speciális igazítás"
-cms,widget_connection_params.field.float.right,,hu_HU,"Floated right","Jobbra úsztatott",0,"Jobbra úsztatott"
-cms,widget_connection_params.field.float.right_clear,,hu_HU,"Floated right in new row","Jobbra úsztatott új sorban",0,"Jobbra úsztatott új sorban"
+cms,widget_connection_params.field.float.left,,hu_HU,Floated left,Balra úsztatott,0,Balra úsztatott
+cms,widget_connection_params.field.float.left_clear,,hu_HU,Floated left in new row,Balra úsztatott új sorban,0,Balra úsztatott új sorban
+cms,widget_connection_params.field.float.none,,hu_HU,No special alignment,Nincs speciális igazítás,0,Nincs speciális igazítás
+cms,widget_connection_params.field.float.right,,hu_HU,Floated right,Jobbra úsztatott,0,Jobbra úsztatott
+cms,widget_connection_params.field.float.right_clear,,hu_HU,Floated right in new row,Jobbra úsztatott új sorban,0,Jobbra úsztatott új sorban
 cms,widget_connection_params.field.height.explanation,,hu_HU,"Height in CSS format with unit (for example 100%, 200px, or auto).","Magasság CSS formában, mértékegységgel együtt (például 100%, 200px vagy auto).",0,"Magasság CSS formában, mértékegységgel együtt (például 100%, 200px vagy auto)."
 cms,widget_connection_params.field.height.label,,hu_HU,Height,Magasság,0,Magasság
-cms,widget_connection_params.field.margin_bottom.explanation,,hu_HU,"Bottom margin in CSS format with unit (for example 100% or 200px).","Alsó margó CSS formában, mértékegységgel együtt (például 100% vagy 200px).",0,"Alsó margó CSS formában, mértékegységgel együtt (például 100% vagy 200px)."
-cms,widget_connection_params.field.margin_bottom.label,,hu_HU,"Bottom margin","Alsó margó",0,"Alsó margó"
-cms,widget_connection_params.field.margin_left.explanation,,hu_HU,"Left margin in CSS format with unit (for example 100% or 200px).","Bal oldali margó CSS formában, mértékegységgel együtt (például 100% vagy 200px).",0,"Bal oldali margó CSS formában, mértékegységgel együtt (például 100% vagy 200px)."
-cms,widget_connection_params.field.margin_left.label,,hu_HU,"Left margin","Bal oldali margó",0,"Bal oldali margó"
-cms,widget_connection_params.field.margin_right.explanation,,hu_HU,"Right margin in CSS format with unit (for example 100% or 200px).","Jobb oldali margó CSS formában, mértékegységgel együtt (például 100% vagy 200px).",0,"Jobb oldali margó CSS formában, mértékegységgel együtt (például 100% vagy 200px)."
-cms,widget_connection_params.field.margin_right.label,,hu_HU,"Right margin","Jobb oldali margó",0,"Jobb oldali margó"
-cms,widget_connection_params.field.margin_top.explanation,,hu_HU,"Top margin in CSS format with unit (for example 100% or 200px).","Felső margó CSS formában, mértékegységgel együtt (például 100% vagy 200px).",0,"Felső margó CSS formában, mértékegységgel együtt (például 100% vagy 200px)."
-cms,widget_connection_params.field.margin_top.label,,hu_HU,"Top margin","Felső margó",0,"Felső margó"
+cms,widget_connection_params.field.margin_bottom.explanation,,hu_HU,Bottom margin in CSS format with unit (for example 100% or 200px).,"Alsó margó CSS formában, mértékegységgel együtt (például 100% vagy 200px).",0,"Alsó margó CSS formában, mértékegységgel együtt (például 100% vagy 200px)."
+cms,widget_connection_params.field.margin_bottom.label,,hu_HU,Bottom margin,Alsó margó,0,Alsó margó
+cms,widget_connection_params.field.margin_left.explanation,,hu_HU,Left margin in CSS format with unit (for example 100% or 200px).,"Bal oldali margó CSS formában, mértékegységgel együtt (például 100% vagy 200px).",0,"Bal oldali margó CSS formában, mértékegységgel együtt (például 100% vagy 200px)."
+cms,widget_connection_params.field.margin_left.label,,hu_HU,Left margin,Bal oldali margó,0,Bal oldali margó
+cms,widget_connection_params.field.margin_right.explanation,,hu_HU,Right margin in CSS format with unit (for example 100% or 200px).,"Jobb oldali margó CSS formában, mértékegységgel együtt (például 100% vagy 200px).",0,"Jobb oldali margó CSS formában, mértékegységgel együtt (például 100% vagy 200px)."
+cms,widget_connection_params.field.margin_right.label,,hu_HU,Right margin,Jobb oldali margó,0,Jobb oldali margó
+cms,widget_connection_params.field.margin_top.explanation,,hu_HU,Top margin in CSS format with unit (for example 100% or 200px).,"Felső margó CSS formában, mértékegységgel együtt (például 100% vagy 200px).",0,"Felső margó CSS formában, mértékegységgel együtt (például 100% vagy 200px)."
+cms,widget_connection_params.field.margin_top.label,,hu_HU,Top margin,Felső margó,0,Felső margó
 cms,widget_connection_params.field.width.explanation,,hu_HU,"Width in CSS format with unit (for example 100%, 200px, or auto).","Szélesség CSS formában, mértékegységgel együtt (például 100%, 200px vagy auto).",0,"Szélesség CSS formában, mértékegységgel együtt (például 100%, 200px vagy auto)."
 cms,widget_connection_params.field.width.label,,hu_HU,Width,Szélesség,0,Szélesség
-cms,widget_connection_params.missing_widget_id,,hu_HU,"Widget ID is missing","Hiányzik a widget azonosítója",0,"Hiányzik a widget azonosítója"
-cms,widget_connection_params.no_content_id,,hu_HU,"No content ID given","Nincs tartalom azonosító",0,"Nincs tartalom azonosító"
-cms,widget_connection_params.subtitle,,hu_HU,"Webpage: {page}","Weboldal: {page}",0,"Weboldal: {page}"
-cms,widget_connection_params.title,,hu_HU,"Edit display settings","Megjelenítés módosítása",0,"Megjelenítés módosítása"
-cms,widget_connection_settings.field.is_last.explanation,,hu_HU,"Check this if this is the last column in the row. This helps keep spacing correct and prevents overlapping or broken layout.","Akkor kell bejelölni, ha ez az utolsó hasáb. Ez a margók helyes kezelése miatt szükséges. Helytelen beállítás esetén a tartalmak összeérhetnek, vagy az oldal elrendezése széteshet.",0,"Akkor kell bejelölni, ha ez az utolsó hasáb. Ez a margók helyes kezelése miatt szükséges. Helytelen beállítás esetén a tartalmak összeérhetnek, vagy az oldal elrendezése széteshet."
-cms,widget_connection_settings.field.is_last.label,,hu_HU,"Last in row","Utolsó a sorban",0,"Utolsó a sorban"
-cms,widget_connection_settings.field.widget_width.label,,hu_HU,"Content width","Tartalom szélesség",0,"Tartalom szélesség"
-cms,widget_connection_settings.missing_widget_id,,hu_HU,"Widget ID is missing","Hiányzik a widget azonosítója",0,"Hiányzik a widget azonosítója"
-cms,widget_connection_settings.subtitle,,hu_HU,"Webpage: {page}","Weboldal: {page}",0,"Weboldal: {page}"
-cms,widget_connection.added,,hu_HU,"Content element placed on the webpage","Tartalmi elem a weboldalra helyezve!",0,"Tartalmi elem a weboldalra helyezve!"
-cms,widget_connection.copied_to_clipboard,,hu_HU,"Content copied to clipboard","A tartalom a vágólapra másolva.",0,"A tartalom a vágólapra másolva."
-cms,widget_connection.duplicate_not_allowed,,hu_HU,"This content element is already on this block and multiple placement is not allowed.","Ez a tartalmi elem már fent van ezen a blokkon, és nincs engedélyezve a többszöri megjelenítés!",0,"Ez a tartalmi elem már fent van ezen a blokkon, és nincs engedélyezve a többszöri megjelenítés!"
-cms,widget_connection.moved,,hu_HU,"Content element moved","Tartalmi elem áthelyezve!",0,"Tartalmi elem áthelyezve!"
-cms,widget_connection.remove_from_webpage,,hu_HU,"Remove from this webpage","Eltávolítás erről a weboldalról",0,"Eltávolítás erről a weboldalról"
-cms,widget_connection.removed,,hu_HU,"Content element removed from the webpage","Tartalmi elem eltávolítva a weboldalról!",0,"Tartalmi elem eltávolítva a weboldalról!"
-cms,widget_connection.select_widget_type,,hu_HU,"Choose the content type to insert","Válaszd ki a beszúrandó tartalom típusát!",0,"Válaszd ki a beszúrandó tartalom típusát!"
-cms,widget_group.begin_delete_error,,hu_HU,"Error: Unable to delete opening block","Ismeretlen hiba történt a nyitó blokk törlése közben!",0,"Ismeretlen hiba történt a nyitó blokk törlése közben!"
-cms,widget_group.both_delete_error,,hu_HU,"Error: Unable to delete opening or closing block","Ismeretlen hiba történt a nyitó és a záró blokk törlése közben is!",0,"Ismeretlen hiba történt a nyitó és a záró blokk törlése közben is!"
-cms,widget_group.end_delete_error,,hu_HU,"Error: Unable to delete closing block","Ismeretlen hiba történt a záró blokk törlése közben!",0,"Ismeretlen hiba történt a záró blokk törlése közben!"
-cms,widget_group.end_missing_delete_error,,hu_HU,"Closing block not found and opening block deletion failed","Nem található a záró blokk, és ismeretlen hiba történt a nyitó blokk törlése közben!",0,"Nem található a záró blokk, és ismeretlen hiba történt a nyitó blokk törlése közben!"
-cms,widget_group.end_missing_removed_beginning,,hu_HU,"Closing block not found, opening block removed successfully","Nem található a záró blokk (nyitó blokk sikeresen törölve)!",0,"Nem található a záró blokk (nyitó blokk sikeresen törölve)!"
-cms,widget_group.remove_block,,hu_HU,"Remove block","Blokk megszüntetése",0,"Blokk megszüntetése"
-cms,widget_group.removed,,hu_HU,"Block removed from webpage","Blokk eltávolítva a weboldalról.",0,"Blokk eltávolítva a weboldalról."
+cms,widget_connection_params.missing_widget_id,,hu_HU,Widget ID is missing,Hiányzik a widget azonosítója,0,Hiányzik a widget azonosítója
+cms,widget_connection_params.no_content_id,,hu_HU,No content ID given,Nincs tartalom azonosító,0,Nincs tartalom azonosító
+cms,widget_connection_params.subtitle,,hu_HU,Webpage: {page},Weboldal: {page},0,Weboldal: {page}
+cms,widget_connection_params.title,,hu_HU,Edit display settings,Megjelenítés módosítása,0,Megjelenítés módosítása
+cms,widget_connection_settings.field.is_last.explanation,,hu_HU,Check this if this is the last column in the row. This helps keep spacing correct and prevents overlapping or broken layout.,"Akkor kell bejelölni, ha ez az utolsó hasáb. Ez a margók helyes kezelése miatt szükséges. Helytelen beállítás esetén a tartalmak összeérhetnek, vagy az oldal elrendezése széteshet.",0,"Akkor kell bejelölni, ha ez az utolsó hasáb. Ez a margók helyes kezelése miatt szükséges. Helytelen beállítás esetén a tartalmak összeérhetnek, vagy az oldal elrendezése széteshet."
+cms,widget_connection_settings.field.is_last.label,,hu_HU,Last in row,Utolsó a sorban,0,Utolsó a sorban
+cms,widget_connection_settings.field.widget_width.label,,hu_HU,Content width,Tartalom szélesség,0,Tartalom szélesség
+cms,widget_connection_settings.missing_widget_id,,hu_HU,Widget ID is missing,Hiányzik a widget azonosítója,0,Hiányzik a widget azonosítója
+cms,widget_connection_settings.subtitle,,hu_HU,Webpage: {page},Weboldal: {page},0,Weboldal: {page}
+cms,widget_connection.added,,hu_HU,Content element placed on the webpage,Tartalmi elem a weboldalra helyezve!,0,Tartalmi elem a weboldalra helyezve!
+cms,widget_connection.copied_to_clipboard,,hu_HU,Content copied to clipboard,A tartalom a vágólapra másolva.,0,A tartalom a vágólapra másolva.
+cms,widget_connection.duplicate_not_allowed,,hu_HU,This content element is already on this block and multiple placement is not allowed.,"Ez a tartalmi elem már fent van ezen a blokkon, és nincs engedélyezve a többszöri megjelenítés!",0,"Ez a tartalmi elem már fent van ezen a blokkon, és nincs engedélyezve a többszöri megjelenítés!"
+cms,widget_connection.moved,,hu_HU,Content element moved,Tartalmi elem áthelyezve!,0,Tartalmi elem áthelyezve!
+cms,widget_connection.remove_from_webpage,,hu_HU,Remove from this webpage,Eltávolítás erről a weboldalról,0,Eltávolítás erről a weboldalról
+cms,widget_connection.removed,,hu_HU,Content element removed from the webpage,Tartalmi elem eltávolítva a weboldalról!,0,Tartalmi elem eltávolítva a weboldalról!
+cms,widget_connection.select_widget_type,,hu_HU,Choose the content type to insert,Válaszd ki a beszúrandó tartalom típusát!,0,Válaszd ki a beszúrandó tartalom típusát!
+cms,widget_group.begin_delete_error,,hu_HU,Error: Unable to delete opening block,Ismeretlen hiba történt a nyitó blokk törlése közben!,0,Ismeretlen hiba történt a nyitó blokk törlése közben!
+cms,widget_group.both_delete_error,,hu_HU,Error: Unable to delete opening or closing block,Ismeretlen hiba történt a nyitó és a záró blokk törlése közben is!,0,Ismeretlen hiba történt a nyitó és a záró blokk törlése közben is!
+cms,widget_group.end_delete_error,,hu_HU,Error: Unable to delete closing block,Ismeretlen hiba történt a záró blokk törlése közben!,0,Ismeretlen hiba történt a záró blokk törlése közben!
+cms,widget_group.end_missing_delete_error,,hu_HU,Closing block not found and opening block deletion failed,"Nem található a záró blokk, és ismeretlen hiba történt a nyitó blokk törlése közben!",0,"Nem található a záró blokk, és ismeretlen hiba történt a nyitó blokk törlése közben!"
+cms,widget_group.end_missing_removed_beginning,,hu_HU,"Closing block not found, opening block removed successfully",Nem található a záró blokk (nyitó blokk sikeresen törölve)!,0,Nem található a záró blokk (nyitó blokk sikeresen törölve)!
+cms,widget_group.remove_block,,hu_HU,Remove block,Blokk megszüntetése,0,Blokk megszüntetése
+cms,widget_group.removed,,hu_HU,Block removed from webpage,Blokk eltávolítva a weboldalról.,0,Blokk eltávolítva a weboldalról.
 cms,widget_preview.description,,hu_HU,Description,Leírás,0,Leírás
 cms,widget_preview.implemented,,hu_HU,Implemented,Elérhető,0,Elérhető
-cms,widget_preview.info.current_theme,,hu_HU,"Current theme","Aktuális téma",0,"Aktuális téma"
+cms,widget_preview.info.current_theme,,hu_HU,Current theme,Aktuális téma,0,Aktuális téma
 cms,widget_preview.info.fallback,,hu_HU,Fallback,Visszaesés,0,Visszaesés
 cms,widget_preview.info.implemented,,hu_HU,Implemented,Megvalósítva,0,Megvalósítva
 cms,widget_preview.info.template,,hu_HU,Template,Sablon,0,Sablon
-cms,widget_preview.info.title,,hu_HU,"Widget preview","Widget előnézet",0,"Widget előnézet"
+cms,widget_preview.info.title,,hu_HU,Widget preview,Widget előnézet,0,Widget előnézet
 cms,widget_preview.info.widget,,hu_HU,Widget,Widget,0,Widget
-cms,widget_preview.none,,hu_HU,"No mockable widgets found.","Nem található előnézeti widget.",0,"Nem található előnézeti widget."
-cms,widget_preview.not_implemented,,hu_HU,"Not implemented","Nem elérhető",0,"Nem elérhető"
-cms,widget_preview.not_mockable_prefix,,hu_HU,Widget,"A widget",0,"A widget"
-cms,widget_preview.not_mockable_suffix,,hu_HU,"does not implement iMockable.","nem implementálja az iMockable interfészt.",0,"nem implementálja az iMockable interfészt."
-cms,widget_preview.not_registered,,hu_HU,"Widget not registered: {widget}","Nem regisztrált widget: {widget}",0,"Nem regisztrált widget: {widget}"
-cms,widget_preview.redirecting,,hu_HU,"Redirecting to the correct theme...","Átirányítás a megfelelő témára...",0,"Átirányítás a megfelelő témára..."
-cms,widget_preview.title,,hu_HU,"Available widgets for preview","Előnézethez elérhető widgetek",0,"Előnézethez elérhető widgetek"
+cms,widget_preview.none,,hu_HU,No mockable widgets found.,Nem található előnézeti widget.,0,Nem található előnézeti widget.
+cms,widget_preview.not_implemented,,hu_HU,Not implemented,Nem elérhető,0,Nem elérhető
+cms,widget_preview.not_mockable_prefix,,hu_HU,Widget,A widget,0,A widget
+cms,widget_preview.not_mockable_suffix,,hu_HU,does not implement iMockable.,nem implementálja az iMockable interfészt.,0,nem implementálja az iMockable interfészt.
+cms,widget_preview.not_registered,,hu_HU,Widget not registered: {widget},Nem regisztrált widget: {widget},0,Nem regisztrált widget: {widget}
+cms,widget_preview.redirecting,,hu_HU,Redirecting to the correct theme...,Átirányítás a megfelelő témára...,0,Átirányítás a megfelelő témára...
+cms,widget_preview.title,,hu_HU,Available widgets for preview,Előnézethez elérhető widgetek,0,Előnézethez elérhető widgetek
 cms,widget_preview.widget,,hu_HU,Widget,Widget,0,Widget
-cms,widget.insert_from_clipboard,,hu_HU,"Insert clipboard content here","Vágólap tartalmának beszúrása ide",0,"Vágólap tartalmának beszúrása ide"
+cms,widget.insert_from_clipboard,,hu_HU,Insert clipboard content here,Vágólap tartalmának beszúrása ide,0,Vágólap tartalmának beszúrása ide
 cms,widget.insert.button,,hu_HU,Insert,Beszúr,0,Beszúr
-cms,widget.insert.icon_title,,hu_HU,"Insert content","Tartalom beszúrása",0,"Tartalom beszúrása"
-cms,widget.insert.placeholder,,hu_HU,"-- Insert content --","-- Tartalom beszúrása --",0,"-- Tartalom beszúrása --"
+cms,widget.insert.icon_title,,hu_HU,Insert content,Tartalom beszúrása,0,Tartalom beszúrása
+cms,widget.insert.placeholder,,hu_HU,-- Insert content --,-- Tartalom beszúrása --,0,-- Tartalom beszúrása --
 common,actions,,hu_HU,Actions,Műveletek,0,Műveletek
 common,all,,hu_HU,All,Összes,0,Összes
 common,back,,hu_HU,Back,Vissza,0,Vissza
 common,calendar,,hu_HU,Calendar,Naptár,0,Naptár
 common,cancel,,hu_HU,Cancel,Mégse,0,Mégse
-common,choose_placeholder,,hu_HU,"-- Choose --","-- Válassz! --",0,"-- Válassz! --"
+common,choose_placeholder,,hu_HU,-- Choose --,-- Válassz! --,0,-- Válassz! --
 common,delete,,hu_HU,Delete,Törlés,0,Törlés
 common,download,,hu_HU,Download,Letöltés,0,Letöltés
 common,edit,,hu_HU,Edit,Szerkeszt,0,Szerkeszt
 common,error,,hu_HU,Error,Hiba,0,Hiba
-common,error_save,,hu_HU,"Error: Unable to save","Hiba: Nem sikerült a mentés",0,"Hiba: Nem sikerült a mentés"
+common,error_save,,hu_HU,Error: Unable to save,Hiba: Nem sikerült a mentés,0,Hiba: Nem sikerült a mentés
 common,id,,hu_HU,ID,Azonosító,0,Azonosító
 common,loading,,hu_HU,Loading...,Betöltés...,0,Betöltés...
-common,logout,,hu_HU,"Log out",Kijelentkezés,0,Kijelentkezés
-common,missing_required_url_params,,hu_HU,"Missing required URL parameters","Hiányzó kötelező URL paraméterek",0,"Hiányzó kötelező URL paraméterek"
-common,move_down,,hu_HU,"Move down","Mozgatás lefele",0,"Mozgatás lefele"
-common,move_up,,hu_HU,"Move up","Mozgatás felfele",0,"Mozgatás felfele"
+common,logout,,hu_HU,Log out,Kijelentkezés,0,Kijelentkezés
+common,missing_required_url_params,,hu_HU,Missing required URL parameters,Hiányzó kötelező URL paraméterek,0,Hiányzó kötelező URL paraméterek
+common,move_down,,hu_HU,Move down,Mozgatás lefele,0,Mozgatás lefele
+common,move_up,,hu_HU,Move up,Mozgatás felfele,0,Mozgatás felfele
 common,never,,hu_HU,Never,Soha,0,Soha
 common,no,,hu_HU,No,Nem,0,Nem
-common,no_changes,,hu_HU,"No changes made","Nem történt módosítás",0,"Nem történt módosítás"
-common,no_data,,hu_HU,"No data","Nincs adat",0,"Nincs adat"
-common,no_description,,hu_HU,"No description","Nincs leírás...",0,"Nincs leírás..."
-common,not_set,,hu_HU,"[not set]","[nincs beállítva]",0,"[nincs beállítva]"
+common,no_changes,,hu_HU,No changes made,Nem történt módosítás,0,Nem történt módosítás
+common,no_data,,hu_HU,No data,Nincs adat,0,Nincs adat
+common,no_description,,hu_HU,No description,Nincs leírás...,0,Nincs leírás...
+common,not_set,,hu_HU,[not set],[nincs beállítva],0,[nincs beállítva]
 common,open,,hu_HU,Open,Nyitott,0,Nyitott
 common,operations,,hu_HU,Operations,Műveletek,0,Műveletek
 common,preview,,hu_HU,Preview,Megnéz,0,Megnéz
-common,read_more,,hu_HU,"Read more",Bővebben,0,Bővebben
+common,read_more,,hu_HU,Read more,Bővebben,0,Bővebben
 common,renamed,,hu_HU,Renamed,Átnevezve,0,Átnevezve
 common,save,,hu_HU,Save,Mentés,0,Mentés
-common,saved,,hu_HU,"Record saved",Mentve,0,Mentve
+common,saved,,hu_HU,Record saved,Mentve,0,Mentve
 common,saved_short,,hu_HU,Saved,Mentve,0,Mentve
 common,search,,hu_HU,Search,Keresés,0,Keresés
 common,unknown,,hu_HU,Unknown,Ismeretlen,0,Ismeretlen
@@ -325,170 +325,144 @@ common,upload,,hu_HU,Upload,Feltöltés,0,Feltöltés
 common,user,,hu_HU,User,Felhasználó,0,Felhasználó
 common,width,,hu_HU,Width,Szélesség,0,Szélesség
 common,yes,,hu_HU,Yes,Igen,0,Igen
-datatable,column_visibility,,hu_HU,"Visible columns","Megjelenített oszlopok",0,"Megjelenített oszlopok"
-datatable,displayed_columns,,hu_HU,"Displayed columns","Megjelenített oszlopok",0,"Megjelenített oszlopok"
-datatable,empty_table,,hu_HU,"No data","Nincs adat",0,"Nincs adat"
+datatable,column_visibility,,hu_HU,Visible columns,Megjelenített oszlopok,0,Megjelenített oszlopok
+datatable,displayed_columns,,hu_HU,Displayed columns,Megjelenített oszlopok,0,Megjelenített oszlopok
+datatable,empty_table,,hu_HU,No data,Nincs adat,0,Nincs adat
 datatable,first,,hu_HU,First,Első,0,Első
-datatable,info_compact,,hu_HU,"_START_ - _END_ / _TOTAL_ items","_START_ - _END_ / _TOTAL_ elem",0,"_START_ - _END_ / _TOTAL_ elem"
-datatable,info_empty,,hu_HU,"No results","Nincs találat",0,"Nincs találat"
-datatable,info_filtered_compact,,hu_HU,"(filtered from _MAX_ items)","(szűrve _MAX_ elemből)",0,"(szűrve _MAX_ elemből)"
-datatable,info_filtered_html,,hu_HU,"<br><i>filtered from _MAX_ rows</i>","<br><i>szűrt eredmény _MAX_ adatsorból</i>",0,"<br><i>szűrt eredmény _MAX_ adatsorból</i>"
-datatable,info_full,,hu_HU,"_TOTAL_ displayable items (showing: _START_ - _END_)","_TOTAL_ megjeleníthető elem (megjelenítve: _START_ - _END_)",0,"_TOTAL_ megjeleníthető elem (megjelenítve: _START_ - _END_)"
+datatable,info_compact,,hu_HU,_START_ - _END_ / _TOTAL_ items,_START_ - _END_ / _TOTAL_ elem,0,_START_ - _END_ / _TOTAL_ elem
+datatable,info_empty,,hu_HU,No results,Nincs találat,0,Nincs találat
+datatable,info_filtered_compact,,hu_HU,(filtered from _MAX_ items),(szűrve _MAX_ elemből),0,(szűrve _MAX_ elemből)
+datatable,info_filtered_html,,hu_HU,<br><i>filtered from _MAX_ rows</i>,<br><i>szűrt eredmény _MAX_ adatsorból</i>,0,<br><i>szűrt eredmény _MAX_ adatsorból</i>
+datatable,info_full,,hu_HU,_TOTAL_ displayable items (showing: _START_ - _END_),_TOTAL_ megjeleníthető elem (megjelenítve: _START_ - _END_),0,_TOTAL_ megjeleníthető elem (megjelenítve: _START_ - _END_)
 datatable,last,,hu_HU,Last,Utolsó,0,Utolsó
-datatable,length_menu,,hu_HU,"_MENU_ items/page","_MENU_ elem/oldal",0,"_MENU_ elem/oldal"
+datatable,length_menu,,hu_HU,_MENU_ items/page,_MENU_ elem/oldal,0,_MENU_ elem/oldal
 datatable,loading_records,,hu_HU,Loading...,Betöltés...,0,Betöltés...
 datatable,next,,hu_HU,Next,Következő,0,Következő
 datatable,previous,,hu_HU,Previous,Előző,0,Előző
 datatable,processing,,hu_HU,Processing...,Feldolgozás...,0,Feldolgozás...
 datatable,search,,hu_HU,Search,Keresés,0,Keresés
-datatable,zero_records,,hu_HU,"No displayable items","Nincs megjeleníthető elem",0,"Nincs megjeleníthető elem"
-layout,admin_default.description,,hu_HU,"Single-column admin layout","Egyszerű, egyhasábos admin layout",0,"Egyszerű, egyhasábos admin layout"
-layout,admin_default.name,,hu_HU,"Admin 1-column","Adminisztráció 1 hasábos",0,"Adminisztráció 1 hasábos"
-layout,admin_empty.description,,hu_HU,"Empty admin layout","Üres admin layout",0,"Üres admin layout"
-layout,admin_empty.name,,hu_HU,"Empty admin","Adminisztráció üres",0,"Adminisztráció üres"
-layout,admin_menu.description,,hu_HU,"Displays the admin menu","Megjeleníti az admin menüt",0,"Megjeleníti az admin menüt"
-layout,admin_menu.name,,hu_HU,"Admin menu","Admin menü",0,"Admin menü"
-layout,admin_nomenu.description,,hu_HU,"Admin layout without menu","Menü nélküli admin layout",0,"Menü nélküli admin layout"
-layout,admin_nomenu.name,,hu_HU,"Admin without menu","Adminisztráció menü nélkül",0,"Adminisztráció menü nélkül"
-layout,header_right.description,,hu_HU,"Displays the quick access menu","Megjeleníti a gyorselérési menüt",0,"Megjeleníti a gyorselérési menüt"
-layout,header_right.name,,hu_HU,"Quick menu",Gyorsmenü,0,Gyorsmenü
-layout,main_menu.description,,hu_HU,"Displays the main menu","Megjeleníti a főmenüt",0,"Megjeleníti a főmenüt"
-layout,main_menu.name,,hu_HU,"Main menu",Főmenü,0,Főmenü
-layout,public_2row.description,,hu_HU,"Two-column public layout","Kéthasábos publikus layout",0,"Kéthasábos publikus layout"
-layout,public_2row.hero.balanced_life,,hu_HU,"Want to live a more balanced life?","Szeretne kiegyensúlyozottabb életet élni?",0,"Szeretne kiegyensúlyozottabb életet élni?"
-layout,public_2row.hero.better_quality_of_life,,hu_HU,"Want a better quality of life?","Szeretne jobb életminőséget?",0,"Szeretne jobb életminőséget?"
-layout,public_2row.hero.conflict_management,,hu_HU,"Want to handle conflicts better?","Szeretné konfliktusait jobban kezelni?",0,"Szeretné konfliktusait jobban kezelni?"
-layout,public_2row.hero.equal_partner,,hu_HU,"Want to be treated as an equal partner?","Szeretné, ha egyenrangú félként kezelnék Önt?",0,"Szeretné, ha egyenrangú félként kezelnék Önt?"
-layout,public_2row.hero.self_discovery,,hu_HU,"Want to understand yourself better?","Szeretné önmagát jobban megismerni?",0,"Szeretné önmagát jobban megismerni?"
-layout,public_2row.hero.solution,,hu_HU,"The solution: TeamSolution!","a megoldás: TeamSolution!",0,"a megoldás: TeamSolution!"
-layout,public_2row.hero.success_and_happiness,,hu_HU,"Want to be successful and happy?","Szeretne sikeres és boldog lenni?",0,"Szeretne sikeres és boldog lenni?"
-layout,public_2row.name,,hu_HU,2-column,"2 hasábos",0,"2 hasábos"
-layout,public_default.description,,hu_HU,"Single-column public layout","Egyszerű, egyhasábos publikus layout",0,"Egyszerű, egyhasábos publikus layout"
-layout,public_default.name,,hu_HU,1-column,"1 hasábos",0,"1 hasábos"
-layout,public_empty.description,,hu_HU,"Empty layout for simple responses","Üres layout egyszerű válaszokhoz",0,"Üres layout egyszerű válaszokhoz"
+datatable,zero_records,,hu_HU,No displayable items,Nincs megjeleníthető elem,0,Nincs megjeleníthető elem
+layout,admin_default.description,,hu_HU,Single-column admin layout,"Egyszerű, egyhasábos admin layout",0,"Egyszerű, egyhasábos admin layout"
+layout,admin_default.name,,hu_HU,Admin 1-column,Adminisztráció 1 hasábos,0,Adminisztráció 1 hasábos
+layout,admin_empty.description,,hu_HU,Empty admin layout,Üres admin layout,0,Üres admin layout
+layout,admin_empty.name,,hu_HU,Empty admin,Adminisztráció üres,0,Adminisztráció üres
+layout,admin_menu.description,,hu_HU,Displays the admin menu,Megjeleníti az admin menüt,0,Megjeleníti az admin menüt
+layout,admin_menu.name,,hu_HU,Admin menu,Admin menü,0,Admin menü
+layout,admin_nomenu.description,,hu_HU,Admin layout without menu,Menü nélküli admin layout,0,Menü nélküli admin layout
+layout,admin_nomenu.name,,hu_HU,Admin without menu,Adminisztráció menü nélkül,0,Adminisztráció menü nélkül
+layout,header_right.description,,hu_HU,Displays the quick access menu,Megjeleníti a gyorselérési menüt,0,Megjeleníti a gyorselérési menüt
+layout,header_right.name,,hu_HU,Quick menu,Gyorsmenü,0,Gyorsmenü
+layout,main_menu.description,,hu_HU,Displays the main menu,Megjeleníti a főmenüt,0,Megjeleníti a főmenüt
+layout,main_menu.name,,hu_HU,Main menu,Főmenü,0,Főmenü
+layout,public_2row.description,,hu_HU,Two-column public layout,Kéthasábos publikus layout,0,Kéthasábos publikus layout
+layout,public_2row.hero.balanced_life,,hu_HU,Want to live a more balanced life?,Szeretne kiegyensúlyozottabb életet élni?,0,Szeretne kiegyensúlyozottabb életet élni?
+layout,public_2row.hero.better_quality_of_life,,hu_HU,Want a better quality of life?,Szeretne jobb életminőséget?,0,Szeretne jobb életminőséget?
+layout,public_2row.hero.conflict_management,,hu_HU,Want to handle conflicts better?,Szeretné konfliktusait jobban kezelni?,0,Szeretné konfliktusait jobban kezelni?
+layout,public_2row.hero.equal_partner,,hu_HU,Want to be treated as an equal partner?,"Szeretné, ha egyenrangú félként kezelnék Önt?",0,"Szeretné, ha egyenrangú félként kezelnék Önt?"
+layout,public_2row.hero.self_discovery,,hu_HU,Want to understand yourself better?,Szeretné önmagát jobban megismerni?,0,Szeretné önmagát jobban megismerni?
+layout,public_2row.hero.solution,,hu_HU,The solution: TeamSolution!,a megoldás: TeamSolution!,0,a megoldás: TeamSolution!
+layout,public_2row.hero.success_and_happiness,,hu_HU,Want to be successful and happy?,Szeretne sikeres és boldog lenni?,0,Szeretne sikeres és boldog lenni?
+layout,public_2row.name,,hu_HU,2-column,2 hasábos,0,2 hasábos
+layout,public_default.description,,hu_HU,Single-column public layout,"Egyszerű, egyhasábos publikus layout",0,"Egyszerű, egyhasábos publikus layout"
+layout,public_default.name,,hu_HU,1-column,1 hasábos,0,1 hasábos
+layout,public_empty.description,,hu_HU,Empty layout for simple responses,Üres layout egyszerű válaszokhoz,0,Üres layout egyszerű válaszokhoz
 layout,public_empty.name,,hu_HU,Empty,Üres,0,Üres
-layout,public_login.description,,hu_HU,"Login layout","Belépő layout",0,"Belépő layout"
+layout,public_login.description,,hu_HU,Login layout,Belépő layout,0,Belépő layout
 layout,public_login.name,,hu_HU,Login,Belépés,0,Belépés
-layout,public_preview.description,,hu_HU,"Preview layout","Előnézeti layout",0,"Előnézeti layout"
+layout,public_preview.description,,hu_HU,Preview layout,Előnézeti layout,0,Előnézeti layout
 layout,public_preview.name,,hu_HU,Preview,Előnézet,0,Előnézet
-layout,top_menu_admin.description,,hu_HU,"Displays the admin top menu","Megjeleníti az admin felső menüt",0,"Megjeleníti az admin felső menüt"
-layout,top_menu_admin.name,,hu_HU,"Admin top menu","Admin felső menü",0,"Admin felső menü"
-layout,unknown.description,,hu_HU,"Layout not configured","A layout nincs beállítva",0,"A layout nincs beállítva"
-layout,unknown.name,,hu_HU,"Unknown layout","Nem beállított layout",0,"Nem beállított layout"
-layout,widget_previewer.description,,hu_HU,"Minimal layout for widget previews","Minimális layout a widget előnézetekhez",0,"Minimális layout a widget előnézetekhez"
-layout,widget_previewer.name,,hu_HU,"Widget previewer","Widget előnézet",0,"Widget előnézet"
+layout,top_menu_admin.description,,hu_HU,Displays the admin top menu,Megjeleníti az admin felső menüt,0,Megjeleníti az admin felső menüt
+layout,top_menu_admin.name,,hu_HU,Admin top menu,Admin felső menü,0,Admin felső menü
+layout,unknown.description,,hu_HU,Layout not configured,A layout nincs beállítva,0,A layout nincs beállítva
+layout,unknown.name,,hu_HU,Unknown layout,Nem beállított layout,0,Nem beállított layout
+layout,widget_previewer.description,,hu_HU,Minimal layout for widget previews,Minimális layout a widget előnézetekhez,0,Minimális layout a widget előnézetekhez
+layout,widget_previewer.name,,hu_HU,Widget previewer,Widget előnézet,0,Widget előnézet
 record_action,datasheet,,hu_HU,Datasheet,Adatlap,0,Adatlap
 record_action,versions,,hu_HU,Versions,Verziók,0,Verziók
-record_meta,created_by,,hu_HU,"Created by",Létrehozta,0,Létrehozta
-record_meta,last_modified,,hu_HU,"Last modified","Utolsó módosítás",0,"Utolsó módosítás"
-resource,new_folder,,hu_HU,"New folder","Új mappa",0,"Új mappa"
-resource,new_webpage,,hu_HU,"New webpage","Új weboldal",0,"Új weboldal"
+record_meta,created_by,,hu_HU,Created by,Létrehozta,0,Létrehozta
+record_meta,last_modified,,hu_HU,Last modified,Utolsó módosítás,0,Utolsó módosítás
+resource,new_folder,,hu_HU,New folder,Új mappa,0,Új mappa
+resource,new_webpage,,hu_HU,New webpage,Új weboldal,0,Új weboldal
 resource,properties,,hu_HU,Properties,Tulajdonságok,0,Tulajdonságok
 resource,security,,hu_HU,Security,Biztonság,0,Biztonság
-resource,upload_file,,hu_HU,"Upload file...","Fájl feltöltése...",0,"Fájl feltöltése..."
-response_error,access_denied,,hu_HU,"Access denied","Hozzáférés megtagadva",0,"Hozzáférés megtagadva"
-response_error,access_restricted,,hu_HU,"Access restricted","Hozzáférés korlátozva",0,"Hozzáférés korlátozva"
-response_error,forbidden.message,,hu_HU,"You do not have permission to access this resource.","Nincs jogosultságod ehhez az erőforráshoz.",0,"Nincs jogosultságod ehhez az erőforráshoz."
+resource,upload_file,,hu_HU,Upload file...,Fájl feltöltése...,0,Fájl feltöltése...
+response_error,access_denied,,hu_HU,Access denied,Hozzáférés megtagadva,0,Hozzáférés megtagadva
+response_error,access_restricted,,hu_HU,Access restricted,Hozzáférés korlátozva,0,Hozzáférés korlátozva
+response_error,forbidden.message,,hu_HU,You do not have permission to access this resource.,Nincs jogosultságod ehhez az erőforráshoz.,0,Nincs jogosultságod ehhez az erőforráshoz.
 response_error,forbidden.title,,hu_HU,Forbidden,Tiltott,0,Tiltott
 response_error,internal.contact_support,,hu_HU,"If the problem persists, please contact our support team.","Ha a probléma továbbra is fennáll, kérlek lépj kapcsolatba az ügyfélszolgálatunkkal.",0,"Ha a probléma továbbra is fennáll, kérlek lépj kapcsolatba az ügyfélszolgálatunkkal."
-response_error,internal.go_back_previous_page,,hu_HU,"Go back to the previous page using your browser's back button","Térj vissza az előző oldalra a böngésző vissza gombjával",0,"Térj vissza az előző oldalra a böngésző vissza gombjával"
-response_error,internal.intro,,hu_HU,"We apologize for the inconvenience. Our team has been notified and we are working to fix this issue.","Elnézést kérünk a kellemetlenségért. A csapatunk értesítést kapott, és dolgozunk a hiba elhárításán.",0,"Elnézést kérünk a kellemetlenségért. A csapatunk értesítést kapott, és dolgozunk a hiba elhárításán."
+response_error,internal.go_back_previous_page,,hu_HU,Go back to the previous page using your browser's back button,Térj vissza az előző oldalra a böngésző vissza gombjával,0,Térj vissza az előző oldalra a böngésző vissza gombjával
+response_error,internal.intro,,hu_HU,We apologize for the inconvenience. Our team has been notified and we are working to fix this issue.,"Elnézést kérünk a kellemetlenségért. A csapatunk értesítést kapott, és dolgozunk a hiba elhárításán.",0,"Elnézést kérünk a kellemetlenségért. A csapatunk értesítést kapott, és dolgozunk a hiba elhárításán."
 response_error,internal.reference_label,,hu_HU,Reference,Hivatkozás,0,Hivatkozás
-response_error,internal.refresh_page,,hu_HU,"Refresh this page","Frissítsd ezt az oldalt",0,"Frissítsd ezt az oldalt"
-response_error,internal.title,,hu_HU,"Oops! Something went wrong on our end.","Hoppá! Nálunk valami hiba történt.",0,"Hoppá! Nálunk valami hiba történt."
-response_error,internal.try_actions,,hu_HU,"You can try to:","A következőket próbálhatod meg:",0,"A következőket próbálhatod meg:"
-response_error,internal.try_again_in_a_few_minutes,,hu_HU,"Try again in a few minutes","Próbáld újra néhány perc múlva",0,"Próbáld újra néhány perc múlva"
-selection,delete_invalid_entry_confirm,,hu_HU,"Are you sure you want to delete this invalid entry?","Biztosan törölni szeretnéd ezt a hibás bejegyzést?",0,"Biztosan törölni szeretnéd ezt a hibás bejegyzést?"
-selection,delete_selected,,hu_HU,"Delete selected","Kijelöltek törlése",0,"Kijelöltek törlése"
-selection,delete_selected_confirm,,hu_HU,"Are you sure you want to delete all selected items?","Biztosan törölni akarod az összes kijelölt elemet?",0,"Biztosan törölni akarod az összes kijelölt elemet?"
-selection,group,,hu_HU,"Group selection","Csoportos kijelölés",0,"Csoportos kijelölés"
-selection,invalid_entry,,hu_HU,"Invalid entry","Hibás bejegyzés",0,"Hibás bejegyzés"
-selection,multiple,,hu_HU,"Multiple selection","Csoportos kijelölés",0,"Csoportos kijelölés"
-selection,selected_items,,hu_HU,"Selected items","Kijelölt elemek",0,"Kijelölt elemek"
-social,disqus.comments_link,,hu_HU,"Disqus comments","Disqus hozzászólások",0,"Disqus hozzászólások"
-social,disqus.enable_javascript,,hu_HU,"JavaScript must be enabled to display","A megjelenítéshez engedélyezni kell a JavaScriptet",0,"A megjelenítéshez engedélyezni kell a JavaScriptet"
-social,disqus.powered_by,,hu_HU,"comments powered by","hozzászólások motorja:",0,"hozzászólások motorja:"
-system_message,default_header,,hu_HU,"System message",Rendszerüzenet,0,Rendszerüzenet
-theme,error.description,,hu_HU,"Fallback error theme","Tartalék hibatéma",0,"Tartalék hibatéma"
+response_error,internal.refresh_page,,hu_HU,Refresh this page,Frissítsd ezt az oldalt,0,Frissítsd ezt az oldalt
+response_error,internal.title,,hu_HU,Oops! Something went wrong on our end.,Hoppá! Nálunk valami hiba történt.,0,Hoppá! Nálunk valami hiba történt.
+response_error,internal.try_actions,,hu_HU,You can try to:,A következőket próbálhatod meg:,0,A következőket próbálhatod meg:
+response_error,internal.try_again_in_a_few_minutes,,hu_HU,Try again in a few minutes,Próbáld újra néhány perc múlva,0,Próbáld újra néhány perc múlva
+selection,delete_invalid_entry_confirm,,hu_HU,Are you sure you want to delete this invalid entry?,Biztosan törölni szeretnéd ezt a hibás bejegyzést?,0,Biztosan törölni szeretnéd ezt a hibás bejegyzést?
+selection,delete_selected,,hu_HU,Delete selected,Kijelöltek törlése,0,Kijelöltek törlése
+selection,delete_selected_confirm,,hu_HU,Are you sure you want to delete all selected items?,Biztosan törölni akarod az összes kijelölt elemet?,0,Biztosan törölni akarod az összes kijelölt elemet?
+selection,group,,hu_HU,Group selection,Csoportos kijelölés,0,Csoportos kijelölés
+selection,invalid_entry,,hu_HU,Invalid entry,Hibás bejegyzés,0,Hibás bejegyzés
+selection,multiple,,hu_HU,Multiple selection,Csoportos kijelölés,0,Csoportos kijelölés
+selection,selected_items,,hu_HU,Selected items,Kijelölt elemek,0,Kijelölt elemek
+social,disqus.comments_link,,hu_HU,Disqus comments,Disqus hozzászólások,0,Disqus hozzászólások
+social,disqus.enable_javascript,,hu_HU,JavaScript must be enabled to display,A megjelenítéshez engedélyezni kell a JavaScriptet,0,A megjelenítéshez engedélyezni kell a JavaScriptet
+social,disqus.powered_by,,hu_HU,comments powered by,hozzászólások motorja:,0,hozzászólások motorja:
+system_message,default_header,,hu_HU,System message,Rendszerüzenet,0,Rendszerüzenet
+theme,error.description,,hu_HU,Fallback error theme,Tartalék hibatéma,0,Tartalék hibatéma
 theme,error.name,,hu_HU,Error,Hiba,0,Hiba
-theme,radaptor_portal_admin.description,,hu_HU,"Bootstrap 5 admin theme with portal neon/glass styling","Bootstrap 5 admin téma portál neon/glass megjelenéssel",0,"Bootstrap 5 admin téma portál neon/glass megjelenéssel"
+theme,radaptor_portal_admin.description,,hu_HU,Bootstrap 5 admin theme with portal neon/glass styling,Bootstrap 5 admin téma portál neon/glass megjelenéssel,0,Bootstrap 5 admin téma portál neon/glass megjelenéssel
 theme,radaptor_portal_admin.name,,hu_HU,RadaptorPortalAdmin,RadaptorPortalAdmin,0,RadaptorPortalAdmin
-theme,so_admin.description,,hu_HU,"SO-like admin theme","SO-szerű admin téma",0,"SO-szerű admin téma"
+theme,so_admin.description,,hu_HU,SO-like admin theme,SO-szerű admin téma,0,SO-szerű admin téma
 theme,so_admin.name,,hu_HU,SO-Admin,SO-Admin,0,SO-Admin
-theme,tracker.description,,hu_HU,"With time tracker",Időmérővel,0,Időmérővel
-theme,tracker.name,,hu_HU,Tracker,Tracker,0,Tracker
-widget,admin_menu.description,,hu_HU,"Manage the admin menu tree","Az admin menü fa szerkesztése",0,"Az admin menü fa szerkesztése"
-widget,admin_menu.name,,hu_HU,"Admin menu administration","Admin menü adminisztráció",0,"Admin menü adminisztráció"
-widget,blog_list.description,,hu_HU,"Blog list","Blog lista",0,"Blog lista"
-widget,blog_list.name,,hu_HU,"Blog list","Blog lista",0,"Blog lista"
+widget,admin_menu.description,,hu_HU,Manage the admin menu tree,Az admin menü fa szerkesztése,0,Az admin menü fa szerkesztése
+widget,admin_menu.name,,hu_HU,Admin menu administration,Admin menü adminisztráció,0,Admin menü adminisztráció
+widget,blog_list.description,,hu_HU,Blog list,Blog lista,0,Blog lista
+widget,blog_list.name,,hu_HU,Blog list,Blog lista,0,Blog lista
 widget,blog.description,,hu_HU,Blog,Blog,0,Blog
 widget,blog.name,,hu_HU,Blog,Blog,0,Blog
-widget,company_description.description,,hu_HU,"Company datasheet","Cég adatlap",0,"Cég adatlap"
-widget,company_description.name,,hu_HU,"Company datasheet","Cég adatlap",0,"Cég adatlap"
-widget,company_list.description,,hu_HU,"Company list","Cég lista",0,"Cég lista"
-widget,company_list.name,,hu_HU,"Company list","Cég lista",0,"Cég lista"
-widget,contact_person_description.description,,hu_HU,"Contact person datasheet","Kapcsolattartó adatlap",0,"Kapcsolattartó adatlap"
-widget,contact_person_description.name,,hu_HU,"Contact person datasheet","Kapcsolattartó adatlap",0,"Kapcsolattartó adatlap"
-widget,contact_person_list.description,,hu_HU,"Contact person list","Kapcsolattartó lista",0,"Kapcsolattartó lista"
-widget,contact_person_list.name,,hu_HU,"Contact person list","Kapcsolattartó lista",0,"Kapcsolattartó lista"
-widget,file_upload.description,,hu_HU,"File upload","Fájl feltöltés",0,"Fájl feltöltés"
-widget,file_upload.name,,hu_HU,"File upload","Fájl feltöltés",0,"Fájl feltöltés"
-widget,form.description,,hu_HU,"Displays a configured form","Beállított űrlapot jelenít meg",0,"Beállított űrlapot jelenít meg"
+widget,file_upload.description,,hu_HU,File upload,Fájl feltöltés,0,Fájl feltöltés
+widget,file_upload.name,,hu_HU,File upload,Fájl feltöltés,0,Fájl feltöltés
+widget,form.description,,hu_HU,Displays a configured form,Beállított űrlapot jelenít meg,0,Beállított űrlapot jelenít meg
 widget,form.name,,hu_HU,Form,Űrlap,0,Űrlap
-widget,group_beginning.description,,hu_HU,"Separately managed content unit that can contain jointly styled elements.","Külön kezelt tartalmi egység, ami egyben formázható elemeket tartalmazhat.",0,"Külön kezelt tartalmi egység, ami egyben formázható elemeket tartalmazhat."
-widget,group_beginning.name,,hu_HU,"Content block","Tartalom blokk",0,"Tartalom blokk"
-widget,group_end.description,,hu_HU,"End of a separately managed content unit.","Külön kezelt tartalmi egység vége.",0,"Külön kezelt tartalmi egység vége."
-widget,group_end.name,,hu_HU,"End of content block","Tartalom blokk vége",0,"Tartalom blokk vége"
-widget,import_export.description,,hu_HU,"Central CSV import and export tools","Központi CSV import és export eszközök",0,"Központi CSV import és export eszközök"
-widget,import_export.name,,hu_HU,"Import / Export","Import / Export",0,"Import / Export"
-widget,js_tree.description,,hu_HU,"Displays and manages a hierarchical tree of admin resources","Megjeleníti és kezeli az adminisztrálható erőforrások hierarchikus fáját",0,"Megjeleníti és kezeli az adminisztrálható erőforrások hierarchikus fáját"
-widget,js_tree.name,,hu_HU,"Tree browser","Fastruktúra böngésző",0,"Fastruktúra böngésző"
-widget,js_tree.settings,,hu_HU,"Tree settings","Fa beállítások",0,"Fa beállítások"
-widget,main_menu.description,,hu_HU,"Manage the main menu tree","A főmenü fa szerkesztése",0,"A főmenü fa szerkesztése"
-widget,main_menu.name,,hu_HU,"Main menu administration","Főmenü adminisztráció",0,"Főmenü adminisztráció"
-widget,plain_html.description,,hu_HU,"HTML code (embed)","HTML kód (beágyazás)",0,"HTML kód (beágyazás)"
-widget,plain_html.name,,hu_HU,"HTML code (embed)","HTML kód (beágyazás)",0,"HTML kód (beágyazás)"
-widget,project_list.description,,hu_HU,"Project list","Projekt lista",0,"Projekt lista"
-widget,project_list.name,,hu_HU,"Project list","Projekt lista",0,"Projekt lista"
-widget,project_state_list.description,,hu_HU,"Project status list","Projekt állapot lista",0,"Projekt állapot lista"
-widget,project_state_list.name,,hu_HU,"Project status list","Projekt állapot lista",0,"Projekt állapot lista"
-widget,resource_acl_selector.description,,hu_HU,"Configure resource access permissions","Erőforrás-hozzáférési jogosultságok beállítása",0,"Erőforrás-hozzáférési jogosultságok beállítása"
-widget,resource_acl_selector.name,,hu_HU,"Resource access settings","Weboldal hozzáférési beállítások",0,"Weboldal hozzáférési beállítások"
+widget,group_beginning.description,,hu_HU,Separately managed content unit that can contain jointly styled elements.,"Külön kezelt tartalmi egység, ami egyben formázható elemeket tartalmazhat.",0,"Külön kezelt tartalmi egység, ami egyben formázható elemeket tartalmazhat."
+widget,group_beginning.name,,hu_HU,Content block,Tartalom blokk,0,Tartalom blokk
+widget,group_end.description,,hu_HU,End of a separately managed content unit.,Külön kezelt tartalmi egység vége.,0,Külön kezelt tartalmi egység vége.
+widget,group_end.name,,hu_HU,End of content block,Tartalom blokk vége,0,Tartalom blokk vége
+widget,import_export.description,,hu_HU,Central CSV import and export tools,Központi CSV import és export eszközök,0,Központi CSV import és export eszközök
+widget,import_export.name,,hu_HU,Import / Export,Import / Export,0,Import / Export
+widget,js_tree.description,,hu_HU,Displays and manages a hierarchical tree of admin resources,Megjeleníti és kezeli az adminisztrálható erőforrások hierarchikus fáját,0,Megjeleníti és kezeli az adminisztrálható erőforrások hierarchikus fáját
+widget,js_tree.name,,hu_HU,Tree browser,Fastruktúra böngésző,0,Fastruktúra böngésző
+widget,js_tree.settings,,hu_HU,Tree settings,Fa beállítások,0,Fa beállítások
+widget,main_menu.description,,hu_HU,Manage the main menu tree,A főmenü fa szerkesztése,0,A főmenü fa szerkesztése
+widget,main_menu.name,,hu_HU,Main menu administration,Főmenü adminisztráció,0,Főmenü adminisztráció
+widget,plain_html.description,,hu_HU,HTML code (embed),HTML kód (beágyazás),0,HTML kód (beágyazás)
+widget,plain_html.name,,hu_HU,HTML code (embed),HTML kód (beágyazás),0,HTML kód (beágyazás)
+widget,resource_acl_selector.description,,hu_HU,Configure resource access permissions,Erőforrás-hozzáférési jogosultságok beállítása,0,Erőforrás-hozzáférési jogosultságok beállítása
+widget,resource_acl_selector.name,,hu_HU,Resource access settings,Weboldal hozzáférési beállítások,0,Weboldal hozzáférési beállítások
 widget,resource_tree.description,,hu_HU,"Manage webpages, web folders, and uploaded files here.","Itt kezelhetőek a weboldalak, webes alkönyvtárak és a feltöltött fájlok.",0,"Itt kezelhetőek a weboldalak, webes alkönyvtárak és a feltöltött fájlok."
-widget,resource_tree.name,,hu_HU,"Webpage structure","Weboldal szerkezet",0,"Weboldal szerkezet"
-widget,rich_text.description,,hu_HU,"Freely editable text with images","Szabadon szerkeszthető szöveg, képekkel",0,"Szabadon szerkeszthető szöveg, képekkel"
-widget,rich_text.name,,hu_HU,"Editable text","Szerkeszthető szöveg",0,"Szerkeszthető szöveg"
-widget,role_list.description,,hu_HU,"Displays the role tree","Felhasználói szerepek megjelenítése",0,"Felhasználói szerepek megjelenítése"
-widget,role_list.name,,hu_HU,"Role list","Felhasználói szerep lista",0,"Felhasználói szerep lista"
-widget,role_selector.description,,hu_HU,"Role selector","Szerep választó",0,"Szerep választó"
-widget,role_selector.name,,hu_HU,"Role selector","Szerep választó",0,"Szerep választó"
-widget,tag_list.description,,hu_HU,"Tag list","Címke lista",0,"Címke lista"
-widget,tag_list.name,,hu_HU,"Tag list","Címke lista",0,"Címke lista"
-widget,ticket_description.description,,hu_HU,"Ticket details","Jegy részletek",0,"Jegy részletek"
-widget,ticket_description.name,,hu_HU,"Ticket details","Jegy részletek",0,"Jegy részletek"
-widget,ticket_list.description,,hu_HU,"Ticket list","Jegy lista",0,"Jegy lista"
-widget,ticket_list.name,,hu_HU,"Ticket list","Jegy lista",0,"Jegy lista"
-widget,ticket_priority_list.description,,hu_HU,"Ticket priorities","Jegy prioritások",0,"Jegy prioritások"
-widget,ticket_priority_list.name,,hu_HU,"Ticket priorities","Jegy prioritások",0,"Jegy prioritások"
-widget,ticket_state_list.description,,hu_HU,"Ticket statuses","Jegy állapotok",0,"Jegy állapotok"
-widget,ticket_state_list.name,,hu_HU,"Ticket statuses","Jegy állapotok",0,"Jegy állapotok"
-widget,ticket_type_list.description,,hu_HU,"Ticket types","Jegy típusok",0,"Jegy típusok"
-widget,ticket_type_list.name,,hu_HU,"Ticket types","Jegy típusok",0,"Jegy típusok"
-widget,time_tracker_list.description,,hu_HU,"Time tracking","Idő bejegyzés lista",0,"Idő bejegyzés lista"
-widget,time_tracker_list.name,,hu_HU,"Time tracking","Idő bejegyzés lista",0,"Idő bejegyzés lista"
-widget,user_description.description,,hu_HU,"Displays the details of a user","Egy felhasználó részletes adatainak megjelenítése",0,"Egy felhasználó részletes adatainak megjelenítése"
-widget,user_description.name,,hu_HU,"User details","Felhasználó részletes leírás",0,"Felhasználó részletes leírás"
-widget,user_list.description,,hu_HU,"User list","Felhasználó lista",0,"Felhasználó lista"
-widget,user_list.name,,hu_HU,"User list","Felhasználó lista",0,"Felhasználó lista"
-widget,usergroup_list.description,,hu_HU,"Displays the user group tree","Felhasználói csoportok megjelenítése",0,"Felhasználói csoportok megjelenítése"
-widget,usergroup_list.name,,hu_HU,"User group list","Felhasználói csoport lista",0,"Felhasználói csoport lista"
-widget,usergroup_selector.description,,hu_HU,"Select user groups for a user","Felhasználói csoportok kiválasztása egy felhasználóhoz",0,"Felhasználói csoportok kiválasztása egy felhasználóhoz"
-widget,usergroup_selector.name,,hu_HU,"User group selector","Felhasználói csoport választó",0,"Felhasználói csoport választó"
-widget,widget_error.description,,hu_HU,"Invalid widget","Hibás widget",0,"Hibás widget"
-widget,widget_error.invalid_type,,hu_HU,"Non-existent content type: {type}","Nem létező tartalom típus: {type}",0,"Nem létező tartalom típus: {type}"
-widget,widget_error.name,,hu_HU,"Invalid widget","Hibás widget",0,"Hibás widget"
+widget,resource_tree.name,,hu_HU,Webpage structure,Weboldal szerkezet,0,Weboldal szerkezet
+widget,rich_text.description,,hu_HU,Freely editable text with images,"Szabadon szerkeszthető szöveg, képekkel",0,"Szabadon szerkeszthető szöveg, képekkel"
+widget,rich_text.name,,hu_HU,Editable text,Szerkeszthető szöveg,0,Szerkeszthető szöveg
+widget,role_list.description,,hu_HU,Displays the role tree,Felhasználói szerepek megjelenítése,0,Felhasználói szerepek megjelenítése
+widget,role_list.name,,hu_HU,Role list,Felhasználói szerep lista,0,Felhasználói szerep lista
+widget,role_selector.description,,hu_HU,Role selector,Szerep választó,0,Szerep választó
+widget,role_selector.name,,hu_HU,Role selector,Szerep választó,0,Szerep választó
+widget,tag_list.description,,hu_HU,Tag list,Címke lista,0,Címke lista
+widget,tag_list.name,,hu_HU,Tag list,Címke lista,0,Címke lista
+widget,user_description.description,,hu_HU,Displays the details of a user,Egy felhasználó részletes adatainak megjelenítése,0,Egy felhasználó részletes adatainak megjelenítése
+widget,user_description.name,,hu_HU,User details,Felhasználó részletes leírás,0,Felhasználó részletes leírás
+widget,user_list.description,,hu_HU,User list,Felhasználó lista,0,Felhasználó lista
+widget,user_list.name,,hu_HU,User list,Felhasználó lista,0,Felhasználó lista
+widget,usergroup_list.description,,hu_HU,Displays the user group tree,Felhasználói csoportok megjelenítése,0,Felhasználói csoportok megjelenítése
+widget,usergroup_list.name,,hu_HU,User group list,Felhasználói csoport lista,0,Felhasználói csoport lista
+widget,usergroup_selector.description,,hu_HU,Select user groups for a user,Felhasználói csoportok kiválasztása egy felhasználóhoz,0,Felhasználói csoportok kiválasztása egy felhasználóhoz
+widget,usergroup_selector.name,,hu_HU,User group selector,Felhasználói csoport választó,0,Felhasználói csoport választó
+widget,widget_error.description,,hu_HU,Invalid widget,Hibás widget,0,Hibás widget
+widget,widget_error.invalid_type,,hu_HU,Non-existent content type: {type},Nem létező tartalom típus: {type},0,Nem létező tartalom típus: {type}
+widget,widget_error.name,,hu_HU,Invalid widget,Hibás widget,0,Hibás widget
 widget,widget_preview.description,,hu_HU,"Preview any widget with mock data. URL params: widget (required), theme (optional)","Bármely widget előnézete mintaadatokkal. URL paraméterek: widget (kötelező), theme (opcionális)",0,"Bármely widget előnézete mintaadatokkal. URL paraméterek: widget (kötelező), theme (opcionális)"
-widget,widget_preview.name,,hu_HU,"Widget preview","Widget előnézet",0,"Widget előnézet"
+widget,widget_preview.name,,hu_HU,Widget preview,Widget előnézet,0,Widget előnézet
 workbench,tm_apply,,hu_HU,Apply,Alkalmaz,0,Alkalmaz
-workbench,tm_no_results,,hu_HU,"No suggestions","Nincsenek javaslatok",0,"Nincsenek javaslatok"
+workbench,tm_no_results,,hu_HU,No suggestions,Nincsenek javaslatok,0,Nincsenek javaslatok
 workbench,tm_uses,,hu_HU,uses,használat,0,használat

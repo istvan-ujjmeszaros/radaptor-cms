@@ -7,317 +7,317 @@ admin,i18n.col.status,,zh_Hans_CN,Status,状态,0,状态
 admin,i18n.col.translation,,zh_Hans_CN,Translation,翻译,0,翻译
 admin,i18n.domain,,zh_Hans_CN,Domain,域,0,域
 admin,i18n.locale,,zh_Hans_CN,Locale,语言,0,语言
-admin,i18n.search_placeholder,,zh_Hans_CN,"Search source or translation",搜索源文本或翻译,0,搜索源文本或翻译
+admin,i18n.search_placeholder,,zh_Hans_CN,Search source or translation,搜索源文本或翻译,0,搜索源文本或翻译
 admin,i18n.status,,zh_Hans_CN,Status,状态,0,状态
-admin,i18n.status.ai_generated,,zh_Hans_CN,AI-generated,"AI 生成",0,"AI 生成"
+admin,i18n.status.ai_generated,,zh_Hans_CN,AI-generated,AI 生成,0,AI 生成
 admin,i18n.status.approved,,zh_Hans_CN,Approved,已审批,0,已审批
 admin,i18n.status.missing,,zh_Hans_CN,Missing,缺失,0,缺失
-admin,i18n.status.needs_review,,zh_Hans_CN,"Needs review",需要审核,0,需要审核
+admin,i18n.status.needs_review,,zh_Hans_CN,Needs review,需要审核,0,需要审核
 admin,i18n.status.translated,,zh_Hans_CN,Translated,已翻译,0,已翻译
-admin,i18n.title,,zh_Hans_CN,"Translation workbench",翻译工作台,0,翻译工作台
-admin,i18n.tm.exact_match_only,,zh_Hans_CN,"Exact-match suggestions only",仅精确匹配建议,0,仅精确匹配建议
-admin,i18n.tm.exact_matches,,zh_Hans_CN,"Exact matches",精确匹配,0,精确匹配
-admin,i18n.tm.exact_then_similar,,zh_Hans_CN,"Exact matches load first. Similar matches load afterwards.",精确匹配优先加载，相似匹配随后加载。,0,精确匹配优先加载，相似匹配随后加载。
-admin,i18n.tm.no_exact_matches,,zh_Hans_CN,"No exact matches",无精确匹配,0,无精确匹配
-admin,i18n.tm.no_similar_matches,,zh_Hans_CN,"No similar matches",无相似匹配,0,无相似匹配
+admin,i18n.title,,zh_Hans_CN,Translation workbench,翻译工作台,0,翻译工作台
+admin,i18n.tm.exact_match_only,,zh_Hans_CN,Exact-match suggestions only,仅精确匹配建议,0,仅精确匹配建议
+admin,i18n.tm.exact_matches,,zh_Hans_CN,Exact matches,精确匹配,0,精确匹配
+admin,i18n.tm.exact_then_similar,,zh_Hans_CN,Exact matches load first. Similar matches load afterwards.,精确匹配优先加载，相似匹配随后加载。,0,精确匹配优先加载，相似匹配随后加载。
+admin,i18n.tm.no_exact_matches,,zh_Hans_CN,No exact matches,无精确匹配,0,无精确匹配
+admin,i18n.tm.no_similar_matches,,zh_Hans_CN,No similar matches,无相似匹配,0,无相似匹配
 admin,i18n.tm.origin,,zh_Hans_CN,Origin,来源,0,来源
-admin,i18n.tm.review_placeholders,,zh_Hans_CN,"Review placeholders",检查占位符,0,检查占位符
+admin,i18n.tm.review_placeholders,,zh_Hans_CN,Review placeholders,检查占位符,0,检查占位符
 admin,i18n.tm.safe,,zh_Hans_CN,Safe,安全,0,安全
-admin,i18n.tm.similar_matches,,zh_Hans_CN,"Similar matches",相似匹配,0,相似匹配
+admin,i18n.tm.similar_matches,,zh_Hans_CN,Similar matches,相似匹配,0,相似匹配
 admin,i18n.tm.similarity,,zh_Hans_CN,Similarity,相似度,0,相似度
-admin,i18n.tm.source_example,,zh_Hans_CN,"Source example",源文本示例,0,源文本示例
-admin,i18n.tm.title,,zh_Hans_CN,"Translation memory suggestions",翻译记忆建议,0,翻译记忆建议
-admin,menu.admin_menu,,zh_Hans_CN,"Admin menu",管理员菜单,0,管理员菜单
+admin,i18n.tm.source_example,,zh_Hans_CN,Source example,源文本示例,0,源文本示例
+admin,i18n.tm.title,,zh_Hans_CN,Translation memory suggestions,翻译记忆建议,0,翻译记忆建议
+admin,menu.admin_menu,,zh_Hans_CN,Admin menu,管理员菜单,0,管理员菜单
 admin,menu.blog,,zh_Hans_CN,Blog,博客,0,博客
-admin,menu.custom_menu,,zh_Hans_CN,"Custom menu",自定义菜单,0,自定义菜单
-admin,menu.home,,zh_Hans_CN,"Admin home",管理员主页,0,管理员主页
-admin,menu.import_export,,zh_Hans_CN,"Import / Export","导入 / 导出",0,"导入 / 导出"
-admin,menu.phpinfo,,zh_Hans_CN,PHPinfo,"PHP 信息",0,"PHP 信息"
-admin,menu.resource_tree,,zh_Hans_CN,"Website structure",网站结构,0,网站结构
+admin,menu.custom_menu,,zh_Hans_CN,Custom menu,自定义菜单,0,自定义菜单
+admin,menu.home,,zh_Hans_CN,Admin home,管理员主页,0,管理员主页
+admin,menu.import_export,,zh_Hans_CN,Import / Export,导入 / 导出,0,导入 / 导出
+admin,menu.phpinfo,,zh_Hans_CN,PHPinfo,PHP 信息,0,PHP 信息
+admin,menu.resource_tree,,zh_Hans_CN,Website structure,网站结构,0,网站结构
 admin,menu.roles,,zh_Hans_CN,Roles,角色,0,角色
 admin,menu.section.administration,,zh_Hans_CN,Administration,管理,0,管理
 admin,menu.section.configuration,,zh_Hans_CN,Configuration,配置,0,配置
 admin,menu.section.content,,zh_Hans_CN,Content,内容,0,内容
-admin,menu.section.developer_tools,,zh_Hans_CN,"Developer tools",开发者工具,0,开发者工具
-admin,menu.template_engines,,zh_Hans_CN,"Template engines",模板引擎,0,模板引擎
-admin,menu.theme_selector,,zh_Hans_CN,"Theme selection",主题选择,0,主题选择
+admin,menu.section.developer_tools,,zh_Hans_CN,Developer tools,开发者工具,0,开发者工具
+admin,menu.template_engines,,zh_Hans_CN,Template engines,模板引擎,0,模板引擎
+admin,menu.theme_selector,,zh_Hans_CN,Theme selection,主题选择,0,主题选择
 admin,menu.translations,,zh_Hans_CN,Translations,翻译,0,翻译
-admin,menu.usergroups,,zh_Hans_CN,"User groups",用户组,0,用户组
-admin,menu.widget_preview,,zh_Hans_CN,"Widget preview",组件预览,0,组件预览
-cms,admin_dropdown.edit_mode,,zh_Hans_CN,"Edit mode",编辑模式,0,编辑模式
+admin,menu.usergroups,,zh_Hans_CN,User groups,用户组,0,用户组
+admin,menu.widget_preview,,zh_Hans_CN,Widget preview,组件预览,0,组件预览
+cms,admin_dropdown.edit_mode,,zh_Hans_CN,Edit mode,编辑模式,0,编辑模式
 cms,admin_dropdown.edit_mode_off,,zh_Hans_CN,off,关,0,关
 cms,admin_dropdown.edit_mode_on,,zh_Hans_CN,on,开,0,开
 cms,admin_dropdown.seo,,zh_Hans_CN,SEO,SEO,0,SEO
-cms,admin_menu.form.name,,zh_Hans_CN,"Admin menu administration",管理员菜单管理,0,管理员菜单管理
-cms,admin_menu.form.title_create,,zh_Hans_CN,"Create admin menu item",创建管理员菜单项,0,创建管理员菜单项
-cms,admin_menu.form.title_edit,,zh_Hans_CN,"Edit admin menu item",编辑管理员菜单项,0,编辑管理员菜单项
+cms,admin_menu.form.name,,zh_Hans_CN,Admin menu administration,管理员菜单管理,0,管理员菜单管理
+cms,admin_menu.form.title_create,,zh_Hans_CN,Create admin menu item,创建管理员菜单项,0,创建管理员菜单项
+cms,admin_menu.form.title_edit,,zh_Hans_CN,Edit admin menu item,编辑管理员菜单项,0,编辑管理员菜单项
 cms,edit,,zh_Hans_CN,Edit,编辑,0,编辑
-cms,edit_mode.disabled,,zh_Hans_CN,"Edit mode disabled",编辑模式已禁用,0,编辑模式已禁用
-cms,edit_mode.enabled,,zh_Hans_CN,"Edit mode enabled",编辑模式已启用,0,编辑模式已启用
-cms,edit_mode.save_error,,zh_Hans_CN,"Error: Unable to save configuration",错误：无法保存配置,0,错误：无法保存配置
-cms,error.login_page_missing,,zh_Hans_CN,"Login page not found - create it manually","未找到登录页面 - 请手动创建",0,"未找到登录页面 - 请手动创建"
-cms,file_upload.destination_path,,zh_Hans_CN,"Destination path",目标路径,0,目标路径
-cms,file_upload.unknown_destination,,zh_Hans_CN,"Unknown destination path",未知目标路径,0,未知目标路径
-cms,file.missing_ref_id,,zh_Hans_CN,"Missing file reference",文件引用缺失,0,文件引用缺失
-cms,file.upload_error,,zh_Hans_CN,"Error: File upload failed",错误：文件上传失败,0,错误：文件上传失败
-cms,file.uploaded,,zh_Hans_CN,"File uploaded",文件已上传,0,文件已上传
-cms,form.field.form_id.explanation,,zh_Hans_CN,"Select from the predefined forms",从预定义表单中选择,0,从预定义表单中选择
+cms,edit_mode.disabled,,zh_Hans_CN,Edit mode disabled,编辑模式已禁用,0,编辑模式已禁用
+cms,edit_mode.enabled,,zh_Hans_CN,Edit mode enabled,编辑模式已启用,0,编辑模式已启用
+cms,edit_mode.save_error,,zh_Hans_CN,Error: Unable to save configuration,错误：无法保存配置,0,错误：无法保存配置
+cms,error.login_page_missing,,zh_Hans_CN,Login page not found - create it manually,未找到登录页面 - 请手动创建,0,未找到登录页面 - 请手动创建
+cms,file_upload.destination_path,,zh_Hans_CN,Destination path,目标路径,0,目标路径
+cms,file_upload.unknown_destination,,zh_Hans_CN,Unknown destination path,未知目标路径,0,未知目标路径
+cms,file.missing_ref_id,,zh_Hans_CN,Missing file reference,文件引用缺失,0,文件引用缺失
+cms,file.upload_error,,zh_Hans_CN,Error: File upload failed,错误：文件上传失败,0,错误：文件上传失败
+cms,file.uploaded,,zh_Hans_CN,File uploaded,文件已上传,0,文件已上传
+cms,form.field.form_id.explanation,,zh_Hans_CN,Select from the predefined forms,从预定义表单中选择,0,从预定义表单中选择
 cms,form.field.form_id.label,,zh_Hans_CN,Form,表单,0,表单
-cms,form.missing_widget_id,,zh_Hans_CN,"Widget ID is missing","组件 ID 缺失",0,"组件 ID 缺失"
-cms,form.no_form_page_warning,,zh_Hans_CN,"Create at least one page with a blank form",创建至少一个带有空白表单的页面,0,创建至少一个带有空白表单的页面
-cms,form.no_id,,zh_Hans_CN,"No form ID given","未提供表单 ID",0,"未提供表单 ID"
-cms,form.settings_subtitle,,zh_Hans_CN,"Page: {page}",页面：{page},0,页面：{page}
+cms,form.missing_widget_id,,zh_Hans_CN,Widget ID is missing,组件 ID 缺失,0,组件 ID 缺失
+cms,form.no_form_page_warning,,zh_Hans_CN,Create at least one page with a blank form,创建至少一个带有空白表单的页面,0,创建至少一个带有空白表单的页面
+cms,form.no_id,,zh_Hans_CN,No form ID given,未提供表单 ID,0,未提供表单 ID
+cms,form.settings_subtitle,,zh_Hans_CN,Page: {page},页面：{page},0,页面：{page}
 cms,library.folder,,zh_Hans_CN,Folder,文件夹,0,文件夹
 cms,library.resource,,zh_Hans_CN,Resource,资源,0,资源
-cms,library.unknown,,zh_Hans_CN,"Unknown library",未知库,0,未知库
-cms,menu.delete_confirm,,zh_Hans_CN,"Are you sure you want to delete this menu item?",确定要删除此菜单项吗？,0,确定要删除此菜单项吗？
-cms,menu.delete_failed,,zh_Hans_CN,"Delete failed",删除失败,0,删除失败
-cms,menu.delete_forbidden,,zh_Hans_CN,"Menu item deletion is not allowed: {name}",不允许删除菜单项：{name},0,不允许删除菜单项：{name}
-cms,menu.delete_unknown_error,,zh_Hans_CN,"Error: An unknown error occurred while deleting the menu item",错误：删除菜单项时发生未知错误,0,错误：删除菜单项时发生未知错误
-cms,menu.deleted,,zh_Hans_CN,"Menu item deleted: {name}",菜单项已删除：{name},0,菜单项已删除：{name}
-cms,menu.external_link,,zh_Hans_CN,"External link",外部链接,0,外部链接
-cms,menu.field.node_name.label,,zh_Hans_CN,"Display text",显示文本,0,显示文本
-cms,menu.field.page.explanation,,zh_Hans_CN,"Select the page this menu item points to",选择此菜单项指向的页面,0,选择此菜单项指向的页面
+cms,library.unknown,,zh_Hans_CN,Unknown library,未知库,0,未知库
+cms,menu.delete_confirm,,zh_Hans_CN,Are you sure you want to delete this menu item?,确定要删除此菜单项吗？,0,确定要删除此菜单项吗？
+cms,menu.delete_failed,,zh_Hans_CN,Delete failed,删除失败,0,删除失败
+cms,menu.delete_forbidden,,zh_Hans_CN,Menu item deletion is not allowed: {name},不允许删除菜单项：{name},0,不允许删除菜单项：{name}
+cms,menu.delete_unknown_error,,zh_Hans_CN,Error: An unknown error occurred while deleting the menu item,错误：删除菜单项时发生未知错误,0,错误：删除菜单项时发生未知错误
+cms,menu.deleted,,zh_Hans_CN,Menu item deleted: {name},菜单项已删除：{name},0,菜单项已删除：{name}
+cms,menu.external_link,,zh_Hans_CN,External link,外部链接,0,外部链接
+cms,menu.field.node_name.label,,zh_Hans_CN,Display text,显示文本,0,显示文本
+cms,menu.field.page.explanation,,zh_Hans_CN,Select the page this menu item points to,选择此菜单项指向的页面,0,选择此菜单项指向的页面
 cms,menu.field.page.label,,zh_Hans_CN,Page,页面,0,页面
-cms,menu.field.type.external,,zh_Hans_CN,"Points to external page",指向外部页面,0,指向外部页面
-cms,menu.field.type.internal,,zh_Hans_CN,"Points to internal page",指向内部页面,0,指向内部页面
-cms,menu.field.type.label,,zh_Hans_CN,"Link type",链接类型,0,链接类型
-cms,menu.field.url.explanation,,zh_Hans_CN,"You can enter a custom URL (including mailto:// links)","您可以输入自定义 URL（包括 mailto:// 链接）",0,"您可以输入自定义 URL（包括 mailto:// 链接）"
-cms,menu.field.url.label,,zh_Hans_CN,"Custom URL","自定义 URL",0,"自定义 URL"
-cms,menu.form.name,,zh_Hans_CN,"Main menu item",主菜单项,0,主菜单项
-cms,menu.form.title_create,,zh_Hans_CN,"Create menu item",创建菜单项,0,创建菜单项
-cms,menu.form.title_edit,,zh_Hans_CN,"Edit menu item",编辑菜单项,0,编辑菜单项
-cms,menu.internal_link,,zh_Hans_CN,"Internal link",内部链接,0,内部链接
-cms,menu.move_error,,zh_Hans_CN,"Error: Unable to move menu item",错误：无法移动菜单项,0,错误：无法移动菜单项
-cms,menu.move_success,,zh_Hans_CN,"Menu item moved: {name}",菜单项已移动：{name},0,菜单项已移动：{name}
-cms,menu.new_child,,zh_Hans_CN,"New submenu item",新子菜单项,0,新子菜单项
-cms,menu.new_item,,zh_Hans_CN,"New menu item",新菜单项,0,新菜单项
-cms,menu.no_link_configured,,zh_Hans_CN,"No link configured",未配置链接,0,未配置链接
-cms,menu.root,,zh_Hans_CN,"Main menu",主菜单,0,主菜单
-cms,menu.saved,,zh_Hans_CN,"Menu item saved",菜单项已保存,0,菜单项已保存
+cms,menu.field.type.external,,zh_Hans_CN,Points to external page,指向外部页面,0,指向外部页面
+cms,menu.field.type.internal,,zh_Hans_CN,Points to internal page,指向内部页面,0,指向内部页面
+cms,menu.field.type.label,,zh_Hans_CN,Link type,链接类型,0,链接类型
+cms,menu.field.url.explanation,,zh_Hans_CN,You can enter a custom URL (including mailto:// links),您可以输入自定义 URL（包括 mailto:// 链接）,0,您可以输入自定义 URL（包括 mailto:// 链接）
+cms,menu.field.url.label,,zh_Hans_CN,Custom URL,自定义 URL,0,自定义 URL
+cms,menu.form.name,,zh_Hans_CN,Main menu item,主菜单项,0,主菜单项
+cms,menu.form.title_create,,zh_Hans_CN,Create menu item,创建菜单项,0,创建菜单项
+cms,menu.form.title_edit,,zh_Hans_CN,Edit menu item,编辑菜单项,0,编辑菜单项
+cms,menu.internal_link,,zh_Hans_CN,Internal link,内部链接,0,内部链接
+cms,menu.move_error,,zh_Hans_CN,Error: Unable to move menu item,错误：无法移动菜单项,0,错误：无法移动菜单项
+cms,menu.move_success,,zh_Hans_CN,Menu item moved: {name},菜单项已移动：{name},0,菜单项已移动：{name}
+cms,menu.new_child,,zh_Hans_CN,New submenu item,新子菜单项,0,新子菜单项
+cms,menu.new_item,,zh_Hans_CN,New menu item,新菜单项,0,新菜单项
+cms,menu.no_link_configured,,zh_Hans_CN,No link configured,未配置链接,0,未配置链接
+cms,menu.root,,zh_Hans_CN,Main menu,主菜单,0,主菜单
+cms,menu.saved,,zh_Hans_CN,Menu item saved,菜单项已保存,0,菜单项已保存
 cms,menu.selection_help,,zh_Hans_CN,"Select a menu item to edit it, or create a new one.",选择菜单项进行编辑，或创建新菜单项。,0,选择菜单项进行编辑，或创建新菜单项。
-cms,menu.updated,,zh_Hans_CN,"Menu item updated",菜单项已更新,0,菜单项已更新
-cms,menu.validation.node_name_max_length,,zh_Hans_CN,"Display text must not exceed 255 characters","显示文本不得超过 255 个字符",0,"显示文本不得超过 255 个字符"
-cms,menu.validation.type_required,,zh_Hans_CN,"Choose whether the link points to an internal or external page",选择链接指向内部页面还是外部页面,0,选择链接指向内部页面还是外部页面
-cms,menu.validation.url_max_length,,zh_Hans_CN,"URL must not exceed 255 characters","URL 不得超过 255 个字符",0,"URL 不得超过 255 个字符"
-cms,menu.validation.url_required,,zh_Hans_CN,"Select a page or enter a URL","选择页面或输入 URL",0,"选择页面或输入 URL"
-cms,plainhtml.field.content.explanation,,zh_Hans_CN,"The HTML code you enter will appear on the website without modifications.","您输入的 HTML 代码将原样显示在网站上。",0,"您输入的 HTML 代码将原样显示在网站上。"
-cms,plainhtml.field.content.label,,zh_Hans_CN,"HTML code","HTML 代码",0,"HTML 代码"
-cms,plainhtml.form.name,,zh_Hans_CN,"HTML code (embed)","HTML 代码（嵌入）",0,"HTML 代码（嵌入）"
-cms,plainhtml.form.title,,zh_Hans_CN,"Edit HTML content","编辑 HTML 内容",0,"编辑 HTML 内容"
-cms,plainhtml.not_set,,zh_Hans_CN,"Configure the content",配置内容,0,配置内容
-cms,resource_acl.acl_not_found,,zh_Hans_CN,"ACL entry not found: {id}","未找到 ACL 条目：{id}",0,"未找到 ACL 条目：{id}"
+cms,menu.updated,,zh_Hans_CN,Menu item updated,菜单项已更新,0,菜单项已更新
+cms,menu.validation.node_name_max_length,,zh_Hans_CN,Display text must not exceed 255 characters,显示文本不得超过 255 个字符,0,显示文本不得超过 255 个字符
+cms,menu.validation.type_required,,zh_Hans_CN,Choose whether the link points to an internal or external page,选择链接指向内部页面还是外部页面,0,选择链接指向内部页面还是外部页面
+cms,menu.validation.url_max_length,,zh_Hans_CN,URL must not exceed 255 characters,URL 不得超过 255 个字符,0,URL 不得超过 255 个字符
+cms,menu.validation.url_required,,zh_Hans_CN,Select a page or enter a URL,选择页面或输入 URL,0,选择页面或输入 URL
+cms,plainhtml.field.content.explanation,,zh_Hans_CN,The HTML code you enter will appear on the website without modifications.,您输入的 HTML 代码将原样显示在网站上。,0,您输入的 HTML 代码将原样显示在网站上。
+cms,plainhtml.field.content.label,,zh_Hans_CN,HTML code,HTML 代码,0,HTML 代码
+cms,plainhtml.form.name,,zh_Hans_CN,HTML code (embed),HTML 代码（嵌入）,0,HTML 代码（嵌入）
+cms,plainhtml.form.title,,zh_Hans_CN,Edit HTML content,编辑 HTML 内容,0,编辑 HTML 内容
+cms,plainhtml.not_set,,zh_Hans_CN,Configure the content,配置内容,0,配置内容
+cms,resource_acl.acl_not_found,,zh_Hans_CN,ACL entry not found: {id},未找到 ACL 条目：{id},0,未找到 ACL 条目：{id}
 cms,resource_acl.assign,,zh_Hans_CN,Assign,分配,0,分配
-cms,resource_acl.deleted,,zh_Hans_CN,"Assignment removed.",分配已移除。,0,分配已移除。
-cms,resource_acl.error_ambiguous_subject,,zh_Hans_CN,"The name {name} matches both a user and a user group. Select the correct type from the list.","名称 {name} 同时匹配用户和用户组。请从列表中选择正确的类型。",0,"名称 {name} 同时匹配用户和用户组。请从列表中选择正确的类型。"
-cms,resource_acl.error_ambiguous_subject_short,,zh_Hans_CN,"Ambiguous assignment",分配不明确,0,分配不明确
-cms,resource_acl.error_delete,,zh_Hans_CN,"Error: Unable to remove assignment.",错误：无法移除分配。,0,错误：无法移除分配。
-cms,resource_acl.error_missing_resource_id,,zh_Hans_CN,"Resource ID is missing","资源 ID 缺失",0,"资源 ID 缺失"
-cms,resource_acl.error_save,,zh_Hans_CN,"Error: Unable to save access settings.",错误：无法保存访问设置。,0,错误：无法保存访问设置。
-cms,resource_acl.error_subject_not_found,,zh_Hans_CN,"No user or user group found with the name {name}","未找到名为 {name} 的用户或用户组",0,"未找到名为 {name} 的用户或用户组"
-cms,resource_acl.error_subject_not_found_short,,zh_Hans_CN,"No matching subject found",未找到匹配的主题,0,未找到匹配的主题
+cms,resource_acl.deleted,,zh_Hans_CN,Assignment removed.,分配已移除。,0,分配已移除。
+cms,resource_acl.error_ambiguous_subject,,zh_Hans_CN,The name {name} matches both a user and a user group. Select the correct type from the list.,名称 {name} 同时匹配用户和用户组。请从列表中选择正确的类型。,0,名称 {name} 同时匹配用户和用户组。请从列表中选择正确的类型。
+cms,resource_acl.error_ambiguous_subject_short,,zh_Hans_CN,Ambiguous assignment,分配不明确,0,分配不明确
+cms,resource_acl.error_delete,,zh_Hans_CN,Error: Unable to remove assignment.,错误：无法移除分配。,0,错误：无法移除分配。
+cms,resource_acl.error_missing_resource_id,,zh_Hans_CN,Resource ID is missing,资源 ID 缺失,0,资源 ID 缺失
+cms,resource_acl.error_save,,zh_Hans_CN,Error: Unable to save access settings.,错误：无法保存访问设置。,0,错误：无法保存访问设置。
+cms,resource_acl.error_subject_not_found,,zh_Hans_CN,No user or user group found with the name {name},未找到名为 {name} 的用户或用户组,0,未找到名为 {name} 的用户或用户组
+cms,resource_acl.error_subject_not_found_short,,zh_Hans_CN,No matching subject found,未找到匹配的主题,0,未找到匹配的主题
 cms,resource_acl.inherit_help,,zh_Hans_CN,"When inheritance is enabled, the parent folder's permissions also apply to this resource.",启用继承后，父文件夹的权限也适用于此资源。,0,启用继承后，父文件夹的权限也适用于此资源。
-cms,resource_acl.inherit_label,,zh_Hans_CN,"Inherit permissions from parent folder",从父文件夹继承权限,0,从父文件夹继承权限
-cms,resource_acl.inherited_title,,zh_Hans_CN,"Inherited permissions",继承的权限,0,继承的权限
-cms,resource_acl.new_assignment,,zh_Hans_CN,"New assignment:",新分配：,0,新分配：
+cms,resource_acl.inherit_label,,zh_Hans_CN,Inherit permissions from parent folder,从父文件夹继承权限,0,从父文件夹继承权限
+cms,resource_acl.inherited_title,,zh_Hans_CN,Inherited permissions,继承的权限,0,继承的权限
+cms,resource_acl.new_assignment,,zh_Hans_CN,New assignment:,新分配：,0,新分配：
 cms,resource_acl.permission.create,,zh_Hans_CN,Create,创建,0,创建
 cms,resource_acl.permission.delete,,zh_Hans_CN,Delete,删除,0,删除
 cms,resource_acl.permission.edit,,zh_Hans_CN,Edit,编辑,0,编辑
 cms,resource_acl.permission.list,,zh_Hans_CN,List,列表,0,列表
 cms,resource_acl.permission.view,,zh_Hans_CN,View,查看,0,查看
-cms,resource_acl.resource_not_found,,zh_Hans_CN,"Resource not found: {id}",未找到资源：{id},0,未找到资源：{id}
-cms,resource_acl.search_placeholder,,zh_Hans_CN,"Search for user or group...",搜索用户或组...,0,搜索用户或组...
+cms,resource_acl.resource_not_found,,zh_Hans_CN,Resource not found: {id},未找到资源：{id},0,未找到资源：{id}
+cms,resource_acl.search_placeholder,,zh_Hans_CN,Search for user or group...,搜索用户或组...,0,搜索用户或组...
 cms,resource_acl.specific_help,,zh_Hans_CN,"Specific permissions always apply, regardless of the inheritance setting.",特定权限始终适用，无论继承设置如何。,0,特定权限始终适用，无论继承设置如何。
-cms,resource_acl.specific_title,,zh_Hans_CN,"Specific permissions",特定权限,0,特定权限
+cms,resource_acl.specific_title,,zh_Hans_CN,Specific permissions,特定权限,0,特定权限
 cms,resource_acl.subject,,zh_Hans_CN,Subject,主题,0,主题
 cms,resource_acl.title,,zh_Hans_CN,Access,访问,0,访问
-cms,resource_acl.unknown_subject_type,,zh_Hans_CN,"Unknown ACL subject type: {type}","未知的 ACL 主体类型：{type}",0,"未知的 ACL 主体类型：{type}"
-cms,resource_acl.unknown_type,,zh_Hans_CN,"Unknown ACL list type: {type}","未知的 ACL 列表类型：{type}",0,"未知的 ACL 列表类型：{type}"
-cms,resource_acl.usergroup_assignment.added,,zh_Hans_CN,"User group assigned to resource:<br>{group} -> {target}","用户组已分配给资源：<br>{group} -> {target}",0,"用户组已分配给资源：<br>{group} -> {target}"
-cms,resource_acl.usergroup_assignment.error_add,,zh_Hans_CN,"Error: Unable to assign user group to resource:<br>{group} -> {target}","错误：无法将用户组分配给资源：<br>{group} -> {target}",0,"错误：无法将用户组分配给资源：<br>{group} -> {target}"
-cms,resource_acl.usergroup_assignment.error_add_generic,,zh_Hans_CN,"Error: Unable to assign user group to resource.",错误：无法将用户组分配给资源。,0,错误：无法将用户组分配给资源。
-cms,resource_acl.usergroup_assignment.error_remove,,zh_Hans_CN,"Error: Unable to remove user group from resource:<br>{group} -> {target}","错误：无法从资源中移除用户组：<br>{group} -> {target}",0,"错误：无法从资源中移除用户组：<br>{group} -> {target}"
-cms,resource_acl.usergroup_assignment.error_remove_generic,,zh_Hans_CN,"Error: Unable to remove user group from resource.",错误：无法从资源中移除用户组。,0,错误：无法从资源中移除用户组。
-cms,resource_acl.usergroup_assignment.removed,,zh_Hans_CN,"User group assignment removed:<br>{group} -> {target}","用户组分配已移除：<br>{group} -> {target}",0,"用户组分配已移除：<br>{group} -> {target}"
-cms,resource_browser.create_index_page,,zh_Hans_CN,"Create index page!",创建索引页面！,0,创建索引页面！
-cms,resource_browser.delete_file_confirm,,zh_Hans_CN,"Are you sure you want to delete this file?",确定要删除此文件吗？,0,确定要删除此文件吗？
-cms,resource_browser.delete_folder_confirm,,zh_Hans_CN,"Are you sure you want to delete this folder and all its contents?",确定要删除此文件夹及其所有内容吗？,0,确定要删除此文件夹及其所有内容吗？
-cms,resource_browser.delete_invalid_confirm,,zh_Hans_CN,"Are you sure you want to delete this invalid entry?",确定要删除此无效条目吗？,0,确定要删除此无效条目吗？
-cms,resource_browser.delete_webpage_confirm,,zh_Hans_CN,"Are you sure you want to delete this webpage?",确定要删除此网页吗？,0,确定要删除此网页吗？
-cms,resource_browser.help_create,,zh_Hans_CN,"Create folders and webpages within them.",在其中创建文件夹和网页。,0,在其中创建文件夹和网页。
-cms,resource_browser.help_move,,zh_Hans_CN,"Drag and drop to move items between folders.",拖放以在文件夹之间移动项目。,0,拖放以在文件夹之间移动项目。
+cms,resource_acl.unknown_subject_type,,zh_Hans_CN,Unknown ACL subject type: {type},未知的 ACL 主体类型：{type},0,未知的 ACL 主体类型：{type}
+cms,resource_acl.unknown_type,,zh_Hans_CN,Unknown ACL list type: {type},未知的 ACL 列表类型：{type},0,未知的 ACL 列表类型：{type}
+cms,resource_acl.usergroup_assignment.added,,zh_Hans_CN,User group assigned to resource:<br>{group} -> {target},用户组已分配给资源：<br>{group} -> {target},0,用户组已分配给资源：<br>{group} -> {target}
+cms,resource_acl.usergroup_assignment.error_add,,zh_Hans_CN,Error: Unable to assign user group to resource:<br>{group} -> {target},错误：无法将用户组分配给资源：<br>{group} -> {target},0,错误：无法将用户组分配给资源：<br>{group} -> {target}
+cms,resource_acl.usergroup_assignment.error_add_generic,,zh_Hans_CN,Error: Unable to assign user group to resource.,错误：无法将用户组分配给资源。,0,错误：无法将用户组分配给资源。
+cms,resource_acl.usergroup_assignment.error_remove,,zh_Hans_CN,Error: Unable to remove user group from resource:<br>{group} -> {target},错误：无法从资源中移除用户组：<br>{group} -> {target},0,错误：无法从资源中移除用户组：<br>{group} -> {target}
+cms,resource_acl.usergroup_assignment.error_remove_generic,,zh_Hans_CN,Error: Unable to remove user group from resource.,错误：无法从资源中移除用户组。,0,错误：无法从资源中移除用户组。
+cms,resource_acl.usergroup_assignment.removed,,zh_Hans_CN,User group assignment removed:<br>{group} -> {target},用户组分配已移除：<br>{group} -> {target},0,用户组分配已移除：<br>{group} -> {target}
+cms,resource_browser.create_index_page,,zh_Hans_CN,Create index page!,创建索引页面！,0,创建索引页面！
+cms,resource_browser.delete_file_confirm,,zh_Hans_CN,Are you sure you want to delete this file?,确定要删除此文件吗？,0,确定要删除此文件吗？
+cms,resource_browser.delete_folder_confirm,,zh_Hans_CN,Are you sure you want to delete this folder and all its contents?,确定要删除此文件夹及其所有内容吗？,0,确定要删除此文件夹及其所有内容吗？
+cms,resource_browser.delete_invalid_confirm,,zh_Hans_CN,Are you sure you want to delete this invalid entry?,确定要删除此无效条目吗？,0,确定要删除此无效条目吗？
+cms,resource_browser.delete_webpage_confirm,,zh_Hans_CN,Are you sure you want to delete this webpage?,确定要删除此网页吗？,0,确定要删除此网页吗？
+cms,resource_browser.help_create,,zh_Hans_CN,Create folders and webpages within them.,在其中创建文件夹和网页。,0,在其中创建文件夹和网页。
+cms,resource_browser.help_move,,zh_Hans_CN,Drag and drop to move items between folders.,拖放以在文件夹之间移动项目。,0,拖放以在文件夹之间移动项目。
 cms,resource_browser.insert,,zh_Hans_CN,Insert,插入,0,插入
-cms,resource_browser.invalid_entry,,zh_Hans_CN,"Invalid entry",无效条目,0,无效条目
-cms,resource_browser.new_domain,,zh_Hans_CN,"New domain",新域,0,新域
-cms,resource_browser.preview_index_page,,zh_Hans_CN,"Preview (index page)",预览（索引页面）,0,预览（索引页面）
-cms,resource_browser.root_not_found,,zh_Hans_CN,"Root node not found for the resource tree",未找到资源树的根节点,0,未找到资源树的根节点
-cms,resource_browser.select_tree_item,,zh_Hans_CN,"Select an item from the tree",从树中选择项目,0,从树中选择项目
-cms,resource_browser.site_structure,,zh_Hans_CN,"Site structure",网站结构,0,网站结构
-cms,resource.delete_error,,zh_Hans_CN,"Error: Unable to delete resource(s)",错误：无法删除资源,0,错误：无法删除资源
-cms,resource.delete_failed,,zh_Hans_CN,"Delete failed",删除失败,0,删除失败
-cms,resource.delete_partial_error,,zh_Hans_CN,"{count} error(s) occurred during deletion","删除时发生 {count} 个错误",0,"删除时发生 {count} 个错误"
-cms,resource.deleted,,zh_Hans_CN,"Resource deleted",资源已删除,0,资源已删除
-cms,resource.deleted_multiple,,zh_Hans_CN,"Resources deleted",资源已删除,0,资源已删除
-cms,resource.folder_count,,zh_Hans_CN,"{count} folder(s)","{count} 个文件夹",0,"{count} 个文件夹"
-cms,resource.move_error,,zh_Hans_CN,"Error: Unable to move resource",错误：无法移动资源,0,错误：无法移动资源
-cms,resource.move_failed,,zh_Hans_CN,"Move failed",移动失败,0,移动失败
-cms,resource.moved,,zh_Hans_CN,"Resource moved",资源已移动,0,资源已移动
-cms,resource.page_count,,zh_Hans_CN,"{count} page(s)","{count} 个页面",0,"{count} 个页面"
+cms,resource_browser.invalid_entry,,zh_Hans_CN,Invalid entry,无效条目,0,无效条目
+cms,resource_browser.new_domain,,zh_Hans_CN,New domain,新域,0,新域
+cms,resource_browser.preview_index_page,,zh_Hans_CN,Preview (index page),预览（索引页面）,0,预览（索引页面）
+cms,resource_browser.root_not_found,,zh_Hans_CN,Root node not found for the resource tree,未找到资源树的根节点,0,未找到资源树的根节点
+cms,resource_browser.select_tree_item,,zh_Hans_CN,Select an item from the tree,从树中选择项目,0,从树中选择项目
+cms,resource_browser.site_structure,,zh_Hans_CN,Site structure,网站结构,0,网站结构
+cms,resource.delete_error,,zh_Hans_CN,Error: Unable to delete resource(s),错误：无法删除资源,0,错误：无法删除资源
+cms,resource.delete_failed,,zh_Hans_CN,Delete failed,删除失败,0,删除失败
+cms,resource.delete_partial_error,,zh_Hans_CN,{count} error(s) occurred during deletion,删除时发生 {count} 个错误,0,删除时发生 {count} 个错误
+cms,resource.deleted,,zh_Hans_CN,Resource deleted,资源已删除,0,资源已删除
+cms,resource.deleted_multiple,,zh_Hans_CN,Resources deleted,资源已删除,0,资源已删除
+cms,resource.folder_count,,zh_Hans_CN,{count} folder(s),{count} 个文件夹,0,{count} 个文件夹
+cms,resource.move_error,,zh_Hans_CN,Error: Unable to move resource,错误：无法移动资源,0,错误：无法移动资源
+cms,resource.move_failed,,zh_Hans_CN,Move failed,移动失败,0,移动失败
+cms,resource.moved,,zh_Hans_CN,Resource moved,资源已移动,0,资源已移动
+cms,resource.page_count,,zh_Hans_CN,{count} page(s),{count} 个页面,0,{count} 个页面
 cms,resource.renamed,,zh_Hans_CN,Renamed,已重命名,0,已重命名
-cms,resource.view_forbidden,,zh_Hans_CN,"403 - You do not have permission to view this content!","403 - 您没有权限查看此内容！",0,"403 - 您没有权限查看此内容！"
-cms,richtext.assigned,,zh_Hans_CN,"Text content assigned",文本内容已分配,0,文本内容已分配
-cms,richtext.field.content.explanation,,zh_Hans_CN,"Format text freely, add images, and embed external content (e.g. YouTube). Use HTML view for embed codes.","自由格式化文本、添加图片并嵌入外部内容（如 YouTube）。使用 HTML 视图输入嵌入代码。",0,"自由格式化文本、添加图片并嵌入外部内容（如 YouTube）。使用 HTML 视图输入嵌入代码。"
+cms,resource.view_forbidden,,zh_Hans_CN,403 - You do not have permission to view this content!,403 - 您没有权限查看此内容！,0,403 - 您没有权限查看此内容！
+cms,richtext.assigned,,zh_Hans_CN,Text content assigned,文本内容已分配,0,文本内容已分配
+cms,richtext.field.content.explanation,,zh_Hans_CN,"Format text freely, add images, and embed external content (e.g. YouTube). Use HTML view for embed codes.",自由格式化文本、添加图片并嵌入外部内容（如 YouTube）。使用 HTML 视图输入嵌入代码。,0,自由格式化文本、添加图片并嵌入外部内容（如 YouTube）。使用 HTML 视图输入嵌入代码。
 cms,richtext.field.content.label,,zh_Hans_CN,Content,内容,0,内容
-cms,richtext.field.name.explanation,,zh_Hans_CN,"Visible in the admin area only. Use this to identify the content when selecting it for display on public pages. Must be unique.",仅在管理区域可见。在选择内容用于公共页面显示时，用此标识内容。必须唯一。,0,仅在管理区域可见。在选择内容用于公共页面显示时，用此标识内容。必须唯一。
-cms,richtext.field.name.label,,zh_Hans_CN,"Name (identifier)",名称（标识符）,0,名称（标识符）
-cms,richtext.field.name.unique_error,,zh_Hans_CN,"An information content item with this name already exists",同名信息内容项已存在,0,同名信息内容项已存在
-cms,richtext.field.title.explanation,,zh_Hans_CN,"Appears as a title above the text. Leave empty for no title.",显示为文本上方的标题。留空则无标题。,0,显示为文本上方的标题。留空则无标题。
+cms,richtext.field.name.explanation,,zh_Hans_CN,Visible in the admin area only. Use this to identify the content when selecting it for display on public pages. Must be unique.,仅在管理区域可见。在选择内容用于公共页面显示时，用此标识内容。必须唯一。,0,仅在管理区域可见。在选择内容用于公共页面显示时，用此标识内容。必须唯一。
+cms,richtext.field.name.label,,zh_Hans_CN,Name (identifier),名称（标识符）,0,名称（标识符）
+cms,richtext.field.name.unique_error,,zh_Hans_CN,An information content item with this name already exists,同名信息内容项已存在,0,同名信息内容项已存在
+cms,richtext.field.title.explanation,,zh_Hans_CN,Appears as a title above the text. Leave empty for no title.,显示为文本上方的标题。留空则无标题。,0,显示为文本上方的标题。留空则无标题。
 cms,richtext.field.title.label,,zh_Hans_CN,Heading,标题,0,标题
-cms,richtext.form.name,,zh_Hans_CN,"Text content",文本内容,0,文本内容
-cms,richtext.form.title_create,,zh_Hans_CN,"Create text content",创建文本内容,0,创建文本内容
-cms,richtext.form.title_edit,,zh_Hans_CN,"Edit text content",编辑文本内容,0,编辑文本内容
-cms,richtext.not_set,,zh_Hans_CN,"No content chosen",未选择内容,0,未选择内容
-cms,richtext.saved,,zh_Hans_CN,"Content saved",内容已保存,0,内容已保存
-cms,richtext.select.form.title,,zh_Hans_CN,"Select text content",选择文本内容,0,选择文本内容
-cms,richtext.updated,,zh_Hans_CN,"Content updated",内容已更新,0,内容已更新
-cms,richtext.widget.choose,,zh_Hans_CN,"Select text content",选择文本内容,0,选择文本内容
-cms,richtext.widget.create,,zh_Hans_CN,"Create text content",创建文本内容,0,创建文本内容
-cms,richtext.widget.description,,zh_Hans_CN,"Freely editable text with images",可自由编辑的带图片文本,0,可自由编辑的带图片文本
-cms,richtext.widget.edit,,zh_Hans_CN,"Edit text content",编辑文本内容,0,编辑文本内容
-cms,richtext.widget.name,,zh_Hans_CN,"Editable text",可编辑文本,0,可编辑文本
-cms,tree.field.type.explanation,,zh_Hans_CN,"Select from the predefined trees",从预定义树中选择,0,从预定义树中选择
+cms,richtext.form.name,,zh_Hans_CN,Text content,文本内容,0,文本内容
+cms,richtext.form.title_create,,zh_Hans_CN,Create text content,创建文本内容,0,创建文本内容
+cms,richtext.form.title_edit,,zh_Hans_CN,Edit text content,编辑文本内容,0,编辑文本内容
+cms,richtext.not_set,,zh_Hans_CN,No content chosen,未选择内容,0,未选择内容
+cms,richtext.saved,,zh_Hans_CN,Content saved,内容已保存,0,内容已保存
+cms,richtext.select.form.title,,zh_Hans_CN,Select text content,选择文本内容,0,选择文本内容
+cms,richtext.updated,,zh_Hans_CN,Content updated,内容已更新,0,内容已更新
+cms,richtext.widget.choose,,zh_Hans_CN,Select text content,选择文本内容,0,选择文本内容
+cms,richtext.widget.create,,zh_Hans_CN,Create text content,创建文本内容,0,创建文本内容
+cms,richtext.widget.description,,zh_Hans_CN,Freely editable text with images,可自由编辑的带图片文本,0,可自由编辑的带图片文本
+cms,richtext.widget.edit,,zh_Hans_CN,Edit text content,编辑文本内容,0,编辑文本内容
+cms,richtext.widget.name,,zh_Hans_CN,Editable text,可编辑文本,0,可编辑文本
+cms,tree.field.type.explanation,,zh_Hans_CN,Select from the predefined trees,从预定义树中选择,0,从预定义树中选择
 cms,tree.field.type.label,,zh_Hans_CN,Tree,树,0,树
-cms,tree.invalid_parent_id,,zh_Hans_CN,"Invalid parent ID","无效的父级 ID",0,"无效的父级 ID"
-cms,tree.missing_type,,zh_Hans_CN,"Missing tree type",树类型缺失,0,树类型缺失
-cms,tree.no_connection_id,,zh_Hans_CN,"No widget connection ID given","未提供组件连接 ID",0,"未提供组件连接 ID"
-cms,tree.select_menu_item,,zh_Hans_CN,"Select a menu item from the tree",从树中选择菜单项,0,从树中选择菜单项
-cms,tree.unknown_type,,zh_Hans_CN,"Unknown tree item type: {type}",未知树项目类型：{type},0,未知树项目类型：{type}
-cms,webpage_domain.field.resource_name.explanation,,zh_Hans_CN,"Set this domain name in the DOMAIN_CONTEXT configuration so this domain and its child pages become active.","在 DOMAIN_CONTEXT 配置中设置此域名，使该域及其子页面生效。",0,"在 DOMAIN_CONTEXT 配置中设置此域名，使该域及其子页面生效。"
-cms,webpage_domain.field.resource_name.label,,zh_Hans_CN,"Domain name",域名,0,域名
-cms,webpage_domain.title_create,,zh_Hans_CN,"Add new domain",添加新域,0,添加新域
-cms,webpage_domain.title_edit,,zh_Hans_CN,"Edit domain",编辑域,0,编辑域
-cms,webpage_file.field.resource_name.explanation,,zh_Hans_CN,"This is the file name used in the URL. Avoid accented characters and spaces, and keep the correct file extension.","这是 URL 中使用的文件名。请避免重音字符和空格，并保留正确的文件扩展名。",0,"这是 URL 中使用的文件名。请避免重音字符和空格，并保留正确的文件扩展名。"
-cms,webpage_file.field.resource_name.label,,zh_Hans_CN,"SEO-friendly URL name","SEO 友好的 URL 名称",0,"SEO 友好的 URL 名称"
-cms,webpage_file.field.text.explanation,,zh_Hans_CN,"For images this may appear as a longer description below the title.",对于图片，这可能显示为标题下方的较长描述。,0,对于图片，这可能显示为标题下方的较长描述。
+cms,tree.invalid_parent_id,,zh_Hans_CN,Invalid parent ID,无效的父级 ID,0,无效的父级 ID
+cms,tree.missing_type,,zh_Hans_CN,Missing tree type,树类型缺失,0,树类型缺失
+cms,tree.no_connection_id,,zh_Hans_CN,No widget connection ID given,未提供组件连接 ID,0,未提供组件连接 ID
+cms,tree.select_menu_item,,zh_Hans_CN,Select a menu item from the tree,从树中选择菜单项,0,从树中选择菜单项
+cms,tree.unknown_type,,zh_Hans_CN,Unknown tree item type: {type},未知树项目类型：{type},0,未知树项目类型：{type}
+cms,webpage_domain.field.resource_name.explanation,,zh_Hans_CN,Set this domain name in the DOMAIN_CONTEXT configuration so this domain and its child pages become active.,在 DOMAIN_CONTEXT 配置中设置此域名，使该域及其子页面生效。,0,在 DOMAIN_CONTEXT 配置中设置此域名，使该域及其子页面生效。
+cms,webpage_domain.field.resource_name.label,,zh_Hans_CN,Domain name,域名,0,域名
+cms,webpage_domain.title_create,,zh_Hans_CN,Add new domain,添加新域,0,添加新域
+cms,webpage_domain.title_edit,,zh_Hans_CN,Edit domain,编辑域,0,编辑域
+cms,webpage_file.field.resource_name.explanation,,zh_Hans_CN,"This is the file name used in the URL. Avoid accented characters and spaces, and keep the correct file extension.",这是 URL 中使用的文件名。请避免重音字符和空格，并保留正确的文件扩展名。,0,这是 URL 中使用的文件名。请避免重音字符和空格，并保留正确的文件扩展名。
+cms,webpage_file.field.resource_name.label,,zh_Hans_CN,SEO-friendly URL name,SEO 友好的 URL 名称,0,SEO 友好的 URL 名称
+cms,webpage_file.field.text.explanation,,zh_Hans_CN,For images this may appear as a longer description below the title.,对于图片，这可能显示为标题下方的较长描述。,0,对于图片，这可能显示为标题下方的较长描述。
 cms,webpage_file.field.text.label,,zh_Hans_CN,Description,描述,0,描述
-cms,webpage_file.field.title.explanation,,zh_Hans_CN,"For images this may appear below the image.",对于图片，这可能显示在图片下方。,0,对于图片，这可能显示在图片下方。
+cms,webpage_file.field.title.explanation,,zh_Hans_CN,For images this may appear below the image.,对于图片，这可能显示在图片下方。,0,对于图片，这可能显示在图片下方。
 cms,webpage_file.field.title.label,,zh_Hans_CN,Title,标题,0,标题
-cms,webpage_file.title_edit,,zh_Hans_CN,"Edit file name",编辑文件名,0,编辑文件名
-cms,webpage_folder.field.resource_name.explanation,,zh_Hans_CN,"This is the real folder name used in the URL. Changing it later may cause visitors from search engines to see a 404 page.","这是 URL 中使用的实际文件夹名称。之后更改可能导致搜索引擎访客看到 404 页面。",0,"这是 URL 中使用的实际文件夹名称。之后更改可能导致搜索引擎访客看到 404 页面。"
-cms,webpage_folder.field.resource_name.label,,zh_Hans_CN,"SEO-friendly folder URL name","SEO 友好的文件夹 URL 名称",0,"SEO 友好的文件夹 URL 名称"
-cms,webpage_folder.title_create,,zh_Hans_CN,"Create new folder",创建新文件夹,0,创建新文件夹
-cms,webpage_folder.title_edit,,zh_Hans_CN,"Edit folder",编辑文件夹,0,编辑文件夹
-cms,webpage_from_path.subtitle,,zh_Hans_CN,"If you want to create this webpage, you can do it here. Before doing so, make sure the URL was not mistyped.","如果您想创建此网页，可以在此处操作。在此之前，请确保 URL 没有输入错误。",0,"如果您想创建此网页，可以在此处操作。在此之前，请确保 URL 没有输入错误。"
-cms,webpage_from_path.title,,zh_Hans_CN,"The requested webpage was not found!",未找到请求的网页！,0,未找到请求的网页！
-cms,webpage_page.field.description.explanation,,zh_Hans_CN,"Description meta tag, usually shown under the URL in search results.","描述元标签，通常显示在搜索结果中 URL 下方。",0,"描述元标签，通常显示在搜索结果中 URL 下方。"
+cms,webpage_file.title_edit,,zh_Hans_CN,Edit file name,编辑文件名,0,编辑文件名
+cms,webpage_folder.field.resource_name.explanation,,zh_Hans_CN,This is the real folder name used in the URL. Changing it later may cause visitors from search engines to see a 404 page.,这是 URL 中使用的实际文件夹名称。之后更改可能导致搜索引擎访客看到 404 页面。,0,这是 URL 中使用的实际文件夹名称。之后更改可能导致搜索引擎访客看到 404 页面。
+cms,webpage_folder.field.resource_name.label,,zh_Hans_CN,SEO-friendly folder URL name,SEO 友好的文件夹 URL 名称,0,SEO 友好的文件夹 URL 名称
+cms,webpage_folder.title_create,,zh_Hans_CN,Create new folder,创建新文件夹,0,创建新文件夹
+cms,webpage_folder.title_edit,,zh_Hans_CN,Edit folder,编辑文件夹,0,编辑文件夹
+cms,webpage_from_path.subtitle,,zh_Hans_CN,"If you want to create this webpage, you can do it here. Before doing so, make sure the URL was not mistyped.",如果您想创建此网页，可以在此处操作。在此之前，请确保 URL 没有输入错误。,0,如果您想创建此网页，可以在此处操作。在此之前，请确保 URL 没有输入错误。
+cms,webpage_from_path.title,,zh_Hans_CN,The requested webpage was not found!,未找到请求的网页！,0,未找到请求的网页！
+cms,webpage_page.field.description.explanation,,zh_Hans_CN,"Description meta tag, usually shown under the URL in search results.",描述元标签，通常显示在搜索结果中 URL 下方。,0,描述元标签，通常显示在搜索结果中 URL 下方。
 cms,webpage_page.field.description.label,,zh_Hans_CN,Description,描述,0,描述
-cms,webpage_page.field.keywords.explanation,,zh_Hans_CN,"Keywords meta tag with comma-separated values.",以逗号分隔值的关键词元标签。,0,以逗号分隔值的关键词元标签。
+cms,webpage_page.field.keywords.explanation,,zh_Hans_CN,Keywords meta tag with comma-separated values.,以逗号分隔值的关键词元标签。,0,以逗号分隔值的关键词元标签。
 cms,webpage_page.field.keywords.label,,zh_Hans_CN,Keywords,关键词,0,关键词
-cms,webpage_page.field.resource_name.explanation,,zh_Hans_CN,"This is the real URL name of the page. Change it later only when necessary.","这是页面的实际 URL 名称。仅在必要时才进行更改。",0,"这是页面的实际 URL 名称。仅在必要时才进行更改。"
-cms,webpage_page.field.resource_name.label,,zh_Hans_CN,"SEO-friendly URL name","SEO 友好的 URL 名称",0,"SEO 友好的 URL 名称"
-cms,webpage_page.field.title.explanation,,zh_Hans_CN,"HTML title meta tag shown in the browser window title.","显示在浏览器窗口标题中的 HTML 标题元标签。",0,"显示在浏览器窗口标题中的 HTML 标题元标签。"
+cms,webpage_page.field.resource_name.explanation,,zh_Hans_CN,This is the real URL name of the page. Change it later only when necessary.,这是页面的实际 URL 名称。仅在必要时才进行更改。,0,这是页面的实际 URL 名称。仅在必要时才进行更改。
+cms,webpage_page.field.resource_name.label,,zh_Hans_CN,SEO-friendly URL name,SEO 友好的 URL 名称,0,SEO 友好的 URL 名称
+cms,webpage_page.field.title.explanation,,zh_Hans_CN,HTML title meta tag shown in the browser window title.,显示在浏览器窗口标题中的 HTML 标题元标签。,0,显示在浏览器窗口标题中的 HTML 标题元标签。
 cms,webpage_page.field.title.label,,zh_Hans_CN,Title,标题,0,标题
-cms,webpage_page.title_create,,zh_Hans_CN,"Create new webpage",创建新网页,0,创建新网页
-cms,webpage_page.title_edit,,zh_Hans_CN,"Edit webpage",编辑网页,0,编辑网页
+cms,webpage_page.title_create,,zh_Hans_CN,Create new webpage,创建新网页,0,创建新网页
+cms,webpage_page.title_edit,,zh_Hans_CN,Edit webpage,编辑网页,0,编辑网页
 cms,webpage.create_for_params,,zh_Hans_CN,"Create a webpage for the following parameters: <br>{param_name}, {param_value}","为以下参数创建网页：<br>{param_name}, {param_value}",0,"为以下参数创建网页：<br>{param_name}, {param_value}"
-cms,webpage.create_for_widget,,zh_Hans_CN,"Create a webpage with the following content: <br><b>{widget}</b>",创建包含以下内容的网页：<br><b>{widget}</b>,0,创建包含以下内容的网页：<br><b>{widget}</b>
-cms,webpage.field.layout.explanation,,zh_Hans_CN,"The webpage layout structure determines where content elements can be placed on the page.",网页布局结构决定了内容元素在页面上的放置位置。,0,网页布局结构决定了内容元素在页面上的放置位置。
-cms,webpage.field.layout.label,,zh_Hans_CN,"Page type",页面类型,0,页面类型
-cms,widget_connection_params.field.anchor.explanation,,zh_Hans_CN,"Anchor name that can be used in links to jump to this content on the page.",可在链接中使用的锚点名称，用于跳转到页面上的此内容。,0,可在链接中使用的锚点名称，用于跳转到页面上的此内容。
+cms,webpage.create_for_widget,,zh_Hans_CN,Create a webpage with the following content: <br><b>{widget}</b>,创建包含以下内容的网页：<br><b>{widget}</b>,0,创建包含以下内容的网页：<br><b>{widget}</b>
+cms,webpage.field.layout.explanation,,zh_Hans_CN,The webpage layout structure determines where content elements can be placed on the page.,网页布局结构决定了内容元素在页面上的放置位置。,0,网页布局结构决定了内容元素在页面上的放置位置。
+cms,webpage.field.layout.label,,zh_Hans_CN,Page type,页面类型,0,页面类型
+cms,widget_connection_params.field.anchor.explanation,,zh_Hans_CN,Anchor name that can be used in links to jump to this content on the page.,可在链接中使用的锚点名称，用于跳转到页面上的此内容。,0,可在链接中使用的锚点名称，用于跳转到页面上的此内容。
 cms,widget_connection_params.field.anchor.label,,zh_Hans_CN,Anchor,锚点,0,锚点
-cms,widget_connection_params.field.float.clear,,zh_Hans_CN,"New row",新行,0,新行
-cms,widget_connection_params.field.float.explanation,,zh_Hans_CN,"Content box alignment. Floated elements can appear next to each other.",内容框对齐方式。浮动元素可以并排显示。,0,内容框对齐方式。浮动元素可以并排显示。
+cms,widget_connection_params.field.float.clear,,zh_Hans_CN,New row,新行,0,新行
+cms,widget_connection_params.field.float.explanation,,zh_Hans_CN,Content box alignment. Floated elements can appear next to each other.,内容框对齐方式。浮动元素可以并排显示。,0,内容框对齐方式。浮动元素可以并排显示。
 cms,widget_connection_params.field.float.label,,zh_Hans_CN,Alignment,对齐,0,对齐
-cms,widget_connection_params.field.float.left,,zh_Hans_CN,"Floated left",左浮动,0,左浮动
-cms,widget_connection_params.field.float.left_clear,,zh_Hans_CN,"Floated left in new row",新行左浮动,0,新行左浮动
-cms,widget_connection_params.field.float.none,,zh_Hans_CN,"No special alignment",无特殊对齐,0,无特殊对齐
-cms,widget_connection_params.field.float.right,,zh_Hans_CN,"Floated right",右浮动,0,右浮动
-cms,widget_connection_params.field.float.right_clear,,zh_Hans_CN,"Floated right in new row",新行右浮动,0,新行右浮动
-cms,widget_connection_params.field.height.explanation,,zh_Hans_CN,"Height in CSS format with unit (for example 100%, 200px, or auto).","CSS 格式的高度（例如 100%、200px 或 auto）。",0,"CSS 格式的高度（例如 100%、200px 或 auto）。"
+cms,widget_connection_params.field.float.left,,zh_Hans_CN,Floated left,左浮动,0,左浮动
+cms,widget_connection_params.field.float.left_clear,,zh_Hans_CN,Floated left in new row,新行左浮动,0,新行左浮动
+cms,widget_connection_params.field.float.none,,zh_Hans_CN,No special alignment,无特殊对齐,0,无特殊对齐
+cms,widget_connection_params.field.float.right,,zh_Hans_CN,Floated right,右浮动,0,右浮动
+cms,widget_connection_params.field.float.right_clear,,zh_Hans_CN,Floated right in new row,新行右浮动,0,新行右浮动
+cms,widget_connection_params.field.height.explanation,,zh_Hans_CN,"Height in CSS format with unit (for example 100%, 200px, or auto).",CSS 格式的高度（例如 100%、200px 或 auto）。,0,CSS 格式的高度（例如 100%、200px 或 auto）。
 cms,widget_connection_params.field.height.label,,zh_Hans_CN,Height,高度,0,高度
-cms,widget_connection_params.field.margin_bottom.explanation,,zh_Hans_CN,"Bottom margin in CSS format with unit (for example 100% or 200px).","CSS 格式的下边距（例如 100% 或 200px）。",0,"CSS 格式的下边距（例如 100% 或 200px）。"
-cms,widget_connection_params.field.margin_bottom.label,,zh_Hans_CN,"Bottom margin",下边距,0,下边距
-cms,widget_connection_params.field.margin_left.explanation,,zh_Hans_CN,"Left margin in CSS format with unit (for example 100% or 200px).","CSS 格式的左边距（例如 100% 或 200px）。",0,"CSS 格式的左边距（例如 100% 或 200px）。"
-cms,widget_connection_params.field.margin_left.label,,zh_Hans_CN,"Left margin",左边距,0,左边距
-cms,widget_connection_params.field.margin_right.explanation,,zh_Hans_CN,"Right margin in CSS format with unit (for example 100% or 200px).","CSS 格式的右边距（例如 100% 或 200px）。",0,"CSS 格式的右边距（例如 100% 或 200px）。"
-cms,widget_connection_params.field.margin_right.label,,zh_Hans_CN,"Right margin",右边距,0,右边距
-cms,widget_connection_params.field.margin_top.explanation,,zh_Hans_CN,"Top margin in CSS format with unit (for example 100% or 200px).","CSS 格式的上边距（例如 100% 或 200px）。",0,"CSS 格式的上边距（例如 100% 或 200px）。"
-cms,widget_connection_params.field.margin_top.label,,zh_Hans_CN,"Top margin",上边距,0,上边距
-cms,widget_connection_params.field.width.explanation,,zh_Hans_CN,"Width in CSS format with unit (for example 100%, 200px, or auto).","CSS 格式的宽度（例如 100%、200px 或 auto）。",0,"CSS 格式的宽度（例如 100%、200px 或 auto）。"
+cms,widget_connection_params.field.margin_bottom.explanation,,zh_Hans_CN,Bottom margin in CSS format with unit (for example 100% or 200px).,CSS 格式的下边距（例如 100% 或 200px）。,0,CSS 格式的下边距（例如 100% 或 200px）。
+cms,widget_connection_params.field.margin_bottom.label,,zh_Hans_CN,Bottom margin,下边距,0,下边距
+cms,widget_connection_params.field.margin_left.explanation,,zh_Hans_CN,Left margin in CSS format with unit (for example 100% or 200px).,CSS 格式的左边距（例如 100% 或 200px）。,0,CSS 格式的左边距（例如 100% 或 200px）。
+cms,widget_connection_params.field.margin_left.label,,zh_Hans_CN,Left margin,左边距,0,左边距
+cms,widget_connection_params.field.margin_right.explanation,,zh_Hans_CN,Right margin in CSS format with unit (for example 100% or 200px).,CSS 格式的右边距（例如 100% 或 200px）。,0,CSS 格式的右边距（例如 100% 或 200px）。
+cms,widget_connection_params.field.margin_right.label,,zh_Hans_CN,Right margin,右边距,0,右边距
+cms,widget_connection_params.field.margin_top.explanation,,zh_Hans_CN,Top margin in CSS format with unit (for example 100% or 200px).,CSS 格式的上边距（例如 100% 或 200px）。,0,CSS 格式的上边距（例如 100% 或 200px）。
+cms,widget_connection_params.field.margin_top.label,,zh_Hans_CN,Top margin,上边距,0,上边距
+cms,widget_connection_params.field.width.explanation,,zh_Hans_CN,"Width in CSS format with unit (for example 100%, 200px, or auto).",CSS 格式的宽度（例如 100%、200px 或 auto）。,0,CSS 格式的宽度（例如 100%、200px 或 auto）。
 cms,widget_connection_params.field.width.label,,zh_Hans_CN,Width,宽度,0,宽度
-cms,widget_connection_params.missing_widget_id,,zh_Hans_CN,"Widget ID is missing","组件 ID 缺失",0,"组件 ID 缺失"
-cms,widget_connection_params.no_content_id,,zh_Hans_CN,"No content ID given","未提供内容 ID",0,"未提供内容 ID"
-cms,widget_connection_params.subtitle,,zh_Hans_CN,"Webpage: {page}",网页：{page},0,网页：{page}
-cms,widget_connection_params.title,,zh_Hans_CN,"Edit display settings",编辑显示设置,0,编辑显示设置
-cms,widget_connection_settings.field.is_last.explanation,,zh_Hans_CN,"Check this if this is the last column in the row. This helps keep spacing correct and prevents overlapping or broken layout.",如果这是行中的最后一列，请勾选此项。这有助于保持正确的间距，防止布局重叠或错乱。,0,如果这是行中的最后一列，请勾选此项。这有助于保持正确的间距，防止布局重叠或错乱。
-cms,widget_connection_settings.field.is_last.label,,zh_Hans_CN,"Last in row",行末,0,行末
-cms,widget_connection_settings.field.widget_width.label,,zh_Hans_CN,"Content width",内容宽度,0,内容宽度
-cms,widget_connection_settings.missing_widget_id,,zh_Hans_CN,"Widget ID is missing","组件 ID 缺失",0,"组件 ID 缺失"
-cms,widget_connection_settings.subtitle,,zh_Hans_CN,"Webpage: {page}",网页：{page},0,网页：{page}
-cms,widget_connection.added,,zh_Hans_CN,"Content element placed on the webpage",内容元素已放置到网页上,0,内容元素已放置到网页上
-cms,widget_connection.copied_to_clipboard,,zh_Hans_CN,"Content copied to clipboard",内容已复制到剪贴板,0,内容已复制到剪贴板
-cms,widget_connection.duplicate_not_allowed,,zh_Hans_CN,"This content element is already on this block and multiple placement is not allowed.",此内容元素已在此块上，不允许重复放置。,0,此内容元素已在此块上，不允许重复放置。
-cms,widget_connection.moved,,zh_Hans_CN,"Content element moved",内容元素已移动,0,内容元素已移动
-cms,widget_connection.remove_from_webpage,,zh_Hans_CN,"Remove from this webpage",从此网页中移除,0,从此网页中移除
-cms,widget_connection.removed,,zh_Hans_CN,"Content element removed from the webpage",内容元素已从网页中移除,0,内容元素已从网页中移除
-cms,widget_connection.select_widget_type,,zh_Hans_CN,"Choose the content type to insert",选择要插入的内容类型,0,选择要插入的内容类型
-cms,widget_group.begin_delete_error,,zh_Hans_CN,"Error: Unable to delete opening block",错误：无法删除开启块,0,错误：无法删除开启块
-cms,widget_group.both_delete_error,,zh_Hans_CN,"Error: Unable to delete opening or closing block",错误：无法删除开启块或关闭块,0,错误：无法删除开启块或关闭块
-cms,widget_group.end_delete_error,,zh_Hans_CN,"Error: Unable to delete closing block",错误：无法删除关闭块,0,错误：无法删除关闭块
-cms,widget_group.end_missing_delete_error,,zh_Hans_CN,"Closing block not found and opening block deletion failed",未找到关闭块，且开启块删除失败,0,未找到关闭块，且开启块删除失败
+cms,widget_connection_params.missing_widget_id,,zh_Hans_CN,Widget ID is missing,组件 ID 缺失,0,组件 ID 缺失
+cms,widget_connection_params.no_content_id,,zh_Hans_CN,No content ID given,未提供内容 ID,0,未提供内容 ID
+cms,widget_connection_params.subtitle,,zh_Hans_CN,Webpage: {page},网页：{page},0,网页：{page}
+cms,widget_connection_params.title,,zh_Hans_CN,Edit display settings,编辑显示设置,0,编辑显示设置
+cms,widget_connection_settings.field.is_last.explanation,,zh_Hans_CN,Check this if this is the last column in the row. This helps keep spacing correct and prevents overlapping or broken layout.,如果这是行中的最后一列，请勾选此项。这有助于保持正确的间距，防止布局重叠或错乱。,0,如果这是行中的最后一列，请勾选此项。这有助于保持正确的间距，防止布局重叠或错乱。
+cms,widget_connection_settings.field.is_last.label,,zh_Hans_CN,Last in row,行末,0,行末
+cms,widget_connection_settings.field.widget_width.label,,zh_Hans_CN,Content width,内容宽度,0,内容宽度
+cms,widget_connection_settings.missing_widget_id,,zh_Hans_CN,Widget ID is missing,组件 ID 缺失,0,组件 ID 缺失
+cms,widget_connection_settings.subtitle,,zh_Hans_CN,Webpage: {page},网页：{page},0,网页：{page}
+cms,widget_connection.added,,zh_Hans_CN,Content element placed on the webpage,内容元素已放置到网页上,0,内容元素已放置到网页上
+cms,widget_connection.copied_to_clipboard,,zh_Hans_CN,Content copied to clipboard,内容已复制到剪贴板,0,内容已复制到剪贴板
+cms,widget_connection.duplicate_not_allowed,,zh_Hans_CN,This content element is already on this block and multiple placement is not allowed.,此内容元素已在此块上，不允许重复放置。,0,此内容元素已在此块上，不允许重复放置。
+cms,widget_connection.moved,,zh_Hans_CN,Content element moved,内容元素已移动,0,内容元素已移动
+cms,widget_connection.remove_from_webpage,,zh_Hans_CN,Remove from this webpage,从此网页中移除,0,从此网页中移除
+cms,widget_connection.removed,,zh_Hans_CN,Content element removed from the webpage,内容元素已从网页中移除,0,内容元素已从网页中移除
+cms,widget_connection.select_widget_type,,zh_Hans_CN,Choose the content type to insert,选择要插入的内容类型,0,选择要插入的内容类型
+cms,widget_group.begin_delete_error,,zh_Hans_CN,Error: Unable to delete opening block,错误：无法删除开启块,0,错误：无法删除开启块
+cms,widget_group.both_delete_error,,zh_Hans_CN,Error: Unable to delete opening or closing block,错误：无法删除开启块或关闭块,0,错误：无法删除开启块或关闭块
+cms,widget_group.end_delete_error,,zh_Hans_CN,Error: Unable to delete closing block,错误：无法删除关闭块,0,错误：无法删除关闭块
+cms,widget_group.end_missing_delete_error,,zh_Hans_CN,Closing block not found and opening block deletion failed,未找到关闭块，且开启块删除失败,0,未找到关闭块，且开启块删除失败
 cms,widget_group.end_missing_removed_beginning,,zh_Hans_CN,"Closing block not found, opening block removed successfully",未找到关闭块，开启块已成功删除,0,未找到关闭块，开启块已成功删除
-cms,widget_group.remove_block,,zh_Hans_CN,"Remove block",移除块,0,移除块
-cms,widget_group.removed,,zh_Hans_CN,"Block removed from webpage",已从网页中移除块,0,已从网页中移除块
+cms,widget_group.remove_block,,zh_Hans_CN,Remove block,移除块,0,移除块
+cms,widget_group.removed,,zh_Hans_CN,Block removed from webpage,已从网页中移除块,0,已从网页中移除块
 cms,widget_preview.description,,zh_Hans_CN,Description,描述,0,描述
 cms,widget_preview.implemented,,zh_Hans_CN,Implemented,已实现,0,已实现
-cms,widget_preview.info.current_theme,,zh_Hans_CN,"Current theme",当前主题,0,当前主题
+cms,widget_preview.info.current_theme,,zh_Hans_CN,Current theme,当前主题,0,当前主题
 cms,widget_preview.info.fallback,,zh_Hans_CN,Fallback,备用,0,备用
 cms,widget_preview.info.implemented,,zh_Hans_CN,Implemented,已实现,0,已实现
 cms,widget_preview.info.template,,zh_Hans_CN,Template,模板,0,模板
-cms,widget_preview.info.title,,zh_Hans_CN,"Widget preview",组件预览,0,组件预览
+cms,widget_preview.info.title,,zh_Hans_CN,Widget preview,组件预览,0,组件预览
 cms,widget_preview.info.widget,,zh_Hans_CN,Widget,组件,0,组件
-cms,widget_preview.none,,zh_Hans_CN,"No mockable widgets found.",未找到可模拟的组件。,0,未找到可模拟的组件。
-cms,widget_preview.not_implemented,,zh_Hans_CN,"Not implemented",未实现,0,未实现
+cms,widget_preview.none,,zh_Hans_CN,No mockable widgets found.,未找到可模拟的组件。,0,未找到可模拟的组件。
+cms,widget_preview.not_implemented,,zh_Hans_CN,Not implemented,未实现,0,未实现
 cms,widget_preview.not_mockable_prefix,,zh_Hans_CN,Widget,组件,0,组件
-cms,widget_preview.not_mockable_suffix,,zh_Hans_CN,"does not implement iMockable.","未实现 iMockable。",0,"未实现 iMockable。"
-cms,widget_preview.not_registered,,zh_Hans_CN,"Widget not registered: {widget}",组件未注册：{widget},0,组件未注册：{widget}
-cms,widget_preview.redirecting,,zh_Hans_CN,"Redirecting to the correct theme...",正在重定向到正确的主题...,0,正在重定向到正确的主题...
-cms,widget_preview.title,,zh_Hans_CN,"Available widgets for preview",可预览的组件,0,可预览的组件
+cms,widget_preview.not_mockable_suffix,,zh_Hans_CN,does not implement iMockable.,未实现 iMockable。,0,未实现 iMockable。
+cms,widget_preview.not_registered,,zh_Hans_CN,Widget not registered: {widget},组件未注册：{widget},0,组件未注册：{widget}
+cms,widget_preview.redirecting,,zh_Hans_CN,Redirecting to the correct theme...,正在重定向到正确的主题...,0,正在重定向到正确的主题...
+cms,widget_preview.title,,zh_Hans_CN,Available widgets for preview,可预览的组件,0,可预览的组件
 cms,widget_preview.widget,,zh_Hans_CN,Widget,组件,0,组件
-cms,widget.insert_from_clipboard,,zh_Hans_CN,"Insert clipboard content here",在此处插入剪贴板内容,0,在此处插入剪贴板内容
+cms,widget.insert_from_clipboard,,zh_Hans_CN,Insert clipboard content here,在此处插入剪贴板内容,0,在此处插入剪贴板内容
 cms,widget.insert.button,,zh_Hans_CN,Insert,插入,0,插入
-cms,widget.insert.icon_title,,zh_Hans_CN,"Insert content",插入内容,0,插入内容
-cms,widget.insert.placeholder,,zh_Hans_CN,"-- Insert content --","-- 插入内容 --",0,"-- 插入内容 --"
+cms,widget.insert.icon_title,,zh_Hans_CN,Insert content,插入内容,0,插入内容
+cms,widget.insert.placeholder,,zh_Hans_CN,-- Insert content --,-- 插入内容 --,0,-- 插入内容 --
 common,actions,,zh_Hans_CN,Actions,操作,0,操作
 common,all,,zh_Hans_CN,All,全部,0,全部
 common,back,,zh_Hans_CN,Back,返回,0,返回
 common,calendar,,zh_Hans_CN,Calendar,日历,0,日历
 common,cancel,,zh_Hans_CN,Cancel,取消,0,取消
-common,choose_placeholder,,zh_Hans_CN,"-- Choose --","-- 请选择 --",0,"-- 请选择 --"
+common,choose_placeholder,,zh_Hans_CN,-- Choose --,-- 请选择 --,0,-- 请选择 --
 common,delete,,zh_Hans_CN,Delete,删除,0,删除
 common,download,,zh_Hans_CN,Download,下载,0,下载
 common,edit,,zh_Hans_CN,Edit,编辑,0,编辑
 common,error,,zh_Hans_CN,Error,错误,0,错误
-common,error_save,,zh_Hans_CN,"Error: Unable to save",错误：无法保存,0,错误：无法保存
+common,error_save,,zh_Hans_CN,Error: Unable to save,错误：无法保存,0,错误：无法保存
 common,id,,zh_Hans_CN,ID,ID,0,ID
 common,loading,,zh_Hans_CN,Loading...,加载中...,0,加载中...
-common,logout,,zh_Hans_CN,"Log out",退出登录,0,退出登录
-common,missing_required_url_params,,zh_Hans_CN,"Missing required URL parameters","缺少必要的 URL 参数",0,"缺少必要的 URL 参数"
-common,move_down,,zh_Hans_CN,"Move down",向下移动,0,向下移动
-common,move_up,,zh_Hans_CN,"Move up",向上移动,0,向上移动
+common,logout,,zh_Hans_CN,Log out,退出登录,0,退出登录
+common,missing_required_url_params,,zh_Hans_CN,Missing required URL parameters,缺少必要的 URL 参数,0,缺少必要的 URL 参数
+common,move_down,,zh_Hans_CN,Move down,向下移动,0,向下移动
+common,move_up,,zh_Hans_CN,Move up,向上移动,0,向上移动
 common,never,,zh_Hans_CN,Never,从不,0,从不
 common,no,,zh_Hans_CN,No,否,0,否
-common,no_changes,,zh_Hans_CN,"No changes made",未做任何更改,0,未做任何更改
-common,no_data,,zh_Hans_CN,"No data",无数据,0,无数据
-common,no_description,,zh_Hans_CN,"No description",无描述,0,无描述
-common,not_set,,zh_Hans_CN,"[not set]",【未设置】,0,【未设置】
+common,no_changes,,zh_Hans_CN,No changes made,未做任何更改,0,未做任何更改
+common,no_data,,zh_Hans_CN,No data,无数据,0,无数据
+common,no_description,,zh_Hans_CN,No description,无描述,0,无描述
+common,not_set,,zh_Hans_CN,[not set],【未设置】,0,【未设置】
 common,open,,zh_Hans_CN,Open,开放,0,开放
 common,operations,,zh_Hans_CN,Operations,操作,0,操作
 common,preview,,zh_Hans_CN,Preview,预览,0,预览
-common,read_more,,zh_Hans_CN,"Read more",阅读更多,0,阅读更多
+common,read_more,,zh_Hans_CN,Read more,阅读更多,0,阅读更多
 common,renamed,,zh_Hans_CN,Renamed,已重命名,0,已重命名
 common,save,,zh_Hans_CN,Save,保存,0,保存
-common,saved,,zh_Hans_CN,"Record saved",记录已保存,0,记录已保存
+common,saved,,zh_Hans_CN,Record saved,记录已保存,0,记录已保存
 common,saved_short,,zh_Hans_CN,Saved,已保存,0,已保存
 common,search,,zh_Hans_CN,Search,搜索,0,搜索
 common,unknown,,zh_Hans_CN,Unknown,未知,0,未知
@@ -325,170 +325,144 @@ common,upload,,zh_Hans_CN,Upload,上传,0,上传
 common,user,,zh_Hans_CN,User,用户,0,用户
 common,width,,zh_Hans_CN,Width,宽度,0,宽度
 common,yes,,zh_Hans_CN,Yes,是,0,是
-datatable,column_visibility,,zh_Hans_CN,"Visible columns",可见列,0,可见列
-datatable,displayed_columns,,zh_Hans_CN,"Displayed columns",显示的列,0,显示的列
-datatable,empty_table,,zh_Hans_CN,"No data",无数据,0,无数据
+datatable,column_visibility,,zh_Hans_CN,Visible columns,可见列,0,可见列
+datatable,displayed_columns,,zh_Hans_CN,Displayed columns,显示的列,0,显示的列
+datatable,empty_table,,zh_Hans_CN,No data,无数据,0,无数据
 datatable,first,,zh_Hans_CN,First,第一,0,第一
-datatable,info_compact,,zh_Hans_CN,"_START_ - _END_ / _TOTAL_ items","_START_ - _END_ / 共 _TOTAL_ 项",0,"_START_ - _END_ / 共 _TOTAL_ 项"
-datatable,info_empty,,zh_Hans_CN,"No results",无结果,0,无结果
-datatable,info_filtered_compact,,zh_Hans_CN,"(filtered from _MAX_ items)","（从 _MAX_ 项中筛选）",0,"（从 _MAX_ 项中筛选）"
-datatable,info_filtered_html,,zh_Hans_CN,"<br><i>filtered from _MAX_ rows</i>","<br><i>从 _MAX_ 行中筛选</i>",0,"<br><i>从 _MAX_ 行中筛选</i>"
-datatable,info_full,,zh_Hans_CN,"_TOTAL_ displayable items (showing: _START_ - _END_)","共 _TOTAL_ 个可显示项目（显示：_START_ - _END_）",0,"共 _TOTAL_ 个可显示项目（显示：_START_ - _END_）"
+datatable,info_compact,,zh_Hans_CN,_START_ - _END_ / _TOTAL_ items,_START_ - _END_ / 共 _TOTAL_ 项,0,_START_ - _END_ / 共 _TOTAL_ 项
+datatable,info_empty,,zh_Hans_CN,No results,无结果,0,无结果
+datatable,info_filtered_compact,,zh_Hans_CN,(filtered from _MAX_ items),（从 _MAX_ 项中筛选）,0,（从 _MAX_ 项中筛选）
+datatable,info_filtered_html,,zh_Hans_CN,<br><i>filtered from _MAX_ rows</i>,<br><i>从 _MAX_ 行中筛选</i>,0,<br><i>从 _MAX_ 行中筛选</i>
+datatable,info_full,,zh_Hans_CN,_TOTAL_ displayable items (showing: _START_ - _END_),共 _TOTAL_ 个可显示项目（显示：_START_ - _END_）,0,共 _TOTAL_ 个可显示项目（显示：_START_ - _END_）
 datatable,last,,zh_Hans_CN,Last,最后,0,最后
-datatable,length_menu,,zh_Hans_CN,"_MENU_ items/page","每页 _MENU_ 项",0,"每页 _MENU_ 项"
+datatable,length_menu,,zh_Hans_CN,_MENU_ items/page,每页 _MENU_ 项,0,每页 _MENU_ 项
 datatable,loading_records,,zh_Hans_CN,Loading...,加载中...,0,加载中...
 datatable,next,,zh_Hans_CN,Next,下一步,0,下一步
 datatable,previous,,zh_Hans_CN,Previous,上一步,0,上一步
 datatable,processing,,zh_Hans_CN,Processing...,处理中...,0,处理中...
 datatable,search,,zh_Hans_CN,Search,搜索,0,搜索
-datatable,zero_records,,zh_Hans_CN,"No displayable items",没有可显示的项目,0,没有可显示的项目
-layout,admin_default.description,,zh_Hans_CN,"Single-column admin layout",单列管理员布局,0,单列管理员布局
-layout,admin_default.name,,zh_Hans_CN,"Admin 1-column",管理员单列,0,管理员单列
-layout,admin_empty.description,,zh_Hans_CN,"Empty admin layout",空管理员布局,0,空管理员布局
-layout,admin_empty.name,,zh_Hans_CN,"Empty admin",空管理员,0,空管理员
-layout,admin_menu.description,,zh_Hans_CN,"Displays the admin menu",显示管理员菜单,0,显示管理员菜单
-layout,admin_menu.name,,zh_Hans_CN,"Admin menu",管理员菜单,0,管理员菜单
-layout,admin_nomenu.description,,zh_Hans_CN,"Admin layout without menu",无菜单管理员布局,0,无菜单管理员布局
-layout,admin_nomenu.name,,zh_Hans_CN,"Admin without menu",无菜单管理员,0,无菜单管理员
-layout,header_right.description,,zh_Hans_CN,"Displays the quick access menu",显示快捷访问菜单,0,显示快捷访问菜单
-layout,header_right.name,,zh_Hans_CN,"Quick menu",快捷菜单,0,快捷菜单
-layout,main_menu.description,,zh_Hans_CN,"Displays the main menu",显示主菜单,0,显示主菜单
-layout,main_menu.name,,zh_Hans_CN,"Main menu",主菜单,0,主菜单
-layout,public_2row.description,,zh_Hans_CN,"Two-column public layout",双列公共布局,0,双列公共布局
-layout,public_2row.hero.balanced_life,,zh_Hans_CN,"Want to live a more balanced life?",想要过更平衡的生活？,0,想要过更平衡的生活？
-layout,public_2row.hero.better_quality_of_life,,zh_Hans_CN,"Want a better quality of life?",想要更好的生活质量？,0,想要更好的生活质量？
-layout,public_2row.hero.conflict_management,,zh_Hans_CN,"Want to handle conflicts better?",想要更好地处理冲突？,0,想要更好地处理冲突？
-layout,public_2row.hero.equal_partner,,zh_Hans_CN,"Want to be treated as an equal partner?",想要被平等对待？,0,想要被平等对待？
-layout,public_2row.hero.self_discovery,,zh_Hans_CN,"Want to understand yourself better?",想要更好地了解自己？,0,想要更好地了解自己？
-layout,public_2row.hero.solution,,zh_Hans_CN,"The solution: TeamSolution!",解决方案：TeamSolution！,0,解决方案：TeamSolution！
-layout,public_2row.hero.success_and_happiness,,zh_Hans_CN,"Want to be successful and happy?",想要成功和幸福？,0,想要成功和幸福？
+datatable,zero_records,,zh_Hans_CN,No displayable items,没有可显示的项目,0,没有可显示的项目
+layout,admin_default.description,,zh_Hans_CN,Single-column admin layout,单列管理员布局,0,单列管理员布局
+layout,admin_default.name,,zh_Hans_CN,Admin 1-column,管理员单列,0,管理员单列
+layout,admin_empty.description,,zh_Hans_CN,Empty admin layout,空管理员布局,0,空管理员布局
+layout,admin_empty.name,,zh_Hans_CN,Empty admin,空管理员,0,空管理员
+layout,admin_menu.description,,zh_Hans_CN,Displays the admin menu,显示管理员菜单,0,显示管理员菜单
+layout,admin_menu.name,,zh_Hans_CN,Admin menu,管理员菜单,0,管理员菜单
+layout,admin_nomenu.description,,zh_Hans_CN,Admin layout without menu,无菜单管理员布局,0,无菜单管理员布局
+layout,admin_nomenu.name,,zh_Hans_CN,Admin without menu,无菜单管理员,0,无菜单管理员
+layout,header_right.description,,zh_Hans_CN,Displays the quick access menu,显示快捷访问菜单,0,显示快捷访问菜单
+layout,header_right.name,,zh_Hans_CN,Quick menu,快捷菜单,0,快捷菜单
+layout,main_menu.description,,zh_Hans_CN,Displays the main menu,显示主菜单,0,显示主菜单
+layout,main_menu.name,,zh_Hans_CN,Main menu,主菜单,0,主菜单
+layout,public_2row.description,,zh_Hans_CN,Two-column public layout,双列公共布局,0,双列公共布局
+layout,public_2row.hero.balanced_life,,zh_Hans_CN,Want to live a more balanced life?,想要过更平衡的生活？,0,想要过更平衡的生活？
+layout,public_2row.hero.better_quality_of_life,,zh_Hans_CN,Want a better quality of life?,想要更好的生活质量？,0,想要更好的生活质量？
+layout,public_2row.hero.conflict_management,,zh_Hans_CN,Want to handle conflicts better?,想要更好地处理冲突？,0,想要更好地处理冲突？
+layout,public_2row.hero.equal_partner,,zh_Hans_CN,Want to be treated as an equal partner?,想要被平等对待？,0,想要被平等对待？
+layout,public_2row.hero.self_discovery,,zh_Hans_CN,Want to understand yourself better?,想要更好地了解自己？,0,想要更好地了解自己？
+layout,public_2row.hero.solution,,zh_Hans_CN,The solution: TeamSolution!,解决方案：TeamSolution！,0,解决方案：TeamSolution！
+layout,public_2row.hero.success_and_happiness,,zh_Hans_CN,Want to be successful and happy?,想要成功和幸福？,0,想要成功和幸福？
 layout,public_2row.name,,zh_Hans_CN,2-column,2列,0,2列
-layout,public_default.description,,zh_Hans_CN,"Single-column public layout",单列公共布局,0,单列公共布局
+layout,public_default.description,,zh_Hans_CN,Single-column public layout,单列公共布局,0,单列公共布局
 layout,public_default.name,,zh_Hans_CN,1-column,1列,0,1列
-layout,public_empty.description,,zh_Hans_CN,"Empty layout for simple responses",用于简单响应的空布局,0,用于简单响应的空布局
+layout,public_empty.description,,zh_Hans_CN,Empty layout for simple responses,用于简单响应的空布局,0,用于简单响应的空布局
 layout,public_empty.name,,zh_Hans_CN,Empty,空,0,空
-layout,public_login.description,,zh_Hans_CN,"Login layout",登录布局,0,登录布局
+layout,public_login.description,,zh_Hans_CN,Login layout,登录布局,0,登录布局
 layout,public_login.name,,zh_Hans_CN,Login,登录,0,登录
-layout,public_preview.description,,zh_Hans_CN,"Preview layout",预览布局,0,预览布局
+layout,public_preview.description,,zh_Hans_CN,Preview layout,预览布局,0,预览布局
 layout,public_preview.name,,zh_Hans_CN,Preview,预览,0,预览
-layout,top_menu_admin.description,,zh_Hans_CN,"Displays the admin top menu",显示管理员顶部菜单,0,显示管理员顶部菜单
-layout,top_menu_admin.name,,zh_Hans_CN,"Admin top menu",管理员顶部菜单,0,管理员顶部菜单
-layout,unknown.description,,zh_Hans_CN,"Layout not configured",布局未配置,0,布局未配置
-layout,unknown.name,,zh_Hans_CN,"Unknown layout",未知布局,0,未知布局
-layout,widget_previewer.description,,zh_Hans_CN,"Minimal layout for widget previews",用于组件预览的最简布局,0,用于组件预览的最简布局
-layout,widget_previewer.name,,zh_Hans_CN,"Widget previewer",组件预览器,0,组件预览器
+layout,top_menu_admin.description,,zh_Hans_CN,Displays the admin top menu,显示管理员顶部菜单,0,显示管理员顶部菜单
+layout,top_menu_admin.name,,zh_Hans_CN,Admin top menu,管理员顶部菜单,0,管理员顶部菜单
+layout,unknown.description,,zh_Hans_CN,Layout not configured,布局未配置,0,布局未配置
+layout,unknown.name,,zh_Hans_CN,Unknown layout,未知布局,0,未知布局
+layout,widget_previewer.description,,zh_Hans_CN,Minimal layout for widget previews,用于组件预览的最简布局,0,用于组件预览的最简布局
+layout,widget_previewer.name,,zh_Hans_CN,Widget previewer,组件预览器,0,组件预览器
 record_action,datasheet,,zh_Hans_CN,Datasheet,数据表,0,数据表
 record_action,versions,,zh_Hans_CN,Versions,版本,0,版本
-record_meta,created_by,,zh_Hans_CN,"Created by",创建者,0,创建者
-record_meta,last_modified,,zh_Hans_CN,"Last modified",最后修改,0,最后修改
-resource,new_folder,,zh_Hans_CN,"New folder",新文件夹,0,新文件夹
-resource,new_webpage,,zh_Hans_CN,"New webpage",新网页,0,新网页
+record_meta,created_by,,zh_Hans_CN,Created by,创建者,0,创建者
+record_meta,last_modified,,zh_Hans_CN,Last modified,最后修改,0,最后修改
+resource,new_folder,,zh_Hans_CN,New folder,新文件夹,0,新文件夹
+resource,new_webpage,,zh_Hans_CN,New webpage,新网页,0,新网页
 resource,properties,,zh_Hans_CN,Properties,属性,0,属性
 resource,security,,zh_Hans_CN,Security,安全,0,安全
-resource,upload_file,,zh_Hans_CN,"Upload file...",上传文件...,0,上传文件...
-response_error,access_denied,,zh_Hans_CN,"Access denied",访问被拒绝,0,访问被拒绝
-response_error,access_restricted,,zh_Hans_CN,"Access restricted",访问受限,0,访问受限
-response_error,forbidden.message,,zh_Hans_CN,"You do not have permission to access this resource.",您没有权限访问此资源。,0,您没有权限访问此资源。
+resource,upload_file,,zh_Hans_CN,Upload file...,上传文件...,0,上传文件...
+response_error,access_denied,,zh_Hans_CN,Access denied,访问被拒绝,0,访问被拒绝
+response_error,access_restricted,,zh_Hans_CN,Access restricted,访问受限,0,访问受限
+response_error,forbidden.message,,zh_Hans_CN,You do not have permission to access this resource.,您没有权限访问此资源。,0,您没有权限访问此资源。
 response_error,forbidden.title,,zh_Hans_CN,Forbidden,禁止,0,禁止
 response_error,internal.contact_support,,zh_Hans_CN,"If the problem persists, please contact our support team.",如果问题仍然存在，请联系我们的支持团队。,0,如果问题仍然存在，请联系我们的支持团队。
-response_error,internal.go_back_previous_page,,zh_Hans_CN,"Go back to the previous page using your browser's back button",使用浏览器的返回按钮返回上一页,0,使用浏览器的返回按钮返回上一页
-response_error,internal.intro,,zh_Hans_CN,"We apologize for the inconvenience. Our team has been notified and we are working to fix this issue.",我们为给您带来的不便深表歉意。我们的团队已收到通知，正在修复此问题。,0,我们为给您带来的不便深表歉意。我们的团队已收到通知，正在修复此问题。
+response_error,internal.go_back_previous_page,,zh_Hans_CN,Go back to the previous page using your browser's back button,使用浏览器的返回按钮返回上一页,0,使用浏览器的返回按钮返回上一页
+response_error,internal.intro,,zh_Hans_CN,We apologize for the inconvenience. Our team has been notified and we are working to fix this issue.,我们为给您带来的不便深表歉意。我们的团队已收到通知，正在修复此问题。,0,我们为给您带来的不便深表歉意。我们的团队已收到通知，正在修复此问题。
 response_error,internal.reference_label,,zh_Hans_CN,Reference,参考,0,参考
-response_error,internal.refresh_page,,zh_Hans_CN,"Refresh this page",刷新此页面,0,刷新此页面
-response_error,internal.title,,zh_Hans_CN,"Oops! Something went wrong on our end.",哎呀！我们这边出现了问题。,0,哎呀！我们这边出现了问题。
-response_error,internal.try_actions,,zh_Hans_CN,"You can try to:",您可以尝试：,0,您可以尝试：
-response_error,internal.try_again_in_a_few_minutes,,zh_Hans_CN,"Try again in a few minutes",请几分钟后重试,0,请几分钟后重试
-selection,delete_invalid_entry_confirm,,zh_Hans_CN,"Are you sure you want to delete this invalid entry?",确定要删除此无效条目吗？,0,确定要删除此无效条目吗？
-selection,delete_selected,,zh_Hans_CN,"Delete selected",删除所选,0,删除所选
-selection,delete_selected_confirm,,zh_Hans_CN,"Are you sure you want to delete all selected items?",确定要删除所有选中项目吗？,0,确定要删除所有选中项目吗？
-selection,group,,zh_Hans_CN,"Group selection",选择组,0,选择组
-selection,invalid_entry,,zh_Hans_CN,"Invalid entry",无效条目,0,无效条目
-selection,multiple,,zh_Hans_CN,"Multiple selection",多选,0,多选
-selection,selected_items,,zh_Hans_CN,"Selected items",已选项目,0,已选项目
-social,disqus.comments_link,,zh_Hans_CN,"Disqus comments","Disqus 评论",0,"Disqus 评论"
-social,disqus.enable_javascript,,zh_Hans_CN,"JavaScript must be enabled to display","必须启用 JavaScript 才能显示",0,"必须启用 JavaScript 才能显示"
-social,disqus.powered_by,,zh_Hans_CN,"comments powered by",评论由以下提供,0,评论由以下提供
-system_message,default_header,,zh_Hans_CN,"System message",系统消息,0,系统消息
-theme,error.description,,zh_Hans_CN,"Fallback error theme",备用错误主题,0,备用错误主题
+response_error,internal.refresh_page,,zh_Hans_CN,Refresh this page,刷新此页面,0,刷新此页面
+response_error,internal.title,,zh_Hans_CN,Oops! Something went wrong on our end.,哎呀！我们这边出现了问题。,0,哎呀！我们这边出现了问题。
+response_error,internal.try_actions,,zh_Hans_CN,You can try to:,您可以尝试：,0,您可以尝试：
+response_error,internal.try_again_in_a_few_minutes,,zh_Hans_CN,Try again in a few minutes,请几分钟后重试,0,请几分钟后重试
+selection,delete_invalid_entry_confirm,,zh_Hans_CN,Are you sure you want to delete this invalid entry?,确定要删除此无效条目吗？,0,确定要删除此无效条目吗？
+selection,delete_selected,,zh_Hans_CN,Delete selected,删除所选,0,删除所选
+selection,delete_selected_confirm,,zh_Hans_CN,Are you sure you want to delete all selected items?,确定要删除所有选中项目吗？,0,确定要删除所有选中项目吗？
+selection,group,,zh_Hans_CN,Group selection,选择组,0,选择组
+selection,invalid_entry,,zh_Hans_CN,Invalid entry,无效条目,0,无效条目
+selection,multiple,,zh_Hans_CN,Multiple selection,多选,0,多选
+selection,selected_items,,zh_Hans_CN,Selected items,已选项目,0,已选项目
+social,disqus.comments_link,,zh_Hans_CN,Disqus comments,Disqus 评论,0,Disqus 评论
+social,disqus.enable_javascript,,zh_Hans_CN,JavaScript must be enabled to display,必须启用 JavaScript 才能显示,0,必须启用 JavaScript 才能显示
+social,disqus.powered_by,,zh_Hans_CN,comments powered by,评论由以下提供,0,评论由以下提供
+system_message,default_header,,zh_Hans_CN,System message,系统消息,0,系统消息
+theme,error.description,,zh_Hans_CN,Fallback error theme,备用错误主题,0,备用错误主题
 theme,error.name,,zh_Hans_CN,Error,错误,0,错误
-theme,radaptor_portal_admin.description,,zh_Hans_CN,"Bootstrap 5 admin theme with portal neon/glass styling","带有门户霓虹/玻璃风格的 Bootstrap 5 管理员主题",0,"带有门户霓虹/玻璃风格的 Bootstrap 5 管理员主题"
+theme,radaptor_portal_admin.description,,zh_Hans_CN,Bootstrap 5 admin theme with portal neon/glass styling,带有门户霓虹/玻璃风格的 Bootstrap 5 管理员主题,0,带有门户霓虹/玻璃风格的 Bootstrap 5 管理员主题
 theme,radaptor_portal_admin.name,,zh_Hans_CN,RadaptorPortalAdmin,RadaptorPortalAdmin,0,RadaptorPortalAdmin
-theme,so_admin.description,,zh_Hans_CN,"SO-like admin theme","SO 风格管理员主题",0,"SO 风格管理员主题"
+theme,so_admin.description,,zh_Hans_CN,SO-like admin theme,SO 风格管理员主题,0,SO 风格管理员主题
 theme,so_admin.name,,zh_Hans_CN,SO-Admin,SO-Admin,0,SO-Admin
-theme,tracker.description,,zh_Hans_CN,"With time tracker",含时间追踪,0,含时间追踪
-theme,tracker.name,,zh_Hans_CN,Tracker,追踪器,0,追踪器
-widget,admin_menu.description,,zh_Hans_CN,"Manage the admin menu tree",管理管理员菜单树,0,管理管理员菜单树
-widget,admin_menu.name,,zh_Hans_CN,"Admin menu administration",管理员菜单管理,0,管理员菜单管理
-widget,blog_list.description,,zh_Hans_CN,"Blog list",博客列表,0,博客列表
-widget,blog_list.name,,zh_Hans_CN,"Blog list",博客列表,0,博客列表
+widget,admin_menu.description,,zh_Hans_CN,Manage the admin menu tree,管理管理员菜单树,0,管理管理员菜单树
+widget,admin_menu.name,,zh_Hans_CN,Admin menu administration,管理员菜单管理,0,管理员菜单管理
+widget,blog_list.description,,zh_Hans_CN,Blog list,博客列表,0,博客列表
+widget,blog_list.name,,zh_Hans_CN,Blog list,博客列表,0,博客列表
 widget,blog.description,,zh_Hans_CN,Blog,博客,0,博客
 widget,blog.name,,zh_Hans_CN,Blog,博客,0,博客
-widget,company_description.description,,zh_Hans_CN,"Company datasheet",公司数据表,0,公司数据表
-widget,company_description.name,,zh_Hans_CN,"Company datasheet",公司数据表,0,公司数据表
-widget,company_list.description,,zh_Hans_CN,"Company list",公司列表,0,公司列表
-widget,company_list.name,,zh_Hans_CN,"Company list",公司列表,0,公司列表
-widget,contact_person_description.description,,zh_Hans_CN,"Contact person datasheet",联系人数据表,0,联系人数据表
-widget,contact_person_description.name,,zh_Hans_CN,"Contact person datasheet",联系人数据表,0,联系人数据表
-widget,contact_person_list.description,,zh_Hans_CN,"Contact person list",联系人列表,0,联系人列表
-widget,contact_person_list.name,,zh_Hans_CN,"Contact person list",联系人列表,0,联系人列表
-widget,file_upload.description,,zh_Hans_CN,"File upload",文件上传,0,文件上传
-widget,file_upload.name,,zh_Hans_CN,"File upload",文件上传,0,文件上传
-widget,form.description,,zh_Hans_CN,"Displays a configured form",显示已配置的表单,0,显示已配置的表单
+widget,file_upload.description,,zh_Hans_CN,File upload,文件上传,0,文件上传
+widget,file_upload.name,,zh_Hans_CN,File upload,文件上传,0,文件上传
+widget,form.description,,zh_Hans_CN,Displays a configured form,显示已配置的表单,0,显示已配置的表单
 widget,form.name,,zh_Hans_CN,Form,表单,0,表单
-widget,group_beginning.description,,zh_Hans_CN,"Separately managed content unit that can contain jointly styled elements.",独立管理的内容单元，可包含共同样式的元素。,0,独立管理的内容单元，可包含共同样式的元素。
-widget,group_beginning.name,,zh_Hans_CN,"Content block",内容块,0,内容块
-widget,group_end.description,,zh_Hans_CN,"End of a separately managed content unit.",独立管理内容单元的结束。,0,独立管理内容单元的结束。
-widget,group_end.name,,zh_Hans_CN,"End of content block",内容块结束,0,内容块结束
-widget,import_export.description,,zh_Hans_CN,"Central CSV import and export tools","集中 CSV 导入导出工具",0,"集中 CSV 导入导出工具"
-widget,import_export.name,,zh_Hans_CN,"Import / Export","导入 / 导出",0,"导入 / 导出"
-widget,js_tree.description,,zh_Hans_CN,"Displays and manages a hierarchical tree of admin resources",显示和管理管理员资源的层次树,0,显示和管理管理员资源的层次树
-widget,js_tree.name,,zh_Hans_CN,"Tree browser",树浏览器,0,树浏览器
-widget,js_tree.settings,,zh_Hans_CN,"Tree settings",树设置,0,树设置
-widget,main_menu.description,,zh_Hans_CN,"Manage the main menu tree",管理主菜单树,0,管理主菜单树
-widget,main_menu.name,,zh_Hans_CN,"Main menu administration",主菜单管理,0,主菜单管理
-widget,plain_html.description,,zh_Hans_CN,"HTML code (embed)","HTML 代码（嵌入）",0,"HTML 代码（嵌入）"
-widget,plain_html.name,,zh_Hans_CN,"HTML code (embed)","HTML 代码（嵌入）",0,"HTML 代码（嵌入）"
-widget,project_list.description,,zh_Hans_CN,"Project list",项目列表,0,项目列表
-widget,project_list.name,,zh_Hans_CN,"Project list",项目列表,0,项目列表
-widget,project_state_list.description,,zh_Hans_CN,"Project status list",项目状态列表,0,项目状态列表
-widget,project_state_list.name,,zh_Hans_CN,"Project status list",项目状态列表,0,项目状态列表
-widget,resource_acl_selector.description,,zh_Hans_CN,"Configure resource access permissions",配置资源访问权限,0,配置资源访问权限
-widget,resource_acl_selector.name,,zh_Hans_CN,"Resource access settings",资源访问设置,0,资源访问设置
+widget,group_beginning.description,,zh_Hans_CN,Separately managed content unit that can contain jointly styled elements.,独立管理的内容单元，可包含共同样式的元素。,0,独立管理的内容单元，可包含共同样式的元素。
+widget,group_beginning.name,,zh_Hans_CN,Content block,内容块,0,内容块
+widget,group_end.description,,zh_Hans_CN,End of a separately managed content unit.,独立管理内容单元的结束。,0,独立管理内容单元的结束。
+widget,group_end.name,,zh_Hans_CN,End of content block,内容块结束,0,内容块结束
+widget,import_export.description,,zh_Hans_CN,Central CSV import and export tools,集中 CSV 导入导出工具,0,集中 CSV 导入导出工具
+widget,import_export.name,,zh_Hans_CN,Import / Export,导入 / 导出,0,导入 / 导出
+widget,js_tree.description,,zh_Hans_CN,Displays and manages a hierarchical tree of admin resources,显示和管理管理员资源的层次树,0,显示和管理管理员资源的层次树
+widget,js_tree.name,,zh_Hans_CN,Tree browser,树浏览器,0,树浏览器
+widget,js_tree.settings,,zh_Hans_CN,Tree settings,树设置,0,树设置
+widget,main_menu.description,,zh_Hans_CN,Manage the main menu tree,管理主菜单树,0,管理主菜单树
+widget,main_menu.name,,zh_Hans_CN,Main menu administration,主菜单管理,0,主菜单管理
+widget,plain_html.description,,zh_Hans_CN,HTML code (embed),HTML 代码（嵌入）,0,HTML 代码（嵌入）
+widget,plain_html.name,,zh_Hans_CN,HTML code (embed),HTML 代码（嵌入）,0,HTML 代码（嵌入）
+widget,resource_acl_selector.description,,zh_Hans_CN,Configure resource access permissions,配置资源访问权限,0,配置资源访问权限
+widget,resource_acl_selector.name,,zh_Hans_CN,Resource access settings,资源访问设置,0,资源访问设置
 widget,resource_tree.description,,zh_Hans_CN,"Manage webpages, web folders, and uploaded files here.",在此管理网页、网络文件夹和上传的文件。,0,在此管理网页、网络文件夹和上传的文件。
-widget,resource_tree.name,,zh_Hans_CN,"Webpage structure",网页结构,0,网页结构
-widget,rich_text.description,,zh_Hans_CN,"Freely editable text with images",可自由编辑的带图片文本,0,可自由编辑的带图片文本
-widget,rich_text.name,,zh_Hans_CN,"Editable text",可编辑文本,0,可编辑文本
-widget,role_list.description,,zh_Hans_CN,"Displays the role tree",显示角色树,0,显示角色树
-widget,role_list.name,,zh_Hans_CN,"Role list",角色列表,0,角色列表
-widget,role_selector.description,,zh_Hans_CN,"Role selector",角色选择器,0,角色选择器
-widget,role_selector.name,,zh_Hans_CN,"Role selector",角色选择器,0,角色选择器
-widget,tag_list.description,,zh_Hans_CN,"Tag list",标签列表,0,标签列表
-widget,tag_list.name,,zh_Hans_CN,"Tag list",标签列表,0,标签列表
-widget,ticket_description.description,,zh_Hans_CN,"Ticket details",工单详情,0,工单详情
-widget,ticket_description.name,,zh_Hans_CN,"Ticket details",工单详情,0,工单详情
-widget,ticket_list.description,,zh_Hans_CN,"Ticket list",工单列表,0,工单列表
-widget,ticket_list.name,,zh_Hans_CN,"Ticket list",工单列表,0,工单列表
-widget,ticket_priority_list.description,,zh_Hans_CN,"Ticket priorities",工单优先级,0,工单优先级
-widget,ticket_priority_list.name,,zh_Hans_CN,"Ticket priorities",工单优先级,0,工单优先级
-widget,ticket_state_list.description,,zh_Hans_CN,"Ticket statuses",工单状态,0,工单状态
-widget,ticket_state_list.name,,zh_Hans_CN,"Ticket statuses",工单状态,0,工单状态
-widget,ticket_type_list.description,,zh_Hans_CN,"Ticket types",工单类型,0,工单类型
-widget,ticket_type_list.name,,zh_Hans_CN,"Ticket types",工单类型,0,工单类型
-widget,time_tracker_list.description,,zh_Hans_CN,"Time tracking",时间追踪,0,时间追踪
-widget,time_tracker_list.name,,zh_Hans_CN,"Time tracking",时间追踪,0,时间追踪
-widget,user_description.description,,zh_Hans_CN,"Displays the details of a user",显示用户详情,0,显示用户详情
-widget,user_description.name,,zh_Hans_CN,"User details",用户详情,0,用户详情
-widget,user_list.description,,zh_Hans_CN,"User list",用户列表,0,用户列表
-widget,user_list.name,,zh_Hans_CN,"User list",用户列表,0,用户列表
-widget,usergroup_list.description,,zh_Hans_CN,"Displays the user group tree",显示用户组树,0,显示用户组树
-widget,usergroup_list.name,,zh_Hans_CN,"User group list",用户组列表,0,用户组列表
-widget,usergroup_selector.description,,zh_Hans_CN,"Select user groups for a user",为用户选择用户组,0,为用户选择用户组
-widget,usergroup_selector.name,,zh_Hans_CN,"User group selector",用户组选择器,0,用户组选择器
-widget,widget_error.description,,zh_Hans_CN,"Invalid widget",无效组件,0,无效组件
-widget,widget_error.invalid_type,,zh_Hans_CN,"Non-existent content type: {type}",不存在的内容类型：{type},0,不存在的内容类型：{type}
-widget,widget_error.name,,zh_Hans_CN,"Invalid widget",无效组件,0,无效组件
-widget,widget_preview.description,,zh_Hans_CN,"Preview any widget with mock data. URL params: widget (required), theme (optional)","使用模拟数据预览任意组件。URL 参数：widget（必填），theme（可选）",0,"使用模拟数据预览任意组件。URL 参数：widget（必填），theme（可选）"
-widget,widget_preview.name,,zh_Hans_CN,"Widget preview",组件预览,0,组件预览
+widget,resource_tree.name,,zh_Hans_CN,Webpage structure,网页结构,0,网页结构
+widget,rich_text.description,,zh_Hans_CN,Freely editable text with images,可自由编辑的带图片文本,0,可自由编辑的带图片文本
+widget,rich_text.name,,zh_Hans_CN,Editable text,可编辑文本,0,可编辑文本
+widget,role_list.description,,zh_Hans_CN,Displays the role tree,显示角色树,0,显示角色树
+widget,role_list.name,,zh_Hans_CN,Role list,角色列表,0,角色列表
+widget,role_selector.description,,zh_Hans_CN,Role selector,角色选择器,0,角色选择器
+widget,role_selector.name,,zh_Hans_CN,Role selector,角色选择器,0,角色选择器
+widget,tag_list.description,,zh_Hans_CN,Tag list,标签列表,0,标签列表
+widget,tag_list.name,,zh_Hans_CN,Tag list,标签列表,0,标签列表
+widget,user_description.description,,zh_Hans_CN,Displays the details of a user,显示用户详情,0,显示用户详情
+widget,user_description.name,,zh_Hans_CN,User details,用户详情,0,用户详情
+widget,user_list.description,,zh_Hans_CN,User list,用户列表,0,用户列表
+widget,user_list.name,,zh_Hans_CN,User list,用户列表,0,用户列表
+widget,usergroup_list.description,,zh_Hans_CN,Displays the user group tree,显示用户组树,0,显示用户组树
+widget,usergroup_list.name,,zh_Hans_CN,User group list,用户组列表,0,用户组列表
+widget,usergroup_selector.description,,zh_Hans_CN,Select user groups for a user,为用户选择用户组,0,为用户选择用户组
+widget,usergroup_selector.name,,zh_Hans_CN,User group selector,用户组选择器,0,用户组选择器
+widget,widget_error.description,,zh_Hans_CN,Invalid widget,无效组件,0,无效组件
+widget,widget_error.invalid_type,,zh_Hans_CN,Non-existent content type: {type},不存在的内容类型：{type},0,不存在的内容类型：{type}
+widget,widget_error.name,,zh_Hans_CN,Invalid widget,无效组件,0,无效组件
+widget,widget_preview.description,,zh_Hans_CN,"Preview any widget with mock data. URL params: widget (required), theme (optional)",使用模拟数据预览任意组件。URL 参数：widget（必填），theme（可选）,0,使用模拟数据预览任意组件。URL 参数：widget（必填），theme（可选）
+widget,widget_preview.name,,zh_Hans_CN,Widget preview,组件预览,0,组件预览
 workbench,tm_apply,,zh_Hans_CN,Apply,应用,0,应用
-workbench,tm_no_results,,zh_Hans_CN,"No suggestions",无建议,0,无建议
+workbench,tm_no_results,,zh_Hans_CN,No suggestions,无建议,0,无建议
 workbench,tm_uses,,zh_Hans_CN,uses,使用,0,使用

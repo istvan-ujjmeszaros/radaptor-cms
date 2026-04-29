@@ -44,6 +44,10 @@ class McpCmsAuthoringAuthorization
 			return PolicyDecision::deny("webpage not found: {$path}");
 		}
 
+		if (($page['node_type'] ?? null) !== 'webpage') {
+			return PolicyDecision::deny("resource is not a webpage: {$path}");
+		}
+
 		return ResourceAcl::canAccessResource((int) $page['node_id'], $operation)
 			? PolicyDecision::allow()
 			: PolicyDecision::deny("webpage {$operation} denied: {$path}");

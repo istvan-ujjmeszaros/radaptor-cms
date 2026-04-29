@@ -108,6 +108,158 @@ class ImageManipulator
 		return $this->imageCacheHandler;
 	}
 
+	/**
+	 * @return Closure(string): array{inputFile: string, parameters: array<string, mixed>}
+	 */
+	public static function fit(
+		int $maxWidth,
+		int $maxHeight,
+		string $outputFormat,
+		int $quality = 100,
+		bool $enableZooming = false
+	): Closure {
+		return static fn (string $inputFile): array => self::pipeline($inputFile, [
+			'outputFormat' => $outputFormat,
+			'quality' => $quality,
+			'sizingMethod' => 'fit',
+			'enableZooming' => $enableZooming,
+			'maxWidth' => $maxWidth,
+			'maxHeight' => $maxHeight,
+		]);
+	}
+
+	/**
+	 * @return Closure(string): array{inputFile: string, parameters: array<string, mixed>}
+	 */
+	public static function crop(
+		int $maxWidth,
+		int $maxHeight,
+		string $outputFormat,
+		int $quality = 100,
+		bool $enableZooming = true
+	): Closure {
+		return static fn (string $inputFile): array => self::pipeline($inputFile, [
+			'outputFormat' => $outputFormat,
+			'quality' => $quality,
+			'sizingMethod' => 'crop',
+			'enableZooming' => $enableZooming,
+			'maxWidth' => $maxWidth,
+			'maxHeight' => $maxHeight,
+		]);
+	}
+
+	/**
+	 * @return Closure(string): array{inputFile: string, parameters: array<string, mixed>}
+	 */
+	public static function stretch(
+		int $maxWidth,
+		int $maxHeight,
+		string $outputFormat,
+		int $quality = 100
+	): Closure {
+		return static fn (string $inputFile): array => self::pipeline($inputFile, [
+			'outputFormat' => $outputFormat,
+			'quality' => $quality,
+			'sizingMethod' => 'stretch',
+			'enableZooming' => true,
+			'maxWidth' => $maxWidth,
+			'maxHeight' => $maxHeight,
+		]);
+	}
+
+	/**
+	 * @return Closure(array{inputFile: string, parameters: array<string, mixed>}): string
+	 */
+	public static function cache(string $cacheSubdirectoryName, bool $cachePathUseFilename = true): Closure
+	{
+		return static fn (array $pipeline): string => self::resizeToCache(
+			$pipeline['inputFile'],
+			$pipeline['parameters'],
+			$cacheSubdirectoryName,
+			$cachePathUseFilename
+		);
+	}
+
+	/**
+	 * @param array<string, mixed> $parameters
+	 */
+	public static function resizeToCache(
+		string $inputFile,
+		array $parameters,
+		string $cacheSubdirectoryName,
+		bool $cachePathUseFilename = true
+	): string {
+		$image = new self($inputFile, $parameters, $cacheSubdirectoryName, $cachePathUseFilename);
+
+		return $image->getImageCacheHandler()->getCacheFileAbsolutePath();
+	}
+
+	/**
+	 * @return array{width: int, height: int}
+	 */
+	public static function calculateFitDimensions(int $originalWidth, int $originalHeight, int $maxWidth, int $maxHeight, bool $enableZooming): array
+	{
+		self::assertPositiveDimensions($originalWidth, $originalHeight, $maxWidth, $maxHeight);
+
+		$scale = min($maxWidth / $originalWidth, $maxHeight / $originalHeight);
+
+		if (!$enableZooming) {
+			$scale = min(1.0, $scale);
+		}
+
+		return [
+			'width' => max(1, (int) round($originalWidth * $scale)),
+			'height' => max(1, (int) round($originalHeight * $scale)),
+		];
+	}
+
+	/**
+	 * @return array{scaled_width: int, scaled_height: int, final_width: int, final_height: int, offset_x: int, offset_y: int}
+	 */
+	public static function calculateCropDimensions(int $originalWidth, int $originalHeight, int $maxWidth, int $maxHeight, bool $enableZooming): array
+	{
+		self::assertPositiveDimensions($originalWidth, $originalHeight, $maxWidth, $maxHeight);
+
+		$scale = max($maxWidth / $originalWidth, $maxHeight / $originalHeight);
+
+		if (!$enableZooming) {
+			$scale = min(1.0, $scale);
+		}
+
+		$scaled_width = max(1, (int) round($originalWidth * $scale));
+		$scaled_height = max(1, (int) round($originalHeight * $scale));
+		$final_width = min($maxWidth, $scaled_width);
+		$final_height = min($maxHeight, $scaled_height);
+
+		return [
+			'scaled_width' => $scaled_width,
+			'scaled_height' => $scaled_height,
+			'final_width' => $final_width,
+			'final_height' => $final_height,
+			'offset_x' => max(0, (int) round(($scaled_width - $final_width) / 2)),
+			'offset_y' => max(0, (int) round(($scaled_height - $final_height) / 2)),
+		];
+	}
+
+	/**
+	 * @param array<string, mixed> $parameters
+	 * @return array{inputFile: string, parameters: array<string, mixed>}
+	 */
+	private static function pipeline(string $inputFile, array $parameters): array
+	{
+		return [
+			'inputFile' => $inputFile,
+			'parameters' => $parameters,
+		];
+	}
+
+	private static function assertPositiveDimensions(int $originalWidth, int $originalHeight, int $maxWidth, int $maxHeight): void
+	{
+		if ($originalWidth <= 0 || $originalHeight <= 0 || $maxWidth <= 0 || $maxHeight <= 0) {
+			throw new InvalidArgumentException('Image dimensions must be positive integers.');
+		}
+	}
+
 	private ?GdImage $originalImageResource = null;
 
 	private int $originalWidth;
@@ -229,31 +381,12 @@ class ImageManipulator
 	 */
 	protected function _calculateFitDimensions(int $originalWidth, int $originalHeight, int $maxWidth, int $maxHeight, bool $enableZooming): void
 	{
-		// Check if image is smaller than max dimensions and zooming is allowed
-		if ($originalWidth < $maxWidth && $originalHeight < $maxHeight && !$enableZooming) {
-			// No changes needed
-			$this->_overlappedWidth = $originalWidth;
-			$this->_overlappedHeight = $originalHeight;
-			$this->_finalWidth = $originalWidth;
-			$this->_finalHeight = $originalHeight;
-		} else {
-			// Calculate aspect ratios
-			$originalAspectRatio = $originalWidth / $originalHeight;
-			$maxAspectRatio = $maxWidth / $maxHeight;
+		$dimensions = self::calculateFitDimensions($originalWidth, $originalHeight, $maxWidth, $maxHeight, $enableZooming);
 
-			if ($originalAspectRatio < $maxAspectRatio) {
-				// Fit to width
-				$this->_overlappedWidth = $maxWidth;
-				$this->_overlappedHeight = intval(round($originalHeight / $originalAspectRatio));
-			} else {
-				// Fit to height
-				$this->_overlappedWidth = intval(round($originalWidth * $originalAspectRatio));
-				$this->_overlappedHeight = $maxHeight;
-			}
-
-			$this->_finalWidth = $this->_overlappedWidth;
-			$this->_finalHeight = $this->_overlappedHeight;
-		}
+		$this->_overlappedWidth = $dimensions['width'];
+		$this->_overlappedHeight = $dimensions['height'];
+		$this->_finalWidth = $this->_overlappedWidth;
+		$this->_finalHeight = $this->_overlappedHeight;
 	}
 
 	/**
@@ -268,38 +401,14 @@ class ImageManipulator
 	 */
 	protected function _calculateCropDimensions(int $originalWidth, int $originalHeight, int $maxWidth, int $maxHeight, bool $enableZooming): void
 	{
-		// Check if image is smaller than max dimensions and zooming is not allowed
-		if ($originalWidth < $maxWidth && $originalHeight < $maxHeight && !$enableZooming) {
-			// No changes needed
-			$this->_overlappedWidth = $originalWidth;
-			$this->_overlappedHeight = $originalHeight;
-			$this->_finalWidth = $originalWidth;
-			$this->_finalHeight = $originalHeight;
-		} else {
-			// Calculate aspect ratios
-			$originalAspectRatio = $originalWidth / $originalHeight;
-			$maxAspectRatio = $maxWidth / $maxHeight;
+		$dimensions = self::calculateCropDimensions($originalWidth, $originalHeight, $maxWidth, $maxHeight, $enableZooming);
 
-			if ($originalAspectRatio < $maxAspectRatio) {
-				// Fit to height, crop width
-				$this->_overlappedWidth = intval(round($originalWidth * ($maxHeight / $originalHeight)));
-				$this->_overlappedHeight = $maxHeight;
-			} elseif ($originalAspectRatio > $maxAspectRatio) {
-				// Fit to width, crop height
-				$this->_overlappedWidth = $maxWidth;
-				$this->_overlappedHeight = intval(round($originalHeight * ($maxWidth / $originalWidth)));
-			} else {
-				// No cropping needed, just resize
-				$this->_overlappedWidth = $maxWidth;
-				$this->_overlappedHeight = $maxHeight;
-			}
-			$this->_finalWidth = $maxWidth;
-			$this->_finalHeight = $maxHeight;
-		}
-
-		// Calculate offsets for cropping (center the image)
-		$this->_boxOffsetX = ($this->_overlappedWidth - $maxWidth) / 2;
-		$this->_boxOffsetY = ($this->_overlappedHeight - $maxHeight) / 2;
+		$this->_overlappedWidth = $dimensions['scaled_width'];
+		$this->_overlappedHeight = $dimensions['scaled_height'];
+		$this->_finalWidth = $dimensions['final_width'];
+		$this->_finalHeight = $dimensions['final_height'];
+		$this->_boxOffsetX = $dimensions['offset_x'];
+		$this->_boxOffsetY = $dimensions['offset_y'];
 	}
 
 	/**
@@ -387,10 +496,7 @@ class ImageManipulator
 				break;
 
 			case 'crop':
-				$xOffset = (int)abs(round(($this->_overlappedWidth - $this->_finalWidth) / 2));
-				$yOffset = (int)abs(round(($this->_overlappedHeight - $this->_finalHeight) / 2));
-
-				if (!imagecopy($this->image_resource, $tmpImage, 0, 0, $xOffset, $yOffset, $this->_overlappedWidth, $this->_overlappedHeight)) {
+				if (!imagecopy($this->image_resource, $tmpImage, 0, 0, $this->_boxOffsetX, $this->_boxOffsetY, $this->_finalWidth, $this->_finalHeight)) {
 					$this->image_resource = null;
 					$tmpImage = null;
 					$this->error = self::ERROR_OUT_OF_MEMORY . " (line " . __LINE__ . ")";
@@ -569,7 +675,7 @@ class ImageManipulator
 				$yOffset = round(($boxHeight - $imageHeight) / 2);
 		}
 
-		return [$xOffset, $yOffset];
+		return [(int) $xOffset, (int) $yOffset];
 	}
 
 	/**

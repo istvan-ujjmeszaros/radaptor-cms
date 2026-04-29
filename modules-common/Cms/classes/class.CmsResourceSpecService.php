@@ -759,7 +759,7 @@ class CmsResourceSpecService
 		$desired_group_ids = [];
 
 		foreach ($spec['usergroups'] as $usergroup_title => $permissions) {
-			$usergroup_id = (int) DbHelper::selectOneColumn('usergroups_tree', ['title' => $usergroup_title], '', 'node_id');
+			$usergroup_id = self::resolveAclUsergroupId((string) $usergroup_title);
 
 			if ($usergroup_id <= 0) {
 				throw new RuntimeException("Usergroup not found for ACL sync: {$usergroup_title}");
@@ -801,6 +801,15 @@ class CmsResourceSpecService
 
 			ResourceAcl::deleteAcl((int) $row['acl_id']);
 		}
+	}
+
+	private static function resolveAclUsergroupId(string $usergroup_title): int
+	{
+		return match ($usergroup_title) {
+			'Everyone' => Usergroups::SYSTEMUSERGROUP_EVERYBODY,
+			'Logged in users' => Usergroups::SYSTEMUSERGROUP_LOGGEDIN,
+			default => (int) DbHelper::selectOneColumn('usergroups_tree', ['title' => $usergroup_title], '', 'node_id'),
+		};
 	}
 
 	/**

@@ -5,5 +5,10 @@
     "version": "0.1.9",
     "dependencies": {
         "radaptor/core/framework": "^0.1.0"
+    },
+    "composer": {
+        "require": {
+            "php": "^8.5"
+        }
     }
 }

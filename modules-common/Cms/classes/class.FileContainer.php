@@ -237,18 +237,14 @@ abstract class FileContainer
 
 		// szabad méretezés
 		if (count($exploded_size) == 2) {
-			$parameters = [
-				'maxWidth' => $exploded_size[0],
-				'maxHeight' => $exploded_size[1],
-				'outputFormat' => mb_strtolower($pathinfo['extension']),
-				'quality' => 90,
-				'sizingMethod' => 'stretch',
-				'enableZooming' => true,
-			];
-
-			$resized_image = new ImageManipulator($originalPath, $parameters, 'resized');
-
-			return $resized_image->getImageCacheHandler()->getCacheFileAbsolutePath();
+			return $originalPath
+				|> ImageManipulator::stretch(
+					maxWidth: (int) $exploded_size[0],
+					maxHeight: (int) $exploded_size[1],
+					outputFormat: mb_strtolower($pathinfo['extension']),
+					quality: 90
+				)
+				|> ImageManipulator::cache(cacheSubdirectoryName: 'resized');
 		}
 
 		// előre definiált manipuláció

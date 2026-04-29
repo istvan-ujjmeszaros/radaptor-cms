@@ -13,11 +13,18 @@ End users should install through a consumer app, not by cloning this package dir
 
 The package is resolved from registry metadata during app install/update.
 
+## Runtime Requirements
+
+The CMS package requires PHP 8.5 or newer. The package metadata declares this as
+`composer.require.php = ^8.5`, and CMS code may use PHP 8.5 syntax such as the
+pipe operator (`|>`).
+
 ## Dependencies
 
 From `.registry-package.json`:
 
 - `radaptor/core/framework` (`^0.1.0`)
+- PHP (`^8.5`)
 
 ## License
 

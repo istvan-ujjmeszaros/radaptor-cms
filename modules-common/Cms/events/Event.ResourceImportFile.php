@@ -7,9 +7,33 @@ class EventResourceImportFile extends AbstractEvent implements iBrowserEventDocu
 	public function authorize(PolicyContext $policyContext): PolicyDecision
 	{
 		$target_folder = trim((string) Request::_POST('target_folder', ''));
+		$resource_name = trim((string) Request::_POST('resource_name', ''));
 
 		if ($target_folder === '') {
 			return PolicyDecision::deny('target_folder is required');
+		}
+
+		if ($resource_name === '') {
+			return PolicyDecision::deny('resource_name is required');
+		}
+
+		$folder_path = CmsPathHelper::splitFolderPath($target_folder)['normalized_path'];
+		$existing = ResourceTreeHandler::getResourceTreeEntryData($folder_path, $resource_name, Config::APP_DOMAIN_CONTEXT->value());
+
+		if (is_array($existing)) {
+			$logged_in = McpCmsAuthoringAuthorization::loggedIn($policyContext);
+
+			if (!$logged_in->allow) {
+				return $logged_in;
+			}
+
+			if (($existing['node_type'] ?? null) !== 'file') {
+				return PolicyDecision::deny("resource path exists and is not a file: {$folder_path}{$resource_name}");
+			}
+
+			return ResourceAcl::canAccessResource((int) $existing['node_id'], ResourceAcl::_ACL_EDIT)
+				? PolicyDecision::allow()
+				: PolicyDecision::deny("resource edit denied: {$folder_path}{$resource_name}");
 		}
 
 		$folder = CmsPathHelper::resolveFolder($target_folder);
@@ -53,7 +77,7 @@ class EventResourceImportFile extends AbstractEvent implements iBrowserEventDocu
 			],
 			'authorization' => [
 				'visibility' => 'resource ACL',
-				'description' => 'Requires create permission on the target folder, or on its parent if the folder has to be created.',
+				'description' => 'Requires create permission for new files and edit permission when replacing an existing file.',
 			],
 			'mcp' => [
 				'enabled' => true,
@@ -90,8 +114,17 @@ class EventResourceImportFile extends AbstractEvent implements iBrowserEventDocu
 			return;
 		}
 
+		$file_id = null;
+
 		try {
 			$source = CmsMigrationSourcePathHelper::resolveReadableFile($source_path);
+			$folder_path = CmsPathHelper::splitFolderPath($target_folder)['normalized_path'];
+			$existing = ResourceTreeHandler::getResourceTreeEntryData($folder_path, $resource_name, Config::APP_DOMAIN_CONTEXT->value());
+
+			if (is_array($existing) && ($existing['node_type'] ?? null) !== 'file') {
+				throw new RuntimeException("Resource path exists and is not a file: {$folder_path}{$resource_name}");
+			}
+
 			$folder_id = CmsResourceSpecService::upsertFolder(['path' => $target_folder]);
 			$folder = ResourceTreeHandler::getResourceTreeEntryDataById($folder_id);
 
@@ -107,8 +140,6 @@ class EventResourceImportFile extends AbstractEvent implements iBrowserEventDocu
 
 			$stored_file = FileContainer::realPathFromFileId($file_id);
 			$mime = is_readable($stored_file) ? (mime_content_type($stored_file) ?: 'application/octet-stream') : 'application/octet-stream';
-			$folder_path = CmsPathHelper::splitFolderPath($target_folder)['normalized_path'];
-			$existing = ResourceTreeHandler::getResourceTreeEntryData($folder_path, $resource_name, Config::APP_DOMAIN_CONTEXT->value());
 			$save_data = [
 				'node_type' => 'file',
 				'resource_name' => $resource_name,
@@ -120,10 +151,6 @@ class EventResourceImportFile extends AbstractEvent implements iBrowserEventDocu
 			$replaced = false;
 
 			if (is_array($existing)) {
-				if (($existing['node_type'] ?? null) !== 'file') {
-					throw new RuntimeException("Resource path exists and is not a file: {$folder_path}{$resource_name}");
-				}
-
 				ResourceTreeHandler::updateResourceTreeEntry($save_data, (int) $existing['node_id']);
 				$resource_id = (int) $existing['node_id'];
 				$replaced = true;
@@ -131,6 +158,9 @@ class EventResourceImportFile extends AbstractEvent implements iBrowserEventDocu
 				$resource_id = ResourceTreeHandler::addResourceEntry($save_data, (int) $folder['node_id']);
 
 				if (!is_int($resource_id) || $resource_id <= 0) {
+					FileContainer::delFile($file_id);
+					$file_id = null;
+
 					throw new RuntimeException("Unable to create file resource: {$folder_path}{$resource_name}");
 				}
 			}
@@ -143,6 +173,10 @@ class EventResourceImportFile extends AbstractEvent implements iBrowserEventDocu
 				'replaced' => $replaced,
 			]);
 		} catch (Throwable $exception) {
+			if (is_int($file_id) && $file_id > 0) {
+				FileContainer::delFile($file_id);
+			}
+
 			ApiResponse::renderError('RESOURCE_IMPORT_FILE_FAILED', $exception->getMessage(), 400);
 		}
 	}

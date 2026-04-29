@@ -58,7 +58,8 @@ class EventWebpageList extends AbstractEvent implements iBrowserEventDocumentabl
 				continue;
 			}
 
-			$result_pages[] = CmsResourceSpecService::exportWebpageSpec(ResourceTreeHandler::getPathFromId($page_id));
+			$page_path = Url::getSeoUrl($page_id, false) ?? ((string) $page['path'] . (string) $page['resource_name']);
+			$result_pages[] = CmsResourceSpecService::exportWebpageSpec($page_path);
 		}
 
 		ApiResponse::renderSuccess([

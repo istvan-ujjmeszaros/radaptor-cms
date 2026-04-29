@@ -67,8 +67,21 @@ class EventWebpageCreate extends AbstractEvent implements iBrowserEventDocumenta
 		}
 
 		try {
-			if (CmsPathHelper::resolveWebpage($path) !== null) {
-				throw new RuntimeException("Webpage already exists: {$path}");
+			$path_parts = CmsPathHelper::splitWebpagePath($path);
+			$existing_resource = ResourceTreeHandler::getResourceTreeEntryData(
+				$path_parts['folder'],
+				$path_parts['resource_name'],
+				Config::APP_DOMAIN_CONTEXT->value()
+			);
+
+			if (is_array($existing_resource)) {
+				$node_type = (string) ($existing_resource['node_type'] ?? '');
+
+				if ($node_type === 'webpage') {
+					throw new RuntimeException("Webpage already exists: {$path}");
+				}
+
+				throw new RuntimeException("Resource path already exists and is not a webpage: {$path}");
 			}
 
 			$spec = self::buildSpec($path, true);

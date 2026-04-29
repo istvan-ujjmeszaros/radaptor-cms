@@ -432,6 +432,35 @@ class CmsResourceSpecService
 	}
 
 	/**
+	 * @param list<CmsWidgetSpec> $spec
+	 * @return list<CmsWidgetSpec>
+	 */
+	public static function validateWidgetSlotSpec(string $path, string $slot_name, array $spec): array
+	{
+		$page = CmsPathHelper::resolveWebpage($path);
+
+		if (!is_array($page)) {
+			throw new RuntimeException("Webpage not found: {$path}");
+		}
+
+		if (trim($slot_name) === '') {
+			throw new InvalidArgumentException('Slot name is required.');
+		}
+
+		$ordered_specs = self::normalizeWidgetSpecs($spec);
+
+		foreach ($ordered_specs as $widget_spec) {
+			$widget_name = (string) $widget_spec['widget'];
+
+			if (!Widget::checkWidgetExists($widget_name)) {
+				throw new InvalidArgumentException("Widget does not exist: {$widget_name}");
+			}
+		}
+
+		return $ordered_specs;
+	}
+
+	/**
 	 * @return array<string, mixed>
 	 */
 	public static function listAcl(string $path, bool $resolved = false): array

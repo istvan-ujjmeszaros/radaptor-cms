@@ -48,11 +48,10 @@ class EventWebpageList extends AbstractEvent implements iBrowserEventDocumentabl
 
 	public function run(): void
 	{
-		$base_path = CLIWebpageHelper::normalizePath((string) Request::_GET('path', '/'));
-		$pages = CLIWebpageHelper::getWebpagesUnderPath($base_path);
+		$base_path = CmsAuthoringQueryHelper::normalizePath((string) Request::_GET('path', '/'));
 		$result_pages = [];
 
-		foreach ($pages as $page) {
+		foreach (CmsAuthoringQueryHelper::getWebpagesUnderPath($base_path) as $page) {
 			$page_id = (int) $page['node_id'];
 
 			if (!ResourceAcl::canAccessResource($page_id, ResourceAcl::_ACL_VIEW)) {

@@ -54,7 +54,7 @@ class EventWidgetUrls extends AbstractEvent implements iBrowserEventDocumentable
 
 		$placements = [];
 
-		foreach (CLIWebpageHelper::getWidgetPlacements($widget_name) as $placement) {
+		foreach (CmsAuthoringQueryHelper::getWidgetPlacements($widget_name) as $placement) {
 			if (ResourceAcl::canAccessResource((int) $placement['page_id'], ResourceAcl::_ACL_VIEW)) {
 				$placements[] = $placement;
 			}

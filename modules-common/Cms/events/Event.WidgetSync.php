@@ -81,9 +81,21 @@ class EventWidgetSync extends AbstractEvent implements iBrowserEventDocumentable
 		}
 
 		try {
+			if ($dry_run) {
+				$validated_widgets = CmsResourceSpecService::validateWidgetSlotSpec($path, $slot, array_values($widgets));
+
+				ApiResponse::renderSuccess([
+					'dry_run' => true,
+					'validated_widget_count' => count($validated_widgets),
+					'connections' => [],
+				]);
+
+				return;
+			}
+
 			ApiResponse::renderSuccess([
-				'dry_run' => $dry_run,
-				'connections' => $dry_run ? [] : CmsResourceSpecService::syncWidgetSlot($path, $slot, array_values($widgets)),
+				'dry_run' => false,
+				'connections' => CmsResourceSpecService::syncWidgetSlot($path, $slot, array_values($widgets)),
 			]);
 		} catch (Throwable $exception) {
 			ApiResponse::renderError('WIDGET_SYNC_FAILED', $exception->getMessage(), 400);

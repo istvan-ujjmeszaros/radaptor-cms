@@ -58,15 +58,15 @@ class McpCmsAuthoringAuthorization
 		}
 
 		$parts = CmsPathHelper::splitWebpagePath($path);
-		$parent = CmsPathHelper::resolveFolder($parts['folder']);
+		$parent = self::resolveNearestExistingFolder($parts['folder']);
 
 		if (!is_array($parent)) {
-			return PolicyDecision::deny("parent folder not found: {$parts['folder']}");
+			return PolicyDecision::deny("no existing ancestor folder found for: {$parts['folder']}");
 		}
 
 		return ResourceAcl::canAccessResource((int) $parent['node_id'], ResourceAcl::_ACL_CREATE)
 			? PolicyDecision::allow()
-			: PolicyDecision::deny("resource create denied: {$parts['folder']}");
+			: PolicyDecision::deny("resource create denied: " . ResourceTreeHandler::getPathFromId((int) $parent['node_id']));
 	}
 
 	public static function createFolder(string $path, PolicyContext $policyContext): PolicyDecision
@@ -78,14 +78,39 @@ class McpCmsAuthoringAuthorization
 		}
 
 		$parts = CmsPathHelper::splitFolderPath($path);
-		$parent = CmsPathHelper::resolveFolder($parts['parent_path']);
+		$parent = self::resolveNearestExistingFolder($parts['parent_path']);
 
 		if (!is_array($parent)) {
-			return PolicyDecision::deny("parent folder not found: {$parts['parent_path']}");
+			return PolicyDecision::deny("no existing ancestor folder found for: {$parts['parent_path']}");
 		}
 
 		return ResourceAcl::canAccessResource((int) $parent['node_id'], ResourceAcl::_ACL_CREATE)
 			? PolicyDecision::allow()
-			: PolicyDecision::deny("resource create denied: {$parts['parent_path']}");
+			: PolicyDecision::deny("resource create denied: " . ResourceTreeHandler::getPathFromId((int) $parent['node_id']));
+	}
+
+	/**
+	 * @return array<string, mixed>|null
+	 */
+	private static function resolveNearestExistingFolder(string $path): ?array
+	{
+		$normalized_path = CmsPathHelper::splitFolderPath($path)['normalized_path'];
+		$segments = array_values(array_filter(
+			explode('/', trim($normalized_path, '/')),
+			static fn (string $segment): bool => $segment !== ''
+		));
+
+		for ($length = count($segments); $length >= 0; --$length) {
+			$candidate = $length === 0
+				? '/'
+				: '/' . implode('/', array_slice($segments, 0, $length)) . '/';
+			$folder = CmsPathHelper::resolveFolder($candidate);
+
+			if (is_array($folder)) {
+				return $folder;
+			}
+		}
+
+		return null;
 	}
 }

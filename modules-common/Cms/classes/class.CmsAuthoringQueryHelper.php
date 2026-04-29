@@ -13,7 +13,7 @@ class CmsAuthoringQueryHelper
 		$path_parts = explode('/', trim($normalized_path, '/'));
 		$resource_name = array_pop($path_parts);
 
-		if (empty($resource_name)) {
+		if ($resource_name === '') {
 			$resource_name = 'index.html';
 		}
 
@@ -29,7 +29,7 @@ class CmsAuthoringQueryHelper
 			return $node;
 		}
 
-		if (empty($path_parts)) {
+		if ($path_parts === []) {
 			return null;
 		}
 

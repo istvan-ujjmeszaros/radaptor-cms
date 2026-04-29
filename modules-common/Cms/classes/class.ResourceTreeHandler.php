@@ -1056,7 +1056,7 @@ class ResourceTreeHandler extends ResourceAcl
 		);
 	}
 
-	private static function hasResourceReferencesForFileId(int $file_id): bool
+	public static function hasResourceReferencesForFileId(int $file_id): bool
 	{
 		$stmt = Db::instance()->prepare(
 			"SELECT 1

@@ -113,9 +113,13 @@ class EventWebpageUpdate extends AbstractEvent implements iBrowserEventDocumenta
 			$spec['catcher'] = filter_var(Request::_POST('catcher'), FILTER_VALIDATE_BOOL, FILTER_NULL_ON_FAILURE) ?? false;
 		}
 
-		$slots = Request::_POST('slots', []);
+		if (Request::hasPost('slots')) {
+			$slots = Request::_POST('slots', []);
 
-		if (is_array($slots) && $slots !== []) {
+			if (!is_array($slots)) {
+				throw new InvalidArgumentException('slots must be an object.');
+			}
+
 			$spec['slots'] = $slots;
 		}
 

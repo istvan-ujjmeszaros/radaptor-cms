@@ -51,21 +51,25 @@ class EventWebpageList extends AbstractEvent implements iBrowserEventDocumentabl
 		$base_path = CmsAuthoringQueryHelper::normalizePath((string) Request::_GET('path', '/'));
 		$result_pages = [];
 
-		foreach (CmsAuthoringQueryHelper::getWebpagesUnderPath($base_path) as $page) {
-			$page_id = (int) $page['node_id'];
+		try {
+			foreach (CmsAuthoringQueryHelper::getWebpagesUnderPath($base_path) as $page) {
+				$page_id = (int) $page['node_id'];
 
-			if (!ResourceAcl::canAccessResource($page_id, ResourceAcl::_ACL_VIEW)) {
-				continue;
+				if (!ResourceAcl::canAccessResource($page_id, ResourceAcl::_ACL_VIEW)) {
+					continue;
+				}
+
+				$page_path = Url::getSeoUrl($page_id, false) ?? ((string) $page['path'] . (string) $page['resource_name']);
+				$result_pages[] = CmsResourceSpecService::exportWebpageSpec($page_path);
 			}
 
-			$page_path = Url::getSeoUrl($page_id, false) ?? ((string) $page['path'] . (string) $page['resource_name']);
-			$result_pages[] = CmsResourceSpecService::exportWebpageSpec($page_path);
+			ApiResponse::renderSuccess([
+				'base_path' => $base_path,
+				'count' => count($result_pages),
+				'pages' => $result_pages,
+			]);
+		} catch (Throwable $exception) {
+			ApiResponse::renderError('WEBPAGE_LIST_FAILED', $exception->getMessage(), 400);
 		}
-
-		ApiResponse::renderSuccess([
-			'base_path' => $base_path,
-			'count' => count($result_pages),
-			'pages' => $result_pages,
-		]);
 	}
 }

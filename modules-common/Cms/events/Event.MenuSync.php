@@ -72,66 +72,87 @@ class EventMenuSync extends AbstractEvent implements iBrowserEventDocumentable
 
 		try {
 			$type = CmsMenuService::normalizeType($type);
-			$existing_by_title = self::rootItemsByTitle($type);
-			$seen_titles = [];
-			$created = [];
-			$updated = [];
+			$pdo = Db::instance();
+			$started_transaction = !$pdo->inTransaction();
 
-			foreach (array_values($items) as $position => $item) {
-				if (!is_array($item)) {
-					throw new InvalidArgumentException('Each menu item must be an object.');
+			try {
+				if ($started_transaction) {
+					$pdo->beginTransaction();
 				}
 
-				$title = trim((string) ($item['title'] ?? ''));
-				$page_path = trim((string) ($item['page_path'] ?? ''));
-				$url = trim((string) ($item['url'] ?? ''));
+				$existing_by_title = self::rootItemsByTitle($type);
+				$seen_titles = [];
+				$created = [];
+				$updated = [];
 
-				if ($title === '') {
-					throw new InvalidArgumentException('Menu item title is required.');
-				}
-
-				if ($page_path === '' && $url === '') {
-					throw new InvalidArgumentException("Menu item {$title} must define page_path or url.");
-				}
-
-				$seen_titles[$title] = true;
-
-				if (isset($existing_by_title[$title])) {
-					$id = (int) $existing_by_title[$title]['node_id'];
-					$updated[] = CmsMenuService::update($type, $id, [
-						'title' => $title,
-						'page_path' => $page_path,
-						'url' => $url,
-					]);
-					$updated[count($updated) - 1] = self::moveRootItemToPosition($type, $id, $position);
-				} else {
-					$created_item = CmsMenuService::create(
-						$type,
-						$title,
-						0,
-						$page_path !== '' ? $page_path : null,
-						$url !== '' ? $url : null,
-						$position
-					);
-					$created[] = $created_item;
-					$existing_by_title[$title] = $created_item;
-				}
-			}
-
-			$pruned = [];
-
-			if ($prune) {
-				foreach ($existing_by_title as $title => $existing_item) {
-					if (isset($seen_titles[$title])) {
-						continue;
+				foreach (array_values($items) as $position => $item) {
+					if (!is_array($item)) {
+						throw new InvalidArgumentException('Each menu item must be an object.');
 					}
 
-					$node_id = (int) $existing_item['node_id'];
+					$title = trim((string) ($item['title'] ?? ''));
+					$page_path = trim((string) ($item['page_path'] ?? ''));
+					$url = trim((string) ($item['url'] ?? ''));
 
-					if (CmsMenuService::delete($type, $node_id, false)) {
-						$pruned[] = $node_id;
+					if ($title === '') {
+						throw new InvalidArgumentException('Menu item title is required.');
+					}
+
+					if ($page_path === '' && $url === '') {
+						throw new InvalidArgumentException("Menu item {$title} must define page_path or url.");
+					}
+
+					$seen_titles[$title] = true;
+
+					if (isset($existing_by_title[$title])) {
+						$id = (int) $existing_by_title[$title]['node_id'];
+						$updated[] = CmsMenuService::update($type, $id, [
+							'title' => $title,
+							'page_path' => $page_path,
+							'url' => $url,
+						]);
+						$updated[count($updated) - 1] = self::moveRootItemToPosition($type, $id, $position);
+					} else {
+						$created_item = CmsMenuService::create(
+							$type,
+							$title,
+							0,
+							$page_path !== '' ? $page_path : null,
+							$url !== '' ? $url : null,
+							$position
+						);
+						$created[] = $created_item;
+						$existing_by_title[$title] = $created_item;
 					}
 				}
+
+				$pruned = [];
+
+				if ($prune) {
+					foreach ($existing_by_title as $title => $existing_item) {
+						if (isset($seen_titles[$title])) {
+							continue;
+						}
+
+						$node_id = (int) $existing_item['node_id'];
+
+						if (CmsMenuService::delete($type, $node_id, false)) {
+							$pruned[] = $node_id;
+						}
+					}
+				}
+
+				$current_items = CmsMenuService::list($type);
+
+				if ($started_transaction) {
+					$pdo->commit();
+				}
+			} catch (Throwable $exception) {
+				if ($started_transaction && $pdo->inTransaction()) {
+					$pdo->rollBack();
+				}
+
+				throw $exception;
 			}
 
 			ApiResponse::renderSuccess([
@@ -139,7 +160,7 @@ class EventMenuSync extends AbstractEvent implements iBrowserEventDocumentable
 				'created' => $created,
 				'updated' => $updated,
 				'pruned' => $pruned,
-				'items' => CmsMenuService::list($type),
+				'items' => $current_items,
 			]);
 		} catch (Throwable $exception) {
 			ApiResponse::renderError('MENU_SYNC_FAILED', $exception->getMessage(), 400);

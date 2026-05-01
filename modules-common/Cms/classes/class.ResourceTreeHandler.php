@@ -452,11 +452,18 @@ class ResourceTreeHandler extends ResourceAcl
 
 	private static function wrapExistingTreeWithDomainRoot(string $domain): ?int
 	{
-		$root_id = NestedSet::wrapExistingTreeWithRoot('resource_tree', [
-			'node_type' => 'root',
-			'resource_name' => $domain,
-			'path' => '/',
-		]);
+		try {
+			$root_id = NestedSet::wrapExistingTreeWithRoot('resource_tree', [
+				'node_type' => 'root',
+				'resource_name' => $domain,
+				'path' => '/',
+			]);
+		} catch (Throwable $exception) {
+			error_log("NestedSet wrapExistingTreeWithRoot failed for resource_tree: " . $exception->getMessage());
+			SystemMessages::_error("Unable to wrap existing resource tree with domain root: {$domain}");
+
+			return null;
+		}
 
 		if (is_null($root_id)) {
 			SystemMessages::_error("Unable to wrap existing resource tree with domain root: {$domain}");

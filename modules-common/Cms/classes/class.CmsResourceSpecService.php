@@ -432,6 +432,29 @@ class CmsResourceSpecService
 	}
 
 	/**
+	 * @param list<CmsWidgetSpec> $spec
+	 * @return list<CmsWidgetSpec>
+	 */
+	public static function validateWidgetSlotSpec(string $path, string $slot_name, array $spec): array
+	{
+		$page = CmsPathHelper::resolveWebpage($path);
+
+		if (!is_array($page)) {
+			throw new RuntimeException("Webpage not found: {$path}");
+		}
+
+		if (trim($slot_name) === '') {
+			throw new InvalidArgumentException('Slot name is required.');
+		}
+
+		$ordered_specs = self::normalizeWidgetSpecs($spec);
+
+		self::assertWidgetSpecsAssignable($ordered_specs);
+
+		return $ordered_specs;
+	}
+
+	/**
 	 * @return array<string, mixed>
 	 */
 	public static function listAcl(string $path, bool $resolved = false): array
@@ -495,31 +518,54 @@ class CmsResourceSpecService
 	 */
 	private static function syncSlot(int $page_id, string $slot_name, array $widget_specs): array
 	{
-		$existing = WidgetConnection::getWidgetsForSlot($page_id, $slot_name);
-
-		foreach ($existing as $connection) {
-			Widget::removeWidgetFromWebpage($connection->getConnectionId());
+		if (trim($slot_name) === '') {
+			throw new InvalidArgumentException('Slot name is required.');
 		}
 
 		$ordered_specs = self::normalizeWidgetSpecs($widget_specs);
+		self::assertWidgetSpecsAssignable($ordered_specs);
 		$created = [];
+		$pdo = Db::instance();
+		$started_transaction = !$pdo->inTransaction();
 
-		foreach ($ordered_specs as $index => $widget_spec) {
-			$connection_id = Widget::assignWidgetToWebpage(
-				$page_id,
-				$slot_name,
-				(string) $widget_spec['widget'],
-				$index,
-				true
-			);
-
-			if (!is_int($connection_id) || $connection_id <= 0) {
-				throw new RuntimeException("Unable to sync widget {$widget_spec['widget']} on slot {$slot_name}.");
+		try {
+			if ($started_transaction) {
+				$pdo->beginTransaction();
 			}
 
-			self::replaceConnectionAttributes($connection_id, (array) ($widget_spec['attributes'] ?? []));
-			self::replaceConnectionSettings($connection_id, (string) $widget_spec['widget'], (array) ($widget_spec['settings'] ?? []));
-			$created[] = self::getWidgetConnectionSnapshot($connection_id);
+			$existing = WidgetConnection::getWidgetsForSlot($page_id, $slot_name);
+
+			foreach ($existing as $connection) {
+				Widget::removeWidgetFromWebpage($connection->getConnectionId());
+			}
+
+			foreach ($ordered_specs as $index => $widget_spec) {
+				$connection_id = Widget::assignWidgetToWebpage(
+					$page_id,
+					$slot_name,
+					(string) $widget_spec['widget'],
+					$index,
+					true
+				);
+
+				if (!is_int($connection_id) || $connection_id <= 0) {
+					throw new RuntimeException("Unable to sync widget {$widget_spec['widget']} on slot {$slot_name}.");
+				}
+
+				self::replaceConnectionAttributes($connection_id, (array) ($widget_spec['attributes'] ?? []));
+				self::replaceConnectionSettings($connection_id, (string) $widget_spec['widget'], (array) ($widget_spec['settings'] ?? []));
+				$created[] = self::getWidgetConnectionSnapshot($connection_id);
+			}
+
+			if ($started_transaction) {
+				$pdo->commit();
+			}
+		} catch (Throwable $exception) {
+			if ($started_transaction && $pdo->inTransaction()) {
+				$pdo->rollBack();
+			}
+
+			throw $exception;
 		}
 
 		return $created;
@@ -547,6 +593,20 @@ class CmsResourceSpecService
 		);
 
 		return $widget_specs;
+	}
+
+	/**
+	 * @param list<CmsWidgetSpec> $widget_specs
+	 */
+	private static function assertWidgetSpecsAssignable(array $widget_specs): void
+	{
+		foreach ($widget_specs as $widget_spec) {
+			$widget_name = (string) $widget_spec['widget'];
+
+			if (!Widget::checkWidgetExists($widget_name)) {
+				throw new InvalidArgumentException("Widget does not exist: {$widget_name}");
+			}
+		}
 	}
 
 	/**
@@ -730,7 +790,7 @@ class CmsResourceSpecService
 		$desired_group_ids = [];
 
 		foreach ($spec['usergroups'] as $usergroup_title => $permissions) {
-			$usergroup_id = (int) DbHelper::selectOneColumn('usergroups_tree', ['title' => $usergroup_title], '', 'node_id');
+			$usergroup_id = self::resolveAclUsergroupId((string) $usergroup_title);
 
 			if ($usergroup_id <= 0) {
 				throw new RuntimeException("Usergroup not found for ACL sync: {$usergroup_title}");
@@ -772,6 +832,15 @@ class CmsResourceSpecService
 
 			ResourceAcl::deleteAcl((int) $row['acl_id']);
 		}
+	}
+
+	private static function resolveAclUsergroupId(string $usergroup_title): int
+	{
+		return match ($usergroup_title) {
+			'Everyone' => Usergroups::SYSTEMUSERGROUP_EVERYBODY,
+			'Logged in users' => Usergroups::SYSTEMUSERGROUP_LOGGEDIN,
+			default => (int) DbHelper::selectOneColumn('usergroups_tree', ['title' => $usergroup_title], '', 'node_id'),
+		};
 	}
 
 	/**

@@ -18,6 +18,7 @@ final class PackageSmokeTest extends TestCase
 		$this->assertSame('core', $decoded['type'] ?? null);
 		$this->assertSame('cms', $decoded['id'] ?? null);
 		$this->assertSame('^0.1.0', $decoded['dependencies']['radaptor/core/framework'] ?? null);
+		$this->assertSame('^8.5', $decoded['composer']['require']['php'] ?? null);
 	}
 
 	public function testCmsCoreEntrypointsExist(): void

@@ -45,8 +45,18 @@ abstract class PredefinedImageHandler implements iPredefinedImage
 	public static function rewriteFileName(string $filename, string $predefinedName): string
 	{
 		$pathInfo = pathinfo($filename);
+		$dirname = (string) ($pathInfo['dirname'] ?? '');
+		$filename = (string) ($pathInfo['filename'] ?? $filename);
+		$extension = (string) ($pathInfo['extension'] ?? '');
+		$rewritten = $extension !== ''
+			? $filename . '.' . $predefinedName . '.' . $extension
+			: $filename . '.' . $predefinedName;
 
-		return $pathInfo['dirname'] . DIRECTORY_SEPARATOR . $predefinedName . '.' . $pathInfo['extension'];
+		if ($dirname === '' || $dirname === '.') {
+			return $rewritten;
+		}
+
+		return $dirname . DIRECTORY_SEPARATOR . $rewritten;
 	}
 
 	public static function getSeoUrl(int $resource_id, string $predefinedName): string

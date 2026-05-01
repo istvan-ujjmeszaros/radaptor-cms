@@ -452,45 +452,25 @@ class ResourceTreeHandler extends ResourceAcl
 
 	private static function wrapExistingTreeWithDomainRoot(string $domain): ?int
 	{
-		$pdo = Db::instance();
-		$started_transaction = !$pdo->inTransaction();
-
 		try {
-			$max_rgt = (int) DbHelper::selectOneColumnFromQuery(
-				"SELECT COALESCE(MAX(rgt), 0) FROM resource_tree"
-			);
-
-			if ($started_transaction) {
-				$pdo->beginTransaction();
-			}
-
-			$pdo->exec("UPDATE resource_tree SET lft = lft + 1, rgt = rgt + 1");
-
-			$insert_root = $pdo->prepare(
-				"INSERT INTO resource_tree SET lft = 1, rgt = ?, parent_id = 0, node_type = 'root', resource_name = ?, path = '/'"
-			);
-			$insert_root->execute([$max_rgt + 2, $domain]);
-			$root_id = (int) $pdo->lastInsertId();
-
-			$update_children = $pdo->prepare(
-				"UPDATE resource_tree SET parent_id = ? WHERE parent_id = 0 AND node_id <> ?"
-			);
-			$update_children->execute([$root_id, $root_id]);
-
-			if ($started_transaction) {
-				$pdo->commit();
-			}
-		} catch (Throwable $e) {
-			if ($started_transaction && $pdo->inTransaction()) {
-				$pdo->rollBack();
-			}
-
-			SystemMessages::_error($e->getMessage());
+			$root_id = NestedSet::wrapExistingTreeWithRoot('resource_tree', [
+				'node_type' => 'root',
+				'resource_name' => $domain,
+				'path' => '/',
+			]);
+		} catch (Throwable $exception) {
+			error_log("NestedSet wrapExistingTreeWithRoot failed for resource_tree: " . $exception->getMessage());
+			SystemMessages::_error("Unable to wrap existing resource tree with domain root: {$domain}");
 
 			return null;
 		}
 
-		Cache::flush();
+		if (is_null($root_id)) {
+			SystemMessages::_error("Unable to wrap existing resource tree with domain root: {$domain}");
+
+			return null;
+		}
+
 		self::rebuildPath($root_id);
 		SystemMessages::_warning("Domain wrapped around existing rootless tree: {$domain}");
 
@@ -653,6 +633,12 @@ class ResourceTreeHandler extends ResourceAcl
 
 	public static function updateResourceTreeEntry(array $savedata, int $resource_id): int
 	{
+		$structural_fields = NestedSet::getStructuralFieldsInSavedata($savedata);
+
+		if ($structural_fields !== []) {
+			throw new InvalidArgumentException('Resource tree structural fields must be changed through ResourceTreeHandler move/add/delete operations: ' . implode(', ', $structural_fields));
+		}
+
 		$resource_data = ResourceTreeHandler::getResourceTreeEntryDataById($resource_id);
 
 		if (is_null($resource_data)) {
@@ -1077,7 +1063,7 @@ class ResourceTreeHandler extends ResourceAcl
 		);
 	}
 
-	private static function hasResourceReferencesForFileId(int $file_id): bool
+	public static function hasResourceReferencesForFileId(int $file_id): bool
 	{
 		$stmt = Db::instance()->prepare(
 			"SELECT 1

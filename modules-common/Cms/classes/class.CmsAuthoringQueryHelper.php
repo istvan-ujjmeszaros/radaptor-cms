@@ -5,6 +5,11 @@ declare(strict_types=1);
 class CmsAuthoringQueryHelper
 {
 	/**
+	 * Resolves a node strictly at the supplied path. A trailing slash is
+	 * treated as the folder's `index.html` (standard webpage convention); no
+	 * other coercion is performed. Callers must pass a fully qualified path
+	 * if they want to match a specific resource.
+	 *
 	 * @return array<string, mixed>|null
 	 */
 	public static function resolveNodeFromPath(string $path): ?array
@@ -17,23 +22,6 @@ class CmsAuthoringQueryHelper
 			$resource_name = 'index.html';
 		}
 
-		$folder = '/' . implode('/', $path_parts);
-
-		if ($folder !== '/') {
-			$folder .= '/';
-		}
-
-		$node = ResourceTreeHandler::getResourceTreeEntryData($folder, $resource_name);
-
-		if ($node !== null) {
-			return $node;
-		}
-
-		if ($path_parts === []) {
-			return null;
-		}
-
-		$resource_name = array_pop($path_parts);
 		$folder = '/' . implode('/', $path_parts);
 
 		if ($folder !== '/') {

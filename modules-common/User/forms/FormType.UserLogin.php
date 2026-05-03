@@ -24,7 +24,7 @@ class FormTypeUserLogin extends AbstractForm
 		return [
 			'path' => '/',
 			'resource_name' => 'login.html',
-			'layout' => 'admin_empty',
+			'layout' => 'admin_login',
 		];
 	}
 
@@ -35,9 +35,8 @@ class FormTypeUserLogin extends AbstractForm
 
 	public function initializeValues(): void
 	{
-		// ha itt vagyunk (a login oldalon), amikor be van jelentkezve valaki,
-		// akkor átirányítunk a kezdőoldalra (kivéve, ha szerkesztő módban
-		// vagyunk), mert a bejelentkezésnek nincs értelme...
+		// A logged-in user should not stay on the login page, unless they are
+		// intentionally editing that page in the CMS.
 		if (!$this->getTreeBuildContext()->isEditable() && !is_null(User::getCurrentUser())) {
 			Url::redirect(Url::getCurrentHost());
 		}

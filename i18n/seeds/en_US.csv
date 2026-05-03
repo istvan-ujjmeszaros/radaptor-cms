@@ -346,6 +346,8 @@ layout,admin_default.description,,en_US,Single-column admin layout,Single-column
 layout,admin_default.name,,en_US,Admin 1-column,Admin 1-column,0,Admin 1-column
 layout,admin_empty.description,,en_US,Empty admin layout,Empty admin layout,0,Empty admin layout
 layout,admin_empty.name,,en_US,Empty admin,Empty admin,0,Empty admin
+layout,admin_login.description,,en_US,Admin login layout,Admin login layout,0,Admin login layout
+layout,admin_login.name,,en_US,Admin login,Admin login,0,Admin login
 layout,admin_menu.description,,en_US,Displays the admin menu,Displays the admin menu,0,Displays the admin menu
 layout,admin_menu.name,,en_US,Admin menu,Admin menu,0,Admin menu
 layout,admin_nomenu.description,,en_US,Admin layout without menu,Admin layout without menu,0,Admin layout without menu

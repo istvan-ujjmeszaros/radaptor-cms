@@ -11,6 +11,13 @@ class McpCmsAuthoringAuthorization
 			: PolicyDecision::deny('login required');
 	}
 
+	public static function systemDeveloper(PolicyContext $policyContext): PolicyDecision
+	{
+		return $policyContext->principal->hasRole(RoleList::ROLE_SYSTEM_DEVELOPER)
+			? PolicyDecision::allow('role: system_developer')
+			: PolicyDecision::deny('role required: system_developer');
+	}
+
 	public static function resourcePath(string $path, string $operation, PolicyContext $policyContext): PolicyDecision
 	{
 		$logged_in = self::loggedIn($policyContext);
@@ -51,6 +58,35 @@ class McpCmsAuthoringAuthorization
 		return ResourceAcl::canAccessResource((int) $page['node_id'], $operation)
 			? PolicyDecision::allow()
 			: PolicyDecision::deny("webpage {$operation} denied: {$path}");
+	}
+
+	public static function widgetConnection(int $connection_id, string $operation, PolicyContext $policyContext): PolicyDecision
+	{
+		$logged_in = self::loggedIn($policyContext);
+
+		if (!$logged_in->allow) {
+			return $logged_in;
+		}
+
+		if ($connection_id <= 0) {
+			return PolicyDecision::deny('widget connection id is required');
+		}
+
+		$connection = Widget::getConnectionData($connection_id);
+
+		if (!is_array($connection)) {
+			return PolicyDecision::deny("widget connection not found: {$connection_id}");
+		}
+
+		$page_id = (int) ($connection['page_id'] ?? 0);
+
+		if ($page_id <= 0) {
+			return PolicyDecision::deny("widget connection has no owning webpage: {$connection_id}");
+		}
+
+		return ResourceAcl::canAccessResource($page_id, $operation)
+			? PolicyDecision::allow()
+			: PolicyDecision::deny("owning webpage {$operation} denied for widget connection: {$connection_id}");
 	}
 
 	public static function createWebpage(string $path, PolicyContext $policyContext): PolicyDecision

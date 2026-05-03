@@ -346,6 +346,8 @@ layout,admin_default.description,,hu_HU,Single-column admin layout,"Egyszerű, e
 layout,admin_default.name,,hu_HU,Admin 1-column,Adminisztráció 1 hasábos,0,Adminisztráció 1 hasábos
 layout,admin_empty.description,,hu_HU,Empty admin layout,Üres admin layout,0,Üres admin layout
 layout,admin_empty.name,,hu_HU,Empty admin,Adminisztráció üres,0,Adminisztráció üres
+layout,admin_login.description,,hu_HU,Admin login layout,Admin bejelentkezési layout,0,Admin bejelentkezési layout
+layout,admin_login.name,,hu_HU,Admin login,Admin bejelentkezés,0,Admin bejelentkezés
 layout,admin_menu.description,,hu_HU,Displays the admin menu,Megjeleníti az admin menüt,0,Megjeleníti az admin menüt
 layout,admin_menu.name,,hu_HU,Admin menu,Admin menü,0,Admin menü
 layout,admin_nomenu.description,,hu_HU,Admin layout without menu,Menü nélküli admin layout,0,Menü nélküli admin layout

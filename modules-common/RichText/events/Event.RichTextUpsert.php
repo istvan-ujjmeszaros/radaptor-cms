@@ -23,7 +23,7 @@ class EventRichTextUpsert extends AbstractEvent implements iBrowserEventDocument
 				'method' => 'POST',
 				'params' => [
 					BrowserEventDocumentationHelper::param('name', 'body', 'string', true, 'Stable RichText name.'),
-					BrowserEventDocumentationHelper::param('title', 'body', 'string', true, 'Human-readable RichText title.'),
+					BrowserEventDocumentationHelper::param('title', 'body', 'string', false, 'Human-readable RichText title. Leave empty when the rendered widget should not show a heading.'),
 					BrowserEventDocumentationHelper::param('content', 'body', 'string', true, 'HTML content.'),
 					BrowserEventDocumentationHelper::param('content_type', 'body', 'string', false, 'Content type, defaults to article.'),
 				],
@@ -56,12 +56,6 @@ class EventRichTextUpsert extends AbstractEvent implements iBrowserEventDocument
 
 		if ($name === '') {
 			ApiResponse::renderError('MISSING_NAME', 'name is required.', 400);
-
-			return;
-		}
-
-		if ($title === '') {
-			ApiResponse::renderError('MISSING_TITLE', 'title is required.', 400);
 
 			return;
 		}

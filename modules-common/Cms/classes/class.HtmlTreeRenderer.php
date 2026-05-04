@@ -189,7 +189,9 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 				$extension = $exploded_extension[0];
 			}
 
-			if (mb_substr($file, 0, 1) != '/' && mb_strpos($file, ":") === false) {
+			$file_path_for_prefix_check = ltrim($file, '^');
+
+			if (mb_substr($file_path_for_prefix_check, 0, 1) != '/' && mb_strpos($file_path_for_prefix_check, ":") === false) {
 				$full_path = Config::PATH_CDN->value() . $file;
 			} else {
 				$full_path = $file;
@@ -362,6 +364,10 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 		$output = "";
 
 		foreach ($this->_registeredJs as $filename => $top) {
+			if ($top) {
+				continue;
+			}
+
 			$url = $this->_appendCacheBuster($filename);
 			$output .= "<script type=\"text/javascript\" src=\"$url\"></script>\n";
 		}

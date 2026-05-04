@@ -29,15 +29,20 @@ class JsonAdapterJsTree3x
 	 * @param array|null $parent_data Parent node data for catcher detection
 	 * @return array Formatted jsTree 3.x data
 	 */
-	public static function resourceTree(array $nodes, ?array $parent_data): array
+	public static function resourceTree(array $nodes, ?array $parent_data, bool $is_root_request = false): array
 	{
 		$result = [];
 
 		foreach ($nodes as $node) {
+			if (!is_array($node)) {
+				continue;
+			}
+
 			$is_catcher = isset($parent_data['catcher_page'])
 				&& $parent_data['catcher_page'] == $node['node_id'];
 
 			$data = [
+				'node_id' => (int) $node['node_id'],
 				'path' => $node['path'] ?? '',
 				'resource_name' => $node['resource_name'],
 				'node_type' => $node['node_type'],
@@ -49,12 +54,18 @@ class JsonAdapterJsTree3x
 				$data['indexpage_node_id'] = ResourceTreeHandler::getIndexpageNodeId($node['node_id']);
 			}
 
-			$result[] = self::buildNode(
+			$tree_node = self::buildNode(
 				$node,
 				$node['resource_name'],
 				$node['node_type'],
 				$data
 			);
+
+			if ($is_root_request && $node['node_type'] === 'root') {
+				$tree_node['state'] = ['opened' => true];
+			}
+
+			$result[] = $tree_node;
 		}
 
 		return $result;

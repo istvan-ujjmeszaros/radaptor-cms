@@ -27,7 +27,8 @@ final class JsTreeTemplateAdapter3x implements iJsTreeTemplateAdapter
 			case JsTreeApiService::TYPE_RESOURCES:
 				return JsonAdapterJsTree3x::resourceTree(
 					$raw_data,
-					$context['parent_data'] ?? null
+					$context['parent_data'] ?? null,
+					!empty($context['is_root_request'])
 				);
 
 			case JsTreeApiService::TYPE_ROLES:

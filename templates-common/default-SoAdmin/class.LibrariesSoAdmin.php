@@ -3,7 +3,7 @@
 /**
  * Libraries for SoAdmin theme.
  *
- * Provides explicit library constants for the legacy admin theme.
+ * Provides explicit library constants for the classic admin theme.
  * Extends LibrariesCommon to inherit common bundles (jQuery, DataTables, etc.)
  *
  * Modernized: jQuery 3.7, DataTables 2.2, jsTree 3.3, Stimulus controllers (shared from new theme).
@@ -35,9 +35,6 @@ class LibrariesSoAdmin extends LibrariesCommon
 		js:https://cdn.jsdelivr.net/npm/jquery-ui@1.14.1/dist/jquery-ui.min.js,
 	';
 
-	/**
-	 * Legacy templates still register `JQUERY_UI`; keep it on the modern stack.
-	 */
 	public const string JQUERY_UI = '
 		JQUERY_UI_10,
 	';
@@ -96,12 +93,6 @@ class LibrariesSoAdmin extends LibrariesCommon
 	public const string WIDGETTYPE_JSTREE = '';
 
 	/**
-	 * Override _ADMIN_DROPDOWN to remove anylinkmenu and missing admin_dropdown.css.
-	 * The wrench dropdown now uses pure CSS (no jQuery plugins needed).
-	 */
-	public const string _ADMIN_DROPDOWN = '';
-
-	/**
 	 * Tippy.js 6 - modern tooltip library, replaces jQuery UI tooltip.
 	 * Requires Popper.js (bundled in the iife build).
 	 */
@@ -121,9 +112,6 @@ class LibrariesSoAdmin extends LibrariesCommon
 		js:https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/hu.js,
 	';
 
-	/**
-	 * Override old CALENDAR to use Flatpickr instead of legacy JSCalendar.
-	 */
 	public const string CALENDAR = '
 		FLATPICKR,
 	';

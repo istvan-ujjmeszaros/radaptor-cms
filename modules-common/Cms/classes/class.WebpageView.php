@@ -188,6 +188,10 @@ class WebpageView extends AbstractWebpageViewComposer implements Stringable
 		$output = "";
 
 		foreach ($this->_registeredJs as $filename => $top) {
+			if ($top) {
+				continue;
+			}
+
 			$url = $this->_appendCacheBuster($filename);
 			$output .= "<script type=\"text/javascript\" src=\"$url\"></script>\n";
 		}

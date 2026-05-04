@@ -56,59 +56,10 @@ class ResourceTypeWebpage extends AbstractResourceType
 		}
 
 		if (Config::DEV_WEBPAGE_AUTOGENERATION_ON_WIDGET_REQUEST->value()) {
-			if ($form_type == "") {
-				return 0;
-			}
+			$page_id = self::ensureDefaultWebpageWithFormType($form_type);
 
-			$formClassName = "FormType" . $form_type;
-
-			if (!class_exists($formClassName) || !is_subclass_of($formClassName, 'AbstractForm')) {
-				SystemMessages::_error("Requested form class '{$formClassName}' does not exist or does not implement AbstractForm.");
-
-				return 0;
-			}
-
-			try {
-				$path_data = $formClassName::getDefaultPathForCreation();
-			} catch (Exception) {
-				SystemMessages::_error("Requested form type doesn't have a class: {$form_type}");
-
-				return 0;
-			}
-
-			if (!isset($path_data['path']) || !isset($path_data['resource_name']) || !isset($path_data['layout'])) {
-				SystemMessages::_error("Bad getDefaultPathForCreation() value for form type: {$form_type}");
-
-				return 0;
-			}
-
-			$resource_data = ResourceTreeHandler::getResourceTreeEntryData($path_data['path'], $path_data['resource_name']);
-
-			if (is_null($resource_data)) {
-				$page_id = ResourceTreeHandler::createResourceTreeEntryFromPath($path_data['path'], $path_data['resource_name'], 'webpage', $path_data['layout']);
-			} else {
-				$page_id = $resource_data['node_id'];
-			}
-
-			if (is_null($page_id)) {
-				SystemMessages::_error("Error creating webpage for form type: {$form_type}");
-
-				return 0;
-			} elseif (is_null($resource_data)) {
-				SystemMessages::_config("Webpage created for form: {$form_type}");
-			}
-
-			$connection_id = self::placeWidgetToWebpage($page_id, WidgetList::FORM);
-
-			if (AttributeHandler::addAttribute(new AttributeResourceIdentifier(ResourceNames::WIDGET_CONNECTION, (string) $connection_id), ['form_id' => $form_type])) {
-				SystemMessages::_config("Form type set: {$form_type}");
-
+			if ($page_id !== false) {
 				return $page_id;
-			}
-			{
-				SystemMessages::_error("Error setting form type: {$form_type}");
-
-				return 0;
 			}
 		}
 
@@ -150,7 +101,9 @@ class ResourceTypeWebpage extends AbstractResourceType
 		$resource_data = ResourceTreeHandler::getResourceTreeEntryData($path_data['path'], $path_data['resource_name']);
 
 		if (is_null($resource_data)) {
-			$page_id = ResourceTreeHandler::createResourceTreeEntryFromPath($path_data['path'], $path_data['resource_name'], 'webpage', $path_data['layout']);
+			$page_id = ResourceTreeHandler::withProtectedResourceMutationBypass(
+				static fn (): ?int => ResourceTreeHandler::createResourceTreeEntryFromPath($path_data['path'], $path_data['resource_name'], 'webpage', $path_data['layout'])
+			);
 		} else {
 			$page_id = $resource_data['node_id'];
 		}
@@ -169,6 +122,118 @@ class ResourceTypeWebpage extends AbstractResourceType
 	public static function placeWidgetToWebpage(int $page_id, string $widget_name): false|int
 	{
 		return Widget::assignWidgetToWebpage($page_id, self::DEFAULT_SLOT_NAME, $widget_name);
+	}
+
+	public static function ensureDefaultWebpageWithFormType(string $form_type): false|int
+	{
+		if ($form_type === '') {
+			return false;
+		}
+
+		$form_class_name = "FormType" . $form_type;
+
+		if (!class_exists($form_class_name) || !is_subclass_of($form_class_name, 'AbstractForm')) {
+			SystemMessages::_error("Requested form class '{$form_class_name}' does not exist or does not implement AbstractForm.");
+
+			return false;
+		}
+
+		try {
+			$path_data = $form_class_name::getDefaultPathForCreation();
+		} catch (Exception) {
+			SystemMessages::_error("Requested form type doesn't have a class: {$form_type}");
+
+			return false;
+		}
+
+		if (!isset($path_data['path']) || !isset($path_data['resource_name']) || !isset($path_data['layout'])) {
+			SystemMessages::_error("Bad getDefaultPathForCreation() value for form type: {$form_type}");
+
+			return false;
+		}
+
+		$resource_data = ResourceTreeHandler::getResourceTreeEntryData($path_data['path'], $path_data['resource_name']);
+
+		if (is_null($resource_data)) {
+			$page_id = ResourceTreeHandler::withProtectedResourceMutationBypass(
+				static fn (): ?int => ResourceTreeHandler::createResourceTreeEntryFromPath($path_data['path'], $path_data['resource_name'], 'webpage', $path_data['layout'])
+			);
+		} else {
+			$page_id = (int) $resource_data['node_id'];
+		}
+
+		if (is_null($page_id)) {
+			SystemMessages::_error("Error creating webpage for form type: {$form_type}");
+
+			return false;
+		} elseif (is_null($resource_data)) {
+			SystemMessages::_config("Webpage created for form: {$form_type}");
+		}
+
+		if (self::defaultWebpageHasFormType($page_id, $form_type)) {
+			return $page_id;
+		}
+
+		$connection_id = self::placeWidgetToWebpage($page_id, WidgetList::FORM);
+
+		if ($connection_id === false) {
+			SystemMessages::_error("Error placing form widget on default webpage: {$form_type}");
+
+			return false;
+		}
+
+		AttributeHandler::addAttribute(new AttributeResourceIdentifier(ResourceNames::WIDGET_CONNECTION, (string) $connection_id), ['form_id' => $form_type]);
+		SystemMessages::_config("Form type set: {$form_type}");
+
+		return $page_id;
+	}
+
+	public static function ensureDefaultWebpageWithWidget(string $widget_name): false|int
+	{
+		if ($widget_name === '') {
+			return false;
+		}
+
+		$page_id = self::generateWebpageForWidget($widget_name);
+
+		if ($page_id === false) {
+			return false;
+		}
+
+		$existing_connection_id = Widget::getWidgetConnectionId($page_id, self::DEFAULT_SLOT_NAME, $widget_name);
+
+		if (is_numeric($existing_connection_id) && (int) $existing_connection_id > 0) {
+			return $page_id;
+		}
+
+		$connection_id = self::placeWidgetToWebpage($page_id, $widget_name);
+
+		if ($connection_id === false) {
+			SystemMessages::_error("Error placing widget on default webpage: {$widget_name}");
+
+			return false;
+		}
+
+		return $page_id;
+	}
+
+	private static function defaultWebpageHasFormType(int $page_id, string $form_type): bool
+	{
+		foreach (WidgetConnection::getWidgetsForSlot($page_id, self::DEFAULT_SLOT_NAME) as $connection) {
+			if ($connection->getWidgetName() !== WidgetList::FORM) {
+				continue;
+			}
+
+			$attributes = AttributeHandler::getAttributes(
+				new AttributeResourceIdentifier(ResourceNames::WIDGET_CONNECTION, (string) $connection->getConnectionId())
+			);
+
+			if (($attributes['form_id'] ?? null) === $form_type) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
@@ -203,13 +268,11 @@ class ResourceTypeWebpage extends AbstractResourceType
 			return Cache::set(self::class, $widget_name, $rs['page_id']);
 		} else {
 			if (Config::DEV_WEBPAGE_AUTOGENERATION_ON_WIDGET_REQUEST->value()) {
-				$page_id = self::generateWebpageForWidget($widget_name);
+				$page_id = self::ensureDefaultWebpageWithWidget($widget_name);
 
-				if ($page_id === false) {
-					return 0;
+				if ($page_id !== false) {
+					return Cache::set(self::class, $widget_name, $page_id);
 				}
-
-				self::placeWidgetToWebpage($page_id, $widget_name);
 			} else {
 				SystemMessages::_error(t('cms.webpage.create_for_widget', [
 					'widget' => Widget::getWidgetName($widget_name),

@@ -5,6 +5,7 @@ class ResourceTreeHandler extends ResourceAcl
 	public const int MAXIMUM_ALLOWED_INLINE_SIZE_FOR_UNKNOWN = 10485760;   // 10MB
 
 	private static array $_resizable_resources = [];
+	private static bool $_protected_resource_mutation_bypass = false;
 
 	public static function getPathFromId(int $resource_id): string
 	{
@@ -39,6 +40,65 @@ class ResourceTreeHandler extends ResourceAcl
 		} else {
 			return $data['parent_id'] != 0 ? ResourceTreeHandler::getFolderId((int)$data['parent_id']) : 0;
 		}
+	}
+
+	/**
+	 * Runs system-owned resource maintenance that may touch protected namespaces.
+	 *
+	 * The bypass flag is process-global for the current PHP request, so callers must keep
+	 * the callback synchronous and narrowly scoped. Do not use it from user-controlled
+	 * resource editing flows.
+	 */
+	public static function withProtectedResourceMutationBypass(callable $callback): mixed
+	{
+		$previous = self::$_protected_resource_mutation_bypass;
+		self::$_protected_resource_mutation_bypass = true;
+
+		try {
+			return $callback();
+		} finally {
+			self::$_protected_resource_mutation_bypass = $previous;
+		}
+	}
+
+	public static function isProtectedSystemResource(int $resource_id): bool
+	{
+		$resource_data = self::getResourceTreeEntryDataById($resource_id);
+
+		if (!is_array($resource_data)) {
+			return false;
+		}
+
+		return self::isProtectedSystemResourceData($resource_data);
+	}
+
+	/**
+	 * Public/account/admin system namespaces are managed by app seeds, explicit
+	 * resource specs, or framework-owned code. Human/admin resource editing must
+	 * not rename, move, delete, or directly edit them from generic tree tools.
+	 *
+	 * @param array<string, mixed> $resource_data
+	 */
+	public static function isProtectedSystemResourceData(array $resource_data): bool
+	{
+		return self::isProtectedSystemResourcePath(self::buildPathFromResourceData($resource_data));
+	}
+
+	public static function isProtectedSystemResourcePath(string $path): bool
+	{
+		$path = CmsPathHelper::normalizePath($path);
+
+		if ($path === '/login.html') {
+			return true;
+		}
+
+		foreach (['/admin', '/account'] as $protected_path) {
+			if ($path === $protected_path || str_starts_with($path, $protected_path . '/')) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public static function getPathVariations(string $folder): array
@@ -89,6 +149,17 @@ class ResourceTreeHandler extends ResourceAcl
 			'is_inheriting_acl',
 			'catcher_page',
 		], 'node_type=\'folder\' DESC, lft ASC'));
+	}
+
+	public static function getResourceChildrenDetailedUnfiltered(int $parent_id): array
+	{
+		return NestedSet::getChildren('resource_tree', $parent_id, [
+			'resource_name',
+			'node_type',
+			'path',
+			'is_inheriting_acl',
+			'catcher_page',
+		], 'node_type=\'folder\' DESC, lft ASC');
 	}
 
 	public static function countChildren(int $parent_id): int
@@ -784,6 +855,119 @@ class ResourceTreeHandler extends ResourceAcl
 		];
 	}
 
+	private static function assertProtectedResourceMutationAllowed(int $resource_id, string $operation): void
+	{
+		if (self::$_protected_resource_mutation_bypass) {
+			return;
+		}
+
+		if (!self::isProtectedSystemResource($resource_id)) {
+			return;
+		}
+
+		$path = self::getPathFromId($resource_id);
+
+		throw new RuntimeException("Refusing to {$operation} protected system resource: {$path}");
+	}
+
+	private static function assertProtectedResourceSubtreeMutationAllowed(int $resource_id, string $operation): void
+	{
+		if (self::$_protected_resource_mutation_bypass) {
+			return;
+		}
+
+		$protected_path = self::findProtectedPathInSubtree($resource_id);
+
+		if ($protected_path === null) {
+			return;
+		}
+
+		throw new RuntimeException("Refusing to {$operation} subtree containing protected system resource: {$protected_path}");
+	}
+
+	private static function assertProtectedResourcePathMutationAllowed(string $path, string $operation): void
+	{
+		if (self::$_protected_resource_mutation_bypass) {
+			return;
+		}
+
+		if (!self::isProtectedSystemResourcePath($path)) {
+			return;
+		}
+
+		throw new RuntimeException("Refusing to {$operation} protected system resource path: {$path}");
+	}
+
+	private static function findProtectedPathInSubtree(int $resource_id): ?string
+	{
+		$resource_data = self::getResourceTreeEntryDataById($resource_id);
+
+		if (!is_array($resource_data)) {
+			return null;
+		}
+
+		$path = self::buildPathFromResourceData($resource_data);
+
+		if (self::isProtectedSystemResourcePath($path)) {
+			return $path;
+		}
+
+		foreach (self::getResourceChildrenDetailedUnfiltered($resource_id) as $child) {
+			$protected_path = self::findProtectedPathInSubtree((int) $child['node_id']);
+
+			if ($protected_path !== null) {
+				return $protected_path;
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * @param array<string, mixed> $resource_data
+	 * @param array<string, mixed> $savedata
+	 */
+	private static function buildPathFromResourceData(array $resource_data, array $savedata = []): string
+	{
+		$resource_name = (string) ($savedata['resource_name'] ?? $resource_data['resource_name'] ?? '');
+		$path = (string) ($savedata['path'] ?? $resource_data['path'] ?? '');
+		$node_type = (string) ($savedata['node_type'] ?? $resource_data['node_type'] ?? '');
+
+		if ($node_type === 'root') {
+			return '/';
+		}
+
+		return self::normalizeResourcePath($path . $resource_name, $node_type);
+	}
+
+	/**
+	 * @param array<string, mixed> $parent_data
+	 * @param array<string, mixed> $savedata
+	 */
+	private static function buildChildPathFromParentData(array $parent_data, array $savedata): string
+	{
+		$parent_path = self::buildPathFromResourceData($parent_data);
+		$resource_name = (string) ($savedata['resource_name'] ?? '');
+		$node_type = (string) ($savedata['node_type'] ?? '');
+
+		return self::normalizeResourcePath(rtrim($parent_path, '/') . '/' . $resource_name, $node_type);
+	}
+
+	private static function normalizeResourcePath(string $path, string $node_type): string
+	{
+		$path = CmsPathHelper::normalizePath($path);
+
+		if ($path === '/') {
+			return $path;
+		}
+
+		if ($node_type === 'folder' && !str_ends_with($path, '/')) {
+			return $path . '/';
+		}
+
+		return $path;
+	}
+
 	public static function updateResourceTreeEntry(array $savedata, int $resource_id): int
 	{
 		$structural_fields = NestedSet::getStructuralFieldsInSavedata($savedata);
@@ -797,6 +981,9 @@ class ResourceTreeHandler extends ResourceAcl
 		if (is_null($resource_data)) {
 			return 0;
 		}
+
+		self::assertProtectedResourceMutationAllowed($resource_id, 'update');
+		self::assertProtectedResourcePathMutationAllowed(self::buildPathFromResourceData($resource_data, $savedata), 'update');
 
 		if (array_key_exists('resource_name', $savedata)) {
 			self::sanitizeResourceTreeEntryNameInSavedata($savedata);
@@ -826,10 +1013,22 @@ class ResourceTreeHandler extends ResourceAcl
 
 	public static function addResourceEntry(array $savedata, int $parent_id = 0): ?int
 	{
+		if ($parent_id > 0) {
+			self::assertProtectedResourceMutationAllowed($parent_id, 'create inside');
+		}
+
 		self::sanitizeResourceTreeEntryNameInSavedata($savedata);
 		self::makeResourceEntryNameUniqueInSavedata($parent_id, $savedata);
 
 		[$resource_savedata, $attribute_savedata] = self::splitResourceAndAttributesData($savedata);
+
+		if ($parent_id > 0) {
+			$parent_data = self::getResourceTreeEntryDataById($parent_id);
+
+			if (is_array($parent_data)) {
+				self::assertProtectedResourcePathMutationAllowed(self::buildChildPathFromParentData($parent_data, $resource_savedata), 'create');
+			}
+		}
 
 		try {
 			$new_id = NestedSet::addNode('resource_tree', $parent_id, $resource_savedata);
@@ -935,6 +1134,8 @@ class ResourceTreeHandler extends ResourceAcl
 
 	public static function deleteResourceEntry(int $resource_id): bool
 	{
+		self::assertProtectedResourceMutationAllowed($resource_id, 'delete');
+
 		if (!ResourceAcl::canAccessResource($resource_id, ResourceAcl::_ACL_DELETE)) {
 			return false;
 		}
@@ -977,6 +1178,8 @@ class ResourceTreeHandler extends ResourceAcl
 
 	public static function deleteResourceEntriesRecursive(int $resource_id): array
 	{
+		self::assertProtectedResourceSubtreeMutationAllowed($resource_id, 'delete recursively');
+
 		$folder_count = 0;
 		$webpage_count = 0;
 		$file_count = 0;
@@ -1164,6 +1367,9 @@ class ResourceTreeHandler extends ResourceAcl
 
 	public static function moveResourceEntryToPosition(int $resource_id, int $parent_id, int $position): bool
 	{
+		self::assertProtectedResourceMutationAllowed($resource_id, 'move');
+		self::assertProtectedResourceMutationAllowed($parent_id, 'move into');
+
 		$move = NestedSet::moveToPosition('resource_tree', $resource_id, $parent_id, $position);
 
 		self::rebuildPath($resource_id);

@@ -237,7 +237,9 @@ abstract class AbstractWebpageViewBase implements iView, iWebpageComposer
 				$extension = $exploded_extension[0];
 			}
 
-			if (mb_substr($file, 0, 1) != '/' && mb_strpos($file, ":") === false) {
+			$file_path_for_prefix_check = ltrim($file, '^');
+
+			if (mb_substr($file_path_for_prefix_check, 0, 1) != '/' && mb_strpos($file_path_for_prefix_check, ":") === false) {
 				$full_path = Config::PATH_CDN->value() . $file;
 			} else {
 				$full_path = $file;

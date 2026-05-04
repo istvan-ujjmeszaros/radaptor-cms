@@ -11,12 +11,6 @@ class LibrariesCommon
         /assets/packages/themes/so-admin/admin-site/admin-site/admin-site.css,
         /assets/packages/themes/so-admin/admin-site/buttons.css,
     ';
-	public const string _ADMIN_DROPDOWN = '
-        COMMON,
-        /assets/_common/libraries/anylinkmenu/anylinkmenu.css,
-        /assets/_common/libraries/anylinkmenu/anylinkmenu.js,
-        /assets/packages/themes/so-admin/admin-site/admin_dropdown.css,
-    ';
 	public const string _SDUI_STATUSMESSAGE = '
         /assets/_common/css/sdui-status.css,
     ';
@@ -66,7 +60,15 @@ class LibrariesCommon
         /assets/packages/themes/so-admin/admin-site/js/jstree.adminmenu.js,
     ';
 	public const string __COMMON_ADMIN = '
-        /assets/packages/themes/so-admin/admin-site/admin.css,
+        /assets/packages/themes/radaptor-portal-admin/css/radaptor-base.css,
+        /assets/packages/themes/radaptor-portal-admin/css/radaptor-portal-admin.css,
+        /assets/packages/themes/radaptor-portal-admin/css/forms.css,
+        /assets/packages/themes/radaptor-portal-admin/css/edit-mode.css,
+        css:https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css,
+        js:https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js,
+        js:https://unpkg.com/htmx.org@2.0.4,
+        /assets/packages/radaptor-portal-admin/js/system-messages.js,
+        /assets/packages/radaptor-portal-admin/js/htmx-config.js,
     ';
 	public const string COMMON = '
         JQUERY,

@@ -36,7 +36,6 @@ class WidgetResourceTree extends AbstractWidget
 		if ($themeName === 'RadaptorPortalAdmin') {
 			$template_name = 'resourceTree.jstree3';
 		} else {
-			// Fallback to legacy jsTree template for other themes
 			$template_name = 'jsTree.resources';
 		}
 

@@ -15,7 +15,8 @@ final class CmsSiteContext
 	 * The fallback rules below are intentionally limited to unambiguous legacy
 	 * shapes: one populated root, one host-named root, or one root total. Multiple
 	 * populated roots without an explicit host alias mapping are rejected instead
-	 * of guessed.
+	 * of guessed. Hostless multi-site contexts are accepted only when the configured
+	 * site key names an existing populated root.
 	 */
 	public static function resolve(?string $explicit_context = null): string
 	{
@@ -28,7 +29,7 @@ final class CmsSiteContext
 		$env_context = self::normalizeSiteKey((string) getenv('RADAPTOR_SITE_CONTEXT'));
 
 		if ($env_context !== '') {
-			return $env_context;
+			return self::resolveHostlessConfiguredContext($env_context);
 		}
 
 		$host = self::getCurrentHostKey();
@@ -44,7 +45,11 @@ final class CmsSiteContext
 
 		if (count($content_roots) > 1) {
 			if (self::hasExplicitHostAliasConfig() && $host === '') {
-				return $configured !== '' ? $configured : self::DEFAULT_SITE_KEY;
+				if (is_array($configured_root) && self::rootHasChildren((int) $configured_root['node_id'])) {
+					return $configured;
+				}
+
+				throw self::hostlessSiteContextException($configured, $content_roots);
 			}
 
 			if (self::hasExplicitHostAliasConfig()) {
@@ -255,9 +260,52 @@ final class CmsSiteContext
 		);
 	}
 
+	/**
+	 * @param list<array<string, mixed>> $roots
+	 */
+	public static function hostlessSiteContextException(string $site_key, array $roots): RuntimeException
+	{
+		$root_names = array_map(
+			static fn (array $root): string => (string) ($root['resource_name'] ?? ''),
+			$roots
+		);
+		$root_names = array_values(array_filter($root_names, static fn (string $name): bool => $name !== ''));
+		$site_key = $site_key !== '' ? $site_key : self::DEFAULT_SITE_KEY;
+
+		return new RuntimeException(
+			"Hostless CMS site context '{$site_key}' does not identify a populated root while multiple populated CMS site roots exist: "
+			. implode(', ', $root_names)
+			. ". Set RADAPTOR_SITE_CONTEXT or ApplicationConfig::APP_SITE_CONTEXT to one of those site keys, "
+			. "or provide an HTTP host mapped through ApplicationConfig::APP_SITE_HOST_ALIASES."
+		);
+	}
+
 	private static function rootHasChildren(int $root_id): bool
 	{
 		return ResourceTreeHandler::countChildren($root_id) > 0;
+	}
+
+	private static function resolveHostlessConfiguredContext(string $site_key): string
+	{
+		$site_key = self::normalizeSiteKey($site_key);
+
+		if ($site_key === '') {
+			return self::DEFAULT_SITE_KEY;
+		}
+
+		$root = self::getRootByName($site_key);
+
+		if (is_array($root) && self::rootHasChildren((int) $root['node_id'])) {
+			return $site_key;
+		}
+
+		$content_roots = self::getContentRootRows();
+
+		if (count($content_roots) > 1) {
+			throw self::hostlessSiteContextException($site_key, $content_roots);
+		}
+
+		return $site_key;
 	}
 
 	/**

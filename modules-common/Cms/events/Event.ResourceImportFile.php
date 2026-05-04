@@ -18,7 +18,7 @@ class EventResourceImportFile extends AbstractEvent implements iBrowserEventDocu
 		}
 
 		$folder_path = CmsPathHelper::splitFolderPath($target_folder)['normalized_path'];
-		$existing = ResourceTreeHandler::getResourceTreeEntryData($folder_path, $resource_name, Config::APP_DOMAIN_CONTEXT->value());
+		$existing = ResourceTreeHandler::getResourceTreeEntryData($folder_path, $resource_name);
 
 		if (is_array($existing)) {
 			$logged_in = McpCmsAuthoringAuthorization::loggedIn($policyContext);

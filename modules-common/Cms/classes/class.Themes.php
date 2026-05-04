@@ -205,11 +205,8 @@ class Themes extends ThemeList
 			$folder .= '/';
 		}
 
-		// Use domain context from config
-		$domain_context = Config::APP_DOMAIN_CONTEXT->value();
-
 		// Get page data from ResourceTreeHandler
-		$page_data = ResourceTreeHandler::getResourceTreeEntryData($folder, $resource_name, $domain_context);
+		$page_data = ResourceTreeHandler::getResourceTreeEntryData($folder, $resource_name);
 
 		if ($page_data === null) {
 			Kernel::abort("getThemeNameFromReferer: Page not found for referer path: {$folder}{$resource_name}");

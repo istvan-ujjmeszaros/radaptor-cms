@@ -42,7 +42,12 @@ class EventUrlRedirect extends AbstractEvent implements iBrowserEventDocumentabl
 	public function run(): void
 	{
 		$id = Request::_GET("id", Request::DEFAULT_ERROR);
+		$url = Url::getSeoUrl((int) $id);
 
-		Url::redirect(Url::getSeoUrl($id));
+		if ($url === null) {
+			ResourceTreeHandler::drop404("Unable to resolve SEO URL for resource {$id}.");
+		}
+
+		Url::redirect($url);
 	}
 }

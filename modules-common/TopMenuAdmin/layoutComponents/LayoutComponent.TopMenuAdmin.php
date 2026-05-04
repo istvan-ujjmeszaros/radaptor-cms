@@ -35,7 +35,9 @@ class LayoutComponentTopMenuAdmin extends AbstractLayoutComponent
 				'label' => t('admin.menu.theme_selector'),
 			];
 			$admin_items[] = [
-				'url' => event_url('system.phpinfo'),
+				'url' => defined(WidgetList::class . '::PHPINFOFRAME')
+					? widget_url((string) constant(WidgetList::class . '::PHPINFOFRAME'))
+					: event_url('system.phpinfo'),
 				'label' => t('admin.menu.phpinfo'),
 			];
 		}

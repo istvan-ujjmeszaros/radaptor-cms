@@ -33,7 +33,7 @@ class LayoutComponentAdminMenu extends AbstractLayoutComponent
 		// Már hozzá van rendelve tartalom, azt szerkesztjük
 		$edit->title = t('layout.' . self::ID . '.name');
 		//$edit->icon = 'edit';
-		$edit->url = Url::getSeoUrl(ResourceTypeWebpage::findWebpageIdWithWidget(WidgetList::ADMINMENU));
+		$edit->url = Url::getSeoUrl(ResourceTypeWebpage::findWebpageIdWithWidget(WidgetList::ADMINMENU)) ?? '';
 
 		if (Roles::hasRole(RoleList::ROLE_SYSTEM_DEVELOPER)) {
 			$return[] = $edit;

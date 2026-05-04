@@ -36,8 +36,7 @@ class CmsAuthoringQueryHelper
 	 */
 	public static function getWebpagesUnderPath(string $base_path): array
 	{
-		$domain_context = Config::APP_DOMAIN_CONTEXT->value();
-		$root_id = ResourceTreeHandler::getDomainRoot($domain_context);
+		$root_id = CmsSiteContext::getCurrentRootId();
 
 		if ($root_id === null) {
 			return [];

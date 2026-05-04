@@ -63,6 +63,10 @@ abstract class PredefinedImageHandler implements iPredefinedImage
 	{
 		$url = Url::getSeoUrl($resource_id, false);
 
+		if ($url === null) {
+			return '';
+		}
+
 		$exploded_url = explode('/', (string) $url);
 
 		$filename = $exploded_url[count($exploded_url) - 1];

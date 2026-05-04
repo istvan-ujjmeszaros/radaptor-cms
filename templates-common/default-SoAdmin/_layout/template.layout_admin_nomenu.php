@@ -20,7 +20,6 @@ $document_title = (string)($this->props['document_title'] ?? trim($administratio
 	<?= $this->getRenderer()->getCss(); ?>
 
 	<?= $this->getRenderer()->getJsTop(); ?>
-	<?= $this->getRenderer()->getJs(); ?>
 	<!--link rel="stylesheet" href="debug.css" type="text/css"-->
 
 </head>
@@ -54,4 +53,5 @@ $document_title = (string)($this->props['document_title'] ?? trim($administratio
 	}
 </script>
 <?= $this->fetchSlot('page_chrome'); ?>
+<?= $this->getRenderer()->getJs(); ?>
 <?= $this->getRenderer()->fetchClosingHtml(); ?>

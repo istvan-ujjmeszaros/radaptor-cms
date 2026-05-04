@@ -48,6 +48,14 @@ class Widget extends WidgetList
 		return in_array($widget_name, self::$_widgetNames);
 	}
 
+	/**
+	 * @return list<string>
+	 */
+	public static function getRegisteredWidgetNames(): array
+	{
+		return array_values(self::$_widgetNames);
+	}
+
 	public static function getWidgetDescription(string $widget_name): string
 	{
 		if (!self::checkWidgetExists($widget_name)) {

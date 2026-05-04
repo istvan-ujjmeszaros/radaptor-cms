@@ -8,6 +8,14 @@ class Layout extends LayoutTypes
 	}
 
 	/**
+	 * @return list<string>
+	 */
+	public static function getRegisteredLayoutTypes(): array
+	{
+		return array_values(self::$_layoutTypeNames);
+	}
+
+	/**
 	 * Get the class name for a layout type without instantiating it.
 	 *
 	 * @param string $layoutTypeName The layout type name (e.g., 'public_default')

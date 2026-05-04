@@ -183,6 +183,13 @@ class ResourceTypeWebpage extends AbstractResourceType
 		}
 
 		AttributeHandler::addAttribute(new AttributeResourceIdentifier(ResourceNames::WIDGET_CONNECTION, (string) $connection_id), ['form_id' => $form_type]);
+
+		if (!self::defaultWebpageHasFormType($page_id, $form_type)) {
+			SystemMessages::_error("Error setting form type on default webpage: {$form_type}");
+
+			return false;
+		}
+
 		SystemMessages::_config("Form type set: {$form_type}");
 
 		return $page_id;

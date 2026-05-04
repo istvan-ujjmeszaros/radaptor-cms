@@ -47,11 +47,11 @@ $document_title = (string)($this->props['document_title'] ?? trim($administratio
 	<!-- /CONTENT -->
 	<br class="cleaner">
 </div>
+<?= $this->fetchSlot('page_chrome'); ?>
+<?= $this->getRenderer()->getJs(); ?>
 <script type="text/javascript">
 	if (typeof renderSystemMessages === 'function') {
 		renderSystemMessages();
 	}
 </script>
-<?= $this->fetchSlot('page_chrome'); ?>
-<?= $this->getRenderer()->getJs(); ?>
 <?= $this->getRenderer()->fetchClosingHtml(); ?>

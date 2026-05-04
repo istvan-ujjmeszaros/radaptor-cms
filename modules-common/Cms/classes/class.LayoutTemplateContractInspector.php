@@ -93,6 +93,8 @@ final class LayoutTemplateContractInspector
 					}
 				}
 			}
+		} elseif (!isset($skip_data['skips']['getJsTop']) || !isset($skip_data['skips']['getJs'])) {
+			$violations[] = 'Layout is missing </head> close tag, cannot enforce script placement.';
 		}
 
 		$skips = [];
@@ -213,13 +215,65 @@ final class LayoutTemplateContractInspector
 			}
 		}
 
-		if (preg_match_all('/\brenderSystemMessages\s*\(/', $source, $matches, PREG_OFFSET_CAPTURE) !== false) {
+		$render_system_messages_lines = self::detectInlineFunctionLines($tokens, 'renderSystemMessages');
+
+		if ($render_system_messages_lines !== []) {
+			$lines['renderSystemMessages'] = $render_system_messages_lines;
+		}
+
+		return $lines;
+	}
+
+	/**
+	 * @param list<array<int, mixed>|string> $tokens
+	 * @return list<int>
+	 */
+	private static function detectInlineFunctionLines(array $tokens, string $function): array
+	{
+		$lines = [];
+		$pattern = '/\b' . preg_quote($function, '/') . '\s*\(/';
+
+		foreach ($tokens as $index => $token) {
+			if (is_array($token) && $token[0] === T_STRING && $token[1] === $function) {
+				$next = self::nextNonWhitespaceToken($tokens, $index + 1);
+
+				if ($next === '(') {
+					$lines[] = (int) $token[2];
+				}
+
+				continue;
+			}
+
+			if (!is_array($token) || $token[0] !== T_INLINE_HTML) {
+				continue;
+			}
+
+			$html = (string) $token[1];
+			$masked = self::maskCommentsAndStringLiterals($html);
+
+			if (preg_match_all($pattern, $masked, $matches, PREG_OFFSET_CAPTURE) === false) {
+				continue;
+			}
+
 			foreach ($matches[0] as $match) {
-				$lines['renderSystemMessages'][] = self::lineForOffset($source, (int) $match[1]);
+				$lines[] = (int) $token[2] + substr_count(substr($html, 0, (int) $match[1]), "\n");
 			}
 		}
 
 		return $lines;
+	}
+
+	private static function maskCommentsAndStringLiterals(string $html): string
+	{
+		return preg_replace_callback(
+			[
+				'/<!--.*?-->/s',
+				'/\/\*.*?\*\//s',
+				'/"(?:\\\\.|[^"\\\\])*"|\'(?:\\\\.|[^\'\\\\])*\'|`(?:\\\\.|[^`\\\\])*`/s',
+			],
+			static fn (array $match): string => preg_replace('/[^\r\n]/', ' ', $match[0]) ?? $match[0],
+			$html
+		) ?? $html;
 	}
 
 	/**

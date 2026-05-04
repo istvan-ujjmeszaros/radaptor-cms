@@ -24,7 +24,25 @@ class EventJstreeResourcesAjaxMove extends AbstractEvent
 		//$movedPageData = ResourceHandler::getResourceDataById($id);
 		//$refPageData = Webpage::getWebpageDataById($ref_node_id);
 
-		$success = ResourceTreeHandler::moveResourceEntryToPosition($id, $ref_node_id, $position);
+		try {
+			$success = ResourceTreeHandler::moveResourceEntryToPosition($id, $ref_node_id, $position);
+		} catch (RuntimeException $exception) {
+			SystemMessages::_error($exception->getMessage());
+			header('HX-Trigger: ' . json_encode([
+				'resourceTreeError' => [
+					'message' => $exception->getMessage(),
+				],
+			]));
+			JsTreeApiService::renderMoveResponse(false, [
+				'debug' => NestedSet::$debug,
+				'data' => null,
+				'parent_data' => null,
+				'parent_node' => 'root',
+			], ['message' => $exception->getMessage()]);
+
+			return;
+		}
+
 		$data = ResourceTreeHandler::getResourceTreeEntryDataById($id);
 		$parent_data = ResourceTreeHandler::getResourceTreeEntryDataById($data['parent_id']);
 

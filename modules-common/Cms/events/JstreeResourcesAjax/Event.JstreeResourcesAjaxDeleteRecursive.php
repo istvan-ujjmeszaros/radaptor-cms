@@ -26,6 +26,7 @@ class EventJstreeResourcesAjaxDeleteRecursive extends AbstractEvent
 		$total_files = 0;
 		$total_errors = 0;
 		$deleted_names = [];
+		$error_messages = [];
 		$last_parent_id = null;
 		$success = true;
 
@@ -38,7 +39,16 @@ class EventJstreeResourcesAjaxDeleteRecursive extends AbstractEvent
 			}
 
 			$last_parent_id = $data['parent_id'];
-			$deletion_response_data = ResourceTreeHandler::deleteResourceEntriesRecursive($id);
+
+			try {
+				$deletion_response_data = ResourceTreeHandler::deleteResourceEntriesRecursive($id);
+			} catch (RuntimeException $exception) {
+				$success = false;
+				++$total_errors;
+				$error_messages[] = $exception->getMessage();
+
+				continue;
+			}
 
 			if ($deletion_response_data['success']) {
 				$total_folders += $deletion_response_data['folder'] ?? 0;
@@ -54,7 +64,11 @@ class EventJstreeResourcesAjaxDeleteRecursive extends AbstractEvent
 		$total_deleted = $total_folders + $total_webpages + $total_files;
 
 		if ($total_errors > 0) {
-			SystemMessages::_error(t('cms.resource.delete_partial_error', ['count' => $total_errors]));
+			SystemMessages::_error(
+				$error_messages !== []
+					? implode('<br>', array_map('e', $error_messages))
+					: t('cms.resource.delete_partial_error', ['count' => $total_errors])
+			);
 		} elseif ($success && $total_deleted > 0) {
 			$name_list = implode(', ', $deleted_names);
 			$info_text = '';
@@ -98,9 +112,11 @@ class EventJstreeResourcesAjaxDeleteRecursive extends AbstractEvent
 				'success' => true,
 			]));
 		} else {
-			header(JsTreeApiService::buildHxTriggerHeaderLine('resourceTreeError', ['message' => t('cms.resource.delete_failed')]));
+			header(JsTreeApiService::buildHxTriggerHeaderLine('resourceTreeError', [
+				'message' => $error_messages[0] ?? t('cms.resource.delete_failed'),
+			]));
 		}
 
-		JsTreeApiService::renderDeleteResponse($success, $json_data);
+		JsTreeApiService::renderDeleteResponse($success, $json_data, ['messages' => $error_messages]);
 	}
 }

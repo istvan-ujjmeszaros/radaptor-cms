@@ -1370,6 +1370,16 @@ class ResourceTreeHandler extends ResourceAcl
 		self::assertProtectedResourceMutationAllowed($resource_id, 'move');
 		self::assertProtectedResourceMutationAllowed($parent_id, 'move into');
 
+		$resource_data = self::getResourceTreeEntryDataById($resource_id);
+		$parent_data = self::getResourceTreeEntryDataById($parent_id);
+
+		if (is_array($resource_data) && is_array($parent_data)) {
+			self::assertProtectedResourcePathMutationAllowed(
+				self::buildChildPathFromParentData($parent_data, $resource_data),
+				'move into'
+			);
+		}
+
 		$move = NestedSet::moveToPosition('resource_tree', $resource_id, $parent_id, $position);
 
 		self::rebuildPath($resource_id);

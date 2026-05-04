@@ -167,11 +167,16 @@ final class CmsResourceTreeSpecService
 			$path = (string) $resource['path'];
 			$type = (string) $resource['type'];
 
-			if ($type === 'folder') {
-				$resource_id = CmsResourceSpecService::upsertFolder($resource);
-			} else {
-				$resource_id = CmsResourceSpecService::upsertWebpage($resource);
-			}
+			/** @var int $resource_id */
+			$resource_id = ResourceTreeHandler::withProtectedResourceMutationBypass(
+				static function () use ($resource, $type): int {
+					if ($type === 'folder') {
+						return CmsResourceSpecService::upsertFolder($resource);
+					}
+
+					return CmsResourceSpecService::upsertWebpage($resource);
+				}
+			);
 
 			self::markManaged($resource_id, self::hashResourceSpec($resource), self::buildSpecId($resource));
 			$applied[] = [

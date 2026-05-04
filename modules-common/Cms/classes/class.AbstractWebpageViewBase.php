@@ -535,6 +535,7 @@ abstract class AbstractWebpageViewBase implements iView, iWebpageComposer
 				]),
 				'edit_mode_label' => t('cms.admin_dropdown.edit_mode'),
 				'edit_mode_state_label' => t($edit_mode ? 'cms.admin_dropdown.edit_mode_off' : 'cms.admin_dropdown.edit_mode_on'),
+				'edit_mode_action_label' => t($edit_mode ? 'cms.admin_dropdown.turn_edit_mode_off' : 'cms.admin_dropdown.turn_edit_mode_on'),
 				'layout_commands' => $layout_commands,
 				'home_url' => '/admin/',
 				'home_label' => t('admin.menu.home'),

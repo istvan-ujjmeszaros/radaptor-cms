@@ -315,8 +315,9 @@ final class JsTreeApiService
 	/**
 	 * @param list<string> $allowed_templates
 	 * @param array<string, mixed> $context
+	 * @param array<string, mixed> $meta
 	 */
-	public static function buildResponse(array $allowed_templates, string $tree_type, array $raw_data, array $context, ?string $shape_template): ApiResponse
+	public static function buildResponse(array $allowed_templates, string $tree_type, array $raw_data, array $context, ?string $shape_template, array $meta = []): ApiResponse
 	{
 		if ($shape_template === null || $shape_template === '') {
 			return ApiResponse::error(
@@ -345,7 +346,7 @@ final class JsTreeApiService
 			);
 		}
 
-		return ApiResponse::success($data);
+		return ApiResponse::success($data, $meta !== [] ? $meta : null);
 	}
 
 	/**

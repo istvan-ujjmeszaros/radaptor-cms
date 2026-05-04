@@ -65,6 +65,12 @@ class Form
 
 		$url = Url::getSeoUrl($page_id);
 
+		if ($url === null) {
+			SystemMessages::_warning(t('cms.form.no_form_page_warning'));
+
+			return '';
+		}
+
 		$extra_params_text = '';
 
 		foreach ($extra_params as $key => $value) {

@@ -58,18 +58,20 @@ class EventJstreeResourcesAjaxLoad extends AbstractEvent implements iBrowserEven
 			$parent_node_id = JsTreeApiService::resolveParentNodeId(
 				node_id: $node_id,
 				root_resolver: function (): int {
-					$root = DbHelper::selectOne('resource_tree', ['node_type' => 'root']);
+					// The jsTree "#" request asks for the active site root's children,
+					// so the synthetic parent anchor is the root node id, not parent_id=0.
+					$root_id = CmsSiteContext::getCurrentRootId();
 
-					if (is_null($root)) {
-						ApiResponse::renderError('ROOT_NOT_FOUND', t('cms.resource_browser.root_not_found'), 500);
-
+					if ($root_id === null) {
 						throw new RuntimeException('Root node not found');
 					}
 
-					return (int) $root['parent_id'];
+					return $root_id;
 				}
 			);
-		} catch (RuntimeException) {
+		} catch (RuntimeException $exception) {
+			ApiResponse::renderError('ROOT_RESOLUTION_FAILED', $exception->getMessage(), 500);
+
 			return;
 		}
 

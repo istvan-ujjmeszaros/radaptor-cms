@@ -44,10 +44,16 @@ admin,menu.theme_selector,,hu_HU,Theme selection,Témák kiválasztása,0,Témá
 admin,menu.translations,,hu_HU,Translations,Fordítások,0,Fordítások
 admin,menu.usergroups,,hu_HU,User groups,Felhasználói csoportok,0,Felhasználói csoportok
 admin,menu.widget_preview,,hu_HU,Widget preview,Widget előnézet,0,Widget előnézet
+widget,phpinfo_frame.description,,hu_HU,Show PHP runtime information inside the admin layout.,PHP futtatókörnyezeti információk admin layoutban.,0,PHP futtatókörnyezeti információk admin layoutban.
+widget,phpinfo_frame.name,,hu_HU,PHPinfo frame,PHPinfo keret,0,PHPinfo keret
+widget,phpinfo_frame.open_raw,,hu_HU,Open raw,Nyers nézet megnyitása,0,Nyers nézet megnyitása
+widget,phpinfo_frame.title,,hu_HU,PHPinfo,PHPinfo,0,PHPinfo
 cms,admin_dropdown.edit_mode,,hu_HU,Edit mode,Szerkesztő mód,0,Szerkesztő mód
 cms,admin_dropdown.edit_mode_off,,hu_HU,off,kikapcs,0,kikapcs
 cms,admin_dropdown.edit_mode_on,,hu_HU,on,bekapcs,0,bekapcs
 cms,admin_dropdown.seo,,hu_HU,SEO,SEO,0,SEO
+cms,admin_dropdown.turn_edit_mode_off,,hu_HU,Turn edit mode off,Szerkesztés kikapcsolása,0,Szerkesztés kikapcsolása
+cms,admin_dropdown.turn_edit_mode_on,,hu_HU,Turn edit mode on,Szerkesztés bekapcsolása,0,Szerkesztés bekapcsolása
 cms,admin_menu.form.name,,hu_HU,Admin menu administration,Admin menü adminisztráció,0,Admin menü adminisztráció
 cms,admin_menu.form.title_create,,hu_HU,Create admin menu item,Admin menüpont létrehozása,0,Admin menüpont létrehozása
 cms,admin_menu.form.title_edit,,hu_HU,Edit admin menu item,Admin menüpont szerkesztése,0,Admin menüpont szerkesztése
@@ -452,6 +458,12 @@ widget,role_selector.description,,hu_HU,Role selector,Szerep választó,0,Szerep
 widget,role_selector.name,,hu_HU,Role selector,Szerep választó,0,Szerep választó
 widget,tag_list.description,,hu_HU,Tag list,Címke lista,0,Címke lista
 widget,tag_list.name,,hu_HU,Tag list,Címke lista,0,Címke lista
+widget,template_engine_demo_blade.description,,hu_HU,"Demonstrates rendering a Blade template inside Radaptor.","Blade sablon renderelésének demója Radaptorban.",0,"Blade sablon renderelésének demója Radaptorban."
+widget,template_engine_demo_blade.name,,hu_HU,"Blade template engine demo","Blade sablonmotor demó",0,"Blade sablonmotor demó"
+widget,template_engine_demo_php.description,,hu_HU,"Demonstrates rendering a native PHP template inside Radaptor.","Natív PHP sablon renderelésének demója Radaptorban.",0,"Natív PHP sablon renderelésének demója Radaptorban."
+widget,template_engine_demo_php.name,,hu_HU,"PHP template engine demo","PHP sablonmotor demó",0,"PHP sablonmotor demó"
+widget,template_engine_demo_twig.description,,hu_HU,"Demonstrates rendering a Twig template inside Radaptor.","Twig sablon renderelésének demója Radaptorban.",0,"Twig sablon renderelésének demója Radaptorban."
+widget,template_engine_demo_twig.name,,hu_HU,"Twig template engine demo","Twig sablonmotor demó",0,"Twig sablonmotor demó"
 widget,user_description.description,,hu_HU,Displays the details of a user,Egy felhasználó részletes adatainak megjelenítése,0,Egy felhasználó részletes adatainak megjelenítése
 widget,user_description.name,,hu_HU,User details,Felhasználó részletes leírás,0,Felhasználó részletes leírás
 widget,user_list.description,,hu_HU,User list,Felhasználó lista,0,Felhasználó lista

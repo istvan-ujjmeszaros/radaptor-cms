@@ -43,10 +43,15 @@ class HtmlComponentTemplateResolver
 		$form_name = trim((string)($props['form_name'] ?? ''));
 
 		if ($form_name !== '') {
-			$specific_template = 'sdui.form.' . $form_name;
+			$specific_templates = array_values(array_unique([
+				'sdui.form.' . $form_name,
+				'sdui.form.' . lcfirst($form_name),
+			]));
 
-			if (Template::checkTemplateIsRegistered($specific_template)) {
-				return $specific_template;
+			foreach ($specific_templates as $specific_template) {
+				if (Template::checkTemplateIsRegistered($specific_template)) {
+					return $specific_template;
+				}
 			}
 		}
 

@@ -9,7 +9,7 @@ $layout_commands = is_array($this->props['layout_commands'] ?? null) ? $this->pr
 	<div class="admin_dropdown_menu">
 		<ul>
 			<li><a href="<?= e((string)($this->props['page_edit_url'] ?? '')) ?>"><?= e((string)($this->props['page_edit_label'] ?? '')) ?></a></li>
-			<li><a href="<?= e((string)($this->props['edit_mode_url'] ?? '')) ?>"><?= e((string)($this->props['edit_mode_label'] ?? '')) ?>: <i><?= e((string)($this->props['edit_mode_state_label'] ?? '')) ?></i></a></li>
+			<li><a href="<?= e((string)($this->props['edit_mode_url'] ?? '')) ?>"><?= e((string)($this->props['edit_mode_action_label'] ?? $this->props['edit_mode_label'] ?? '')) ?></a></li>
 
 			<?php foreach ($layout_commands as $command): ?>
 				<?php $icon = isset($command['icon']) ? IconNames::tryFrom((string)$command['icon']) : null; ?>

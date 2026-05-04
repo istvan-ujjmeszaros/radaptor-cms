@@ -94,8 +94,7 @@ class CmsPathHelper
 
 		return ResourceTreeHandler::getResourceTreeEntryData(
 			$parts['folder'],
-			$parts['resource_name'],
-			Config::APP_DOMAIN_CONTEXT->value()
+			$parts['resource_name']
 		);
 	}
 
@@ -107,15 +106,14 @@ class CmsPathHelper
 		$parts = self::splitFolderPath($path);
 
 		if ($parts['normalized_path'] === '/') {
-			$root_id = ResourceTreeHandler::getDomainRoot(Config::APP_DOMAIN_CONTEXT->value());
+			$root_id = CmsSiteContext::getCurrentRootId();
 
 			return is_int($root_id) ? ResourceTreeHandler::getResourceTreeEntryDataById($root_id) : null;
 		}
 
 		$resource = ResourceTreeHandler::getResourceTreeEntryData(
 			$parts['parent_path'],
-			$parts['resource_name'],
-			Config::APP_DOMAIN_CONTEXT->value()
+			$parts['resource_name']
 		);
 
 		if (!is_array($resource)) {

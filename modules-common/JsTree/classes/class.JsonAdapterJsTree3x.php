@@ -160,24 +160,7 @@ class JsonAdapterJsTree3x
 		$result = [];
 
 		foreach ($nodes as $node) {
-			$title = $node['title'] ?? '';
-			$role_name = $node['role'] ?? '';
-
-			$text = htmlspecialchars($title, ENT_QUOTES | ENT_SUBSTITUTE)
-				. ' <small class="text-muted">('
-				. htmlspecialchars($role_name, ENT_QUOTES | ENT_SUBSTITUTE)
-				. ')</small>';
-
-			$result[] = self::buildNode(
-				$node,
-				$text,
-				'role',
-				[
-					'node_id' => $node['node_id'],
-					'title' => $title,
-					'role' => $role_name,
-				]
-			);
+			$result[] = self::buildRoleNode($node);
 		}
 
 		// Wrap in virtual root when at root level
@@ -186,6 +169,37 @@ class JsonAdapterJsTree3x
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Format the complete roles tree for jsTree 3.x with every branch opened.
+	 *
+	 * @param array $nodes Raw nodes from Roles::getFullRoleTree()
+	 * @return array Formatted jsTree 3.x data
+	 */
+	public static function rolesTreeExpanded(array $nodes): array
+	{
+		$children_by_parent = [];
+
+		foreach ($nodes as $node) {
+			$parent_id = (int)($node['parent_id'] ?? 0);
+			$children_by_parent[$parent_id][] = $node;
+		}
+
+		$buildChildren = static function (int $parent_id) use (&$buildChildren, $children_by_parent): array {
+			$children = [];
+
+			foreach ($children_by_parent[$parent_id] ?? [] as $node) {
+				$child_nodes = $buildChildren((int)$node['node_id']);
+				$tree_node = self::buildRoleNode($node, $child_nodes);
+				$tree_node['state'] = ['opened' => true];
+				$children[] = $tree_node;
+			}
+
+			return $children;
+		};
+
+		return [self::buildVirtualRoot($buildChildren(0), t('admin.menu.roles'))];
 	}
 
 	/**
@@ -244,19 +258,7 @@ class JsonAdapterJsTree3x
 		$result = [];
 
 		foreach ($nodes as $node) {
-			$is_system = !empty($node['is_system_group']);
-			$type = $is_system ? 'systemusergroup' : 'usergroup';
-
-			$result[] = self::buildNode(
-				$node,
-				$node['title'] ?? '',
-				$type,
-				[
-					'node_id' => $node['node_id'],
-					'title' => $node['title'],
-					'is_system_group' => $is_system,
-				]
-			);
+			$result[] = self::buildUsergroupNode($node);
 		}
 
 		// Wrap in virtual root when at root level
@@ -265,6 +267,37 @@ class JsonAdapterJsTree3x
 		}
 
 		return $result;
+	}
+
+	/**
+	 * Format the complete user groups tree for jsTree 3.x with every branch opened.
+	 *
+	 * @param array $nodes Raw nodes from Usergroups::getFullUsergroupTree()
+	 * @return array Formatted jsTree 3.x data
+	 */
+	public static function usergroupsTreeExpanded(array $nodes): array
+	{
+		$children_by_parent = [];
+
+		foreach ($nodes as $node) {
+			$parent_id = (int)($node['parent_id'] ?? 0);
+			$children_by_parent[$parent_id][] = $node;
+		}
+
+		$buildChildren = static function (int $parent_id) use (&$buildChildren, $children_by_parent): array {
+			$children = [];
+
+			foreach ($children_by_parent[$parent_id] ?? [] as $node) {
+				$child_nodes = $buildChildren((int)$node['node_id']);
+				$tree_node = self::buildUsergroupNode($node, $child_nodes);
+				$tree_node['state'] = ['opened' => true];
+				$children[] = $tree_node;
+			}
+
+			return $children;
+		};
+
+		return [self::buildVirtualRoot($buildChildren(0), t('admin.menu.usergroups'))];
 	}
 
 	/**
@@ -345,6 +378,74 @@ class JsonAdapterJsTree3x
 			'children' => $has_children,
 			'data' => $data,
 		];
+	}
+
+	/**
+	 * Build a role jsTree node. When children are provided, jsTree receives the
+	 * complete branch instead of lazy-loading it later.
+	 */
+	private static function buildRoleNode(array $node, ?array $children = null): array
+	{
+		$title = $node['title'] ?? '';
+		$role_name = $node['role'] ?? '';
+
+		$text = htmlspecialchars($title, ENT_QUOTES | ENT_SUBSTITUTE)
+			. ' <small class="text-muted">('
+			. htmlspecialchars($role_name, ENT_QUOTES | ENT_SUBSTITUTE)
+			. ')</small>';
+
+		if ($children !== null) {
+			return [
+				'id' => (string) $node['node_id'],
+				'text' => $text,
+				'type' => 'role',
+				'children' => $children,
+				'data' => [
+					'node_id' => $node['node_id'],
+					'title' => $title,
+					'role' => $role_name,
+				],
+			];
+		}
+
+		return self::buildNode(
+			$node,
+			$text,
+			'role',
+			[
+				'node_id' => $node['node_id'],
+				'title' => $title,
+				'role' => $role_name,
+			]
+		);
+	}
+
+	/**
+	 * Build a user group jsTree node. When children are provided, jsTree
+	 * receives the complete branch instead of lazy-loading it later.
+	 */
+	private static function buildUsergroupNode(array $node, ?array $children = null): array
+	{
+		$is_system = !empty($node['is_system_group']);
+		$type = $is_system ? 'systemusergroup' : 'usergroup';
+		$title = $node['title'] ?? '';
+		$data = [
+			'node_id' => $node['node_id'],
+			'title' => $title,
+			'is_system_group' => $is_system,
+		];
+
+		if ($children !== null) {
+			return [
+				'id' => (string) $node['node_id'],
+				'text' => $title,
+				'type' => $type,
+				'children' => $children,
+				'data' => $data,
+			];
+		}
+
+		return self::buildNode($node, $title, $type, $data);
 	}
 
 	/**

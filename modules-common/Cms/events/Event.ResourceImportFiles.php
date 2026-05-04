@@ -41,7 +41,7 @@ class EventResourceImportFiles extends AbstractEvent implements iBrowserEventDoc
 				return PolicyDecision::deny("file spec at index {$index} is missing resource_name");
 			}
 
-			$existing = ResourceTreeHandler::getResourceTreeEntryData($folder_path, $resource_name, Config::APP_DOMAIN_CONTEXT->value());
+			$existing = ResourceTreeHandler::getResourceTreeEntryData($folder_path, $resource_name);
 
 			if (is_array($existing)) {
 				if (($existing['node_type'] ?? null) !== 'file') {

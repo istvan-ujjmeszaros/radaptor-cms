@@ -20,7 +20,7 @@ class CmsResourceImportService
 		try {
 			$source = CmsMigrationSourcePathHelper::resolveReadableFile($source_path);
 			$folder_path = CmsPathHelper::splitFolderPath($target_folder)['normalized_path'];
-			$existing = ResourceTreeHandler::getResourceTreeEntryData($folder_path, $resource_name, Config::APP_DOMAIN_CONTEXT->value());
+			$existing = ResourceTreeHandler::getResourceTreeEntryData($folder_path, $resource_name);
 			$old_file_id = null;
 
 			if (is_array($existing) && ($existing['node_type'] ?? null) !== 'file') {

@@ -370,59 +370,65 @@ body.i18n-tm-open {
     data-i18n-workbench-ajax-tm-url-value="<?= ajax_url('i18n.ajaxTmSuggest') ?>"
     data-i18n-workbench-ajax-tm-fuzzy-url-value="<?= ajax_url('i18n.ajaxTmSuggestFuzzy') ?>"
 >
-    <!-- Filters -->
-    <div class="d-flex gap-3 flex-wrap align-items-end mb-3">
-        <div>
-            <label for="i18n-locale"><?= e(t('admin.i18n.locale')) ?></label><br>
-            <select id="i18n-locale" class="form-select form-select-sm"
-                    data-filter-state-target="field"
-                    data-filter-state-param="locale"
-                    data-i18n-workbench-target="localeSelect">
-                <?php foreach ($localeOptions as $option) { ?>
-                <option value="<?= e($option['value']) ?>" <?= $option['value'] === $selectedLocale ? 'selected' : '' ?>>
-                    <?= e($option['label']) ?>
-                </option>
-                <?php } ?>
-            </select>
-        </div>
-        <div>
-            <label for="i18n-domain"><?= e(t('admin.i18n.domain')) ?></label><br>
-            <select id="i18n-domain" class="form-select form-select-sm"
-                    data-filter-state-target="field"
-                    data-filter-state-param="domain"
-                    data-i18n-workbench-target="domainSelect">
-                <option value=""><?= e(t('common.all')) ?></option>
-                <?php foreach ($domainOptions as $option) { ?>
-                <option value="<?= e($option['value']) ?>" <?= $option['value'] === $selectedDomain ? 'selected' : '' ?>><?= e($option['label']) ?></option>
-                <?php } ?>
-            </select>
-        </div>
-        <div class="i18n-workbench-filter--search">
-            <label for="i18n-search"><?= e(t('common.search')) ?></label><br>
-            <input type="text" id="i18n-search" class="form-control form-control-sm"
-                   value="<?= e($selectedSearch) ?>"
-                   placeholder="<?= e(t('admin.i18n.search_placeholder')) ?>"
-                   data-filter-state-target="field"
-                   data-filter-state-param="search"
-                   data-filter-state-sync="live"
-                   data-i18n-workbench-target="searchInput">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <!-- Filters -->
+            <div class="d-flex gap-3 flex-wrap align-items-end mb-3">
+                <div>
+                    <label for="i18n-locale"><?= e(t('admin.i18n.locale')) ?></label><br>
+                    <select id="i18n-locale" class="form-select form-select-sm"
+                            data-filter-state-target="field"
+                            data-filter-state-param="locale"
+                            data-i18n-workbench-target="localeSelect">
+                        <?php foreach ($localeOptions as $option) { ?>
+                        <option value="<?= e($option['value']) ?>" <?= $option['value'] === $selectedLocale ? 'selected' : '' ?>>
+                            <?= e($option['label']) ?>
+                        </option>
+                        <?php } ?>
+                    </select>
+                </div>
+                <div>
+                    <label for="i18n-domain"><?= e(t('admin.i18n.domain')) ?></label><br>
+                    <select id="i18n-domain" class="form-select form-select-sm"
+                            data-filter-state-target="field"
+                            data-filter-state-param="domain"
+                            data-i18n-workbench-target="domainSelect">
+                        <option value=""><?= e(t('common.all')) ?></option>
+                        <?php foreach ($domainOptions as $option) { ?>
+                        <option value="<?= e($option['value']) ?>" <?= $option['value'] === $selectedDomain ? 'selected' : '' ?>><?= e($option['label']) ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+                <div class="i18n-workbench-filter--search">
+                    <label for="i18n-search"><?= e(t('common.search')) ?></label><br>
+                    <input type="text" id="i18n-search" class="form-control form-control-sm"
+                           value="<?= e($selectedSearch) ?>"
+                           placeholder="<?= e(t('admin.i18n.search_placeholder')) ?>"
+                           data-filter-state-target="field"
+                           data-filter-state-param="search"
+                           data-filter-state-sync="live"
+                           data-i18n-workbench-target="searchInput">
+                </div>
+            </div>
+
+            <!-- Grid -->
+            <div class="table-responsive">
+                <table data-i18n-workbench-target="table" class="display" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th><?= e(t('admin.i18n.col.domain')) ?></th>
+                            <th><?= e(t('admin.i18n.col.key')) ?></th>
+                            <th><?= e(t('admin.i18n.col.source')) ?></th>
+                            <th><?= e(t('admin.i18n.col.translation')) ?></th>
+                            <th><?= e($reviewedLabel) ?></th>
+                            <th><?= e(t('common.actions')) ?></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
         </div>
     </div>
-
-    <!-- Grid -->
-    <table data-i18n-workbench-target="table" class="display" style="width:100%">
-        <thead>
-            <tr>
-                <th><?= e(t('admin.i18n.col.domain')) ?></th>
-                <th><?= e(t('admin.i18n.col.key')) ?></th>
-                <th><?= e(t('admin.i18n.col.source')) ?></th>
-                <th><?= e(t('admin.i18n.col.translation')) ?></th>
-                <th><?= e($reviewedLabel) ?></th>
-                <th><?= e(t('common.actions')) ?></th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
 
     <div class="i18n-tm-backdrop"
          data-i18n-workbench-target="tmBackdrop"

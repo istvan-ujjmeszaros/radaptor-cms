@@ -146,7 +146,7 @@ class ResourceTreeHandler extends ResourceAcl
 
 	public static function getResourceTreeEntryIdFromUrl(?string $domain_context = null): ?int
 	{
-		$domain_context ??= Config::APP_DOMAIN_CONTEXT->value();
+		$domain_context = self::getActiveDomainContext($domain_context);
 
 		$folder = Request::_GET('folder');
 		$resource = Request::_GET('resource');
@@ -186,6 +186,10 @@ class ResourceTreeHandler extends ResourceAcl
 
 	public static function getDomainContextForResourceTreeEntryData(array $resource_data): string
 	{
+		if (($resource_data['node_type'] ?? null) === 'root') {
+			return (string) ($resource_data['resource_name'] ?? '');
+		}
+
 		$query = "SELECT resource_name FROM resource_tree WHERE lft < ? AND rgt > ? ORDER BY lft LIMIT 1";
 
 		return DbHelper::selectOneColumnFromQuery(
@@ -196,7 +200,7 @@ class ResourceTreeHandler extends ResourceAcl
 
 	public static function getResourceTreeEntryData(string $folder, string $resource_name, ?string $domain_context = null): ?array
 	{
-		$domain_context ??= Config::APP_DOMAIN_CONTEXT->value();
+		$domain_context = self::getActiveDomainContext($domain_context);
 
 		$query_domain_context = "SELECT node_id FROM resource_tree WHERE node_type='root' AND resource_name=?";
 		$stmt_domain_context = Db::instance()->prepare($query_domain_context);
@@ -238,7 +242,7 @@ class ResourceTreeHandler extends ResourceAcl
 
 	private static function _getResourceTreeEntryIdFromNamedResource(string $folder, string $resource_name, ?string $domain_context = null): ?int
 	{
-		$domain_context ??= Config::APP_DOMAIN_CONTEXT->value();
+		$domain_context = self::getActiveDomainContext($domain_context);
 
 		$rs = self::getResourceTreeEntryData($folder, $resource_name, $domain_context);
 
@@ -251,7 +255,7 @@ class ResourceTreeHandler extends ResourceAcl
 
 	private static function _getResizableResourceTreeEntryIdFromNamedResource(string $folder, string $resource_name, ?string $domain_context = null): ?array
 	{
-		$domain_context ??= Config::APP_DOMAIN_CONTEXT->value();
+		$domain_context = self::getActiveDomainContext($domain_context);
 
 		$exploded_resource_name = explode('.', $resource_name);
 
@@ -284,7 +288,7 @@ class ResourceTreeHandler extends ResourceAcl
 
 	private static function _getClosestCatchableResourceTreeEntryId(string $folder, ?string $domain_context = null): ?int
 	{
-		$domain_context ??= Config::APP_DOMAIN_CONTEXT->value();
+		$domain_context = self::getActiveDomainContext($domain_context);
 
 		$path_variations = self::getPathVariations($folder);
 		$path_variations = array_reverse($path_variations);
@@ -297,7 +301,17 @@ class ResourceTreeHandler extends ResourceAcl
 			}
 		}
 
-		$root = self::getResourceTreeEntryDataById(self::getDomainRoot($domain_context));
+		$root_id = self::getDomainRoot($domain_context);
+
+		if ($root_id === null) {
+			return null;
+		}
+
+		$root = self::getResourceTreeEntryDataById($root_id);
+
+		if (!is_array($root)) {
+			return null;
+		}
 
 		if ($root['catcher_page']) {
 			return $root['catcher_page'];
@@ -322,19 +336,30 @@ class ResourceTreeHandler extends ResourceAcl
 		return (int) $root_id;
 	}
 
-	public static function createResourceTreeEntryFromPath(string $folder, string $resource_name, string $resource_type, ?string $layout_name = null): ?int
+	public static function getActiveDomainContext(?string $domain_context = null): string
+	{
+		$domain_context = trim((string) $domain_context);
+
+		if ($domain_context !== '') {
+			return $domain_context;
+		}
+
+		return CmsSiteContext::resolve();
+	}
+
+	public static function createResourceTreeEntryFromPath(string $folder, string $resource_name, string $resource_type, ?string $layout_name = null, ?string $domain_context = null): ?int
 	{
 		$path_variations = self::getPathVariations($folder);
 
-		// először létrehozzuk a hiányzó mappákat az útvonalhoz
-		$last_parent_id = self::ensureDomainRoot(Config::APP_DOMAIN_CONTEXT->value());
+		// Create any missing folders for the requested path first.
+		$last_parent_id = self::ensureDomainRoot(self::getActiveDomainContext($domain_context));
 
 		if (is_null($last_parent_id)) {
 			return null;
 		}
 
 		foreach ($path_variations as $path_variation) {
-			$page_data = self::getResourceTreeEntryData($path_variation['path'], $path_variation['resource_name']);
+			$page_data = self::getResourceTreeEntryData($path_variation['path'], $path_variation['resource_name'], $domain_context);
 
 			if (is_null($page_data)) {
 				$savedata = [
@@ -351,15 +376,15 @@ class ResourceTreeHandler extends ResourceAcl
 
 				$last_parent_id = (int) $created_id;
 			} elseif ($page_data['node_type'] == $resource_type) {
-				// érvénytelen útvonal (pl.: /index/valami/ nem jó, ha már van /index.html),
-				// mert nem létezhet azonos névvel weboldal és mappa is!
+				// Invalid path: a webpage and a folder cannot share the same name
+				// under the same parent.
 				return null;
 			} else {
 				$last_parent_id = (int) $page_data['node_id'];
 			}
 		}
 
-		// utána létrehozzuk a weboldalt
+		// Then create the webpage itself.
 		$savedata = [
 			'node_type' => 'webpage',
 			'path' => $folder,
@@ -376,23 +401,23 @@ class ResourceTreeHandler extends ResourceAcl
 		return (int) $created_webpage_id;
 	}
 
-	public static function createFolderFromPath(string $path): ?int
+	public static function createFolderFromPath(string $path, ?string $domain_context = null): ?int
 	{
 		$normalized_path = CmsPathHelper::splitFolderPath($path)['normalized_path'];
 
 		if ($normalized_path === '/') {
-			return self::ensureDomainRoot(Config::APP_DOMAIN_CONTEXT->value());
+			return self::ensureDomainRoot(self::getActiveDomainContext($domain_context));
 		}
 
 		$path_variations = self::getPathVariations($normalized_path);
-		$last_parent_id = self::ensureDomainRoot(Config::APP_DOMAIN_CONTEXT->value());
+		$last_parent_id = self::ensureDomainRoot(self::getActiveDomainContext($domain_context));
 
 		if (is_null($last_parent_id)) {
 			return null;
 		}
 
 		foreach ($path_variations as $path_variation) {
-			$folder_data = self::getResourceTreeEntryData($path_variation['path'], $path_variation['resource_name']);
+			$folder_data = self::getResourceTreeEntryData($path_variation['path'], $path_variation['resource_name'], $domain_context);
 
 			if ($folder_data === null) {
 				$last_parent_id = self::addResourceEntry([
@@ -420,6 +445,117 @@ class ResourceTreeHandler extends ResourceAcl
 		return $last_parent_id;
 	}
 
+	public static function ensureConfiguredSiteRoot(): ?int
+	{
+		$site_key = CmsSiteContext::getConfiguredSiteKey();
+		$configured_root = CmsSiteContext::getRootByName($site_key);
+		$content_roots = CmsSiteContext::getContentRootRows();
+		$has_explicit_aliases = CmsSiteContext::hasExplicitHostAliasConfig();
+
+		if (!$has_explicit_aliases && count($content_roots) > 1) {
+			throw CmsSiteContext::ambiguousSiteRootsException($content_roots);
+		}
+
+		if (is_array($configured_root) && self::countChildren((int) $configured_root['node_id']) > 0) {
+			return (int) $configured_root['node_id'];
+		}
+
+		if ($has_explicit_aliases && count($content_roots) > 1) {
+			$matching_root = self::getSingleConfiguredAliasContentRoot($site_key, $content_roots);
+
+			if (is_array($matching_root)) {
+				return self::renameContentRootToSiteKey($matching_root, $site_key, $configured_root);
+			}
+
+			throw CmsSiteContext::ambiguousSiteRootsException($content_roots);
+		}
+
+		if (count($content_roots) === 1) {
+			return self::renameContentRootToSiteKey($content_roots[0], $site_key, $configured_root);
+		}
+
+		if (is_array($configured_root)) {
+			return (int) $configured_root['node_id'];
+		}
+
+		return self::ensureDomainRoot($site_key);
+	}
+
+	/**
+	 * @param list<array<string, mixed>> $content_roots
+	 * @return array<string, mixed>|null
+	 */
+	private static function getSingleConfiguredAliasContentRoot(string $site_key, array $content_roots): ?array
+	{
+		$candidate_root_names = array_values(array_unique(array_filter([
+			$site_key,
+			...CmsSiteContext::getHostsForSite($site_key),
+		], static fn (string $name): bool => $name !== '')));
+
+		$matches = array_values(array_filter(
+			$content_roots,
+			static fn (array $root): bool => in_array((string) ($root['resource_name'] ?? ''), $candidate_root_names, true)
+		));
+
+		return count($matches) === 1 ? $matches[0] : null;
+	}
+
+	/**
+	 * @param array<string, mixed>      $content_root
+	 * @param array<string, mixed>|null $configured_root
+	 */
+	private static function renameContentRootToSiteKey(array $content_root, string $site_key, ?array $configured_root): int
+	{
+		$content_root_id = (int) $content_root['node_id'];
+		$content_root_name = (string) $content_root['resource_name'];
+
+		if ($content_root_name === $site_key) {
+			return $content_root_id;
+		}
+
+		if (is_array($configured_root) && (int) $configured_root['node_id'] !== $content_root_id) {
+			if (!self::deleteEmptySiteRoot((int) $configured_root['node_id'])) {
+				throw new RuntimeException("Unable to delete empty configured site root before normalizing {$content_root_name} to {$site_key}.");
+			}
+		}
+
+		self::updateResourceTreeEntry([
+			'resource_name' => $site_key,
+		], $content_root_id);
+
+		if (self::getDomainRoot($site_key) !== $content_root_id) {
+			throw new RuntimeException("Unable to normalize CMS site root from {$content_root_name} to {$site_key}.");
+		}
+
+		SystemMessages::_warning("CMS site root normalized from {$content_root_name} to {$site_key}");
+
+		return $content_root_id;
+	}
+
+	public static function deleteEmptySiteRoot(int $root_id): bool
+	{
+		$root = self::getResourceTreeEntryDataById($root_id);
+
+		if (!is_array($root) || (string) ($root['node_type'] ?? '') !== 'root' || (int) ($root['parent_id'] ?? -1) !== 0) {
+			throw new InvalidArgumentException("Resource {$root_id} is not a site root.");
+		}
+
+		if (self::countChildren($root_id) > 0) {
+			throw new InvalidArgumentException("Site root {$root_id} is not empty.");
+		}
+
+		Cache::flush();
+
+		if (!NestedSet::deleteNode('resource_tree', $root_id)) {
+			return false;
+		}
+
+		AttributeHandler::deleteAttributes(new AttributeResourceIdentifier(ResourceNames::RESOURCE_DATA, (string) $root_id));
+		DbHelper::prexecute('DELETE FROM resource_acl WHERE resource_id=?', [$root_id]);
+
+		return true;
+	}
+
 	private static function ensureDomainRoot(string $domain): ?int
 	{
 		$root_id = self::getDomainRoot($domain);
@@ -441,7 +577,24 @@ class ResourceTreeHandler extends ResourceAcl
 			$root_id = self::addResourceEntry($savedata);
 
 			if (!is_null($root_id)) {
-				SystemMessages::_warning("Domain created in root: {$domain}");
+				SystemMessages::_warning("Site root created: {$domain}");
+			}
+
+			return $root_id;
+		}
+
+		$existing_root_count = (int) DbHelper::selectOneColumnFromQuery(
+			"SELECT COUNT(*) FROM resource_tree WHERE node_type='root'"
+		);
+
+		if ($existing_root_count > 0) {
+			$root_id = self::addResourceEntry([
+				'node_type' => 'root',
+				'resource_name' => $domain,
+			]);
+
+			if (!is_null($root_id)) {
+				SystemMessages::_warning("Site root created: {$domain}");
 			}
 
 			return $root_id;
@@ -460,19 +613,19 @@ class ResourceTreeHandler extends ResourceAcl
 			]);
 		} catch (Throwable $exception) {
 			error_log("NestedSet wrapExistingTreeWithRoot failed for resource_tree: " . $exception->getMessage());
-			SystemMessages::_error("Unable to wrap existing resource tree with domain root: {$domain}");
+			SystemMessages::_error("Unable to wrap existing resource tree with site root: {$domain}");
 
 			return null;
 		}
 
 		if (is_null($root_id)) {
-			SystemMessages::_error("Unable to wrap existing resource tree with domain root: {$domain}");
+			SystemMessages::_error("Unable to wrap existing resource tree with site root: {$domain}");
 
 			return null;
 		}
 
 		self::rebuildPath($root_id);
-		SystemMessages::_warning("Domain wrapped around existing rootless tree: {$domain}");
+		SystemMessages::_warning("Site root wrapped around existing rootless tree: {$domain}");
 
 		return $root_id;
 	}

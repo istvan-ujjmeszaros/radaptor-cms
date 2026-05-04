@@ -70,8 +70,7 @@ class EventWebpageCreate extends AbstractEvent implements iBrowserEventDocumenta
 			$path_parts = CmsPathHelper::splitWebpagePath($path);
 			$existing_resource = ResourceTreeHandler::getResourceTreeEntryData(
 				$path_parts['folder'],
-				$path_parts['resource_name'],
-				Config::APP_DOMAIN_CONTEXT->value()
+				$path_parts['resource_name']
 			);
 
 			if (is_array($existing_resource)) {

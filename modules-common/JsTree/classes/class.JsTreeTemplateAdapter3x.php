@@ -31,12 +31,20 @@ final class JsTreeTemplateAdapter3x implements iJsTreeTemplateAdapter
 				);
 
 			case JsTreeApiService::TYPE_ROLES:
+				if (!empty($context['load_all'])) {
+					return JsonAdapterJsTree3x::rolesTreeExpanded($raw_data);
+				}
+
 				return JsonAdapterJsTree3x::rolesTree(
 					$raw_data,
 					(int) $context['parent_node_id']
 				);
 
 			case JsTreeApiService::TYPE_USERGROUPS:
+				if (!empty($context['load_all'])) {
+					return JsonAdapterJsTree3x::usergroupsTreeExpanded($raw_data);
+				}
+
 				return JsonAdapterJsTree3x::usergroupsTree(
 					$raw_data,
 					(int) $context['parent_node_id']

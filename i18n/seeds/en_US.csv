@@ -44,10 +44,16 @@ admin,menu.theme_selector,,en_US,Theme selection,Theme selection,0,Theme selecti
 admin,menu.translations,,en_US,Translations,Translations,0,Translations
 admin,menu.usergroups,,en_US,User groups,User groups,0,User groups
 admin,menu.widget_preview,,en_US,Widget preview,Widget preview,0,Widget preview
+widget,phpinfo_frame.description,,en_US,Show PHP runtime information inside the admin layout.,Show PHP runtime information inside the admin layout.,0,Show PHP runtime information inside the admin layout.
+widget,phpinfo_frame.name,,en_US,PHPinfo frame,PHPinfo frame,0,PHPinfo frame
+widget,phpinfo_frame.open_raw,,en_US,Open raw,Open raw,0,Open raw
+widget,phpinfo_frame.title,,en_US,PHPinfo,PHPinfo,0,PHPinfo
 cms,admin_dropdown.edit_mode,,en_US,Edit mode,Edit mode,0,Edit mode
 cms,admin_dropdown.edit_mode_off,,en_US,off,off,0,off
 cms,admin_dropdown.edit_mode_on,,en_US,on,on,0,on
 cms,admin_dropdown.seo,,en_US,SEO,SEO,0,SEO
+cms,admin_dropdown.turn_edit_mode_off,,en_US,Turn edit mode off,Turn edit mode off,0,Turn edit mode off
+cms,admin_dropdown.turn_edit_mode_on,,en_US,Turn edit mode on,Turn edit mode on,0,Turn edit mode on
 cms,admin_menu.form.name,,en_US,Admin menu administration,Admin menu administration,0,Admin menu administration
 cms,admin_menu.form.title_create,,en_US,Create admin menu item,Create admin menu item,0,Create admin menu item
 cms,admin_menu.form.title_edit,,en_US,Edit admin menu item,Edit admin menu item,0,Edit admin menu item
@@ -452,6 +458,12 @@ widget,role_selector.description,,en_US,Role selector,Role selector,0,Role selec
 widget,role_selector.name,,en_US,Role selector,Role selector,0,Role selector
 widget,tag_list.description,,en_US,Tag list,Tag list,0,Tag list
 widget,tag_list.name,,en_US,Tag list,Tag list,0,Tag list
+widget,template_engine_demo_blade.description,,en_US,"Demonstrates rendering a Blade template inside Radaptor.","Demonstrates rendering a Blade template inside Radaptor.",0,"Demonstrates rendering a Blade template inside Radaptor."
+widget,template_engine_demo_blade.name,,en_US,"Blade template engine demo","Blade template engine demo",0,"Blade template engine demo"
+widget,template_engine_demo_php.description,,en_US,"Demonstrates rendering a native PHP template inside Radaptor.","Demonstrates rendering a native PHP template inside Radaptor.",0,"Demonstrates rendering a native PHP template inside Radaptor."
+widget,template_engine_demo_php.name,,en_US,"PHP template engine demo","PHP template engine demo",0,"PHP template engine demo"
+widget,template_engine_demo_twig.description,,en_US,"Demonstrates rendering a Twig template inside Radaptor.","Demonstrates rendering a Twig template inside Radaptor.",0,"Demonstrates rendering a Twig template inside Radaptor."
+widget,template_engine_demo_twig.name,,en_US,"Twig template engine demo","Twig template engine demo",0,"Twig template engine demo"
 widget,user_description.description,,en_US,Displays the details of a user,Displays the details of a user,0,Displays the details of a user
 widget,user_description.name,,en_US,User details,User details,0,User details
 widget,user_list.description,,en_US,User list,User list,0,User list

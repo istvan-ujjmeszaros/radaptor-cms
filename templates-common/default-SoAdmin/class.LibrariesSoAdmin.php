@@ -32,7 +32,7 @@ class LibrariesSoAdmin extends LibrariesCommon
 	public const string JQUERY_UI_10 = '
 		JQUERY,
 		css:https://cdn.jsdelivr.net/npm/jquery-ui@1.14.1/dist/themes/base/jquery-ui.min.css,
-		js:https://cdn.jsdelivr.net/npm/jquery-ui@1.14.1/dist/jquery-ui.min.js,
+		js:^https://cdn.jsdelivr.net/npm/jquery-ui@1.14.1/dist/jquery-ui.min.js,
 	';
 
 	public const string JQUERY_UI = '
@@ -97,8 +97,8 @@ class LibrariesSoAdmin extends LibrariesCommon
 	 * Requires Popper.js (bundled in the iife build).
 	 */
 	public const string TIPPY = '
-		js:https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js,
-		js:https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.min.js,
+		js:^https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js,
+		js:^https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.min.js,
 		css:https://unpkg.com/tippy.js@6/dist/tippy.css,
 	';
 

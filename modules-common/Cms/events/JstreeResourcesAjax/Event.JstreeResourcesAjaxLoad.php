@@ -63,15 +63,15 @@ class EventJstreeResourcesAjaxLoad extends AbstractEvent implements iBrowserEven
 					$root_id = CmsSiteContext::getCurrentRootId();
 
 					if ($root_id === null) {
-						ApiResponse::renderError('ROOT_NOT_FOUND', t('cms.resource_browser.root_not_found'), 500);
-
 						throw new RuntimeException('Root node not found');
 					}
 
 					return $root_id;
 				}
 			);
-		} catch (RuntimeException) {
+		} catch (RuntimeException $exception) {
+			ApiResponse::renderError('ROOT_RESOLUTION_FAILED', $exception->getMessage(), 500);
+
 			return;
 		}
 

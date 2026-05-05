@@ -58,7 +58,7 @@ class EventImportExportDownload extends AbstractEvent implements iBrowserEventDo
 		$csv = $dataset->export($options);
 		$filename = $dataset->buildExportFilename($options);
 
-		header('Content-Type: text/csv; charset=UTF-8');
+		header('Content-Type: ' . $dataset->getExportContentType());
 		header('Content-Disposition: attachment; filename="' . $filename . '"');
 		echo $csv;
 	}

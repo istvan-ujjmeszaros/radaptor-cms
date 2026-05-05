@@ -135,7 +135,7 @@ $renderField = static function (string $name, array $field, string $value = ''):
 			<?php if ($selectedDataset->supportsExport()) { ?>
 				<div class="card mb-4">
 					<div class="card-body">
-						<h3><?= e(t('import_export.export.title')) ?></h3>
+						<h3><?= e($selectedDataset->getExportTitle()) ?></h3>
 						<form method="get" action="/">
 							<input type="hidden" name="context" value="importExport">
 							<input type="hidden" name="event" value="download">
@@ -143,7 +143,7 @@ $renderField = static function (string $name, array $field, string $value = ''):
 							<?php foreach ($selectedDataset->getExportFieldDefinitions() as $fieldName => $field) {
 								$renderField($fieldName, $field, Request::_GET($fieldName, (string) ($field['default'] ?? '')));
 							} ?>
-							<button type="submit" class="btn btn-primary btn-sm"><?= e(t('import_export.action.export_csv')) ?></button>
+							<button type="submit" class="btn btn-primary btn-sm"><?= e($selectedDataset->getExportActionLabel()) ?></button>
 						</form>
 					</div>
 				</div>
@@ -152,7 +152,7 @@ $renderField = static function (string $name, array $field, string $value = ''):
 			<?php if ($selectedDataset->supportsImport()) { ?>
 				<div class="card" data-controller="import-export">
 					<div class="card-body">
-						<h3><?= e(t('import_export.import.title')) ?></h3>
+						<h3><?= e($selectedDataset->getImportTitle()) ?></h3>
 						<form method="post"
 							  enctype="multipart/form-data"
 							  action="<?= event_url('importExport.import') ?>"

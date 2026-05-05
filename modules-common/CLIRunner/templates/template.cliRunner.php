@@ -13,6 +13,7 @@ $category_labels = [
 	'migrate' => t('cli_runner.category.migrate'),
 	'plugin' => t('cli_runner.category.plugin'),
 	'role' => t('cli_runner.category.role'),
+	'site' => t('cli_runner.category.site'),
 	'user' => t('cli_runner.category.user'),
 	'userconfig' => t('cli_runner.category.userconfig'),
 	'usergroup' => t('cli_runner.category.usergroup'),

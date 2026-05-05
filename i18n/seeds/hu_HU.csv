@@ -164,6 +164,20 @@ cms,resource.delete_failed,,hu_HU,Delete failed,Sikertelen törlés,0,Sikertelen
 cms,resource.delete_partial_error,,hu_HU,{count} error(s) occurred during deletion,A törlés közben {count} hiba történt,0,A törlés közben {count} hiba történt
 cms,resource.deleted,,hu_HU,Resource deleted,Az erőforrás törölve,0,Az erőforrás törölve
 cms,resource.deleted_multiple,,hu_HU,Resources deleted,Az erőforrások törölve,0,Az erőforrások törölve
+cms,resource.error.add_failed,,hu_HU,Unable to add resource tree entry.,Nem sikerült létrehozni az erőforrásfa bejegyzést.,0,Nem sikerült létrehozni az erőforrásfa bejegyzést.
+cms,resource.error.create_failed_for_path,,hu_HU,Unable to create resource: {path},Nem sikerült létrehozni az erőforrást: {path},0,Nem sikerült létrehozni az erőforrást: {path}
+cms,resource.error.delete_denied,,hu_HU,Delete denied for resource: {resource_id},Az erőforrás törlése nem engedélyezett: {resource_id},0,Az erőforrás törlése nem engedélyezett: {resource_id}
+cms,resource.error.delete_failed_for_id,,hu_HU,Unable to delete resource: {resource_id},Nem sikerült törölni az erőforrást: {resource_id},0,Nem sikerült törölni az erőforrást: {resource_id}
+cms,resource.error.file_delete_failed_for_id,,hu_HU,Unable to delete file for resource: {resource_id},Nem sikerült törölni az erőforráshoz tartozó fájlt: {resource_id},0,Nem sikerült törölni az erőforráshoz tartozó fájlt: {resource_id}
+cms,resource.error.import_file_failed,,hu_HU,Unable to import file: {path},Nem sikerült importálni a fájlt: {path},0,Nem sikerült importálni a fájlt: {path}
+cms,resource.error.move_failed_for_id,,hu_HU,Unable to move resource: {resource_id},Nem sikerült áthelyezni az erőforrást: {resource_id},0,Nem sikerült áthelyezni az erőforrást: {resource_id}
+cms,resource.error.not_found_by_id,,hu_HU,Resource not found: {resource_id},Az erőforrás nem található: {resource_id},0,Az erőforrás nem található: {resource_id}
+cms,resource.error.path_exists_not_file,,hu_HU,Resource path exists and is not a file: {path},"Az útvonal létezik, de nem fájl: {path}",0,"Az útvonal létezik, de nem fájl: {path}"
+cms,resource.error.protected_mutation,,hu_HU,Protected system resource cannot be modified: {path},"A védett rendszer-erőforrás nem módosítható: {path}",0,"A védett rendszer-erőforrás nem módosítható: {path}"
+cms,resource.error.protected_path_mutation,,hu_HU,Protected system resource path cannot be created or modified: {path},"A védett rendszer-erőforrás útvonala nem hozható létre vagy módosítható: {path}",0,"A védett rendszer-erőforrás útvonala nem hozható létre vagy módosítható: {path}"
+cms,resource.error.protected_subtree_mutation,,hu_HU,A protected system resource in this subtree cannot be modified: {path},"A részfában található védett rendszer-erőforrás nem módosítható: {path}",0,"A részfában található védett rendszer-erőforrás nem módosítható: {path}"
+cms,resource.error.target_folder_not_found,,hu_HU,Target folder not found after creation: {path},A célmappa nem található létrehozás után: {path},0,A célmappa nem található létrehozás után: {path}
+cms,resource.error.update_failed_for_path,,hu_HU,Unable to update resource: {path},Nem sikerült frissíteni az erőforrást: {path},0,Nem sikerült frissíteni az erőforrást: {path}
 cms,resource.folder_count,,hu_HU,{count} folder(s),{count} mappa,0,{count} mappa
 cms,resource.move_error,,hu_HU,Error: Unable to move resource,Hiba történt az áthelyezés közben!,0,Hiba történt az áthelyezés közben!
 cms,resource.move_failed,,hu_HU,Move failed,Sikertelen áthelyezés,0,Sikertelen áthelyezés

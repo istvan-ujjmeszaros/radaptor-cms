@@ -22,9 +22,8 @@
 
 	<link rel="shortcut" href="favicon.ico"/>
 	<?= $this->getRenderer()->getCss(); ?>
+	<?= $this->getRenderer()->getJsTop(); ?>
 
-	<!-- HTML5 Shiv -->
-	<?= $this->getRenderer()->getJs(); ?>
 	<link href='https://fonts.googleapis.com/css?family=Oxygen:400,700|Kaushan+Script&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 	<script type="text/javascript">
 
@@ -167,6 +166,8 @@
 	<script src="https://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>
 <![endif]-->
 
+<?= $this->fetchSlot('page_chrome'); ?>
+<?= $this->getRenderer()->getJs(); ?>
 <script src="<?= Config::PATH_CDN->value(); ?>teamsolution.hu/js/custom.js"></script>
 
 <!--/body>
@@ -179,4 +180,4 @@
 		}
 	</script>
 <?php endif; ?>
-<?= $this->fetchSlot('page_chrome'); ?>
+<?= $this->getRenderer()->fetchClosingHtml(); ?>

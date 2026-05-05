@@ -64,6 +64,7 @@ class EventJstreeResourcesAjaxDinaContent extends AbstractEvent
 		];
 
 		foreach ($ids as $id) {
+			$id = $this->resolveResourceTreeNodeId($id);
 			$resource = ResourceTypeFactory::Factory($id);
 
 			if (!is_null($resource)) {
@@ -108,5 +109,14 @@ class EventJstreeResourcesAjaxDinaContent extends AbstractEvent
 				JsTreeApiService::createDinaNode('dina_content.resources._help', [], [], [], $strings),
 			],
 		], $strings);
+	}
+
+	private function resolveResourceTreeNodeId(mixed $node_id): int
+	{
+		if ($node_id === ResourceTreeHandler::JSTREE_SITE_ROOT_ID) {
+			return CmsSiteContext::getCurrentRootId() ?? 0;
+		}
+
+		return (int) $node_id;
 	}
 }

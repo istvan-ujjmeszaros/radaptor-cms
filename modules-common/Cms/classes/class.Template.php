@@ -122,6 +122,17 @@ class Template extends TemplateDebug
 			}
 		}
 
+		// Direct template lookups without a renderer keep the base registry path.
+		$default_theme_name = $theme_name !== null ? Config::APP_DEFAULT_THEME_NAME->value() : '';
+
+		if ($default_theme_name !== '' && $default_theme_name !== $theme_name) {
+			$defaultThemedPath = ThemedTemplateList::getThemedTemplatePath($templateName, $default_theme_name);
+
+			if ($defaultThemedPath !== null) {
+				return $defaultThemedPath;
+			}
+		}
+
 		// Fall back to base template (from __templates__.php)
 		if (TemplateList::hasTemplate($templateName)) {
 			return TemplateList::getPathForTemplate($templateName);

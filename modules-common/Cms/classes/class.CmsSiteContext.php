@@ -7,13 +7,13 @@ final class CmsSiteContext
 	/**
 	 * Resolve the logical CMS site context for the current request.
 	 *
-	 * Host names are treated as aliases, not as the content tree identity. For
-	 * legacy installs, an existing host-named root is still accepted. Single-site
-	 * databases fall back to their only non-empty root so local hosts can serve
-	 * migrated content without renaming the root to the current host.
+	 * Host names are treated as aliases, not as the content tree identity. An
+	 * existing host-named root is still accepted for single-site app migration.
+	 * Single-site databases fall back to their only non-empty root so local hosts
+	 * can serve migrated content without renaming the root to the current host.
 	 *
-	 * The fallback rules below are intentionally limited to unambiguous legacy
-	 * shapes: one populated root, one host-named root, or one root total. Multiple
+	 * The fallback rules below are intentionally limited to unambiguous shapes:
+	 * one populated root, one host-named root, or one root total. Multiple
 	 * populated roots without an explicit host alias mapping are rejected instead
 	 * of guessed. Hostless multi-site contexts are accepted only when the configured
 	 * site key names an existing populated root.
@@ -100,10 +100,10 @@ final class CmsSiteContext
 			return $site_context;
 		}
 
-		$legacy_domain_context = self::getConfigString('APP_DOMAIN_CONTEXT', '');
+		$domain_context = self::getConfigString('APP_DOMAIN_CONTEXT', '');
 
-		if ($legacy_domain_context !== '') {
-			return $legacy_domain_context;
+		if ($domain_context !== '') {
+			return $domain_context;
 		}
 
 		return self::DEFAULT_SITE_KEY;

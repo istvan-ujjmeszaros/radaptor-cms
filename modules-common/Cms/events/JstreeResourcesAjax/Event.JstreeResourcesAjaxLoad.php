@@ -53,31 +53,41 @@ class EventJstreeResourcesAjaxLoad extends AbstractEvent implements iBrowserEven
 		$id_prefix = Request::_GET('id_prefix', 'jstree_resources');
 		$shape_template = Request::_GET('shape_template', null);
 		$node_id = Request::_GET('node_id', Request::_GET('id', '#'));
+		$is_root_request = $node_id === '#' || $node_id === 'root';
 
 		try {
-			$parent_node_id = JsTreeApiService::resolveParentNodeId(
-				node_id: $node_id,
-				root_resolver: function (): int {
-					// The jsTree "#" request asks for the active site root's children,
-					// so the synthetic parent anchor is the root node id, not parent_id=0.
-					$root_id = CmsSiteContext::getCurrentRootId();
+			$root_id = CmsSiteContext::getCurrentRootId();
 
-					if ($root_id === null) {
-						throw new RuntimeException('Root node not found');
-					}
+			if ($root_id === null) {
+				throw new RuntimeException('Root node not found');
+			}
 
-					return $root_id;
+			if ($is_root_request) {
+				$parent_node_id = 0;
+				$root_data = ResourceTreeHandler::getResourceTreeEntryDataById($root_id);
+
+				if (!is_array($root_data)) {
+					throw new RuntimeException('Root node not found');
 				}
-			);
+
+				$root_data['_jstree_id'] = ResourceTreeHandler::JSTREE_SITE_ROOT_ID;
+				$root_data['_jstree_data_node_id'] = 0;
+				$raw_data = [$root_data];
+				$parent_data = null;
+			} elseif ($node_id === ResourceTreeHandler::JSTREE_SITE_ROOT_ID) {
+				$parent_node_id = $root_id;
+				$raw_data = ResourceTreeHandler::getResourceTree($parent_node_id);
+				$parent_data = ResourceTreeHandler::getResourceTreeEntryDataById($parent_node_id);
+			} else {
+				$parent_node_id = JsTreeApiService::resolveParentNodeId($node_id);
+				$raw_data = ResourceTreeHandler::getResourceTree($parent_node_id);
+				$parent_data = ResourceTreeHandler::getResourceTreeEntryDataById($parent_node_id);
+			}
 		} catch (RuntimeException $exception) {
 			ApiResponse::renderError('ROOT_RESOLUTION_FAILED', $exception->getMessage(), 500);
 
 			return;
 		}
-
-		// Get raw tree data
-		$raw_data = ResourceTreeHandler::getResourceTree($parent_node_id);
-		$parent_data = ResourceTreeHandler::getResourceTreeEntryDataById($parent_node_id);
 
 		$response = JsTreeApiService::buildResponse(
 			[JsTreeApiService::TEMPLATE_JSTREE_3],
@@ -85,7 +95,9 @@ class EventJstreeResourcesAjaxLoad extends AbstractEvent implements iBrowserEven
 			$raw_data,
 			[
 				'parent_data' => $parent_data,
+				'parent_node_id' => $parent_node_id,
 				'id_prefix' => $id_prefix,
+				'is_root_request' => $is_root_request,
 			],
 			$shape_template
 		);

@@ -119,7 +119,12 @@ class CmsResourceSpecService
 			$update_data[(string) $key] = $value;
 		}
 
-		ResourceTreeHandler::updateResourceTreeEntry($update_data, (int) $page['node_id']);
+		$update_result = ResourceTreeHandler::updateResourceTreeEntryResult($update_data, (int) $page['node_id']);
+
+		if (!$update_result->ok) {
+			// Resource specs are explicit sync boundaries; callers render this batch failure.
+			throw new RuntimeException($update_result->error?->message ?? t('cms.resource.error.update_failed_for_path', ['path' => $path_parts['normalized_path']]));
+		}
 
 		if (array_key_exists('catcher', $spec)) {
 			if ((bool) $spec['catcher']) {

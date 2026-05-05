@@ -2,10 +2,12 @@ parameters:
 	level: 0
 	bootstrapFiles:
 		- /app/bootstrap/bootstrap.testing.php
+		- ../framework/classes/phpstan/class.NonHtmlResponseHeaderDetectionRule.php
 	paths:
 		- modules-common/Cms/classes/class.CmsPathHelper.php
 		- modules-common/Cms/classes/class.CmsResourceSpecService.php
 		- modules-common/Cms/classes/class.ImageManipulator.php
+		- modules-common/ImportExport/events/Event.ImportExportImport.php
 		- modules-common/Comment/entities/Entity.Comment.php
 		- modules-common/I18n/entities/Entity.I18n_build_state.php
 		- modules-common/I18n/entities/Entity.I18n_messag.php
@@ -14,9 +16,18 @@ parameters:
 		- modules-common/RichText/entities/Entity.Richtext.php
 		- modules-common/Tags/entities/Entity.Tag.php
 		- modules-common/Tags/entities/Entity.TagConnection.php
+	scanFiles:
+		- ../framework/classes/phpstan/class.NonHtmlResponseHeaderDetectionRule.php
 	tmpDir: /app/tmp/phpstan-cms
 	dynamicConstantNames:
 		- USE_PERSISTENT_CACHE
 
 includes:
 	- /app/vendor/phpstan/phpstan/conf/bleedingEdge.neon
+
+services:
+	-
+		# Loaded through the documented PHPStan command's -a flag so package repos do not need Composer autoload metadata.
+		class: NonHtmlResponseHeaderDetectionRule
+		tags:
+			- phpstan.rules.rule

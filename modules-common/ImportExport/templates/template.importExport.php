@@ -18,6 +18,7 @@ registerI18n([
 	'common.loading',
 	'import_export.action.preview_import',
 	'import_export.action.run_import',
+	'import_export.confirm.site_snapshot_replace',
 	'import_export.error.file_required',
 	'import_export.result.detected_locale',
 	'import_export.result.detected_locales',
@@ -135,24 +136,27 @@ $renderField = static function (string $name, array $field, string $value = ''):
 			<?php if ($selectedDataset->supportsExport()) { ?>
 				<div class="card mb-4">
 					<div class="card-body">
-						<h3><?= e(t('import_export.export.title')) ?></h3>
+						<h3><?= e($selectedDataset->getExportTitle()) ?></h3>
 						<form method="get" action="/">
 							<input type="hidden" name="context" value="importExport">
 							<input type="hidden" name="event" value="download">
 							<input type="hidden" name="dataset" value="<?= e($selectedDataset->getKey()) ?>">
+							<input type="hidden" name="referer" value="<?= e($selectedDatasetUrl) ?>">
 							<?php foreach ($selectedDataset->getExportFieldDefinitions() as $fieldName => $field) {
 								$renderField($fieldName, $field, Request::_GET($fieldName, (string) ($field['default'] ?? '')));
 							} ?>
-							<button type="submit" class="btn btn-primary btn-sm"><?= e(t('import_export.action.export_csv')) ?></button>
+							<button type="submit" class="btn btn-primary btn-sm"><?= e($selectedDataset->getExportActionLabel()) ?></button>
 						</form>
 					</div>
 				</div>
 			<?php } ?>
 
 			<?php if ($selectedDataset->supportsImport()) { ?>
-				<div class="card" data-controller="import-export">
+				<div class="card"
+					 data-controller="import-export"
+					 data-import-export-destructive-confirm-value="<?= e($selectedDataset->getKey() === 'site_snapshot' ? t('import_export.confirm.site_snapshot_replace') : '') ?>">
 					<div class="card-body">
-						<h3><?= e(t('import_export.import.title')) ?></h3>
+						<h3><?= e($selectedDataset->getImportTitle()) ?></h3>
 						<form method="post"
 							  enctype="multipart/form-data"
 							  action="<?= event_url('importExport.import') ?>"

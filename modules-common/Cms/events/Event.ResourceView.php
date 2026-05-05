@@ -67,6 +67,8 @@ class EventResourceView extends AbstractEvent implements iBrowserEventDocumentab
 		$resource_id = ResourceTreeHandler::getResourceTreeEntryIdFromUrl();
 		$request_resource_is_viewable = false;
 
+		self::redirectFolderResourceToCanonicalPath($resource_id);
+
 		if ($resource_id > 0) {
 			$request_resource_is_viewable = ResourceTreeHandler::canAccessResource($resource_id, ResourceAcl::_ACL_VIEW);
 
@@ -113,5 +115,49 @@ class EventResourceView extends AbstractEvent implements iBrowserEventDocumentab
 			self::_setCacheHeaders($resource);
 			$resource->view();
 		}
+	}
+
+	private static function redirectFolderResourceToCanonicalPath(?int $resource_id): void
+	{
+		if ($resource_id === null || $resource_id <= 0 || !in_array(Request::getMethod(), ['GET', 'HEAD'], true)) {
+			return;
+		}
+
+		$resource_data = ResourceTreeHandler::getResourceTreeEntryDataById($resource_id);
+
+		if (!is_array($resource_data) || ($resource_data['node_type'] ?? null) !== 'folder') {
+			return;
+		}
+
+		$server = RequestContextHolder::current()->SERVER;
+		$request_uri = (string) ($server['REQUEST_URI'] ?? $_SERVER['REQUEST_URI'] ?? '');
+		$request_path = parse_url($request_uri, PHP_URL_PATH);
+
+		if (!is_string($request_path) || $request_path === '' || str_ends_with($request_path, '/')) {
+			return;
+		}
+
+		$target_path = self::buildCanonicalFolderPath($resource_data);
+
+		if ($target_path === $request_path) {
+			return;
+		}
+
+		$query = parse_url($request_uri, PHP_URL_QUERY);
+		$target = $target_path . (is_string($query) && $query !== '' ? "?{$query}" : '');
+
+		Url::redirect($target);
+	}
+
+	/**
+	 * @param array<string, mixed> $resource_data
+	 */
+	private static function buildCanonicalFolderPath(array $resource_data): string
+	{
+		$path = (string) ($resource_data['path'] ?? '/');
+		$resource_name = (string) ($resource_data['resource_name'] ?? '');
+		$target_path = str_replace('//', '/', '/' . trim($path . $resource_name, '/') . '/');
+
+		return $target_path === '//' ? '/' : $target_path;
 	}
 }

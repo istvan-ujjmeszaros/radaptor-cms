@@ -18,6 +18,7 @@ class EventImportExportDownload extends AbstractEvent implements iBrowserEventDo
 				'method' => 'GET',
 				'params' => [
 					BrowserEventDocumentationHelper::param('dataset', 'query', 'string', true, 'Dataset key to export.'),
+					BrowserEventDocumentationHelper::param('referer', 'query', 'string', false, 'Return URL for validation failures.'),
 					BrowserEventDocumentationHelper::param('*', 'query', 'string', false, 'Additional scalar dataset-specific export options.'),
 				],
 			],
@@ -49,16 +50,24 @@ class EventImportExportDownload extends AbstractEvent implements iBrowserEventDo
 	public function run(): void
 	{
 		$dataset = $this->_dataset ?? $this->_resolveDatasetFromGet();
+		$referer = $this->_getReferer();
 
 		if ($dataset === null || !$dataset->supportsExport()) {
-			Kernel::abort(t('import_export.error.dataset_not_found'));
+			SystemMessages::_error(t('import_export.error.dataset_not_found'));
+			Url::redirect($referer);
 		}
 
 		$options = $this->_collectStringOptions(RequestContextHolder::current()->GET);
-		$csv = $dataset->export($options);
-		$filename = $dataset->buildExportFilename($options);
 
-		header('Content-Type: text/csv; charset=UTF-8');
+		try {
+			$csv = $dataset->export($options);
+			$filename = $dataset->buildExportFilename($options);
+		} catch (Throwable $e) {
+			SystemMessages::_error(nl2br(e($e->getMessage())));
+			Url::redirect($referer);
+		}
+
+		header('Content-Type: ' . $dataset->getExportContentType());
 		header('Content-Disposition: attachment; filename="' . $filename . '"');
 		echo $csv;
 	}
@@ -89,5 +98,16 @@ class EventImportExportDownload extends AbstractEvent implements iBrowserEventDo
 		}
 
 		return $options;
+	}
+
+	private function _getReferer(): string
+	{
+		$referer = trim(Request::_GET('referer', ''));
+
+		if ($referer === '') {
+			return Url::getCurrentHost();
+		}
+
+		return Url::sanitizeRefererUrl($referer);
 	}
 }

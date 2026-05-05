@@ -1,323 +1,389 @@
 ﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
+admin,email_outbox.col.created_at,,de_DE,Created,Created,0,Created
+admin,email_outbox.col.id,,de_DE,ID,ID,0,ID
+admin,email_outbox.col.last_error,,de_DE,"Last error","Last error",0,"Last error"
+admin,email_outbox.col.recipients,,de_DE,Recipients,Recipients,0,Recipients
+admin,email_outbox.col.sent_at,,de_DE,Sent,Sent,0,Sent
+admin,email_outbox.col.status,,de_DE,Status,Status,0,Status
+admin,email_outbox.col.subject,,de_DE,Subject,Subjekt,0,Subjekt
+admin,email_outbox.description,,de_DE,"Read-only transactional email delivery history.","Schreibgeschützter Verlauf der transaktionalen E-Mail-Zustellung.",0,"Schreibgeschützter Verlauf der transaktionalen E-Mail-Zustellung."
+admin,email_outbox.failures.title,,de_DE,"Recent dead letters","Aktuelle unzustellbare Nachrichten",0,"Aktuelle unzustellbare Nachrichten"
+admin,email_outbox.filters.apply,,de_DE,"Apply filters","Apply filters",0,"Apply filters"
+admin,email_outbox.filters.reset,,de_DE,Reset,Reset,0,Reset
+admin,email_outbox.filters.search,,de_DE,Search,Suchen,0,Suchen
+admin,email_outbox.filters.search_placeholder,,de_DE,"Subject, message UID, or recipient email","Betreff, Nachrichten-UID oder Empfänger-E-Mail",0,"Betreff, Nachrichten-UID oder Empfänger-E-Mail"
+admin,email_outbox.filters.status,,de_DE,Status,Status,0,Status
+admin,email_outbox.filters.title,,de_DE,Filters,Filters,0,Filters
+admin,email_outbox.list.title,,de_DE,"Recent outbox entries","Aktuelle Ausgangseinträge",0,"Aktuelle Ausgangseinträge"
+admin,email_outbox.none,,de_DE,"No emails match the current filter.","Keine E-Mails entsprechen dem aktuellen Filter.",0,"Keine E-Mails entsprechen dem aktuellen Filter."
+admin,email_outbox.pagination.page,,de_DE,Page,Seite,0,Seite
+admin,email_outbox.status.all,,de_DE,"All statuses","All statuses",0,"All statuses"
+admin,email_outbox.status.failed,,de_DE,Failed,Failed,0,Failed
+admin,email_outbox.status.partial_failed,,de_DE,"Partial failed","Partial failed",0,"Partial failed"
+admin,email_outbox.status.processing,,de_DE,Processing,Processing,0,Processing
+admin,email_outbox.status.queued,,de_DE,Queued,Queued,0,Queued
+admin,email_outbox.status.sent,,de_DE,Sent,Sent,0,Sent
+admin,email_outbox.summary.title,,de_DE,"Queue summary","Queue summary",0,"Queue summary"
+admin,email_outbox.title,,de_DE,"Email outbox",E-Mail-Ausgang,0,E-Mail-Ausgang
+admin,email_queue.dead_letter,,de_DE,"Dead letter","Dead letter",0,"Dead letter"
+admin,email_queue.empty,,de_DE,"No email jobs are waiting right now.","Zurzeit warten keine E-Mail-Jobs.",0,"Zurzeit warten keine E-Mail-Jobs."
+admin,email_queue.last_processed,,de_DE,"Last processed","Last processed",0,"Last processed"
+admin,email_queue.last_seen,,de_DE,"Last seen","Last seen",0,"Last seen"
+admin,email_queue.open_outbox,,de_DE,"Open email outbox","E-Mail-Ausgang öffnen",0,"E-Mail-Ausgang öffnen"
+admin,email_queue.pending,,de_DE,Pending,Pending,0,Pending
+admin,email_queue.retry_wait,,de_DE,"Retry wait","Retry wait",0,"Retry wait"
+admin,email_queue.sent_last_24h,,de_DE,"Sent in last 24h","Sent in last 24h",0,"Sent in last 24h"
+admin,email_queue.status.never_seen,,de_DE,"Never seen","Never seen",0,"Never seen"
+admin,email_queue.status.running,,de_DE,Running,Running,0,Running
+admin,email_queue.status.stale,,de_DE,Stale,Veraltet,0,Veraltet
+admin,email_queue.status.unavailable,,de_DE,Unavailable,Unavailable,0,Unavailable
+admin,email_queue.subtitle,,de_DE,"Transactional delivery health at a glance.","Transaktionaler Zustellstatus auf einen Blick.",0,"Transaktionaler Zustellstatus auf einen Blick."
+admin,email_queue.title,,de_DE,"Email queue",E-Mail-Warteschlange,0,E-Mail-Warteschlange
+admin,email_queue.worker,,de_DE,Worker,Worker,0,Worker
 admin,i18n.col.domain,,de_DE,Domain,Domain,0,Domain
 admin,i18n.col.key,,de_DE,Key,Schlüssel,0,Schlüssel
 admin,i18n.col.reviewed,,de_DE,Reviewed,Geprüft,1,Geprüft
 admin,i18n.col.source,,de_DE,Source,Quelle,0,Quelle
 admin,i18n.col.status,,de_DE,Status,Status,0,Status
 admin,i18n.col.translation,,de_DE,Translation,Übersetzung,0,Übersetzung
+admin,i18n.coverage.missing,,de_DE,Missing,Fehlend,0,Fehlend
+admin,i18n.coverage.reviewed,,de_DE,Reviewed,Geprüft,0,Geprüft
+admin,i18n.coverage.stale,,de_DE,Stale,Veraltet,0,Veraltet
+admin,i18n.coverage.title,,de_DE,"Translation coverage",Übersetzungsabdeckung,0,Übersetzungsabdeckung
+admin,i18n.coverage.translated,,de_DE,Translated,Übersetzt,0,Übersetzt
 admin,i18n.domain,,de_DE,Domain,Domain,0,Domain
 admin,i18n.locale,,de_DE,Locale,Gebietsschema,0,Gebietsschema
-admin,i18n.search_placeholder,,de_DE,Search source or translation,Quelle oder Übersetzung suchen,0,Quelle oder Übersetzung suchen
+admin,i18n.search_placeholder,,de_DE,"Search source or translation","Quelle oder Übersetzung suchen",0,"Quelle oder Übersetzung suchen"
 admin,i18n.status,,de_DE,Status,Status,0,Status
 admin,i18n.status.ai_generated,,de_DE,AI-generated,KI-generiert,0,KI-generiert
 admin,i18n.status.approved,,de_DE,Approved,Genehmigt,0,Genehmigt
 admin,i18n.status.missing,,de_DE,Missing,Fehlend,0,Fehlend
-admin,i18n.status.needs_review,,de_DE,Needs review,Zu überprüfen,0,Zu überprüfen
+admin,i18n.status.needs_review,,de_DE,"Needs review","Zu überprüfen",0,"Zu überprüfen"
 admin,i18n.status.translated,,de_DE,Translated,Übersetzt,0,Übersetzt
-admin,i18n.title,,de_DE,Translation workbench,Übersetzungsarbeitsplatz,0,Übersetzungsarbeitsplatz
-admin,i18n.tm.exact_match_only,,de_DE,Exact-match suggestions only,Nur exakte Übereinstimmungen,0,Nur exakte Übereinstimmungen
-admin,i18n.tm.exact_matches,,de_DE,Exact matches,Exakte Treffer,0,Exakte Treffer
-admin,i18n.tm.exact_then_similar,,de_DE,Exact matches load first. Similar matches load afterwards.,"Exakte Treffer werden zuerst geladen, ähnliche Treffer danach.",0,"Exakte Treffer werden zuerst geladen, ähnliche Treffer danach."
-admin,i18n.tm.no_exact_matches,,de_DE,No exact matches,Keine exakten Treffer,0,Keine exakten Treffer
-admin,i18n.tm.no_similar_matches,,de_DE,No similar matches,Keine ähnlichen Treffer,0,Keine ähnlichen Treffer
+admin,i18n.title,,de_DE,"Translation workbench",Übersetzungsarbeitsplatz,0,Übersetzungsarbeitsplatz
+admin,i18n.tm.exact_match_only,,de_DE,"Exact-match suggestions only","Nur exakte Übereinstimmungen",0,"Nur exakte Übereinstimmungen"
+admin,i18n.tm.exact_matches,,de_DE,"Exact matches","Exakte Treffer",0,"Exakte Treffer"
+admin,i18n.tm.exact_then_similar,,de_DE,"Exact matches load first. Similar matches load afterwards.","Exakte Treffer werden zuerst geladen, ähnliche Treffer danach.",0,"Exakte Treffer werden zuerst geladen, ähnliche Treffer danach."
+admin,i18n.tm.no_exact_matches,,de_DE,"No exact matches","Keine exakten Treffer",0,"Keine exakten Treffer"
+admin,i18n.tm.no_similar_matches,,de_DE,"No similar matches","Keine ähnlichen Treffer",0,"Keine ähnlichen Treffer"
 admin,i18n.tm.origin,,de_DE,Origin,Herkunft,0,Herkunft
-admin,i18n.tm.review_placeholders,,de_DE,Review placeholders,Platzhalter prüfen,0,Platzhalter prüfen
+admin,i18n.tm.review_placeholders,,de_DE,"Review placeholders","Platzhalter prüfen",0,"Platzhalter prüfen"
 admin,i18n.tm.safe,,de_DE,Safe,Sicher,0,Sicher
-admin,i18n.tm.similar_matches,,de_DE,Similar matches,Ähnliche Treffer,0,Ähnliche Treffer
+admin,i18n.tm.similar_matches,,de_DE,"Similar matches","Ähnliche Treffer",0,"Ähnliche Treffer"
 admin,i18n.tm.similarity,,de_DE,Similarity,Ähnlichkeit,0,Ähnlichkeit
-admin,i18n.tm.source_example,,de_DE,Source example,Quellbeispiel,0,Quellbeispiel
-admin,i18n.tm.title,,de_DE,Translation memory suggestions,Translation-Memory-Vorschläge,0,Translation-Memory-Vorschläge
-admin,menu.admin_menu,,de_DE,Admin menu,Admin-Menü,0,Admin-Menü
+admin,i18n.tm.source_example,,de_DE,"Source example",Quellbeispiel,0,Quellbeispiel
+admin,i18n.tm.title,,de_DE,"Translation memory suggestions",Translation-Memory-Vorschläge,0,Translation-Memory-Vorschläge
+admin,menu.admin_menu,,de_DE,"Admin menu",Admin-Menü,0,Admin-Menü
 admin,menu.blog,,de_DE,Blog,Blog,0,Blog
-admin,menu.custom_menu,,de_DE,Custom menu,Benutzerdefiniertes Menü,0,Benutzerdefiniertes Menü
-admin,menu.home,,de_DE,Admin home,Admin-Startseite,0,Admin-Startseite
-admin,menu.import_export,,de_DE,Import / Export,Import / Export,0,Import / Export
+admin,menu.cli_runner,,de_DE,"CLI Runner","CLI Runner",0,"CLI Runner"
+admin,menu.custom_menu,,de_DE,"Custom menu","Benutzerdefiniertes Menü",0,"Benutzerdefiniertes Menü"
+admin,menu.email_outbox,,de_DE,"Email outbox",E-Mail-Ausgang,0,E-Mail-Ausgang
+admin,menu.home,,de_DE,"Admin home",Admin-Startseite,0,Admin-Startseite
+admin,menu.import_export,,de_DE,"Import / Export","Import / Export",0,"Import / Export"
+admin,menu.mcp_tokens,,de_DE,"MCP tokens",MCP-Tokens,0,MCP-Tokens
 admin,menu.phpinfo,,de_DE,PHPinfo,PHPinfo,0,PHPinfo
-admin,menu.resource_tree,,de_DE,Website structure,Webseitenstruktur,0,Webseitenstruktur
+admin,menu.resource_tree,,de_DE,"Website structure",Webseitenstruktur,0,Webseitenstruktur
 admin,menu.roles,,de_DE,Roles,Rollen,0,Rollen
+admin,menu.runtime_diagnostics,,de_DE,"Runtime diagnostics",Laufzeitdiagnose,0,Laufzeitdiagnose
 admin,menu.section.administration,,de_DE,Administration,Administration,0,Administration
 admin,menu.section.configuration,,de_DE,Configuration,Konfiguration,0,Konfiguration
 admin,menu.section.content,,de_DE,Content,Inhalt,0,Inhalt
-admin,menu.section.developer_tools,,de_DE,Developer tools,Entwicklertools,0,Entwicklertools
-admin,menu.template_engines,,de_DE,Template engines,Template-Engines,0,Template-Engines
-admin,menu.theme_selector,,de_DE,Theme selection,Designauswahl,0,Designauswahl
+admin,menu.section.developer_tools,,de_DE,"Developer tools",Entwicklertools,0,Entwicklertools
+admin,menu.template_engines,,de_DE,"Template engines",Template-Engines,0,Template-Engines
+admin,menu.theme_selector,,de_DE,"Theme selection",Designauswahl,0,Designauswahl
 admin,menu.translations,,de_DE,Translations,Übersetzungen,0,Übersetzungen
-admin,menu.usergroups,,de_DE,User groups,Benutzergruppen,0,Benutzergruppen
-admin,menu.widget_preview,,de_DE,Widget preview,Widget-Vorschau,0,Widget-Vorschau
-cms,admin_dropdown.edit_mode,,de_DE,Edit mode,Bearbeitungsmodus,0,Bearbeitungsmodus
+admin,menu.usergroups,,de_DE,"User groups",Benutzergruppen,0,Benutzergruppen
+admin,menu.widget_preview,,de_DE,"Widget preview",Widget-Vorschau,0,Widget-Vorschau
+cms,admin_dropdown.edit_mode,,de_DE,"Edit mode",Bearbeitungsmodus,0,Bearbeitungsmodus
 cms,admin_dropdown.edit_mode_off,,de_DE,off,aus,0,aus
 cms,admin_dropdown.edit_mode_on,,de_DE,on,ein,0,ein
 cms,admin_dropdown.seo,,de_DE,SEO,SEO,0,SEO
-cms,admin_menu.form.name,,de_DE,Admin menu administration,Admin-Menü-Verwaltung,0,Admin-Menü-Verwaltung
-cms,admin_menu.form.title_create,,de_DE,Create admin menu item,Admin-Menüelement erstellen,0,Admin-Menüelement erstellen
-cms,admin_menu.form.title_edit,,de_DE,Edit admin menu item,Admin-Menüelement bearbeiten,0,Admin-Menüelement bearbeiten
+cms,admin_dropdown.turn_edit_mode_off,,de_DE,"Turn edit mode off","Bearbeitungsmodus ausschalten",0,"Bearbeitungsmodus ausschalten"
+cms,admin_dropdown.turn_edit_mode_on,,de_DE,"Turn edit mode on","Bearbeitungsmodus einschalten",0,"Bearbeitungsmodus einschalten"
+cms,admin_menu.form.name,,de_DE,"Admin menu administration",Admin-Menü-Verwaltung,0,Admin-Menü-Verwaltung
+cms,admin_menu.form.title_create,,de_DE,"Create admin menu item","Admin-Menüelement erstellen",0,"Admin-Menüelement erstellen"
+cms,admin_menu.form.title_edit,,de_DE,"Edit admin menu item","Admin-Menüelement bearbeiten",0,"Admin-Menüelement bearbeiten"
 cms,edit,,de_DE,Edit,Bearbeiten,0,Bearbeiten
-cms,edit_mode.disabled,,de_DE,Edit mode disabled,Bearbeitungsmodus deaktiviert,0,Bearbeitungsmodus deaktiviert
-cms,edit_mode.enabled,,de_DE,Edit mode enabled,Bearbeitungsmodus aktiviert,0,Bearbeitungsmodus aktiviert
-cms,edit_mode.save_error,,de_DE,Error: Unable to save configuration,Fehler: Konfiguration konnte nicht gespeichert werden,0,Fehler: Konfiguration konnte nicht gespeichert werden
-cms,error.login_page_missing,,de_DE,Login page not found - create it manually,Anmeldeseite nicht gefunden – bitte manuell erstellen,0,Anmeldeseite nicht gefunden – bitte manuell erstellen
-cms,file_upload.destination_path,,de_DE,Destination path,Zielpfad,0,Zielpfad
-cms,file_upload.unknown_destination,,de_DE,Unknown destination path,Unbekannter Zielpfad,0,Unbekannter Zielpfad
-cms,file.missing_ref_id,,de_DE,Missing file reference,Fehlende Dateireferenz,0,Fehlende Dateireferenz
-cms,file.upload_error,,de_DE,Error: File upload failed,Fehler: Datei-Upload fehlgeschlagen,0,Fehler: Datei-Upload fehlgeschlagen
-cms,file.uploaded,,de_DE,File uploaded,Datei hochgeladen,0,Datei hochgeladen
-cms,form.field.form_id.explanation,,de_DE,Select from the predefined forms,Aus vordefinierten Formularen auswählen,0,Aus vordefinierten Formularen auswählen
+cms,edit_mode.disabled,,de_DE,"Edit mode disabled","Bearbeitungsmodus deaktiviert",0,"Bearbeitungsmodus deaktiviert"
+cms,edit_mode.enabled,,de_DE,"Edit mode enabled","Bearbeitungsmodus aktiviert",0,"Bearbeitungsmodus aktiviert"
+cms,edit_mode.save_error,,de_DE,"Error: Unable to save configuration","Fehler: Konfiguration konnte nicht gespeichert werden",0,"Fehler: Konfiguration konnte nicht gespeichert werden"
+cms,error.login_page_missing,,de_DE,"Login page not found - create it manually","Anmeldeseite nicht gefunden – bitte manuell erstellen",0,"Anmeldeseite nicht gefunden – bitte manuell erstellen"
+cms,file.missing_ref_id,,de_DE,"Missing file reference","Fehlende Dateireferenz",0,"Fehlende Dateireferenz"
+cms,file.upload_error,,de_DE,"Error: File upload failed","Fehler: Datei-Upload fehlgeschlagen",0,"Fehler: Datei-Upload fehlgeschlagen"
+cms,file.uploaded,,de_DE,"File uploaded","Datei hochgeladen",0,"Datei hochgeladen"
+cms,file_upload.destination_path,,de_DE,"Destination path",Zielpfad,0,Zielpfad
+cms,file_upload.unknown_destination,,de_DE,"Unknown destination path","Unbekannter Zielpfad",0,"Unbekannter Zielpfad"
+cms,form.field.form_id.explanation,,de_DE,"Select from the predefined forms","Aus vordefinierten Formularen auswählen",0,"Aus vordefinierten Formularen auswählen"
 cms,form.field.form_id.label,,de_DE,Form,Formular,0,Formular
-cms,form.missing_widget_id,,de_DE,Widget ID is missing,Widget-ID fehlt,0,Widget-ID fehlt
-cms,form.no_form_page_warning,,de_DE,Create at least one page with a blank form,Erstellen Sie mindestens eine Seite mit einem leeren Formular,0,Erstellen Sie mindestens eine Seite mit einem leeren Formular
-cms,form.no_id,,de_DE,No form ID given,Keine Formular-ID angegeben,0,Keine Formular-ID angegeben
-cms,form.settings_subtitle,,de_DE,Page: {page},Seite: {page},0,Seite: {page}
+cms,form.missing_widget_id,,de_DE,"Widget ID is missing","Widget-ID fehlt",0,"Widget-ID fehlt"
+cms,form.no_form_page_warning,,de_DE,"Create at least one page with a blank form","Erstellen Sie mindestens eine Seite mit einem leeren Formular",0,"Erstellen Sie mindestens eine Seite mit einem leeren Formular"
+cms,form.no_id,,de_DE,"No form ID given","Keine Formular-ID angegeben",0,"Keine Formular-ID angegeben"
+cms,form.settings_subtitle,,de_DE,"Page: {page}","Seite: {page}",0,"Seite: {page}"
 cms,library.folder,,de_DE,Folder,Ordner,0,Ordner
 cms,library.resource,,de_DE,Resource,Ressource,0,Ressource
-cms,library.unknown,,de_DE,Unknown library,Unbekannte Bibliothek,0,Unbekannte Bibliothek
-cms,menu.delete_confirm,,de_DE,Are you sure you want to delete this menu item?,Möchten Sie dieses Menüelement wirklich löschen?,0,Möchten Sie dieses Menüelement wirklich löschen?
-cms,menu.delete_failed,,de_DE,Delete failed,Löschen fehlgeschlagen,0,Löschen fehlgeschlagen
-cms,menu.delete_forbidden,,de_DE,Menu item deletion is not allowed: {name},Löschen des Menüelements nicht erlaubt: {name},0,Löschen des Menüelements nicht erlaubt: {name}
-cms,menu.delete_unknown_error,,de_DE,Error: An unknown error occurred while deleting the menu item,Fehler: Beim Löschen des Menüelements ist ein unbekannter Fehler aufgetreten,0,Fehler: Beim Löschen des Menüelements ist ein unbekannter Fehler aufgetreten
-cms,menu.deleted,,de_DE,Menu item deleted: {name},Menüelement gelöscht: {name},0,Menüelement gelöscht: {name}
-cms,menu.external_link,,de_DE,External link,Externer Link,0,Externer Link
-cms,menu.field.node_name.label,,de_DE,Display text,Anzeigetext,0,Anzeigetext
-cms,menu.field.page.explanation,,de_DE,Select the page this menu item points to,"Wählen Sie die Seite aus, auf die dieses Menüelement verweist",0,"Wählen Sie die Seite aus, auf die dieses Menüelement verweist"
+cms,library.unknown,,de_DE,"Unknown library","Unbekannte Bibliothek",0,"Unbekannte Bibliothek"
+cms,menu.delete_confirm,,de_DE,"Are you sure you want to delete this menu item?","Möchten Sie dieses Menüelement wirklich löschen?",0,"Möchten Sie dieses Menüelement wirklich löschen?"
+cms,menu.delete_failed,,de_DE,"Delete failed","Löschen fehlgeschlagen",0,"Löschen fehlgeschlagen"
+cms,menu.delete_forbidden,,de_DE,"Menu item deletion is not allowed: {name}","Löschen des Menüelements nicht erlaubt: {name}",0,"Löschen des Menüelements nicht erlaubt: {name}"
+cms,menu.delete_unknown_error,,de_DE,"Error: An unknown error occurred while deleting the menu item","Fehler: Beim Löschen des Menüelements ist ein unbekannter Fehler aufgetreten",0,"Fehler: Beim Löschen des Menüelements ist ein unbekannter Fehler aufgetreten"
+cms,menu.deleted,,de_DE,"Menu item deleted: {name}","Menüelement gelöscht: {name}",0,"Menüelement gelöscht: {name}"
+cms,menu.external_link,,de_DE,"External link","Externer Link",0,"Externer Link"
+cms,menu.field.node_name.label,,de_DE,"Display text",Anzeigetext,0,Anzeigetext
+cms,menu.field.page.explanation,,de_DE,"Select the page this menu item points to","Wählen Sie die Seite aus, auf die dieses Menüelement verweist",0,"Wählen Sie die Seite aus, auf die dieses Menüelement verweist"
 cms,menu.field.page.label,,de_DE,Page,Seite,0,Seite
-cms,menu.field.type.external,,de_DE,Points to external page,Verweist auf externe Seite,0,Verweist auf externe Seite
-cms,menu.field.type.internal,,de_DE,Points to internal page,Verweist auf interne Seite,0,Verweist auf interne Seite
-cms,menu.field.type.label,,de_DE,Link type,Linktyp,0,Linktyp
-cms,menu.field.url.explanation,,de_DE,You can enter a custom URL (including mailto:// links),Sie können eine benutzerdefinierte URL eingeben (inkl. mailto://-Links),0,Sie können eine benutzerdefinierte URL eingeben (inkl. mailto://-Links)
-cms,menu.field.url.label,,de_DE,Custom URL,Benutzerdefinierte URL,0,Benutzerdefinierte URL
-cms,menu.form.name,,de_DE,Main menu item,Hauptmenüelement,0,Hauptmenüelement
-cms,menu.form.title_create,,de_DE,Create menu item,Menüelement erstellen,0,Menüelement erstellen
-cms,menu.form.title_edit,,de_DE,Edit menu item,Menüelement bearbeiten,0,Menüelement bearbeiten
-cms,menu.internal_link,,de_DE,Internal link,Interner Link,0,Interner Link
-cms,menu.move_error,,de_DE,Error: Unable to move menu item,Fehler: Menüelement konnte nicht verschoben werden,0,Fehler: Menüelement konnte nicht verschoben werden
-cms,menu.move_success,,de_DE,Menu item moved: {name},Menüelement verschoben: {name},0,Menüelement verschoben: {name}
-cms,menu.new_child,,de_DE,New submenu item,Neues Untermenüelement,0,Neues Untermenüelement
-cms,menu.new_item,,de_DE,New menu item,Neues Menüelement,0,Neues Menüelement
-cms,menu.no_link_configured,,de_DE,No link configured,Kein Link konfiguriert,0,Kein Link konfiguriert
-cms,menu.root,,de_DE,Main menu,Hauptmenü,0,Hauptmenü
-cms,menu.saved,,de_DE,Menu item saved,Menüelement gespeichert,0,Menüelement gespeichert
-cms,menu.selection_help,,de_DE,"Select a menu item to edit it, or create a new one.",Wählen Sie ein Menüelement zum Bearbeiten aus oder erstellen Sie ein neues.,0,Wählen Sie ein Menüelement zum Bearbeiten aus oder erstellen Sie ein neues.
-cms,menu.updated,,de_DE,Menu item updated,Menüelement aktualisiert,0,Menüelement aktualisiert
-cms,menu.validation.node_name_max_length,,de_DE,Display text must not exceed 255 characters,Anzeigetext darf 255 Zeichen nicht überschreiten,0,Anzeigetext darf 255 Zeichen nicht überschreiten
-cms,menu.validation.type_required,,de_DE,Choose whether the link points to an internal or external page,"Wählen Sie, ob der Link auf eine interne oder externe Seite verweist",0,"Wählen Sie, ob der Link auf eine interne oder externe Seite verweist"
-cms,menu.validation.url_max_length,,de_DE,URL must not exceed 255 characters,URL darf 255 Zeichen nicht überschreiten,0,URL darf 255 Zeichen nicht überschreiten
-cms,menu.validation.url_required,,de_DE,Select a page or enter a URL,Wählen Sie eine Seite aus oder geben Sie eine URL ein,0,Wählen Sie eine Seite aus oder geben Sie eine URL ein
-cms,plainhtml.field.content.explanation,,de_DE,The HTML code you enter will appear on the website without modifications.,Der eingegebene HTML-Code wird auf der Website unverändert angezeigt.,0,Der eingegebene HTML-Code wird auf der Website unverändert angezeigt.
-cms,plainhtml.field.content.label,,de_DE,HTML code,HTML-Code,0,HTML-Code
-cms,plainhtml.form.name,,de_DE,HTML code (embed),HTML-Code (Einbettung),0,HTML-Code (Einbettung)
-cms,plainhtml.form.title,,de_DE,Edit HTML content,HTML-Inhalt bearbeiten,0,HTML-Inhalt bearbeiten
-cms,plainhtml.not_set,,de_DE,Configure the content,Inhalt konfigurieren,0,Inhalt konfigurieren
-cms,resource_acl.acl_not_found,,de_DE,ACL entry not found: {id},ACL-Eintrag nicht gefunden: {id},0,ACL-Eintrag nicht gefunden: {id}
+cms,menu.field.type.external,,de_DE,"Points to external page","Verweist auf externe Seite",0,"Verweist auf externe Seite"
+cms,menu.field.type.internal,,de_DE,"Points to internal page","Verweist auf interne Seite",0,"Verweist auf interne Seite"
+cms,menu.field.type.label,,de_DE,"Link type",Linktyp,0,Linktyp
+cms,menu.field.url.explanation,,de_DE,"You can enter a custom URL (including mailto:// links)","Sie können eine benutzerdefinierte URL eingeben (inkl. mailto://-Links)",0,"Sie können eine benutzerdefinierte URL eingeben (inkl. mailto://-Links)"
+cms,menu.field.url.label,,de_DE,"Custom URL","Benutzerdefinierte URL",0,"Benutzerdefinierte URL"
+cms,menu.form.name,,de_DE,"Main menu item",Hauptmenüelement,0,Hauptmenüelement
+cms,menu.form.title_create,,de_DE,"Create menu item","Menüelement erstellen",0,"Menüelement erstellen"
+cms,menu.form.title_edit,,de_DE,"Edit menu item","Menüelement bearbeiten",0,"Menüelement bearbeiten"
+cms,menu.internal_link,,de_DE,"Internal link","Interner Link",0,"Interner Link"
+cms,menu.move_error,,de_DE,"Error: Unable to move menu item","Fehler: Menüelement konnte nicht verschoben werden",0,"Fehler: Menüelement konnte nicht verschoben werden"
+cms,menu.move_success,,de_DE,"Menu item moved: {name}","Menüelement verschoben: {name}",0,"Menüelement verschoben: {name}"
+cms,menu.new_child,,de_DE,"New submenu item","Neues Untermenüelement",0,"Neues Untermenüelement"
+cms,menu.new_item,,de_DE,"New menu item","Neues Menüelement",0,"Neues Menüelement"
+cms,menu.no_link_configured,,de_DE,"No link configured","Kein Link konfiguriert",0,"Kein Link konfiguriert"
+cms,menu.root,,de_DE,"Main menu",Hauptmenü,0,Hauptmenü
+cms,menu.saved,,de_DE,"Menu item saved","Menüelement gespeichert",0,"Menüelement gespeichert"
+cms,menu.selection_help,,de_DE,"Select a menu item to edit it, or create a new one.","Wählen Sie ein Menüelement zum Bearbeiten aus oder erstellen Sie ein neues.",0,"Wählen Sie ein Menüelement zum Bearbeiten aus oder erstellen Sie ein neues."
+cms,menu.updated,,de_DE,"Menu item updated","Menüelement aktualisiert",0,"Menüelement aktualisiert"
+cms,menu.validation.node_name_max_length,,de_DE,"Display text must not exceed 255 characters","Anzeigetext darf 255 Zeichen nicht überschreiten",0,"Anzeigetext darf 255 Zeichen nicht überschreiten"
+cms,menu.validation.type_required,,de_DE,"Choose whether the link points to an internal or external page","Wählen Sie, ob der Link auf eine interne oder externe Seite verweist",0,"Wählen Sie, ob der Link auf eine interne oder externe Seite verweist"
+cms,menu.validation.url_max_length,,de_DE,"URL must not exceed 255 characters","URL darf 255 Zeichen nicht überschreiten",0,"URL darf 255 Zeichen nicht überschreiten"
+cms,menu.validation.url_required,,de_DE,"Select a page or enter a URL","Wählen Sie eine Seite aus oder geben Sie eine URL ein",0,"Wählen Sie eine Seite aus oder geben Sie eine URL ein"
+cms,plainhtml.field.content.explanation,,de_DE,"The HTML code you enter will appear on the website without modifications.","Der eingegebene HTML-Code wird auf der Website unverändert angezeigt.",0,"Der eingegebene HTML-Code wird auf der Website unverändert angezeigt."
+cms,plainhtml.field.content.label,,de_DE,"HTML code",HTML-Code,0,HTML-Code
+cms,plainhtml.form.name,,de_DE,"HTML code (embed)","HTML-Code (Einbettung)",0,"HTML-Code (Einbettung)"
+cms,plainhtml.form.title,,de_DE,"Edit HTML content","HTML-Inhalt bearbeiten",0,"HTML-Inhalt bearbeiten"
+cms,plainhtml.not_set,,de_DE,"Configure the content","Inhalt konfigurieren",0,"Inhalt konfigurieren"
+cms,resource.delete_error,,de_DE,"Error: Unable to delete resource(s)","Fehler: Ressource(n) konnten nicht gelöscht werden",0,"Fehler: Ressource(n) konnten nicht gelöscht werden"
+cms,resource.delete_failed,,de_DE,"Delete failed","Löschen fehlgeschlagen",0,"Löschen fehlgeschlagen"
+cms,resource.delete_partial_error,,de_DE,"{count} error(s) occurred during deletion","{count} Fehler beim Löschen aufgetreten",0,"{count} Fehler beim Löschen aufgetreten"
+cms,resource.deleted,,de_DE,"Resource deleted","Ressource gelöscht",0,"Ressource gelöscht"
+cms,resource.deleted_multiple,,de_DE,"Resources deleted","Ressourcen gelöscht",0,"Ressourcen gelöscht"
+cms,resource.error.add_failed,,de_DE,"Unable to add resource tree entry.","Ressourcenbaum-Eintrag konnte nicht hinzugefügt werden.",0,"Ressourcenbaum-Eintrag konnte nicht hinzugefügt werden."
+cms,resource.error.create_failed_for_path,,de_DE,"Unable to create resource: {path}","Ressource konnte nicht erstellt werden: {path}",0,"Ressource konnte nicht erstellt werden: {path}"
+cms,resource.error.delete_denied,,de_DE,"Delete denied for resource: {resource_id}","Löschen der Ressource verweigert: {resource_id}",0,"Löschen der Ressource verweigert: {resource_id}"
+cms,resource.error.delete_failed_for_id,,de_DE,"Unable to delete resource: {resource_id}","Ressource konnte nicht gelöscht werden: {resource_id}",0,"Ressource konnte nicht gelöscht werden: {resource_id}"
+cms,resource.error.file_delete_failed_for_id,,de_DE,"Unable to delete file for resource: {resource_id}","Datei der Ressource konnte nicht gelöscht werden: {resource_id}",0,"Datei der Ressource konnte nicht gelöscht werden: {resource_id}"
+cms,resource.error.import_file_failed,,de_DE,"Unable to import file: {path}","Datei konnte nicht importiert werden: {path}",0,"Datei konnte nicht importiert werden: {path}"
+cms,resource.error.move_failed_for_id,,de_DE,"Unable to move resource: {resource_id}","Ressource konnte nicht verschoben werden: {resource_id}",0,"Ressource konnte nicht verschoben werden: {resource_id}"
+cms,resource.error.not_found_by_id,,de_DE,"Resource not found: {resource_id}","Ressource nicht gefunden: {resource_id}",0,"Ressource nicht gefunden: {resource_id}"
+cms,resource.error.path_exists_not_file,,de_DE,"Resource path exists and is not a file: {path}","Ressourcenpfad existiert und ist keine Datei: {path}",0,"Ressourcenpfad existiert und ist keine Datei: {path}"
+cms,resource.error.protected_mutation,,de_DE,"Protected system resource cannot be modified: {path}","Geschützte Systemressource kann nicht geändert werden: {path}",0,"Geschützte Systemressource kann nicht geändert werden: {path}"
+cms,resource.error.protected_path_mutation,,de_DE,"Protected system resource path cannot be created or modified: {path}","Geschützter Systemressourcenpfad kann nicht erstellt oder geändert werden: {path}",0,"Geschützter Systemressourcenpfad kann nicht erstellt oder geändert werden: {path}"
+cms,resource.error.protected_subtree_mutation,,de_DE,"A protected system resource in this subtree cannot be modified: {path}","Eine geschützte Systemressource in diesem Teilbaum kann nicht geändert werden: {path}",0,"Eine geschützte Systemressource in diesem Teilbaum kann nicht geändert werden: {path}"
+cms,resource.error.target_folder_not_found,,de_DE,"Target folder not found after creation: {path}","Zielordner nach Erstellung nicht gefunden: {path}",0,"Zielordner nach Erstellung nicht gefunden: {path}"
+cms,resource.error.update_failed_for_path,,de_DE,"Unable to update resource: {path}","Ressource konnte nicht aktualisiert werden: {path}",0,"Ressource konnte nicht aktualisiert werden: {path}"
+cms,resource.folder_count,,de_DE,"{count} folder(s)","{count} Ordner",0,"{count} Ordner"
+cms,resource.move_error,,de_DE,"Error: Unable to move resource","Fehler: Ressource konnte nicht verschoben werden",0,"Fehler: Ressource konnte nicht verschoben werden"
+cms,resource.move_failed,,de_DE,"Move failed","Verschieben fehlgeschlagen",0,"Verschieben fehlgeschlagen"
+cms,resource.moved,,de_DE,"Resource moved","Ressource verschoben",0,"Ressource verschoben"
+cms,resource.page_count,,de_DE,"{count} page(s)","{count} Seite(n)",0,"{count} Seite(n)"
+cms,resource.renamed,,de_DE,Renamed,Umbenannt,0,Umbenannt
+cms,resource.view_forbidden,,de_DE,"403 - You do not have permission to view this content!","403 – Sie haben keine Berechtigung, diesen Inhalt anzuzeigen!",0,"403 – Sie haben keine Berechtigung, diesen Inhalt anzuzeigen!"
+cms,resource_acl.acl_not_found,,de_DE,"ACL entry not found: {id}","ACL-Eintrag nicht gefunden: {id}",0,"ACL-Eintrag nicht gefunden: {id}"
 cms,resource_acl.assign,,de_DE,Assign,Zuweisen,0,Zuweisen
-cms,resource_acl.deleted,,de_DE,Assignment removed.,Zuweisung entfernt.,0,Zuweisung entfernt.
-cms,resource_acl.error_ambiguous_subject,,de_DE,The name {name} matches both a user and a user group. Select the correct type from the list.,Der Name {name} entspricht sowohl einem Benutzer als auch einer Benutzergruppe. Wählen Sie den richtigen Typ aus der Liste.,0,Der Name {name} entspricht sowohl einem Benutzer als auch einer Benutzergruppe. Wählen Sie den richtigen Typ aus der Liste.
-cms,resource_acl.error_ambiguous_subject_short,,de_DE,Ambiguous assignment,Mehrdeutige Zuweisung,0,Mehrdeutige Zuweisung
-cms,resource_acl.error_delete,,de_DE,Error: Unable to remove assignment.,Fehler: Zuweisung konnte nicht entfernt werden.,0,Fehler: Zuweisung konnte nicht entfernt werden.
-cms,resource_acl.error_missing_resource_id,,de_DE,Resource ID is missing,Ressourcen-ID fehlt,0,Ressourcen-ID fehlt
-cms,resource_acl.error_save,,de_DE,Error: Unable to save access settings.,Fehler: Zugriffseinstellungen konnten nicht gespeichert werden.,0,Fehler: Zugriffseinstellungen konnten nicht gespeichert werden.
-cms,resource_acl.error_subject_not_found,,de_DE,No user or user group found with the name {name},Kein Benutzer oder keine Benutzergruppe mit dem Namen {name} gefunden,0,Kein Benutzer oder keine Benutzergruppe mit dem Namen {name} gefunden
-cms,resource_acl.error_subject_not_found_short,,de_DE,No matching subject found,Kein passendes Subjekt gefunden,0,Kein passendes Subjekt gefunden
-cms,resource_acl.inherit_help,,de_DE,"When inheritance is enabled, the parent folder's permissions also apply to this resource.",Bei aktivierter Vererbung gelten die Berechtigungen des übergeordneten Ordners auch für diese Ressource.,0,Bei aktivierter Vererbung gelten die Berechtigungen des übergeordneten Ordners auch für diese Ressource.
-cms,resource_acl.inherit_label,,de_DE,Inherit permissions from parent folder,Berechtigungen vom übergeordneten Ordner erben,0,Berechtigungen vom übergeordneten Ordner erben
-cms,resource_acl.inherited_title,,de_DE,Inherited permissions,Geerbte Berechtigungen,0,Geerbte Berechtigungen
-cms,resource_acl.new_assignment,,de_DE,New assignment:,Neue Zuweisung:,0,Neue Zuweisung:
+cms,resource_acl.deleted,,de_DE,"Assignment removed.","Zuweisung entfernt.",0,"Zuweisung entfernt."
+cms,resource_acl.error_ambiguous_subject,,de_DE,"The name {name} matches both a user and a user group. Select the correct type from the list.","Der Name {name} entspricht sowohl einem Benutzer als auch einer Benutzergruppe. Wählen Sie den richtigen Typ aus der Liste.",0,"Der Name {name} entspricht sowohl einem Benutzer als auch einer Benutzergruppe. Wählen Sie den richtigen Typ aus der Liste."
+cms,resource_acl.error_ambiguous_subject_short,,de_DE,"Ambiguous assignment","Mehrdeutige Zuweisung",0,"Mehrdeutige Zuweisung"
+cms,resource_acl.error_delete,,de_DE,"Error: Unable to remove assignment.","Fehler: Zuweisung konnte nicht entfernt werden.",0,"Fehler: Zuweisung konnte nicht entfernt werden."
+cms,resource_acl.error_missing_resource_id,,de_DE,"Resource ID is missing","Ressourcen-ID fehlt",0,"Ressourcen-ID fehlt"
+cms,resource_acl.error_save,,de_DE,"Error: Unable to save access settings.","Fehler: Zugriffseinstellungen konnten nicht gespeichert werden.",0,"Fehler: Zugriffseinstellungen konnten nicht gespeichert werden."
+cms,resource_acl.error_subject_not_found,,de_DE,"No user or user group found with the name {name}","Kein Benutzer oder keine Benutzergruppe mit dem Namen {name} gefunden",0,"Kein Benutzer oder keine Benutzergruppe mit dem Namen {name} gefunden"
+cms,resource_acl.error_subject_not_found_short,,de_DE,"No matching subject found","Kein passendes Subjekt gefunden",0,"Kein passendes Subjekt gefunden"
+cms,resource_acl.inherit_help,,de_DE,"When inheritance is enabled, the parent folder's permissions also apply to this resource.","Bei aktivierter Vererbung gelten die Berechtigungen des übergeordneten Ordners auch für diese Ressource.",0,"Bei aktivierter Vererbung gelten die Berechtigungen des übergeordneten Ordners auch für diese Ressource."
+cms,resource_acl.inherit_label,,de_DE,"Inherit permissions from parent folder","Berechtigungen vom übergeordneten Ordner erben",0,"Berechtigungen vom übergeordneten Ordner erben"
+cms,resource_acl.inherited_title,,de_DE,"Inherited permissions","Geerbte Berechtigungen",0,"Geerbte Berechtigungen"
+cms,resource_acl.new_assignment,,de_DE,"New assignment:","Neue Zuweisung:",0,"Neue Zuweisung:"
 cms,resource_acl.permission.create,,de_DE,Create,Erstellen,0,Erstellen
 cms,resource_acl.permission.delete,,de_DE,Delete,Löschen,0,Löschen
 cms,resource_acl.permission.edit,,de_DE,Edit,Bearbeiten,0,Bearbeiten
 cms,resource_acl.permission.list,,de_DE,List,Liste,0,Liste
 cms,resource_acl.permission.view,,de_DE,View,Anzeigen,0,Anzeigen
-cms,resource_acl.resource_not_found,,de_DE,Resource not found: {id},Ressource nicht gefunden: {id},0,Ressource nicht gefunden: {id}
-cms,resource_acl.search_placeholder,,de_DE,Search for user or group...,Benutzer oder Gruppe suchen...,0,Benutzer oder Gruppe suchen...
+cms,resource_acl.resource_not_found,,de_DE,"Resource not found: {id}","Ressource nicht gefunden: {id}",0,"Ressource nicht gefunden: {id}"
+cms,resource_acl.search_placeholder,,de_DE,"Search for user or group...","Benutzer oder Gruppe suchen...",0,"Benutzer oder Gruppe suchen..."
 cms,resource_acl.specific_help,,de_DE,"Specific permissions always apply, regardless of the inheritance setting.","Spezifische Berechtigungen gelten immer, unabhängig von der Vererbungseinstellung.",0,"Spezifische Berechtigungen gelten immer, unabhängig von der Vererbungseinstellung."
-cms,resource_acl.specific_title,,de_DE,Specific permissions,Spezifische Berechtigungen,0,Spezifische Berechtigungen
+cms,resource_acl.specific_title,,de_DE,"Specific permissions","Spezifische Berechtigungen",0,"Spezifische Berechtigungen"
 cms,resource_acl.subject,,de_DE,Subject,Subjekt,0,Subjekt
 cms,resource_acl.title,,de_DE,Access,Zugriff,0,Zugriff
-cms,resource_acl.unknown_subject_type,,de_DE,Unknown ACL subject type: {type},Unbekannter ACL-Subjekttyp: {type},0,Unbekannter ACL-Subjekttyp: {type}
-cms,resource_acl.unknown_type,,de_DE,Unknown ACL list type: {type},Unbekannter ACL-Listentyp: {type},0,Unbekannter ACL-Listentyp: {type}
-cms,resource_acl.usergroup_assignment.added,,de_DE,User group assigned to resource:<br>{group} -> {target},Benutzergruppe der Ressource zugewiesen:<br>{group} -> {target},0,Benutzergruppe der Ressource zugewiesen:<br>{group} -> {target}
-cms,resource_acl.usergroup_assignment.error_add,,de_DE,Error: Unable to assign user group to resource:<br>{group} -> {target},Fehler: Benutzergruppe konnte der Ressource nicht zugewiesen werden:<br>{group} -> {target},0,Fehler: Benutzergruppe konnte der Ressource nicht zugewiesen werden:<br>{group} -> {target}
-cms,resource_acl.usergroup_assignment.error_add_generic,,de_DE,Error: Unable to assign user group to resource.,Fehler: Benutzergruppe konnte der Ressource nicht zugewiesen werden.,0,Fehler: Benutzergruppe konnte der Ressource nicht zugewiesen werden.
-cms,resource_acl.usergroup_assignment.error_remove,,de_DE,Error: Unable to remove user group from resource:<br>{group} -> {target},Fehler: Benutzergruppe konnte nicht von der Ressource entfernt werden:<br>{group} -> {target},0,Fehler: Benutzergruppe konnte nicht von der Ressource entfernt werden:<br>{group} -> {target}
-cms,resource_acl.usergroup_assignment.error_remove_generic,,de_DE,Error: Unable to remove user group from resource.,Fehler: Benutzergruppe konnte nicht von der Ressource entfernt werden.,0,Fehler: Benutzergruppe konnte nicht von der Ressource entfernt werden.
-cms,resource_acl.usergroup_assignment.removed,,de_DE,User group assignment removed:<br>{group} -> {target},Benutzergruppenverknüpfung entfernt:<br>{group} -> {target},0,Benutzergruppenverknüpfung entfernt:<br>{group} -> {target}
-cms,resource_browser.create_index_page,,de_DE,Create index page!,Startseite erstellen!,0,Startseite erstellen!
-cms,resource_browser.delete_file_confirm,,de_DE,Are you sure you want to delete this file?,Möchten Sie diese Datei wirklich löschen?,0,Möchten Sie diese Datei wirklich löschen?
-cms,resource_browser.delete_folder_confirm,,de_DE,Are you sure you want to delete this folder and all its contents?,Möchten Sie diesen Ordner und seinen gesamten Inhalt wirklich löschen?,0,Möchten Sie diesen Ordner und seinen gesamten Inhalt wirklich löschen?
-cms,resource_browser.delete_invalid_confirm,,de_DE,Are you sure you want to delete this invalid entry?,Möchten Sie diesen ungültigen Eintrag wirklich löschen?,0,Möchten Sie diesen ungültigen Eintrag wirklich löschen?
-cms,resource_browser.delete_webpage_confirm,,de_DE,Are you sure you want to delete this webpage?,Möchten Sie diese Webseite wirklich löschen?,0,Möchten Sie diese Webseite wirklich löschen?
-cms,resource_browser.help_create,,de_DE,Create folders and webpages within them.,Ordner und Webseiten darin erstellen.,0,Ordner und Webseiten darin erstellen.
-cms,resource_browser.help_move,,de_DE,Drag and drop to move items between folders.,Elemente per Drag & Drop zwischen Ordnern verschieben.,0,Elemente per Drag & Drop zwischen Ordnern verschieben.
+cms,resource_acl.unknown_subject_type,,de_DE,"Unknown ACL subject type: {type}","Unbekannter ACL-Subjekttyp: {type}",0,"Unbekannter ACL-Subjekttyp: {type}"
+cms,resource_acl.unknown_type,,de_DE,"Unknown ACL list type: {type}","Unbekannter ACL-Listentyp: {type}",0,"Unbekannter ACL-Listentyp: {type}"
+cms,resource_acl.usergroup_assignment.added,,de_DE,"User group assigned to resource:<br>{group} -> {target}","Benutzergruppe der Ressource zugewiesen:<br>{group} -> {target}",0,"Benutzergruppe der Ressource zugewiesen:<br>{group} -> {target}"
+cms,resource_acl.usergroup_assignment.error_add,,de_DE,"Error: Unable to assign user group to resource:<br>{group} -> {target}","Fehler: Benutzergruppe konnte der Ressource nicht zugewiesen werden:<br>{group} -> {target}",0,"Fehler: Benutzergruppe konnte der Ressource nicht zugewiesen werden:<br>{group} -> {target}"
+cms,resource_acl.usergroup_assignment.error_add_generic,,de_DE,"Error: Unable to assign user group to resource.","Fehler: Benutzergruppe konnte der Ressource nicht zugewiesen werden.",0,"Fehler: Benutzergruppe konnte der Ressource nicht zugewiesen werden."
+cms,resource_acl.usergroup_assignment.error_remove,,de_DE,"Error: Unable to remove user group from resource:<br>{group} -> {target}","Fehler: Benutzergruppe konnte nicht von der Ressource entfernt werden:<br>{group} -> {target}",0,"Fehler: Benutzergruppe konnte nicht von der Ressource entfernt werden:<br>{group} -> {target}"
+cms,resource_acl.usergroup_assignment.error_remove_generic,,de_DE,"Error: Unable to remove user group from resource.","Fehler: Benutzergruppe konnte nicht von der Ressource entfernt werden.",0,"Fehler: Benutzergruppe konnte nicht von der Ressource entfernt werden."
+cms,resource_acl.usergroup_assignment.removed,,de_DE,"User group assignment removed:<br>{group} -> {target}","Benutzergruppenverknüpfung entfernt:<br>{group} -> {target}",0,"Benutzergruppenverknüpfung entfernt:<br>{group} -> {target}"
+cms,resource_browser.create_index_page,,de_DE,"Create index page!","Startseite erstellen!",0,"Startseite erstellen!"
+cms,resource_browser.delete_file_confirm,,de_DE,"Are you sure you want to delete this file?","Möchten Sie diese Datei wirklich löschen?",0,"Möchten Sie diese Datei wirklich löschen?"
+cms,resource_browser.delete_folder_confirm,,de_DE,"Are you sure you want to delete this folder and all its contents?","Möchten Sie diesen Ordner und seinen gesamten Inhalt wirklich löschen?",0,"Möchten Sie diesen Ordner und seinen gesamten Inhalt wirklich löschen?"
+cms,resource_browser.delete_invalid_confirm,,de_DE,"Are you sure you want to delete this invalid entry?","Möchten Sie diesen ungültigen Eintrag wirklich löschen?",0,"Möchten Sie diesen ungültigen Eintrag wirklich löschen?"
+cms,resource_browser.delete_webpage_confirm,,de_DE,"Are you sure you want to delete this webpage?","Möchten Sie diese Webseite wirklich löschen?",0,"Möchten Sie diese Webseite wirklich löschen?"
+cms,resource_browser.help_create,,de_DE,"Create folders and webpages within them.","Ordner und Webseiten darin erstellen.",0,"Ordner und Webseiten darin erstellen."
+cms,resource_browser.help_move,,de_DE,"Drag and drop to move items between folders.","Elemente per Drag & Drop zwischen Ordnern verschieben.",0,"Elemente per Drag & Drop zwischen Ordnern verschieben."
 cms,resource_browser.insert,,de_DE,Insert,Einfügen,0,Einfügen
-cms,resource_browser.invalid_entry,,de_DE,Invalid entry,Ungültiger Eintrag,0,Ungültiger Eintrag
-cms,resource_browser.new_domain,,de_DE,New domain,Neue Domain,0,Neue Domain
-cms,resource_browser.preview_index_page,,de_DE,Preview (index page),Vorschau (Startseite),0,Vorschau (Startseite)
-cms,resource_browser.root_not_found,,de_DE,Root node not found for the resource tree,Stammknoten der Ressourcenstruktur nicht gefunden,0,Stammknoten der Ressourcenstruktur nicht gefunden
-cms,resource_browser.select_tree_item,,de_DE,Select an item from the tree,Element aus der Struktur auswählen,0,Element aus der Struktur auswählen
-cms,resource_browser.site_structure,,de_DE,Site structure,Seitenstruktur,0,Seitenstruktur
-cms,resource.delete_error,,de_DE,Error: Unable to delete resource(s),Fehler: Ressource(n) konnten nicht gelöscht werden,0,Fehler: Ressource(n) konnten nicht gelöscht werden
-cms,resource.delete_failed,,de_DE,Delete failed,Löschen fehlgeschlagen,0,Löschen fehlgeschlagen
-cms,resource.delete_partial_error,,de_DE,{count} error(s) occurred during deletion,{count} Fehler beim Löschen aufgetreten,0,{count} Fehler beim Löschen aufgetreten
-cms,resource.deleted,,de_DE,Resource deleted,Ressource gelöscht,0,Ressource gelöscht
-cms,resource.deleted_multiple,,de_DE,Resources deleted,Ressourcen gelöscht,0,Ressourcen gelöscht
-cms,resource.folder_count,,de_DE,{count} folder(s),{count} Ordner,0,{count} Ordner
-cms,resource.move_error,,de_DE,Error: Unable to move resource,Fehler: Ressource konnte nicht verschoben werden,0,Fehler: Ressource konnte nicht verschoben werden
-cms,resource.move_failed,,de_DE,Move failed,Verschieben fehlgeschlagen,0,Verschieben fehlgeschlagen
-cms,resource.moved,,de_DE,Resource moved,Ressource verschoben,0,Ressource verschoben
-cms,resource.page_count,,de_DE,{count} page(s),{count} Seite(n),0,{count} Seite(n)
-cms,resource.renamed,,de_DE,Renamed,Umbenannt,0,Umbenannt
-cms,resource.view_forbidden,,de_DE,403 - You do not have permission to view this content!,"403 – Sie haben keine Berechtigung, diesen Inhalt anzuzeigen!",0,"403 – Sie haben keine Berechtigung, diesen Inhalt anzuzeigen!"
-cms,richtext.assigned,,de_DE,Text content assigned,Textinhalt zugewiesen,0,Textinhalt zugewiesen
+cms,resource_browser.invalid_entry,,de_DE,"Invalid entry","Ungültiger Eintrag",0,"Ungültiger Eintrag"
+cms,resource_browser.new_domain,,de_DE,"New domain","Neue Domain",0,"Neue Domain"
+cms,resource_browser.preview_index_page,,de_DE,"Preview (index page)","Vorschau (Startseite)",0,"Vorschau (Startseite)"
+cms,resource_browser.root_not_found,,de_DE,"Root node not found for the resource tree","Stammknoten der Ressourcenstruktur nicht gefunden",0,"Stammknoten der Ressourcenstruktur nicht gefunden"
+cms,resource_browser.select_tree_item,,de_DE,"Select an item from the tree","Element aus der Struktur auswählen",0,"Element aus der Struktur auswählen"
+cms,resource_browser.site_structure,,de_DE,"Site structure",Seitenstruktur,0,Seitenstruktur
+cms,richtext.assigned,,de_DE,"Text content assigned","Textinhalt zugewiesen",0,"Textinhalt zugewiesen"
 cms,richtext.field.content.explanation,,de_DE,"Format text freely, add images, and embed external content (e.g. YouTube). Use HTML view for embed codes.","Text frei formatieren, Bilder hinzufügen und externe Inhalte einbetten (z. B. YouTube). HTML-Ansicht für Einbettungscodes verwenden.",0,"Text frei formatieren, Bilder hinzufügen und externe Inhalte einbetten (z. B. YouTube). HTML-Ansicht für Einbettungscodes verwenden."
 cms,richtext.field.content.label,,de_DE,Content,Inhalt,0,Inhalt
-cms,richtext.field.name.explanation,,de_DE,Visible in the admin area only. Use this to identify the content when selecting it for display on public pages. Must be unique.,Nur im Admin-Bereich sichtbar. Zur Identifizierung beim Auswählen für öffentliche Seiten. Muss eindeutig sein.,0,Nur im Admin-Bereich sichtbar. Zur Identifizierung beim Auswählen für öffentliche Seiten. Muss eindeutig sein.
-cms,richtext.field.name.label,,de_DE,Name (identifier),Name (Bezeichner),0,Name (Bezeichner)
-cms,richtext.field.name.unique_error,,de_DE,An information content item with this name already exists,Ein Informationsinhalt mit diesem Namen existiert bereits,0,Ein Informationsinhalt mit diesem Namen existiert bereits
-cms,richtext.field.title.explanation,,de_DE,Appears as a title above the text. Leave empty for no title.,Erscheint als Titel über dem Text. Leer lassen für keinen Titel.,0,Erscheint als Titel über dem Text. Leer lassen für keinen Titel.
+cms,richtext.field.name.explanation,,de_DE,"Visible in the admin area only. Use this to identify the content when selecting it for display on public pages. Must be unique.","Nur im Admin-Bereich sichtbar. Zur Identifizierung beim Auswählen für öffentliche Seiten. Muss eindeutig sein.",0,"Nur im Admin-Bereich sichtbar. Zur Identifizierung beim Auswählen für öffentliche Seiten. Muss eindeutig sein."
+cms,richtext.field.name.label,,de_DE,"Name (identifier)","Name (Bezeichner)",0,"Name (Bezeichner)"
+cms,richtext.field.name.unique_error,,de_DE,"An information content item with this name already exists","Ein Informationsinhalt mit diesem Namen existiert bereits",0,"Ein Informationsinhalt mit diesem Namen existiert bereits"
+cms,richtext.field.title.explanation,,de_DE,"Appears as a title above the text. Leave empty for no title.","Erscheint als Titel über dem Text. Leer lassen für keinen Titel.",0,"Erscheint als Titel über dem Text. Leer lassen für keinen Titel."
 cms,richtext.field.title.label,,de_DE,Heading,Überschrift,0,Überschrift
-cms,richtext.form.name,,de_DE,Text content,Textinhalt,0,Textinhalt
-cms,richtext.form.title_create,,de_DE,Create text content,Textinhalt erstellen,0,Textinhalt erstellen
-cms,richtext.form.title_edit,,de_DE,Edit text content,Textinhalt bearbeiten,0,Textinhalt bearbeiten
-cms,richtext.not_set,,de_DE,No content chosen,Kein Inhalt ausgewählt,0,Kein Inhalt ausgewählt
-cms,richtext.saved,,de_DE,Content saved,Inhalt gespeichert,0,Inhalt gespeichert
-cms,richtext.select.form.title,,de_DE,Select text content,Textinhalt auswählen,0,Textinhalt auswählen
-cms,richtext.updated,,de_DE,Content updated,Inhalt aktualisiert,0,Inhalt aktualisiert
-cms,richtext.widget.choose,,de_DE,Select text content,Textinhalt auswählen,0,Textinhalt auswählen
-cms,richtext.widget.create,,de_DE,Create text content,Textinhalt erstellen,0,Textinhalt erstellen
-cms,richtext.widget.description,,de_DE,Freely editable text with images,Frei bearbeitbarer Text mit Bildern,0,Frei bearbeitbarer Text mit Bildern
-cms,richtext.widget.edit,,de_DE,Edit text content,Textinhalt bearbeiten,0,Textinhalt bearbeiten
-cms,richtext.widget.name,,de_DE,Editable text,Bearbeitbarer Text,0,Bearbeitbarer Text
-cms,tree.field.type.explanation,,de_DE,Select from the predefined trees,Aus vordefinierten Baumstrukturen auswählen,0,Aus vordefinierten Baumstrukturen auswählen
+cms,richtext.form.name,,de_DE,"Text content",Textinhalt,0,Textinhalt
+cms,richtext.form.title_create,,de_DE,"Create text content","Textinhalt erstellen",0,"Textinhalt erstellen"
+cms,richtext.form.title_edit,,de_DE,"Edit text content","Textinhalt bearbeiten",0,"Textinhalt bearbeiten"
+cms,richtext.not_set,,de_DE,"No content chosen","Kein Inhalt ausgewählt",0,"Kein Inhalt ausgewählt"
+cms,richtext.saved,,de_DE,"Content saved","Inhalt gespeichert",0,"Inhalt gespeichert"
+cms,richtext.select.form.title,,de_DE,"Select text content","Textinhalt auswählen",0,"Textinhalt auswählen"
+cms,richtext.updated,,de_DE,"Content updated","Inhalt aktualisiert",0,"Inhalt aktualisiert"
+cms,richtext.widget.choose,,de_DE,"Select text content","Textinhalt auswählen",0,"Textinhalt auswählen"
+cms,richtext.widget.create,,de_DE,"Create text content","Textinhalt erstellen",0,"Textinhalt erstellen"
+cms,richtext.widget.description,,de_DE,"Freely editable text with images","Frei bearbeitbarer Text mit Bildern",0,"Frei bearbeitbarer Text mit Bildern"
+cms,richtext.widget.edit,,de_DE,"Edit text content","Textinhalt bearbeiten",0,"Textinhalt bearbeiten"
+cms,richtext.widget.name,,de_DE,"Editable text","Bearbeitbarer Text",0,"Bearbeitbarer Text"
+cms,tree.field.type.explanation,,de_DE,"Select from the predefined trees","Aus vordefinierten Baumstrukturen auswählen",0,"Aus vordefinierten Baumstrukturen auswählen"
 cms,tree.field.type.label,,de_DE,Tree,Baumstruktur,0,Baumstruktur
-cms,tree.invalid_parent_id,,de_DE,Invalid parent ID,Ungültige übergeordnete ID,0,Ungültige übergeordnete ID
-cms,tree.missing_type,,de_DE,Missing tree type,Fehlender Baumstrukturtyp,0,Fehlender Baumstrukturtyp
-cms,tree.no_connection_id,,de_DE,No widget connection ID given,Keine Widget-Verbindungs-ID angegeben,0,Keine Widget-Verbindungs-ID angegeben
-cms,tree.select_menu_item,,de_DE,Select a menu item from the tree,Menüelement aus der Baumstruktur auswählen,0,Menüelement aus der Baumstruktur auswählen
-cms,tree.unknown_type,,de_DE,Unknown tree item type: {type},Unbekannter Baumstrukturelementtyp: {type},0,Unbekannter Baumstrukturelementtyp: {type}
-cms,webpage_domain.field.resource_name.explanation,,de_DE,Set this domain name in the DOMAIN_CONTEXT configuration so this domain and its child pages become active.,"Legen Sie diesen Domainnamen in der DOMAIN_CONTEXT-Konfiguration fest, damit diese Domain und ihre untergeordneten Seiten aktiv werden.",0,"Legen Sie diesen Domainnamen in der DOMAIN_CONTEXT-Konfiguration fest, damit diese Domain und ihre untergeordneten Seiten aktiv werden."
-cms,webpage_domain.field.resource_name.label,,de_DE,Domain name,Domainname,0,Domainname
-cms,webpage_domain.title_create,,de_DE,Add new domain,Neue Domain hinzufügen,0,Neue Domain hinzufügen
-cms,webpage_domain.title_edit,,de_DE,Edit domain,Domain bearbeiten,0,Domain bearbeiten
-cms,webpage_file.field.resource_name.explanation,,de_DE,"This is the file name used in the URL. Avoid accented characters and spaces, and keep the correct file extension.",Dies ist der in der URL verwendete Dateiname. Umlaute und Leerzeichen vermeiden und die richtige Dateiendung beibehalten.,0,Dies ist der in der URL verwendete Dateiname. Umlaute und Leerzeichen vermeiden und die richtige Dateiendung beibehalten.
-cms,webpage_file.field.resource_name.label,,de_DE,SEO-friendly URL name,SEO-freundlicher URL-Name,0,SEO-freundlicher URL-Name
-cms,webpage_file.field.text.explanation,,de_DE,For images this may appear as a longer description below the title.,Bei Bildern kann dies als längere Beschreibung unter dem Titel erscheinen.,0,Bei Bildern kann dies als längere Beschreibung unter dem Titel erscheinen.
+cms,tree.invalid_parent_id,,de_DE,"Invalid parent ID","Ungültige übergeordnete ID",0,"Ungültige übergeordnete ID"
+cms,tree.missing_type,,de_DE,"Missing tree type","Fehlender Baumstrukturtyp",0,"Fehlender Baumstrukturtyp"
+cms,tree.no_connection_id,,de_DE,"No widget connection ID given","Keine Widget-Verbindungs-ID angegeben",0,"Keine Widget-Verbindungs-ID angegeben"
+cms,tree.select_menu_item,,de_DE,"Select a menu item from the tree","Menüelement aus der Baumstruktur auswählen",0,"Menüelement aus der Baumstruktur auswählen"
+cms,tree.unknown_type,,de_DE,"Unknown tree item type: {type}","Unbekannter Baumstrukturelementtyp: {type}",0,"Unbekannter Baumstrukturelementtyp: {type}"
+cms,webpage.create_for_params,,de_DE,"Create a webpage for the following parameters: <br>{param_name}, {param_value}","Webseite für folgende Parameter erstellen: <br>{param_name}, {param_value}",0,"Webseite für folgende Parameter erstellen: <br>{param_name}, {param_value}"
+cms,webpage.create_for_widget,,de_DE,"Create a webpage with the following content: <br><b>{widget}</b>","Webseite mit folgendem Inhalt erstellen: <br><b>{widget}</b>",0,"Webseite mit folgendem Inhalt erstellen: <br><b>{widget}</b>"
+cms,webpage.field.layout.explanation,,de_DE,"The webpage layout structure determines where content elements can be placed on the page.","Die Webseitenlayout-Struktur bestimmt, wo Inhaltselemente auf der Seite platziert werden können.",0,"Die Webseitenlayout-Struktur bestimmt, wo Inhaltselemente auf der Seite platziert werden können."
+cms,webpage.field.layout.label,,de_DE,"Page type",Seitentyp,0,Seitentyp
+cms,webpage_domain.field.resource_name.explanation,,de_DE,"Set this domain name in the DOMAIN_CONTEXT configuration so this domain and its child pages become active.","Legen Sie diesen Domainnamen in der DOMAIN_CONTEXT-Konfiguration fest, damit diese Domain und ihre untergeordneten Seiten aktiv werden.",0,"Legen Sie diesen Domainnamen in der DOMAIN_CONTEXT-Konfiguration fest, damit diese Domain und ihre untergeordneten Seiten aktiv werden."
+cms,webpage_domain.field.resource_name.label,,de_DE,"Domain name",Domainname,0,Domainname
+cms,webpage_domain.title_create,,de_DE,"Add new domain","Neue Domain hinzufügen",0,"Neue Domain hinzufügen"
+cms,webpage_domain.title_edit,,de_DE,"Edit domain","Domain bearbeiten",0,"Domain bearbeiten"
+cms,webpage_file.field.resource_name.explanation,,de_DE,"This is the file name used in the URL. Avoid accented characters and spaces, and keep the correct file extension.","Dies ist der in der URL verwendete Dateiname. Umlaute und Leerzeichen vermeiden und die richtige Dateiendung beibehalten.",0,"Dies ist der in der URL verwendete Dateiname. Umlaute und Leerzeichen vermeiden und die richtige Dateiendung beibehalten."
+cms,webpage_file.field.resource_name.label,,de_DE,"SEO-friendly URL name","SEO-freundlicher URL-Name",0,"SEO-freundlicher URL-Name"
+cms,webpage_file.field.text.explanation,,de_DE,"For images this may appear as a longer description below the title.","Bei Bildern kann dies als längere Beschreibung unter dem Titel erscheinen.",0,"Bei Bildern kann dies als längere Beschreibung unter dem Titel erscheinen."
 cms,webpage_file.field.text.label,,de_DE,Description,Beschreibung,0,Beschreibung
-cms,webpage_file.field.title.explanation,,de_DE,For images this may appear below the image.,Bei Bildern kann dies unter dem Bild erscheinen.,0,Bei Bildern kann dies unter dem Bild erscheinen.
+cms,webpage_file.field.title.explanation,,de_DE,"For images this may appear below the image.","Bei Bildern kann dies unter dem Bild erscheinen.",0,"Bei Bildern kann dies unter dem Bild erscheinen."
 cms,webpage_file.field.title.label,,de_DE,Title,Titel,0,Titel
-cms,webpage_file.title_edit,,de_DE,Edit file name,Dateiname bearbeiten,0,Dateiname bearbeiten
-cms,webpage_folder.field.resource_name.explanation,,de_DE,This is the real folder name used in the URL. Changing it later may cause visitors from search engines to see a 404 page.,"Dies ist der echte Ordnername in der URL. Eine spätere Änderung kann dazu führen, dass Besucher aus Suchmaschinen eine 404-Seite sehen.",0,"Dies ist der echte Ordnername in der URL. Eine spätere Änderung kann dazu führen, dass Besucher aus Suchmaschinen eine 404-Seite sehen."
-cms,webpage_folder.field.resource_name.label,,de_DE,SEO-friendly folder URL name,SEO-freundlicher Ordner-URL-Name,0,SEO-freundlicher Ordner-URL-Name
-cms,webpage_folder.title_create,,de_DE,Create new folder,Neuen Ordner erstellen,0,Neuen Ordner erstellen
-cms,webpage_folder.title_edit,,de_DE,Edit folder,Ordner bearbeiten,0,Ordner bearbeiten
+cms,webpage_file.title_edit,,de_DE,"Edit file name","Dateiname bearbeiten",0,"Dateiname bearbeiten"
+cms,webpage_folder.field.resource_name.explanation,,de_DE,"This is the real folder name used in the URL. Changing it later may cause visitors from search engines to see a 404 page.","Dies ist der echte Ordnername in der URL. Eine spätere Änderung kann dazu führen, dass Besucher aus Suchmaschinen eine 404-Seite sehen.",0,"Dies ist der echte Ordnername in der URL. Eine spätere Änderung kann dazu führen, dass Besucher aus Suchmaschinen eine 404-Seite sehen."
+cms,webpage_folder.field.resource_name.label,,de_DE,"SEO-friendly folder URL name","SEO-freundlicher Ordner-URL-Name",0,"SEO-freundlicher Ordner-URL-Name"
+cms,webpage_folder.title_create,,de_DE,"Create new folder","Neuen Ordner erstellen",0,"Neuen Ordner erstellen"
+cms,webpage_folder.title_edit,,de_DE,"Edit folder","Ordner bearbeiten",0,"Ordner bearbeiten"
 cms,webpage_from_path.subtitle,,de_DE,"If you want to create this webpage, you can do it here. Before doing so, make sure the URL was not mistyped.","Wenn Sie diese Webseite erstellen möchten, können Sie dies hier tun. Stellen Sie sicher, dass die URL korrekt geschrieben wurde.",0,"Wenn Sie diese Webseite erstellen möchten, können Sie dies hier tun. Stellen Sie sicher, dass die URL korrekt geschrieben wurde."
-cms,webpage_from_path.title,,de_DE,The requested webpage was not found!,Die angeforderte Webseite wurde nicht gefunden!,0,Die angeforderte Webseite wurde nicht gefunden!
+cms,webpage_from_path.title,,de_DE,"The requested webpage was not found!","Die angeforderte Webseite wurde nicht gefunden!",0,"Die angeforderte Webseite wurde nicht gefunden!"
 cms,webpage_page.field.description.explanation,,de_DE,"Description meta tag, usually shown under the URL in search results.","Beschreibungs-Meta-Tag, in Suchergebnissen üblicherweise unter der URL angezeigt.",0,"Beschreibungs-Meta-Tag, in Suchergebnissen üblicherweise unter der URL angezeigt."
 cms,webpage_page.field.description.label,,de_DE,Description,Beschreibung,0,Beschreibung
-cms,webpage_page.field.keywords.explanation,,de_DE,Keywords meta tag with comma-separated values.,Keywords-Meta-Tag mit durch Komma getrennten Werten.,0,Keywords-Meta-Tag mit durch Komma getrennten Werten.
+cms,webpage_page.field.keywords.explanation,,de_DE,"Keywords meta tag with comma-separated values.","Keywords-Meta-Tag mit durch Komma getrennten Werten.",0,"Keywords-Meta-Tag mit durch Komma getrennten Werten."
 cms,webpage_page.field.keywords.label,,de_DE,Keywords,Schlüsselwörter,0,Schlüsselwörter
-cms,webpage_page.field.resource_name.explanation,,de_DE,This is the real URL name of the page. Change it later only when necessary.,Dies ist der echte URL-Name der Seite. Nur bei Bedarf ändern.,0,Dies ist der echte URL-Name der Seite. Nur bei Bedarf ändern.
-cms,webpage_page.field.resource_name.label,,de_DE,SEO-friendly URL name,SEO-freundlicher URL-Name,0,SEO-freundlicher URL-Name
-cms,webpage_page.field.title.explanation,,de_DE,HTML title meta tag shown in the browser window title.,HTML-Titel-Meta-Tag im Browserfenstertitel.,0,HTML-Titel-Meta-Tag im Browserfenstertitel.
+cms,webpage_page.field.resource_name.explanation,,de_DE,"This is the real URL name of the page. Change it later only when necessary.","Dies ist der echte URL-Name der Seite. Nur bei Bedarf ändern.",0,"Dies ist der echte URL-Name der Seite. Nur bei Bedarf ändern."
+cms,webpage_page.field.resource_name.label,,de_DE,"SEO-friendly URL name","SEO-freundlicher URL-Name",0,"SEO-freundlicher URL-Name"
+cms,webpage_page.field.title.explanation,,de_DE,"HTML title meta tag shown in the browser window title.","HTML-Titel-Meta-Tag im Browserfenstertitel.",0,"HTML-Titel-Meta-Tag im Browserfenstertitel."
 cms,webpage_page.field.title.label,,de_DE,Title,Titel,0,Titel
-cms,webpage_page.title_create,,de_DE,Create new webpage,Neue Webseite erstellen,0,Neue Webseite erstellen
-cms,webpage_page.title_edit,,de_DE,Edit webpage,Webseite bearbeiten,0,Webseite bearbeiten
-cms,webpage.create_for_params,,de_DE,"Create a webpage for the following parameters: <br>{param_name}, {param_value}","Webseite für folgende Parameter erstellen: <br>{param_name}, {param_value}",0,"Webseite für folgende Parameter erstellen: <br>{param_name}, {param_value}"
-cms,webpage.create_for_widget,,de_DE,Create a webpage with the following content: <br><b>{widget}</b>,Webseite mit folgendem Inhalt erstellen: <br><b>{widget}</b>,0,Webseite mit folgendem Inhalt erstellen: <br><b>{widget}</b>
-cms,webpage.field.layout.explanation,,de_DE,The webpage layout structure determines where content elements can be placed on the page.,"Die Webseitenlayout-Struktur bestimmt, wo Inhaltselemente auf der Seite platziert werden können.",0,"Die Webseitenlayout-Struktur bestimmt, wo Inhaltselemente auf der Seite platziert werden können."
-cms,webpage.field.layout.label,,de_DE,Page type,Seitentyp,0,Seitentyp
-cms,widget_connection_params.field.anchor.explanation,,de_DE,Anchor name that can be used in links to jump to this content on the page.,"Ankername, der in Links verwendet werden kann, um zu diesem Inhalt auf der Seite zu springen.",0,"Ankername, der in Links verwendet werden kann, um zu diesem Inhalt auf der Seite zu springen."
+cms,webpage_page.title_create,,de_DE,"Create new webpage","Neue Webseite erstellen",0,"Neue Webseite erstellen"
+cms,webpage_page.title_edit,,de_DE,"Edit webpage","Webseite bearbeiten",0,"Webseite bearbeiten"
+cms,widget.insert.button,,de_DE,Insert,Einfügen,0,Einfügen
+cms,widget.insert.icon_title,,de_DE,"Insert content","Inhalt einfügen",0,"Inhalt einfügen"
+cms,widget.insert.placeholder,,de_DE,"-- Insert content --","-- Inhalt einfügen --",0,"-- Inhalt einfügen --"
+cms,widget.insert_from_clipboard,,de_DE,"Insert clipboard content here","Zwischenablageinhalt hier einfügen",0,"Zwischenablageinhalt hier einfügen"
+cms,widget_connection.added,,de_DE,"Content element placed on the webpage","Inhaltselement auf der Webseite platziert",0,"Inhaltselement auf der Webseite platziert"
+cms,widget_connection.copied_to_clipboard,,de_DE,"Content copied to clipboard","Inhalt in die Zwischenablage kopiert",0,"Inhalt in die Zwischenablage kopiert"
+cms,widget_connection.duplicate_not_allowed,,de_DE,"This content element is already on this block and multiple placement is not allowed.","Dieses Inhaltselement befindet sich bereits auf diesem Block und mehrfaches Platzieren ist nicht erlaubt.",0,"Dieses Inhaltselement befindet sich bereits auf diesem Block und mehrfaches Platzieren ist nicht erlaubt."
+cms,widget_connection.moved,,de_DE,"Content element moved","Inhaltselement verschoben",0,"Inhaltselement verschoben"
+cms,widget_connection.remove_from_webpage,,de_DE,"Remove from this webpage","Von dieser Webseite entfernen",0,"Von dieser Webseite entfernen"
+cms,widget_connection.removed,,de_DE,"Content element removed from the webpage","Inhaltselement von der Webseite entfernt",0,"Inhaltselement von der Webseite entfernt"
+cms,widget_connection.select_widget_type,,de_DE,"Choose the content type to insert","Inhaltstyp zum Einfügen auswählen",0,"Inhaltstyp zum Einfügen auswählen"
+cms,widget_connection_params.field.anchor.explanation,,de_DE,"Anchor name that can be used in links to jump to this content on the page.","Ankername, der in Links verwendet werden kann, um zu diesem Inhalt auf der Seite zu springen.",0,"Ankername, der in Links verwendet werden kann, um zu diesem Inhalt auf der Seite zu springen."
 cms,widget_connection_params.field.anchor.label,,de_DE,Anchor,Anker,0,Anker
-cms,widget_connection_params.field.float.clear,,de_DE,New row,Neue Zeile,0,Neue Zeile
-cms,widget_connection_params.field.float.explanation,,de_DE,Content box alignment. Floated elements can appear next to each other.,Ausrichtung des Inhaltsbereichs. Gefloatete Elemente können nebeneinander erscheinen.,0,Ausrichtung des Inhaltsbereichs. Gefloatete Elemente können nebeneinander erscheinen.
+cms,widget_connection_params.field.float.clear,,de_DE,"New row","Neue Zeile",0,"Neue Zeile"
+cms,widget_connection_params.field.float.explanation,,de_DE,"Content box alignment. Floated elements can appear next to each other.","Ausrichtung des Inhaltsbereichs. Gefloatete Elemente können nebeneinander erscheinen.",0,"Ausrichtung des Inhaltsbereichs. Gefloatete Elemente können nebeneinander erscheinen."
 cms,widget_connection_params.field.float.label,,de_DE,Alignment,Ausrichtung,0,Ausrichtung
-cms,widget_connection_params.field.float.left,,de_DE,Floated left,Links gefloatet,0,Links gefloatet
-cms,widget_connection_params.field.float.left_clear,,de_DE,Floated left in new row,Links gefloatet in neuer Zeile,0,Links gefloatet in neuer Zeile
-cms,widget_connection_params.field.float.none,,de_DE,No special alignment,Keine besondere Ausrichtung,0,Keine besondere Ausrichtung
-cms,widget_connection_params.field.float.right,,de_DE,Floated right,Rechts gefloatet,0,Rechts gefloatet
-cms,widget_connection_params.field.float.right_clear,,de_DE,Floated right in new row,Rechts gefloatet in neuer Zeile,0,Rechts gefloatet in neuer Zeile
+cms,widget_connection_params.field.float.left,,de_DE,"Floated left","Links gefloatet",0,"Links gefloatet"
+cms,widget_connection_params.field.float.left_clear,,de_DE,"Floated left in new row","Links gefloatet in neuer Zeile",0,"Links gefloatet in neuer Zeile"
+cms,widget_connection_params.field.float.none,,de_DE,"No special alignment","Keine besondere Ausrichtung",0,"Keine besondere Ausrichtung"
+cms,widget_connection_params.field.float.right,,de_DE,"Floated right","Rechts gefloatet",0,"Rechts gefloatet"
+cms,widget_connection_params.field.float.right_clear,,de_DE,"Floated right in new row","Rechts gefloatet in neuer Zeile",0,"Rechts gefloatet in neuer Zeile"
 cms,widget_connection_params.field.height.explanation,,de_DE,"Height in CSS format with unit (for example 100%, 200px, or auto).","Höhe im CSS-Format mit Einheit (z. B. 100%, 200px oder auto).",0,"Höhe im CSS-Format mit Einheit (z. B. 100%, 200px oder auto)."
 cms,widget_connection_params.field.height.label,,de_DE,Height,Höhe,0,Höhe
-cms,widget_connection_params.field.margin_bottom.explanation,,de_DE,Bottom margin in CSS format with unit (for example 100% or 200px).,Unterer Abstand im CSS-Format mit Einheit (z. B. 100% oder 200px).,0,Unterer Abstand im CSS-Format mit Einheit (z. B. 100% oder 200px).
-cms,widget_connection_params.field.margin_bottom.label,,de_DE,Bottom margin,Unterer Abstand,0,Unterer Abstand
-cms,widget_connection_params.field.margin_left.explanation,,de_DE,Left margin in CSS format with unit (for example 100% or 200px).,Linker Abstand im CSS-Format mit Einheit (z. B. 100% oder 200px).,0,Linker Abstand im CSS-Format mit Einheit (z. B. 100% oder 200px).
-cms,widget_connection_params.field.margin_left.label,,de_DE,Left margin,Linker Abstand,0,Linker Abstand
-cms,widget_connection_params.field.margin_right.explanation,,de_DE,Right margin in CSS format with unit (for example 100% or 200px).,Rechter Abstand im CSS-Format mit Einheit (z. B. 100% oder 200px).,0,Rechter Abstand im CSS-Format mit Einheit (z. B. 100% oder 200px).
-cms,widget_connection_params.field.margin_right.label,,de_DE,Right margin,Rechter Abstand,0,Rechter Abstand
-cms,widget_connection_params.field.margin_top.explanation,,de_DE,Top margin in CSS format with unit (for example 100% or 200px).,Oberer Abstand im CSS-Format mit Einheit (z. B. 100% oder 200px).,0,Oberer Abstand im CSS-Format mit Einheit (z. B. 100% oder 200px).
-cms,widget_connection_params.field.margin_top.label,,de_DE,Top margin,Oberer Abstand,0,Oberer Abstand
+cms,widget_connection_params.field.margin_bottom.explanation,,de_DE,"Bottom margin in CSS format with unit (for example 100% or 200px).","Unterer Abstand im CSS-Format mit Einheit (z. B. 100% oder 200px).",0,"Unterer Abstand im CSS-Format mit Einheit (z. B. 100% oder 200px)."
+cms,widget_connection_params.field.margin_bottom.label,,de_DE,"Bottom margin","Unterer Abstand",0,"Unterer Abstand"
+cms,widget_connection_params.field.margin_left.explanation,,de_DE,"Left margin in CSS format with unit (for example 100% or 200px).","Linker Abstand im CSS-Format mit Einheit (z. B. 100% oder 200px).",0,"Linker Abstand im CSS-Format mit Einheit (z. B. 100% oder 200px)."
+cms,widget_connection_params.field.margin_left.label,,de_DE,"Left margin","Linker Abstand",0,"Linker Abstand"
+cms,widget_connection_params.field.margin_right.explanation,,de_DE,"Right margin in CSS format with unit (for example 100% or 200px).","Rechter Abstand im CSS-Format mit Einheit (z. B. 100% oder 200px).",0,"Rechter Abstand im CSS-Format mit Einheit (z. B. 100% oder 200px)."
+cms,widget_connection_params.field.margin_right.label,,de_DE,"Right margin","Rechter Abstand",0,"Rechter Abstand"
+cms,widget_connection_params.field.margin_top.explanation,,de_DE,"Top margin in CSS format with unit (for example 100% or 200px).","Oberer Abstand im CSS-Format mit Einheit (z. B. 100% oder 200px).",0,"Oberer Abstand im CSS-Format mit Einheit (z. B. 100% oder 200px)."
+cms,widget_connection_params.field.margin_top.label,,de_DE,"Top margin","Oberer Abstand",0,"Oberer Abstand"
 cms,widget_connection_params.field.width.explanation,,de_DE,"Width in CSS format with unit (for example 100%, 200px, or auto).","Breite im CSS-Format mit Einheit (z. B. 100%, 200px oder auto).",0,"Breite im CSS-Format mit Einheit (z. B. 100%, 200px oder auto)."
 cms,widget_connection_params.field.width.label,,de_DE,Width,Breite,0,Breite
-cms,widget_connection_params.missing_widget_id,,de_DE,Widget ID is missing,Widget-ID fehlt,0,Widget-ID fehlt
-cms,widget_connection_params.no_content_id,,de_DE,No content ID given,Keine Inhalts-ID angegeben,0,Keine Inhalts-ID angegeben
-cms,widget_connection_params.subtitle,,de_DE,Webpage: {page},Webseite: {page},0,Webseite: {page}
-cms,widget_connection_params.title,,de_DE,Edit display settings,Anzeigeeinstellungen bearbeiten,0,Anzeigeeinstellungen bearbeiten
-cms,widget_connection_settings.field.is_last.explanation,,de_DE,Check this if this is the last column in the row. This helps keep spacing correct and prevents overlapping or broken layout.,"Aktivieren Sie dies, wenn dies die letzte Spalte in der Zeile ist. Hilft, den Abstand korrekt zu halten und verhindert überlappende Layouts.",0,"Aktivieren Sie dies, wenn dies die letzte Spalte in der Zeile ist. Hilft, den Abstand korrekt zu halten und verhindert überlappende Layouts."
-cms,widget_connection_settings.field.is_last.label,,de_DE,Last in row,Letzte in der Zeile,0,Letzte in der Zeile
-cms,widget_connection_settings.field.widget_width.label,,de_DE,Content width,Inhaltsbreite,0,Inhaltsbreite
-cms,widget_connection_settings.missing_widget_id,,de_DE,Widget ID is missing,Widget-ID fehlt,0,Widget-ID fehlt
-cms,widget_connection_settings.subtitle,,de_DE,Webpage: {page},Webseite: {page},0,Webseite: {page}
-cms,widget_connection.added,,de_DE,Content element placed on the webpage,Inhaltselement auf der Webseite platziert,0,Inhaltselement auf der Webseite platziert
-cms,widget_connection.copied_to_clipboard,,de_DE,Content copied to clipboard,Inhalt in die Zwischenablage kopiert,0,Inhalt in die Zwischenablage kopiert
-cms,widget_connection.duplicate_not_allowed,,de_DE,This content element is already on this block and multiple placement is not allowed.,Dieses Inhaltselement befindet sich bereits auf diesem Block und mehrfaches Platzieren ist nicht erlaubt.,0,Dieses Inhaltselement befindet sich bereits auf diesem Block und mehrfaches Platzieren ist nicht erlaubt.
-cms,widget_connection.moved,,de_DE,Content element moved,Inhaltselement verschoben,0,Inhaltselement verschoben
-cms,widget_connection.remove_from_webpage,,de_DE,Remove from this webpage,Von dieser Webseite entfernen,0,Von dieser Webseite entfernen
-cms,widget_connection.removed,,de_DE,Content element removed from the webpage,Inhaltselement von der Webseite entfernt,0,Inhaltselement von der Webseite entfernt
-cms,widget_connection.select_widget_type,,de_DE,Choose the content type to insert,Inhaltstyp zum Einfügen auswählen,0,Inhaltstyp zum Einfügen auswählen
-cms,widget_group.begin_delete_error,,de_DE,Error: Unable to delete opening block,Fehler: Öffnender Block konnte nicht gelöscht werden,0,Fehler: Öffnender Block konnte nicht gelöscht werden
-cms,widget_group.both_delete_error,,de_DE,Error: Unable to delete opening or closing block,Fehler: Öffnender oder schließender Block konnte nicht gelöscht werden,0,Fehler: Öffnender oder schließender Block konnte nicht gelöscht werden
-cms,widget_group.end_delete_error,,de_DE,Error: Unable to delete closing block,Fehler: Schließender Block konnte nicht gelöscht werden,0,Fehler: Schließender Block konnte nicht gelöscht werden
-cms,widget_group.end_missing_delete_error,,de_DE,Closing block not found and opening block deletion failed,Schließender Block nicht gefunden und öffnender Block konnte nicht gelöscht werden,0,Schließender Block nicht gefunden und öffnender Block konnte nicht gelöscht werden
+cms,widget_connection_params.missing_widget_id,,de_DE,"Widget ID is missing","Widget-ID fehlt",0,"Widget-ID fehlt"
+cms,widget_connection_params.no_content_id,,de_DE,"No content ID given","Keine Inhalts-ID angegeben",0,"Keine Inhalts-ID angegeben"
+cms,widget_connection_params.subtitle,,de_DE,"Webpage: {page}","Webseite: {page}",0,"Webseite: {page}"
+cms,widget_connection_params.title,,de_DE,"Edit display settings","Anzeigeeinstellungen bearbeiten",0,"Anzeigeeinstellungen bearbeiten"
+cms,widget_connection_settings.field.is_last.explanation,,de_DE,"Check this if this is the last column in the row. This helps keep spacing correct and prevents overlapping or broken layout.","Aktivieren Sie dies, wenn dies die letzte Spalte in der Zeile ist. Hilft, den Abstand korrekt zu halten und verhindert überlappende Layouts.",0,"Aktivieren Sie dies, wenn dies die letzte Spalte in der Zeile ist. Hilft, den Abstand korrekt zu halten und verhindert überlappende Layouts."
+cms,widget_connection_settings.field.is_last.label,,de_DE,"Last in row","Letzte in der Zeile",0,"Letzte in der Zeile"
+cms,widget_connection_settings.field.widget_width.label,,de_DE,"Content width",Inhaltsbreite,0,Inhaltsbreite
+cms,widget_connection_settings.missing_widget_id,,de_DE,"Widget ID is missing","Widget-ID fehlt",0,"Widget-ID fehlt"
+cms,widget_connection_settings.subtitle,,de_DE,"Webpage: {page}","Webseite: {page}",0,"Webseite: {page}"
+cms,widget_group.begin_delete_error,,de_DE,"Error: Unable to delete opening block","Fehler: Öffnender Block konnte nicht gelöscht werden",0,"Fehler: Öffnender Block konnte nicht gelöscht werden"
+cms,widget_group.both_delete_error,,de_DE,"Error: Unable to delete opening or closing block","Fehler: Öffnender oder schließender Block konnte nicht gelöscht werden",0,"Fehler: Öffnender oder schließender Block konnte nicht gelöscht werden"
+cms,widget_group.end_delete_error,,de_DE,"Error: Unable to delete closing block","Fehler: Schließender Block konnte nicht gelöscht werden",0,"Fehler: Schließender Block konnte nicht gelöscht werden"
+cms,widget_group.end_missing_delete_error,,de_DE,"Closing block not found and opening block deletion failed","Schließender Block nicht gefunden und öffnender Block konnte nicht gelöscht werden",0,"Schließender Block nicht gefunden und öffnender Block konnte nicht gelöscht werden"
 cms,widget_group.end_missing_removed_beginning,,de_DE,"Closing block not found, opening block removed successfully","Schließender Block nicht gefunden, öffnender Block erfolgreich entfernt",0,"Schließender Block nicht gefunden, öffnender Block erfolgreich entfernt"
-cms,widget_group.remove_block,,de_DE,Remove block,Block entfernen,0,Block entfernen
-cms,widget_group.removed,,de_DE,Block removed from webpage,Block von der Webseite entfernt,0,Block von der Webseite entfernt
+cms,widget_group.remove_block,,de_DE,"Remove block","Block entfernen",0,"Block entfernen"
+cms,widget_group.removed,,de_DE,"Block removed from webpage","Block von der Webseite entfernt",0,"Block von der Webseite entfernt"
 cms,widget_preview.description,,de_DE,Description,Beschreibung,0,Beschreibung
 cms,widget_preview.implemented,,de_DE,Implemented,Implementiert,0,Implementiert
-cms,widget_preview.info.current_theme,,de_DE,Current theme,Aktuelles Design,0,Aktuelles Design
+cms,widget_preview.info.current_theme,,de_DE,"Current theme","Aktuelles Design",0,"Aktuelles Design"
 cms,widget_preview.info.fallback,,de_DE,Fallback,Fallback,0,Fallback
 cms,widget_preview.info.implemented,,de_DE,Implemented,Implementiert,0,Implementiert
 cms,widget_preview.info.template,,de_DE,Template,Template,0,Template
-cms,widget_preview.info.title,,de_DE,Widget preview,Widget-Vorschau,0,Widget-Vorschau
+cms,widget_preview.info.title,,de_DE,"Widget preview",Widget-Vorschau,0,Widget-Vorschau
 cms,widget_preview.info.widget,,de_DE,Widget,Widget,0,Widget
-cms,widget_preview.none,,de_DE,No mockable widgets found.,Keine vorschaubaren Widgets gefunden.,0,Keine vorschaubaren Widgets gefunden.
-cms,widget_preview.not_implemented,,de_DE,Not implemented,Nicht implementiert,0,Nicht implementiert
+cms,widget_preview.none,,de_DE,"No mockable widgets found.","Keine vorschaubaren Widgets gefunden.",0,"Keine vorschaubaren Widgets gefunden."
+cms,widget_preview.not_implemented,,de_DE,"Not implemented","Nicht implementiert",0,"Nicht implementiert"
 cms,widget_preview.not_mockable_prefix,,de_DE,Widget,Widget,0,Widget
-cms,widget_preview.not_mockable_suffix,,de_DE,does not implement iMockable.,implementiert iMockable nicht.,0,implementiert iMockable nicht.
-cms,widget_preview.not_registered,,de_DE,Widget not registered: {widget},Widget nicht registriert: {widget},0,Widget nicht registriert: {widget}
-cms,widget_preview.redirecting,,de_DE,Redirecting to the correct theme...,Weiterleitung zum korrekten Design...,0,Weiterleitung zum korrekten Design...
-cms,widget_preview.title,,de_DE,Available widgets for preview,Verfügbare Widgets für die Vorschau,0,Verfügbare Widgets für die Vorschau
+cms,widget_preview.not_mockable_suffix,,de_DE,"does not implement iMockable.","implementiert iMockable nicht.",0,"implementiert iMockable nicht."
+cms,widget_preview.not_registered,,de_DE,"Widget not registered: {widget}","Widget nicht registriert: {widget}",0,"Widget nicht registriert: {widget}"
+cms,widget_preview.redirecting,,de_DE,"Redirecting to the correct theme...","Weiterleitung zum korrekten Design...",0,"Weiterleitung zum korrekten Design..."
+cms,widget_preview.title,,de_DE,"Available widgets for preview","Verfügbare Widgets für die Vorschau",0,"Verfügbare Widgets für die Vorschau"
 cms,widget_preview.widget,,de_DE,Widget,Widget,0,Widget
-cms,widget.insert_from_clipboard,,de_DE,Insert clipboard content here,Zwischenablageinhalt hier einfügen,0,Zwischenablageinhalt hier einfügen
-cms,widget.insert.button,,de_DE,Insert,Einfügen,0,Einfügen
-cms,widget.insert.icon_title,,de_DE,Insert content,Inhalt einfügen,0,Inhalt einfügen
-cms,widget.insert.placeholder,,de_DE,-- Insert content --,-- Inhalt einfügen --,0,-- Inhalt einfügen --
 common,actions,,de_DE,Actions,Aktionen,0,Aktionen
 common,all,,de_DE,All,Alle,0,Alle
 common,back,,de_DE,Back,Zurück,0,Zurück
 common,calendar,,de_DE,Calendar,Kalender,0,Kalender
 common,cancel,,de_DE,Cancel,Abbrechen,0,Abbrechen
-common,choose_placeholder,,de_DE,-- Choose --,-- Auswählen --,0,-- Auswählen --
+common,choose_placeholder,,de_DE,"-- Choose --","-- Auswählen --",0,"-- Auswählen --"
 common,delete,,de_DE,Delete,Löschen,0,Löschen
 common,download,,de_DE,Download,Herunterladen,0,Herunterladen
 common,edit,,de_DE,Edit,Bearbeiten,0,Bearbeiten
 common,error,,de_DE,Error,Fehler,0,Fehler
-common,error_save,,de_DE,Error: Unable to save,Fehler: Speichern nicht möglich,0,Fehler: Speichern nicht möglich
+common,error_save,,de_DE,"Error: Unable to save","Fehler: Speichern nicht möglich",0,"Fehler: Speichern nicht möglich"
 common,id,,de_DE,ID,ID,0,ID
-common,loading,,de_DE,Loading...,Wird geladen...,0,Wird geladen...
-common,logout,,de_DE,Log out,Abmelden,0,Abmelden
-common,missing_required_url_params,,de_DE,Missing required URL parameters,Erforderliche URL-Parameter fehlen,0,Erforderliche URL-Parameter fehlen
-common,move_down,,de_DE,Move down,Nach unten verschieben,0,Nach unten verschieben
-common,move_up,,de_DE,Move up,Nach oben verschieben,0,Nach oben verschieben
+common,loading,,de_DE,Loading...,"Wird geladen...",0,"Wird geladen..."
+common,logout,,de_DE,"Log out",Abmelden,0,Abmelden
+common,missing_required_url_params,,de_DE,"Missing required URL parameters","Erforderliche URL-Parameter fehlen",0,"Erforderliche URL-Parameter fehlen"
+common,move_down,,de_DE,"Move down","Nach unten verschieben",0,"Nach unten verschieben"
+common,move_up,,de_DE,"Move up","Nach oben verschieben",0,"Nach oben verschieben"
 common,never,,de_DE,Never,Nie,0,Nie
 common,no,,de_DE,No,Nein,0,Nein
-common,no_changes,,de_DE,No changes made,Keine Änderungen vorgenommen,0,Keine Änderungen vorgenommen
-common,no_data,,de_DE,No data,Keine Daten,0,Keine Daten
-common,no_description,,de_DE,No description,Keine Beschreibung,0,Keine Beschreibung
-common,not_set,,de_DE,[not set],[nicht gesetzt],0,[nicht gesetzt]
+common,no_changes,,de_DE,"No changes made","Keine Änderungen vorgenommen",0,"Keine Änderungen vorgenommen"
+common,no_data,,de_DE,"No data","Keine Daten",0,"Keine Daten"
+common,no_description,,de_DE,"No description","Keine Beschreibung",0,"Keine Beschreibung"
+common,not_set,,de_DE,"[not set]","[nicht gesetzt]",0,"[nicht gesetzt]"
 common,open,,de_DE,Open,Öffnen,0,Öffnen
 common,operations,,de_DE,Operations,Operationen,0,Operationen
 common,preview,,de_DE,Preview,Vorschau,0,Vorschau
-common,read_more,,de_DE,Read more,Weiterlesen,0,Weiterlesen
+common,read_more,,de_DE,"Read more",Weiterlesen,0,Weiterlesen
 common,renamed,,de_DE,Renamed,Umbenannt,0,Umbenannt
 common,save,,de_DE,Save,Speichern,0,Speichern
-common,saved,,de_DE,Record saved,Datensatz gespeichert,0,Datensatz gespeichert
+common,saved,,de_DE,"Record saved","Datensatz gespeichert",0,"Datensatz gespeichert"
 common,saved_short,,de_DE,Saved,Gespeichert,0,Gespeichert
 common,search,,de_DE,Search,Suchen,0,Suchen
 common,unknown,,de_DE,Unknown,Unbekannt,0,Unbekannt
@@ -325,144 +391,201 @@ common,upload,,de_DE,Upload,Hochladen,0,Hochladen
 common,user,,de_DE,User,Benutzer,0,Benutzer
 common,width,,de_DE,Width,Breite,0,Breite
 common,yes,,de_DE,Yes,Ja,0,Ja
-datatable,column_visibility,,de_DE,Visible columns,Sichtbare Spalten,0,Sichtbare Spalten
-datatable,displayed_columns,,de_DE,Displayed columns,Angezeigte Spalten,0,Angezeigte Spalten
-datatable,empty_table,,de_DE,No data,Keine Daten,0,Keine Daten
+datatable,column_visibility,,de_DE,"Visible columns","Sichtbare Spalten",0,"Sichtbare Spalten"
+datatable,displayed_columns,,de_DE,"Displayed columns","Angezeigte Spalten",0,"Angezeigte Spalten"
+datatable,empty_table,,de_DE,"No data","Keine Daten",0,"Keine Daten"
 datatable,first,,de_DE,First,Erste,0,Erste
-datatable,info_compact,,de_DE,_START_ - _END_ / _TOTAL_ items,_START_ - _END_ / _TOTAL_ Einträge,0,_START_ - _END_ / _TOTAL_ Einträge
-datatable,info_empty,,de_DE,No results,Keine Ergebnisse,0,Keine Ergebnisse
-datatable,info_filtered_compact,,de_DE,(filtered from _MAX_ items),(gefiltert aus _MAX_ Einträgen),0,(gefiltert aus _MAX_ Einträgen)
-datatable,info_filtered_html,,de_DE,<br><i>filtered from _MAX_ rows</i>,<br><i>gefiltert aus _MAX_ Zeilen</i>,0,<br><i>gefiltert aus _MAX_ Zeilen</i>
-datatable,info_full,,de_DE,_TOTAL_ displayable items (showing: _START_ - _END_),_TOTAL_ anzeigbare Einträge (angezeigt: _START_ - _END_),0,_TOTAL_ anzeigbare Einträge (angezeigt: _START_ - _END_)
+datatable,info_compact,,de_DE,"_START_ - _END_ / _TOTAL_ items","_START_ - _END_ / _TOTAL_ Einträge",0,"_START_ - _END_ / _TOTAL_ Einträge"
+datatable,info_empty,,de_DE,"No results","Keine Ergebnisse",0,"Keine Ergebnisse"
+datatable,info_filtered_compact,,de_DE,"(filtered from _MAX_ items)","(gefiltert aus _MAX_ Einträgen)",0,"(gefiltert aus _MAX_ Einträgen)"
+datatable,info_filtered_html,,de_DE,"<br><i>filtered from _MAX_ rows</i>","<br><i>gefiltert aus _MAX_ Zeilen</i>",0,"<br><i>gefiltert aus _MAX_ Zeilen</i>"
+datatable,info_full,,de_DE,"_TOTAL_ displayable items (showing: _START_ - _END_)","_TOTAL_ anzeigbare Einträge (angezeigt: _START_ - _END_)",0,"_TOTAL_ anzeigbare Einträge (angezeigt: _START_ - _END_)"
 datatable,last,,de_DE,Last,Letzte,0,Letzte
-datatable,length_menu,,de_DE,_MENU_ items/page,_MENU_ Einträge/Seite,0,_MENU_ Einträge/Seite
-datatable,loading_records,,de_DE,Loading...,Wird geladen...,0,Wird geladen...
+datatable,length_menu,,de_DE,"_MENU_ items/page","_MENU_ Einträge/Seite",0,"_MENU_ Einträge/Seite"
+datatable,loading_records,,de_DE,Loading...,"Wird geladen...",0,"Wird geladen..."
 datatable,next,,de_DE,Next,Weiter,0,Weiter
 datatable,previous,,de_DE,Previous,Zurück,0,Zurück
-datatable,processing,,de_DE,Processing...,Wird verarbeitet...,0,Wird verarbeitet...
+datatable,processing,,de_DE,Processing...,"Wird verarbeitet...",0,"Wird verarbeitet..."
 datatable,search,,de_DE,Search,Suchen,0,Suchen
-datatable,zero_records,,de_DE,No displayable items,Keine anzeigbaren Einträge,0,Keine anzeigbaren Einträge
-layout,admin_default.description,,de_DE,Single-column admin layout,Einspaltiges Admin-Layout,0,Einspaltiges Admin-Layout
-layout,admin_default.name,,de_DE,Admin 1-column,Admin 1-spaltig,0,Admin 1-spaltig
-layout,admin_empty.description,,de_DE,Empty admin layout,Leeres Admin-Layout,0,Leeres Admin-Layout
-layout,admin_empty.name,,de_DE,Empty admin,Leeres Admin,0,Leeres Admin
-layout,admin_menu.description,,de_DE,Displays the admin menu,Zeigt das Admin-Menü an,0,Zeigt das Admin-Menü an
-layout,admin_menu.name,,de_DE,Admin menu,Admin-Menü,0,Admin-Menü
-layout,admin_nomenu.description,,de_DE,Admin layout without menu,Admin-Layout ohne Menü,0,Admin-Layout ohne Menü
-layout,admin_nomenu.name,,de_DE,Admin without menu,Admin ohne Menü,0,Admin ohne Menü
-layout,header_right.description,,de_DE,Displays the quick access menu,Zeigt das Schnellzugriffsmenü an,0,Zeigt das Schnellzugriffsmenü an
-layout,header_right.name,,de_DE,Quick menu,Schnellmenü,0,Schnellmenü
-layout,main_menu.description,,de_DE,Displays the main menu,Zeigt das Hauptmenü an,0,Zeigt das Hauptmenü an
-layout,main_menu.name,,de_DE,Main menu,Hauptmenü,0,Hauptmenü
-layout,public_2row.description,,de_DE,Two-column public layout,Zweispaltiges öffentliches Layout,0,Zweispaltiges öffentliches Layout
-layout,public_2row.hero.balanced_life,,de_DE,Want to live a more balanced life?,Möchten Sie ein ausgeglicheneres Leben führen?,0,Möchten Sie ein ausgeglicheneres Leben führen?
-layout,public_2row.hero.better_quality_of_life,,de_DE,Want a better quality of life?,Möchten Sie eine bessere Lebensqualität?,0,Möchten Sie eine bessere Lebensqualität?
-layout,public_2row.hero.conflict_management,,de_DE,Want to handle conflicts better?,Möchten Sie Konflikte besser handhaben?,0,Möchten Sie Konflikte besser handhaben?
-layout,public_2row.hero.equal_partner,,de_DE,Want to be treated as an equal partner?,Möchten Sie als gleichberechtigter Partner behandelt werden?,0,Möchten Sie als gleichberechtigter Partner behandelt werden?
-layout,public_2row.hero.self_discovery,,de_DE,Want to understand yourself better?,Möchten Sie sich selbst besser verstehen?,0,Möchten Sie sich selbst besser verstehen?
-layout,public_2row.hero.solution,,de_DE,The solution: TeamSolution!,Die Lösung: TeamSolution!,0,Die Lösung: TeamSolution!
-layout,public_2row.hero.success_and_happiness,,de_DE,Want to be successful and happy?,Möchten Sie erfolgreich und glücklich sein?,0,Möchten Sie erfolgreich und glücklich sein?
+datatable,zero_records,,de_DE,"No displayable items","Keine anzeigbaren Einträge",0,"Keine anzeigbaren Einträge"
+layout,admin_default.description,,de_DE,"Single-column admin layout","Einspaltiges Admin-Layout",0,"Einspaltiges Admin-Layout"
+layout,admin_default.name,,de_DE,"Admin 1-column","Admin 1-spaltig",0,"Admin 1-spaltig"
+layout,admin_empty.description,,de_DE,"Empty admin layout","Leeres Admin-Layout",0,"Leeres Admin-Layout"
+layout,admin_empty.name,,de_DE,"Empty admin","Leeres Admin",0,"Leeres Admin"
+layout,admin_login.description,,de_DE,"Admin login layout",Admin-Anmelde-Layout,0,Admin-Anmelde-Layout
+layout,admin_login.name,,de_DE,"Admin login",Admin-Anmeldung,0,Admin-Anmeldung
+layout,admin_menu.description,,de_DE,"Displays the admin menu","Zeigt das Admin-Menü an",0,"Zeigt das Admin-Menü an"
+layout,admin_menu.name,,de_DE,"Admin menu",Admin-Menü,0,Admin-Menü
+layout,admin_nomenu.description,,de_DE,"Admin layout without menu","Admin-Layout ohne Menü",0,"Admin-Layout ohne Menü"
+layout,admin_nomenu.name,,de_DE,"Admin without menu","Admin ohne Menü",0,"Admin ohne Menü"
+layout,header_right.description,,de_DE,"Displays the quick access menu","Zeigt das Schnellzugriffsmenü an",0,"Zeigt das Schnellzugriffsmenü an"
+layout,header_right.name,,de_DE,"Quick menu",Schnellmenü,0,Schnellmenü
+layout,main_menu.description,,de_DE,"Displays the main menu","Zeigt das Hauptmenü an",0,"Zeigt das Hauptmenü an"
+layout,main_menu.name,,de_DE,"Main menu",Hauptmenü,0,Hauptmenü
+layout,public_2row.description,,de_DE,"Two-column public layout","Zweispaltiges öffentliches Layout",0,"Zweispaltiges öffentliches Layout"
+layout,public_2row.hero.balanced_life,,de_DE,"Want to live a more balanced life?","Möchten Sie ein ausgeglicheneres Leben führen?",0,"Möchten Sie ein ausgeglicheneres Leben führen?"
+layout,public_2row.hero.better_quality_of_life,,de_DE,"Want a better quality of life?","Möchten Sie eine bessere Lebensqualität?",0,"Möchten Sie eine bessere Lebensqualität?"
+layout,public_2row.hero.conflict_management,,de_DE,"Want to handle conflicts better?","Möchten Sie Konflikte besser handhaben?",0,"Möchten Sie Konflikte besser handhaben?"
+layout,public_2row.hero.equal_partner,,de_DE,"Want to be treated as an equal partner?","Möchten Sie als gleichberechtigter Partner behandelt werden?",0,"Möchten Sie als gleichberechtigter Partner behandelt werden?"
+layout,public_2row.hero.self_discovery,,de_DE,"Want to understand yourself better?","Möchten Sie sich selbst besser verstehen?",0,"Möchten Sie sich selbst besser verstehen?"
+layout,public_2row.hero.solution,,de_DE,"The solution: TeamSolution!","Die Lösung: TeamSolution!",0,"Die Lösung: TeamSolution!"
+layout,public_2row.hero.success_and_happiness,,de_DE,"Want to be successful and happy?","Möchten Sie erfolgreich und glücklich sein?",0,"Möchten Sie erfolgreich und glücklich sein?"
 layout,public_2row.name,,de_DE,2-column,2-spaltig,0,2-spaltig
-layout,public_default.description,,de_DE,Single-column public layout,Einspaltiges öffentliches Layout,0,Einspaltiges öffentliches Layout
+layout,public_default.description,,de_DE,"Single-column public layout","Einspaltiges öffentliches Layout",0,"Einspaltiges öffentliches Layout"
 layout,public_default.name,,de_DE,1-column,1-spaltig,0,1-spaltig
-layout,public_empty.description,,de_DE,Empty layout for simple responses,Leeres Layout für einfache Antworten,0,Leeres Layout für einfache Antworten
+layout,public_empty.description,,de_DE,"Empty layout for simple responses","Leeres Layout für einfache Antworten",0,"Leeres Layout für einfache Antworten"
 layout,public_empty.name,,de_DE,Empty,Leer,0,Leer
-layout,public_login.description,,de_DE,Login layout,Anmelde-Layout,0,Anmelde-Layout
+layout,public_login.description,,de_DE,"Login layout",Anmelde-Layout,0,Anmelde-Layout
 layout,public_login.name,,de_DE,Login,Anmelden,0,Anmelden
-layout,public_preview.description,,de_DE,Preview layout,Vorschau-Layout,0,Vorschau-Layout
+layout,public_preview.description,,de_DE,"Preview layout",Vorschau-Layout,0,Vorschau-Layout
 layout,public_preview.name,,de_DE,Preview,Vorschau,0,Vorschau
-layout,top_menu_admin.description,,de_DE,Displays the admin top menu,Zeigt das obere Admin-Menü an,0,Zeigt das obere Admin-Menü an
-layout,top_menu_admin.name,,de_DE,Admin top menu,Oberes Admin-Menü,0,Oberes Admin-Menü
-layout,unknown.description,,de_DE,Layout not configured,Layout nicht konfiguriert,0,Layout nicht konfiguriert
-layout,unknown.name,,de_DE,Unknown layout,Unbekanntes Layout,0,Unbekanntes Layout
-layout,widget_previewer.description,,de_DE,Minimal layout for widget previews,Minimales Layout für Widget-Vorschauen,0,Minimales Layout für Widget-Vorschauen
-layout,widget_previewer.name,,de_DE,Widget previewer,Widget-Vorschau,0,Widget-Vorschau
+layout,top_menu_admin.description,,de_DE,"Displays the admin top menu","Zeigt das obere Admin-Menü an",0,"Zeigt das obere Admin-Menü an"
+layout,top_menu_admin.name,,de_DE,"Admin top menu","Oberes Admin-Menü",0,"Oberes Admin-Menü"
+layout,unknown.description,,de_DE,"Layout not configured","Layout nicht konfiguriert",0,"Layout nicht konfiguriert"
+layout,unknown.name,,de_DE,"Unknown layout","Unbekanntes Layout",0,"Unbekanntes Layout"
+layout,widget_previewer.description,,de_DE,"Minimal layout for widget previews","Minimales Layout für Widget-Vorschauen",0,"Minimales Layout für Widget-Vorschauen"
+layout,widget_previewer.name,,de_DE,"Widget previewer",Widget-Vorschau,0,Widget-Vorschau
+mcp,tokens.col.actions,,de_DE,Actions,Aktionen,0,Aktionen
+mcp,tokens.col.created,,de_DE,Created,Created,0,Created
+mcp,tokens.col.expires,,de_DE,Expires,Expires,0,Expires
+mcp,tokens.col.last_used,,de_DE,"Last used","Last used",0,"Last used"
+mcp,tokens.col.name,,de_DE,Name,Name,0,Name
+mcp,tokens.col.prefix,,de_DE,Prefix,Prefix,0,Prefix
+mcp,tokens.col.status,,de_DE,Status,Status,0,Status
+mcp,tokens.create,,de_DE,"Create token","Create token",0,"Create token"
+mcp,tokens.create_title,,de_DE,"Create token","Create token",0,"Create token"
+mcp,tokens.created_help,,de_DE,"Copy this user-bound token now. It will not be shown again.","Kopieren Sie dieses benutzergebundene Token jetzt. Es wird nicht erneut angezeigt.",0,"Kopieren Sie dieses benutzergebundene Token jetzt. Es wird nicht erneut angezeigt."
+mcp,tokens.created_title,,de_DE,"Token created","Token created",0,"Token created"
+mcp,tokens.description,,de_DE,"Create and revoke MCP access tokens tied to your user account.","MCP-Zugriffstoken erstellen und widerrufen, die mit Ihrem Benutzerkonto verknüpft sind.",0,"MCP-Zugriffstoken erstellen und widerrufen, die mit Ihrem Benutzerkonto verknüpft sind."
+mcp,tokens.empty,,de_DE,"No MCP tokens yet.","Noch keine MCP-Token.",0,"Noch keine MCP-Token."
+mcp,tokens.endpoint,,de_DE,"MCP endpoint","MCP endpoint",0,"MCP endpoint"
+mcp,tokens.existing_title,,de_DE,"Existing tokens","Existing tokens",0,"Existing tokens"
+mcp,tokens.expiry,,de_DE,Expiry,Expiry,0,Expiry
+mcp,tokens.expiry_30,,de_DE,"30 days","30 days",0,"30 days"
+mcp,tokens.expiry_365,,de_DE,"1 year","1 year",0,"1 year"
+mcp,tokens.expiry_90,,de_DE,"90 days","90 days",0,"90 days"
+mcp,tokens.expiry_never,,de_DE,"No expiry","No expiry",0,"No expiry"
+mcp,tokens.name,,de_DE,Name,Name,0,Name
+mcp,tokens.name_placeholder,,de_DE,"Claude Desktop - local","Claude Desktop - lokal",0,"Claude Desktop - lokal"
+mcp,tokens.never,,de_DE,Never,Nie,0,Nie
+mcp,tokens.revoke,,de_DE,Revoke,Revoke,0,Revoke
+mcp,tokens.revoke_confirm,,de_DE,"Revoke this MCP token?","Dieses MCP-Token widerrufen?",0,"Dieses MCP-Token widerrufen?"
+mcp,tokens.security_note,,de_DE,"MCP clients using one of these tokens run as your Radaptor user and have the same permissions you have. Keep tokens secret and revoke any token you no longer use.","MCP-Clients, die eines dieser Tokens verwenden, laufen als Ihr Radaptor-Benutzer und haben dieselben Berechtigungen wie Sie. Halten Sie Tokens geheim und widerrufen Sie Tokens, die Sie nicht mehr verwenden.",0,"MCP-Clients, die eines dieser Tokens verwenden, laufen als Ihr Radaptor-Benutzer und haben dieselben Berechtigungen wie Sie. Halten Sie Tokens geheim und widerrufen Sie Tokens, die Sie nicht mehr verwenden."
+mcp,tokens.status.active,,de_DE,Active,Active,0,Active
+mcp,tokens.status.expired,,de_DE,Expired,Expired,0,Expired
+mcp,tokens.status.revoked,,de_DE,Revoked,Revoked,0,Revoked
+mcp,tokens.title,,de_DE,"MCP tokens",MCP-Tokens,0,MCP-Tokens
 record_action,datasheet,,de_DE,Datasheet,Datenblatt,0,Datenblatt
 record_action,versions,,de_DE,Versions,Versionen,0,Versionen
-record_meta,created_by,,de_DE,Created by,Erstellt von,0,Erstellt von
-record_meta,last_modified,,de_DE,Last modified,Zuletzt geändert,0,Zuletzt geändert
-resource,new_folder,,de_DE,New folder,Neuer Ordner,0,Neuer Ordner
-resource,new_webpage,,de_DE,New webpage,Neue Webseite,0,Neue Webseite
+record_meta,created_by,,de_DE,"Created by","Erstellt von",0,"Erstellt von"
+record_meta,last_modified,,de_DE,"Last modified","Zuletzt geändert",0,"Zuletzt geändert"
+resource,new_folder,,de_DE,"New folder","Neuer Ordner",0,"Neuer Ordner"
+resource,new_webpage,,de_DE,"New webpage","Neue Webseite",0,"Neue Webseite"
 resource,properties,,de_DE,Properties,Eigenschaften,0,Eigenschaften
 resource,security,,de_DE,Security,Sicherheit,0,Sicherheit
-resource,upload_file,,de_DE,Upload file...,Datei hochladen...,0,Datei hochladen...
-response_error,access_denied,,de_DE,Access denied,Zugriff verweigert,0,Zugriff verweigert
-response_error,access_restricted,,de_DE,Access restricted,Zugriff eingeschränkt,0,Zugriff eingeschränkt
-response_error,forbidden.message,,de_DE,You do not have permission to access this resource.,"Sie haben keine Berechtigung, auf diese Ressource zuzugreifen.",0,"Sie haben keine Berechtigung, auf diese Ressource zuzugreifen."
+resource,upload_file,,de_DE,"Upload file...","Datei hochladen...",0,"Datei hochladen..."
+response_error,access_denied,,de_DE,"Access denied","Zugriff verweigert",0,"Zugriff verweigert"
+response_error,access_restricted,,de_DE,"Access restricted","Zugriff eingeschränkt",0,"Zugriff eingeschränkt"
+response_error,forbidden.message,,de_DE,"You do not have permission to access this resource.","Sie haben keine Berechtigung, auf diese Ressource zuzugreifen.",0,"Sie haben keine Berechtigung, auf diese Ressource zuzugreifen."
 response_error,forbidden.title,,de_DE,Forbidden,Verboten,0,Verboten
 response_error,internal.contact_support,,de_DE,"If the problem persists, please contact our support team.","Wenn das Problem weiterhin besteht, wenden Sie sich bitte an unser Support-Team.",0,"Wenn das Problem weiterhin besteht, wenden Sie sich bitte an unser Support-Team."
-response_error,internal.go_back_previous_page,,de_DE,Go back to the previous page using your browser's back button,Kehren Sie mit dem Zurück-Button Ihres Browsers zur vorherigen Seite zurück,0,Kehren Sie mit dem Zurück-Button Ihres Browsers zur vorherigen Seite zurück
-response_error,internal.intro,,de_DE,We apologize for the inconvenience. Our team has been notified and we are working to fix this issue.,Wir entschuldigen uns für die Unannehmlichkeiten. Unser Team wurde benachrichtigt und arbeitet an der Behebung.,0,Wir entschuldigen uns für die Unannehmlichkeiten. Unser Team wurde benachrichtigt und arbeitet an der Behebung.
+response_error,internal.go_back_previous_page,,de_DE,"Go back to the previous page using your browser's back button","Kehren Sie mit dem Zurück-Button Ihres Browsers zur vorherigen Seite zurück",0,"Kehren Sie mit dem Zurück-Button Ihres Browsers zur vorherigen Seite zurück"
+response_error,internal.intro,,de_DE,"We apologize for the inconvenience. Our team has been notified and we are working to fix this issue.","Wir entschuldigen uns für die Unannehmlichkeiten. Unser Team wurde benachrichtigt und arbeitet an der Behebung.",0,"Wir entschuldigen uns für die Unannehmlichkeiten. Unser Team wurde benachrichtigt und arbeitet an der Behebung."
 response_error,internal.reference_label,,de_DE,Reference,Referenz,0,Referenz
-response_error,internal.refresh_page,,de_DE,Refresh this page,Diese Seite aktualisieren,0,Diese Seite aktualisieren
-response_error,internal.title,,de_DE,Oops! Something went wrong on our end.,Hoppla! Etwas ist auf unserer Seite schiefgelaufen.,0,Hoppla! Etwas ist auf unserer Seite schiefgelaufen.
-response_error,internal.try_actions,,de_DE,You can try to:,Sie können versuchen:,0,Sie können versuchen:
-response_error,internal.try_again_in_a_few_minutes,,de_DE,Try again in a few minutes,Versuchen Sie es in ein paar Minuten erneut,0,Versuchen Sie es in ein paar Minuten erneut
-selection,delete_invalid_entry_confirm,,de_DE,Are you sure you want to delete this invalid entry?,Möchten Sie diesen ungültigen Eintrag wirklich löschen?,0,Möchten Sie diesen ungültigen Eintrag wirklich löschen?
-selection,delete_selected,,de_DE,Delete selected,Ausgewählte löschen,0,Ausgewählte löschen
-selection,delete_selected_confirm,,de_DE,Are you sure you want to delete all selected items?,Möchten Sie alle ausgewählten Elemente wirklich löschen?,0,Möchten Sie alle ausgewählten Elemente wirklich löschen?
-selection,group,,de_DE,Group selection,Gruppenauswahl,0,Gruppenauswahl
-selection,invalid_entry,,de_DE,Invalid entry,Ungültiger Eintrag,0,Ungültiger Eintrag
-selection,multiple,,de_DE,Multiple selection,Mehrfachauswahl,0,Mehrfachauswahl
-selection,selected_items,,de_DE,Selected items,Ausgewählte Elemente,0,Ausgewählte Elemente
-social,disqus.comments_link,,de_DE,Disqus comments,Disqus-Kommentare,0,Disqus-Kommentare
-social,disqus.enable_javascript,,de_DE,JavaScript must be enabled to display,JavaScript muss aktiviert sein zur Anzeige,0,JavaScript muss aktiviert sein zur Anzeige
-social,disqus.powered_by,,de_DE,comments powered by,Kommentare bereitgestellt von,0,Kommentare bereitgestellt von
-system_message,default_header,,de_DE,System message,Systemnachricht,0,Systemnachricht
-theme,error.description,,de_DE,Fallback error theme,Fallback-Fehler-Design,0,Fallback-Fehler-Design
+response_error,internal.refresh_page,,de_DE,"Refresh this page","Diese Seite aktualisieren",0,"Diese Seite aktualisieren"
+response_error,internal.title,,de_DE,"Oops! Something went wrong on our end.","Hoppla! Etwas ist auf unserer Seite schiefgelaufen.",0,"Hoppla! Etwas ist auf unserer Seite schiefgelaufen."
+response_error,internal.try_actions,,de_DE,"You can try to:","Sie können versuchen:",0,"Sie können versuchen:"
+response_error,internal.try_again_in_a_few_minutes,,de_DE,"Try again in a few minutes","Versuchen Sie es in ein paar Minuten erneut",0,"Versuchen Sie es in ein paar Minuten erneut"
+runtime_diagnostics,card.database,,de_DE,Database,Database,0,Database
+runtime_diagnostics,card.email,,de_DE,"Email safety","Email safety",0,"Email safety"
+runtime_diagnostics,card.environment,,de_DE,Environment,Environment,0,Environment
+runtime_diagnostics,card.mcp,,de_DE,MCP,MCP,0,MCP
+runtime_diagnostics,card.packages,,de_DE,Packages,Packages,0,Packages
+runtime_diagnostics,card.redis,,de_DE,Redis,Redis,0,Redis
+runtime_diagnostics,card.warnings,,de_DE,Warnings,Warnings,0,Warnings
+runtime_diagnostics,no,,de_DE,no,no,0,no
+runtime_diagnostics,none,,de_DE,None,None,0,None
+runtime_diagnostics,safe_to_test,,de_DE,"Safe to test","Safe to test",0,"Safe to test"
+runtime_diagnostics,subtitle,,de_DE,"Effective runtime state with secrets redacted.","Effektiver Laufzeitzustand mit geschwärzten Geheimnissen.",0,"Effektiver Laufzeitzustand mit geschwärzten Geheimnissen."
+runtime_diagnostics,title,,de_DE,"Runtime diagnostics",Laufzeitdiagnose,0,Laufzeitdiagnose
+runtime_diagnostics,yes,,de_DE,yes,yes,0,yes
+selection,delete_invalid_entry_confirm,,de_DE,"Are you sure you want to delete this invalid entry?","Möchten Sie diesen ungültigen Eintrag wirklich löschen?",0,"Möchten Sie diesen ungültigen Eintrag wirklich löschen?"
+selection,delete_selected,,de_DE,"Delete selected","Ausgewählte löschen",0,"Ausgewählte löschen"
+selection,delete_selected_confirm,,de_DE,"Are you sure you want to delete all selected items?","Möchten Sie alle ausgewählten Elemente wirklich löschen?",0,"Möchten Sie alle ausgewählten Elemente wirklich löschen?"
+selection,group,,de_DE,"Group selection",Gruppenauswahl,0,Gruppenauswahl
+selection,invalid_entry,,de_DE,"Invalid entry","Ungültiger Eintrag",0,"Ungültiger Eintrag"
+selection,multiple,,de_DE,"Multiple selection",Mehrfachauswahl,0,Mehrfachauswahl
+selection,selected_items,,de_DE,"Selected items","Ausgewählte Elemente",0,"Ausgewählte Elemente"
+social,disqus.comments_link,,de_DE,"Disqus comments",Disqus-Kommentare,0,Disqus-Kommentare
+social,disqus.enable_javascript,,de_DE,"JavaScript must be enabled to display","JavaScript muss aktiviert sein zur Anzeige",0,"JavaScript muss aktiviert sein zur Anzeige"
+social,disqus.powered_by,,de_DE,"comments powered by","Kommentare bereitgestellt von",0,"Kommentare bereitgestellt von"
+system_message,default_header,,de_DE,"System message",Systemnachricht,0,Systemnachricht
+theme,error.description,,de_DE,"Fallback error theme",Fallback-Fehler-Design,0,Fallback-Fehler-Design
 theme,error.name,,de_DE,Error,Fehler,0,Fehler
-theme,radaptor_portal_admin.description,,de_DE,Bootstrap 5 admin theme with portal neon/glass styling,Bootstrap 5 Admin-Design mit Portal-Neon/Glas-Stil,0,Bootstrap 5 Admin-Design mit Portal-Neon/Glas-Stil
+theme,radaptor_portal_admin.description,,de_DE,"Bootstrap 5 admin theme with portal neon/glass styling","Bootstrap 5 Admin-Design mit Portal-Neon/Glas-Stil",0,"Bootstrap 5 Admin-Design mit Portal-Neon/Glas-Stil"
 theme,radaptor_portal_admin.name,,de_DE,RadaptorPortalAdmin,RadaptorPortalAdmin,0,RadaptorPortalAdmin
-theme,so_admin.description,,de_DE,SO-like admin theme,SO-ähnliches Admin-Design,0,SO-ähnliches Admin-Design
+theme,so_admin.description,,de_DE,"SO-like admin theme","SO-ähnliches Admin-Design",0,"SO-ähnliches Admin-Design"
 theme,so_admin.name,,de_DE,SO-Admin,SO-Admin,0,SO-Admin
-widget,admin_menu.description,,de_DE,Manage the admin menu tree,Admin-Menüstruktur verwalten,0,Admin-Menüstruktur verwalten
-widget,admin_menu.name,,de_DE,Admin menu administration,Admin-Menü-Verwaltung,0,Admin-Menü-Verwaltung
-widget,blog_list.description,,de_DE,Blog list,Blogliste,0,Blogliste
-widget,blog_list.name,,de_DE,Blog list,Blogliste,0,Blogliste
+widget,admin_menu.description,,de_DE,"Manage the admin menu tree","Admin-Menüstruktur verwalten",0,"Admin-Menüstruktur verwalten"
+widget,admin_menu.name,,de_DE,"Admin menu administration",Admin-Menü-Verwaltung,0,Admin-Menü-Verwaltung
 widget,blog.description,,de_DE,Blog,Blog,0,Blog
 widget,blog.name,,de_DE,Blog,Blog,0,Blog
-widget,file_upload.description,,de_DE,File upload,Datei-Upload,0,Datei-Upload
-widget,file_upload.name,,de_DE,File upload,Datei-Upload,0,Datei-Upload
-widget,form.description,,de_DE,Displays a configured form,Zeigt ein konfiguriertes Formular an,0,Zeigt ein konfiguriertes Formular an
+widget,blog_list.description,,de_DE,"Blog list",Blogliste,0,Blogliste
+widget,blog_list.name,,de_DE,"Blog list",Blogliste,0,Blogliste
+widget,cli_runner.description,,de_DE,"Run CLI commands from the admin panel.","CLI-Befehle im Adminbereich ausführen.",0,"CLI-Befehle im Adminbereich ausführen."
+widget,cli_runner.name,,de_DE,"CLI Runner","CLI Runner",0,"CLI Runner"
+widget,file_upload.description,,de_DE,"File upload",Datei-Upload,0,Datei-Upload
+widget,file_upload.name,,de_DE,"File upload",Datei-Upload,0,Datei-Upload
+widget,form.description,,de_DE,"Displays a configured form","Zeigt ein konfiguriertes Formular an",0,"Zeigt ein konfiguriertes Formular an"
 widget,form.name,,de_DE,Form,Formular,0,Formular
-widget,group_beginning.description,,de_DE,Separately managed content unit that can contain jointly styled elements.,"Separat verwaltete Inhaltseinheit, die gemeinsam gestaltete Elemente enthalten kann.",0,"Separat verwaltete Inhaltseinheit, die gemeinsam gestaltete Elemente enthalten kann."
-widget,group_beginning.name,,de_DE,Content block,Inhaltsblock,0,Inhaltsblock
-widget,group_end.description,,de_DE,End of a separately managed content unit.,Ende einer separat verwalteten Inhaltseinheit.,0,Ende einer separat verwalteten Inhaltseinheit.
-widget,group_end.name,,de_DE,End of content block,Ende des Inhaltsblocks,0,Ende des Inhaltsblocks
-widget,import_export.description,,de_DE,Central CSV import and export tools,Zentrale CSV-Import- und Exportwerkzeuge,0,Zentrale CSV-Import- und Exportwerkzeuge
-widget,import_export.name,,de_DE,Import / Export,Import / Export,0,Import / Export
-widget,js_tree.description,,de_DE,Displays and manages a hierarchical tree of admin resources,Zeigt eine hierarchische Struktur von Admin-Ressourcen an und verwaltet sie,0,Zeigt eine hierarchische Struktur von Admin-Ressourcen an und verwaltet sie
-widget,js_tree.name,,de_DE,Tree browser,Baumstruktur-Browser,0,Baumstruktur-Browser
-widget,js_tree.settings,,de_DE,Tree settings,Baumstruktureinstellungen,0,Baumstruktureinstellungen
-widget,main_menu.description,,de_DE,Manage the main menu tree,Hauptmenüstruktur verwalten,0,Hauptmenüstruktur verwalten
-widget,main_menu.name,,de_DE,Main menu administration,Hauptmenü-Verwaltung,0,Hauptmenü-Verwaltung
-widget,plain_html.description,,de_DE,HTML code (embed),HTML-Code (Einbettung),0,HTML-Code (Einbettung)
-widget,plain_html.name,,de_DE,HTML code (embed),HTML-Code (Einbettung),0,HTML-Code (Einbettung)
-widget,resource_acl_selector.description,,de_DE,Configure resource access permissions,Ressourcenzugriffsberechtigungen konfigurieren,0,Ressourcenzugriffsberechtigungen konfigurieren
-widget,resource_acl_selector.name,,de_DE,Resource access settings,Ressourcenzugriffseinstellungen,0,Ressourcenzugriffseinstellungen
+widget,group_beginning.description,,de_DE,"Separately managed content unit that can contain jointly styled elements.","Separat verwaltete Inhaltseinheit, die gemeinsam gestaltete Elemente enthalten kann.",0,"Separat verwaltete Inhaltseinheit, die gemeinsam gestaltete Elemente enthalten kann."
+widget,group_beginning.name,,de_DE,"Content block",Inhaltsblock,0,Inhaltsblock
+widget,group_end.description,,de_DE,"End of a separately managed content unit.","Ende einer separat verwalteten Inhaltseinheit.",0,"Ende einer separat verwalteten Inhaltseinheit."
+widget,group_end.name,,de_DE,"End of content block","Ende des Inhaltsblocks",0,"Ende des Inhaltsblocks"
+widget,import_export.description,,de_DE,"Central CSV import and export tools","Zentrale CSV-Import- und Exportwerkzeuge",0,"Zentrale CSV-Import- und Exportwerkzeuge"
+widget,import_export.name,,de_DE,"Import / Export","Import / Export",0,"Import / Export"
+widget,js_tree.description,,de_DE,"Displays and manages a hierarchical tree of admin resources","Zeigt eine hierarchische Struktur von Admin-Ressourcen an und verwaltet sie",0,"Zeigt eine hierarchische Struktur von Admin-Ressourcen an und verwaltet sie"
+widget,js_tree.name,,de_DE,"Tree browser",Baumstruktur-Browser,0,Baumstruktur-Browser
+widget,js_tree.settings,,de_DE,"Tree settings",Baumstruktureinstellungen,0,Baumstruktureinstellungen
+widget,main_menu.description,,de_DE,"Manage the main menu tree","Hauptmenüstruktur verwalten",0,"Hauptmenüstruktur verwalten"
+widget,main_menu.name,,de_DE,"Main menu administration",Hauptmenü-Verwaltung,0,Hauptmenü-Verwaltung
+widget,phpinfo_frame.description,,de_DE,"Show PHP runtime information inside the admin layout.","PHP-Laufzeitinformationen im Admin-Layout anzeigen.",0,"PHP-Laufzeitinformationen im Admin-Layout anzeigen."
+widget,phpinfo_frame.name,,de_DE,"PHPinfo frame",PHPinfo-Rahmen,0,PHPinfo-Rahmen
+widget,phpinfo_frame.open_raw,,de_DE,"Open raw","Rohansicht öffnen",0,"Rohansicht öffnen"
+widget,phpinfo_frame.title,,de_DE,PHPinfo,PHPinfo,0,PHPinfo
+widget,plain_html.description,,de_DE,"HTML code (embed)","HTML-Code (Einbettung)",0,"HTML-Code (Einbettung)"
+widget,plain_html.name,,de_DE,"HTML code (embed)","HTML-Code (Einbettung)",0,"HTML-Code (Einbettung)"
+widget,resource_acl_selector.description,,de_DE,"Configure resource access permissions","Ressourcenzugriffsberechtigungen konfigurieren",0,"Ressourcenzugriffsberechtigungen konfigurieren"
+widget,resource_acl_selector.name,,de_DE,"Resource access settings",Ressourcenzugriffseinstellungen,0,Ressourcenzugriffseinstellungen
 widget,resource_tree.description,,de_DE,"Manage webpages, web folders, and uploaded files here.","Verwalten Sie hier Webseiten, Webordner und hochgeladene Dateien.",0,"Verwalten Sie hier Webseiten, Webordner und hochgeladene Dateien."
-widget,resource_tree.name,,de_DE,Webpage structure,Webseitenstruktur,0,Webseitenstruktur
-widget,rich_text.description,,de_DE,Freely editable text with images,Frei bearbeitbarer Text mit Bildern,0,Frei bearbeitbarer Text mit Bildern
-widget,rich_text.name,,de_DE,Editable text,Bearbeitbarer Text,0,Bearbeitbarer Text
-widget,role_list.description,,de_DE,Displays the role tree,Zeigt die Rollenstruktur an,0,Zeigt die Rollenstruktur an
-widget,role_list.name,,de_DE,Role list,Rollenliste,0,Rollenliste
-widget,role_selector.description,,de_DE,Role selector,Rollenauswahl,0,Rollenauswahl
-widget,role_selector.name,,de_DE,Role selector,Rollenauswahl,0,Rollenauswahl
-widget,tag_list.description,,de_DE,Tag list,Tag-Liste,0,Tag-Liste
-widget,tag_list.name,,de_DE,Tag list,Tag-Liste,0,Tag-Liste
-widget,user_description.description,,de_DE,Displays the details of a user,Zeigt die Details eines Benutzers an,0,Zeigt die Details eines Benutzers an
-widget,user_description.name,,de_DE,User details,Benutzerdetails,0,Benutzerdetails
-widget,user_list.description,,de_DE,User list,Benutzerliste,0,Benutzerliste
-widget,user_list.name,,de_DE,User list,Benutzerliste,0,Benutzerliste
-widget,usergroup_list.description,,de_DE,Displays the user group tree,Zeigt die Benutzergruppenstruktur an,0,Zeigt die Benutzergruppenstruktur an
-widget,usergroup_list.name,,de_DE,User group list,Benutzergruppenliste,0,Benutzergruppenliste
-widget,usergroup_selector.description,,de_DE,Select user groups for a user,Benutzergruppen für einen Benutzer auswählen,0,Benutzergruppen für einen Benutzer auswählen
-widget,usergroup_selector.name,,de_DE,User group selector,Benutzergruppenauswahl,0,Benutzergruppenauswahl
-widget,widget_error.description,,de_DE,Invalid widget,Ungültiges Widget,0,Ungültiges Widget
-widget,widget_error.invalid_type,,de_DE,Non-existent content type: {type},Nicht vorhandener Inhaltstyp: {type},0,Nicht vorhandener Inhaltstyp: {type}
-widget,widget_error.name,,de_DE,Invalid widget,Ungültiges Widget,0,Ungültiges Widget
+widget,resource_tree.name,,de_DE,"Webpage structure",Webseitenstruktur,0,Webseitenstruktur
+widget,rich_text.description,,de_DE,"Freely editable text with images","Frei bearbeitbarer Text mit Bildern",0,"Frei bearbeitbarer Text mit Bildern"
+widget,rich_text.name,,de_DE,"Editable text","Bearbeitbarer Text",0,"Bearbeitbarer Text"
+widget,role_list.description,,de_DE,"Displays the role tree","Zeigt die Rollenstruktur an",0,"Zeigt die Rollenstruktur an"
+widget,role_list.name,,de_DE,"Role list",Rollenliste,0,Rollenliste
+widget,role_selector.description,,de_DE,"Role selector",Rollenauswahl,0,Rollenauswahl
+widget,role_selector.name,,de_DE,"Role selector",Rollenauswahl,0,Rollenauswahl
+widget,tag_list.description,,de_DE,"Tag list",Tag-Liste,0,Tag-Liste
+widget,tag_list.name,,de_DE,"Tag list",Tag-Liste,0,Tag-Liste
+widget,template_engine_demo_blade.description,,de_DE,"Demonstrates rendering a Blade template inside Radaptor.","Demonstriert das Rendern eines Blade-Templates in Radaptor.",0,"Demonstriert das Rendern eines Blade-Templates in Radaptor."
+widget,template_engine_demo_blade.name,,de_DE,"Blade template engine demo",Blade-Template-Engine-Demo,0,Blade-Template-Engine-Demo
+widget,template_engine_demo_php.description,,de_DE,"Demonstrates rendering a native PHP template inside Radaptor.","Demonstriert das Rendern eines nativen PHP-Templates in Radaptor.",0,"Demonstriert das Rendern eines nativen PHP-Templates in Radaptor."
+widget,template_engine_demo_php.name,,de_DE,"PHP template engine demo",PHP-Template-Engine-Demo,0,PHP-Template-Engine-Demo
+widget,template_engine_demo_twig.description,,de_DE,"Demonstrates rendering a Twig template inside Radaptor.","Demonstriert das Rendern eines Twig-Templates in Radaptor.",0,"Demonstriert das Rendern eines Twig-Templates in Radaptor."
+widget,template_engine_demo_twig.name,,de_DE,"Twig template engine demo",Twig-Template-Engine-Demo,0,Twig-Template-Engine-Demo
+widget,user_description.description,,de_DE,"Displays the details of a user","Zeigt die Details eines Benutzers an",0,"Zeigt die Details eines Benutzers an"
+widget,user_description.name,,de_DE,"User details",Benutzerdetails,0,Benutzerdetails
+widget,user_list.description,,de_DE,"User list",Benutzerliste,0,Benutzerliste
+widget,user_list.name,,de_DE,"User list",Benutzerliste,0,Benutzerliste
+widget,usergroup_list.description,,de_DE,"Displays the user group tree","Zeigt die Benutzergruppenstruktur an",0,"Zeigt die Benutzergruppenstruktur an"
+widget,usergroup_list.name,,de_DE,"User group list",Benutzergruppenliste,0,Benutzergruppenliste
+widget,usergroup_selector.description,,de_DE,"Select user groups for a user","Benutzergruppen für einen Benutzer auswählen",0,"Benutzergruppen für einen Benutzer auswählen"
+widget,usergroup_selector.name,,de_DE,"User group selector",Benutzergruppenauswahl,0,Benutzergruppenauswahl
+widget,widget_error.description,,de_DE,"Invalid widget","Ungültiges Widget",0,"Ungültiges Widget"
+widget,widget_error.invalid_type,,de_DE,"Non-existent content type: {type}","Nicht vorhandener Inhaltstyp: {type}",0,"Nicht vorhandener Inhaltstyp: {type}"
+widget,widget_error.name,,de_DE,"Invalid widget","Ungültiges Widget",0,"Ungültiges Widget"
 widget,widget_preview.description,,de_DE,"Preview any widget with mock data. URL params: widget (required), theme (optional)","Beliebiges Widget mit Testdaten in der Vorschau anzeigen. URL-Parameter: widget (erforderlich), theme (optional)",0,"Beliebiges Widget mit Testdaten in der Vorschau anzeigen. URL-Parameter: widget (erforderlich), theme (optional)"
-widget,widget_preview.name,,de_DE,Widget preview,Widget-Vorschau,0,Widget-Vorschau
+widget,widget_preview.name,,de_DE,"Widget preview",Widget-Vorschau,0,Widget-Vorschau
 workbench,tm_apply,,de_DE,Apply,Übernehmen,0,Übernehmen
-workbench,tm_no_results,,de_DE,No suggestions,Keine Vorschläge,0,Keine Vorschläge
+workbench,tm_no_results,,de_DE,"No suggestions","Keine Vorschläge",0,"Keine Vorschläge"
 workbench,tm_uses,,de_DE,uses,Verwendungen,0,Verwendungen

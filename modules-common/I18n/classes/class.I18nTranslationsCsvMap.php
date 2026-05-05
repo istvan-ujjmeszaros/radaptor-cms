@@ -28,9 +28,11 @@ declare(strict_types=1);
  *   locale        required  — e.g. 'hu_HU'
  *   source_text   optional  — English canonical text; used to create a
  *                             missing i18n_messages row during import
- *   expected_text optional  — compare-and-swap guard; when present and
- *                             non-empty, updates only apply if the current
- *                             DB translation text matches this value
+ *   expected_text optional  — compare-and-swap guard for human-reviewed rows;
+ *                             when present and non-empty, reviewed rows only
+ *                             update if the current DB text still matches.
+ *                             Unreviewed rows may still be upserted so shipped
+ *                             seeds can replace placeholders.
  *   human_reviewed optional — when present:
  *                             1 promotes the row to reviewed,
  *                             0 keeps reviewed rows reviewed and only affects
@@ -165,7 +167,7 @@ class I18nTranslationsCsvMap implements iCsvMap
 		fwrite($handle, $csvContent);
 		rewind($handle);
 
-		$headers = fgetcsv($handle, 0, ',', '"', '\\');
+		$headers = fgetcsv($handle, 0, ',', '"', '');
 
 		if ($headers === false) {
 			fclose($handle);
@@ -186,7 +188,7 @@ class I18nTranslationsCsvMap implements iCsvMap
 		$locales = [];
 		$lineNumber = 1;
 
-		while (($rawRow = fgetcsv($handle, 0, ',', '"', '\\')) !== false) {
+		while (($rawRow = fgetcsv($handle, 0, ',', '"', '')) !== false) {
 			$lineNumber++;
 
 			if (CsvHelper::isIgnorableRawRow($rawRow)) {

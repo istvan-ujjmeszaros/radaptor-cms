@@ -47,3 +47,16 @@ import_export,result.updated,,ja_JP,Updated,更新済み,0,更新済み
 import_export,workbench.description,,ja_JP,"Export data to CSV or import CSV files into registered datasets.",データをCSVにエクスポート、またはCSVを登録済みデータセットにインポートします。,0,データをCSVにエクスポート、またはCSVを登録済みデータセットにインポートします。
 import_export,workbench.no_datasets,,ja_JP,"No import/export datasets are available.",インポート/エクスポートデータセットがありません。,0,インポート/エクスポートデータセットがありません。
 import_export,workbench.title,,ja_JP,"Import / Export","インポート / エクスポート",0,"インポート / エクスポート"
+import_export,error.upload_backup_required,,ja_JP,"Confirm the uploaded files backup before exporting the site snapshot.",サイトスナップショットをエクスポートする前に、アップロード済みファイルのバックアップを確認してください。,0,サイトスナップショットをエクスポートする前に、アップロード済みファイルのバックアップを確認してください。
+import_export,dataset.site_snapshot.name,,ja_JP,"Site snapshot",サイトスナップショット,0,サイトスナップショット
+import_export,dataset.site_snapshot.description,,ja_JP,"Export or restore database-backed site content and identity data as a JSON disaster-recovery snapshot.",データベースに保存されたサイトコンテンツとIDデータを、災害復旧用JSONスナップショットとしてエクスポートまたは復元します。,0,データベースに保存されたサイトコンテンツとIDデータを、災害復旧用JSONスナップショットとしてエクスポートまたは復元します。
+import_export,field.uploads_backed_up.label,,ja_JP,"Uploaded files backed up",アップロード済みファイルをバックアップ済み,0,アップロード済みファイルをバックアップ済み
+import_export,field.uploads_backed_up.help,,ja_JP,"Confirm that the upload directory has been copied separately before downloading the JSON snapshot.",JSONスナップショットをダウンロードする前に、アップロードディレクトリを別途コピーしたことを確認してください。,0,JSONスナップショットをダウンロードする前に、アップロードディレクトリを別途コピーしたことを確認してください。
+import_export,field.site_snapshot_file.label,,ja_JP,"Site snapshot JSON",サイトスナップショットJSON,0,サイトスナップショットJSON
+import_export,field.site_snapshot_file.help,,ja_JP,"Upload a JSON snapshot exported from the same Radaptor schema. Copy the upload directory before applying the import.",同じRadaptorスキーマからエクスポートしたJSONスナップショットをアップロードしてください。インポート適用前にアップロードディレクトリをコピーしてください。,0,同じRadaptorスキーマからエクスポートしたJSONスナップショットをアップロードしてください。インポート適用前にアップロードディレクトリをコピーしてください。
+import_export,field.replace_confirmed.label,,ja_JP,"Replace current site data",現在のサイトデータを置き換える,0,現在のサイトデータを置き換える
+import_export,field.replace_confirmed.help,,ja_JP,"Required for the real import. The restore replaces the snapshot-managed database tables.",実際のインポートに必要です。復元はスナップショット管理対象のデータベーステーブルを置き換えます。,0,実際のインポートに必要です。復元はスナップショット管理対象のデータベーステーブルを置き換えます。
+import_export,site_snapshot.export.title,,ja_JP,"Export JSON snapshot",JSONスナップショットをエクスポート,0,JSONスナップショットをエクスポート
+import_export,site_snapshot.import.title,,ja_JP,"Import JSON snapshot",JSONスナップショットをインポート,0,JSONスナップショットをインポート
+import_export,site_snapshot.action.export,,ja_JP,"Export JSON",JSONをエクスポート,0,JSONをエクスポート
+import_export,confirm.site_snapshot_replace,,ja_JP,"This import will replace the current site database content with the uploaded snapshot. Continue?",このインポートは現在のサイトデータベース内容をアップロードされたスナップショットで置き換えます。続行しますか？,0,このインポートは現在のサイトデータベース内容をアップロードされたスナップショットで置き換えます。続行しますか？

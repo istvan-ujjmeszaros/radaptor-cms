@@ -123,3 +123,7 @@ user,validation.password_required,,hu_HU,"Password is required","A jelszó köte
 user,validation.timezone_invalid,,hu_HU,"Invalid timezone. Use an IANA name (e.g. Europe/Budapest).","Érvénytelen időzóna. IANA nevet használj (például Europe/Budapest).",0,"Érvénytelen időzóna. IANA nevet használj (például Europe/Budapest)."
 user,validation.username_max_length,,hu_HU,"Username must be 32 characters or fewer","A felhasználónév maximum 32 karakter lehet",0,"A felhasználónév maximum 32 karakter lehet"
 user,validation.username_taken,,hu_HU,"Username is already taken","Ez a felhasználónév már foglalt",0,"Ez a felhasználónév már foglalt"
+user,locale.current_label,,hu_HU,"Current language","Jelenlegi nyelv",0,"Jelenlegi nyelv"
+user,locale.invalid,,hu_HU,"Selected language is not available","A kiválasztott nyelv nem érhető el",0,"A kiválasztott nyelv nem érhető el"
+user,locale.menu_label,,hu_HU,Language,Nyelv,0,Nyelv
+user,locale.updated,,hu_HU,"Language updated","Nyelv frissítve",0,"Nyelv frissítve"

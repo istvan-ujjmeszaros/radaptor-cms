@@ -27,6 +27,3 @@ cli_runner,category.userconfig,,hu_HU,"User Config","Felhasználó konfiguráci�
 cli_runner,category.usergroup,,hu_HU,"User Groups","Felhasználócsoportok",0,"Felhasználócsoportok"
 cli_runner,category.webpage,,hu_HU,"Webpages","Weboldalak",0,"Weboldalak"
 cli_runner,category.widget,,hu_HU,"Widgets","Widgetek",0,"Widgetek"
-admin,menu.cli_runner,,hu_HU,"CLI Runner","CLI futtatás",0,"CLI futtatás"
-widget,cli_runner.name,,hu_HU,"CLI Runner","CLI futtatás",0,"CLI futtatás"
-widget,cli_runner.description,,hu_HU,"Run CLI commands from the admin panel.","CLI parancsok futtatása az admin felületről.",0,"CLI parancsok futtatása az admin felületről."

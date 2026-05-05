@@ -123,3 +123,7 @@ user,validation.password_required,,ko_KR,"Password is required","비밀번호는
 user,validation.timezone_invalid,,ko_KR,"Invalid timezone. Use an IANA name (e.g. Europe/Budapest).","잘못된 시간대. IANA 이름을 사용하세요 (예: Europe/Budapest).",0,"잘못된 시간대. IANA 이름을 사용하세요 (예: Europe/Budapest)."
 user,validation.username_max_length,,ko_KR,"Username must be 32 characters or fewer","사용자명은 32자 이하여야 합니다",0,"사용자명은 32자 이하여야 합니다"
 user,validation.username_taken,,ko_KR,"Username is already taken","사용자명이 이미 사용 중입니다",0,"사용자명이 이미 사용 중입니다"
+user,locale.current_label,,ko_KR,"Current language","현재 언어",0,"현재 언어"
+user,locale.invalid,,ko_KR,"Selected language is not available","선택한 언어를 사용할 수 없습니다",0,"선택한 언어를 사용할 수 없습니다"
+user,locale.menu_label,,ko_KR,Language,언어,0,언어
+user,locale.updated,,ko_KR,"Language updated","언어가 업데이트되었습니다",0,"언어가 업데이트되었습니다"

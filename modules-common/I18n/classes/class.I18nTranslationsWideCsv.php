@@ -14,7 +14,7 @@ final class I18nTranslationsWideCsv
 		fwrite($handle, $csvContent);
 		rewind($handle);
 
-		$headers = fgetcsv($handle, 0, ',', '"', '\\');
+		$headers = fgetcsv($handle, 0, ',', '"', '');
 		fclose($handle);
 
 		if ($headers === false) {
@@ -83,7 +83,7 @@ final class I18nTranslationsWideCsv
 
 		$buf = fopen('php://temp', 'r+');
 		fwrite($buf, self::_BOM);
-		fputcsv($buf, $headers, ',', '"', '\\');
+		fputcsv($buf, $headers, ',', '"', '');
 
 		foreach ($grouped as $row) {
 			$line = [
@@ -97,7 +97,7 @@ final class I18nTranslationsWideCsv
 				$line[] = (string) ($row['texts'][$locale] ?? '');
 			}
 
-			fputcsv($buf, $line, ',', '"', '\\');
+			fputcsv($buf, $line, ',', '"', '');
 		}
 
 		rewind($buf);
@@ -123,7 +123,7 @@ final class I18nTranslationsWideCsv
 		fwrite($handle, $csvContent);
 		rewind($handle);
 
-		$headers = fgetcsv($handle, 0, ',', '"', '\\');
+		$headers = fgetcsv($handle, 0, ',', '"', '');
 
 		if ($headers === false) {
 			fclose($handle);
@@ -181,11 +181,11 @@ final class I18nTranslationsWideCsv
 
 		$buf = fopen('php://temp', 'r+');
 		fwrite($buf, self::_BOM);
-		fputcsv($buf, ['domain', 'key', 'context', 'locale', 'source_text', 'expected_text', 'human_reviewed', 'text'], ',', '"', '\\');
+		fputcsv($buf, ['domain', 'key', 'context', 'locale', 'source_text', 'expected_text', 'human_reviewed', 'text'], ',', '"', '');
 
 		$lineNumber = 1;
 
-		while (($rawRow = fgetcsv($handle, 0, ',', '"', '\\')) !== false) {
+		while (($rawRow = fgetcsv($handle, 0, ',', '"', '')) !== false) {
 			$lineNumber++;
 
 			if (CsvHelper::isIgnorableRawRow($rawRow)) {
@@ -214,7 +214,7 @@ final class I18nTranslationsWideCsv
 					'',
 					'',
 					$text,
-				], ',', '"', '\\');
+				], ',', '"', '');
 			}
 		}
 

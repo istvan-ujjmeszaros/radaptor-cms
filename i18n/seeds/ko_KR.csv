@@ -1,468 +1,591 @@
 ﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
+admin,email_outbox.col.created_at,,ko_KR,Created,Created,0,Created
+admin,email_outbox.col.id,,ko_KR,ID,ID,0,ID
+admin,email_outbox.col.last_error,,ko_KR,"Last error","Last error",0,"Last error"
+admin,email_outbox.col.recipients,,ko_KR,Recipients,Recipients,0,Recipients
+admin,email_outbox.col.sent_at,,ko_KR,Sent,Sent,0,Sent
+admin,email_outbox.col.status,,ko_KR,Status,상태,0,상태
+admin,email_outbox.col.subject,,ko_KR,Subject,대상,0,대상
+admin,email_outbox.description,,ko_KR,"Read-only transactional email delivery history.","트랜잭션 이메일 전달 기록을 읽기 전용으로 표시합니다.",0,"트랜잭션 이메일 전달 기록을 읽기 전용으로 표시합니다."
+admin,email_outbox.failures.title,,ko_KR,"Recent dead letters","최근 전달 실패 메시지",0,"최근 전달 실패 메시지"
+admin,email_outbox.filters.apply,,ko_KR,"Apply filters","Apply filters",0,"Apply filters"
+admin,email_outbox.filters.reset,,ko_KR,Reset,Reset,0,Reset
+admin,email_outbox.filters.search,,ko_KR,Search,검색,0,검색
+admin,email_outbox.filters.search_placeholder,,ko_KR,"Subject, message UID, or recipient email","제목, 메시지 UID 또는 수신자 이메일",0,"제목, 메시지 UID 또는 수신자 이메일"
+admin,email_outbox.filters.status,,ko_KR,Status,상태,0,상태
+admin,email_outbox.filters.title,,ko_KR,Filters,Filters,0,Filters
+admin,email_outbox.list.title,,ko_KR,"Recent outbox entries","최근 발신함 항목",0,"최근 발신함 항목"
+admin,email_outbox.none,,ko_KR,"No emails match the current filter.","현재 필터와 일치하는 이메일이 없습니다.",0,"현재 필터와 일치하는 이메일이 없습니다."
+admin,email_outbox.pagination.page,,ko_KR,Page,페이지,0,페이지
+admin,email_outbox.status.all,,ko_KR,"All statuses","All statuses",0,"All statuses"
+admin,email_outbox.status.failed,,ko_KR,Failed,Failed,0,Failed
+admin,email_outbox.status.partial_failed,,ko_KR,"Partial failed","Partial failed",0,"Partial failed"
+admin,email_outbox.status.processing,,ko_KR,Processing,Processing,0,Processing
+admin,email_outbox.status.queued,,ko_KR,Queued,Queued,0,Queued
+admin,email_outbox.status.sent,,ko_KR,Sent,Sent,0,Sent
+admin,email_outbox.summary.title,,ko_KR,"Queue summary","Queue summary",0,"Queue summary"
+admin,email_outbox.title,,ko_KR,"Email outbox","이메일 발신함",0,"이메일 발신함"
+admin,email_queue.dead_letter,,ko_KR,"Dead letter","Dead letter",0,"Dead letter"
+admin,email_queue.empty,,ko_KR,"No email jobs are waiting right now.","현재 대기 중인 이메일 작업이 없습니다.",0,"현재 대기 중인 이메일 작업이 없습니다."
+admin,email_queue.last_processed,,ko_KR,"Last processed","Last processed",0,"Last processed"
+admin,email_queue.last_seen,,ko_KR,"Last seen","Last seen",0,"Last seen"
+admin,email_queue.open_outbox,,ko_KR,"Open email outbox","이메일 발신함 열기",0,"이메일 발신함 열기"
+admin,email_queue.pending,,ko_KR,Pending,Pending,0,Pending
+admin,email_queue.retry_wait,,ko_KR,"Retry wait","Retry wait",0,"Retry wait"
+admin,email_queue.sent_last_24h,,ko_KR,"Sent in last 24h","Sent in last 24h",0,"Sent in last 24h"
+admin,email_queue.status.never_seen,,ko_KR,"Never seen","Never seen",0,"Never seen"
+admin,email_queue.status.running,,ko_KR,Running,Running,0,Running
+admin,email_queue.status.stale,,ko_KR,Stale,오래됨,0,오래됨
+admin,email_queue.status.unavailable,,ko_KR,Unavailable,Unavailable,0,Unavailable
+admin,email_queue.subtitle,,ko_KR,"Transactional delivery health at a glance.","트랜잭션 전달 상태를 한눈에 확인합니다.",0,"트랜잭션 전달 상태를 한눈에 확인합니다."
+admin,email_queue.title,,ko_KR,"Email queue","이메일 큐",0,"이메일 큐"
+admin,email_queue.worker,,ko_KR,Worker,Worker,0,Worker
 admin,i18n.col.domain,,ko_KR,Domain,도메인,0,도메인
 admin,i18n.col.key,,ko_KR,Key,키,0,키
 admin,i18n.col.reviewed,,ko_KR,Reviewed,검토됨,0,검토됨
 admin,i18n.col.source,,ko_KR,Source,원본,0,원본
 admin,i18n.col.status,,ko_KR,Status,상태,0,상태
 admin,i18n.col.translation,,ko_KR,Translation,번역,0,번역
+admin,i18n.coverage.missing,,ko_KR,Missing,누락,0,누락
+admin,i18n.coverage.reviewed,,ko_KR,Reviewed,검토됨,0,검토됨
+admin,i18n.coverage.stale,,ko_KR,Stale,오래됨,0,오래됨
+admin,i18n.coverage.title,,ko_KR,"Translation coverage","번역 범위",0,"번역 범위"
+admin,i18n.coverage.translated,,ko_KR,Translated,번역됨,0,번역됨
 admin,i18n.domain,,ko_KR,Domain,도메인,0,도메인
 admin,i18n.locale,,ko_KR,Locale,로케일,0,로케일
-admin,i18n.search_placeholder,,ko_KR,Search source or translation,원본 또는 번역 검색,0,원본 또는 번역 검색
+admin,i18n.search_placeholder,,ko_KR,"Search source or translation","원본 또는 번역 검색",0,"원본 또는 번역 검색"
 admin,i18n.status,,ko_KR,Status,상태,0,상태
-admin,i18n.status.ai_generated,,ko_KR,AI-generated,AI 생성,0,AI 생성
+admin,i18n.status.ai_generated,,ko_KR,AI-generated,"AI 생성",0,"AI 생성"
 admin,i18n.status.approved,,ko_KR,Approved,승인됨,0,승인됨
 admin,i18n.status.missing,,ko_KR,Missing,누락,0,누락
-admin,i18n.status.needs_review,,ko_KR,Needs review,검토 필요,0,검토 필요
+admin,i18n.status.needs_review,,ko_KR,"Needs review","검토 필요",0,"검토 필요"
 admin,i18n.status.translated,,ko_KR,Translated,번역됨,0,번역됨
-admin,i18n.title,,ko_KR,Translation workbench,번역 작업대,0,번역 작업대
-admin,i18n.tm.exact_match_only,,ko_KR,Exact-match suggestions only,완전 일치 제안만,0,완전 일치 제안만
-admin,i18n.tm.exact_matches,,ko_KR,Exact matches,완전 일치,0,완전 일치
-admin,i18n.tm.exact_then_similar,,ko_KR,Exact matches load first. Similar matches load afterwards.,완전 일치가 먼저 로드됩니다. 유사 일치는 이후에 로드됩니다.,0,완전 일치가 먼저 로드됩니다. 유사 일치는 이후에 로드됩니다.
-admin,i18n.tm.no_exact_matches,,ko_KR,No exact matches,완전 일치 없음,0,완전 일치 없음
-admin,i18n.tm.no_similar_matches,,ko_KR,No similar matches,유사 일치 없음,0,유사 일치 없음
+admin,i18n.title,,ko_KR,"Translation workbench","번역 작업대",0,"번역 작업대"
+admin,i18n.tm.exact_match_only,,ko_KR,"Exact-match suggestions only","완전 일치 제안만",0,"완전 일치 제안만"
+admin,i18n.tm.exact_matches,,ko_KR,"Exact matches","완전 일치",0,"완전 일치"
+admin,i18n.tm.exact_then_similar,,ko_KR,"Exact matches load first. Similar matches load afterwards.","완전 일치가 먼저 로드됩니다. 유사 일치는 이후에 로드됩니다.",0,"완전 일치가 먼저 로드됩니다. 유사 일치는 이후에 로드됩니다."
+admin,i18n.tm.no_exact_matches,,ko_KR,"No exact matches","완전 일치 없음",0,"완전 일치 없음"
+admin,i18n.tm.no_similar_matches,,ko_KR,"No similar matches","유사 일치 없음",0,"유사 일치 없음"
 admin,i18n.tm.origin,,ko_KR,Origin,출처,0,출처
-admin,i18n.tm.review_placeholders,,ko_KR,Review placeholders,플레이스홀더 검토,0,플레이스홀더 검토
+admin,i18n.tm.review_placeholders,,ko_KR,"Review placeholders","플레이스홀더 검토",0,"플레이스홀더 검토"
 admin,i18n.tm.safe,,ko_KR,Safe,안전,0,안전
-admin,i18n.tm.similar_matches,,ko_KR,Similar matches,유사 일치,0,유사 일치
+admin,i18n.tm.similar_matches,,ko_KR,"Similar matches","유사 일치",0,"유사 일치"
 admin,i18n.tm.similarity,,ko_KR,Similarity,유사도,0,유사도
-admin,i18n.tm.source_example,,ko_KR,Source example,원본 예시,0,원본 예시
-admin,i18n.tm.title,,ko_KR,Translation memory suggestions,번역 메모리 제안,0,번역 메모리 제안
-admin,menu.admin_menu,,ko_KR,Admin menu,관리자 메뉴,0,관리자 메뉴
+admin,i18n.tm.source_example,,ko_KR,"Source example","원본 예시",0,"원본 예시"
+admin,i18n.tm.title,,ko_KR,"Translation memory suggestions","번역 메모리 제안",0,"번역 메모리 제안"
+admin,menu.admin_menu,,ko_KR,"Admin menu","관리자 메뉴",0,"관리자 메뉴"
 admin,menu.blog,,ko_KR,Blog,블로그,0,블로그
-admin,menu.custom_menu,,ko_KR,Custom menu,사용자 정의 메뉴,0,사용자 정의 메뉴
-admin,menu.home,,ko_KR,Admin home,관리자 홈,0,관리자 홈
-admin,menu.import_export,,ko_KR,Import / Export,가져오기 / 내보내기,0,가져오기 / 내보내기
+admin,menu.cli_runner,,ko_KR,"CLI Runner","CLI 실행기",0,"CLI 실행기"
+admin,menu.custom_menu,,ko_KR,"Custom menu","사용자 정의 메뉴",0,"사용자 정의 메뉴"
+admin,menu.email_outbox,,ko_KR,"Email outbox","이메일 발신함",0,"이메일 발신함"
+admin,menu.home,,ko_KR,"Admin home","관리자 홈",0,"관리자 홈"
+admin,menu.import_export,,ko_KR,"Import / Export","가져오기 / 내보내기",0,"가져오기 / 내보내기"
+admin,menu.mcp_tokens,,ko_KR,"MCP tokens","MCP 토큰",0,"MCP 토큰"
 admin,menu.phpinfo,,ko_KR,PHPinfo,PHPinfo,0,PHPinfo
-admin,menu.resource_tree,,ko_KR,Website structure,웹사이트 구조,0,웹사이트 구조
+admin,menu.resource_tree,,ko_KR,"Website structure","웹사이트 구조",0,"웹사이트 구조"
 admin,menu.roles,,ko_KR,Roles,역할,0,역할
+admin,menu.runtime_diagnostics,,ko_KR,"Runtime diagnostics","런타임 진단",0,"런타임 진단"
 admin,menu.section.administration,,ko_KR,Administration,관리,0,관리
 admin,menu.section.configuration,,ko_KR,Configuration,설정,0,설정
 admin,menu.section.content,,ko_KR,Content,콘텐츠,0,콘텐츠
-admin,menu.section.developer_tools,,ko_KR,Developer tools,개발자 도구,0,개발자 도구
-admin,menu.template_engines,,ko_KR,Template engines,템플릿 엔진,0,템플릿 엔진
-admin,menu.theme_selector,,ko_KR,Theme selection,테마 선택,0,테마 선택
+admin,menu.section.developer_tools,,ko_KR,"Developer tools","개발자 도구",0,"개발자 도구"
+admin,menu.template_engines,,ko_KR,"Template engines","템플릿 엔진",0,"템플릿 엔진"
+admin,menu.theme_selector,,ko_KR,"Theme selection","테마 선택",0,"테마 선택"
 admin,menu.translations,,ko_KR,Translations,번역,0,번역
-admin,menu.usergroups,,ko_KR,User groups,사용자 그룹,0,사용자 그룹
-admin,menu.widget_preview,,ko_KR,Widget preview,위젯 미리보기,0,위젯 미리보기
-cms,admin_dropdown.edit_mode,,ko_KR,Edit mode,편집 모드,0,편집 모드
+admin,menu.usergroups,,ko_KR,"User groups","사용자 그룹",0,"사용자 그룹"
+admin,menu.widget_preview,,ko_KR,"Widget preview","위젯 미리보기",0,"위젯 미리보기"
+cms,admin_dropdown.edit_mode,,ko_KR,"Edit mode","편집 모드",0,"편집 모드"
 cms,admin_dropdown.edit_mode_off,,ko_KR,off,끄기,0,끄기
 cms,admin_dropdown.edit_mode_on,,ko_KR,on,켜기,0,켜기
 cms,admin_dropdown.seo,,ko_KR,SEO,SEO,0,SEO
-cms,admin_menu.form.name,,ko_KR,Admin menu administration,관리자 메뉴 관리,0,관리자 메뉴 관리
-cms,admin_menu.form.title_create,,ko_KR,Create admin menu item,관리자 메뉴 항목 만들기,0,관리자 메뉴 항목 만들기
-cms,admin_menu.form.title_edit,,ko_KR,Edit admin menu item,관리자 메뉴 항목 편집,0,관리자 메뉴 항목 편집
+cms,admin_dropdown.turn_edit_mode_off,,ko_KR,"Turn edit mode off","편집 모드 끄기",0,"편집 모드 끄기"
+cms,admin_dropdown.turn_edit_mode_on,,ko_KR,"Turn edit mode on","편집 모드 켜기",0,"편집 모드 켜기"
+cms,admin_menu.form.name,,ko_KR,"Admin menu administration","관리자 메뉴 관리",0,"관리자 메뉴 관리"
+cms,admin_menu.form.title_create,,ko_KR,"Create admin menu item","관리자 메뉴 항목 만들기",0,"관리자 메뉴 항목 만들기"
+cms,admin_menu.form.title_edit,,ko_KR,"Edit admin menu item","관리자 메뉴 항목 편집",0,"관리자 메뉴 항목 편집"
 cms,edit,,ko_KR,Edit,편집,0,편집
-cms,edit_mode.disabled,,ko_KR,Edit mode disabled,편집 모드 비활성화됨,0,편집 모드 비활성화됨
-cms,edit_mode.enabled,,ko_KR,Edit mode enabled,편집 모드 활성화됨,0,편집 모드 활성화됨
-cms,edit_mode.save_error,,ko_KR,Error: Unable to save configuration,오류: 설정을 저장할 수 없습니다,0,오류: 설정을 저장할 수 없습니다
-cms,error.login_page_missing,,ko_KR,Login page not found - create it manually,로그인 페이지를 찾을 수 없습니다 - 수동으로 생성하세요,0,로그인 페이지를 찾을 수 없습니다 - 수동으로 생성하세요
-cms,file_upload.destination_path,,ko_KR,Destination path,대상 경로,0,대상 경로
-cms,file_upload.unknown_destination,,ko_KR,Unknown destination path,알 수 없는 대상 경로,0,알 수 없는 대상 경로
-cms,file.missing_ref_id,,ko_KR,Missing file reference,파일 참조 누락,0,파일 참조 누락
-cms,file.upload_error,,ko_KR,Error: File upload failed,오류: 파일 업로드 실패,0,오류: 파일 업로드 실패
-cms,file.uploaded,,ko_KR,File uploaded,파일 업로드됨,0,파일 업로드됨
-cms,form.field.form_id.explanation,,ko_KR,Select from the predefined forms,미리 정의된 양식에서 선택,0,미리 정의된 양식에서 선택
+cms,edit_mode.disabled,,ko_KR,"Edit mode disabled","편집 모드 비활성화됨",0,"편집 모드 비활성화됨"
+cms,edit_mode.enabled,,ko_KR,"Edit mode enabled","편집 모드 활성화됨",0,"편집 모드 활성화됨"
+cms,edit_mode.save_error,,ko_KR,"Error: Unable to save configuration","오류: 설정을 저장할 수 없습니다",0,"오류: 설정을 저장할 수 없습니다"
+cms,error.login_page_missing,,ko_KR,"Login page not found - create it manually","로그인 페이지를 찾을 수 없습니다 - 수동으로 생성하세요",0,"로그인 페이지를 찾을 수 없습니다 - 수동으로 생성하세요"
+cms,file.missing_ref_id,,ko_KR,"Missing file reference","파일 참조 누락",0,"파일 참조 누락"
+cms,file.upload_error,,ko_KR,"Error: File upload failed","오류: 파일 업로드 실패",0,"오류: 파일 업로드 실패"
+cms,file.uploaded,,ko_KR,"File uploaded","파일 업로드됨",0,"파일 업로드됨"
+cms,file_upload.destination_path,,ko_KR,"Destination path","대상 경로",0,"대상 경로"
+cms,file_upload.unknown_destination,,ko_KR,"Unknown destination path","알 수 없는 대상 경로",0,"알 수 없는 대상 경로"
+cms,form.field.form_id.explanation,,ko_KR,"Select from the predefined forms","미리 정의된 양식에서 선택",0,"미리 정의된 양식에서 선택"
 cms,form.field.form_id.label,,ko_KR,Form,양식,0,양식
-cms,form.missing_widget_id,,ko_KR,Widget ID is missing,위젯 ID가 누락됨,0,위젯 ID가 누락됨
-cms,form.no_form_page_warning,,ko_KR,Create at least one page with a blank form,빈 양식이 있는 페이지를 하나 이상 만드세요,0,빈 양식이 있는 페이지를 하나 이상 만드세요
-cms,form.no_id,,ko_KR,No form ID given,양식 ID가 없습니다,0,양식 ID가 없습니다
-cms,form.settings_subtitle,,ko_KR,Page: {page},페이지: {page},0,페이지: {page}
+cms,form.missing_widget_id,,ko_KR,"Widget ID is missing","위젯 ID가 누락됨",0,"위젯 ID가 누락됨"
+cms,form.no_form_page_warning,,ko_KR,"Create at least one page with a blank form","빈 양식이 있는 페이지를 하나 이상 만드세요",0,"빈 양식이 있는 페이지를 하나 이상 만드세요"
+cms,form.no_id,,ko_KR,"No form ID given","양식 ID가 없습니다",0,"양식 ID가 없습니다"
+cms,form.settings_subtitle,,ko_KR,"Page: {page}","페이지: {page}",0,"페이지: {page}"
 cms,library.folder,,ko_KR,Folder,폴더,0,폴더
 cms,library.resource,,ko_KR,Resource,리소스,0,리소스
-cms,library.unknown,,ko_KR,Unknown library,알 수 없는 라이브러리,0,알 수 없는 라이브러리
-cms,menu.delete_confirm,,ko_KR,Are you sure you want to delete this menu item?,이 메뉴 항목을 삭제하시겠습니까?,0,이 메뉴 항목을 삭제하시겠습니까?
-cms,menu.delete_failed,,ko_KR,Delete failed,삭제 실패,0,삭제 실패
-cms,menu.delete_forbidden,,ko_KR,Menu item deletion is not allowed: {name},메뉴 항목 삭제가 허용되지 않습니다: {name},0,메뉴 항목 삭제가 허용되지 않습니다: {name}
-cms,menu.delete_unknown_error,,ko_KR,Error: An unknown error occurred while deleting the menu item,오류: 메뉴 항목 삭제 중 알 수 없는 오류가 발생했습니다,0,오류: 메뉴 항목 삭제 중 알 수 없는 오류가 발생했습니다
-cms,menu.deleted,,ko_KR,Menu item deleted: {name},메뉴 항목 삭제됨: {name},0,메뉴 항목 삭제됨: {name}
-cms,menu.external_link,,ko_KR,External link,외부 링크,0,외부 링크
-cms,menu.field.node_name.label,,ko_KR,Display text,표시 텍스트,0,표시 텍스트
-cms,menu.field.page.explanation,,ko_KR,Select the page this menu item points to,이 메뉴 항목이 가리키는 페이지를 선택하세요,0,이 메뉴 항목이 가리키는 페이지를 선택하세요
+cms,library.unknown,,ko_KR,"Unknown library","알 수 없는 라이브러리",0,"알 수 없는 라이브러리"
+cms,menu.delete_confirm,,ko_KR,"Are you sure you want to delete this menu item?","이 메뉴 항목을 삭제하시겠습니까?",0,"이 메뉴 항목을 삭제하시겠습니까?"
+cms,menu.delete_failed,,ko_KR,"Delete failed","삭제 실패",0,"삭제 실패"
+cms,menu.delete_forbidden,,ko_KR,"Menu item deletion is not allowed: {name}","메뉴 항목 삭제가 허용되지 않습니다: {name}",0,"메뉴 항목 삭제가 허용되지 않습니다: {name}"
+cms,menu.delete_unknown_error,,ko_KR,"Error: An unknown error occurred while deleting the menu item","오류: 메뉴 항목 삭제 중 알 수 없는 오류가 발생했습니다",0,"오류: 메뉴 항목 삭제 중 알 수 없는 오류가 발생했습니다"
+cms,menu.deleted,,ko_KR,"Menu item deleted: {name}","메뉴 항목 삭제됨: {name}",0,"메뉴 항목 삭제됨: {name}"
+cms,menu.external_link,,ko_KR,"External link","외부 링크",0,"외부 링크"
+cms,menu.field.node_name.label,,ko_KR,"Display text","표시 텍스트",0,"표시 텍스트"
+cms,menu.field.page.explanation,,ko_KR,"Select the page this menu item points to","이 메뉴 항목이 가리키는 페이지를 선택하세요",0,"이 메뉴 항목이 가리키는 페이지를 선택하세요"
 cms,menu.field.page.label,,ko_KR,Page,페이지,0,페이지
-cms,menu.field.type.external,,ko_KR,Points to external page,외부 페이지로 연결,0,외부 페이지로 연결
-cms,menu.field.type.internal,,ko_KR,Points to internal page,내부 페이지로 연결,0,내부 페이지로 연결
-cms,menu.field.type.label,,ko_KR,Link type,링크 유형,0,링크 유형
-cms,menu.field.url.explanation,,ko_KR,You can enter a custom URL (including mailto:// links),사용자 정의 URL을 입력할 수 있습니다 (mailto:// 링크 포함),0,사용자 정의 URL을 입력할 수 있습니다 (mailto:// 링크 포함)
-cms,menu.field.url.label,,ko_KR,Custom URL,사용자 정의 URL,0,사용자 정의 URL
-cms,menu.form.name,,ko_KR,Main menu item,메인 메뉴 항목,0,메인 메뉴 항목
-cms,menu.form.title_create,,ko_KR,Create menu item,메뉴 항목 만들기,0,메뉴 항목 만들기
-cms,menu.form.title_edit,,ko_KR,Edit menu item,메뉴 항목 편집,0,메뉴 항목 편집
-cms,menu.internal_link,,ko_KR,Internal link,내부 링크,0,내부 링크
-cms,menu.move_error,,ko_KR,Error: Unable to move menu item,오류: 메뉴 항목을 이동할 수 없습니다,0,오류: 메뉴 항목을 이동할 수 없습니다
-cms,menu.move_success,,ko_KR,Menu item moved: {name},메뉴 항목 이동됨: {name},0,메뉴 항목 이동됨: {name}
-cms,menu.new_child,,ko_KR,New submenu item,새 하위 메뉴 항목,0,새 하위 메뉴 항목
-cms,menu.new_item,,ko_KR,New menu item,새 메뉴 항목,0,새 메뉴 항목
-cms,menu.no_link_configured,,ko_KR,No link configured,링크가 설정되지 않음,0,링크가 설정되지 않음
-cms,menu.root,,ko_KR,Main menu,메인 메뉴,0,메인 메뉴
-cms,menu.saved,,ko_KR,Menu item saved,메뉴 항목 저장됨,0,메뉴 항목 저장됨
-cms,menu.selection_help,,ko_KR,"Select a menu item to edit it, or create a new one.",메뉴 항목을 선택하여 편집하거나 새로 만드세요.,0,메뉴 항목을 선택하여 편집하거나 새로 만드세요.
-cms,menu.updated,,ko_KR,Menu item updated,메뉴 항목 업데이트됨,0,메뉴 항목 업데이트됨
-cms,menu.validation.node_name_max_length,,ko_KR,Display text must not exceed 255 characters,표시 텍스트는 255자를 초과할 수 없습니다,0,표시 텍스트는 255자를 초과할 수 없습니다
-cms,menu.validation.type_required,,ko_KR,Choose whether the link points to an internal or external page,링크가 내부 또는 외부 페이지로 연결되는지 선택하세요,0,링크가 내부 또는 외부 페이지로 연결되는지 선택하세요
-cms,menu.validation.url_max_length,,ko_KR,URL must not exceed 255 characters,URL은 255자를 초과할 수 없습니다,0,URL은 255자를 초과할 수 없습니다
-cms,menu.validation.url_required,,ko_KR,Select a page or enter a URL,페이지를 선택하거나 URL을 입력하세요,0,페이지를 선택하거나 URL을 입력하세요
-cms,plainhtml.field.content.explanation,,ko_KR,The HTML code you enter will appear on the website without modifications.,입력한 HTML 코드가 수정 없이 웹사이트에 표시됩니다.,0,입력한 HTML 코드가 수정 없이 웹사이트에 표시됩니다.
-cms,plainhtml.field.content.label,,ko_KR,HTML code,HTML 코드,0,HTML 코드
-cms,plainhtml.form.name,,ko_KR,HTML code (embed),HTML 코드 (삽입),0,HTML 코드 (삽입)
-cms,plainhtml.form.title,,ko_KR,Edit HTML content,HTML 콘텐츠 편집,0,HTML 콘텐츠 편집
-cms,plainhtml.not_set,,ko_KR,Configure the content,콘텐츠 설정,0,콘텐츠 설정
-cms,resource_acl.acl_not_found,,ko_KR,ACL entry not found: {id},ACL 항목을 찾을 수 없습니다: {id},0,ACL 항목을 찾을 수 없습니다: {id}
+cms,menu.field.type.external,,ko_KR,"Points to external page","외부 페이지로 연결",0,"외부 페이지로 연결"
+cms,menu.field.type.internal,,ko_KR,"Points to internal page","내부 페이지로 연결",0,"내부 페이지로 연결"
+cms,menu.field.type.label,,ko_KR,"Link type","링크 유형",0,"링크 유형"
+cms,menu.field.url.explanation,,ko_KR,"You can enter a custom URL (including mailto:// links)","사용자 정의 URL을 입력할 수 있습니다 (mailto:// 링크 포함)",0,"사용자 정의 URL을 입력할 수 있습니다 (mailto:// 링크 포함)"
+cms,menu.field.url.label,,ko_KR,"Custom URL","사용자 정의 URL",0,"사용자 정의 URL"
+cms,menu.form.name,,ko_KR,"Main menu item","메인 메뉴 항목",0,"메인 메뉴 항목"
+cms,menu.form.title_create,,ko_KR,"Create menu item","메뉴 항목 만들기",0,"메뉴 항목 만들기"
+cms,menu.form.title_edit,,ko_KR,"Edit menu item","메뉴 항목 편집",0,"메뉴 항목 편집"
+cms,menu.internal_link,,ko_KR,"Internal link","내부 링크",0,"내부 링크"
+cms,menu.move_error,,ko_KR,"Error: Unable to move menu item","오류: 메뉴 항목을 이동할 수 없습니다",0,"오류: 메뉴 항목을 이동할 수 없습니다"
+cms,menu.move_success,,ko_KR,"Menu item moved: {name}","메뉴 항목 이동됨: {name}",0,"메뉴 항목 이동됨: {name}"
+cms,menu.new_child,,ko_KR,"New submenu item","새 하위 메뉴 항목",0,"새 하위 메뉴 항목"
+cms,menu.new_item,,ko_KR,"New menu item","새 메뉴 항목",0,"새 메뉴 항목"
+cms,menu.no_link_configured,,ko_KR,"No link configured","링크가 설정되지 않음",0,"링크가 설정되지 않음"
+cms,menu.root,,ko_KR,"Main menu","메인 메뉴",0,"메인 메뉴"
+cms,menu.saved,,ko_KR,"Menu item saved","메뉴 항목 저장됨",0,"메뉴 항목 저장됨"
+cms,menu.selection_help,,ko_KR,"Select a menu item to edit it, or create a new one.","메뉴 항목을 선택하여 편집하거나 새로 만드세요.",0,"메뉴 항목을 선택하여 편집하거나 새로 만드세요."
+cms,menu.updated,,ko_KR,"Menu item updated","메뉴 항목 업데이트됨",0,"메뉴 항목 업데이트됨"
+cms,menu.validation.node_name_max_length,,ko_KR,"Display text must not exceed 255 characters","표시 텍스트는 255자를 초과할 수 없습니다",0,"표시 텍스트는 255자를 초과할 수 없습니다"
+cms,menu.validation.type_required,,ko_KR,"Choose whether the link points to an internal or external page","링크가 내부 또는 외부 페이지로 연결되는지 선택하세요",0,"링크가 내부 또는 외부 페이지로 연결되는지 선택하세요"
+cms,menu.validation.url_max_length,,ko_KR,"URL must not exceed 255 characters","URL은 255자를 초과할 수 없습니다",0,"URL은 255자를 초과할 수 없습니다"
+cms,menu.validation.url_required,,ko_KR,"Select a page or enter a URL","페이지를 선택하거나 URL을 입력하세요",0,"페이지를 선택하거나 URL을 입력하세요"
+cms,plainhtml.field.content.explanation,,ko_KR,"The HTML code you enter will appear on the website without modifications.","입력한 HTML 코드가 수정 없이 웹사이트에 표시됩니다.",0,"입력한 HTML 코드가 수정 없이 웹사이트에 표시됩니다."
+cms,plainhtml.field.content.label,,ko_KR,"HTML code","HTML 코드",0,"HTML 코드"
+cms,plainhtml.form.name,,ko_KR,"HTML code (embed)","HTML 코드 (삽입)",0,"HTML 코드 (삽입)"
+cms,plainhtml.form.title,,ko_KR,"Edit HTML content","HTML 콘텐츠 편집",0,"HTML 콘텐츠 편집"
+cms,plainhtml.not_set,,ko_KR,"Configure the content","콘텐츠 설정",0,"콘텐츠 설정"
+cms,resource.delete_error,,ko_KR,"Error: Unable to delete resource(s)","오류: 리소스를 삭제할 수 없습니다",0,"오류: 리소스를 삭제할 수 없습니다"
+cms,resource.delete_failed,,ko_KR,"Delete failed","삭제 실패",0,"삭제 실패"
+cms,resource.delete_partial_error,,ko_KR,"{count} error(s) occurred during deletion","삭제 중 {count}개의 오류가 발생했습니다",0,"삭제 중 {count}개의 오류가 발생했습니다"
+cms,resource.deleted,,ko_KR,"Resource deleted","리소스 삭제됨",0,"리소스 삭제됨"
+cms,resource.deleted_multiple,,ko_KR,"Resources deleted","리소스들 삭제됨",0,"리소스들 삭제됨"
+cms,resource.error.add_failed,,ko_KR,"Unable to add resource tree entry.","리소스 트리 항목을 추가할 수 없습니다.",0,"리소스 트리 항목을 추가할 수 없습니다."
+cms,resource.error.create_failed_for_path,,ko_KR,"Unable to create resource: {path}","리소스를 만들 수 없습니다: {path}",0,"리소스를 만들 수 없습니다: {path}"
+cms,resource.error.delete_denied,,ko_KR,"Delete denied for resource: {resource_id}","리소스 삭제가 거부되었습니다: {resource_id}",0,"리소스 삭제가 거부되었습니다: {resource_id}"
+cms,resource.error.delete_failed_for_id,,ko_KR,"Unable to delete resource: {resource_id}","리소스를 삭제할 수 없습니다: {resource_id}",0,"리소스를 삭제할 수 없습니다: {resource_id}"
+cms,resource.error.file_delete_failed_for_id,,ko_KR,"Unable to delete file for resource: {resource_id}","리소스 파일을 삭제할 수 없습니다: {resource_id}",0,"리소스 파일을 삭제할 수 없습니다: {resource_id}"
+cms,resource.error.import_file_failed,,ko_KR,"Unable to import file: {path}","파일을 가져올 수 없습니다: {path}",0,"파일을 가져올 수 없습니다: {path}"
+cms,resource.error.move_failed_for_id,,ko_KR,"Unable to move resource: {resource_id}","리소스를 이동할 수 없습니다: {resource_id}",0,"리소스를 이동할 수 없습니다: {resource_id}"
+cms,resource.error.not_found_by_id,,ko_KR,"Resource not found: {resource_id}","리소스를 찾을 수 없습니다: {resource_id}",0,"리소스를 찾을 수 없습니다: {resource_id}"
+cms,resource.error.path_exists_not_file,,ko_KR,"Resource path exists and is not a file: {path}","리소스 경로가 존재하지만 파일이 아닙니다: {path}",0,"리소스 경로가 존재하지만 파일이 아닙니다: {path}"
+cms,resource.error.protected_mutation,,ko_KR,"Protected system resource cannot be modified: {path}","보호된 시스템 리소스는 수정할 수 없습니다: {path}",0,"보호된 시스템 리소스는 수정할 수 없습니다: {path}"
+cms,resource.error.protected_path_mutation,,ko_KR,"Protected system resource path cannot be created or modified: {path}","보호된 시스템 리소스 경로는 만들거나 수정할 수 없습니다: {path}",0,"보호된 시스템 리소스 경로는 만들거나 수정할 수 없습니다: {path}"
+cms,resource.error.protected_subtree_mutation,,ko_KR,"A protected system resource in this subtree cannot be modified: {path}","이 하위 트리의 보호된 시스템 리소스는 수정할 수 없습니다: {path}",0,"이 하위 트리의 보호된 시스템 리소스는 수정할 수 없습니다: {path}"
+cms,resource.error.target_folder_not_found,,ko_KR,"Target folder not found after creation: {path}","생성 후 대상 폴더를 찾을 수 없습니다: {path}",0,"생성 후 대상 폴더를 찾을 수 없습니다: {path}"
+cms,resource.error.update_failed_for_path,,ko_KR,"Unable to update resource: {path}","리소스를 업데이트할 수 없습니다: {path}",0,"리소스를 업데이트할 수 없습니다: {path}"
+cms,resource.folder_count,,ko_KR,"{count} folder(s)","{count}개 폴더",0,"{count}개 폴더"
+cms,resource.move_error,,ko_KR,"Error: Unable to move resource","오류: 리소스를 이동할 수 없습니다",0,"오류: 리소스를 이동할 수 없습니다"
+cms,resource.move_failed,,ko_KR,"Move failed","이동 실패",0,"이동 실패"
+cms,resource.moved,,ko_KR,"Resource moved","리소스 이동됨",0,"리소스 이동됨"
+cms,resource.page_count,,ko_KR,"{count} page(s)","{count}개 페이지",0,"{count}개 페이지"
+cms,resource.renamed,,ko_KR,Renamed,"이름 변경됨",0,"이름 변경됨"
+cms,resource.view_forbidden,,ko_KR,"403 - You do not have permission to view this content!","403 - 이 콘텐츠를 볼 권한이 없습니다!",0,"403 - 이 콘텐츠를 볼 권한이 없습니다!"
+cms,resource_acl.acl_not_found,,ko_KR,"ACL entry not found: {id}","ACL 항목을 찾을 수 없습니다: {id}",0,"ACL 항목을 찾을 수 없습니다: {id}"
 cms,resource_acl.assign,,ko_KR,Assign,할당,0,할당
-cms,resource_acl.deleted,,ko_KR,Assignment removed.,할당이 제거됨.,0,할당이 제거됨.
-cms,resource_acl.error_ambiguous_subject,,ko_KR,The name {name} matches both a user and a user group. Select the correct type from the list.,이름 {name}이 사용자와 사용자 그룹 모두에 일치합니다. 목록에서 올바른 유형을 선택하세요.,0,이름 {name}이 사용자와 사용자 그룹 모두에 일치합니다. 목록에서 올바른 유형을 선택하세요.
-cms,resource_acl.error_ambiguous_subject_short,,ko_KR,Ambiguous assignment,모호한 할당,0,모호한 할당
-cms,resource_acl.error_delete,,ko_KR,Error: Unable to remove assignment.,오류: 할당을 제거할 수 없습니다.,0,오류: 할당을 제거할 수 없습니다.
-cms,resource_acl.error_missing_resource_id,,ko_KR,Resource ID is missing,리소스 ID가 누락됨,0,리소스 ID가 누락됨
-cms,resource_acl.error_save,,ko_KR,Error: Unable to save access settings.,오류: 접근 설정을 저장할 수 없습니다.,0,오류: 접근 설정을 저장할 수 없습니다.
-cms,resource_acl.error_subject_not_found,,ko_KR,No user or user group found with the name {name},{name} 이름의 사용자 또는 사용자 그룹을 찾을 수 없습니다,0,{name} 이름의 사용자 또는 사용자 그룹을 찾을 수 없습니다
-cms,resource_acl.error_subject_not_found_short,,ko_KR,No matching subject found,일치하는 대상을 찾을 수 없음,0,일치하는 대상을 찾을 수 없음
-cms,resource_acl.inherit_help,,ko_KR,"When inheritance is enabled, the parent folder's permissions also apply to this resource.",상속이 활성화되면 상위 폴더의 권한이 이 리소스에도 적용됩니다.,0,상속이 활성화되면 상위 폴더의 권한이 이 리소스에도 적용됩니다.
-cms,resource_acl.inherit_label,,ko_KR,Inherit permissions from parent folder,상위 폴더에서 권한 상속,0,상위 폴더에서 권한 상속
-cms,resource_acl.inherited_title,,ko_KR,Inherited permissions,상속된 권한,0,상속된 권한
-cms,resource_acl.new_assignment,,ko_KR,New assignment:,새 할당:,0,새 할당:
+cms,resource_acl.deleted,,ko_KR,"Assignment removed.","할당이 제거됨.",0,"할당이 제거됨."
+cms,resource_acl.error_ambiguous_subject,,ko_KR,"The name {name} matches both a user and a user group. Select the correct type from the list.","이름 {name}이 사용자와 사용자 그룹 모두에 일치합니다. 목록에서 올바른 유형을 선택하세요.",0,"이름 {name}이 사용자와 사용자 그룹 모두에 일치합니다. 목록에서 올바른 유형을 선택하세요."
+cms,resource_acl.error_ambiguous_subject_short,,ko_KR,"Ambiguous assignment","모호한 할당",0,"모호한 할당"
+cms,resource_acl.error_delete,,ko_KR,"Error: Unable to remove assignment.","오류: 할당을 제거할 수 없습니다.",0,"오류: 할당을 제거할 수 없습니다."
+cms,resource_acl.error_missing_resource_id,,ko_KR,"Resource ID is missing","리소스 ID가 누락됨",0,"리소스 ID가 누락됨"
+cms,resource_acl.error_save,,ko_KR,"Error: Unable to save access settings.","오류: 접근 설정을 저장할 수 없습니다.",0,"오류: 접근 설정을 저장할 수 없습니다."
+cms,resource_acl.error_subject_not_found,,ko_KR,"No user or user group found with the name {name}","{name} 이름의 사용자 또는 사용자 그룹을 찾을 수 없습니다",0,"{name} 이름의 사용자 또는 사용자 그룹을 찾을 수 없습니다"
+cms,resource_acl.error_subject_not_found_short,,ko_KR,"No matching subject found","일치하는 대상을 찾을 수 없음",0,"일치하는 대상을 찾을 수 없음"
+cms,resource_acl.inherit_help,,ko_KR,"When inheritance is enabled, the parent folder's permissions also apply to this resource.","상속이 활성화되면 상위 폴더의 권한이 이 리소스에도 적용됩니다.",0,"상속이 활성화되면 상위 폴더의 권한이 이 리소스에도 적용됩니다."
+cms,resource_acl.inherit_label,,ko_KR,"Inherit permissions from parent folder","상위 폴더에서 권한 상속",0,"상위 폴더에서 권한 상속"
+cms,resource_acl.inherited_title,,ko_KR,"Inherited permissions","상속된 권한",0,"상속된 권한"
+cms,resource_acl.new_assignment,,ko_KR,"New assignment:","새 할당:",0,"새 할당:"
 cms,resource_acl.permission.create,,ko_KR,Create,만들기,0,만들기
 cms,resource_acl.permission.delete,,ko_KR,Delete,삭제,0,삭제
 cms,resource_acl.permission.edit,,ko_KR,Edit,편집,0,편집
 cms,resource_acl.permission.list,,ko_KR,List,목록,0,목록
 cms,resource_acl.permission.view,,ko_KR,View,보기,0,보기
-cms,resource_acl.resource_not_found,,ko_KR,Resource not found: {id},리소스를 찾을 수 없습니다: {id},0,리소스를 찾을 수 없습니다: {id}
-cms,resource_acl.search_placeholder,,ko_KR,Search for user or group...,사용자 또는 그룹 검색...,0,사용자 또는 그룹 검색...
-cms,resource_acl.specific_help,,ko_KR,"Specific permissions always apply, regardless of the inheritance setting.",특정 권한은 상속 설정에 관계없이 항상 적용됩니다.,0,특정 권한은 상속 설정에 관계없이 항상 적용됩니다.
-cms,resource_acl.specific_title,,ko_KR,Specific permissions,특정 권한,0,특정 권한
+cms,resource_acl.resource_not_found,,ko_KR,"Resource not found: {id}","리소스를 찾을 수 없습니다: {id}",0,"리소스를 찾을 수 없습니다: {id}"
+cms,resource_acl.search_placeholder,,ko_KR,"Search for user or group...","사용자 또는 그룹 검색...",0,"사용자 또는 그룹 검색..."
+cms,resource_acl.specific_help,,ko_KR,"Specific permissions always apply, regardless of the inheritance setting.","특정 권한은 상속 설정에 관계없이 항상 적용됩니다.",0,"특정 권한은 상속 설정에 관계없이 항상 적용됩니다."
+cms,resource_acl.specific_title,,ko_KR,"Specific permissions","특정 권한",0,"특정 권한"
 cms,resource_acl.subject,,ko_KR,Subject,대상,0,대상
 cms,resource_acl.title,,ko_KR,Access,접근,0,접근
-cms,resource_acl.unknown_subject_type,,ko_KR,Unknown ACL subject type: {type},알 수 없는 ACL 대상 유형: {type},0,알 수 없는 ACL 대상 유형: {type}
-cms,resource_acl.unknown_type,,ko_KR,Unknown ACL list type: {type},알 수 없는 ACL 목록 유형: {type},0,알 수 없는 ACL 목록 유형: {type}
-cms,resource_acl.usergroup_assignment.added,,ko_KR,User group assigned to resource:<br>{group} -> {target},사용자 그룹이 리소스에 할당됨:<br>{group} -> {target},0,사용자 그룹이 리소스에 할당됨:<br>{group} -> {target}
-cms,resource_acl.usergroup_assignment.error_add,,ko_KR,Error: Unable to assign user group to resource:<br>{group} -> {target},오류: 사용자 그룹을 리소스에 할당할 수 없습니다:<br>{group} -> {target},0,오류: 사용자 그룹을 리소스에 할당할 수 없습니다:<br>{group} -> {target}
-cms,resource_acl.usergroup_assignment.error_add_generic,,ko_KR,Error: Unable to assign user group to resource.,오류: 사용자 그룹을 리소스에 할당할 수 없습니다.,0,오류: 사용자 그룹을 리소스에 할당할 수 없습니다.
-cms,resource_acl.usergroup_assignment.error_remove,,ko_KR,Error: Unable to remove user group from resource:<br>{group} -> {target},오류: 리소스에서 사용자 그룹을 제거할 수 없습니다:<br>{group} -> {target},0,오류: 리소스에서 사용자 그룹을 제거할 수 없습니다:<br>{group} -> {target}
-cms,resource_acl.usergroup_assignment.error_remove_generic,,ko_KR,Error: Unable to remove user group from resource.,오류: 리소스에서 사용자 그룹을 제거할 수 없습니다.,0,오류: 리소스에서 사용자 그룹을 제거할 수 없습니다.
-cms,resource_acl.usergroup_assignment.removed,,ko_KR,User group assignment removed:<br>{group} -> {target},사용자 그룹 할당 제거됨:<br>{group} -> {target},0,사용자 그룹 할당 제거됨:<br>{group} -> {target}
-cms,resource_browser.create_index_page,,ko_KR,Create index page!,인덱스 페이지 만들기!,0,인덱스 페이지 만들기!
-cms,resource_browser.delete_file_confirm,,ko_KR,Are you sure you want to delete this file?,이 파일을 삭제하시겠습니까?,0,이 파일을 삭제하시겠습니까?
-cms,resource_browser.delete_folder_confirm,,ko_KR,Are you sure you want to delete this folder and all its contents?,이 폴더와 모든 내용을 삭제하시겠습니까?,0,이 폴더와 모든 내용을 삭제하시겠습니까?
-cms,resource_browser.delete_invalid_confirm,,ko_KR,Are you sure you want to delete this invalid entry?,이 잘못된 항목을 삭제하시겠습니까?,0,이 잘못된 항목을 삭제하시겠습니까?
-cms,resource_browser.delete_webpage_confirm,,ko_KR,Are you sure you want to delete this webpage?,이 웹 페이지를 삭제하시겠습니까?,0,이 웹 페이지를 삭제하시겠습니까?
-cms,resource_browser.help_create,,ko_KR,Create folders and webpages within them.,폴더와 그 안의 웹 페이지를 만드세요.,0,폴더와 그 안의 웹 페이지를 만드세요.
-cms,resource_browser.help_move,,ko_KR,Drag and drop to move items between folders.,드래그 앤 드롭으로 폴더 간 항목을 이동하세요.,0,드래그 앤 드롭으로 폴더 간 항목을 이동하세요.
+cms,resource_acl.unknown_subject_type,,ko_KR,"Unknown ACL subject type: {type}","알 수 없는 ACL 대상 유형: {type}",0,"알 수 없는 ACL 대상 유형: {type}"
+cms,resource_acl.unknown_type,,ko_KR,"Unknown ACL list type: {type}","알 수 없는 ACL 목록 유형: {type}",0,"알 수 없는 ACL 목록 유형: {type}"
+cms,resource_acl.usergroup_assignment.added,,ko_KR,"User group assigned to resource:<br>{group} -> {target}","사용자 그룹이 리소스에 할당됨:<br>{group} -> {target}",0,"사용자 그룹이 리소스에 할당됨:<br>{group} -> {target}"
+cms,resource_acl.usergroup_assignment.error_add,,ko_KR,"Error: Unable to assign user group to resource:<br>{group} -> {target}","오류: 사용자 그룹을 리소스에 할당할 수 없습니다:<br>{group} -> {target}",0,"오류: 사용자 그룹을 리소스에 할당할 수 없습니다:<br>{group} -> {target}"
+cms,resource_acl.usergroup_assignment.error_add_generic,,ko_KR,"Error: Unable to assign user group to resource.","오류: 사용자 그룹을 리소스에 할당할 수 없습니다.",0,"오류: 사용자 그룹을 리소스에 할당할 수 없습니다."
+cms,resource_acl.usergroup_assignment.error_remove,,ko_KR,"Error: Unable to remove user group from resource:<br>{group} -> {target}","오류: 리소스에서 사용자 그룹을 제거할 수 없습니다:<br>{group} -> {target}",0,"오류: 리소스에서 사용자 그룹을 제거할 수 없습니다:<br>{group} -> {target}"
+cms,resource_acl.usergroup_assignment.error_remove_generic,,ko_KR,"Error: Unable to remove user group from resource.","오류: 리소스에서 사용자 그룹을 제거할 수 없습니다.",0,"오류: 리소스에서 사용자 그룹을 제거할 수 없습니다."
+cms,resource_acl.usergroup_assignment.removed,,ko_KR,"User group assignment removed:<br>{group} -> {target}","사용자 그룹 할당 제거됨:<br>{group} -> {target}",0,"사용자 그룹 할당 제거됨:<br>{group} -> {target}"
+cms,resource_browser.create_index_page,,ko_KR,"Create index page!","인덱스 페이지 만들기!",0,"인덱스 페이지 만들기!"
+cms,resource_browser.delete_file_confirm,,ko_KR,"Are you sure you want to delete this file?","이 파일을 삭제하시겠습니까?",0,"이 파일을 삭제하시겠습니까?"
+cms,resource_browser.delete_folder_confirm,,ko_KR,"Are you sure you want to delete this folder and all its contents?","이 폴더와 모든 내용을 삭제하시겠습니까?",0,"이 폴더와 모든 내용을 삭제하시겠습니까?"
+cms,resource_browser.delete_invalid_confirm,,ko_KR,"Are you sure you want to delete this invalid entry?","이 잘못된 항목을 삭제하시겠습니까?",0,"이 잘못된 항목을 삭제하시겠습니까?"
+cms,resource_browser.delete_webpage_confirm,,ko_KR,"Are you sure you want to delete this webpage?","이 웹 페이지를 삭제하시겠습니까?",0,"이 웹 페이지를 삭제하시겠습니까?"
+cms,resource_browser.help_create,,ko_KR,"Create folders and webpages within them.","폴더와 그 안의 웹 페이지를 만드세요.",0,"폴더와 그 안의 웹 페이지를 만드세요."
+cms,resource_browser.help_move,,ko_KR,"Drag and drop to move items between folders.","드래그 앤 드롭으로 폴더 간 항목을 이동하세요.",0,"드래그 앤 드롭으로 폴더 간 항목을 이동하세요."
 cms,resource_browser.insert,,ko_KR,Insert,삽입,0,삽입
-cms,resource_browser.invalid_entry,,ko_KR,Invalid entry,잘못된 항목,0,잘못된 항목
-cms,resource_browser.new_domain,,ko_KR,New domain,새 도메인,0,새 도메인
-cms,resource_browser.preview_index_page,,ko_KR,Preview (index page),미리보기 (인덱스 페이지),0,미리보기 (인덱스 페이지)
-cms,resource_browser.root_not_found,,ko_KR,Root node not found for the resource tree,리소스 트리의 루트 노드를 찾을 수 없습니다,0,리소스 트리의 루트 노드를 찾을 수 없습니다
-cms,resource_browser.select_tree_item,,ko_KR,Select an item from the tree,트리에서 항목을 선택하세요,0,트리에서 항목을 선택하세요
-cms,resource_browser.site_structure,,ko_KR,Site structure,사이트 구조,0,사이트 구조
-cms,resource.delete_error,,ko_KR,Error: Unable to delete resource(s),오류: 리소스를 삭제할 수 없습니다,0,오류: 리소스를 삭제할 수 없습니다
-cms,resource.delete_failed,,ko_KR,Delete failed,삭제 실패,0,삭제 실패
-cms,resource.delete_partial_error,,ko_KR,{count} error(s) occurred during deletion,삭제 중 {count}개의 오류가 발생했습니다,0,삭제 중 {count}개의 오류가 발생했습니다
-cms,resource.deleted,,ko_KR,Resource deleted,리소스 삭제됨,0,리소스 삭제됨
-cms,resource.deleted_multiple,,ko_KR,Resources deleted,리소스들 삭제됨,0,리소스들 삭제됨
-cms,resource.folder_count,,ko_KR,{count} folder(s),{count}개 폴더,0,{count}개 폴더
-cms,resource.move_error,,ko_KR,Error: Unable to move resource,오류: 리소스를 이동할 수 없습니다,0,오류: 리소스를 이동할 수 없습니다
-cms,resource.move_failed,,ko_KR,Move failed,이동 실패,0,이동 실패
-cms,resource.moved,,ko_KR,Resource moved,리소스 이동됨,0,리소스 이동됨
-cms,resource.page_count,,ko_KR,{count} page(s),{count}개 페이지,0,{count}개 페이지
-cms,resource.renamed,,ko_KR,Renamed,이름 변경됨,0,이름 변경됨
-cms,resource.view_forbidden,,ko_KR,403 - You do not have permission to view this content!,403 - 이 콘텐츠를 볼 권한이 없습니다!,0,403 - 이 콘텐츠를 볼 권한이 없습니다!
-cms,richtext.assigned,,ko_KR,Text content assigned,텍스트 콘텐츠 할당됨,0,텍스트 콘텐츠 할당됨
-cms,richtext.field.content.explanation,,ko_KR,"Format text freely, add images, and embed external content (e.g. YouTube). Use HTML view for embed codes.",텍스트를 자유롭게 작성하고 이미지를 추가하거나 외부 콘텐츠(예: YouTube)를 삽입하세요. 삽입 코드는 HTML 보기를 사용하세요.,0,텍스트를 자유롭게 작성하고 이미지를 추가하거나 외부 콘텐츠(예: YouTube)를 삽입하세요. 삽입 코드는 HTML 보기를 사용하세요.
+cms,resource_browser.invalid_entry,,ko_KR,"Invalid entry","잘못된 항목",0,"잘못된 항목"
+cms,resource_browser.new_domain,,ko_KR,"New domain","새 도메인",0,"새 도메인"
+cms,resource_browser.preview_index_page,,ko_KR,"Preview (index page)","미리보기 (인덱스 페이지)",0,"미리보기 (인덱스 페이지)"
+cms,resource_browser.root_not_found,,ko_KR,"Root node not found for the resource tree","리소스 트리의 루트 노드를 찾을 수 없습니다",0,"리소스 트리의 루트 노드를 찾을 수 없습니다"
+cms,resource_browser.select_tree_item,,ko_KR,"Select an item from the tree","트리에서 항목을 선택하세요",0,"트리에서 항목을 선택하세요"
+cms,resource_browser.site_structure,,ko_KR,"Site structure","사이트 구조",0,"사이트 구조"
+cms,richtext.assigned,,ko_KR,"Text content assigned","텍스트 콘텐츠 할당됨",0,"텍스트 콘텐츠 할당됨"
+cms,richtext.field.content.explanation,,ko_KR,"Format text freely, add images, and embed external content (e.g. YouTube). Use HTML view for embed codes.","텍스트를 자유롭게 작성하고 이미지를 추가하거나 외부 콘텐츠(예: YouTube)를 삽입하세요. 삽입 코드는 HTML 보기를 사용하세요.",0,"텍스트를 자유롭게 작성하고 이미지를 추가하거나 외부 콘텐츠(예: YouTube)를 삽입하세요. 삽입 코드는 HTML 보기를 사용하세요."
 cms,richtext.field.content.label,,ko_KR,Content,내용,0,내용
-cms,richtext.field.name.explanation,,ko_KR,Visible in the admin area only. Use this to identify the content when selecting it for display on public pages. Must be unique.,관리자 영역에서만 표시됩니다. 공개 페이지에 표시할 콘텐츠를 선택할 때 식별에 사용하세요. 고유해야 합니다.,0,관리자 영역에서만 표시됩니다. 공개 페이지에 표시할 콘텐츠를 선택할 때 식별에 사용하세요. 고유해야 합니다.
-cms,richtext.field.name.label,,ko_KR,Name (identifier),이름 (식별자),0,이름 (식별자)
-cms,richtext.field.name.unique_error,,ko_KR,An information content item with this name already exists,이 이름의 정보 콘텐츠 항목이 이미 존재합니다,0,이 이름의 정보 콘텐츠 항목이 이미 존재합니다
-cms,richtext.field.title.explanation,,ko_KR,Appears as a title above the text. Leave empty for no title.,텍스트 위에 제목으로 표시됩니다. 제목이 없으면 비워두세요.,0,텍스트 위에 제목으로 표시됩니다. 제목이 없으면 비워두세요.
+cms,richtext.field.name.explanation,,ko_KR,"Visible in the admin area only. Use this to identify the content when selecting it for display on public pages. Must be unique.","관리자 영역에서만 표시됩니다. 공개 페이지에 표시할 콘텐츠를 선택할 때 식별에 사용하세요. 고유해야 합니다.",0,"관리자 영역에서만 표시됩니다. 공개 페이지에 표시할 콘텐츠를 선택할 때 식별에 사용하세요. 고유해야 합니다."
+cms,richtext.field.name.label,,ko_KR,"Name (identifier)","이름 (식별자)",0,"이름 (식별자)"
+cms,richtext.field.name.unique_error,,ko_KR,"An information content item with this name already exists","이 이름의 정보 콘텐츠 항목이 이미 존재합니다",0,"이 이름의 정보 콘텐츠 항목이 이미 존재합니다"
+cms,richtext.field.title.explanation,,ko_KR,"Appears as a title above the text. Leave empty for no title.","텍스트 위에 제목으로 표시됩니다. 제목이 없으면 비워두세요.",0,"텍스트 위에 제목으로 표시됩니다. 제목이 없으면 비워두세요."
 cms,richtext.field.title.label,,ko_KR,Heading,제목,0,제목
-cms,richtext.form.name,,ko_KR,Text content,텍스트 콘텐츠,0,텍스트 콘텐츠
-cms,richtext.form.title_create,,ko_KR,Create text content,텍스트 콘텐츠 만들기,0,텍스트 콘텐츠 만들기
-cms,richtext.form.title_edit,,ko_KR,Edit text content,텍스트 콘텐츠 편집,0,텍스트 콘텐츠 편집
-cms,richtext.not_set,,ko_KR,No content chosen,콘텐츠가 선택되지 않음,0,콘텐츠가 선택되지 않음
-cms,richtext.saved,,ko_KR,Content saved,콘텐츠 저장됨,0,콘텐츠 저장됨
-cms,richtext.select.form.title,,ko_KR,Select text content,텍스트 콘텐츠 선택,0,텍스트 콘텐츠 선택
-cms,richtext.updated,,ko_KR,Content updated,콘텐츠 업데이트됨,0,콘텐츠 업데이트됨
-cms,richtext.widget.choose,,ko_KR,Select text content,텍스트 콘텐츠 선택,0,텍스트 콘텐츠 선택
-cms,richtext.widget.create,,ko_KR,Create text content,텍스트 콘텐츠 만들기,0,텍스트 콘텐츠 만들기
-cms,richtext.widget.description,,ko_KR,Freely editable text with images,이미지가 포함된 자유 편집 텍스트,0,이미지가 포함된 자유 편집 텍스트
-cms,richtext.widget.edit,,ko_KR,Edit text content,텍스트 콘텐츠 편집,0,텍스트 콘텐츠 편집
-cms,richtext.widget.name,,ko_KR,Editable text,편집 가능한 텍스트,0,편집 가능한 텍스트
-cms,tree.field.type.explanation,,ko_KR,Select from the predefined trees,미리 정의된 트리에서 선택,0,미리 정의된 트리에서 선택
+cms,richtext.form.name,,ko_KR,"Text content","텍스트 콘텐츠",0,"텍스트 콘텐츠"
+cms,richtext.form.title_create,,ko_KR,"Create text content","텍스트 콘텐츠 만들기",0,"텍스트 콘텐츠 만들기"
+cms,richtext.form.title_edit,,ko_KR,"Edit text content","텍스트 콘텐츠 편집",0,"텍스트 콘텐츠 편집"
+cms,richtext.not_set,,ko_KR,"No content chosen","콘텐츠가 선택되지 않음",0,"콘텐츠가 선택되지 않음"
+cms,richtext.saved,,ko_KR,"Content saved","콘텐츠 저장됨",0,"콘텐츠 저장됨"
+cms,richtext.select.form.title,,ko_KR,"Select text content","텍스트 콘텐츠 선택",0,"텍스트 콘텐츠 선택"
+cms,richtext.updated,,ko_KR,"Content updated","콘텐츠 업데이트됨",0,"콘텐츠 업데이트됨"
+cms,richtext.widget.choose,,ko_KR,"Select text content","텍스트 콘텐츠 선택",0,"텍스트 콘텐츠 선택"
+cms,richtext.widget.create,,ko_KR,"Create text content","텍스트 콘텐츠 만들기",0,"텍스트 콘텐츠 만들기"
+cms,richtext.widget.description,,ko_KR,"Freely editable text with images","이미지가 포함된 자유 편집 텍스트",0,"이미지가 포함된 자유 편집 텍스트"
+cms,richtext.widget.edit,,ko_KR,"Edit text content","텍스트 콘텐츠 편집",0,"텍스트 콘텐츠 편집"
+cms,richtext.widget.name,,ko_KR,"Editable text","편집 가능한 텍스트",0,"편집 가능한 텍스트"
+cms,tree.field.type.explanation,,ko_KR,"Select from the predefined trees","미리 정의된 트리에서 선택",0,"미리 정의된 트리에서 선택"
 cms,tree.field.type.label,,ko_KR,Tree,트리,0,트리
-cms,tree.invalid_parent_id,,ko_KR,Invalid parent ID,잘못된 상위 ID,0,잘못된 상위 ID
-cms,tree.missing_type,,ko_KR,Missing tree type,트리 유형 누락,0,트리 유형 누락
-cms,tree.no_connection_id,,ko_KR,No widget connection ID given,위젯 연결 ID가 없습니다,0,위젯 연결 ID가 없습니다
-cms,tree.select_menu_item,,ko_KR,Select a menu item from the tree,트리에서 메뉴 항목을 선택하세요,0,트리에서 메뉴 항목을 선택하세요
-cms,tree.unknown_type,,ko_KR,Unknown tree item type: {type},알 수 없는 트리 항목 유형: {type},0,알 수 없는 트리 항목 유형: {type}
-cms,webpage_domain.field.resource_name.explanation,,ko_KR,Set this domain name in the DOMAIN_CONTEXT configuration so this domain and its child pages become active.,이 도메인 이름을 DOMAIN_CONTEXT 설정에 추가하여 이 도메인과 하위 페이지를 활성화하세요.,0,이 도메인 이름을 DOMAIN_CONTEXT 설정에 추가하여 이 도메인과 하위 페이지를 활성화하세요.
-cms,webpage_domain.field.resource_name.label,,ko_KR,Domain name,도메인 이름,0,도메인 이름
-cms,webpage_domain.title_create,,ko_KR,Add new domain,새 도메인 추가,0,새 도메인 추가
-cms,webpage_domain.title_edit,,ko_KR,Edit domain,도메인 편집,0,도메인 편집
-cms,webpage_file.field.resource_name.explanation,,ko_KR,"This is the file name used in the URL. Avoid accented characters and spaces, and keep the correct file extension.",URL에 사용되는 파일 이름입니다. 특수 문자와 공백을 피하고 올바른 파일 확장자를 유지하세요.,0,URL에 사용되는 파일 이름입니다. 특수 문자와 공백을 피하고 올바른 파일 확장자를 유지하세요.
-cms,webpage_file.field.resource_name.label,,ko_KR,SEO-friendly URL name,SEO 친화적 URL 이름,0,SEO 친화적 URL 이름
-cms,webpage_file.field.text.explanation,,ko_KR,For images this may appear as a longer description below the title.,이미지의 경우 제목 아래에 긴 설명으로 표시될 수 있습니다.,0,이미지의 경우 제목 아래에 긴 설명으로 표시될 수 있습니다.
-cms,webpage_file.field.text.label,,ko_KR,Description,설명,0,설명
-cms,webpage_file.field.title.explanation,,ko_KR,For images this may appear below the image.,이미지의 경우 이미지 아래에 표시될 수 있습니다.,0,이미지의 경우 이미지 아래에 표시될 수 있습니다.
-cms,webpage_file.field.title.label,,ko_KR,Title,제목,0,제목
-cms,webpage_file.title_edit,,ko_KR,Edit file name,파일 이름 편집,0,파일 이름 편집
-cms,webpage_folder.field.resource_name.explanation,,ko_KR,This is the real folder name used in the URL. Changing it later may cause visitors from search engines to see a 404 page.,URL에 사용되는 실제 폴더 이름입니다. 나중에 변경하면 검색 엔진 방문자에게 404 페이지가 표시될 수 있습니다.,0,URL에 사용되는 실제 폴더 이름입니다. 나중에 변경하면 검색 엔진 방문자에게 404 페이지가 표시될 수 있습니다.
-cms,webpage_folder.field.resource_name.label,,ko_KR,SEO-friendly folder URL name,SEO 친화적 폴더 URL 이름,0,SEO 친화적 폴더 URL 이름
-cms,webpage_folder.title_create,,ko_KR,Create new folder,새 폴더 만들기,0,새 폴더 만들기
-cms,webpage_folder.title_edit,,ko_KR,Edit folder,폴더 편집,0,폴더 편집
-cms,webpage_from_path.subtitle,,ko_KR,"If you want to create this webpage, you can do it here. Before doing so, make sure the URL was not mistyped.",이 웹 페이지를 만들려면 여기서 할 수 있습니다. 그 전에 URL이 올바르게 입력되었는지 확인하세요.,0,이 웹 페이지를 만들려면 여기서 할 수 있습니다. 그 전에 URL이 올바르게 입력되었는지 확인하세요.
-cms,webpage_from_path.title,,ko_KR,The requested webpage was not found!,요청한 웹 페이지를 찾을 수 없습니다!,0,요청한 웹 페이지를 찾을 수 없습니다!
-cms,webpage_page.field.description.explanation,,ko_KR,"Description meta tag, usually shown under the URL in search results.",설명 메타 태그로 검색 결과에서 URL 아래에 표시됩니다.,0,설명 메타 태그로 검색 결과에서 URL 아래에 표시됩니다.
-cms,webpage_page.field.description.label,,ko_KR,Description,설명,0,설명
-cms,webpage_page.field.keywords.explanation,,ko_KR,Keywords meta tag with comma-separated values.,쉼표로 구분된 값이 있는 키워드 메타 태그.,0,쉼표로 구분된 값이 있는 키워드 메타 태그.
-cms,webpage_page.field.keywords.label,,ko_KR,Keywords,키워드,0,키워드
-cms,webpage_page.field.resource_name.explanation,,ko_KR,This is the real URL name of the page. Change it later only when necessary.,페이지의 실제 URL 이름입니다. 필요한 경우에만 나중에 변경하세요.,0,페이지의 실제 URL 이름입니다. 필요한 경우에만 나중에 변경하세요.
-cms,webpage_page.field.resource_name.label,,ko_KR,SEO-friendly URL name,SEO 친화적 URL 이름,0,SEO 친화적 URL 이름
-cms,webpage_page.field.title.explanation,,ko_KR,HTML title meta tag shown in the browser window title.,브라우저 창 제목에 표시되는 HTML 제목 메타 태그.,0,브라우저 창 제목에 표시되는 HTML 제목 메타 태그.
-cms,webpage_page.field.title.label,,ko_KR,Title,제목,0,제목
-cms,webpage_page.title_create,,ko_KR,Create new webpage,새 웹 페이지 만들기,0,새 웹 페이지 만들기
-cms,webpage_page.title_edit,,ko_KR,Edit webpage,웹 페이지 편집,0,웹 페이지 편집
+cms,tree.invalid_parent_id,,ko_KR,"Invalid parent ID","잘못된 상위 ID",0,"잘못된 상위 ID"
+cms,tree.missing_type,,ko_KR,"Missing tree type","트리 유형 누락",0,"트리 유형 누락"
+cms,tree.no_connection_id,,ko_KR,"No widget connection ID given","위젯 연결 ID가 없습니다",0,"위젯 연결 ID가 없습니다"
+cms,tree.select_menu_item,,ko_KR,"Select a menu item from the tree","트리에서 메뉴 항목을 선택하세요",0,"트리에서 메뉴 항목을 선택하세요"
+cms,tree.unknown_type,,ko_KR,"Unknown tree item type: {type}","알 수 없는 트리 항목 유형: {type}",0,"알 수 없는 트리 항목 유형: {type}"
 cms,webpage.create_for_params,,ko_KR,"Create a webpage for the following parameters: <br>{param_name}, {param_value}","다음 매개변수에 대한 웹 페이지를 만드세요: <br>{param_name}, {param_value}",0,"다음 매개변수에 대한 웹 페이지를 만드세요: <br>{param_name}, {param_value}"
-cms,webpage.create_for_widget,,ko_KR,Create a webpage with the following content: <br><b>{widget}</b>,다음 콘텐츠로 웹 페이지를 만드세요: <br><b>{widget}</b>,0,다음 콘텐츠로 웹 페이지를 만드세요: <br><b>{widget}</b>
-cms,webpage.field.layout.explanation,,ko_KR,The webpage layout structure determines where content elements can be placed on the page.,웹 페이지 레이아웃 구조는 콘텐츠 요소를 페이지 어디에 배치할 수 있는지를 결정합니다.,0,웹 페이지 레이아웃 구조는 콘텐츠 요소를 페이지 어디에 배치할 수 있는지를 결정합니다.
-cms,webpage.field.layout.label,,ko_KR,Page type,페이지 유형,0,페이지 유형
-cms,widget_connection_params.field.anchor.explanation,,ko_KR,Anchor name that can be used in links to jump to this content on the page.,페이지의 이 콘텐츠로 이동하는 링크에 사용할 수 있는 앵커 이름.,0,페이지의 이 콘텐츠로 이동하는 링크에 사용할 수 있는 앵커 이름.
+cms,webpage.create_for_widget,,ko_KR,"Create a webpage with the following content: <br><b>{widget}</b>","다음 콘텐츠로 웹 페이지를 만드세요: <br><b>{widget}</b>",0,"다음 콘텐츠로 웹 페이지를 만드세요: <br><b>{widget}</b>"
+cms,webpage.field.layout.explanation,,ko_KR,"The webpage layout structure determines where content elements can be placed on the page.","웹 페이지 레이아웃 구조는 콘텐츠 요소를 페이지 어디에 배치할 수 있는지를 결정합니다.",0,"웹 페이지 레이아웃 구조는 콘텐츠 요소를 페이지 어디에 배치할 수 있는지를 결정합니다."
+cms,webpage.field.layout.label,,ko_KR,"Page type","페이지 유형",0,"페이지 유형"
+cms,webpage_domain.field.resource_name.explanation,,ko_KR,"Set this domain name in the DOMAIN_CONTEXT configuration so this domain and its child pages become active.","이 도메인 이름을 DOMAIN_CONTEXT 설정에 추가하여 이 도메인과 하위 페이지를 활성화하세요.",0,"이 도메인 이름을 DOMAIN_CONTEXT 설정에 추가하여 이 도메인과 하위 페이지를 활성화하세요."
+cms,webpage_domain.field.resource_name.label,,ko_KR,"Domain name","도메인 이름",0,"도메인 이름"
+cms,webpage_domain.title_create,,ko_KR,"Add new domain","새 도메인 추가",0,"새 도메인 추가"
+cms,webpage_domain.title_edit,,ko_KR,"Edit domain","도메인 편집",0,"도메인 편집"
+cms,webpage_file.field.resource_name.explanation,,ko_KR,"This is the file name used in the URL. Avoid accented characters and spaces, and keep the correct file extension.","URL에 사용되는 파일 이름입니다. 특수 문자와 공백을 피하고 올바른 파일 확장자를 유지하세요.",0,"URL에 사용되는 파일 이름입니다. 특수 문자와 공백을 피하고 올바른 파일 확장자를 유지하세요."
+cms,webpage_file.field.resource_name.label,,ko_KR,"SEO-friendly URL name","SEO 친화적 URL 이름",0,"SEO 친화적 URL 이름"
+cms,webpage_file.field.text.explanation,,ko_KR,"For images this may appear as a longer description below the title.","이미지의 경우 제목 아래에 긴 설명으로 표시될 수 있습니다.",0,"이미지의 경우 제목 아래에 긴 설명으로 표시될 수 있습니다."
+cms,webpage_file.field.text.label,,ko_KR,Description,설명,0,설명
+cms,webpage_file.field.title.explanation,,ko_KR,"For images this may appear below the image.","이미지의 경우 이미지 아래에 표시될 수 있습니다.",0,"이미지의 경우 이미지 아래에 표시될 수 있습니다."
+cms,webpage_file.field.title.label,,ko_KR,Title,제목,0,제목
+cms,webpage_file.title_edit,,ko_KR,"Edit file name","파일 이름 편집",0,"파일 이름 편집"
+cms,webpage_folder.field.resource_name.explanation,,ko_KR,"This is the real folder name used in the URL. Changing it later may cause visitors from search engines to see a 404 page.","URL에 사용되는 실제 폴더 이름입니다. 나중에 변경하면 검색 엔진 방문자에게 404 페이지가 표시될 수 있습니다.",0,"URL에 사용되는 실제 폴더 이름입니다. 나중에 변경하면 검색 엔진 방문자에게 404 페이지가 표시될 수 있습니다."
+cms,webpage_folder.field.resource_name.label,,ko_KR,"SEO-friendly folder URL name","SEO 친화적 폴더 URL 이름",0,"SEO 친화적 폴더 URL 이름"
+cms,webpage_folder.title_create,,ko_KR,"Create new folder","새 폴더 만들기",0,"새 폴더 만들기"
+cms,webpage_folder.title_edit,,ko_KR,"Edit folder","폴더 편집",0,"폴더 편집"
+cms,webpage_from_path.subtitle,,ko_KR,"If you want to create this webpage, you can do it here. Before doing so, make sure the URL was not mistyped.","이 웹 페이지를 만들려면 여기서 할 수 있습니다. 그 전에 URL이 올바르게 입력되었는지 확인하세요.",0,"이 웹 페이지를 만들려면 여기서 할 수 있습니다. 그 전에 URL이 올바르게 입력되었는지 확인하세요."
+cms,webpage_from_path.title,,ko_KR,"The requested webpage was not found!","요청한 웹 페이지를 찾을 수 없습니다!",0,"요청한 웹 페이지를 찾을 수 없습니다!"
+cms,webpage_page.field.description.explanation,,ko_KR,"Description meta tag, usually shown under the URL in search results.","설명 메타 태그로 검색 결과에서 URL 아래에 표시됩니다.",0,"설명 메타 태그로 검색 결과에서 URL 아래에 표시됩니다."
+cms,webpage_page.field.description.label,,ko_KR,Description,설명,0,설명
+cms,webpage_page.field.keywords.explanation,,ko_KR,"Keywords meta tag with comma-separated values.","쉼표로 구분된 값이 있는 키워드 메타 태그.",0,"쉼표로 구분된 값이 있는 키워드 메타 태그."
+cms,webpage_page.field.keywords.label,,ko_KR,Keywords,키워드,0,키워드
+cms,webpage_page.field.resource_name.explanation,,ko_KR,"This is the real URL name of the page. Change it later only when necessary.","페이지의 실제 URL 이름입니다. 필요한 경우에만 나중에 변경하세요.",0,"페이지의 실제 URL 이름입니다. 필요한 경우에만 나중에 변경하세요."
+cms,webpage_page.field.resource_name.label,,ko_KR,"SEO-friendly URL name","SEO 친화적 URL 이름",0,"SEO 친화적 URL 이름"
+cms,webpage_page.field.title.explanation,,ko_KR,"HTML title meta tag shown in the browser window title.","브라우저 창 제목에 표시되는 HTML 제목 메타 태그.",0,"브라우저 창 제목에 표시되는 HTML 제목 메타 태그."
+cms,webpage_page.field.title.label,,ko_KR,Title,제목,0,제목
+cms,webpage_page.title_create,,ko_KR,"Create new webpage","새 웹 페이지 만들기",0,"새 웹 페이지 만들기"
+cms,webpage_page.title_edit,,ko_KR,"Edit webpage","웹 페이지 편집",0,"웹 페이지 편집"
+cms,widget.insert.button,,ko_KR,Insert,삽입,0,삽입
+cms,widget.insert.icon_title,,ko_KR,"Insert content","콘텐츠 삽입",0,"콘텐츠 삽입"
+cms,widget.insert.placeholder,,ko_KR,"-- Insert content --","-- 콘텐츠 삽입 --",0,"-- 콘텐츠 삽입 --"
+cms,widget.insert_from_clipboard,,ko_KR,"Insert clipboard content here","여기에 클립보드 콘텐츠 삽입",0,"여기에 클립보드 콘텐츠 삽입"
+cms,widget_connection.added,,ko_KR,"Content element placed on the webpage","콘텐츠 요소가 웹 페이지에 배치됨",0,"콘텐츠 요소가 웹 페이지에 배치됨"
+cms,widget_connection.copied_to_clipboard,,ko_KR,"Content copied to clipboard","콘텐츠가 클립보드에 복사됨",0,"콘텐츠가 클립보드에 복사됨"
+cms,widget_connection.duplicate_not_allowed,,ko_KR,"This content element is already on this block and multiple placement is not allowed.","이 콘텐츠 요소는 이미 이 블록에 있으며 중복 배치가 허용되지 않습니다.",0,"이 콘텐츠 요소는 이미 이 블록에 있으며 중복 배치가 허용되지 않습니다."
+cms,widget_connection.moved,,ko_KR,"Content element moved","콘텐츠 요소 이동됨",0,"콘텐츠 요소 이동됨"
+cms,widget_connection.remove_from_webpage,,ko_KR,"Remove from this webpage","이 웹 페이지에서 제거",0,"이 웹 페이지에서 제거"
+cms,widget_connection.removed,,ko_KR,"Content element removed from the webpage","콘텐츠 요소가 웹 페이지에서 제거됨",0,"콘텐츠 요소가 웹 페이지에서 제거됨"
+cms,widget_connection.select_widget_type,,ko_KR,"Choose the content type to insert","삽입할 콘텐츠 유형 선택",0,"삽입할 콘텐츠 유형 선택"
+cms,widget_connection_params.field.anchor.explanation,,ko_KR,"Anchor name that can be used in links to jump to this content on the page.","페이지의 이 콘텐츠로 이동하는 링크에 사용할 수 있는 앵커 이름.",0,"페이지의 이 콘텐츠로 이동하는 링크에 사용할 수 있는 앵커 이름."
 cms,widget_connection_params.field.anchor.label,,ko_KR,Anchor,앵커,0,앵커
-cms,widget_connection_params.field.float.clear,,ko_KR,New row,새 행,0,새 행
-cms,widget_connection_params.field.float.explanation,,ko_KR,Content box alignment. Floated elements can appear next to each other.,콘텐츠 박스 정렬. 플로팅 요소는 서로 나란히 표시될 수 있습니다.,0,콘텐츠 박스 정렬. 플로팅 요소는 서로 나란히 표시될 수 있습니다.
+cms,widget_connection_params.field.float.clear,,ko_KR,"New row","새 행",0,"새 행"
+cms,widget_connection_params.field.float.explanation,,ko_KR,"Content box alignment. Floated elements can appear next to each other.","콘텐츠 박스 정렬. 플로팅 요소는 서로 나란히 표시될 수 있습니다.",0,"콘텐츠 박스 정렬. 플로팅 요소는 서로 나란히 표시될 수 있습니다."
 cms,widget_connection_params.field.float.label,,ko_KR,Alignment,정렬,0,정렬
-cms,widget_connection_params.field.float.left,,ko_KR,Floated left,왼쪽 플로팅,0,왼쪽 플로팅
-cms,widget_connection_params.field.float.left_clear,,ko_KR,Floated left in new row,새 행 왼쪽 플로팅,0,새 행 왼쪽 플로팅
-cms,widget_connection_params.field.float.none,,ko_KR,No special alignment,특별 정렬 없음,0,특별 정렬 없음
-cms,widget_connection_params.field.float.right,,ko_KR,Floated right,오른쪽 플로팅,0,오른쪽 플로팅
-cms,widget_connection_params.field.float.right_clear,,ko_KR,Floated right in new row,새 행 오른쪽 플로팅,0,새 행 오른쪽 플로팅
+cms,widget_connection_params.field.float.left,,ko_KR,"Floated left","왼쪽 플로팅",0,"왼쪽 플로팅"
+cms,widget_connection_params.field.float.left_clear,,ko_KR,"Floated left in new row","새 행 왼쪽 플로팅",0,"새 행 왼쪽 플로팅"
+cms,widget_connection_params.field.float.none,,ko_KR,"No special alignment","특별 정렬 없음",0,"특별 정렬 없음"
+cms,widget_connection_params.field.float.right,,ko_KR,"Floated right","오른쪽 플로팅",0,"오른쪽 플로팅"
+cms,widget_connection_params.field.float.right_clear,,ko_KR,"Floated right in new row","새 행 오른쪽 플로팅",0,"새 행 오른쪽 플로팅"
 cms,widget_connection_params.field.height.explanation,,ko_KR,"Height in CSS format with unit (for example 100%, 200px, or auto).","단위가 포함된 CSS 형식의 높이 (예: 100%, 200px, 또는 auto).",0,"단위가 포함된 CSS 형식의 높이 (예: 100%, 200px, 또는 auto)."
 cms,widget_connection_params.field.height.label,,ko_KR,Height,높이,0,높이
-cms,widget_connection_params.field.margin_bottom.explanation,,ko_KR,Bottom margin in CSS format with unit (for example 100% or 200px).,단위가 포함된 CSS 형식의 하단 여백 (예: 100% 또는 200px).,0,단위가 포함된 CSS 형식의 하단 여백 (예: 100% 또는 200px).
-cms,widget_connection_params.field.margin_bottom.label,,ko_KR,Bottom margin,하단 여백,0,하단 여백
-cms,widget_connection_params.field.margin_left.explanation,,ko_KR,Left margin in CSS format with unit (for example 100% or 200px).,단위가 포함된 CSS 형식의 좌측 여백 (예: 100% 또는 200px).,0,단위가 포함된 CSS 형식의 좌측 여백 (예: 100% 또는 200px).
-cms,widget_connection_params.field.margin_left.label,,ko_KR,Left margin,좌측 여백,0,좌측 여백
-cms,widget_connection_params.field.margin_right.explanation,,ko_KR,Right margin in CSS format with unit (for example 100% or 200px).,단위가 포함된 CSS 형식의 우측 여백 (예: 100% 또는 200px).,0,단위가 포함된 CSS 형식의 우측 여백 (예: 100% 또는 200px).
-cms,widget_connection_params.field.margin_right.label,,ko_KR,Right margin,우측 여백,0,우측 여백
-cms,widget_connection_params.field.margin_top.explanation,,ko_KR,Top margin in CSS format with unit (for example 100% or 200px).,단위가 포함된 CSS 형식의 상단 여백 (예: 100% 또는 200px).,0,단위가 포함된 CSS 형식의 상단 여백 (예: 100% 또는 200px).
-cms,widget_connection_params.field.margin_top.label,,ko_KR,Top margin,상단 여백,0,상단 여백
+cms,widget_connection_params.field.margin_bottom.explanation,,ko_KR,"Bottom margin in CSS format with unit (for example 100% or 200px).","단위가 포함된 CSS 형식의 하단 여백 (예: 100% 또는 200px).",0,"단위가 포함된 CSS 형식의 하단 여백 (예: 100% 또는 200px)."
+cms,widget_connection_params.field.margin_bottom.label,,ko_KR,"Bottom margin","하단 여백",0,"하단 여백"
+cms,widget_connection_params.field.margin_left.explanation,,ko_KR,"Left margin in CSS format with unit (for example 100% or 200px).","단위가 포함된 CSS 형식의 좌측 여백 (예: 100% 또는 200px).",0,"단위가 포함된 CSS 형식의 좌측 여백 (예: 100% 또는 200px)."
+cms,widget_connection_params.field.margin_left.label,,ko_KR,"Left margin","좌측 여백",0,"좌측 여백"
+cms,widget_connection_params.field.margin_right.explanation,,ko_KR,"Right margin in CSS format with unit (for example 100% or 200px).","단위가 포함된 CSS 형식의 우측 여백 (예: 100% 또는 200px).",0,"단위가 포함된 CSS 형식의 우측 여백 (예: 100% 또는 200px)."
+cms,widget_connection_params.field.margin_right.label,,ko_KR,"Right margin","우측 여백",0,"우측 여백"
+cms,widget_connection_params.field.margin_top.explanation,,ko_KR,"Top margin in CSS format with unit (for example 100% or 200px).","단위가 포함된 CSS 형식의 상단 여백 (예: 100% 또는 200px).",0,"단위가 포함된 CSS 형식의 상단 여백 (예: 100% 또는 200px)."
+cms,widget_connection_params.field.margin_top.label,,ko_KR,"Top margin","상단 여백",0,"상단 여백"
 cms,widget_connection_params.field.width.explanation,,ko_KR,"Width in CSS format with unit (for example 100%, 200px, or auto).","단위가 포함된 CSS 형식의 너비 (예: 100%, 200px, 또는 auto).",0,"단위가 포함된 CSS 형식의 너비 (예: 100%, 200px, 또는 auto)."
 cms,widget_connection_params.field.width.label,,ko_KR,Width,너비,0,너비
-cms,widget_connection_params.missing_widget_id,,ko_KR,Widget ID is missing,위젯 ID가 누락됨,0,위젯 ID가 누락됨
-cms,widget_connection_params.no_content_id,,ko_KR,No content ID given,콘텐츠 ID가 없습니다,0,콘텐츠 ID가 없습니다
-cms,widget_connection_params.subtitle,,ko_KR,Webpage: {page},웹 페이지: {page},0,웹 페이지: {page}
-cms,widget_connection_params.title,,ko_KR,Edit display settings,표시 설정 편집,0,표시 설정 편집
-cms,widget_connection_settings.field.is_last.explanation,,ko_KR,Check this if this is the last column in the row. This helps keep spacing correct and prevents overlapping or broken layout.,행의 마지막 열인 경우 선택하세요. 간격을 올바르게 유지하고 레이아웃 겹침이나 깨짐을 방지합니다.,0,행의 마지막 열인 경우 선택하세요. 간격을 올바르게 유지하고 레이아웃 겹침이나 깨짐을 방지합니다.
-cms,widget_connection_settings.field.is_last.label,,ko_KR,Last in row,행의 마지막,0,행의 마지막
-cms,widget_connection_settings.field.widget_width.label,,ko_KR,Content width,콘텐츠 너비,0,콘텐츠 너비
-cms,widget_connection_settings.missing_widget_id,,ko_KR,Widget ID is missing,위젯 ID가 누락됨,0,위젯 ID가 누락됨
-cms,widget_connection_settings.subtitle,,ko_KR,Webpage: {page},웹 페이지: {page},0,웹 페이지: {page}
-cms,widget_connection.added,,ko_KR,Content element placed on the webpage,콘텐츠 요소가 웹 페이지에 배치됨,0,콘텐츠 요소가 웹 페이지에 배치됨
-cms,widget_connection.copied_to_clipboard,,ko_KR,Content copied to clipboard,콘텐츠가 클립보드에 복사됨,0,콘텐츠가 클립보드에 복사됨
-cms,widget_connection.duplicate_not_allowed,,ko_KR,This content element is already on this block and multiple placement is not allowed.,이 콘텐츠 요소는 이미 이 블록에 있으며 중복 배치가 허용되지 않습니다.,0,이 콘텐츠 요소는 이미 이 블록에 있으며 중복 배치가 허용되지 않습니다.
-cms,widget_connection.moved,,ko_KR,Content element moved,콘텐츠 요소 이동됨,0,콘텐츠 요소 이동됨
-cms,widget_connection.remove_from_webpage,,ko_KR,Remove from this webpage,이 웹 페이지에서 제거,0,이 웹 페이지에서 제거
-cms,widget_connection.removed,,ko_KR,Content element removed from the webpage,콘텐츠 요소가 웹 페이지에서 제거됨,0,콘텐츠 요소가 웹 페이지에서 제거됨
-cms,widget_connection.select_widget_type,,ko_KR,Choose the content type to insert,삽입할 콘텐츠 유형 선택,0,삽입할 콘텐츠 유형 선택
-cms,widget_group.begin_delete_error,,ko_KR,Error: Unable to delete opening block,오류: 시작 블록을 삭제할 수 없습니다,0,오류: 시작 블록을 삭제할 수 없습니다
-cms,widget_group.both_delete_error,,ko_KR,Error: Unable to delete opening or closing block,오류: 시작 또는 종료 블록을 삭제할 수 없습니다,0,오류: 시작 또는 종료 블록을 삭제할 수 없습니다
-cms,widget_group.end_delete_error,,ko_KR,Error: Unable to delete closing block,오류: 종료 블록을 삭제할 수 없습니다,0,오류: 종료 블록을 삭제할 수 없습니다
-cms,widget_group.end_missing_delete_error,,ko_KR,Closing block not found and opening block deletion failed,종료 블록을 찾을 수 없고 시작 블록 삭제 실패,0,종료 블록을 찾을 수 없고 시작 블록 삭제 실패
-cms,widget_group.end_missing_removed_beginning,,ko_KR,"Closing block not found, opening block removed successfully",종료 블록을 찾을 수 없고 시작 블록이 성공적으로 제거됨,0,종료 블록을 찾을 수 없고 시작 블록이 성공적으로 제거됨
-cms,widget_group.remove_block,,ko_KR,Remove block,블록 제거,0,블록 제거
-cms,widget_group.removed,,ko_KR,Block removed from webpage,블록이 웹 페이지에서 제거됨,0,블록이 웹 페이지에서 제거됨
+cms,widget_connection_params.missing_widget_id,,ko_KR,"Widget ID is missing","위젯 ID가 누락됨",0,"위젯 ID가 누락됨"
+cms,widget_connection_params.no_content_id,,ko_KR,"No content ID given","콘텐츠 ID가 없습니다",0,"콘텐츠 ID가 없습니다"
+cms,widget_connection_params.subtitle,,ko_KR,"Webpage: {page}","웹 페이지: {page}",0,"웹 페이지: {page}"
+cms,widget_connection_params.title,,ko_KR,"Edit display settings","표시 설정 편집",0,"표시 설정 편집"
+cms,widget_connection_settings.field.is_last.explanation,,ko_KR,"Check this if this is the last column in the row. This helps keep spacing correct and prevents overlapping or broken layout.","행의 마지막 열인 경우 선택하세요. 간격을 올바르게 유지하고 레이아웃 겹침이나 깨짐을 방지합니다.",0,"행의 마지막 열인 경우 선택하세요. 간격을 올바르게 유지하고 레이아웃 겹침이나 깨짐을 방지합니다."
+cms,widget_connection_settings.field.is_last.label,,ko_KR,"Last in row","행의 마지막",0,"행의 마지막"
+cms,widget_connection_settings.field.widget_width.label,,ko_KR,"Content width","콘텐츠 너비",0,"콘텐츠 너비"
+cms,widget_connection_settings.missing_widget_id,,ko_KR,"Widget ID is missing","위젯 ID가 누락됨",0,"위젯 ID가 누락됨"
+cms,widget_connection_settings.subtitle,,ko_KR,"Webpage: {page}","웹 페이지: {page}",0,"웹 페이지: {page}"
+cms,widget_group.begin_delete_error,,ko_KR,"Error: Unable to delete opening block","오류: 시작 블록을 삭제할 수 없습니다",0,"오류: 시작 블록을 삭제할 수 없습니다"
+cms,widget_group.both_delete_error,,ko_KR,"Error: Unable to delete opening or closing block","오류: 시작 또는 종료 블록을 삭제할 수 없습니다",0,"오류: 시작 또는 종료 블록을 삭제할 수 없습니다"
+cms,widget_group.end_delete_error,,ko_KR,"Error: Unable to delete closing block","오류: 종료 블록을 삭제할 수 없습니다",0,"오류: 종료 블록을 삭제할 수 없습니다"
+cms,widget_group.end_missing_delete_error,,ko_KR,"Closing block not found and opening block deletion failed","종료 블록을 찾을 수 없고 시작 블록 삭제 실패",0,"종료 블록을 찾을 수 없고 시작 블록 삭제 실패"
+cms,widget_group.end_missing_removed_beginning,,ko_KR,"Closing block not found, opening block removed successfully","종료 블록을 찾을 수 없고 시작 블록이 성공적으로 제거됨",0,"종료 블록을 찾을 수 없고 시작 블록이 성공적으로 제거됨"
+cms,widget_group.remove_block,,ko_KR,"Remove block","블록 제거",0,"블록 제거"
+cms,widget_group.removed,,ko_KR,"Block removed from webpage","블록이 웹 페이지에서 제거됨",0,"블록이 웹 페이지에서 제거됨"
 cms,widget_preview.description,,ko_KR,Description,설명,0,설명
 cms,widget_preview.implemented,,ko_KR,Implemented,구현됨,0,구현됨
-cms,widget_preview.info.current_theme,,ko_KR,Current theme,현재 테마,0,현재 테마
+cms,widget_preview.info.current_theme,,ko_KR,"Current theme","현재 테마",0,"현재 테마"
 cms,widget_preview.info.fallback,,ko_KR,Fallback,대체,0,대체
 cms,widget_preview.info.implemented,,ko_KR,Implemented,구현됨,0,구현됨
 cms,widget_preview.info.template,,ko_KR,Template,템플릿,0,템플릿
-cms,widget_preview.info.title,,ko_KR,Widget preview,위젯 미리보기,0,위젯 미리보기
+cms,widget_preview.info.title,,ko_KR,"Widget preview","위젯 미리보기",0,"위젯 미리보기"
 cms,widget_preview.info.widget,,ko_KR,Widget,위젯,0,위젯
-cms,widget_preview.none,,ko_KR,No mockable widgets found.,모의 가능한 위젯을 찾을 수 없습니다.,0,모의 가능한 위젯을 찾을 수 없습니다.
-cms,widget_preview.not_implemented,,ko_KR,Not implemented,구현되지 않음,0,구현되지 않음
+cms,widget_preview.none,,ko_KR,"No mockable widgets found.","모의 가능한 위젯을 찾을 수 없습니다.",0,"모의 가능한 위젯을 찾을 수 없습니다."
+cms,widget_preview.not_implemented,,ko_KR,"Not implemented","구현되지 않음",0,"구현되지 않음"
 cms,widget_preview.not_mockable_prefix,,ko_KR,Widget,위젯,0,위젯
-cms,widget_preview.not_mockable_suffix,,ko_KR,does not implement iMockable.,iMockable를 구현하지 않습니다.,0,iMockable를 구현하지 않습니다.
-cms,widget_preview.not_registered,,ko_KR,Widget not registered: {widget},위젯이 등록되지 않음: {widget},0,위젯이 등록되지 않음: {widget}
-cms,widget_preview.redirecting,,ko_KR,Redirecting to the correct theme...,올바른 테마로 이동 중...,0,올바른 테마로 이동 중...
-cms,widget_preview.title,,ko_KR,Available widgets for preview,미리보기 가능한 위젯,0,미리보기 가능한 위젯
+cms,widget_preview.not_mockable_suffix,,ko_KR,"does not implement iMockable.","iMockable를 구현하지 않습니다.",0,"iMockable를 구현하지 않습니다."
+cms,widget_preview.not_registered,,ko_KR,"Widget not registered: {widget}","위젯이 등록되지 않음: {widget}",0,"위젯이 등록되지 않음: {widget}"
+cms,widget_preview.redirecting,,ko_KR,"Redirecting to the correct theme...","올바른 테마로 이동 중...",0,"올바른 테마로 이동 중..."
+cms,widget_preview.title,,ko_KR,"Available widgets for preview","미리보기 가능한 위젯",0,"미리보기 가능한 위젯"
 cms,widget_preview.widget,,ko_KR,Widget,위젯,0,위젯
-cms,widget.insert_from_clipboard,,ko_KR,Insert clipboard content here,여기에 클립보드 콘텐츠 삽입,0,여기에 클립보드 콘텐츠 삽입
-cms,widget.insert.button,,ko_KR,Insert,삽입,0,삽입
-cms,widget.insert.icon_title,,ko_KR,Insert content,콘텐츠 삽입,0,콘텐츠 삽입
-cms,widget.insert.placeholder,,ko_KR,-- Insert content --,-- 콘텐츠 삽입 --,0,-- 콘텐츠 삽입 --
 common,actions,,ko_KR,Actions,작업,0,작업
 common,all,,ko_KR,All,전체,0,전체
 common,back,,ko_KR,Back,뒤로,0,뒤로
 common,calendar,,ko_KR,Calendar,달력,0,달력
 common,cancel,,ko_KR,Cancel,취소,0,취소
-common,choose_placeholder,,ko_KR,-- Choose --,-- 선택 --,0,-- 선택 --
+common,choose_placeholder,,ko_KR,"-- Choose --","-- 선택 --",0,"-- 선택 --"
 common,delete,,ko_KR,Delete,삭제,0,삭제
 common,download,,ko_KR,Download,다운로드,0,다운로드
 common,edit,,ko_KR,Edit,편집,0,편집
 common,error,,ko_KR,Error,오류,0,오류
-common,error_save,,ko_KR,Error: Unable to save,오류: 저장할 수 없습니다,0,오류: 저장할 수 없습니다
+common,error_save,,ko_KR,"Error: Unable to save","오류: 저장할 수 없습니다",0,"오류: 저장할 수 없습니다"
 common,id,,ko_KR,ID,ID,0,ID
-common,loading,,ko_KR,Loading...,로딩 중...,0,로딩 중...
-common,logout,,ko_KR,Log out,로그아웃,0,로그아웃
-common,missing_required_url_params,,ko_KR,Missing required URL parameters,필수 URL 매개변수 누락,0,필수 URL 매개변수 누락
-common,move_down,,ko_KR,Move down,아래로 이동,0,아래로 이동
-common,move_up,,ko_KR,Move up,위로 이동,0,위로 이동
+common,loading,,ko_KR,Loading...,"로딩 중...",0,"로딩 중..."
+common,logout,,ko_KR,"Log out",로그아웃,0,로그아웃
+common,missing_required_url_params,,ko_KR,"Missing required URL parameters","필수 URL 매개변수 누락",0,"필수 URL 매개변수 누락"
+common,move_down,,ko_KR,"Move down","아래로 이동",0,"아래로 이동"
+common,move_up,,ko_KR,"Move up","위로 이동",0,"위로 이동"
 common,never,,ko_KR,Never,없음,0,없음
 common,no,,ko_KR,No,아니요,0,아니요
-common,no_changes,,ko_KR,No changes made,변경 사항 없음,0,변경 사항 없음
-common,no_data,,ko_KR,No data,데이터 없음,0,데이터 없음
-common,no_description,,ko_KR,No description,설명 없음,0,설명 없음
-common,not_set,,ko_KR,[not set],[설정 안 됨],0,[설정 안 됨]
+common,no_changes,,ko_KR,"No changes made","변경 사항 없음",0,"변경 사항 없음"
+common,no_data,,ko_KR,"No data","데이터 없음",0,"데이터 없음"
+common,no_description,,ko_KR,"No description","설명 없음",0,"설명 없음"
+common,not_set,,ko_KR,"[not set]","[설정 안 됨]",0,"[설정 안 됨]"
 common,open,,ko_KR,Open,열기,0,열기
 common,operations,,ko_KR,Operations,작업,0,작업
 common,preview,,ko_KR,Preview,미리보기,0,미리보기
-common,read_more,,ko_KR,Read more,더 읽기,0,더 읽기
-common,renamed,,ko_KR,Renamed,이름 변경됨,0,이름 변경됨
+common,read_more,,ko_KR,"Read more","더 읽기",0,"더 읽기"
+common,renamed,,ko_KR,Renamed,"이름 변경됨",0,"이름 변경됨"
 common,save,,ko_KR,Save,저장,0,저장
-common,saved,,ko_KR,Record saved,레코드 저장됨,0,레코드 저장됨
+common,saved,,ko_KR,"Record saved","레코드 저장됨",0,"레코드 저장됨"
 common,saved_short,,ko_KR,Saved,저장됨,0,저장됨
 common,search,,ko_KR,Search,검색,0,검색
-common,unknown,,ko_KR,Unknown,알 수 없음,0,알 수 없음
+common,unknown,,ko_KR,Unknown,"알 수 없음",0,"알 수 없음"
 common,upload,,ko_KR,Upload,업로드,0,업로드
 common,user,,ko_KR,User,사용자,0,사용자
 common,width,,ko_KR,Width,너비,0,너비
 common,yes,,ko_KR,Yes,예,0,예
-datatable,column_visibility,,ko_KR,Visible columns,표시 열,0,표시 열
-datatable,displayed_columns,,ko_KR,Displayed columns,표시된 열,0,표시된 열
-datatable,empty_table,,ko_KR,No data,데이터 없음,0,데이터 없음
+datatable,column_visibility,,ko_KR,"Visible columns","표시 열",0,"표시 열"
+datatable,displayed_columns,,ko_KR,"Displayed columns","표시된 열",0,"표시된 열"
+datatable,empty_table,,ko_KR,"No data","데이터 없음",0,"데이터 없음"
 datatable,first,,ko_KR,First,처음,0,처음
-datatable,info_compact,,ko_KR,_START_ - _END_ / _TOTAL_ items,_START_ - _END_ / _TOTAL_ 항목,0,_START_ - _END_ / _TOTAL_ 항목
-datatable,info_empty,,ko_KR,No results,결과 없음,0,결과 없음
-datatable,info_filtered_compact,,ko_KR,(filtered from _MAX_ items),(_MAX_ 항목에서 필터링됨),0,(_MAX_ 항목에서 필터링됨)
-datatable,info_filtered_html,,ko_KR,<br><i>filtered from _MAX_ rows</i>,<br><i>_MAX_ 행에서 필터링됨</i>,0,<br><i>_MAX_ 행에서 필터링됨</i>
-datatable,info_full,,ko_KR,_TOTAL_ displayable items (showing: _START_ - _END_),_TOTAL_ 표시 가능 항목 (표시 중: _START_ - _END_),0,_TOTAL_ 표시 가능 항목 (표시 중: _START_ - _END_)
+datatable,info_compact,,ko_KR,"_START_ - _END_ / _TOTAL_ items","_START_ - _END_ / _TOTAL_ 항목",0,"_START_ - _END_ / _TOTAL_ 항목"
+datatable,info_empty,,ko_KR,"No results","결과 없음",0,"결과 없음"
+datatable,info_filtered_compact,,ko_KR,"(filtered from _MAX_ items)","(_MAX_ 항목에서 필터링됨)",0,"(_MAX_ 항목에서 필터링됨)"
+datatable,info_filtered_html,,ko_KR,"<br><i>filtered from _MAX_ rows</i>","<br><i>_MAX_ 행에서 필터링됨</i>",0,"<br><i>_MAX_ 행에서 필터링됨</i>"
+datatable,info_full,,ko_KR,"_TOTAL_ displayable items (showing: _START_ - _END_)","_TOTAL_ 표시 가능 항목 (표시 중: _START_ - _END_)",0,"_TOTAL_ 표시 가능 항목 (표시 중: _START_ - _END_)"
 datatable,last,,ko_KR,Last,마지막,0,마지막
-datatable,length_menu,,ko_KR,_MENU_ items/page,_MENU_ 항목/페이지,0,_MENU_ 항목/페이지
-datatable,loading_records,,ko_KR,Loading...,로딩 중...,0,로딩 중...
+datatable,length_menu,,ko_KR,"_MENU_ items/page","_MENU_ 항목/페이지",0,"_MENU_ 항목/페이지"
+datatable,loading_records,,ko_KR,Loading...,"로딩 중...",0,"로딩 중..."
 datatable,next,,ko_KR,Next,다음,0,다음
 datatable,previous,,ko_KR,Previous,이전,0,이전
-datatable,processing,,ko_KR,Processing...,처리 중...,0,처리 중...
+datatable,processing,,ko_KR,Processing...,"처리 중...",0,"처리 중..."
 datatable,search,,ko_KR,Search,검색,0,검색
-datatable,zero_records,,ko_KR,No displayable items,표시 가능한 항목 없음,0,표시 가능한 항목 없음
-layout,admin_default.description,,ko_KR,Single-column admin layout,단일 열 관리자 레이아웃,0,단일 열 관리자 레이아웃
-layout,admin_default.name,,ko_KR,Admin 1-column,관리자 1열,0,관리자 1열
-layout,admin_empty.description,,ko_KR,Empty admin layout,빈 관리자 레이아웃,0,빈 관리자 레이아웃
-layout,admin_empty.name,,ko_KR,Empty admin,빈 관리자,0,빈 관리자
-layout,admin_menu.description,,ko_KR,Displays the admin menu,관리자 메뉴 표시,0,관리자 메뉴 표시
-layout,admin_menu.name,,ko_KR,Admin menu,관리자 메뉴,0,관리자 메뉴
-layout,admin_nomenu.description,,ko_KR,Admin layout without menu,메뉴 없는 관리자 레이아웃,0,메뉴 없는 관리자 레이아웃
-layout,admin_nomenu.name,,ko_KR,Admin without menu,메뉴 없는 관리자,0,메뉴 없는 관리자
-layout,header_right.description,,ko_KR,Displays the quick access menu,빠른 액세스 메뉴 표시,0,빠른 액세스 메뉴 표시
-layout,header_right.name,,ko_KR,Quick menu,빠른 메뉴,0,빠른 메뉴
-layout,main_menu.description,,ko_KR,Displays the main menu,메인 메뉴 표시,0,메인 메뉴 표시
-layout,main_menu.name,,ko_KR,Main menu,메인 메뉴,0,메인 메뉴
-layout,public_2row.description,,ko_KR,Two-column public layout,2열 공개 레이아웃,0,2열 공개 레이아웃
-layout,public_2row.hero.balanced_life,,ko_KR,Want to live a more balanced life?,더 균형 잡힌 삶을 원하시나요?,0,더 균형 잡힌 삶을 원하시나요?
-layout,public_2row.hero.better_quality_of_life,,ko_KR,Want a better quality of life?,더 나은 삶의 질을 원하시나요?,0,더 나은 삶의 질을 원하시나요?
-layout,public_2row.hero.conflict_management,,ko_KR,Want to handle conflicts better?,갈등을 더 잘 해결하고 싶으신가요?,0,갈등을 더 잘 해결하고 싶으신가요?
-layout,public_2row.hero.equal_partner,,ko_KR,Want to be treated as an equal partner?,동등한 파트너로 대우받고 싶으신가요?,0,동등한 파트너로 대우받고 싶으신가요?
-layout,public_2row.hero.self_discovery,,ko_KR,Want to understand yourself better?,자신을 더 잘 이해하고 싶으신가요?,0,자신을 더 잘 이해하고 싶으신가요?
-layout,public_2row.hero.solution,,ko_KR,The solution: TeamSolution!,해결책: TeamSolution!,0,해결책: TeamSolution!
-layout,public_2row.hero.success_and_happiness,,ko_KR,Want to be successful and happy?,성공하고 행복해지고 싶으신가요?,0,성공하고 행복해지고 싶으신가요?
+datatable,zero_records,,ko_KR,"No displayable items","표시 가능한 항목 없음",0,"표시 가능한 항목 없음"
+layout,admin_default.description,,ko_KR,"Single-column admin layout","단일 열 관리자 레이아웃",0,"단일 열 관리자 레이아웃"
+layout,admin_default.name,,ko_KR,"Admin 1-column","관리자 1열",0,"관리자 1열"
+layout,admin_empty.description,,ko_KR,"Empty admin layout","빈 관리자 레이아웃",0,"빈 관리자 레이아웃"
+layout,admin_empty.name,,ko_KR,"Empty admin","빈 관리자",0,"빈 관리자"
+layout,admin_login.description,,ko_KR,"Admin login layout","관리자 로그인 레이아웃",0,"관리자 로그인 레이아웃"
+layout,admin_login.name,,ko_KR,"Admin login","관리자 로그인",0,"관리자 로그인"
+layout,admin_menu.description,,ko_KR,"Displays the admin menu","관리자 메뉴 표시",0,"관리자 메뉴 표시"
+layout,admin_menu.name,,ko_KR,"Admin menu","관리자 메뉴",0,"관리자 메뉴"
+layout,admin_nomenu.description,,ko_KR,"Admin layout without menu","메뉴 없는 관리자 레이아웃",0,"메뉴 없는 관리자 레이아웃"
+layout,admin_nomenu.name,,ko_KR,"Admin without menu","메뉴 없는 관리자",0,"메뉴 없는 관리자"
+layout,header_right.description,,ko_KR,"Displays the quick access menu","빠른 액세스 메뉴 표시",0,"빠른 액세스 메뉴 표시"
+layout,header_right.name,,ko_KR,"Quick menu","빠른 메뉴",0,"빠른 메뉴"
+layout,main_menu.description,,ko_KR,"Displays the main menu","메인 메뉴 표시",0,"메인 메뉴 표시"
+layout,main_menu.name,,ko_KR,"Main menu","메인 메뉴",0,"메인 메뉴"
+layout,public_2row.description,,ko_KR,"Two-column public layout","2열 공개 레이아웃",0,"2열 공개 레이아웃"
+layout,public_2row.hero.balanced_life,,ko_KR,"Want to live a more balanced life?","더 균형 잡힌 삶을 원하시나요?",0,"더 균형 잡힌 삶을 원하시나요?"
+layout,public_2row.hero.better_quality_of_life,,ko_KR,"Want a better quality of life?","더 나은 삶의 질을 원하시나요?",0,"더 나은 삶의 질을 원하시나요?"
+layout,public_2row.hero.conflict_management,,ko_KR,"Want to handle conflicts better?","갈등을 더 잘 해결하고 싶으신가요?",0,"갈등을 더 잘 해결하고 싶으신가요?"
+layout,public_2row.hero.equal_partner,,ko_KR,"Want to be treated as an equal partner?","동등한 파트너로 대우받고 싶으신가요?",0,"동등한 파트너로 대우받고 싶으신가요?"
+layout,public_2row.hero.self_discovery,,ko_KR,"Want to understand yourself better?","자신을 더 잘 이해하고 싶으신가요?",0,"자신을 더 잘 이해하고 싶으신가요?"
+layout,public_2row.hero.solution,,ko_KR,"The solution: TeamSolution!","해결책: TeamSolution!",0,"해결책: TeamSolution!"
+layout,public_2row.hero.success_and_happiness,,ko_KR,"Want to be successful and happy?","성공하고 행복해지고 싶으신가요?",0,"성공하고 행복해지고 싶으신가요?"
 layout,public_2row.name,,ko_KR,2-column,2열,0,2열
-layout,public_default.description,,ko_KR,Single-column public layout,단일 열 공개 레이아웃,0,단일 열 공개 레이아웃
+layout,public_default.description,,ko_KR,"Single-column public layout","단일 열 공개 레이아웃",0,"단일 열 공개 레이아웃"
 layout,public_default.name,,ko_KR,1-column,1열,0,1열
-layout,public_empty.description,,ko_KR,Empty layout for simple responses,단순 응답을 위한 빈 레이아웃,0,단순 응답을 위한 빈 레이아웃
-layout,public_empty.name,,ko_KR,Empty,비어 있음,0,비어 있음
-layout,public_login.description,,ko_KR,Login layout,로그인 레이아웃,0,로그인 레이아웃
+layout,public_empty.description,,ko_KR,"Empty layout for simple responses","단순 응답을 위한 빈 레이아웃",0,"단순 응답을 위한 빈 레이아웃"
+layout,public_empty.name,,ko_KR,Empty,"비어 있음",0,"비어 있음"
+layout,public_login.description,,ko_KR,"Login layout","로그인 레이아웃",0,"로그인 레이아웃"
 layout,public_login.name,,ko_KR,Login,로그인,0,로그인
-layout,public_preview.description,,ko_KR,Preview layout,미리보기 레이아웃,0,미리보기 레이아웃
+layout,public_preview.description,,ko_KR,"Preview layout","미리보기 레이아웃",0,"미리보기 레이아웃"
 layout,public_preview.name,,ko_KR,Preview,미리보기,0,미리보기
-layout,top_menu_admin.description,,ko_KR,Displays the admin top menu,관리자 상단 메뉴 표시,0,관리자 상단 메뉴 표시
-layout,top_menu_admin.name,,ko_KR,Admin top menu,관리자 상단 메뉴,0,관리자 상단 메뉴
-layout,unknown.description,,ko_KR,Layout not configured,레이아웃이 설정되지 않음,0,레이아웃이 설정되지 않음
-layout,unknown.name,,ko_KR,Unknown layout,알 수 없는 레이아웃,0,알 수 없는 레이아웃
-layout,widget_previewer.description,,ko_KR,Minimal layout for widget previews,위젯 미리보기를 위한 최소 레이아웃,0,위젯 미리보기를 위한 최소 레이아웃
-layout,widget_previewer.name,,ko_KR,Widget previewer,위젯 미리보기,0,위젯 미리보기
+layout,top_menu_admin.description,,ko_KR,"Displays the admin top menu","관리자 상단 메뉴 표시",0,"관리자 상단 메뉴 표시"
+layout,top_menu_admin.name,,ko_KR,"Admin top menu","관리자 상단 메뉴",0,"관리자 상단 메뉴"
+layout,unknown.description,,ko_KR,"Layout not configured","레이아웃이 설정되지 않음",0,"레이아웃이 설정되지 않음"
+layout,unknown.name,,ko_KR,"Unknown layout","알 수 없는 레이아웃",0,"알 수 없는 레이아웃"
+layout,widget_previewer.description,,ko_KR,"Minimal layout for widget previews","위젯 미리보기를 위한 최소 레이아웃",0,"위젯 미리보기를 위한 최소 레이아웃"
+layout,widget_previewer.name,,ko_KR,"Widget previewer","위젯 미리보기",0,"위젯 미리보기"
+mcp,tokens.col.actions,,ko_KR,Actions,작업,0,작업
+mcp,tokens.col.created,,ko_KR,Created,Created,0,Created
+mcp,tokens.col.expires,,ko_KR,Expires,Expires,0,Expires
+mcp,tokens.col.last_used,,ko_KR,"Last used","Last used",0,"Last used"
+mcp,tokens.col.name,,ko_KR,Name,Name,0,Name
+mcp,tokens.col.prefix,,ko_KR,Prefix,Prefix,0,Prefix
+mcp,tokens.col.status,,ko_KR,Status,상태,0,상태
+mcp,tokens.create,,ko_KR,"Create token","Create token",0,"Create token"
+mcp,tokens.create_title,,ko_KR,"Create token","Create token",0,"Create token"
+mcp,tokens.created_help,,ko_KR,"Copy this user-bound token now. It will not be shown again.","이 사용자에 연결된 토큰을 지금 복사하세요. 다시 표시되지 않습니다.",0,"이 사용자에 연결된 토큰을 지금 복사하세요. 다시 표시되지 않습니다."
+mcp,tokens.created_title,,ko_KR,"Token created","Token created",0,"Token created"
+mcp,tokens.description,,ko_KR,"Create and revoke MCP access tokens tied to your user account.","사용자 계정에 연결된 MCP 액세스 토큰을 만들고 취소합니다.",0,"사용자 계정에 연결된 MCP 액세스 토큰을 만들고 취소합니다."
+mcp,tokens.empty,,ko_KR,"No MCP tokens yet.","아직 MCP 토큰이 없습니다.",0,"아직 MCP 토큰이 없습니다."
+mcp,tokens.endpoint,,ko_KR,"MCP endpoint","MCP endpoint",0,"MCP endpoint"
+mcp,tokens.existing_title,,ko_KR,"Existing tokens","Existing tokens",0,"Existing tokens"
+mcp,tokens.expiry,,ko_KR,Expiry,Expiry,0,Expiry
+mcp,tokens.expiry_30,,ko_KR,"30 days","30 days",0,"30 days"
+mcp,tokens.expiry_365,,ko_KR,"1 year","1 year",0,"1 year"
+mcp,tokens.expiry_90,,ko_KR,"90 days","90 days",0,"90 days"
+mcp,tokens.expiry_never,,ko_KR,"No expiry","No expiry",0,"No expiry"
+mcp,tokens.name,,ko_KR,Name,Name,0,Name
+mcp,tokens.name_placeholder,,ko_KR,"Claude Desktop - local","Claude Desktop - local",0,"Claude Desktop - local"
+mcp,tokens.never,,ko_KR,Never,없음,0,없음
+mcp,tokens.revoke,,ko_KR,Revoke,Revoke,0,Revoke
+mcp,tokens.revoke_confirm,,ko_KR,"Revoke this MCP token?","이 MCP 토큰을 취소할까요?",0,"이 MCP 토큰을 취소할까요?"
+mcp,tokens.security_note,,ko_KR,"MCP clients using one of these tokens run as your Radaptor user and have the same permissions you have. Keep tokens secret and revoke any token you no longer use.","이 토큰 중 하나를 사용하는 MCP 클라이언트는 사용자의 Radaptor 계정으로 실행되며 동일한 권한을 가집니다. 토큰을 비밀로 유지하고 더 이상 사용하지 않는 토큰은 취소하세요.",0,"이 토큰 중 하나를 사용하는 MCP 클라이언트는 사용자의 Radaptor 계정으로 실행되며 동일한 권한을 가집니다. 토큰을 비밀로 유지하고 더 이상 사용하지 않는 토큰은 취소하세요."
+mcp,tokens.status.active,,ko_KR,Active,Active,0,Active
+mcp,tokens.status.expired,,ko_KR,Expired,Expired,0,Expired
+mcp,tokens.status.revoked,,ko_KR,Revoked,Revoked,0,Revoked
+mcp,tokens.title,,ko_KR,"MCP tokens","MCP 토큰",0,"MCP 토큰"
 record_action,datasheet,,ko_KR,Datasheet,데이터시트,0,데이터시트
 record_action,versions,,ko_KR,Versions,버전,0,버전
-record_meta,created_by,,ko_KR,Created by,작성자,0,작성자
-record_meta,last_modified,,ko_KR,Last modified,마지막 수정,0,마지막 수정
-resource,new_folder,,ko_KR,New folder,새 폴더,0,새 폴더
-resource,new_webpage,,ko_KR,New webpage,새 웹 페이지,0,새 웹 페이지
+record_meta,created_by,,ko_KR,"Created by",작성자,0,작성자
+record_meta,last_modified,,ko_KR,"Last modified","마지막 수정",0,"마지막 수정"
+resource,new_folder,,ko_KR,"New folder","새 폴더",0,"새 폴더"
+resource,new_webpage,,ko_KR,"New webpage","새 웹 페이지",0,"새 웹 페이지"
 resource,properties,,ko_KR,Properties,속성,0,속성
 resource,security,,ko_KR,Security,보안,0,보안
-resource,upload_file,,ko_KR,Upload file...,파일 업로드...,0,파일 업로드...
-response_error,access_denied,,ko_KR,Access denied,접근 거부됨,0,접근 거부됨
-response_error,access_restricted,,ko_KR,Access restricted,접근 제한됨,0,접근 제한됨
-response_error,forbidden.message,,ko_KR,You do not have permission to access this resource.,이 리소스에 접근할 권한이 없습니다.,0,이 리소스에 접근할 권한이 없습니다.
-response_error,forbidden.title,,ko_KR,Forbidden,접근 금지,0,접근 금지
-response_error,internal.contact_support,,ko_KR,"If the problem persists, please contact our support team.",문제가 계속되면 지원팀에 문의하세요.,0,문제가 계속되면 지원팀에 문의하세요.
-response_error,internal.go_back_previous_page,,ko_KR,Go back to the previous page using your browser's back button,브라우저의 뒤로 버튼을 사용하여 이전 페이지로 돌아가세요,0,브라우저의 뒤로 버튼을 사용하여 이전 페이지로 돌아가세요
-response_error,internal.intro,,ko_KR,We apologize for the inconvenience. Our team has been notified and we are working to fix this issue.,불편을 드려 죄송합니다. 팀이 알림을 받았으며 문제 해결을 위해 노력하고 있습니다.,0,불편을 드려 죄송합니다. 팀이 알림을 받았으며 문제 해결을 위해 노력하고 있습니다.
+resource,upload_file,,ko_KR,"Upload file...","파일 업로드...",0,"파일 업로드..."
+response_error,access_denied,,ko_KR,"Access denied","접근 거부됨",0,"접근 거부됨"
+response_error,access_restricted,,ko_KR,"Access restricted","접근 제한됨",0,"접근 제한됨"
+response_error,forbidden.message,,ko_KR,"You do not have permission to access this resource.","이 리소스에 접근할 권한이 없습니다.",0,"이 리소스에 접근할 권한이 없습니다."
+response_error,forbidden.title,,ko_KR,Forbidden,"접근 금지",0,"접근 금지"
+response_error,internal.contact_support,,ko_KR,"If the problem persists, please contact our support team.","문제가 계속되면 지원팀에 문의하세요.",0,"문제가 계속되면 지원팀에 문의하세요."
+response_error,internal.go_back_previous_page,,ko_KR,"Go back to the previous page using your browser's back button","브라우저의 뒤로 버튼을 사용하여 이전 페이지로 돌아가세요",0,"브라우저의 뒤로 버튼을 사용하여 이전 페이지로 돌아가세요"
+response_error,internal.intro,,ko_KR,"We apologize for the inconvenience. Our team has been notified and we are working to fix this issue.","불편을 드려 죄송합니다. 팀이 알림을 받았으며 문제 해결을 위해 노력하고 있습니다.",0,"불편을 드려 죄송합니다. 팀이 알림을 받았으며 문제 해결을 위해 노력하고 있습니다."
 response_error,internal.reference_label,,ko_KR,Reference,참조,0,참조
-response_error,internal.refresh_page,,ko_KR,Refresh this page,이 페이지 새로 고침,0,이 페이지 새로 고침
-response_error,internal.title,,ko_KR,Oops! Something went wrong on our end.,오류가 발생했습니다.,0,오류가 발생했습니다.
-response_error,internal.try_actions,,ko_KR,You can try to:,다음을 시도해 보세요:,0,다음을 시도해 보세요:
-response_error,internal.try_again_in_a_few_minutes,,ko_KR,Try again in a few minutes,몇 분 후에 다시 시도하세요,0,몇 분 후에 다시 시도하세요
-selection,delete_invalid_entry_confirm,,ko_KR,Are you sure you want to delete this invalid entry?,이 잘못된 항목을 삭제하시겠습니까?,0,이 잘못된 항목을 삭제하시겠습니까?
-selection,delete_selected,,ko_KR,Delete selected,선택 항목 삭제,0,선택 항목 삭제
-selection,delete_selected_confirm,,ko_KR,Are you sure you want to delete all selected items?,선택한 모든 항목을 삭제하시겠습니까?,0,선택한 모든 항목을 삭제하시겠습니까?
-selection,group,,ko_KR,Group selection,그룹 선택,0,그룹 선택
-selection,invalid_entry,,ko_KR,Invalid entry,잘못된 항목,0,잘못된 항목
-selection,multiple,,ko_KR,Multiple selection,다중 선택,0,다중 선택
-selection,selected_items,,ko_KR,Selected items,선택된 항목,0,선택된 항목
-social,disqus.comments_link,,ko_KR,Disqus comments,Disqus 댓글,0,Disqus 댓글
-social,disqus.enable_javascript,,ko_KR,JavaScript must be enabled to display,표시하려면 JavaScript를 활성화해야 합니다,0,표시하려면 JavaScript를 활성화해야 합니다
-social,disqus.powered_by,,ko_KR,comments powered by,댓글 제공:,0,댓글 제공:
-system_message,default_header,,ko_KR,System message,시스템 메시지,0,시스템 메시지
-theme,error.description,,ko_KR,Fallback error theme,대체 오류 테마,0,대체 오류 테마
+response_error,internal.refresh_page,,ko_KR,"Refresh this page","이 페이지 새로 고침",0,"이 페이지 새로 고침"
+response_error,internal.title,,ko_KR,"Oops! Something went wrong on our end.","오류가 발생했습니다.",0,"오류가 발생했습니다."
+response_error,internal.try_actions,,ko_KR,"You can try to:","다음을 시도해 보세요:",0,"다음을 시도해 보세요:"
+response_error,internal.try_again_in_a_few_minutes,,ko_KR,"Try again in a few minutes","몇 분 후에 다시 시도하세요",0,"몇 분 후에 다시 시도하세요"
+runtime_diagnostics,card.database,,ko_KR,Database,Database,0,Database
+runtime_diagnostics,card.email,,ko_KR,"Email safety","Email safety",0,"Email safety"
+runtime_diagnostics,card.environment,,ko_KR,Environment,Environment,0,Environment
+runtime_diagnostics,card.mcp,,ko_KR,MCP,MCP,0,MCP
+runtime_diagnostics,card.packages,,ko_KR,Packages,Packages,0,Packages
+runtime_diagnostics,card.redis,,ko_KR,Redis,Redis,0,Redis
+runtime_diagnostics,card.warnings,,ko_KR,Warnings,Warnings,0,Warnings
+runtime_diagnostics,no,,ko_KR,no,no,0,no
+runtime_diagnostics,none,,ko_KR,None,None,0,None
+runtime_diagnostics,safe_to_test,,ko_KR,"Safe to test","Safe to test",0,"Safe to test"
+runtime_diagnostics,subtitle,,ko_KR,"Effective runtime state with secrets redacted.","비밀값이 가려진 실제 런타임 상태입니다.",0,"비밀값이 가려진 실제 런타임 상태입니다."
+runtime_diagnostics,title,,ko_KR,"Runtime diagnostics","런타임 진단",0,"런타임 진단"
+runtime_diagnostics,yes,,ko_KR,yes,yes,0,yes
+selection,delete_invalid_entry_confirm,,ko_KR,"Are you sure you want to delete this invalid entry?","이 잘못된 항목을 삭제하시겠습니까?",0,"이 잘못된 항목을 삭제하시겠습니까?"
+selection,delete_selected,,ko_KR,"Delete selected","선택 항목 삭제",0,"선택 항목 삭제"
+selection,delete_selected_confirm,,ko_KR,"Are you sure you want to delete all selected items?","선택한 모든 항목을 삭제하시겠습니까?",0,"선택한 모든 항목을 삭제하시겠습니까?"
+selection,group,,ko_KR,"Group selection","그룹 선택",0,"그룹 선택"
+selection,invalid_entry,,ko_KR,"Invalid entry","잘못된 항목",0,"잘못된 항목"
+selection,multiple,,ko_KR,"Multiple selection","다중 선택",0,"다중 선택"
+selection,selected_items,,ko_KR,"Selected items","선택된 항목",0,"선택된 항목"
+social,disqus.comments_link,,ko_KR,"Disqus comments","Disqus 댓글",0,"Disqus 댓글"
+social,disqus.enable_javascript,,ko_KR,"JavaScript must be enabled to display","표시하려면 JavaScript를 활성화해야 합니다",0,"표시하려면 JavaScript를 활성화해야 합니다"
+social,disqus.powered_by,,ko_KR,"comments powered by","댓글 제공:",0,"댓글 제공:"
+system_message,default_header,,ko_KR,"System message","시스템 메시지",0,"시스템 메시지"
+theme,error.description,,ko_KR,"Fallback error theme","대체 오류 테마",0,"대체 오류 테마"
 theme,error.name,,ko_KR,Error,오류,0,오류
-theme,radaptor_portal_admin.description,,ko_KR,Bootstrap 5 admin theme with portal neon/glass styling,포털 네온/글라스 스타일의 Bootstrap 5 관리자 테마,0,포털 네온/글라스 스타일의 Bootstrap 5 관리자 테마
+theme,radaptor_portal_admin.description,,ko_KR,"Bootstrap 5 admin theme with portal neon/glass styling","포털 네온/글라스 스타일의 Bootstrap 5 관리자 테마",0,"포털 네온/글라스 스타일의 Bootstrap 5 관리자 테마"
 theme,radaptor_portal_admin.name,,ko_KR,RadaptorPortalAdmin,RadaptorPortalAdmin,0,RadaptorPortalAdmin
-theme,so_admin.description,,ko_KR,SO-like admin theme,SO 스타일 관리자 테마,0,SO 스타일 관리자 테마
+theme,so_admin.description,,ko_KR,"SO-like admin theme","SO 스타일 관리자 테마",0,"SO 스타일 관리자 테마"
 theme,so_admin.name,,ko_KR,SO-Admin,SO-Admin,0,SO-Admin
-widget,admin_menu.description,,ko_KR,Manage the admin menu tree,관리자 메뉴 트리 관리,0,관리자 메뉴 트리 관리
-widget,admin_menu.name,,ko_KR,Admin menu administration,관리자 메뉴 관리,0,관리자 메뉴 관리
-widget,blog_list.description,,ko_KR,Blog list,블로그 목록,0,블로그 목록
-widget,blog_list.name,,ko_KR,Blog list,블로그 목록,0,블로그 목록
+widget,admin_menu.description,,ko_KR,"Manage the admin menu tree","관리자 메뉴 트리 관리",0,"관리자 메뉴 트리 관리"
+widget,admin_menu.name,,ko_KR,"Admin menu administration","관리자 메뉴 관리",0,"관리자 메뉴 관리"
 widget,blog.description,,ko_KR,Blog,블로그,0,블로그
 widget,blog.name,,ko_KR,Blog,블로그,0,블로그
-widget,file_upload.description,,ko_KR,File upload,파일 업로드,0,파일 업로드
-widget,file_upload.name,,ko_KR,File upload,파일 업로드,0,파일 업로드
-widget,form.description,,ko_KR,Displays a configured form,설정된 양식 표시,0,설정된 양식 표시
+widget,blog_list.description,,ko_KR,"Blog list","블로그 목록",0,"블로그 목록"
+widget,blog_list.name,,ko_KR,"Blog list","블로그 목록",0,"블로그 목록"
+widget,cli_runner.description,,ko_KR,"Run CLI commands from the admin panel.","관리자 패널에서 CLI 명령을 실행합니다.",0,"관리자 패널에서 CLI 명령을 실행합니다."
+widget,cli_runner.name,,ko_KR,"CLI Runner","CLI 실행기",0,"CLI 실행기"
+widget,file_upload.description,,ko_KR,"File upload","파일 업로드",0,"파일 업로드"
+widget,file_upload.name,,ko_KR,"File upload","파일 업로드",0,"파일 업로드"
+widget,form.description,,ko_KR,"Displays a configured form","설정된 양식 표시",0,"설정된 양식 표시"
 widget,form.name,,ko_KR,Form,양식,0,양식
-widget,group_beginning.description,,ko_KR,Separately managed content unit that can contain jointly styled elements.,공동 스타일 요소를 포함할 수 있는 별도로 관리되는 콘텐츠 단위.,0,공동 스타일 요소를 포함할 수 있는 별도로 관리되는 콘텐츠 단위.
-widget,group_beginning.name,,ko_KR,Content block,콘텐츠 블록,0,콘텐츠 블록
-widget,group_end.description,,ko_KR,End of a separately managed content unit.,별도로 관리되는 콘텐츠 단위의 끝.,0,별도로 관리되는 콘텐츠 단위의 끝.
-widget,group_end.name,,ko_KR,End of content block,콘텐츠 블록 끝,0,콘텐츠 블록 끝
-widget,import_export.description,,ko_KR,Central CSV import and export tools,중앙 CSV 가져오기 및 내보내기 도구,0,중앙 CSV 가져오기 및 내보내기 도구
-widget,import_export.name,,ko_KR,Import / Export,가져오기 / 내보내기,0,가져오기 / 내보내기
-widget,js_tree.description,,ko_KR,Displays and manages a hierarchical tree of admin resources,관리자 리소스의 계층적 트리를 표시하고 관리,0,관리자 리소스의 계층적 트리를 표시하고 관리
-widget,js_tree.name,,ko_KR,Tree browser,트리 브라우저,0,트리 브라우저
-widget,js_tree.settings,,ko_KR,Tree settings,트리 설정,0,트리 설정
-widget,main_menu.description,,ko_KR,Manage the main menu tree,메인 메뉴 트리 관리,0,메인 메뉴 트리 관리
-widget,main_menu.name,,ko_KR,Main menu administration,메인 메뉴 관리,0,메인 메뉴 관리
-widget,plain_html.description,,ko_KR,HTML code (embed),HTML 코드 (삽입),0,HTML 코드 (삽입)
-widget,plain_html.name,,ko_KR,HTML code (embed),HTML 코드 (삽입),0,HTML 코드 (삽입)
-widget,resource_acl_selector.description,,ko_KR,Configure resource access permissions,리소스 접근 권한 설정,0,리소스 접근 권한 설정
-widget,resource_acl_selector.name,,ko_KR,Resource access settings,리소스 접근 설정,0,리소스 접근 설정
+widget,group_beginning.description,,ko_KR,"Separately managed content unit that can contain jointly styled elements.","공동 스타일 요소를 포함할 수 있는 별도로 관리되는 콘텐츠 단위.",0,"공동 스타일 요소를 포함할 수 있는 별도로 관리되는 콘텐츠 단위."
+widget,group_beginning.name,,ko_KR,"Content block","콘텐츠 블록",0,"콘텐츠 블록"
+widget,group_end.description,,ko_KR,"End of a separately managed content unit.","별도로 관리되는 콘텐츠 단위의 끝.",0,"별도로 관리되는 콘텐츠 단위의 끝."
+widget,group_end.name,,ko_KR,"End of content block","콘텐츠 블록 끝",0,"콘텐츠 블록 끝"
+widget,import_export.description,,ko_KR,"Central CSV import and export tools","중앙 CSV 가져오기 및 내보내기 도구",0,"중앙 CSV 가져오기 및 내보내기 도구"
+widget,import_export.name,,ko_KR,"Import / Export","가져오기 / 내보내기",0,"가져오기 / 내보내기"
+widget,js_tree.description,,ko_KR,"Displays and manages a hierarchical tree of admin resources","관리자 리소스의 계층적 트리를 표시하고 관리",0,"관리자 리소스의 계층적 트리를 표시하고 관리"
+widget,js_tree.name,,ko_KR,"Tree browser","트리 브라우저",0,"트리 브라우저"
+widget,js_tree.settings,,ko_KR,"Tree settings","트리 설정",0,"트리 설정"
+widget,main_menu.description,,ko_KR,"Manage the main menu tree","메인 메뉴 트리 관리",0,"메인 메뉴 트리 관리"
+widget,main_menu.name,,ko_KR,"Main menu administration","메인 메뉴 관리",0,"메인 메뉴 관리"
+widget,phpinfo_frame.description,,ko_KR,"Show PHP runtime information inside the admin layout.","관리자 레이아웃 안에 PHP 런타임 정보를 표시합니다.",0,"관리자 레이아웃 안에 PHP 런타임 정보를 표시합니다."
+widget,phpinfo_frame.name,,ko_KR,"PHPinfo frame","PHPinfo 프레임",0,"PHPinfo 프레임"
+widget,phpinfo_frame.open_raw,,ko_KR,"Open raw","원본 보기 열기",0,"원본 보기 열기"
+widget,phpinfo_frame.title,,ko_KR,PHPinfo,PHPinfo,0,PHPinfo
+widget,plain_html.description,,ko_KR,"HTML code (embed)","HTML 코드 (삽입)",0,"HTML 코드 (삽입)"
+widget,plain_html.name,,ko_KR,"HTML code (embed)","HTML 코드 (삽입)",0,"HTML 코드 (삽입)"
+widget,resource_acl_selector.description,,ko_KR,"Configure resource access permissions","리소스 접근 권한 설정",0,"리소스 접근 권한 설정"
+widget,resource_acl_selector.name,,ko_KR,"Resource access settings","리소스 접근 설정",0,"리소스 접근 설정"
 widget,resource_tree.description,,ko_KR,"Manage webpages, web folders, and uploaded files here.","웹 페이지, 웹 폴더, 업로드된 파일을 여기서 관리하세요.",0,"웹 페이지, 웹 폴더, 업로드된 파일을 여기서 관리하세요."
-widget,resource_tree.name,,ko_KR,Webpage structure,웹 페이지 구조,0,웹 페이지 구조
-widget,rich_text.description,,ko_KR,Freely editable text with images,이미지가 포함된 자유 편집 텍스트,0,이미지가 포함된 자유 편집 텍스트
-widget,rich_text.name,,ko_KR,Editable text,편집 가능한 텍스트,0,편집 가능한 텍스트
-widget,role_list.description,,ko_KR,Displays the role tree,역할 트리 표시,0,역할 트리 표시
-widget,role_list.name,,ko_KR,Role list,역할 목록,0,역할 목록
-widget,role_selector.description,,ko_KR,Role selector,역할 선택기,0,역할 선택기
-widget,role_selector.name,,ko_KR,Role selector,역할 선택기,0,역할 선택기
-widget,tag_list.description,,ko_KR,Tag list,태그 목록,0,태그 목록
-widget,tag_list.name,,ko_KR,Tag list,태그 목록,0,태그 목록
-widget,user_description.description,,ko_KR,Displays the details of a user,사용자 상세 정보 표시,0,사용자 상세 정보 표시
-widget,user_description.name,,ko_KR,User details,사용자 상세,0,사용자 상세
-widget,user_list.description,,ko_KR,User list,사용자 목록,0,사용자 목록
-widget,user_list.name,,ko_KR,User list,사용자 목록,0,사용자 목록
-widget,usergroup_list.description,,ko_KR,Displays the user group tree,사용자 그룹 트리 표시,0,사용자 그룹 트리 표시
-widget,usergroup_list.name,,ko_KR,User group list,사용자 그룹 목록,0,사용자 그룹 목록
-widget,usergroup_selector.description,,ko_KR,Select user groups for a user,사용자의 사용자 그룹 선택,0,사용자의 사용자 그룹 선택
-widget,usergroup_selector.name,,ko_KR,User group selector,사용자 그룹 선택기,0,사용자 그룹 선택기
-widget,widget_error.description,,ko_KR,Invalid widget,잘못된 위젯,0,잘못된 위젯
-widget,widget_error.invalid_type,,ko_KR,Non-existent content type: {type},존재하지 않는 콘텐츠 유형: {type},0,존재하지 않는 콘텐츠 유형: {type}
-widget,widget_error.name,,ko_KR,Invalid widget,잘못된 위젯,0,잘못된 위젯
+widget,resource_tree.name,,ko_KR,"Webpage structure","웹 페이지 구조",0,"웹 페이지 구조"
+widget,rich_text.description,,ko_KR,"Freely editable text with images","이미지가 포함된 자유 편집 텍스트",0,"이미지가 포함된 자유 편집 텍스트"
+widget,rich_text.name,,ko_KR,"Editable text","편집 가능한 텍스트",0,"편집 가능한 텍스트"
+widget,role_list.description,,ko_KR,"Displays the role tree","역할 트리 표시",0,"역할 트리 표시"
+widget,role_list.name,,ko_KR,"Role list","역할 목록",0,"역할 목록"
+widget,role_selector.description,,ko_KR,"Role selector","역할 선택기",0,"역할 선택기"
+widget,role_selector.name,,ko_KR,"Role selector","역할 선택기",0,"역할 선택기"
+widget,tag_list.description,,ko_KR,"Tag list","태그 목록",0,"태그 목록"
+widget,tag_list.name,,ko_KR,"Tag list","태그 목록",0,"태그 목록"
+widget,template_engine_demo_blade.description,,ko_KR,"Demonstrates rendering a Blade template inside Radaptor.","Radaptor 안에서 Blade 템플릿 렌더링을 시연합니다.",0,"Radaptor 안에서 Blade 템플릿 렌더링을 시연합니다."
+widget,template_engine_demo_blade.name,,ko_KR,"Blade template engine demo","Blade 템플릿 엔진 데모",0,"Blade 템플릿 엔진 데모"
+widget,template_engine_demo_php.description,,ko_KR,"Demonstrates rendering a native PHP template inside Radaptor.","Radaptor 안에서 네이티브 PHP 템플릿 렌더링을 시연합니다.",0,"Radaptor 안에서 네이티브 PHP 템플릿 렌더링을 시연합니다."
+widget,template_engine_demo_php.name,,ko_KR,"PHP template engine demo","PHP 템플릿 엔진 데모",0,"PHP 템플릿 엔진 데모"
+widget,template_engine_demo_twig.description,,ko_KR,"Demonstrates rendering a Twig template inside Radaptor.","Radaptor 안에서 Twig 템플릿 렌더링을 시연합니다.",0,"Radaptor 안에서 Twig 템플릿 렌더링을 시연합니다."
+widget,template_engine_demo_twig.name,,ko_KR,"Twig template engine demo","Twig 템플릿 엔진 데모",0,"Twig 템플릿 엔진 데모"
+widget,user_description.description,,ko_KR,"Displays the details of a user","사용자 상세 정보 표시",0,"사용자 상세 정보 표시"
+widget,user_description.name,,ko_KR,"User details","사용자 상세",0,"사용자 상세"
+widget,user_list.description,,ko_KR,"User list","사용자 목록",0,"사용자 목록"
+widget,user_list.name,,ko_KR,"User list","사용자 목록",0,"사용자 목록"
+widget,usergroup_list.description,,ko_KR,"Displays the user group tree","사용자 그룹 트리 표시",0,"사용자 그룹 트리 표시"
+widget,usergroup_list.name,,ko_KR,"User group list","사용자 그룹 목록",0,"사용자 그룹 목록"
+widget,usergroup_selector.description,,ko_KR,"Select user groups for a user","사용자의 사용자 그룹 선택",0,"사용자의 사용자 그룹 선택"
+widget,usergroup_selector.name,,ko_KR,"User group selector","사용자 그룹 선택기",0,"사용자 그룹 선택기"
+widget,widget_error.description,,ko_KR,"Invalid widget","잘못된 위젯",0,"잘못된 위젯"
+widget,widget_error.invalid_type,,ko_KR,"Non-existent content type: {type}","존재하지 않는 콘텐츠 유형: {type}",0,"존재하지 않는 콘텐츠 유형: {type}"
+widget,widget_error.name,,ko_KR,"Invalid widget","잘못된 위젯",0,"잘못된 위젯"
 widget,widget_preview.description,,ko_KR,"Preview any widget with mock data. URL params: widget (required), theme (optional)","모의 데이터로 위젯 미리보기. URL 매개변수: widget (필수), theme (선택사항)",0,"모의 데이터로 위젯 미리보기. URL 매개변수: widget (필수), theme (선택사항)"
-widget,widget_preview.name,,ko_KR,Widget preview,위젯 미리보기,0,위젯 미리보기
+widget,widget_preview.name,,ko_KR,"Widget preview","위젯 미리보기",0,"위젯 미리보기"
 workbench,tm_apply,,ko_KR,Apply,적용,0,적용
-workbench,tm_no_results,,ko_KR,No suggestions,제안 없음,0,제안 없음
+workbench,tm_no_results,,ko_KR,"No suggestions","제안 없음",0,"제안 없음"
 workbench,tm_uses,,ko_KR,uses,사용,0,사용

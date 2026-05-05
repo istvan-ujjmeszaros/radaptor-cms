@@ -47,3 +47,16 @@ import_export,result.updated,,zh_Hans_CN,Updated,已更新,0,已更新
 import_export,workbench.description,,zh_Hans_CN,"Export data to CSV or import CSV files into registered datasets.","将数据导出为 CSV 或将 CSV 文件导入已注册的数据集。",0,"将数据导出为 CSV 或将 CSV 文件导入已注册的数据集。"
 import_export,workbench.no_datasets,,zh_Hans_CN,"No import/export datasets are available.",没有可用的导入/导出数据集。,0,没有可用的导入/导出数据集。
 import_export,workbench.title,,zh_Hans_CN,"Import / Export","导入 / 导出",0,"导入 / 导出"
+import_export,error.upload_backup_required,,zh_Hans_CN,"Confirm the uploaded files backup before exporting the site snapshot.",导出站点快照前，请确认已备份上传文件。,0,导出站点快照前，请确认已备份上传文件。
+import_export,dataset.site_snapshot.name,,zh_Hans_CN,"Site snapshot",站点快照,0,站点快照
+import_export,dataset.site_snapshot.description,,zh_Hans_CN,"Export or restore database-backed site content and identity data as a JSON disaster-recovery snapshot.","将数据库中的站点内容和身份数据导出或恢复为用于灾难恢复的 JSON 快照。",0,"将数据库中的站点内容和身份数据导出或恢复为用于灾难恢复的 JSON 快照。"
+import_export,field.uploads_backed_up.label,,zh_Hans_CN,"Uploaded files backed up",已备份上传文件,0,已备份上传文件
+import_export,field.uploads_backed_up.help,,zh_Hans_CN,"Confirm that the upload directory has been copied separately before downloading the JSON snapshot.","下载 JSON 快照前，请确认上传目录已单独复制。",0,"下载 JSON 快照前，请确认上传目录已单独复制。"
+import_export,field.site_snapshot_file.label,,zh_Hans_CN,"Site snapshot JSON","站点快照 JSON",0,"站点快照 JSON"
+import_export,field.site_snapshot_file.help,,zh_Hans_CN,"Upload a JSON snapshot exported from the same Radaptor schema. Copy the upload directory before applying the import.","上传从同一 Radaptor 架构导出的 JSON 快照。应用导入前请复制上传目录。",0,"上传从同一 Radaptor 架构导出的 JSON 快照。应用导入前请复制上传目录。"
+import_export,field.replace_confirmed.label,,zh_Hans_CN,"Replace current site data",替换当前站点数据,0,替换当前站点数据
+import_export,field.replace_confirmed.help,,zh_Hans_CN,"Required for the real import. The restore replaces the snapshot-managed database tables.",真实导入必须确认。恢复会替换快照管理的数据库表。,0,真实导入必须确认。恢复会替换快照管理的数据库表。
+import_export,site_snapshot.export.title,,zh_Hans_CN,"Export JSON snapshot","导出 JSON 快照",0,"导出 JSON 快照"
+import_export,site_snapshot.import.title,,zh_Hans_CN,"Import JSON snapshot","导入 JSON 快照",0,"导入 JSON 快照"
+import_export,site_snapshot.action.export,,zh_Hans_CN,"Export JSON","导出 JSON",0,"导出 JSON"
+import_export,confirm.site_snapshot_replace,,zh_Hans_CN,"This import will replace the current site database content with the uploaded snapshot. Continue?",此导入会用上传的快照替换当前站点数据库内容。是否继续？,0,此导入会用上传的快照替换当前站点数据库内容。是否继续？

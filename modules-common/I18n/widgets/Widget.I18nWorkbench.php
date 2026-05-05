@@ -53,6 +53,12 @@ class WidgetI18nWorkbench extends AbstractWidget
 			'selected_locale' => $selectedLocale,
 			'selected_domain' => $selectedDomain,
 			'selected_search' => $selectedSearch,
+			'coverage_summary' => I18nCoverageService::summarize([
+				'locales' => array_values(array_map(
+					static fn (array $option): string => (string) $option['value'],
+					$localeOptions
+				)),
+			]),
 		]);
 	}
 

@@ -56,21 +56,11 @@ class CmsSiteSnapshotService
 			throw new InvalidArgumentException('Uploaded files must be backed up before exporting a site snapshot. Re-run with --uploads-backed-up after copying the upload directory.');
 		}
 
-		$uploads_report = self::checkUploads();
+		$export_data = self::readExportSnapshotFromDatabase();
+		$uploads_report = self::checkUploadManifest($export_data['upload_manifest']);
 
 		if (!$uploads_report['ok']) {
 			throw new RuntimeException('Uploaded file consistency check failed. Fix or back up the upload directory before exporting the snapshot.');
-		}
-
-		$tables = self::getSnapshotTables();
-		$schema = self::buildSchema($tables);
-		$table_rows = [];
-		$table_counts = [];
-
-		foreach ($tables as $table) {
-			$rows = self::fetchTableRows($table);
-			$table_rows[$table] = $rows;
-			$table_counts[$table] = count($rows);
 		}
 
 		return [
@@ -83,13 +73,13 @@ class CmsSiteSnapshotService
 					? CmsSiteContext::getConfiguredSiteKey()
 					: Config::APP_DOMAIN_CONTEXT->value(),
 			],
-			'schema' => $schema,
-			'table_counts' => $table_counts,
-			'tables' => $table_rows,
+			'schema' => $export_data['schema'],
+			'table_counts' => $export_data['table_counts'],
+			'tables' => $export_data['table_rows'],
 			'uploads' => [
 				'directory' => self::getUploadDirectoryRelativePath(),
 				'backed_up_confirmed' => true,
-				'files' => $uploads_report['manifest'],
+				'files' => $export_data['upload_manifest'],
 			],
 			'excluded_operational_tables' => self::EXCLUDED_OPERATIONAL_TABLES,
 		];
@@ -226,6 +216,15 @@ class CmsSiteSnapshotService
 			? self::buildUploadManifestFromDatabase()
 			: self::extractUploadManifestFromSnapshot($snapshot);
 
+		return self::checkUploadManifest($manifest);
+	}
+
+	/**
+	 * @param list<array<string, mixed>> $manifest
+	 * @return array<string, mixed>
+	 */
+	private static function checkUploadManifest(array $manifest): array
+	{
 		$files = [];
 		$missing = 0;
 		$mismatched = 0;
@@ -641,6 +640,59 @@ class CmsSiteSnapshotService
 	}
 
 	/**
+	 * @return array{
+	 *     schema: array<string, mixed>,
+	 *     table_rows: array<string, list<array<string, mixed>>>,
+	 *     table_counts: array<string, int>,
+	 *     upload_manifest: list<array<string, mixed>>
+	 * }
+	 */
+	private static function readExportSnapshotFromDatabase(): array
+	{
+		$pdo = Db::instance();
+		$transaction_started = false;
+
+		try {
+			if (!$pdo->inTransaction()) {
+				$pdo->exec('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ');
+				$pdo->exec('START TRANSACTION READ ONLY');
+				$transaction_started = true;
+			}
+
+			$tables = self::getSnapshotTables();
+			$schema = self::buildSchema($tables);
+			$table_rows = [];
+			$table_counts = [];
+
+			foreach ($tables as $table) {
+				$rows = self::fetchTableRows($table);
+				$table_rows[$table] = $rows;
+				$table_counts[$table] = count($rows);
+			}
+
+			$upload_rows = $table_rows['mediacontainer_vfs_files'] ?? [];
+			$upload_manifest = self::buildUploadManifestFromRows($upload_rows);
+
+			if ($transaction_started) {
+				$pdo->commit();
+			}
+
+			return [
+				'schema' => $schema,
+				'table_rows' => $table_rows,
+				'table_counts' => $table_counts,
+				'upload_manifest' => $upload_manifest,
+			];
+		} catch (Throwable $exception) {
+			if ($transaction_started && $pdo->inTransaction()) {
+				$pdo->rollBack();
+			}
+
+			throw $exception;
+		}
+	}
+
+	/**
 	 * @param list<string> $tables
 	 * @return array<string, mixed>
 	 */
@@ -846,14 +898,19 @@ class CmsSiteSnapshotService
 			return [];
 		}
 
-		$rows = self::fetchTableRows('mediacontainer_vfs_files');
-		$manifest = [];
+		return self::buildUploadManifestFromRows(self::fetchTableRows('mediacontainer_vfs_files'));
+	}
 
-		foreach ($rows as $row) {
-			$manifest[] = self::normalizeUploadManifestRow($row);
-		}
-
-		return $manifest;
+	/**
+	 * @param list<array<string, mixed>> $rows
+	 * @return list<array<string, mixed>>
+	 */
+	private static function buildUploadManifestFromRows(array $rows): array
+	{
+		return array_map(
+			static fn (array $row): array => self::normalizeUploadManifestRow($row),
+			$rows
+		);
 	}
 
 	/**

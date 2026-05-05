@@ -14,36 +14,37 @@ class EventJumploaderPartitionedUploadHandler extends AbstractEvent
 		$ref_id = Request::_GET('ref_id');
 
 		if (is_null($ref_id)) {
-			SystemMessages::_error(t('cms.file.missing_ref_id'));
-
-			return;
+			$this->respondJson(400, false, t('cms.file.missing_ref_id'));
 		}
 
 		$temporary_uploaded_file = JumploaderUpload::manageUpload();
 
 		if ($temporary_uploaded_file === false) {
-			return;
+			$this->respondJson(400, false, t('cms.file.upload_error'));
 		}
 
 		if ($temporary_uploaded_file === true) {
-			return;
+			$this->respondJson(200, true, '');
 		}
 
-		// 1. Beszúrjuk a fájl tárolóba
 		$file_id = FileContainer::addFile($temporary_uploaded_file);
 		@unlink($temporary_uploaded_file);
 
 		if ($file_id === false) {
-			SystemMessages::_error(t('cms.file.upload_error'));
-
-			return;
+			$this->respondJson(500, false, t('cms.file.upload_error'));
 		}
 
-		// 2. Rögzítjük a weboldal fában
-		$this->addResource((int)$ref_id, $file_id, $_FILES['file']['name']);
+		$add_result = $this->addResource((int) $ref_id, $file_id, (string) ($_FILES['file']['name'] ?? $_POST['fileName'] ?? ''));
+
+		if (!$add_result->ok) {
+			FileContainer::delFile($file_id);
+			$this->respondJson(500, false, $add_result->error?->message ?? t('cms.file.upload_error'));
+		}
+
+		$this->respondJson(200, true, t('cms.file.uploaded'));
 	}
 
-	private function addResource($parent_id, $file_id, $savename): void
+	private function addResource(int $parent_id, int $file_id, string $save_name): ResourceTreeMutationResult
 	{
 		$mime = mime_content_type(FileContainer::realPathFromFileId($file_id));
 
@@ -53,19 +54,25 @@ class EventJumploaderPartitionedUploadHandler extends AbstractEvent
 
 		$savedata = [
 			'node_type' => 'file',
-			'resource_name' => $savename,
+			'resource_name' => $save_name,
 			'path' => ResourceTreeHandler::getPathFromId($parent_id),
 			'file_id' => $file_id,
-			'title' => $savename,
+			'title' => $save_name,
 			'mime' => $mime,
 		];
 
-		$page_id = ResourceTreeHandler::addResourceEntry($savedata, $parent_id);
+		return ResourceTreeHandler::addResourceEntryResult($savedata, $parent_id);
+	}
 
-		if ($page_id) {
-			SystemMessages::addSystemMessage(t('cms.file.uploaded'));
-		} else {
-			SystemMessages::addSystemMessage(t('cms.file.upload_error'));
-		}
+	private function respondJson(int $status_code, bool $ok, string $message): never
+	{
+		http_response_code($status_code);
+		header('Content-Type: application/json; charset=UTF-8');
+		echo json_encode([
+			'ok' => $ok,
+			'message' => $message,
+		], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+
+		exit;
 	}
 }

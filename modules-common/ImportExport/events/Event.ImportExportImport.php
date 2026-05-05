@@ -20,14 +20,13 @@ class EventImportExportImport extends AbstractEvent implements iBrowserEventDocu
 					BrowserEventDocumentationHelper::param('dataset', 'body', 'string', true, 'Dataset key to import into.'),
 					BrowserEventDocumentationHelper::param('csv_file', 'file', 'uploaded-file', true, 'CSV upload payload.'),
 					BrowserEventDocumentationHelper::param('dry_run', 'body', 'string', false, 'When set to 1, perform a dry run.'),
-					BrowserEventDocumentationHelper::param('ajax', 'body', 'string', false, 'When set to 1, force JSON output.'),
-					BrowserEventDocumentationHelper::param('referer', 'body', 'string', false, 'Optional return URL for non-AJAX flows.'),
+					BrowserEventDocumentationHelper::param('referer', 'body', 'string', false, 'Optional return URL for full-page flows.'),
 				],
 			],
 			'response' => [
 				'kind' => 'json-or-redirect',
 				'content_type' => 'application/json or text/html',
-				'description' => 'Returns JSON for AJAX requests, otherwise redirects back with system messages.',
+				'description' => 'Returns JSON for non-HTML requests, otherwise redirects back with system messages.',
 			],
 			'authorization' => [
 				'visibility' => 'dataset-specific',
@@ -35,11 +34,11 @@ class EventImportExportImport extends AbstractEvent implements iBrowserEventDocu
 			],
 			'notes' => BrowserEventDocumentationHelper::lines(
 				'Dataset-specific extra POST fields are forwarded as scalar options to the dataset importer.',
-				'The response shape changes depending on the AJAX detection rules or explicit ajax=1.'
+				'JSON output is selected by Request::wantsNonHtmlResponse() headers, not by request parameters.'
 			),
 			'side_effects' => BrowserEventDocumentationHelper::lines(
 				'May insert, update, or delete data depending on the dataset and selected mode.',
-				'Queues system messages in non-AJAX flows.'
+				'Queues system messages in full-page flows.'
 			),
 		];
 	}
@@ -57,10 +56,10 @@ class EventImportExportImport extends AbstractEvent implements iBrowserEventDocu
 	{
 		$dataset = $this->_dataset ?? $this->_resolveDatasetFromPost();
 		$referer = trim(Request::_POST('referer', Url::getCurrentUrl()));
-		$ajax = $this->_wantsJsonResponse();
+		$wants_json_response = $this->_wantsJsonResponse();
 
 		if ($dataset === null || !$dataset->supportsImport()) {
-			if ($ajax) {
+			if ($wants_json_response) {
 				$this->_respondJson(404, [
 					'ok' => false,
 					'dry_run' => Request::_POST('dry_run', '0') === '1',
@@ -78,7 +77,7 @@ class EventImportExportImport extends AbstractEvent implements iBrowserEventDocu
 		$upload = $_FILES['csv_file'] ?? null;
 
 		if (!is_array($upload) || empty($upload['tmp_name']) || !is_uploaded_file($upload['tmp_name'])) {
-			if ($ajax) {
+			if ($wants_json_response) {
 				$this->_respondJson(400, [
 					'ok' => false,
 					'dry_run' => Request::_POST('dry_run', '0') === '1',
@@ -96,7 +95,7 @@ class EventImportExportImport extends AbstractEvent implements iBrowserEventDocu
 		$csvContent = file_get_contents($upload['tmp_name']);
 
 		if ($csvContent === false) {
-			if ($ajax) {
+			if ($wants_json_response) {
 				$this->_respondJson(400, [
 					'ok' => false,
 					'dry_run' => Request::_POST('dry_run', '0') === '1',
@@ -118,7 +117,7 @@ class EventImportExportImport extends AbstractEvent implements iBrowserEventDocu
 		try {
 			$result = $dataset->import($csvContent, $options);
 
-			if ($ajax) {
+			if ($wants_json_response) {
 				$this->_respondJson(200, [
 					'ok' => empty($result['errors']),
 					'dry_run' => $dryRun,
@@ -131,7 +130,7 @@ class EventImportExportImport extends AbstractEvent implements iBrowserEventDocu
 
 			$this->_reportResult($dataset, $result, $options['dry_run'] === '1');
 		} catch (Throwable $e) {
-			if ($ajax) {
+			if ($wants_json_response) {
 				$this->_respondJson(422, [
 					'ok' => false,
 					'dry_run' => $dryRun,
@@ -178,15 +177,7 @@ class EventImportExportImport extends AbstractEvent implements iBrowserEventDocu
 
 	private function _wantsJsonResponse(): bool
 	{
-		if (Request::_POST('ajax', '0') === '1') {
-			return true;
-		}
-
-		$server = RequestContextHolder::current()->SERVER;
-		$requestedWith = strtolower(trim((string) ($server['HTTP_X_REQUESTED_WITH'] ?? '')));
-		$accept = strtolower(trim((string) ($server['HTTP_ACCEPT'] ?? '')));
-
-		return $requestedWith === 'xmlhttprequest' || str_contains($accept, 'application/json');
+		return Request::wantsNonHtmlResponse();
 	}
 
 	/**

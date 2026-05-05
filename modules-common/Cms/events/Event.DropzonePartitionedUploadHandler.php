@@ -38,18 +38,15 @@ class EventDropzonePartitionedUploadHandler extends AbstractEvent
 		@unlink($uploaded_file['path']);
 
 		if ($file_id === false) {
-			SystemMessages::_error(t('cms.file.upload_error'));
 			$this->respondJson(500, false, t('cms.file.upload_error'));
 		}
 
 		$page_id = $this->addResource((int) $ref_id, $file_id, $uploaded_file['original_name']);
 
 		if ($page_id === false) {
-			SystemMessages::_error(t('cms.file.upload_error'));
 			$this->respondJson(500, false, t('cms.file.upload_error'));
 		}
 
-		SystemMessages::addSystemMessage(t('cms.file.uploaded'));
 		$this->respondJson(200, true, t('cms.file.uploaded'));
 	}
 
@@ -70,7 +67,9 @@ class EventDropzonePartitionedUploadHandler extends AbstractEvent
 			'mime' => $mime,
 		];
 
-		return ResourceTreeHandler::addResourceEntry($savedata, $parent_id);
+		$result = ResourceTreeHandler::addResourceEntryResult($savedata, $parent_id);
+
+		return $result->ok ? (int) $result->data : false;
 	}
 
 	private function respondJson(int $status_code, bool $ok, string $message): never

@@ -24,7 +24,7 @@ class CmsResourceImportService
 			$old_file_id = null;
 
 			if (is_array($existing) && ($existing['node_type'] ?? null) !== 'file') {
-				throw new RuntimeException("Resource path exists and is not a file: {$folder_path}{$resource_name}");
+				throw new RuntimeException(t('cms.resource.error.path_exists_not_file', ['path' => $folder_path . $resource_name]));
 			}
 
 			if (is_array($existing)) {
@@ -38,13 +38,13 @@ class CmsResourceImportService
 			$folder = ResourceTreeHandler::getResourceTreeEntryDataById($folder_id);
 
 			if (!is_array($folder)) {
-				throw new RuntimeException("Target folder not found after creation: {$target_folder}");
+				throw new RuntimeException(t('cms.resource.error.target_folder_not_found', ['path' => $target_folder]));
 			}
 
 			$file_id = FileContainer::addFile($source);
 
 			if (!is_int($file_id) || $file_id <= 0) {
-				throw new RuntimeException("Unable to import file: {$source_path}");
+				throw new RuntimeException(t('cms.resource.error.import_file_failed', ['path' => $source_path]));
 			}
 
 			$stored_file = FileContainer::realPathFromFileId($file_id);
@@ -61,7 +61,13 @@ class CmsResourceImportService
 			$response_file_id = $file_id;
 
 			if (is_array($existing)) {
-				ResourceTreeHandler::updateResourceTreeEntry($save_data, (int) $existing['node_id']);
+				$update_result = ResourceTreeHandler::updateResourceTreeEntryResult($save_data, (int) $existing['node_id']);
+
+				if (!$update_result->ok) {
+					// Import is a batch boundary; callers render this item failure at the event or CLI layer.
+					throw new RuntimeException($update_result->error?->message ?? t('cms.resource.error.update_failed_for_path', ['path' => $folder_path . $resource_name]));
+				}
+
 				$resource_id = (int) $existing['node_id'];
 				$replaced = true;
 				$file_id = null;
@@ -74,13 +80,15 @@ class CmsResourceImportService
 					FileContainer::delFile($old_file_id);
 				}
 			} else {
-				$resource_id = ResourceTreeHandler::addResourceEntry($save_data, (int) $folder['node_id']);
+				$add_result = ResourceTreeHandler::addResourceEntryResult($save_data, (int) $folder['node_id']);
+				$resource_id = $add_result->ok ? (int) $add_result->data : null;
 
 				if (!is_int($resource_id) || $resource_id <= 0) {
 					FileContainer::delFile($file_id);
 					$file_id = null;
 
-					throw new RuntimeException("Unable to create file resource: {$folder_path}{$resource_name}");
+					// Import is a batch boundary; callers render this item failure at the event or CLI layer.
+					throw new RuntimeException($add_result->error?->message ?? t('cms.resource.error.create_failed_for_path', ['path' => $folder_path . $resource_name]));
 				}
 
 				$file_id = null;

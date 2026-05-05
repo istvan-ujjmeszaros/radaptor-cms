@@ -10,7 +10,6 @@ final class LayoutTemplateContractInspector
 		'getJs',
 		'page_chrome',
 		'fetchClosingHtml',
-		'renderSystemMessages',
 	];
 
 	/**

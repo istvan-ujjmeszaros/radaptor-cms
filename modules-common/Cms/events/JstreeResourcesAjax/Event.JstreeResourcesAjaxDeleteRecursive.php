@@ -40,12 +40,21 @@ class EventJstreeResourcesAjaxDeleteRecursive extends AbstractEvent
 
 			$last_parent_id = $data['parent_id'];
 
-			try {
-				$deletion_response_data = ResourceTreeHandler::deleteResourceEntriesRecursive($id);
-			} catch (RuntimeException $exception) {
+			$deletion_result = ResourceTreeHandler::deleteResourceEntriesRecursiveResult($id);
+			$deletion_response_data = is_array($deletion_result->data)
+				? $deletion_result->data
+				: [
+					'success' => false,
+					'erroneous' => 1,
+					'folder' => 0,
+					'webpage' => 0,
+					'file' => 0,
+				];
+
+			if (!$deletion_result->ok) {
 				$success = false;
 				++$total_errors;
-				$error_messages[] = $exception->getMessage();
+				$error_messages[] = $deletion_result->error?->message ?? t('cms.resource.delete_failed');
 
 				continue;
 			}
@@ -59,43 +68,6 @@ class EventJstreeResourcesAjaxDeleteRecursive extends AbstractEvent
 			} else {
 				$success = false;
 			}
-		}
-
-		$total_deleted = $total_folders + $total_webpages + $total_files;
-
-		if ($total_errors > 0) {
-			SystemMessages::_error(
-				$error_messages !== []
-					? implode('<br>', array_map('e', $error_messages))
-					: t('cms.resource.delete_partial_error', ['count' => $total_errors])
-			);
-		} elseif ($success && $total_deleted > 0) {
-			$name_list = implode(', ', $deleted_names);
-			$info_text = '';
-
-			if ($total_deleted > 1) {
-				$parts = [];
-
-				if ($total_folders > 0) {
-					$parts[] = t('cms.resource.folder_count', ['count' => $total_folders]);
-				}
-
-				if ($total_webpages > 0) {
-					$parts[] = t('cms.resource.page_count', ['count' => $total_webpages]);
-				}
-
-				if (!empty($parts)) {
-					$info_text = '<br><i>(' . implode(', ', $parts) . ')</i>';
-				}
-			}
-
-			if (count($deleted_names) === 1) {
-				SystemMessages::addSystemMessage(t('cms.resource.deleted') . "<br><i>{$name_list}</i>{$info_text}");
-			} else {
-				SystemMessages::addSystemMessage(t('cms.resource.deleted_multiple') . "<br><i>{$name_list}</i>{$info_text}");
-			}
-		} elseif (!$success) {
-			SystemMessages::_error(t('cms.resource.delete_error'));
 		}
 
 		$parent_data = $last_parent_id !== null ? ResourceTreeHandler::getResourceTreeEntryDataById((int) $last_parent_id) : null;
@@ -117,6 +89,23 @@ class EventJstreeResourcesAjaxDeleteRecursive extends AbstractEvent
 			]));
 		}
 
-		JsTreeApiService::renderDeleteResponse($success, $json_data, ['messages' => $error_messages]);
+		if ($success) {
+			ApiResponse::renderSuccess($json_data, [
+				'deleted' => [
+					'folder' => $total_folders,
+					'webpage' => $total_webpages,
+					'file' => $total_files,
+					'names' => $deleted_names,
+				],
+			]);
+
+			return;
+		}
+
+		ApiResponse::renderErrorObj(
+			new ApiError('RESOURCE_DELETE_FAILED', $error_messages[0] ?? t('cms.resource.delete_failed')),
+			400,
+			['messages' => $error_messages]
+		);
 	}
 }

@@ -164,6 +164,20 @@ cms,resource.delete_failed,,en_US,Delete failed,Delete failed,0,Delete failed
 cms,resource.delete_partial_error,,en_US,{count} error(s) occurred during deletion,{count} error(s) occurred during deletion,0,{count} error(s) occurred during deletion
 cms,resource.deleted,,en_US,Resource deleted,Resource deleted,0,Resource deleted
 cms,resource.deleted_multiple,,en_US,Resources deleted,Resources deleted,0,Resources deleted
+cms,resource.error.add_failed,,en_US,Unable to add resource tree entry.,Unable to add resource tree entry.,0,Unable to add resource tree entry.
+cms,resource.error.create_failed_for_path,,en_US,Unable to create resource: {path},Unable to create resource: {path},0,Unable to create resource: {path}
+cms,resource.error.delete_denied,,en_US,Delete denied for resource: {resource_id},Delete denied for resource: {resource_id},0,Delete denied for resource: {resource_id}
+cms,resource.error.delete_failed_for_id,,en_US,Unable to delete resource: {resource_id},Unable to delete resource: {resource_id},0,Unable to delete resource: {resource_id}
+cms,resource.error.file_delete_failed_for_id,,en_US,Unable to delete file for resource: {resource_id},Unable to delete file for resource: {resource_id},0,Unable to delete file for resource: {resource_id}
+cms,resource.error.import_file_failed,,en_US,Unable to import file: {path},Unable to import file: {path},0,Unable to import file: {path}
+cms,resource.error.move_failed_for_id,,en_US,Unable to move resource: {resource_id},Unable to move resource: {resource_id},0,Unable to move resource: {resource_id}
+cms,resource.error.not_found_by_id,,en_US,Resource not found: {resource_id},Resource not found: {resource_id},0,Resource not found: {resource_id}
+cms,resource.error.path_exists_not_file,,en_US,Resource path exists and is not a file: {path},Resource path exists and is not a file: {path},0,Resource path exists and is not a file: {path}
+cms,resource.error.protected_mutation,,en_US,Protected system resource cannot be modified: {path},Protected system resource cannot be modified: {path},0,Protected system resource cannot be modified: {path}
+cms,resource.error.protected_path_mutation,,en_US,Protected system resource path cannot be created or modified: {path},Protected system resource path cannot be created or modified: {path},0,Protected system resource path cannot be created or modified: {path}
+cms,resource.error.protected_subtree_mutation,,en_US,A protected system resource in this subtree cannot be modified: {path},A protected system resource in this subtree cannot be modified: {path},0,A protected system resource in this subtree cannot be modified: {path}
+cms,resource.error.target_folder_not_found,,en_US,Target folder not found after creation: {path},Target folder not found after creation: {path},0,Target folder not found after creation: {path}
+cms,resource.error.update_failed_for_path,,en_US,Unable to update resource: {path},Unable to update resource: {path},0,Unable to update resource: {path}
 cms,resource.folder_count,,en_US,{count} folder(s),{count} folder(s),0,{count} folder(s)
 cms,resource.move_error,,en_US,Error: Unable to move resource,Error: Unable to move resource,0,Error: Unable to move resource
 cms,resource.move_failed,,en_US,Move failed,Move failed,0,Move failed

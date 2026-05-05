@@ -183,31 +183,11 @@ class CmsSiteSnapshotService
 		}
 
 		self::replaceTables($snapshot);
-		$post_import_build = null;
-		$i18n_shipped_sync = null;
-
-		try {
-			$post_import_build = self::runBuildAllAfterImport();
-		} catch (Throwable $exception) {
-			$errors[] = 'Post-import build:all failed: ' . $exception->getMessage();
-			$post_import_build = [
-				'ran' => true,
-				'success' => false,
-				'message' => $exception->getMessage(),
-			];
-		}
-
-		try {
-			$i18n_shipped_sync_result = self::syncShippedTranslationsAfterImport();
-
-			if (($i18n_shipped_sync_result['has_errors'] ?? false) === true) {
-				$errors[] = 'Shipped i18n sync reported errors after import.';
-			}
-
-			$i18n_shipped_sync = self::summarizeI18nShippedSyncResult($i18n_shipped_sync_result);
-		} catch (Throwable $exception) {
-			$errors[] = 'Shipped i18n sync failed after import: ' . $exception->getMessage();
-		}
+		$post_import_maintenance = self::runPostImportMaintenance();
+		$errors = [
+			...$errors,
+			...self::collectPostImportMaintenanceErrors($post_import_maintenance),
+		];
 
 		$tree_reports = self::checkSnapshotTrees();
 		$tree_ok = array_reduce(
@@ -227,8 +207,11 @@ class CmsSiteSnapshotService
 			'errors' => $errors,
 			'summary' => $summary,
 			'uploads' => self::summarizeUploadsReport(self::checkUploads($snapshot)),
-			'post_import_build' => $post_import_build,
-			'i18n_shipped_sync' => $i18n_shipped_sync,
+			'post_import_build' => $post_import_maintenance['steps']['build_all']['result'] ?? null,
+			'i18n_shipped_sync' => $post_import_maintenance['steps']['i18n_shipped_sync']['result'] ?? null,
+			'i18n_tag_sync' => $post_import_maintenance['steps']['i18n_tag_sync']['result'] ?? null,
+			'i18n_tm_rebuild' => $post_import_maintenance['steps']['i18n_tm_rebuild']['result'] ?? null,
+			'post_import_maintenance' => $post_import_maintenance,
 			'trees' => $tree_reports,
 		];
 	}
@@ -436,6 +419,143 @@ class CmsSiteSnapshotService
 			'dry_run' => false,
 			'build' => true,
 		]);
+	}
+
+	/**
+	 * @return array<string, mixed>|null
+	 */
+	private static function syncTagI18nMessagesAfterImport(): ?array
+	{
+		if (!class_exists(EntityTag::class)) {
+			return null;
+		}
+
+		return EntityTag::syncAllTagI18nMessages(false);
+	}
+
+	/**
+	 * @return array<string, int>|null
+	 */
+	private static function rebuildTranslationMemoryAfterImport(): ?array
+	{
+		if (!class_exists(I18nTm::class)) {
+			return null;
+		}
+
+		return [
+			'rebuilt_rows' => I18nTm::rebuildFromTranslations(),
+		];
+	}
+
+	/**
+	 * @return array{
+	 *     ran: bool,
+	 *     success: bool,
+	 *     steps: array<string, array<string, mixed>>
+	 * }
+	 */
+	private static function runPostImportMaintenance(): array
+	{
+		$steps = [
+			'i18n_tag_sync' => self::runPostImportMaintenanceStep(
+				'i18n:sync-tags',
+				'Tag i18n sync',
+				static fn (): ?array => self::syncTagI18nMessagesAfterImport()
+			),
+			'i18n_shipped_sync' => self::runPostImportMaintenanceStep(
+				'i18n:sync-shipped',
+				'Shipped i18n sync',
+				static fn (): ?array => self::summarizeI18nShippedSyncResult(self::syncShippedTranslationsAfterImport()),
+				static fn (mixed $result): bool => !is_array($result) || ($result['has_errors'] ?? false) !== true,
+				'Shipped i18n sync reported errors.'
+			),
+			'i18n_tm_rebuild' => self::runPostImportMaintenanceStep(
+				'i18n:tm-rebuild',
+				'Translation memory rebuild',
+				static fn (): ?array => self::rebuildTranslationMemoryAfterImport()
+			),
+			'build_all' => self::runPostImportMaintenanceStep(
+				'build:all',
+				'Build all',
+				static fn (): array => self::runBuildAllAfterImport()
+			),
+			'cache_flush' => self::runPostImportMaintenanceStep(
+				'cache:flush',
+				'Cache flush',
+				static function (): array {
+					Cache::flush();
+
+					return ['flushed' => true];
+				}
+			),
+		];
+
+		return [
+			'ran' => true,
+			'success' => array_reduce(
+				$steps,
+				static fn (bool $carry, array $step): bool => $carry && (bool) ($step['success'] ?? false),
+				true
+			),
+			'steps' => $steps,
+		];
+	}
+
+	/**
+	 * @param callable(): mixed $callback
+	 * @param (callable(mixed): bool)|null $isSuccess
+	 * @return array<string, mixed>
+	 */
+	private static function runPostImportMaintenanceStep(
+		string $command,
+		string $label,
+		callable $callback,
+		?callable $isSuccess = null,
+		?string $failureMessage = null
+	): array {
+		try {
+			$result = $callback();
+			$success = $isSuccess === null ? true : $isSuccess($result);
+
+			return [
+				'command' => $command,
+				'label' => $label,
+				'ran' => true,
+				'success' => $success,
+				'message' => $success ? null : ($failureMessage ?? "{$label} failed."),
+				'result' => $result,
+			];
+		} catch (Throwable $exception) {
+			return [
+				'command' => $command,
+				'label' => $label,
+				'ran' => true,
+				'success' => false,
+				'message' => $exception->getMessage(),
+				'result' => null,
+			];
+		}
+	}
+
+	/**
+	 * @param array<string, mixed> $maintenance
+	 * @return list<string>
+	 */
+	private static function collectPostImportMaintenanceErrors(array $maintenance): array
+	{
+		$errors = [];
+
+		foreach (($maintenance['steps'] ?? []) as $step) {
+			if (!is_array($step) || ($step['success'] ?? false) === true) {
+				continue;
+			}
+
+			$label = (string) ($step['label'] ?? 'Maintenance step');
+			$message = trim((string) ($step['message'] ?? 'failed'));
+			$errors[] = "Post-import {$label} failed: {$message}";
+		}
+
+		return $errors;
 	}
 
 	/**

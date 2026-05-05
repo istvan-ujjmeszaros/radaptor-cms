@@ -41,8 +41,12 @@ class JsonAdapterJsTree3x
 			$is_catcher = isset($parent_data['catcher_page'])
 				&& $parent_data['catcher_page'] == $node['node_id'];
 
+			$jstree_id = (string) ($node['_jstree_id'] ?? $node['node_id']);
+			$data_node_id = is_numeric($node['_jstree_data_node_id'] ?? null)
+				? (int) $node['_jstree_data_node_id']
+				: (int) $node['node_id'];
 			$data = [
-				'node_id' => (int) $node['node_id'],
+				'node_id' => $data_node_id,
 				'path' => $node['path'] ?? '',
 				'resource_name' => $node['resource_name'],
 				'node_type' => $node['node_type'],
@@ -58,7 +62,8 @@ class JsonAdapterJsTree3x
 				$node,
 				$node['resource_name'],
 				$node['node_type'],
-				$data
+				$data,
+				$jstree_id
 			);
 
 			if ($is_root_request && $node['node_type'] === 'root') {
@@ -378,12 +383,13 @@ class JsonAdapterJsTree3x
 		array $node,
 		string $text,
 		string $type,
-		array $data
+		array $data,
+		?string $id = null
 	): array {
 		$has_children = ($node['rgt'] - $node['lft'] > 1);
 
 		return [
-			'id' => (string) $node['node_id'],
+			'id' => $id ?? (string) $node['node_id'],
 			'text' => $text,
 			'type' => $type,
 			'children' => $has_children,

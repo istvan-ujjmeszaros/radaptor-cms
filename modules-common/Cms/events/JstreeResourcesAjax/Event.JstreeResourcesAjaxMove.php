@@ -21,8 +21,8 @@ class EventJstreeResourcesAjaxMove extends AbstractEvent
 			return;
 		}
 
-		//$movedPageData = ResourceHandler::getResourceDataById($id);
-		//$refPageData = Webpage::getWebpageDataById($ref_node_id);
+		$id = $this->resolveResourceTreeNodeId($id);
+		$ref_node_id = $this->resolveResourceTreeNodeId($ref_node_id);
 
 		$result = ResourceTreeHandler::moveResourceEntryToPositionResult($id, $ref_node_id, $position);
 		$success = $result->ok;
@@ -64,5 +64,14 @@ class EventJstreeResourcesAjaxMove extends AbstractEvent
 			400,
 			['debug' => NestedSet::$debug, 'message' => $error_message]
 		);
+	}
+
+	private function resolveResourceTreeNodeId(mixed $node_id): int
+	{
+		if ($node_id === ResourceTreeHandler::JSTREE_SITE_ROOT_ID) {
+			return CmsSiteContext::getCurrentRootId() ?? 0;
+		}
+
+		return (int) $node_id;
 	}
 }

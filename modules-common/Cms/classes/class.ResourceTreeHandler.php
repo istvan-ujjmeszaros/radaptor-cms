@@ -3,6 +3,7 @@
 class ResourceTreeHandler extends ResourceAcl
 {
 	public const int MAXIMUM_ALLOWED_INLINE_SIZE_FOR_UNKNOWN = 10485760;   // 10MB
+	public const string JSTREE_SITE_ROOT_ID = 'site-root';
 
 	private static array $_resizable_resources = [];
 	private static bool $_protected_resource_mutation_bypass = false;
@@ -590,9 +591,11 @@ class ResourceTreeHandler extends ResourceAcl
 			}
 		}
 
-		self::updateResourceTreeEntry([
-			'resource_name' => $site_key,
-		], $content_root_id);
+		self::withProtectedResourceMutationBypass(static function () use ($content_root_id, $site_key): void {
+			self::updateResourceTreeEntry([
+				'resource_name' => $site_key,
+			], $content_root_id);
+		});
 
 		if (self::getDomainRoot($site_key) !== $content_root_id) {
 			throw new RuntimeException("Unable to normalize CMS site root from {$content_root_name} to {$site_key}.");
@@ -861,6 +864,26 @@ class ResourceTreeHandler extends ResourceAcl
 		);
 	}
 
+	private static function getRootResourceMutationError(int $resource_id, string $operation): ?ApiError
+	{
+		if (self::$_protected_resource_mutation_bypass) {
+			return null;
+		}
+
+		$resource_data = self::getResourceTreeEntryDataById($resource_id);
+
+		if (!is_array($resource_data) || (string) ($resource_data['node_type'] ?? '') !== 'root') {
+			return null;
+		}
+
+		return new ApiError(
+			'PROTECTED_RESOURCE_MUTATION',
+			t('cms.resource.error.protected_mutation', ['path' => '/']),
+			[],
+			['resource_id' => $resource_id, 'path' => '/', 'operation' => $operation]
+		);
+	}
+
 	private static function getProtectedResourceSubtreeMutationError(int $resource_id, string $operation): ?ApiError
 	{
 		if (self::$_protected_resource_mutation_bypass) {
@@ -995,7 +1018,8 @@ class ResourceTreeHandler extends ResourceAcl
 			);
 		}
 
-		$error = self::getProtectedResourceMutationError($resource_id, 'update')
+		$error = self::getRootResourceMutationError($resource_id, 'update')
+			?? self::getProtectedResourceMutationError($resource_id, 'update')
 			?? self::getProtectedResourcePathMutationError(self::buildPathFromResourceData($resource_data, $savedata), 'update');
 
 		if ($error !== null) {
@@ -1174,7 +1198,8 @@ class ResourceTreeHandler extends ResourceAcl
 
 	public static function deleteResourceEntryResult(int $resource_id): ResourceTreeMutationResult
 	{
-		$error = self::getProtectedResourceMutationError($resource_id, 'delete');
+		$error = self::getRootResourceMutationError($resource_id, 'delete')
+			?? self::getProtectedResourceMutationError($resource_id, 'delete');
 
 		if ($error !== null) {
 			return ResourceTreeMutationResult::failure($error);
@@ -1253,7 +1278,8 @@ class ResourceTreeHandler extends ResourceAcl
 
 	public static function deleteResourceEntriesRecursiveResult(int $resource_id): ResourceTreeMutationResult
 	{
-		$error = self::getProtectedResourceSubtreeMutationError($resource_id, 'delete recursively');
+		$error = self::getRootResourceMutationError($resource_id, 'delete recursively')
+			?? self::getProtectedResourceSubtreeMutationError($resource_id, 'delete recursively');
 
 		if ($error !== null) {
 			return ResourceTreeMutationResult::failure($error, self::emptyDeleteCounts(false, 1));
@@ -1468,7 +1494,8 @@ class ResourceTreeHandler extends ResourceAcl
 
 	public static function moveResourceEntryToPositionResult(int $resource_id, int $parent_id, int $position): ResourceTreeMutationResult
 	{
-		$error = self::getProtectedResourceMutationError($resource_id, 'move')
+		$error = self::getRootResourceMutationError($resource_id, 'move')
+			?? self::getProtectedResourceMutationError($resource_id, 'move')
 			?? self::getProtectedResourceMutationError($parent_id, 'move into');
 
 		if ($error !== null) {

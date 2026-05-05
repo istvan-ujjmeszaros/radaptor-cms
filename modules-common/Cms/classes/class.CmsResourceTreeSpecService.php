@@ -288,7 +288,7 @@ final class CmsResourceTreeSpecService
 
 		$resource['type'] = $type;
 		$resource['path'] = $type === 'folder'
-			? CmsPathHelper::normalizePath((string) $resource['path'])
+			? CmsPathHelper::splitFolderPath((string) $resource['path'])['normalized_path']
 			: CmsPathHelper::splitWebpagePath((string) $resource['path'])['normalized_path'];
 
 		return $resource;

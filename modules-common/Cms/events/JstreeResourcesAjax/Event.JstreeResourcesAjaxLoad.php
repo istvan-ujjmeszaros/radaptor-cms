@@ -56,16 +56,28 @@ class EventJstreeResourcesAjaxLoad extends AbstractEvent implements iBrowserEven
 		$is_root_request = $node_id === '#' || $node_id === 'root';
 
 		try {
+			$root_id = CmsSiteContext::getCurrentRootId();
+
+			if ($root_id === null) {
+				throw new RuntimeException('Root node not found');
+			}
+
 			if ($is_root_request) {
 				$parent_node_id = 0;
-				$root_id = CmsSiteContext::getCurrentRootId();
+				$root_data = ResourceTreeHandler::getResourceTreeEntryDataById($root_id);
 
-				if ($root_id === null) {
+				if (!is_array($root_data)) {
 					throw new RuntimeException('Root node not found');
 				}
 
-				$raw_data = [ResourceTreeHandler::getResourceTreeEntryDataById($root_id)];
+				$root_data['_jstree_id'] = ResourceTreeHandler::JSTREE_SITE_ROOT_ID;
+				$root_data['_jstree_data_node_id'] = 0;
+				$raw_data = [$root_data];
 				$parent_data = null;
+			} elseif ($node_id === ResourceTreeHandler::JSTREE_SITE_ROOT_ID) {
+				$parent_node_id = $root_id;
+				$raw_data = ResourceTreeHandler::getResourceTree($parent_node_id);
+				$parent_data = ResourceTreeHandler::getResourceTreeEntryDataById($parent_node_id);
 			} else {
 				$parent_node_id = JsTreeApiService::resolveParentNodeId($node_id);
 				$raw_data = ResourceTreeHandler::getResourceTree($parent_node_id);

@@ -31,7 +31,7 @@ class EventJstreeResourcesAjaxDeleteRecursive extends AbstractEvent
 		$success = true;
 
 		foreach ($ids as $id) {
-			$id = (int) $id;
+			$id = $this->resolveResourceTreeNodeId($id);
 			$data = ResourceTreeHandler::getResourceTreeEntryDataById($id);
 
 			if (!$data) {
@@ -107,5 +107,14 @@ class EventJstreeResourcesAjaxDeleteRecursive extends AbstractEvent
 			400,
 			['messages' => $error_messages]
 		);
+	}
+
+	private function resolveResourceTreeNodeId(mixed $node_id): int
+	{
+		if ($node_id === ResourceTreeHandler::JSTREE_SITE_ROOT_ID) {
+			return CmsSiteContext::getCurrentRootId() ?? 0;
+		}
+
+		return (int) $node_id;
 	}
 }

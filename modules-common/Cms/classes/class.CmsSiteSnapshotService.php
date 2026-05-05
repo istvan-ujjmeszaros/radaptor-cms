@@ -377,6 +377,8 @@ class CmsSiteSnapshotService
 	 */
 	private static function replaceTables(array $snapshot): void
 	{
+		self::validateSnapshotTableRows($snapshot);
+
 		$pdo = Db::instance();
 		$tables = array_keys($snapshot['tables']);
 		$schema = self::buildSchema($tables);

@@ -27,6 +27,3 @@ cli_runner,category.userconfig,,en_US,"User Config","User Config",0,"User Config
 cli_runner,category.usergroup,,en_US,"User Groups","User Groups",0,"User Groups"
 cli_runner,category.webpage,,en_US,"Webpages","Webpages",0,"Webpages"
 cli_runner,category.widget,,en_US,"Widgets","Widgets",0,"Widgets"
-admin,menu.cli_runner,,en_US,"CLI Runner","CLI Runner",0,"CLI Runner"
-widget,cli_runner.name,,en_US,"CLI Runner","CLI Runner",0,"CLI Runner"
-widget,cli_runner.description,,en_US,"Run CLI commands from the admin panel.","Run CLI commands from the admin panel.",0,"Run CLI commands from the admin panel."

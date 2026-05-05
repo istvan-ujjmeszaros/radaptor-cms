@@ -1,0 +1,29 @@
+domain,key,context,locale,source_text,expected_text,human_reviewed,text
+cli_runner,title,,ja_JP,"CLI Command Runner",CLIコマンドランナー,0,CLIコマンドランナー
+cli_runner,subtitle,,ja_JP,"Execute Radaptor CLI commands from the browser.","ブラウザーからRadaptor CLIコマンドを実行します。",0,"ブラウザーからRadaptor CLIコマンドを実行します。"
+cli_runner,select_command,,ja_JP,"Select a command from the list to get started.",開始するには一覧からコマンドを選択してください。,0,開始するには一覧からコマンドを選択してください。
+cli_runner,action.run,,ja_JP,Run,実行,0,実行
+cli_runner,action.confirm,,ja_JP,"Confirm & Run",確認して実行,0,確認して実行
+cli_runner,action.clear,,ja_JP,Clear,クリア,0,クリア
+cli_runner,confirm.title,,ja_JP,"Confirm Command",コマンドの確認,0,コマンドの確認
+cli_runner,confirm.message,,ja_JP,"This command will modify data or system state. Are you sure?",このコマンドはデータまたはシステム状態を変更します。よろしいですか？,0,このコマンドはデータまたはシステム状態を変更します。よろしいですか？
+cli_runner,output.title,,ja_JP,Output,出力,0,出力
+cli_runner,output.empty,,ja_JP,"No output",出力なし,0,出力なし
+cli_runner,output.running,,ja_JP,"Running command...",コマンドを実行中...,0,コマンドを実行中...
+cli_runner,output.completed,,ja_JP,"Completed in {duration}ms",{duration}msで完了,0,{duration}msで完了
+cli_runner,output.failed,,ja_JP,"Command failed (exit code {code})","コマンドが失敗しました（終了コード {code}）",0,"コマンドが失敗しました（終了コード {code}）"
+cli_runner,output.timeout,,ja_JP,"Command timed out",コマンドがタイムアウトしました,0,コマンドがタイムアウトしました
+cli_runner,category.build,,ja_JP,Build,ビルド,0,ビルド
+cli_runner,category.db,,ja_JP,Database,データベース,0,データベース
+cli_runner,category.emailqueue,,ja_JP,"Email Queue",メールキュー,0,メールキュー
+cli_runner,category.form,,ja_JP,Forms,フォーム,0,フォーム
+cli_runner,category.i18n,,ja_JP,Translations,翻訳,0,翻訳
+cli_runner,category.migrate,,ja_JP,Migrations,マイグレーション,0,マイグレーション
+cli_runner,category.plugin,,ja_JP,Plugins,プラグイン,0,プラグイン
+cli_runner,category.role,,ja_JP,Roles,ロール,0,ロール
+cli_runner,category.site,,ja_JP,Site,サイト,0,サイト
+cli_runner,category.user,,ja_JP,Users,ユーザー,0,ユーザー
+cli_runner,category.userconfig,,ja_JP,"User Config",ユーザー設定,0,ユーザー設定
+cli_runner,category.usergroup,,ja_JP,"User Groups",ユーザーグループ,0,ユーザーグループ
+cli_runner,category.webpage,,ja_JP,Webpages,Webページ,0,Webページ
+cli_runner,category.widget,,ja_JP,Widgets,ウィジェット,0,ウィジェット

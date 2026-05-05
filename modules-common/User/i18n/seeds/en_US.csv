@@ -123,3 +123,7 @@ user,validation.password_required,,en_US,"Password is required","Password is req
 user,validation.timezone_invalid,,en_US,"Invalid timezone. Use an IANA name (e.g. Europe/Budapest).","Invalid timezone. Use an IANA name (e.g. Europe/Budapest).",0,"Invalid timezone. Use an IANA name (e.g. Europe/Budapest)."
 user,validation.username_max_length,,en_US,"Username must be 32 characters or fewer","Username must be 32 characters or fewer",0,"Username must be 32 characters or fewer"
 user,validation.username_taken,,en_US,"Username is already taken","Username is already taken",0,"Username is already taken"
+user,locale.current_label,,en_US,"Current language","Current language",0,"Current language"
+user,locale.invalid,,en_US,"Selected language is not available","Selected language is not available",0,"Selected language is not available"
+user,locale.menu_label,,en_US,Language,Language,0,Language
+user,locale.updated,,en_US,"Language updated","Language updated",0,"Language updated"

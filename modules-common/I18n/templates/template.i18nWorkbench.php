@@ -10,6 +10,11 @@
 	'admin.i18n.col.source',
 	'admin.i18n.col.translation',
 	'admin.i18n.col.reviewed',
+	'admin.i18n.coverage.title',
+	'admin.i18n.coverage.translated',
+	'admin.i18n.coverage.reviewed',
+	'admin.i18n.coverage.missing',
+	'admin.i18n.coverage.stale',
 	'admin.i18n.tm.title',
 	'admin.i18n.tm.exact_then_similar',
 	'admin.i18n.tm.exact_matches',
@@ -40,6 +45,8 @@ $domainOptions = $this->props['domain_options'] ?? [];
 $selectedLocale = (string) ($this->props['selected_locale'] ?? 'en_US');
 $selectedDomain = (string) ($this->props['selected_domain'] ?? '');
 $selectedSearch = (string) ($this->props['selected_search'] ?? '');
+$coverageSummary = is_array($this->props['coverage_summary'] ?? null) ? $this->props['coverage_summary'] : [];
+$coverageLocales = is_array($coverageSummary['locales'] ?? null) ? $coverageSummary['locales'] : [];
 $reviewedLabel = t('admin.i18n.col.reviewed');
 
 if ($reviewedLabel === 'admin.i18n.col.reviewed') {
@@ -357,6 +364,31 @@ body.i18n-tm-open {
 .i18n-row-state--error {
     color: #b91c1c;
 }
+
+.i18n-coverage-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.i18n-coverage-summary__item {
+    border: 1px solid rgba(148, 163, 184, 0.28);
+    border-radius: 0.5rem;
+    padding: 0.7rem 0.8rem;
+}
+
+.i18n-coverage-summary__locale {
+    margin: 0;
+    font-weight: 700;
+}
+
+.i18n-coverage-summary__meta {
+    margin: 0.25rem 0 0 0;
+    color: #64748b;
+    font-size: 0.82rem;
+    line-height: 1.35;
+}
 </style>
 <div class="subheader">
     <h1><?= e(t('admin.i18n.title')) ?></h1>
@@ -410,6 +442,28 @@ body.i18n-tm-open {
                            data-i18n-workbench-target="searchInput">
                 </div>
             </div>
+
+            <?php if (!empty($coverageLocales)) { ?>
+            <h2 class="h6 mb-2"><?= e(t('admin.i18n.coverage.title')) ?></h2>
+            <div class="i18n-coverage-summary">
+                <?php foreach ($coverageLocales as $coverageLocale) { ?>
+                <div class="i18n-coverage-summary__item">
+                    <p class="i18n-coverage-summary__locale"><?= e((string) ($coverageLocale['label'] ?? $coverageLocale['locale'] ?? '')) ?></p>
+                    <p class="i18n-coverage-summary__meta">
+                        <?= e(t('admin.i18n.coverage.translated')) ?>:
+                        <?= e((string) ($coverageLocale['translated'] ?? 0)) ?>/<?= e((string) ($coverageLocale['total'] ?? 0)) ?>
+                        (<?= e((string) ($coverageLocale['translated_percent'] ?? 0)) ?>%)<br>
+                        <?= e(t('admin.i18n.coverage.reviewed')) ?>:
+                        <?= e((string) ($coverageLocale['reviewed'] ?? 0)) ?><br>
+                        <?= e(t('admin.i18n.coverage.missing')) ?>:
+                        <?= e((string) ($coverageLocale['missing'] ?? 0)) ?>,
+                        <?= e(t('admin.i18n.coverage.stale')) ?>:
+                        <?= e((string) ($coverageLocale['stale'] ?? 0)) ?>
+                    </p>
+                </div>
+                <?php } ?>
+            </div>
+            <?php } ?>
 
             <!-- Grid -->
             <div class="table-responsive">

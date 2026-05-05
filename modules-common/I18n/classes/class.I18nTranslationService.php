@@ -149,6 +149,7 @@ final class I18nTranslationService
 			'context' => $context,
 			'locale' => $locale,
 		]);
+		$existingHumanReviewed = $existing !== null && self::_normalizeHumanReviewed($existing->human_reviewed ?? 0);
 
 		if ($existing === null) {
 			return [
@@ -229,6 +230,7 @@ final class I18nTranslationService
 			'context' => $context,
 			'locale' => $locale,
 		]);
+		$existingHumanReviewed = $existing !== null && self::_normalizeHumanReviewed($existing->human_reviewed ?? 0);
 
 		if ($mode === CsvImportMode::InsertNew && $existing !== null) {
 			return [
@@ -250,6 +252,7 @@ final class I18nTranslationService
 			$existing !== null
 			&& $expectedText !== ''
 			&& (string) ($existing->text ?? '') !== $expectedText
+			&& $existingHumanReviewed
 		) {
 			return [
 				'action' => 'skipped',

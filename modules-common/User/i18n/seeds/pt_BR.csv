@@ -123,3 +123,7 @@ user,validation.password_required,,pt_BR,"Password is required","A senha é obri
 user,validation.timezone_invalid,,pt_BR,"Invalid timezone. Use an IANA name (e.g. Europe/Budapest).","Fuso horário inválido. Use um nome IANA (ex.: America/Sao_Paulo).",0,"Fuso horário inválido. Use um nome IANA (ex.: America/Sao_Paulo)."
 user,validation.username_max_length,,pt_BR,"Username must be 32 characters or fewer","O nome de usuário deve ter 32 caracteres ou menos",0,"O nome de usuário deve ter 32 caracteres ou menos"
 user,validation.username_taken,,pt_BR,"Username is already taken","O nome de usuário já está em uso",0,"O nome de usuário já está em uso"
+user,locale.current_label,,pt_BR,"Current language","Idioma atual",0,"Idioma atual"
+user,locale.invalid,,pt_BR,"Selected language is not available","O idioma selecionado não está disponível",0,"O idioma selecionado não está disponível"
+user,locale.menu_label,,pt_BR,Language,Idioma,0,Idioma
+user,locale.updated,,pt_BR,"Language updated","Idioma atualizado",0,"Idioma atualizado"

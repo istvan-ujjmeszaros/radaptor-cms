@@ -1,0 +1,29 @@
+domain,key,context,locale,source_text,expected_text,human_reviewed,text
+cli_runner,title,,fr_FR,"CLI Command Runner","Exécuteur de commandes CLI",0,"Exécuteur de commandes CLI"
+cli_runner,subtitle,,fr_FR,"Execute Radaptor CLI commands from the browser.","Exécutez des commandes CLI Radaptor depuis le navigateur.",0,"Exécutez des commandes CLI Radaptor depuis le navigateur."
+cli_runner,select_command,,fr_FR,"Select a command from the list to get started.","Sélectionnez une commande dans la liste pour commencer.",0,"Sélectionnez une commande dans la liste pour commencer."
+cli_runner,action.run,,fr_FR,Run,Exécuter,0,Exécuter
+cli_runner,action.confirm,,fr_FR,"Confirm & Run","Confirmer et exécuter",0,"Confirmer et exécuter"
+cli_runner,action.clear,,fr_FR,Clear,Effacer,0,Effacer
+cli_runner,confirm.title,,fr_FR,"Confirm Command","Confirmer la commande",0,"Confirmer la commande"
+cli_runner,confirm.message,,fr_FR,"This command will modify data or system state. Are you sure?","Cette commande modifiera des données ou l’état du système. Confirmez-vous ?",0,"Cette commande modifiera des données ou l’état du système. Confirmez-vous ?"
+cli_runner,output.title,,fr_FR,Output,Sortie,0,Sortie
+cli_runner,output.empty,,fr_FR,"No output","Aucune sortie",0,"Aucune sortie"
+cli_runner,output.running,,fr_FR,"Running command...","Commande en cours...",0,"Commande en cours..."
+cli_runner,output.completed,,fr_FR,"Completed in {duration}ms","Terminé en {duration}ms",0,"Terminé en {duration}ms"
+cli_runner,output.failed,,fr_FR,"Command failed (exit code {code})","Commande échouée (code de sortie {code})",0,"Commande échouée (code de sortie {code})"
+cli_runner,output.timeout,,fr_FR,"Command timed out","La commande a expiré",0,"La commande a expiré"
+cli_runner,category.build,,fr_FR,Build,Build,0,Build
+cli_runner,category.db,,fr_FR,Database,"Base de données",0,"Base de données"
+cli_runner,category.emailqueue,,fr_FR,"Email Queue","File d’e-mails",0,"File d’e-mails"
+cli_runner,category.form,,fr_FR,Forms,Formulaires,0,Formulaires
+cli_runner,category.i18n,,fr_FR,Translations,Traductions,0,Traductions
+cli_runner,category.migrate,,fr_FR,Migrations,Migrations,0,Migrations
+cli_runner,category.plugin,,fr_FR,Plugins,Plugins,0,Plugins
+cli_runner,category.role,,fr_FR,Roles,Rôles,0,Rôles
+cli_runner,category.site,,fr_FR,Site,Site,0,Site
+cli_runner,category.user,,fr_FR,Users,Utilisateurs,0,Utilisateurs
+cli_runner,category.userconfig,,fr_FR,"User Config","Configuration utilisateur",0,"Configuration utilisateur"
+cli_runner,category.usergroup,,fr_FR,"User Groups","Groupes d’utilisateurs",0,"Groupes d’utilisateurs"
+cli_runner,category.webpage,,fr_FR,Webpages,"Pages web",0,"Pages web"
+cli_runner,category.widget,,fr_FR,Widgets,Widgets,0,Widgets

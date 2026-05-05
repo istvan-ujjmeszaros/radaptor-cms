@@ -60,15 +60,8 @@ class LibrariesCommon
         /assets/packages/themes/so-admin/admin-site/js/jstree.adminmenu.js,
     ';
 	public const string __COMMON_ADMIN = '
-        /assets/packages/themes/radaptor-portal-admin/css/radaptor-base.css,
-        /assets/packages/themes/radaptor-portal-admin/css/radaptor-portal-admin.css,
-        /assets/packages/themes/radaptor-portal-admin/css/forms.css,
         /assets/packages/themes/radaptor-portal-admin/css/edit-mode.css,
         css:https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css,
-        js:https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js,
-        js:https://unpkg.com/htmx.org@2.0.4,
-        /assets/packages/radaptor-portal-admin/js/system-messages.js,
-        /assets/packages/radaptor-portal-admin/js/htmx-config.js,
     ';
 	public const string COMMON = '
         JQUERY,

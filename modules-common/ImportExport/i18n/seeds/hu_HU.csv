@@ -10,6 +10,7 @@ import_export,error.file_required,,hu_HU,"Please select a CSV file to import.","
 import_export,error.invalid_format,,hu_HU,"Invalid format","Érvénytelen formátum",0,"Érvénytelen formátum"
 import_export,error.invalid_mode,,hu_HU,"Invalid import mode.","Érvénytelen import mód.",0,"Érvénytelen import mód."
 import_export,error.locale_required,,hu_HU,"Locale is required for export.","Az exporthoz locale megadása kötelező.",0,"Az exporthoz locale megadása kötelező."
+import_export,error.upload_backup_required,,hu_HU,"Confirm the uploaded files backup before exporting the site snapshot.","Erősítsd meg a feltöltött fájlok mentését a weboldal snapshot exportálása előtt.",0,"Erősítsd meg a feltöltött fájlok mentését a weboldal snapshot exportálása előtt."
 import_export,export.title,,hu_HU,"Export CSV","CSV export",0,"CSV export"
 import_export,field.dataset.label,,hu_HU,Dataset,Adatkészlet,0,Adatkészlet
 import_export,field.expect_locale.any,,hu_HU,"Any locale in file","Bármely locale a fájlban",0,"Bármely locale a fájlban"
@@ -58,3 +59,4 @@ import_export,field.replace_confirmed.help,,hu_HU,"Required for the real import.
 import_export,site_snapshot.export.title,,hu_HU,"Export JSON snapshot","JSON snapshot export",0,"JSON snapshot export"
 import_export,site_snapshot.import.title,,hu_HU,"Import JSON snapshot","JSON snapshot import",0,"JSON snapshot import"
 import_export,site_snapshot.action.export,,hu_HU,"Export JSON","JSON export",0,"JSON export"
+import_export,confirm.site_snapshot_replace,,hu_HU,"This import will replace the current site database content with the uploaded snapshot. Continue?","Ez az import lecseréli a jelenlegi weboldal adatbázisban tárolt tartalmát a feltöltött snapshotra. Folytatod?",0,"Ez az import lecseréli a jelenlegi weboldal adatbázisban tárolt tartalmát a feltöltött snapshotra. Folytatod?"

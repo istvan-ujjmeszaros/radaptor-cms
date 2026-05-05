@@ -10,6 +10,7 @@ import_export,error.file_required,,en_US,"Please select a CSV file to import.","
 import_export,error.invalid_format,,en_US,"Invalid format","Invalid format",0,"Invalid format"
 import_export,error.invalid_mode,,en_US,"Invalid import mode.","Invalid import mode.",0,"Invalid import mode."
 import_export,error.locale_required,,en_US,"Locale is required for export.","Locale is required for export.",0,"Locale is required for export."
+import_export,error.upload_backup_required,,en_US,"Confirm the uploaded files backup before exporting the site snapshot.","Confirm the uploaded files backup before exporting the site snapshot.",0,"Confirm the uploaded files backup before exporting the site snapshot."
 import_export,export.title,,en_US,"Export CSV","Export CSV",0,"Export CSV"
 import_export,field.dataset.label,,en_US,Dataset,Dataset,0,Dataset
 import_export,field.expect_locale.any,,en_US,"Any locale in file","Any locale in file",0,"Any locale in file"
@@ -58,3 +59,4 @@ import_export,field.replace_confirmed.help,,en_US,"Required for the real import.
 import_export,site_snapshot.export.title,,en_US,"Export JSON snapshot","Export JSON snapshot",0,"Export JSON snapshot"
 import_export,site_snapshot.import.title,,en_US,"Import JSON snapshot","Import JSON snapshot",0,"Import JSON snapshot"
 import_export,site_snapshot.action.export,,en_US,"Export JSON","Export JSON",0,"Export JSON"
+import_export,confirm.site_snapshot_replace,,en_US,"This import will replace the current site database content with the uploaded snapshot. Continue?","This import will replace the current site database content with the uploaded snapshot. Continue?",0,"This import will replace the current site database content with the uploaded snapshot. Continue?"

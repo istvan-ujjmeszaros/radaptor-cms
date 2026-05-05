@@ -89,7 +89,11 @@ class ImportExportDatasetSiteSnapshot extends AbstractImportExportDataset
 
 	public function export(array $options): string
 	{
-		$snapshot = CmsSiteSnapshotService::exportSnapshot(($options['uploads_backed_up'] ?? '') === '1');
+		if (($options['uploads_backed_up'] ?? '') !== '1') {
+			throw new InvalidArgumentException(t('import_export.error.upload_backup_required'));
+		}
+
+		$snapshot = CmsSiteSnapshotService::exportSnapshot(true);
 
 		return CmsSiteSnapshotService::encodeSnapshot($snapshot);
 	}

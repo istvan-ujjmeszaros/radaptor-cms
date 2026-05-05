@@ -380,26 +380,41 @@ class CmsSiteSnapshotService
 		$pdo = Db::instance();
 		$tables = array_keys($snapshot['tables']);
 		$schema = self::buildSchema($tables);
+		$transaction_started = false;
 
 		$pdo->exec('SET FOREIGN_KEY_CHECKS = 0');
 
 		try {
+			if (!$pdo->inTransaction()) {
+				$pdo->beginTransaction();
+				$transaction_started = true;
+			}
+
 			foreach (array_reverse($tables) as $table) {
 				$pdo->exec('DELETE FROM ' . self::quoteIdentifier($table));
 			}
 
 			foreach ($tables as $table) {
-				$rows = $snapshot['tables'][$table] ?? [];
-
-				if (!is_array($rows)) {
-					throw new InvalidArgumentException("Snapshot table '{$table}' rows must be an array.");
-				}
-
+				/** @var list<array<string, mixed>> $rows */
+				$rows = $snapshot['tables'][$table];
 				self::insertTableRows($table, $schema['tables'][$table]['columns'], $rows);
-				self::resetAutoIncrement($table, $schema['tables'][$table]['columns']);
 			}
+
+			if ($transaction_started) {
+				$pdo->commit();
+			}
+		} catch (Throwable $exception) {
+			if ($transaction_started && $pdo->inTransaction()) {
+				$pdo->rollBack();
+			}
+
+			throw $exception;
 		} finally {
 			$pdo->exec('SET FOREIGN_KEY_CHECKS = 1');
+		}
+
+		foreach ($tables as $table) {
+			self::resetAutoIncrement($table, $schema['tables'][$table]['columns']);
 		}
 
 		Cache::flush();
@@ -725,11 +740,7 @@ class CmsSiteSnapshotService
 	 */
 	private static function extractUploadManifestFromSnapshot(array $snapshot): array
 	{
-		$files = $snapshot['uploads']['files'] ?? [];
-
-		if (!is_array($files)) {
-			throw new InvalidArgumentException('Snapshot uploads.files must be an array.');
-		}
+		$files = self::getRawUploadManifestRowsFromSnapshot($snapshot);
 
 		return array_map(
 			static fn (array $row): array => self::normalizeUploadManifestRow($row),
@@ -776,6 +787,9 @@ class CmsSiteSnapshotService
 			throw new InvalidArgumentException('Site snapshot is missing schema signature.');
 		}
 
+		self::validateSnapshotTableRows($snapshot);
+		self::getRawUploadManifestRowsFromSnapshot($snapshot);
+
 		$existing = self::getExistingTables();
 
 		foreach (array_keys($snapshot['tables']) as $table) {
@@ -783,6 +797,74 @@ class CmsSiteSnapshotService
 				throw new InvalidArgumentException("Snapshot table '{$table}' does not exist in the current database.");
 			}
 		}
+	}
+
+	/**
+	 * @param array<string, mixed> $snapshot
+	 */
+	private static function validateSnapshotTableRows(array $snapshot): void
+	{
+		foreach ($snapshot['tables'] as $table => $rows) {
+			if (!is_string($table) || $table === '') {
+				throw new InvalidArgumentException('Snapshot table names must be non-empty strings.');
+			}
+
+			self::quoteIdentifier($table);
+
+			if (!is_array($rows)) {
+				throw new InvalidArgumentException("Snapshot table '{$table}' rows must be an array.");
+			}
+
+			if (!array_is_list($rows)) {
+				throw new InvalidArgumentException("Snapshot table '{$table}' rows must be a list.");
+			}
+
+			foreach ($rows as $index => $row) {
+				if (!is_array($row)) {
+					throw new InvalidArgumentException("Snapshot table '{$table}' row #{$index} must be an object.");
+				}
+
+				foreach (array_keys($row) as $column) {
+					if (!is_string($column)) {
+						throw new InvalidArgumentException("Snapshot table '{$table}' row #{$index} column names must be strings.");
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * @param array<string, mixed> $snapshot
+	 * @return list<array<string, mixed>>
+	 */
+	private static function getRawUploadManifestRowsFromSnapshot(array $snapshot): array
+	{
+		if (!isset($snapshot['uploads']) || !is_array($snapshot['uploads'])) {
+			throw new InvalidArgumentException('Site snapshot is missing uploads manifest.');
+		}
+
+		if (!array_key_exists('files', $snapshot['uploads']) || !is_array($snapshot['uploads']['files'])) {
+			throw new InvalidArgumentException('Snapshot uploads.files must be an array.');
+		}
+
+		$files = [];
+
+		foreach ($snapshot['uploads']['files'] as $index => $file) {
+			if (!is_array($file)) {
+				throw new InvalidArgumentException("Snapshot uploads.files row #{$index} must be an object.");
+			}
+
+			foreach (['storage_folder_id', 'md5_hash', 'filesize'] as $required_field) {
+				if (!array_key_exists($required_field, $file)) {
+					throw new InvalidArgumentException("Snapshot uploads.files row #{$index} is missing {$required_field}.");
+				}
+			}
+
+			/** @var array<string, mixed> $file */
+			$files[] = $file;
+		}
+
+		return $files;
 	}
 
 	/**

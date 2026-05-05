@@ -53,12 +53,7 @@ class WidgetI18nWorkbench extends AbstractWidget
 			'selected_locale' => $selectedLocale,
 			'selected_domain' => $selectedDomain,
 			'selected_search' => $selectedSearch,
-			'coverage_summary' => I18nCoverageService::summarize([
-				'locales' => array_values(array_map(
-					static fn (array $option): string => (string) $option['value'],
-					$localeOptions
-				)),
-			]),
+			'coverage_summary' => $this->_getCoverageSummary($localeOptions),
 		]);
 	}
 
@@ -86,5 +81,23 @@ class WidgetI18nWorkbench extends AbstractWidget
 			],
 			array_map('strval', $rows ?: [])
 		);
+	}
+
+	/**
+	 * @param list<array{value: string, label: string}> $localeOptions
+	 * @return array<string, mixed>
+	 */
+	private function _getCoverageSummary(array $localeOptions): array
+	{
+		if (!class_exists('I18nCoverageService')) {
+			return [];
+		}
+
+		return I18nCoverageService::summarize([
+			'locales' => array_values(array_map(
+				static fn (array $option): string => (string) $option['value'],
+				$localeOptions
+			)),
+		]);
 	}
 }

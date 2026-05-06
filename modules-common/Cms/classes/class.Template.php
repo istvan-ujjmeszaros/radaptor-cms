@@ -24,7 +24,7 @@ class Template extends TemplateDebug
 	protected string $_mime = self::MIME_HTML;
 
 	/** @var array<string, string> */
-	protected array $_slotHtml = [];
+	protected array $_contentHtml = [];
 
 	/** @var array<string, mixed> */
 	protected array $_render_context = [];
@@ -299,19 +299,19 @@ class Template extends TemplateDebug
 	}
 
 	/**
-	 * @param array<string, string> $slot_html
+	 * @param array<string, string> $content_html
 	 */
-	public function setSlots(array $slot_html): void
+	public function setContents(array $content_html): void
 	{
-		$this->_slotHtml = $slot_html;
+		$this->_contentHtml = $content_html;
 	}
 
 	/**
-	 * Return the already-rendered HTML for a named slot.
+	 * Return the already-rendered HTML for a named template content region.
 	 */
-	public function fetchSlot(string $name): string
+	public function fetchContent(string $name): string
 	{
-		return $this->_slotHtml[$name] ?? '';
+		return $this->_contentHtml[$name] ?? '';
 	}
 
 	/**

@@ -5,7 +5,7 @@
  *     type: string,
  *     component: string,
  *     props: array<string, mixed>,
- *     slots: array<string, list<array<string, mixed>>>,
+ *     contents: array<string, list<array<string, mixed>>>,
  *     strings?: array<string, mixed>,
  *     meta?: array<string, mixed>
  * }
@@ -162,6 +162,8 @@ class Widget extends WidgetList
 				ResourceTreeHandler::setAsCatcherPage($page_id);
 			}
 
+			CmsRenderVersion::touchWebpage($page_id);
+
 			return $connection_id;
 		}
 
@@ -209,7 +211,13 @@ class Widget extends WidgetList
 
 		Cache::flush();
 
-		return DbHelper::deleteHelper('widget_connections', $connection_id);
+		$deleted = DbHelper::deleteHelper('widget_connections', $connection_id);
+
+		if ($deleted) {
+			CmsRenderVersion::touchWebpage($page_id);
+		}
+
+		return $deleted;
 	}
 
 	/**
@@ -245,7 +253,7 @@ class Widget extends WidgetList
 		return SduiNode::create(
 			component: $templateName,
 			props: $props,
-			slots: [
+			contents: [
 				'edit_bar' => [
 					SduiNode::create('editBar.common', [
 						'widget_edit_commands' => $widget_edit_commands,

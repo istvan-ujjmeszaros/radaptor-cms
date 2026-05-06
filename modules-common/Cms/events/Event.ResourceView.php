@@ -110,11 +110,72 @@ class EventResourceView extends AbstractEvent implements iBrowserEventDocumentab
 				SystemMessages::setSystemMessagesDependencies($resource->getView());
 			}
 
+			if ($this->renderFragmentIfRequested($resource)) {
+				return;
+			}
+
 			$resource->view();
 		} else {
 			self::_setCacheHeaders($resource);
+
+			if ($resource instanceof ResourceTypeWebpage && $this->renderFragmentIfRequested($resource)) {
+				return;
+			}
 			$resource->view();
 		}
+	}
+
+	private function renderFragmentIfRequested(ResourceTypeWebpage $resource): bool
+	{
+		$server = RequestContextHolder::current()->SERVER ?: $_SERVER;
+		$hx_request = strtolower(trim((string)($server['HTTP_HX_REQUEST'] ?? $server['http_hx_request'] ?? '')));
+		$hx_boosted = strtolower(trim((string)($server['HTTP_HX_BOOSTED'] ?? $server['http_hx_boosted'] ?? '')));
+		$is_fragment_context = (string)Request::_GET('context', '') === 'fragment';
+		$is_boosted_fragment_request = $hx_request === 'true' && $hx_boosted === 'true';
+
+		if (!$is_fragment_context && !$is_boosted_fragment_request) {
+			return false;
+		}
+
+		RequestContextHolder::disablePersistentCacheWrite();
+
+		if (!$resource->getView()->getLayoutType() instanceof iPartialNavigableLayout) {
+			if ($hx_request === 'true') {
+				header('HX-Redirect: ' . $this->canonicalCurrentUrl());
+			} else {
+				http_response_code(400);
+			}
+
+			return true;
+		}
+
+		try {
+			$targets = Request::_GET('targets', []);
+			$targets = is_array($targets) ? array_values(array_map('strval', $targets)) : [];
+
+			WebpageView::header('Content-Type: text/html; charset=UTF-8');
+			WebpageView::header('HX-Reswap: none');
+			$renderer = new CmsFragmentRenderer($resource);
+			echo $is_fragment_context ? $renderer->renderTargets($targets) : $renderer->renderDefaultPageFragment();
+		} catch (Throwable) {
+			if ($hx_request === 'true') {
+				header('HX-Redirect: ' . $this->canonicalCurrentUrl());
+			} else {
+				http_response_code(400);
+			}
+		}
+
+		return true;
+	}
+
+	private function canonicalCurrentUrl(): string
+	{
+		$params = Request::getGET();
+		unset($params['context'], $params['event'], $params['targets']);
+		$path = (string)(parse_url((string)($_SERVER['REQUEST_URI'] ?? '/'), PHP_URL_PATH) ?: '/');
+		$query = http_build_query($params);
+
+		return $query !== '' ? $path . '?' . $query : $path;
 	}
 
 	private static function redirectFolderResourceToCanonicalPath(?int $resource_id): void

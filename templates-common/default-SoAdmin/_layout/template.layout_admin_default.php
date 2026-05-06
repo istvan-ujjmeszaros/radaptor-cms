@@ -30,14 +30,14 @@ $administration_label = (string)($this->props['administration_label'] ?? $admini
 	<!-- TOPMENU -->
 	<div id="topmenu-container">
 		<div id="topmenu">
-			<?= $this->fetchSlot('top_menu_admin'); ?>
+			<?= $this->fetchContent('top_menu_admin'); ?>
 		</div>
 	</div>
 	<!-- /TOPMENU -->
 	<!-- HEADER -->
 	<div id="header">
 		<div id="header-left">
-			<?= $this->fetchSlot('admin_menu'); ?>
+			<?= $this->fetchContent('admin_menu'); ?>
 		</div>
 		<div id="logo"><a href="/"><?= e($site_name) ?> - <?= e($administration_label) ?></a></div>
 		<div class="cleaner"></div>
@@ -46,13 +46,13 @@ $administration_label = (string)($this->props['administration_label'] ?? $admini
 	<!-- CONTENT -->
 	<div class="content">
 		<div class="content-full">
-			<?= $this->fetchSlot('content'); ?>
+			<?= $this->fetchContent('content'); ?>
 		</div>
 	</div>
 	<!-- /CONTENT -->
 	<br class="cleaner">
 </div>
-<?= $this->fetchSlot('page_chrome'); ?>
+<?= $this->fetchContent('page_chrome'); ?>
 <?= $this->getRenderer()->getJs(); ?>
 <script type="text/javascript">
 	if (typeof renderSystemMessages === 'function') {

@@ -41,13 +41,13 @@ $document_title = (string)($this->props['document_title'] ?? trim($administratio
 	<!-- CONTENT -->
 	<div class="content">
 		<div class="content-full">
-			<?= $this->fetchSlot('content'); ?>
+			<?= $this->fetchContent('content'); ?>
 		</div>
 	</div>
 	<!-- /CONTENT -->
 	<br class="cleaner">
 </div>
-<?= $this->fetchSlot('page_chrome'); ?>
+<?= $this->fetchContent('page_chrome'); ?>
 <?= $this->getRenderer()->getJs(); ?>
 <script type="text/javascript">
 	if (typeof renderSystemMessages === 'function') {

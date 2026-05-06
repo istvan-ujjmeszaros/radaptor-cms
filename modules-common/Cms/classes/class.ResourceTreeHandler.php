@@ -1049,6 +1049,10 @@ class ResourceTreeHandler extends ResourceAcl
 
 		self::rebuildPath($resource_savedata['node_id']);
 
+		if (($resource_data['node_type'] ?? null) === 'webpage') {
+			CmsRenderVersion::touchWebpage($resource_id);
+		}
+
 		return ResourceTreeMutationResult::success($return + $return2);
 	}
 

@@ -58,7 +58,7 @@
 
 			<span id="logo"><img src="<?= Config::PATH_CDN->value(); ?>teamsolution.hu/images/logo-orange.png"><a href="/">TeamSolution</a></span>
 
-			<?= $this->fetchSlot('main_menu'); ?>
+			<?= $this->fetchContent('main_menu'); ?>
 		</div>
 
 	</header><!--/ #header -->
@@ -139,7 +139,7 @@
 
 	<section class="container clearfix">
 
-		<?= $this->fetchSlot('content'); ?>
+		<?= $this->fetchContent('content'); ?>
 
 	</section><!--/ .container -->
 
@@ -166,7 +166,7 @@
 	<script src="https://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE8.js"></script>
 <![endif]-->
 
-<?= $this->fetchSlot('page_chrome'); ?>
+<?= $this->fetchContent('page_chrome'); ?>
 <?= $this->getRenderer()->getJs(); ?>
 <script src="<?= Config::PATH_CDN->value(); ?>teamsolution.hu/js/custom.js"></script>
 

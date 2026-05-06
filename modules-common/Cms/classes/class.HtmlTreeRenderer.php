@@ -7,7 +7,7 @@ declare(strict_types=1);
  *     type?: string,
  *     component?: string,
  *     props?: array<string, mixed>,
- *     slots?: array<string, list<array<string, mixed>>>,
+ *     contents?: array<string, list<array<string, mixed>>>,
  *     strings?: array<string, mixed>,
  *     meta?: array<string, mixed>
  * }
@@ -226,6 +226,8 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 
 					if (defined($libraryClass . '::' . $path_parts['filename'])) {
 						$this->registerLibrary(constant($libraryClass . '::' . $path_parts['filename']), $force_top);
+					} elseif ($libraryClass !== LibrariesCommon::class && defined(LibrariesCommon::class . '::' . $path_parts['filename'])) {
+						$this->registerLibrary(constant(LibrariesCommon::class . '::' . $path_parts['filename']), $force_top);
 					} else {
 						SystemMessages::_warning(t('cms.library.unknown') . ': ' . $path_parts['filename']);
 
@@ -530,14 +532,18 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 			$node_render_context[self::CONTEXT_WIDGET_CONNECTION] = $this->hydrateWidgetConnection($meta['widget_connection']);
 		}
 
-		$slot_html = [];
+		$content_html = [];
 
-		foreach ($node['slots'] as $slot_name => $items) {
-			$slot_html[$slot_name] = '';
+		foreach ($node['contents'] as $content_name => $items) {
+			$content_html[$content_name] = '';
 
 			foreach ($items as $item) {
-				$slot_html[$slot_name] .= $this->render($item, $node_render_context);
+				$content_html[$content_name] .= $this->render($item, $node_render_context);
 			}
+		}
+
+		if ($node['component'] === '_contentContainer') {
+			return $this->wrapStableContainer($content_html['content'] ?? '', $meta);
 		}
 
 		$template_name = HtmlComponentTemplateResolver::resolveTemplateName($node);
@@ -550,13 +556,41 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 		);
 		$template->strings = $node['strings'];
 		$template->props = $props;
-		$template->setSlots($slot_html);
+		$template->setContents($content_html);
 		$template->setRenderContext($node_render_context);
 
-		return $template->fetch();
+		return $this->wrapStableContainer($template->fetch(), $meta);
 	}
 
 	// ── Private helpers ───────────────────────────────────────────────────────
+
+	/**
+	 * @param array<string, mixed> $meta
+	 */
+	private function wrapStableContainer(string $html, array $meta): string
+	{
+		$container_id = trim((string)($meta['stable_container_id'] ?? ''));
+
+		if ($container_id === '') {
+			return $html;
+		}
+
+		$attributes = [
+			'id' => $container_id,
+		];
+
+		if (!empty($meta['hx_swap_oob'])) {
+			$attributes['hx-swap-oob'] = (string)($meta['hx_swap_oob'] === true ? 'outerHTML' : $meta['hx_swap_oob']);
+		}
+
+		$attribute_html = '';
+
+		foreach ($attributes as $name => $value) {
+			$attribute_html .= ' ' . e((string)$name) . '="' . e((string)$value) . '"';
+		}
+
+		return '<div' . $attribute_html . '>' . $html . '</div>';
+	}
 
 	/**
 	 * @return array<string, string>

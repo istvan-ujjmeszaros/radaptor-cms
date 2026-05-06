@@ -22,7 +22,7 @@
  *     type: string,
  *     component: string,
  *     props: array<string, mixed>,
- *     slots: array<string, list<array<string, mixed>>>,
+ *     contents: array<string, list<array<string, mixed>>>,
  *     strings?: array<string, mixed>,
  *     meta?: array<string, mixed>
  * }
@@ -62,20 +62,41 @@ abstract class AbstractLayoutComponent implements iLayoutComponent
 
 	/**
 	 * @param array<string, mixed> $props
-	 * @param array<string, list<array<string, mixed>>> $slots
+	 * @param array<string, list<array<string, mixed>>> $contents
 	 * @param array<string, mixed> $strings
 	 * @param array<string, mixed> $meta
 	 * @return RenderTreeNode
 	 */
-	protected function createComponentTree(string $component_name, array $props = [], array $strings = [], array $slots = [], array $meta = []): array
+	protected function createComponentTree(string $component_name, array $props = [], array $strings = [], array $contents = [], array $meta = []): array
 	{
+		$stable_container_id = $this->getStableContainerId();
+
+		if ($stable_container_id !== null) {
+			$meta['stable_container_id'] ??= $stable_container_id;
+		}
+
 		return SduiNode::create(
 			component: $component_name,
 			props: $props,
-			slots: $slots,
+			contents: $contents,
 			type: SduiNode::TYPE_SUB,
 			meta: $meta,
 			strings: $strings,
 		);
+	}
+
+	private function getStableContainerId(): ?string
+	{
+		if (!$this->_webpage_composer instanceof iWebpageComposer) {
+			return null;
+		}
+
+		if (!$this->_webpage_composer->getLayoutType() instanceof iPartialNavigableLayout) {
+			return null;
+		}
+
+		$component_id = defined(static::class . '::ID') ? (string)constant(static::class . '::ID') : '';
+
+		return $component_id !== '' ? 'component-' . $component_id : null;
 	}
 }

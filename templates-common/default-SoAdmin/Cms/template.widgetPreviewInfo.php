@@ -60,7 +60,7 @@ $openJsonLabel = (string)($this->props['openJsonLabel'] ?? 'Open JSON');
 <div style="border: 1px solid #ddd; border-radius: 4px; background: #fff; margin-bottom: 24px;">
 	<div style="padding: 12px 16px; border-bottom: 1px solid #ddd; font-weight: bold;"><?= e($serverPreviewTitle) ?></div>
 	<div style="padding: 16px;">
-		<?= $this->fetchSlot('preview'); ?>
+		<?= $this->fetchContent('preview'); ?>
 	</div>
 </div>
 <div style="border: 1px solid #ddd; border-radius: 4px; background: #fff;" data-controller="sdui-json-preview" data-sdui-json-preview-json-url-value="<?= e($jsonPreviewUrl) ?>" data-sdui-json-preview-preview-component-value="widgetPreviewInfo" data-sdui-json-preview-preview-slot-value="preview">

@@ -28,10 +28,10 @@ class SduiJsonSerializer
 			throw new LogicException('Raw HTML nodes cannot be serialized into the SDUI JSON transport.');
 		}
 
-		$slots = [];
+		$contents = [];
 
-		foreach ($normalized['slots'] as $slot_name => $items) {
-			$slots[$slot_name] = array_map(
+		foreach ($normalized['contents'] as $content_name => $items) {
+			$contents[$content_name] = array_map(
 				fn (array $item): array => $this->serializeNode($item),
 				$items
 			);
@@ -42,7 +42,7 @@ class SduiJsonSerializer
 			'component' => $normalized['component'],
 			'props'     => (object)$this->normalizeValue($normalized['props']),
 			'strings'   => (object)$this->normalizeValue($normalized['strings']),
-			'slots'     => (object)$slots,
+			'contents'  => (object)$contents,
 		];
 	}
 

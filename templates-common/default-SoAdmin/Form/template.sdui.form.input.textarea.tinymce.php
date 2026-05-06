@@ -1,7 +1,7 @@
 <?php assert(isset($this) && $this instanceof Template); ?>
 <?php $this->registerLibrary('TINYMCE'); ?>
 <label for="<?= e((string)$this->props['id']) ?>"<?= (string)($this->props['label_style_attr'] ?? '') ?>><?= e((string)($this->props['label'] ?? '')) ?></label>
-<?= $this->fetchSlot('helper') ?>
+<?= $this->fetchContent('helper') ?>
 <textarea id="<?= e((string)$this->props['id']) ?>"<?= (string)($this->props['input_style_attr'] ?? '') ?> name="<?= e((string)$this->props['name']) ?>"><?= e((string)($this->props['value'] ?? '')) ?></textarea>
 <script type="text/javascript">
 	document.domain = /(\w+)(.\w+)?$/.exec(location.hostname)[0];

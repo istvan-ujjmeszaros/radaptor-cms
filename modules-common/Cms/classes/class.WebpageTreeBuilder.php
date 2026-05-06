@@ -7,7 +7,7 @@ declare(strict_types=1);
  *     type: string,
  *     component: string,
  *     props: array<string, mixed>,
- *     slots: array<string, list<array<string, mixed>>>,
+ *     contents: array<string, list<array<string, mixed>>>,
  *     strings?: array<string, mixed>,
  *     meta?: array<string, mixed>
  * }
@@ -28,8 +28,7 @@ class WebpageTreeBuilder
 	 */
 	public function build(array $build_context = []): array
 	{
-		$this->view->getLayoutType()->initialize($this->view);
-		$this->view->getTheme()?->initialize();
+		$this->initialize();
 
 		$connections_by_slot = WidgetConnection::getWidgetsForPageGroupedBySlot((int)$this->view->getPageId());
 		$slot_trees = [];
@@ -39,7 +38,7 @@ class WebpageTreeBuilder
 		));
 
 		foreach ($slot_names as $slot_name) {
-			$slot_trees[$slot_name] = $this->buildSlotTrees($slot_name, $connections_by_slot[$slot_name] ?? [], $build_context);
+			$slot_trees[$slot_name] = $this->buildSlotContentTrees($slot_name, $connections_by_slot[$slot_name] ?? [], $build_context);
 		}
 
 		$layout_type = $this->view->getLayoutType();
@@ -52,13 +51,36 @@ class WebpageTreeBuilder
 		$page_chrome_trees = $this->buildPageChromeTrees();
 
 		if ($page_chrome_trees !== []) {
-			$page_tree['slots']['page_chrome'] = array_merge(
-				$page_tree['slots']['page_chrome'] ?? [],
+			$page_tree['contents']['page_chrome'] = array_merge(
+				$page_tree['contents']['page_chrome'] ?? [],
 				$page_chrome_trees
 			);
 		}
 
 		return $page_tree;
+	}
+
+	public function buildSlotTargetTree(string $slot_name, array $build_context = []): array
+	{
+		$this->initialize();
+
+		return $this->buildSlotContainerTree(
+			$slot_name,
+			$this->buildWidgetTrees($slot_name, WidgetConnection::getWidgetsForSlot((int)$this->view->getPageId(), $slot_name), $build_context)
+		);
+	}
+
+	public function buildWidgetTargetTree(WidgetConnection $connection, array $build_context = []): array
+	{
+		$this->initialize();
+
+		return $this->buildWrappedWidgetTree($connection->getSlotName(), $connection, $build_context);
+	}
+
+	public function initialize(): void
+	{
+		$this->view->getLayoutType()->initialize($this->view);
+		$this->view->getTheme()?->initialize();
 	}
 
 	/**
@@ -67,7 +89,40 @@ class WebpageTreeBuilder
 	 * @param array<string, mixed> $build_context
 	 * @return list<array<string, mixed>>
 	 */
-	private function buildSlotTrees(string $slot_name, array $connections, array $build_context): array
+	private function buildSlotContentTrees(string $slot_name, array $connections, array $build_context): array
+	{
+		$widget_trees = $this->buildWidgetTrees($slot_name, $connections, $build_context);
+
+		if (!$this->shouldEmitStableContainers()) {
+			return $widget_trees;
+		}
+
+		return [
+			$this->buildSlotContainerTree($slot_name, $widget_trees),
+		];
+	}
+
+	private function buildSlotContainerTree(string $slot_name, array $contents): array
+	{
+		return SduiNode::create(
+			component: '_contentContainer',
+			contents: [
+				'content' => $contents,
+			],
+			type: SduiNode::TYPE_SUB,
+			meta: [
+				'stable_container_id' => 'slot-' . $slot_name,
+			],
+		);
+	}
+
+	/**
+	 * @param string $slot_name
+	 * @param array<WidgetConnection> $connections
+	 * @param array<string, mixed> $build_context
+	 * @return list<array<string, mixed>>
+	 */
+	private function buildWidgetTrees(string $slot_name, array $connections, array $build_context): array
 	{
 		$slot_trees = [];
 
@@ -76,37 +131,7 @@ class WebpageTreeBuilder
 				$slot_trees[] = $this->view->buildWidgetInserterTree($slot_name, $connection);
 			}
 
-			$widget_tree = $connection->buildTree($this->view, $build_context);
-
-			if ($this->view->isEditable()) {
-				$widget_tree = Widget::buildEditTree($this->view, $connection, $widget_tree);
-			}
-
-			$wrapped_tree = SduiNode::create(
-				component: 'layoutElementWidgetHandler',
-				props: [
-					'use_customizable_wrapper' => $connection->getWidget()?->isWrapperStylingEnabled() ?? true,
-					'style' => $connection->getStyle(),
-					'class' => Themes::getClass($this->view, $connection->connection_id),
-					'settings' => WidgetSettings::getSettings($connection->connection_id),
-					'extraparams' => $connection->getExtraparams(),
-				],
-				slots: [
-					'content' => [$widget_tree],
-				],
-				type: SduiNode::TYPE_SUB,
-				meta: [
-					'widget_connection' => WidgetConnection::toTreeMetadata($connection),
-				],
-			);
-
-			if (!empty($build_context['is_mock'])) {
-				$wrapped_tree['meta']['render_flags'] = [
-					'is_mock' => true,
-				];
-			}
-
-			$slot_trees[] = $wrapped_tree;
+			$slot_trees[] = $this->buildWrappedWidgetTree($slot_name, $connection, $build_context);
 		}
 
 		if ($this->view->isEditable()) {
@@ -114,6 +139,53 @@ class WebpageTreeBuilder
 		}
 
 		return $slot_trees;
+	}
+
+	private function buildWrappedWidgetTree(string $slot_name, WidgetConnection $connection, array $build_context): array
+	{
+		$widget_tree = $connection->buildTree($this->view, $build_context);
+
+		if ($this->view->isEditable()) {
+			$widget_tree = Widget::buildEditTree($this->view, $connection, $widget_tree);
+		}
+
+		$meta = [
+			'widget_connection' => WidgetConnection::toTreeMetadata($connection),
+		];
+
+		if ($this->shouldEmitStableContainers()) {
+			$meta['stable_container_id'] = 'widget-' . $connection->getConnectionId();
+		}
+
+		$wrapped_tree = SduiNode::create(
+			component: 'layoutElementWidgetHandler',
+			props: [
+				'slot_name' => $slot_name,
+				'use_customizable_wrapper' => $connection->getWidget()?->isWrapperStylingEnabled() ?? true,
+				'style' => $connection->getStyle(),
+				'class' => Themes::getClass($this->view, $connection->connection_id),
+				'settings' => WidgetSettings::getSettings($connection->connection_id),
+				'extraparams' => $connection->getExtraparams(),
+			],
+			contents: [
+				'content' => [$widget_tree],
+			],
+			type: SduiNode::TYPE_SUB,
+			meta: $meta,
+		);
+
+		if (!empty($build_context['is_mock'])) {
+			$wrapped_tree['meta']['render_flags'] = [
+				'is_mock' => true,
+			];
+		}
+
+		return $wrapped_tree;
+	}
+
+	private function shouldEmitStableContainers(): bool
+	{
+		return $this->view->getLayoutType() instanceof iPartialNavigableLayout;
 	}
 
 	/**

@@ -160,10 +160,10 @@ abstract class FormInput implements iFormInput, Stringable
 	 */
 	public function buildTree(): array
 	{
-		$slots = [];
+		$contents = [];
 
 		if ($this->supportsHelperSlot()) {
-			$slots['helper'] = [$this->buildHelperTree()];
+			$contents['helper'] = [$this->buildHelperTree()];
 		}
 
 		$meta = [];
@@ -176,7 +176,7 @@ abstract class FormInput implements iFormInput, Stringable
 			'type' => 'sub',
 			'component' => 'form.input.' . $this->getInputtype(),
 			'props' => $this->buildComponentProps(),
-			'slots' => $slots,
+			'contents' => $contents,
 			'meta' => $meta,
 		];
 	}
@@ -319,7 +319,7 @@ abstract class FormInput implements iFormInput, Stringable
 				'error_string' => $this->getInputErrorString(),
 				'info_string' => $this->explanation ?? '',
 			],
-			'slots' => [],
+			'contents' => [],
 		];
 	}
 }

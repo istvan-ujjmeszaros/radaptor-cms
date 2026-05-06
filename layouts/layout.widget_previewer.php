@@ -31,7 +31,7 @@ class LayoutTypeWidgetPreviewer extends AbstractLayoutType
 		return $this->createLayoutTree('layout_widget_previewer', [
 			'lang' => substr(Kernel::getLocale(), 0, 2),
 			'document_title' => t('widget.widget_preview.name'),
-		], slots: [
+		], contents: [
 			'content' => $slot_trees['content'] ?? [],
 		]);
 	}

@@ -32,5 +32,5 @@ if (is_object($this->getWidgetConnection()) && $this->getWidgetConnection()->get
 			'seq' => is_object($this->getWidgetConnection()) ? $this->getWidgetConnection()->seq() : null,
 		]); ?>"><?= Icons::get(IconNames::WIDGET_INSERT); ?></a>
 	<?php endif; ?>
-	<?= $this->fetchSlot('add_widget_from_list'); ?>
+	<?= $this->fetchContent('add_widget_from_list'); ?>
 </div>

@@ -32,7 +32,7 @@ class LayoutTypeAdminLogin extends AbstractLayoutType
 			'lang' => substr(Kernel::getLocale(), 0, 2),
 			'site_name' => Config::APP_SITE_NAME->value(),
 			'document_title' => Config::APP_SITE_NAME->value(),
-		], slots: [
+		], contents: [
 			'content' => $slot_trees['content'] ?? [],
 		]);
 	}

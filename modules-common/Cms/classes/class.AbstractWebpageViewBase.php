@@ -275,6 +275,8 @@ abstract class AbstractWebpageViewBase implements iView, iWebpageComposer
 
 					if (defined($libraryClass . '::' . $path_parts['filename'])) {
 						$this->registerLibrary(constant($libraryClass . '::' . $path_parts['filename']), $force_top);
+					} elseif ($libraryClass !== LibrariesCommon::class && defined(LibrariesCommon::class . '::' . $path_parts['filename'])) {
+						$this->registerLibrary(constant(LibrariesCommon::class . '::' . $path_parts['filename']), $force_top);
 					} else {
 						SystemMessages::_warning(t('cms.library.unknown') . ': ' . $path_parts['filename']);
 
@@ -455,7 +457,7 @@ abstract class AbstractWebpageViewBase implements iView, iWebpageComposer
 	 *         counter: int,
 	 *         visibleWidgets: list<array{type_name:string, name:string, description:string}>,
 	 *     },
-	 *     slots: array{
+	 *     contents: array{
 	 *         add_widget_from_list: list<array{
 	 *             type: string,
 	 *             component: string,
@@ -464,7 +466,7 @@ abstract class AbstractWebpageViewBase implements iView, iWebpageComposer
 	 *                 counter: int,
 	 *                 visibleWidgets: list<array{type_name:string, name:string, description:string}>
 	 *             },
-	 *             slots: array<string, list<array<string, mixed>>>,
+	 *             contents: array<string, list<array<string, mixed>>>,
 	 *             meta?: array<string, mixed>
 	 *         }>
 	 *     },
@@ -486,7 +488,7 @@ abstract class AbstractWebpageViewBase implements iView, iWebpageComposer
 		return SduiNode::create(
 			component: 'widgetInsert',
 			props: $props,
-			slots: [
+			contents: [
 				'add_widget_from_list' => [
 					SduiNode::create('addWidgetFromList', $props, strings: $strings),
 				],

@@ -45,7 +45,14 @@ class EventWidgetConnectionSwap extends AbstractEvent implements iBrowserEventDo
 	{
 		$table = 'widget_connections';
 
-		if (DbHelper::swapHelper($table, Request::_GET('item_id', Request::DEFAULT_ERROR), Request::_GET('swap_id', Request::DEFAULT_ERROR))) {
+		$item_id = (int) Request::_GET('item_id', Request::DEFAULT_ERROR);
+		$swap_id = (int) Request::_GET('swap_id', Request::DEFAULT_ERROR);
+
+		if (DbHelper::swapHelper($table, $item_id, $swap_id)) {
+			foreach ([$item_id, $swap_id] as $connection_id) {
+				CmsRenderVersion::touchWidgetConnection($connection_id);
+			}
+
 			SystemMessages::_ok(t('cms.widget_connection.moved'));
 		}
 

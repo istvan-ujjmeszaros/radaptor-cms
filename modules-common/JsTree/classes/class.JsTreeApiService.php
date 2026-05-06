@@ -266,10 +266,10 @@ final class JsTreeApiService
 	 * Render a jsTree detail component with themed override support.
 	 *
 	 * @param array<string, mixed> $component_props
-	 * @param array<string, list<array<string, mixed>>> $slots
+	 * @param array<string, list<array<string, mixed>>> $contents
 	 * @param array<string, mixed> $strings
 	 */
-	public static function renderDinaComponent(string $component_name, array $component_props, string $theme_name, array $slots = [], array $strings = []): void
+	public static function renderDinaComponent(string $component_name, array $component_props, string $theme_name, array $contents = [], array $strings = []): void
 	{
 		WebpageView::header('Content-type: ' . Template::MIME_HTML);
 
@@ -277,7 +277,7 @@ final class JsTreeApiService
 		echo $renderer->render(SduiNode::create(
 			component: $component_name,
 			props: $component_props,
-			slots: $slots,
+			contents: $contents,
 			strings: $strings,
 		));
 	}
@@ -286,27 +286,27 @@ final class JsTreeApiService
 	 * Render a jsTree detail template with themed override support.
 	 *
 	 * @param array<string, mixed> $template_props
-	 * @param array<string, list<array<string, mixed>>> $slots
+	 * @param array<string, list<array<string, mixed>>> $contents
 	 * @param array<string, mixed> $strings
 	 */
-	public static function renderDinaTemplate(string $template_name, array $template_props, string $theme_name, array $slots = [], array $strings = []): void
+	public static function renderDinaTemplate(string $template_name, array $template_props, string $theme_name, array $contents = [], array $strings = []): void
 	{
-		self::renderDinaComponent($template_name, $template_props, $theme_name, $slots, $strings);
+		self::renderDinaComponent($template_name, $template_props, $theme_name, $contents, $strings);
 	}
 
 	/**
 	 * @param array<string, mixed> $props
-	 * @param array<string, list<array<string, mixed>>> $slots
+	 * @param array<string, list<array<string, mixed>>> $contents
 	 * @param array<string, mixed> $meta
 	 * @param array<string, mixed> $strings
 	 * @return array<string, mixed>
 	 */
-	public static function createDinaNode(string $component_name, array $props = [], array $slots = [], array $meta = [], array $strings = []): array
+	public static function createDinaNode(string $component_name, array $props = [], array $contents = [], array $meta = [], array $strings = []): array
 	{
 		return SduiNode::create(
 			component: $component_name,
 			props: $props,
-			slots: $slots,
+			contents: $contents,
 			meta: $meta,
 			strings: $strings,
 		);

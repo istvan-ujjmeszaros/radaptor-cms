@@ -7,7 +7,7 @@
  * (insertion point) in a page's layout.
  *
  * Terminology:
- * - Layout: Page structure definition (e.g., LayoutTypePublic2row)
+ * - Layout: Page structure definition (e.g., LayoutTypePublicDefault)
  * - Slot: Named insertion point in a layout (e.g., 'content', 'sidebar')
  * - WidgetConnection: This class - the join record
  * - Widget: The component class that renders content (e.g., WidgetCompanyList)
@@ -16,7 +16,7 @@
  *     type: string,
  *     component: string,
  *     props: array<string, mixed>,
- *     slots: array<string, list<array<string, mixed>>>,
+ *     contents: array<string, list<array<string, mixed>>>,
  *     strings?: array<string, mixed>,
  *     meta?: array<string, mixed>
  * }

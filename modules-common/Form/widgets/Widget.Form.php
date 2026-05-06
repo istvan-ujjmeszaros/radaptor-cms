@@ -138,7 +138,7 @@ class WidgetForm extends AbstractWidget implements iMockable
 					],
 				],
 			],
-			slots: [
+			contents: [
 				'hidden_fields' => [
 					$this->buildPreviewInputTree(
 						'form.input.hidden',
@@ -285,7 +285,7 @@ class WidgetForm extends AbstractWidget implements iMockable
 			props: [
 				'row_id' => $row_id,
 			],
-			slots: [
+			contents: [
 				'content' => $content,
 			],
 			type: SduiNode::TYPE_SUB,
@@ -298,10 +298,10 @@ class WidgetForm extends AbstractWidget implements iMockable
 	 */
 	private function buildPreviewInputTree(string $component, array $props, string $info_string = ''): array
 	{
-		$slots = [];
+		$contents = [];
 
 		if ($component !== 'form.input.hidden') {
-			$slots['helper'] = [
+			$contents['helper'] = [
 				SduiNode::create(
 					component: 'form.helper',
 					props: [
@@ -316,7 +316,7 @@ class WidgetForm extends AbstractWidget implements iMockable
 		return SduiNode::create(
 			component: $component,
 			props: $props,
-			slots: $slots,
+			contents: $contents,
 			type: SduiNode::TYPE_SUB,
 		);
 	}

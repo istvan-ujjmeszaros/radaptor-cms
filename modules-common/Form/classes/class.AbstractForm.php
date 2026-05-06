@@ -71,7 +71,7 @@ abstract class AbstractForm implements iForm, iListable
 		} else {
 			$this->referer = Url::sanitizeRefererUrl((string) Kernel::getReferer());
 
-			if ($this->_meta->enableAutoReferer && (Kernel::getReferer() != '') && !Url::CurrentEqualsToReferer()) {
+			if ($this->_meta->enableAutoReferer && !self::isHtmxRequest() && (Kernel::getReferer() != '') && !Url::CurrentEqualsToReferer()) {
 				Url::redirect(Url::modifyCurrentUrl(['referer' => Url::sanitizeRefererUrl((string) Kernel::getReferer())]));
 			}
 		}
@@ -87,6 +87,13 @@ abstract class AbstractForm implements iForm, iListable
 		}
 
 		$this->_processForm();
+	}
+
+	private static function isHtmxRequest(): bool
+	{
+		$server = RequestContextHolder::current()->SERVER ?: $_SERVER;
+
+		return strtolower(trim((string)($server['HTTP_HX_REQUEST'] ?? $server['http_hx_request'] ?? ''))) === 'true';
 	}
 
 	public function getTreeBuildContext(): iTreeBuildContext

@@ -26,7 +26,7 @@ class SduiNode
 			'type'      => $type,
 			'component' => $component,
 			'props'     => $props,
-			'contents'     => $contents,
+			'contents'  => $contents,
 			'strings'   => $strings,
 			'meta'      => $meta,
 		];
@@ -46,7 +46,7 @@ class SduiNode
 			'type'      => (string)($node['type'] ?? self::TYPE_SUB),
 			'component' => (string)($node['component'] ?? '_missing'),
 			'props'     => $props,
-			'contents'     => is_array($node['contents'] ?? null) ? $node['contents'] : [],
+			'contents'  => is_array($node['contents'] ?? null) ? $node['contents'] : [],
 			'strings'   => $strings,
 		];
 

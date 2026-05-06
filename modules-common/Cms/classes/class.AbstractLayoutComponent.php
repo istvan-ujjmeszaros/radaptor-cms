@@ -69,6 +69,12 @@ abstract class AbstractLayoutComponent implements iLayoutComponent
 	 */
 	protected function createComponentTree(string $component_name, array $props = [], array $strings = [], array $contents = [], array $meta = []): array
 	{
+		$stable_container_id = $this->getStableContainerId();
+
+		if ($stable_container_id !== null) {
+			$meta['stable_container_id'] ??= $stable_container_id;
+		}
+
 		return SduiNode::create(
 			component: $component_name,
 			props: $props,
@@ -77,5 +83,20 @@ abstract class AbstractLayoutComponent implements iLayoutComponent
 			meta: $meta,
 			strings: $strings,
 		);
+	}
+
+	private function getStableContainerId(): ?string
+	{
+		if (!$this->_webpage_composer instanceof iWebpageComposer) {
+			return null;
+		}
+
+		if (!$this->_webpage_composer->getLayoutType() instanceof iPartialNavigableLayout) {
+			return null;
+		}
+
+		$component_id = defined(static::class . '::ID') ? (string)constant(static::class . '::ID') : '';
+
+		return $component_id !== '' ? 'component-' . $component_id : null;
 	}
 }

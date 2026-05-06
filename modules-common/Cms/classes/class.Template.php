@@ -307,7 +307,7 @@ class Template extends TemplateDebug
 	}
 
 	/**
-	 * Return the already-rendered HTML for a named slot.
+	 * Return the already-rendered HTML for a named template content region.
 	 */
 	public function fetchContent(string $name): string
 	{

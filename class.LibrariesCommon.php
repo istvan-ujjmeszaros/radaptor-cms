@@ -75,6 +75,13 @@ class LibrariesCommon
         GRITTER,
         /assets/_common/libraries/common.js,
     ';
+	public const string HTMX = '
+        js:^https://unpkg.com/htmx.org@2.0.4/dist/htmx.min.js,
+    ';
+	public const string RADAPTOR_PARTIAL_NAVIGATION = '
+        HTMX,
+        js:^/assets/_common/libraries/radaptor/partial-navigation.js?v1,
+    ';
 	public const string JQUERY = '
         /assets/_common/libraries/jquery/jquery-1.12.4.min.js,
     ';

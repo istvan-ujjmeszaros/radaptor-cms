@@ -162,6 +162,8 @@ class Widget extends WidgetList
 				ResourceTreeHandler::setAsCatcherPage($page_id);
 			}
 
+			CmsRenderVersion::touchWebpage($page_id);
+
 			return $connection_id;
 		}
 
@@ -209,7 +211,13 @@ class Widget extends WidgetList
 
 		Cache::flush();
 
-		return DbHelper::deleteHelper('widget_connections', $connection_id);
+		$deleted = DbHelper::deleteHelper('widget_connections', $connection_id);
+
+		if ($deleted) {
+			CmsRenderVersion::touchWebpage($page_id);
+		}
+
+		return $deleted;
 	}
 
 	/**

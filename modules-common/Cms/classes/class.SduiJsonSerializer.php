@@ -30,8 +30,8 @@ class SduiJsonSerializer
 
 		$contents = [];
 
-		foreach ($normalized['contents'] as $slot_name => $items) {
-			$contents[$slot_name] = array_map(
+		foreach ($normalized['contents'] as $content_name => $items) {
+			$contents[$content_name] = array_map(
 				fn (array $item): array => $this->serializeNode($item),
 				$items
 			);
@@ -42,7 +42,7 @@ class SduiJsonSerializer
 			'component' => $normalized['component'],
 			'props'     => (object)$this->normalizeValue($normalized['props']),
 			'strings'   => (object)$this->normalizeValue($normalized['strings']),
-			'contents'     => (object)$contents,
+			'contents'  => (object)$contents,
 		];
 	}
 

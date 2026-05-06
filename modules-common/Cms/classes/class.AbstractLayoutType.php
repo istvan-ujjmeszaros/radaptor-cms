@@ -9,7 +9,7 @@
  *     strings?: array<string, mixed>,
  *     meta?: array<string, mixed>
  * }
- * @phpstan-type SlotTrees array<string, list<array<string, mixed>>>
+ * @phpstan-type ContentTrees array<string, list<array<string, mixed>>>
  */
 abstract class AbstractLayoutType implements iLayoutType, iListable
 {
@@ -31,7 +31,7 @@ abstract class AbstractLayoutType implements iLayoutType, iListable
 	/**
 	 * @param array<string, mixed> $props
 	 * @param array<string, mixed> $strings
-	 * @param SlotTrees $contents
+	 * @param ContentTrees $contents
 	 * @param array<string, mixed> $meta
 	 * @return RenderTreeNode
 	 */

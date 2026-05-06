@@ -275,6 +275,8 @@ abstract class AbstractWebpageViewBase implements iView, iWebpageComposer
 
 					if (defined($libraryClass . '::' . $path_parts['filename'])) {
 						$this->registerLibrary(constant($libraryClass . '::' . $path_parts['filename']), $force_top);
+					} elseif ($libraryClass !== LibrariesCommon::class && defined(LibrariesCommon::class . '::' . $path_parts['filename'])) {
+						$this->registerLibrary(constant(LibrariesCommon::class . '::' . $path_parts['filename']), $force_top);
 					} else {
 						SystemMessages::_warning(t('cms.library.unknown') . ': ' . $path_parts['filename']);
 

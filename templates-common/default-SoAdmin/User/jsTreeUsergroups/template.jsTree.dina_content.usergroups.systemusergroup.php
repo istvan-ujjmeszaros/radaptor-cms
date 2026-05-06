@@ -19,4 +19,4 @@
 <?= e($this->strings['user.usergroup.system_managed_help']) ?>
 <hr>
 
-<?= $this->fetchSlot('help'); ?>
+<?= $this->fetchContent('help'); ?>

@@ -6,7 +6,7 @@ $required = (bool)($this->props['required'] ?? true);
 $placeholder_label = (string)($this->props['placeholder_label'] ?? '');
 ?>
 <label for="<?= e((string)$this->props['id']) ?>"<?= (string)($this->props['label_style_attr'] ?? '') ?>><?= e((string)($this->props['label'] ?? '')) ?></label>
-<?= $this->fetchSlot('helper') ?>
+<?= $this->fetchContent('helper') ?>
 <select id="<?= e((string)$this->props['id']) ?>"<?= (string)($this->props['input_style_attr'] ?? '') ?> name="<?= e((string)$this->props['name']) ?>">
 	<?php if ($required): ?>
 		<option value=""><?= e($placeholder_label) ?></option>

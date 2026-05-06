@@ -4,7 +4,7 @@
 
 <div class="buttons">
 
-	<?= $this->fetchSlot('insert_button'); ?>
+	<?= $this->fetchContent('insert_button'); ?>
 
 	<?php if (ResourceAcl::canAccessResource($this->props['data'][0]['node_id'], ResourceAcl::_ACL_VIEW)): ?>
 		<button class="button right_img button_preview" type="button" onclick="widgettype._.openWindow('<?= Url::getUrl('resource.view', [
@@ -53,4 +53,4 @@
 
 <hr>
 
-<?= $this->fetchSlot('help'); ?>
+<?= $this->fetchContent('help'); ?>

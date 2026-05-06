@@ -12,9 +12,9 @@ $template->props = array_replace($this->props, [
 		'data-menu-link-type-internal-value' => 'belso',
 	],
 ]);
-$template->setSlots([
-	'hidden_fields' => $this->fetchSlot('hidden_fields'),
-	'rows' => $this->fetchSlot('rows'),
+$template->setContents([
+	'hidden_fields' => $this->fetchContent('hidden_fields'),
+	'rows' => $this->fetchContent('rows'),
 ]);
 ?>
 <?= $template->fetch() ?>

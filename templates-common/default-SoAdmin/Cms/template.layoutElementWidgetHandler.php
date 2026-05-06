@@ -3,7 +3,7 @@
 assert(isset($this) && $this instanceof Template);
 
 if (!$this->props['use_customizable_wrapper']) {
-	echo $this->fetchSlot('content');
+	echo $this->fetchContent('content');
 } else {
 	$attributes = [];
 
@@ -29,7 +29,7 @@ if (!$this->props['use_customizable_wrapper']) {
 
 	// Echo the div with dynamic attributes
 	echo "<div$attributeString>";
-	echo $this->fetchSlot('content');
+	echo $this->fetchContent('content');
 	echo "</div>";
 
 	// Clear both if it is the last item

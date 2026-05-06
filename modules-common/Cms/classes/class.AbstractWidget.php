@@ -5,7 +5,7 @@
  *     type: string,
  *     component: string,
  *     props: array<string, mixed>,
- *     slots: array<string, list<array<string, mixed>>>,
+ *     contents: array<string, list<array<string, mixed>>>,
  *     strings?: array<string, mixed>,
  *     meta?: array<string, mixed>
  * }
@@ -156,17 +156,17 @@ abstract class AbstractWidget implements iWidget, iListable
 
 	/**
 	 * @param array<string, mixed> $props
-	 * @param array<string, list<array<string, mixed>>> $slots
+	 * @param array<string, list<array<string, mixed>>> $contents
 	 * @param array<string, mixed> $strings
 	 * @param array<string, mixed> $meta
 	 * @return RenderTreeNode
 	 */
-	protected function createComponentTree(string $component_name, array $props = [], array $strings = [], array $slots = [], array $meta = []): array
+	protected function createComponentTree(string $component_name, array $props = [], array $strings = [], array $contents = [], array $meta = []): array
 	{
 		return SduiNode::create(
 			component: $component_name,
 			props: $props,
-			slots: $slots,
+			contents: $contents,
 			type: SduiNode::TYPE_WIDGET,
 			meta: $meta,
 			strings: $strings,

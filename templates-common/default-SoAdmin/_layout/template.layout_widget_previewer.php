@@ -19,9 +19,9 @@ $document_title = (string)($this->props['document_title'] ?? $site_name);
 </head>
 <body class="widget-preview">
 	<div style="max-width: 1000px; margin: 0 auto; padding: 24px 16px;">
-		<?= $this->fetchSlot('content'); ?>
+		<?= $this->fetchContent('content'); ?>
 	</div>
-	<?= $this->fetchSlot('page_chrome'); ?>
+	<?= $this->fetchContent('page_chrome'); ?>
 	<?= $this->getRenderer()->getJs(); ?>
 	<script type="text/javascript">
 		if (typeof renderSystemMessages === 'function') {

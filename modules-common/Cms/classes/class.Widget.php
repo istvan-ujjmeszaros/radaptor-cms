@@ -5,7 +5,7 @@
  *     type: string,
  *     component: string,
  *     props: array<string, mixed>,
- *     slots: array<string, list<array<string, mixed>>>,
+ *     contents: array<string, list<array<string, mixed>>>,
  *     strings?: array<string, mixed>,
  *     meta?: array<string, mixed>
  * }
@@ -245,7 +245,7 @@ class Widget extends WidgetList
 		return SduiNode::create(
 			component: $templateName,
 			props: $props,
-			slots: [
+			contents: [
 				'edit_bar' => [
 					SduiNode::create('editBar.common', [
 						'widget_edit_commands' => $widget_edit_commands,

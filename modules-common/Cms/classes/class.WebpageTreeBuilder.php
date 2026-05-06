@@ -7,7 +7,7 @@ declare(strict_types=1);
  *     type: string,
  *     component: string,
  *     props: array<string, mixed>,
- *     slots: array<string, list<array<string, mixed>>>,
+ *     contents: array<string, list<array<string, mixed>>>,
  *     strings?: array<string, mixed>,
  *     meta?: array<string, mixed>
  * }
@@ -52,8 +52,8 @@ class WebpageTreeBuilder
 		$page_chrome_trees = $this->buildPageChromeTrees();
 
 		if ($page_chrome_trees !== []) {
-			$page_tree['slots']['page_chrome'] = array_merge(
-				$page_tree['slots']['page_chrome'] ?? [],
+			$page_tree['contents']['page_chrome'] = array_merge(
+				$page_tree['contents']['page_chrome'] ?? [],
 				$page_chrome_trees
 			);
 		}
@@ -91,7 +91,7 @@ class WebpageTreeBuilder
 					'settings' => WidgetSettings::getSettings($connection->connection_id),
 					'extraparams' => $connection->getExtraparams(),
 				],
-				slots: [
+				contents: [
 					'content' => [$widget_tree],
 				],
 				type: SduiNode::TYPE_SUB,

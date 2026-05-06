@@ -308,7 +308,7 @@ abstract class AbstractForm implements iForm, iListable
 				'post_javascript_file' => $this->getMeta()->postJavascriptFile,
 				'field_refs' => $this->buildFieldRefs(),
 			],
-			'slots' => [
+			'contents' => [
 				'hidden_fields' => $hidden_fields,
 				'rows' => $rows,
 			],
@@ -332,7 +332,7 @@ abstract class AbstractForm implements iForm, iListable
 			'props' => [
 				'row_id' => $row_id,
 			],
-			'slots' => [
+			'contents' => [
 				'content' => $items,
 			],
 		];

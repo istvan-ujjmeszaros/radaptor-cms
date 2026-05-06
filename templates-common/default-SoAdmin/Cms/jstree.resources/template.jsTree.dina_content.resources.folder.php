@@ -73,4 +73,4 @@
 
 <hr>
 
-<?= $this->fetchSlot('help'); ?>
+<?= $this->fetchContent('help'); ?>

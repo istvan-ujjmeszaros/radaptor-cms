@@ -530,13 +530,13 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 			$node_render_context[self::CONTEXT_WIDGET_CONNECTION] = $this->hydrateWidgetConnection($meta['widget_connection']);
 		}
 
-		$slot_html = [];
+		$content_html = [];
 
-		foreach ($node['slots'] as $slot_name => $items) {
-			$slot_html[$slot_name] = '';
+		foreach ($node['contents'] as $slot_name => $items) {
+			$content_html[$slot_name] = '';
 
 			foreach ($items as $item) {
-				$slot_html[$slot_name] .= $this->render($item, $node_render_context);
+				$content_html[$slot_name] .= $this->render($item, $node_render_context);
 			}
 		}
 
@@ -550,7 +550,7 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 		);
 		$template->strings = $node['strings'];
 		$template->props = $props;
-		$template->setSlots($slot_html);
+		$template->setContents($content_html);
 		$template->setRenderContext($node_render_context);
 
 		return $template->fetch();

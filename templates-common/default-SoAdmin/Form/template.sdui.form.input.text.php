@@ -1,7 +1,7 @@
 <?php assert(isset($this) && $this instanceof Template); ?>
 <?php $readonly = (bool)($this->props['readonly'] ?? false); ?>
 <label for="<?= e((string)$this->props['id']) ?>"<?= (string)($this->props['label_style_attr'] ?? '') ?>><?= e((string)($this->props['label'] ?? '')) ?></label>
-<?= $this->fetchSlot('helper') ?>
+<?= $this->fetchContent('helper') ?>
 <input id="<?= e((string)$this->props['id']) ?>"<?= (string)($this->props['input_style_attr'] ?? '') ?> type="text" name="<?= e((string)$this->props['name']) ?>" value="<?= e((string)($this->props['value'] ?? '')) ?>"<?= $readonly ? ' readonly="readonly" tabindex="-1"' : '' ?>>
 <?php if ((string)($this->props['autocomplete_url'] ?? '') !== ''): ?>
 	<script>

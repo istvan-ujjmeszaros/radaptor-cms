@@ -4,7 +4,7 @@ $values = is_array($this->props['values'] ?? null) ? $this->props['values'] : []
 $current_value = (string)($this->props['value'] ?? '');
 ?>
 <span class="label"<?= (string)($this->props['label_style_attr'] ?? '') ?>><?= e((string)($this->props['label'] ?? '')) ?></span>
-<?= $this->fetchSlot('helper') ?>
+<?= $this->fetchContent('helper') ?>
 <?php $i = 0; ?>
 <?php foreach ($values as $label => $value): ?>
 	<?php $radio_id = (string)$this->props['id'] . '_' . ++$i; ?>

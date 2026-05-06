@@ -52,8 +52,8 @@ foreach ($html_attributes as $attribute_name => $attribute_value) {
 	<?php endif; ?>
 
 	<input type="hidden" name="form_id" value="<?= e($form_id) ?>">
-	<?= $this->fetchSlot('hidden_fields') ?>
-	<?= $this->fetchSlot('rows') ?>
+	<?= $this->fetchContent('hidden_fields') ?>
+	<?= $this->fetchContent('rows') ?>
 
 	<div style="text-align:center;" class="button-container buttons">
 		<?php if (is_array($button_save)): ?>

@@ -33,7 +33,7 @@ class LayoutTypeAdminEmpty extends AbstractLayoutType
 			'site_name' => Config::APP_SITE_NAME->value(),
 			'administration_label' => t('admin.menu.section.administration'),
 			'document_title' => t('admin.menu.section.administration') . ' - ' . Config::APP_SITE_NAME->value(),
-		], slots: [
+		], contents: [
 			'content' => $slot_trees['content'] ?? [],
 		]);
 	}

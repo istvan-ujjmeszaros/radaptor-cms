@@ -68,11 +68,14 @@ class EventFragmentRender extends AbstractEvent implements iBrowserEventDocument
 
 	private function fallbackToFullNavigation(int $status_code): void
 	{
-		http_response_code($status_code);
-
 		if ((string)($_SERVER['HTTP_HX_REQUEST'] ?? '') === 'true') {
+			http_response_code(200);
 			header('HX-Redirect: ' . $this->canonicalCurrentUrl());
+
+			return;
 		}
+
+		http_response_code($status_code);
 	}
 
 	private function canonicalCurrentUrl(): string

@@ -89,11 +89,18 @@ class CmsFragmentRenderer
 				continue;
 			}
 
-			if (!preg_match('/^(component|slot|widget):([A-Za-z0-9_\\-]+)$/', $target)) {
+			if (!preg_match('/^(component|slot|widget):([A-Za-z0-9_\\-]+)$/', $target, $matches)) {
 				throw new InvalidArgumentException("Invalid fragment target: {$target}");
 			}
 
-			$normalized[] = $target;
+			$type = $matches[1];
+			$name = $matches[2];
+
+			if ($type === 'widget' && !ctype_digit($name)) {
+				throw new InvalidArgumentException("Invalid widget fragment target: {$target}");
+			}
+
+			$normalized[] = $type . ':' . $name;
 		}
 
 		$normalized = array_values(array_unique($normalized));

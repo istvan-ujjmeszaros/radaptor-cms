@@ -23,7 +23,7 @@ pipe operator (`|>`).
 
 From `.registry-package.json`:
 
-- `radaptor/core/framework` (`^0.1.0`)
+- `radaptor/core/framework` (`^0.1.25`)
 - PHP (`^8.5`)
 
 ## Layout Terminology

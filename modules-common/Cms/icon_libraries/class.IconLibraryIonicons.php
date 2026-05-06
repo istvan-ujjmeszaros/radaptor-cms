@@ -72,6 +72,7 @@ class IconLibraryIonicons extends AbstractIconLibrary
 		'checklist' => 'checkbox-outline',
 		'versions' => 'time-outline',
 		'column_width' => 'resize-outline',
+		'content_formatting' => 'text-outline',
 		'align' => 'options-outline',
 
 		// Links
@@ -81,6 +82,8 @@ class IconLibraryIonicons extends AbstractIconLibrary
 
 		// Misc
 		'admin_wrench' => 'construct-outline',
+		'home' => 'home-outline',
+		'logout' => 'log-out-outline',
 		'menubar' => 'menu-outline',
 		'help' => 'help-circle-outline',
 		'date' => 'calendar-outline',

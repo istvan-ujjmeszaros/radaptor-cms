@@ -72,6 +72,7 @@ class IconLibraryFontAwesome extends AbstractIconLibrary
 		'checklist' => 'list-check',
 		'versions' => 'clock-rotate-left',
 		'column_width' => 'hand-point-right',
+		'content_formatting' => 'font',
 		'align' => 'rectangle-list',
 
 		// Links
@@ -81,6 +82,8 @@ class IconLibraryFontAwesome extends AbstractIconLibrary
 
 		// Misc
 		'admin_wrench' => 'solid/gear',
+		'home' => 'house',
+		'logout' => 'right-from-bracket',
 		'menubar' => 'bars',
 		'help' => 'circle-question',
 		'date' => 'calendar',

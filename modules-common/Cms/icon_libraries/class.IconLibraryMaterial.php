@@ -72,6 +72,7 @@ class IconLibraryMaterial extends AbstractIconLibrary
 		'checklist' => 'checklist',
 		'versions' => 'history',
 		'column_width' => 'swap_horiz',
+		'content_formatting' => 'format_size',
 		'align' => 'tune',
 
 		// Links
@@ -81,6 +82,8 @@ class IconLibraryMaterial extends AbstractIconLibrary
 
 		// Misc
 		'admin_wrench' => 'build',
+		'home' => 'home',
+		'logout' => 'logout',
 		'menubar' => 'menu',
 		'help' => 'help',
 		'date' => 'calendar_today',

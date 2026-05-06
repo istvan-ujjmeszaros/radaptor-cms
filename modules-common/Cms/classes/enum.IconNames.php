@@ -67,6 +67,7 @@ enum IconNames: string
 	case CHECKLIST = 'checklist';
 	case VERSIONS = 'versions';
 	case COLUMN_WIDTH = 'column_width';
+	case CONTENT_FORMATTING = 'content_formatting';
 	case ALIGN = 'align';
 
 	// Links
@@ -76,6 +77,8 @@ enum IconNames: string
 
 	// Misc
 	case ADMIN_WRENCH = 'admin_wrench';
+	case HOME = 'home';
+	case LOGOUT = 'logout';
 	case MENUBAR = 'menubar';
 	case HELP = 'help';
 	case DATE = 'date';

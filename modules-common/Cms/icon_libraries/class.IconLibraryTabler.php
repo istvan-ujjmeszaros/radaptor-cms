@@ -68,6 +68,7 @@ class IconLibraryTabler extends AbstractIconLibrary
 		'checklist' => 'list-check',
 		'versions' => 'history',
 		'column_width' => 'arrows-horizontal',
+		'content_formatting' => 'typography',
 		'align' => 'adjustments',
 
 		// Links
@@ -77,6 +78,8 @@ class IconLibraryTabler extends AbstractIconLibrary
 
 		// Misc
 		'admin_wrench' => 'tools',
+		'home' => 'home',
+		'logout' => 'logout',
 		'menubar' => 'menu-2',
 		'help' => 'help',
 		'date' => 'calendar',

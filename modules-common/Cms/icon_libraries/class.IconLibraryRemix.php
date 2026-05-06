@@ -73,6 +73,7 @@ class IconLibraryRemix extends AbstractIconLibrary
 		'checklist' => 'Document/todo-line',
 		'versions' => 'System/history-line',
 		'column_width' => 'Arrows/expand-horizontal-s-line',
+		'content_formatting' => 'Editor/font-size',
 		'align' => 'Media/equalizer-line',
 
 		// Links
@@ -82,6 +83,8 @@ class IconLibraryRemix extends AbstractIconLibrary
 
 		// Misc
 		'admin_wrench' => 'System/settings-5-line',
+		'home' => 'Buildings/home-line',
+		'logout' => 'System/logout-box-line',
 		'menubar' => 'System/menu-line',
 		'help' => 'System/question-line',
 		'date' => 'Business/calendar-line',

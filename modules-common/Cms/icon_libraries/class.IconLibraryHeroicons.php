@@ -72,6 +72,7 @@ class IconLibraryHeroicons extends AbstractIconLibrary
 		'checklist' => 'clipboard-document-check',
 		'versions' => 'clock',
 		'column_width' => 'arrows-right-left',
+		'content_formatting' => 'bars-3-bottom-left',
 		'align' => 'adjustments-horizontal',
 
 		// Links
@@ -81,6 +82,8 @@ class IconLibraryHeroicons extends AbstractIconLibrary
 
 		// Misc
 		'admin_wrench' => 'wrench',
+		'home' => 'home',
+		'logout' => 'arrow-left-on-rectangle',
 		'menubar' => 'bars-3',
 		'help' => 'question-mark-circle',
 		'date' => 'calendar',

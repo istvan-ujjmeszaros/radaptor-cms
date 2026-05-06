@@ -1,5 +1,6 @@
 <?php
 assert(isset($this) && $this instanceof Template);
+$this->registerLibrary('_ADMIN_DROPDOWN');
 $layout_commands = is_array($this->props['layout_commands'] ?? null) ? $this->props['layout_commands'] : [];
 ?>
 

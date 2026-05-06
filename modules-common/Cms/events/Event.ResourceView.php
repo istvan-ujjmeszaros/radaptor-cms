@@ -154,6 +154,7 @@ class EventResourceView extends AbstractEvent implements iBrowserEventDocumentab
 			$targets = is_array($targets) ? array_values(array_map('strval', $targets)) : [];
 
 			WebpageView::header('Content-Type: text/html; charset=UTF-8');
+			WebpageView::header('HX-Reswap: none');
 			$renderer = new CmsFragmentRenderer($resource);
 			echo $is_fragment_context ? $renderer->renderTargets($targets) : $renderer->renderDefaultPageFragment();
 		} catch (Throwable) {

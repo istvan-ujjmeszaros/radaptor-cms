@@ -60,6 +60,7 @@ class EventFragmentRender extends AbstractEvent implements iBrowserEventDocument
 
 		try {
 			WebpageView::header('Content-Type: text/html; charset=UTF-8');
+			WebpageView::header('HX-Reswap: none');
 			echo (new CmsFragmentRenderer($resource))->renderTargets($targets);
 		} catch (Throwable) {
 			$this->fallbackToFullNavigation(400);

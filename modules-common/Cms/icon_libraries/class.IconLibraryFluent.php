@@ -72,6 +72,7 @@ class IconLibraryFluent extends AbstractIconLibrary
 		'checklist' => 'checkbox_checked',
 		'versions' => 'history',
 		'column_width' => 'arrow_autofit_width',
+		'content_formatting' => 'text_font',
 		'align' => 'options',
 
 		// Links
@@ -81,6 +82,8 @@ class IconLibraryFluent extends AbstractIconLibrary
 
 		// Misc
 		'admin_wrench' => 'wrench',
+		'home' => 'home',
+		'logout' => 'arrow_exit',
 		'menubar' => 'navigation',
 		'help' => 'question_circle',
 		'date' => 'calendar_ltr',

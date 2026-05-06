@@ -72,6 +72,7 @@ class IconLibraryCarbon extends AbstractIconLibrary
 		'checklist' => 'task',
 		'versions' => 'time',
 		'column_width' => 'fit-to-width',
+		'content_formatting' => 'text-font',
 		'align' => 'settings--adjust',
 
 		// Links
@@ -81,6 +82,8 @@ class IconLibraryCarbon extends AbstractIconLibrary
 
 		// Misc
 		'admin_wrench' => 'tool-kit',
+		'home' => 'home',
+		'logout' => 'logout',
 		'menubar' => 'menu',
 		'help' => 'help',
 		'date' => 'calendar',

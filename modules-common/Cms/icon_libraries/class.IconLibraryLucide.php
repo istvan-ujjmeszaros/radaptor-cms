@@ -72,6 +72,7 @@ class IconLibraryLucide extends AbstractIconLibrary
 		'checklist' => 'list-checks',
 		'versions' => 'history',
 		'column_width' => 'move-horizontal',
+		'content_formatting' => 'type',
 		'align' => 'sliders-horizontal',
 
 		// Links
@@ -81,6 +82,8 @@ class IconLibraryLucide extends AbstractIconLibrary
 
 		// Misc
 		'admin_wrench' => 'wrench',
+		'home' => 'house',
+		'logout' => 'log-out',
 		'menubar' => 'menu',
 		'help' => 'help-circle',
 		'date' => 'calendar',

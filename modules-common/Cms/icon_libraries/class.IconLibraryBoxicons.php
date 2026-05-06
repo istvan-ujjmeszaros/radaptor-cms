@@ -72,6 +72,7 @@ class IconLibraryBoxicons extends AbstractIconLibrary
 		'checklist' => 'bx-list-check',
 		'versions' => 'bx-history',
 		'column_width' => 'bx-move-horizontal',
+		'content_formatting' => 'bx-font',
 		'align' => 'bx-slider',
 
 		// Links
@@ -81,6 +82,8 @@ class IconLibraryBoxicons extends AbstractIconLibrary
 
 		// Misc
 		'admin_wrench' => 'bx-wrench',
+		'home' => 'bx-home',
+		'logout' => 'bx-log-out',
 		'menubar' => 'bx-menu',
 		'help' => 'bx-help-circle',
 		'date' => 'bx-calendar',

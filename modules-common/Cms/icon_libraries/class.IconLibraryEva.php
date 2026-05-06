@@ -72,6 +72,7 @@ class IconLibraryEva extends AbstractIconLibrary
 		'checklist' => 'checkmark-square-outline',
 		'versions' => 'clock-outline',
 		'column_width' => 'expand-outline',
+		'content_formatting' => 'text-outline',
 		'align' => 'options-outline',
 
 		// Links
@@ -81,6 +82,8 @@ class IconLibraryEva extends AbstractIconLibrary
 
 		// Misc
 		'admin_wrench' => 'settings-2-outline',
+		'home' => 'home-outline',
+		'logout' => 'log-out-outline',
 		'menubar' => 'menu-outline',
 		'help' => 'question-mark-circle-outline',
 		'date' => 'calendar-outline',

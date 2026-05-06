@@ -72,6 +72,7 @@ class IconLibraryIconoir extends AbstractIconLibrary
 		'checklist' => 'task-list',
 		'versions' => 'clock',
 		'column_width' => 'horizontal-split',
+		'content_formatting' => 'text',
 		'align' => 'ruler-arrows',
 
 		// Links
@@ -81,6 +82,8 @@ class IconLibraryIconoir extends AbstractIconLibrary
 
 		// Misc
 		'admin_wrench' => 'tools',
+		'home' => 'home',
+		'logout' => 'log-out',
 		'menubar' => 'menu',
 		'help' => 'help-circle',
 		'date' => 'calendar',

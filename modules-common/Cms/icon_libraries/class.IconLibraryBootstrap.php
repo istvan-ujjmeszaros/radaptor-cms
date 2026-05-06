@@ -72,6 +72,7 @@ class IconLibraryBootstrap extends AbstractIconLibrary
 		'checklist' => 'list-check',
 		'versions' => 'clock-history',
 		'column_width' => 'arrows-expand',
+		'content_formatting' => 'rulers',
 		'align' => 'sliders',
 
 		// Links
@@ -81,6 +82,8 @@ class IconLibraryBootstrap extends AbstractIconLibrary
 
 		// Misc
 		'admin_wrench' => 'wrench',
+		'home' => 'house',
+		'logout' => 'box-arrow-right',
 		'menubar' => 'list',
 		'help' => 'question-circle',
 		'date' => 'calendar',

@@ -72,6 +72,7 @@ class IconLibraryPhosphor extends AbstractIconLibrary
 		'checklist' => 'list-checks',
 		'versions' => 'clock-counter-clockwise',
 		'column_width' => 'arrows-out-line-horizontal',
+		'content_formatting' => 'text-t',
 		'align' => 'sliders-horizontal',
 
 		// Links
@@ -81,6 +82,8 @@ class IconLibraryPhosphor extends AbstractIconLibrary
 
 		// Misc
 		'admin_wrench' => 'wrench',
+		'home' => 'house',
+		'logout' => 'sign-out',
 		'menubar' => 'list',
 		'help' => 'question',
 		'date' => 'calendar-blank',

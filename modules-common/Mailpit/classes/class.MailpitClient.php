@@ -105,7 +105,7 @@ final class MailpitClient
 	/**
 	 * @param list<string> $ids
 	 */
-	public function deleteMessages(array $ids = [], string $search = '', string $timezone = ''): string
+	public function deleteMessages(array $ids = [], string $search = '', string $timezone = '', bool $delete_all = false): string
 	{
 		if ($search !== '') {
 			$params = ['query' => $search];
@@ -118,6 +118,10 @@ final class MailpitClient
 		}
 
 		if ($ids === []) {
+			if (!$delete_all) {
+				throw new MailpitClientException('Mailpit delete target is required.');
+			}
+
 			return $this->request('DELETE', '/api/v1/messages')->body;
 		}
 
@@ -294,10 +298,42 @@ final class MailpitClient
 
 	private static function baseUrlFromConfig(): string
 	{
-		$host = trim((string) Config::EMAIL_CATCHER_HOST->value());
-		$port = (int) Config::EMAIL_CATCHER_HTTP_PORT->value();
+		$host = trim((string) self::configValue('EMAIL_CATCHER_HOST', 'mailpit'));
+		$port = (int) self::configValue('EMAIL_CATCHER_HTTP_PORT', null);
+
+		if ($port < 1) {
+			$port = self::envInt('APP_MAILPIT_HTTP_PORT') ?? 8025;
+		}
 
 		return $host . ':' . $port;
+	}
+
+	private static function configValue(string $name, mixed $fallback): mixed
+	{
+		if (!enum_exists('Config') || !method_exists(Config::class, 'tryFrom')) {
+			return $fallback;
+		}
+
+		$case = Config::tryFrom($name);
+
+		if (!is_object($case) || !method_exists($case, 'value')) {
+			return $fallback;
+		}
+
+		return $case->value();
+	}
+
+	private static function envInt(string $name): ?int
+	{
+		$value = getenv($name);
+
+		if ($value === false || trim($value) === '') {
+			return null;
+		}
+
+		$int_value = (int) $value;
+
+		return $int_value > 0 ? $int_value : null;
 	}
 
 	private static function normalizeBaseUrl(string $base_url): string

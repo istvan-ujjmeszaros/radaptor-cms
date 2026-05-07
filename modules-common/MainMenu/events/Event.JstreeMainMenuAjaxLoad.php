@@ -4,7 +4,8 @@ class EventJstreeMainMenuAjaxLoad extends AbstractEvent
 {
 	public function authorize(PolicyContext $policyContext): PolicyDecision
 	{
-		return $policyContext->principal->inGroup(Usergroups::SYSTEMUSERGROUP_LOGGEDIN)
+		return $policyContext->principal->hasRole(RoleList::ROLE_CONTENT_ADMIN)
+			|| $policyContext->principal->hasRole(RoleList::ROLE_SYSTEM_DEVELOPER)
 			? PolicyDecision::allow()
 			: PolicyDecision::deny();
 	}

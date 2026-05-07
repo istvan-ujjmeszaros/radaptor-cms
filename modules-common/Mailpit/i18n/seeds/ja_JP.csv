@@ -1,0 +1,52 @@
+domain,key,context,locale,source_text,expected_text,human_reviewed,text
+mailpit,title,,ja_JP,Mailpit,Mailpit,0,Mailpit
+mailpit,subtitle,,ja_JP,"Captured development emails",キャプチャされた開発メール,0,キャプチャされた開発メール
+mailpit,inbox,,ja_JP,Inbox,受信箱,0,受信箱
+mailpit,search,,ja_JP,Search,検索,0,検索
+mailpit,refresh,,ja_JP,Refresh,更新,0,更新
+mailpit,back_to_inbox,,ja_JP,"Back to inbox",受信箱に戻る,0,受信箱に戻る
+mailpit,messages,,ja_JP,Messages,メッセージ,0,メッセージ
+mailpit,unread,,ja_JP,Unread,未読,0,未読
+mailpit,empty,,ja_JP,"No captured emails found.",キャプチャされたメールはありません。,0,キャプチャされたメールはありません。
+mailpit,unavailable,,ja_JP,"Mailpit is unavailable",Mailpitは利用できません,0,Mailpitは利用できません
+mailpit,not_found,,ja_JP,"Mailpit view not found",Mailpitビューが見つかりません,0,Mailpitビューが見つかりません
+mailpit,access_denied,,ja_JP,"Mailpit catcher is only available in non-production for email admins and system developers.",Mailpitキャッチャーは、本番以外でメール管理者とシステム開発者のみ利用できます。,0,Mailpitキャッチャーは、本番以外でメール管理者とシステム開発者のみ利用できます。
+mailpit,page_not_resolved,,ja_JP,"Mailpit catcher page could not be resolved.",Mailpitキャッチャーページを解決できませんでした。,0,Mailpitキャッチャーページを解決できませんでした。
+mailpit,col.subject,,ja_JP,Subject,件名,0,件名
+mailpit,col.from,,ja_JP,From,差出人,0,差出人
+mailpit,col.to,,ja_JP,To,宛先,0,宛先
+mailpit,col.received,,ja_JP,Received,受信日時,0,受信日時
+mailpit,col.size,,ja_JP,Size,サイズ,0,サイズ
+mailpit,pagination.previous,,ja_JP,Previous,前へ,0,前へ
+mailpit,pagination.next,,ja_JP,Next,次へ,0,次へ
+mailpit,no_subject,,ja_JP,"(no subject)",（件名なし）,0,（件名なし）
+mailpit,delete,,ja_JP,Delete,削除,0,削除
+mailpit,meta.from,,ja_JP,From,差出人,0,差出人
+mailpit,meta.to,,ja_JP,To,宛先,0,宛先
+mailpit,meta.cc,,ja_JP,Cc,Cc,0,Cc
+mailpit,meta.bcc,,ja_JP,Bcc,Bcc,0,Bcc
+mailpit,meta.date,,ja_JP,Date,日付,0,日付
+mailpit,meta.size,,ja_JP,Size,サイズ,0,サイズ
+mailpit,html_empty,,ja_JP,"This message has no HTML body.",このメッセージにはHTML本文がありません。,0,このメッセージにはHTML本文がありません。
+mailpit,html_preview_title,,ja_JP,"Mailpit HTML preview","Mailpit HTMLプレビュー",0,"Mailpit HTMLプレビュー"
+mailpit,check.supported,,ja_JP,Supported,対応,0,対応
+mailpit,check.partial,,ja_JP,Partial,部分対応,0,部分対応
+mailpit,check.unsupported,,ja_JP,Unsupported,非対応,0,非対応
+mailpit,check.tests,,ja_JP,Tests,テスト,0,テスト
+mailpit,check.no_warnings,,ja_JP,"No HTML compatibility warnings.",HTML互換性の警告はありません。,0,HTML互換性の警告はありません。
+mailpit,warning_fallback,,ja_JP,Warning,警告,0,警告
+mailpit,links.status,,ja_JP,Status,ステータス,0,ステータス
+mailpit,links.none,,ja_JP,"No links found.",リンクが見つかりません。,0,リンクが見つかりません。
+mailpit,attachments,,ja_JP,Attachments,添付ファイル,0,添付ファイル
+mailpit,inline_attachments,,ja_JP,"Inline attachments",インライン添付,0,インライン添付
+mailpit,attachment_fallback,,ja_JP,attachment,添付ファイル,0,添付ファイル
+mailpit,tab_error,,ja_JP,"Mailpit tab content could not be loaded.",Mailpitタブの内容を読み込めませんでした。,0,Mailpitタブの内容を読み込めませんでした。
+mailpit,tab.html,,ja_JP,HTML,HTML,0,HTML
+mailpit,tab.html_source,,ja_JP,"HTML Source",HTMLソース,0,HTMLソース
+mailpit,tab.text,,ja_JP,Text,テキスト,0,テキスト
+mailpit,tab.headers,,ja_JP,Headers,ヘッダー,0,ヘッダー
+mailpit,tab.raw,,ja_JP,Raw,Raw,0,Raw
+mailpit,tab.html_check,,ja_JP,"HTML Check",HTMLチェック,0,HTMLチェック
+mailpit,tab.link_check,,ja_JP,"Link Check",リンクチェック,0,リンクチェック
+widget,mailpit.name,,ja_JP,"Mailpit catcher",Mailpitキャッチャー,0,Mailpitキャッチャー
+widget,mailpit.description,,ja_JP,"Shows captured Mailpit emails inside the admin UI.",管理UI内にMailpitでキャプチャしたメールを表示します。,0,管理UI内にMailpitでキャプチャしたメールを表示します。

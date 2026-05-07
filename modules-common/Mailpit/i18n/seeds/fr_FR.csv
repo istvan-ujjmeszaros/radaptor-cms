@@ -1,0 +1,52 @@
+domain,key,context,locale,source_text,expected_text,human_reviewed,text
+mailpit,title,,fr_FR,Mailpit,Mailpit,0,Mailpit
+mailpit,subtitle,,fr_FR,"Captured development emails","Emails de développement capturés",0,"Emails de développement capturés"
+mailpit,inbox,,fr_FR,Inbox,"Boîte de réception",0,"Boîte de réception"
+mailpit,search,,fr_FR,Search,Rechercher,0,Rechercher
+mailpit,refresh,,fr_FR,Refresh,Actualiser,0,Actualiser
+mailpit,back_to_inbox,,fr_FR,"Back to inbox","Retour à la boîte de réception",0,"Retour à la boîte de réception"
+mailpit,messages,,fr_FR,Messages,Messages,0,Messages
+mailpit,unread,,fr_FR,Unread,"Non lus",0,"Non lus"
+mailpit,empty,,fr_FR,"No captured emails found.","Aucun email capturé trouvé.",0,"Aucun email capturé trouvé."
+mailpit,unavailable,,fr_FR,"Mailpit is unavailable","Mailpit est indisponible",0,"Mailpit est indisponible"
+mailpit,not_found,,fr_FR,"Mailpit view not found","Vue Mailpit introuvable",0,"Vue Mailpit introuvable"
+mailpit,access_denied,,fr_FR,"Mailpit catcher is only available in non-production for email admins and system developers.","Le catcher Mailpit est disponible hors production uniquement pour les admins email et les développeurs système.",0,"Le catcher Mailpit est disponible hors production uniquement pour les admins email et les développeurs système."
+mailpit,page_not_resolved,,fr_FR,"Mailpit catcher page could not be resolved.","La page du catcher Mailpit n’a pas pu être résolue.",0,"La page du catcher Mailpit n’a pas pu être résolue."
+mailpit,col.subject,,fr_FR,Subject,Objet,0,Objet
+mailpit,col.from,,fr_FR,From,De,0,De
+mailpit,col.to,,fr_FR,To,À,0,À
+mailpit,col.received,,fr_FR,Received,Reçu,0,Reçu
+mailpit,col.size,,fr_FR,Size,Taille,0,Taille
+mailpit,pagination.previous,,fr_FR,Previous,Précédent,0,Précédent
+mailpit,pagination.next,,fr_FR,Next,Suivant,0,Suivant
+mailpit,no_subject,,fr_FR,"(no subject)","(sans objet)",0,"(sans objet)"
+mailpit,delete,,fr_FR,Delete,Supprimer,0,Supprimer
+mailpit,meta.from,,fr_FR,From,De,0,De
+mailpit,meta.to,,fr_FR,To,À,0,À
+mailpit,meta.cc,,fr_FR,Cc,Cc,0,Cc
+mailpit,meta.bcc,,fr_FR,Bcc,Bcc,0,Bcc
+mailpit,meta.date,,fr_FR,Date,Date,0,Date
+mailpit,meta.size,,fr_FR,Size,Taille,0,Taille
+mailpit,html_empty,,fr_FR,"This message has no HTML body.","Ce message n’a pas de corps HTML.",0,"Ce message n’a pas de corps HTML."
+mailpit,html_preview_title,,fr_FR,"Mailpit HTML preview","Aperçu HTML Mailpit",0,"Aperçu HTML Mailpit"
+mailpit,check.supported,,fr_FR,Supported,"Pris en charge",0,"Pris en charge"
+mailpit,check.partial,,fr_FR,Partial,Partiel,0,Partiel
+mailpit,check.unsupported,,fr_FR,Unsupported,"Non pris en charge",0,"Non pris en charge"
+mailpit,check.tests,,fr_FR,Tests,Tests,0,Tests
+mailpit,check.no_warnings,,fr_FR,"No HTML compatibility warnings.","Aucun avertissement de compatibilité HTML.",0,"Aucun avertissement de compatibilité HTML."
+mailpit,warning_fallback,,fr_FR,Warning,Avertissement,0,Avertissement
+mailpit,links.status,,fr_FR,Status,Statut,0,Statut
+mailpit,links.none,,fr_FR,"No links found.","Aucun lien trouvé.",0,"Aucun lien trouvé."
+mailpit,attachments,,fr_FR,Attachments,"Pièces jointes",0,"Pièces jointes"
+mailpit,inline_attachments,,fr_FR,"Inline attachments","Pièces jointes intégrées",0,"Pièces jointes intégrées"
+mailpit,attachment_fallback,,fr_FR,attachment,"pièce jointe",0,"pièce jointe"
+mailpit,tab_error,,fr_FR,"Mailpit tab content could not be loaded.","Le contenu de l’onglet Mailpit n’a pas pu être chargé.",0,"Le contenu de l’onglet Mailpit n’a pas pu être chargé."
+mailpit,tab.html,,fr_FR,HTML,HTML,0,HTML
+mailpit,tab.html_source,,fr_FR,"HTML Source","Source HTML",0,"Source HTML"
+mailpit,tab.text,,fr_FR,Text,Texte,0,Texte
+mailpit,tab.headers,,fr_FR,Headers,En-têtes,0,En-têtes
+mailpit,tab.raw,,fr_FR,Raw,Brut,0,Brut
+mailpit,tab.html_check,,fr_FR,"HTML Check","Vérification HTML",0,"Vérification HTML"
+mailpit,tab.link_check,,fr_FR,"Link Check","Vérification des liens",0,"Vérification des liens"
+widget,mailpit.name,,fr_FR,"Mailpit catcher","Catcher Mailpit",0,"Catcher Mailpit"
+widget,mailpit.description,,fr_FR,"Shows captured Mailpit emails inside the admin UI.","Affiche les emails capturés par Mailpit dans l’interface admin.",0,"Affiche les emails capturés par Mailpit dans l’interface admin."

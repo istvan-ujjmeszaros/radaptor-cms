@@ -28,6 +28,10 @@ final class PackageSmokeTest extends TestCase
 		$this->assertFileExists($root . '/class.LibrariesCommon.php');
 		$this->assertFileExists($root . '/modules-common/Cms/classes/class.CmsResourceSpecService.php');
 		$this->assertFileExists($root . '/modules-common/Cms/classes/class.CmsSeedHelper.php');
+		$this->assertFileExists($root . '/modules-common/Mailpit/classes/class.MailpitClient.php');
+		$this->assertFileExists($root . '/modules-common/Mailpit/widgets/Widget.Mailpit.php');
+		$this->assertFileExists($root . '/modules-common/Mailpit/templates/template.mailpit.inbox.php');
+		$this->assertFileExists($root . '/modules-common/Mailpit/i18n/seeds/en_US.csv');
 		$this->assertDirectoryExists($root . '/templates-common');
 	}
 }

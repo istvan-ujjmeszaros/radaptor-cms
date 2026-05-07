@@ -1,0 +1,52 @@
+domain,key,context,locale,source_text,expected_text,human_reviewed,text
+mailpit,title,,en_US,Mailpit,Mailpit,0,Mailpit
+mailpit,subtitle,,en_US,"Captured development emails","Captured development emails",0,"Captured development emails"
+mailpit,inbox,,en_US,Inbox,Inbox,0,Inbox
+mailpit,search,,en_US,Search,Search,0,Search
+mailpit,refresh,,en_US,Refresh,Refresh,0,Refresh
+mailpit,back_to_inbox,,en_US,"Back to inbox","Back to inbox",0,"Back to inbox"
+mailpit,messages,,en_US,Messages,Messages,0,Messages
+mailpit,unread,,en_US,Unread,Unread,0,Unread
+mailpit,empty,,en_US,"No captured emails found.","No captured emails found.",0,"No captured emails found."
+mailpit,unavailable,,en_US,"Mailpit is unavailable","Mailpit is unavailable",0,"Mailpit is unavailable"
+mailpit,not_found,,en_US,"Mailpit view not found","Mailpit view not found",0,"Mailpit view not found"
+mailpit,access_denied,,en_US,"Mailpit catcher is only available in non-production for email admins and system developers.","Mailpit catcher is only available in non-production for email admins and system developers.",0,"Mailpit catcher is only available in non-production for email admins and system developers."
+mailpit,page_not_resolved,,en_US,"Mailpit catcher page could not be resolved.","Mailpit catcher page could not be resolved.",0,"Mailpit catcher page could not be resolved."
+mailpit,col.subject,,en_US,Subject,Subject,0,Subject
+mailpit,col.from,,en_US,From,From,0,From
+mailpit,col.to,,en_US,To,To,0,To
+mailpit,col.received,,en_US,Received,Received,0,Received
+mailpit,col.size,,en_US,Size,Size,0,Size
+mailpit,pagination.previous,,en_US,Previous,Previous,0,Previous
+mailpit,pagination.next,,en_US,Next,Next,0,Next
+mailpit,no_subject,,en_US,"(no subject)","(no subject)",0,"(no subject)"
+mailpit,delete,,en_US,Delete,Delete,0,Delete
+mailpit,meta.from,,en_US,From,From,0,From
+mailpit,meta.to,,en_US,To,To,0,To
+mailpit,meta.cc,,en_US,Cc,Cc,0,Cc
+mailpit,meta.bcc,,en_US,Bcc,Bcc,0,Bcc
+mailpit,meta.date,,en_US,Date,Date,0,Date
+mailpit,meta.size,,en_US,Size,Size,0,Size
+mailpit,html_empty,,en_US,"This message has no HTML body.","This message has no HTML body.",0,"This message has no HTML body."
+mailpit,html_preview_title,,en_US,"Mailpit HTML preview","Mailpit HTML preview",0,"Mailpit HTML preview"
+mailpit,check.supported,,en_US,Supported,Supported,0,Supported
+mailpit,check.partial,,en_US,Partial,Partial,0,Partial
+mailpit,check.unsupported,,en_US,Unsupported,Unsupported,0,Unsupported
+mailpit,check.tests,,en_US,Tests,Tests,0,Tests
+mailpit,check.no_warnings,,en_US,"No HTML compatibility warnings.","No HTML compatibility warnings.",0,"No HTML compatibility warnings."
+mailpit,warning_fallback,,en_US,Warning,Warning,0,Warning
+mailpit,links.status,,en_US,Status,Status,0,Status
+mailpit,links.none,,en_US,"No links found.","No links found.",0,"No links found."
+mailpit,attachments,,en_US,Attachments,Attachments,0,Attachments
+mailpit,inline_attachments,,en_US,"Inline attachments","Inline attachments",0,"Inline attachments"
+mailpit,attachment_fallback,,en_US,attachment,attachment,0,attachment
+mailpit,tab_error,,en_US,"Mailpit tab content could not be loaded.","Mailpit tab content could not be loaded.",0,"Mailpit tab content could not be loaded."
+mailpit,tab.html,,en_US,HTML,HTML,0,HTML
+mailpit,tab.html_source,,en_US,"HTML Source","HTML Source",0,"HTML Source"
+mailpit,tab.text,,en_US,Text,Text,0,Text
+mailpit,tab.headers,,en_US,Headers,Headers,0,Headers
+mailpit,tab.raw,,en_US,Raw,Raw,0,Raw
+mailpit,tab.html_check,,en_US,"HTML Check","HTML Check",0,"HTML Check"
+mailpit,tab.link_check,,en_US,"Link Check","Link Check",0,"Link Check"
+widget,mailpit.name,,en_US,"Mailpit catcher","Mailpit catcher",0,"Mailpit catcher"
+widget,mailpit.description,,en_US,"Shows captured Mailpit emails inside the admin UI.","Shows captured Mailpit emails inside the admin UI.",0,"Shows captured Mailpit emails inside the admin UI."

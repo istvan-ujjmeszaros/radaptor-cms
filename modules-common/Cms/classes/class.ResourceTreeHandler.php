@@ -1499,7 +1499,7 @@ class ResourceTreeHandler extends ResourceAcl
 	public static function moveResourceEntryToPositionResult(int $resource_id, int $parent_id, int $position): ResourceTreeMutationResult
 	{
 		$error = self::getRootResourceMutationError($resource_id, 'move')
-			?? self::getProtectedResourceMutationError($resource_id, 'move')
+			?? self::getProtectedResourceSubtreeMutationError($resource_id, 'move')
 			?? self::getProtectedResourceMutationError($parent_id, 'move into');
 
 		if ($error !== null) {
@@ -1509,15 +1509,37 @@ class ResourceTreeHandler extends ResourceAcl
 		$resource_data = self::getResourceTreeEntryDataById($resource_id);
 		$parent_data = self::getResourceTreeEntryDataById($parent_id);
 
-		if (is_array($resource_data) && is_array($parent_data)) {
-			$error = self::getProtectedResourcePathMutationError(
-				self::buildChildPathFromParentData($parent_data, $resource_data),
-				'move into'
+		if (!is_array($resource_data)) {
+			return ResourceTreeMutationResult::error(
+				'RESOURCE_NOT_FOUND',
+				t('cms.resource.error.not_found_by_id', ['resource_id' => $resource_id]),
+				[],
+				['resource_id' => $resource_id]
 			);
+		}
 
-			if ($error !== null) {
-				return ResourceTreeMutationResult::failure($error);
-			}
+		if (!is_array($parent_data)) {
+			return ResourceTreeMutationResult::error(
+				'RESOURCE_NOT_FOUND',
+				t('cms.resource.error.not_found_by_id', ['resource_id' => $parent_id]),
+				[],
+				['resource_id' => $parent_id]
+			);
+		}
+
+		$error = self::getResourceMoveAclError($resource_id, $parent_id);
+
+		if ($error !== null) {
+			return ResourceTreeMutationResult::failure($error);
+		}
+
+		$error = self::getProtectedResourcePathMutationError(
+			self::buildChildPathFromParentData($parent_data, $resource_data),
+			'move into'
+		);
+
+		if ($error !== null) {
+			return ResourceTreeMutationResult::failure($error);
 		}
 
 		$move = NestedSet::moveToPosition('resource_tree', $resource_id, $parent_id, $position);
@@ -1534,6 +1556,59 @@ class ResourceTreeHandler extends ResourceAcl
 		self::rebuildPath($resource_id);
 
 		return ResourceTreeMutationResult::success(true);
+	}
+
+	private static function getResourceMoveAclError(int $resource_id, int $parent_id): ?ApiError
+	{
+		if (!ResourceAcl::canAccessResource($parent_id, ResourceAcl::_ACL_CREATE)) {
+			return new ApiError(
+				'RESOURCE_MOVE_DENIED',
+				t('response_error.access_denied'),
+				[],
+				[
+					'resource_id' => $resource_id,
+					'parent_id' => $parent_id,
+					'denied_resource_id' => $parent_id,
+					'required_operation' => ResourceAcl::_ACL_CREATE,
+				]
+			);
+		}
+
+		if (!ResourceAcl::canAccessResource($resource_id, ResourceAcl::_ACL_EDIT)) {
+			return new ApiError(
+				'RESOURCE_MOVE_DENIED',
+				t('response_error.access_denied'),
+				[],
+				[
+					'resource_id' => $resource_id,
+					'parent_id' => $parent_id,
+					'denied_resource_id' => $resource_id,
+					'required_operation' => ResourceAcl::_ACL_EDIT,
+				]
+			);
+		}
+
+		foreach (NestedSet::getDescendants('resource_tree', $resource_id, [], 'lft ASC') as $node) {
+			$node_id = (int) ($node['node_id'] ?? 0);
+
+			if ($node_id <= 0 || $node_id === $resource_id || ResourceAcl::canAccessResource($node_id, ResourceAcl::_ACL_EDIT)) {
+				continue;
+			}
+
+			return new ApiError(
+				'RESOURCE_MOVE_DENIED',
+				t('response_error.access_denied'),
+				[],
+				[
+					'resource_id' => $resource_id,
+					'parent_id' => $parent_id,
+					'denied_resource_id' => $node_id,
+					'required_operation' => ResourceAcl::_ACL_EDIT,
+				]
+			);
+		}
+
+		return null;
 	}
 
 	public static function getResourceListForSelect(string $resource_type, bool $use_index_html = true): array

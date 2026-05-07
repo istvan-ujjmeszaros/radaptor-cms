@@ -125,7 +125,7 @@ class MainMenu
 
 	public static function getMenuData(iTreeBuildContext $tree_build_context): array
 	{
-		$menuData = DbHelper::fetchAll("SELECT * FROM mainmenu_tree ORDER BY lft;");
+		$menuData = self::filterMenuDataByAcl(DbHelper::fetchAll("SELECT * FROM mainmenu_tree ORDER BY lft;"));
 
 		$current_page_path = $tree_build_context->getPagedata('path');
 
@@ -160,5 +160,82 @@ class MainMenu
 		}
 
 		return $menuData;
+	}
+
+	private static function filterMenuDataByAcl(array $menuData): array
+	{
+		$by_id = [];
+		$children_by_parent = [];
+		$page_visibility_cache = [];
+
+		foreach ($menuData as $menu) {
+			$node_id = (int) ($menu['node_id'] ?? 0);
+			$parent_id = (int) ($menu['parent_id'] ?? 0);
+
+			if ($node_id <= 0) {
+				continue;
+			}
+
+			$by_id[$node_id] = $menu;
+			$children_by_parent[$parent_id][] = $node_id;
+		}
+
+		$visible_cache = [];
+		$is_visible = function (int $node_id) use (&$is_visible, &$visible_cache, $by_id, $children_by_parent, &$page_visibility_cache): bool {
+			if (array_key_exists($node_id, $visible_cache)) {
+				return $visible_cache[$node_id];
+			}
+
+			$menu = $by_id[$node_id] ?? null;
+
+			if (!is_array($menu)) {
+				return $visible_cache[$node_id] = false;
+			}
+
+			if (($menu['url'] ?? null) !== null) {
+				return $visible_cache[$node_id] = true;
+			}
+
+			if (($menu['page_id'] ?? null) !== null) {
+				$page_id = (int) $menu['page_id'];
+
+				if ($page_id <= 0) {
+					return $visible_cache[$node_id] = false;
+				}
+
+				if (!array_key_exists($page_id, $page_visibility_cache)) {
+					$page_visibility_cache[$page_id] = ResourceAcl::canAccessResource($page_id, ResourceAcl::_ACL_VIEW);
+				}
+
+				return $visible_cache[$node_id] = $page_visibility_cache[$page_id];
+			}
+
+			foreach ($children_by_parent[$node_id] ?? [] as $child_id) {
+				if ($is_visible($child_id)) {
+					return $visible_cache[$node_id] = true;
+				}
+			}
+
+			return $visible_cache[$node_id] = false;
+		};
+
+		$has_visible_ancestors = function (int $node_id) use (&$has_visible_ancestors, $by_id, $is_visible): bool {
+			$parent_id = (int) ($by_id[$node_id]['parent_id'] ?? 0);
+
+			if ($parent_id <= 0) {
+				return true;
+			}
+
+			return $is_visible($parent_id) && $has_visible_ancestors($parent_id);
+		};
+
+		return array_values(array_filter(
+			$menuData,
+			static function (array $menu) use ($is_visible, $has_visible_ancestors): bool {
+				$node_id = (int) ($menu['node_id'] ?? 0);
+
+				return $node_id > 0 && $is_visible($node_id) && $has_visible_ancestors($node_id);
+			}
+		));
 	}
 }

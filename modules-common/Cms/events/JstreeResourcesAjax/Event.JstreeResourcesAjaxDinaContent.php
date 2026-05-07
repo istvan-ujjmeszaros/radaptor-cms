@@ -34,7 +34,7 @@ class EventJstreeResourcesAjaxDinaContent extends AbstractEvent
 		];
 
 		try {
-			$ids = Request::postRequired('id');
+			$ids = JsTreeApiService::normalizeIds(Request::postRequired('id'));
 			$type = Request::postOptional('type', 'null');
 			$jstree_id = Request::postRequired('jstree_id');
 		} catch (RequestParamException $e) {
@@ -65,6 +65,13 @@ class EventJstreeResourcesAjaxDinaContent extends AbstractEvent
 
 		foreach ($ids as $id) {
 			$id = $this->resolveResourceTreeNodeId($id);
+
+			if (!$this->canRenderResourceDetails($id)) {
+				ApiResponse::renderError('RESOURCE_ACCESS_DENIED', t('response_error.access_denied'), 403);
+
+				return;
+			}
+
 			$resource = ResourceTypeFactory::Factory($id);
 
 			if (!is_null($resource)) {
@@ -84,6 +91,7 @@ class EventJstreeResourcesAjaxDinaContent extends AbstractEvent
 			if ($type == 'folder' || $type == 'root') {
 				$templateProps['indexpage_node_id'] = ResourceTreeHandler::getIndexpageNodeId($id);
 				$templateProps['indexpage_data'] = $templateProps['indexpage_node_id'] !== null
+					&& $this->canRenderResourceDetails((int) $templateProps['indexpage_node_id'])
 					? ResourceTreeHandler::getResourceTreeEntryDataById($templateProps['indexpage_node_id'])
 					: null;
 			}
@@ -118,5 +126,12 @@ class EventJstreeResourcesAjaxDinaContent extends AbstractEvent
 		}
 
 		return (int) $node_id;
+	}
+
+	private function canRenderResourceDetails(int $resource_id): bool
+	{
+		return $resource_id > 0
+			&& ResourceTreeHandler::getResourceTreeEntryDataById($resource_id) !== null
+			&& ResourceAcl::canAccessResource($resource_id, ResourceAcl::_ACL_LIST);
 	}
 }

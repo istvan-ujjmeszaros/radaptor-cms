@@ -1,5 +1,5 @@
 <?php assert(isset($this) && $this instanceof Template); ?>
-<table class="editBar">
+<table class="editBar" hx-boost="false">
 		<tr>
 			<?php foreach ($this->props['widget_edit_commands'] as $widgetEditCommand): ?>
 				<?php if (!is_array($widgetEditCommand)) {

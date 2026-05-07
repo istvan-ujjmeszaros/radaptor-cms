@@ -178,13 +178,15 @@ $summaryMetrics = [
 									<?= e($statusOptions[$rowStatus] ?? $rowStatus) ?>
 								</span>
 							</td>
-							<td>
-								<?= e((string) ((int) ($row['recipient_total'] ?? 0))) ?>
-								<span class="small text-muted email-outbox__message-meta">
-									(<?= e((string) ((int) ($row['recipient_sent'] ?? 0))) ?> sent /
-									<?= e((string) ((int) ($row['recipient_failed'] ?? 0))) ?> failed)
-								</span>
-							</td>
+								<td>
+									<?= e((string) ((int) ($row['recipient_total'] ?? 0))) ?>
+									<span class="small text-muted email-outbox__message-meta">
+										<?= e(t('admin.email_outbox.recipients_delivery_counts', [
+											'sent' => (string) ((int) ($row['recipient_sent'] ?? 0)),
+											'failed' => (string) ((int) ($row['recipient_failed'] ?? 0)),
+										])) ?>
+									</span>
+								</td>
 							<td><?= e((string) ($row['created_at'] ?? '')) ?></td>
 							<td><?= e((string) ($row['sent_at'] ?? '—')) ?></td>
 							<td><?= e(trim((string) ($row['last_error_message'] ?? '')) ?: '—') ?></td>
@@ -197,14 +199,14 @@ $summaryMetrics = [
 
 		<?php if ($totalPages > 1) { ?>
 			<div class="card-footer d-flex justify-content-between">
-				<a class="btn btn-outline-secondary btn-sm <?= $page <= 1 ? 'disabled' : '' ?>"
-				   href="<?= e($page <= 1 ? '#' : $buildPageUrl($page - 1)) ?>">
-					Previous
-				</a>
-				<a class="btn btn-outline-secondary btn-sm <?= $page >= $totalPages ? 'disabled' : '' ?>"
-				   href="<?= e($page >= $totalPages ? '#' : $buildPageUrl($page + 1)) ?>">
-					Next
-				</a>
+					<a class="btn btn-outline-secondary btn-sm <?= $page <= 1 ? 'disabled' : '' ?>"
+					   href="<?= e($page <= 1 ? '#' : $buildPageUrl($page - 1)) ?>">
+						<?= e($this->strings['admin.email_outbox.pagination.previous'] ?? t('admin.email_outbox.pagination.previous')) ?>
+					</a>
+					<a class="btn btn-outline-secondary btn-sm <?= $page >= $totalPages ? 'disabled' : '' ?>"
+					   href="<?= e($page >= $totalPages ? '#' : $buildPageUrl($page + 1)) ?>">
+						<?= e($this->strings['admin.email_outbox.pagination.next'] ?? t('admin.email_outbox.pagination.next')) ?>
+					</a>
 			</div>
 		<?php } ?>
 	</section>
@@ -223,10 +225,10 @@ $summaryMetrics = [
 					<thead>
 					<tr>
 						<th><?= e($this->strings['admin.email_outbox.col.id'] ?? 'ID') ?></th>
-						<th>Job</th>
+						<th><?= e($this->strings['admin.email_outbox.col.job'] ?? t('admin.email_outbox.col.job')) ?></th>
 						<th><?= e($this->strings['admin.email_outbox.col.status'] ?? 'Status') ?></th>
 						<th><?= e($this->strings['admin.email_outbox.col.last_error'] ?? 'Last error') ?></th>
-						<th>Dead lettered</th>
+						<th><?= e($this->strings['admin.email_outbox.col.dead_lettered'] ?? t('admin.email_outbox.col.dead_lettered')) ?></th>
 					</tr>
 					</thead>
 					<tbody>
@@ -237,7 +239,7 @@ $summaryMetrics = [
 								<div><strong><?= e((string) ($failure['job_type'] ?? '')) ?></strong></div>
 								<div class="small text-muted email-outbox__message-meta"><?= e((string) ($failure['source_table'] ?? '')) ?></div>
 							</td>
-							<td><span class="badge rounded-pill email-outbox__status" data-status="failed">Dead letter</span></td>
+							<td><span class="badge rounded-pill email-outbox__status" data-status="failed"><?= e($this->strings['admin.email_queue.dead_letter'] ?? t('admin.email_queue.dead_letter')) ?></span></td>
 							<td>
 								<div><strong><?= e((string) ($failure['error_code'] ?? '')) ?></strong></div>
 								<div class="small text-muted email-outbox__message-meta"><?= e((string) ($failure['error_message'] ?? '')) ?></div>

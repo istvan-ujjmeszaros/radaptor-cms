@@ -56,7 +56,7 @@
 
 		<div class="container clearfix">
 
-			<span id="logo"><img src="<?= Config::PATH_CDN->value(); ?>teamsolution.hu/images/logo-orange.png"><a href="/">TeamSolution</a></span>
+			<span id="logo"><img src="<?= Config::PATH_CDN->value(); ?>teamsolution.hu/images/logo-orange.png" alt=""><a href="/"><?= e(t('layout.public_2row.brand')) ?></a></span>
 
 			<?= $this->fetchContent('main_menu'); ?>
 		</div>
@@ -76,48 +76,48 @@
 		<div class="Slides">
 
 			<div class="Slide" data-position="50,190" data-width="470" data-height="60">
-				<img src="/images-slider/img01.jpg" alt="img1"/>
+				<img src="/images-slider/img01.jpg" alt=""/>
 				<div class="SlideText-1">
 					<h1><?= e($this->strings['layout.public_2row.hero.self_discovery']) ?></h1>
 				</div>
 			</div><!--/ .Slide-->
 
 			<div class="Slide" data-position="400,15" data-width="560" data-height="60">
-				<img src="/images-slider/img02.jpg" alt="img2"/>
+				<img src="/images-slider/img02.jpg" alt=""/>
 				<div class="SlideText-1">
 					<h1><?= e($this->strings['layout.public_2row.hero.equal_partner']) ?></h1>
 				</div>
 			</div><!--/ .Slide-->
 
 			<div class="Slide" data-position="390,20" data-width="370" data-height="60">
-				<img src="/images-slider/img03.jpg" alt="img3"/>
+				<img src="/images-slider/img03.jpg" alt=""/>
 				<div class="SlideText-1">
 					<h1><?= e($this->strings['layout.public_2row.hero.better_quality_of_life']) ?></h1>
 				</div>
 			</div><!--/ .Slide-->
 
 			<div class="Slide" data-position="400,270" data-width="500" data-height="60">
-				<img src="/images-slider/img04.jpg" alt="img4"/>
+				<img src="/images-slider/img04.jpg" alt=""/>
 				<div class="SlideText-3">
 					<h1><?= e($this->strings['layout.public_2row.hero.balanced_life']) ?></h1>
 				</div>
 			</div><!--/ .Slide-->
 
 			<div class="Slide" data-position="290,290" data-width="460" data-height="60">
-				<img src="/images-slider/img05.jpg" alt="img5"/>
+				<img src="/images-slider/img05.jpg" alt=""/>
 				<div class="SlideText-1">
 					<h1><?= e($this->strings['layout.public_2row.hero.conflict_management']) ?></h1>
 				</div>
 			</div><!--/ .Slide-->
 
 			<div class="Slide" data-position="350,70" data-width="400" data-height="60">
-				<img src="/images-slider/img06.jpg" alt="img6"/>
+				<img src="/images-slider/img06.jpg" alt=""/>
 				<div class="SlideText-1">
 					<h1><?= e($this->strings['layout.public_2row.hero.success_and_happiness']) ?></h1>
 				</div>
 			</div><!--/ .Slide-->
 			<div class="Slide" data-position="20,200" data-width="340" data-height="60">
-				<img src="/images-slider/img07.jpg" alt="img7"/>
+				<img src="/images-slider/img07.jpg" alt=""/>
 				<div class="SlideText-3">
 					<h1><?= e($this->strings['layout.public_2row.hero.solution']) ?></h1>
 				</div>

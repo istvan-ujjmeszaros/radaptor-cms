@@ -589,3 +589,59 @@ widget,widget_preview.name,,fr_FR,"Widget preview","Aperçu du widget",0,"Aperç
 workbench,tm_apply,,fr_FR,Apply,Appliquer,0,Appliquer
 workbench,tm_no_results,,fr_FR,"No suggestions","Aucune suggestion",0,"Aucune suggestion"
 workbench,tm_uses,,fr_FR,uses,utilise,0,utilise
+admin,menu.mailpit,,fr_FR,Mailpit,Mailpit,0,Mailpit
+admin,email_outbox.recipients_delivery_counts,,fr_FR,"({sent} sent / {failed} failed)","({sent} envoyés / {failed} échoués)",0,"({sent} envoyés / {failed} échoués)"
+admin,email_outbox.col.job,,fr_FR,Job,Tâche,0,Tâche
+admin,email_outbox.col.dead_lettered,,fr_FR,"Dead lettered","Mis en dead letter",0,"Mis en dead letter"
+admin,email_outbox.pagination.previous,,fr_FR,Previous,Précédent,0,Précédent
+admin,email_outbox.pagination.next,,fr_FR,Next,Suivant,0,Suivant
+runtime_diagnostics,card.package_roots,,fr_FR,"Package roots","Racines des paquets",0,"Racines des paquets"
+runtime_diagnostics,field.environment,,fr_FR,Environment,Environnement,0,Environnement
+runtime_diagnostics,field.application,,fr_FR,Application,Application,0,Application
+runtime_diagnostics,field.domain_context,,fr_FR,"Domain context","Contexte de domaine",0,"Contexte de domaine"
+runtime_diagnostics,field.runtime,,fr_FR,Runtime,Runtime,0,Runtime
+runtime_diagnostics,field.smtp_host,,fr_FR,"SMTP host","Hôte SMTP",0,"Hôte SMTP"
+runtime_diagnostics,field.smtp_port,,fr_FR,"SMTP port","Port SMTP",0,"Port SMTP"
+runtime_diagnostics,field.using_catcher,,fr_FR,"Using catcher","Catcher utilisé",0,"Catcher utilisé"
+runtime_diagnostics,field.catcher_host,,fr_FR,"Catcher host","Hôte du catcher",0,"Hôte du catcher"
+runtime_diagnostics,field.catcher_smtp_port,,fr_FR,"Catcher SMTP port","Port SMTP du catcher",0,"Port SMTP du catcher"
+runtime_diagnostics,field.mailpit_ui_url,,fr_FR,"Mailpit UI URL","URL UI Mailpit",0,"URL UI Mailpit"
+runtime_diagnostics,field.driver,,fr_FR,Driver,Pilote,0,Pilote
+runtime_diagnostics,field.host,,fr_FR,Host,Hôte,0,Hôte
+runtime_diagnostics,field.port,,fr_FR,Port,Port,0,Port
+runtime_diagnostics,field.database,,fr_FR,Database,"Base de données",0,"Base de données"
+runtime_diagnostics,field.username,,fr_FR,Username,"Nom d’utilisateur",0,"Nom d’utilisateur"
+runtime_diagnostics,field.password,,fr_FR,Password,"Mot de passe",0,"Mot de passe"
+runtime_diagnostics,field.dsn,,fr_FR,DSN,DSN,0,DSN
+runtime_diagnostics,field.session,,fr_FR,Session,Session,0,Session
+runtime_diagnostics,field.cache,,fr_FR,Cache,Cache,0,Cache
+runtime_diagnostics,field.test,,fr_FR,Test,Test,0,Test
+runtime_diagnostics,field.public_url,,fr_FR,"Public URL","URL publique",0,"URL publique"
+runtime_diagnostics,field.allowed_origins,,fr_FR,"Allowed origins","Origines autorisées",0,"Origines autorisées"
+runtime_diagnostics,field.enabled_hint,,fr_FR,"Enabled hint","Indice d’activation",0,"Indice d’activation"
+runtime_diagnostics,field.mode,,fr_FR,Mode,Mode,0,Mode
+runtime_diagnostics,field.local_manifest,,fr_FR,"Local manifest","Manifeste local",0,"Manifeste local"
+runtime_diagnostics,field.local_lock,,fr_FR,"Local lock","Lock local",0,"Lock local"
+runtime_diagnostics,field.workspace_dev_mode,,fr_FR,"Workspace dev mode","Mode dev du workspace",0,"Mode dev du workspace"
+runtime_diagnostics,field.local_overrides_disabled,,fr_FR,"Local overrides disabled","Overrides locaux désactivés",0,"Overrides locaux désactivés"
+runtime_diagnostics,col.package,,fr_FR,Package,Paquet,0,Paquet
+runtime_diagnostics,col.source,,fr_FR,Source,Source,0,Source
+runtime_diagnostics,col.version,,fr_FR,Version,Version,0,Version
+runtime_diagnostics,col.active_path,,fr_FR,"Active path","Chemin actif",0,"Chemin actif"
+cms,template.missing,,fr_FR,"Missing template:","Template manquant :",0,"Template manquant :"
+cms,widget_preview.server_html_preview,,fr_FR,"Server HTML preview","Aperçu HTML serveur",0,"Aperçu HTML serveur"
+cms,widget_preview.subtree_json,,fr_FR,"Widget subtree JSON","JSON du sous-arbre du widget",0,"JSON du sous-arbre du widget"
+cms,widget_preview.subtree_json_description,,fr_FR,"Extracted from the same SDUI JSON document available through Open JSON.","Extrait du même document JSON SDUI disponible via Ouvrir JSON.",0,"Extrait du même document JSON SDUI disponible via Ouvrir JSON."
+cms,widget_preview.open_json,,fr_FR,"Open JSON","Ouvrir JSON",0,"Ouvrir JSON"
+cms,widget_preview.loading_json_preview,,fr_FR,"Loading JSON preview...","Chargement de l’aperçu JSON...",0,"Chargement de l’aperçu JSON..."
+cms,widget_preview.sdui_subtree_help,,fr_FR,"Showing the widget subtree extracted from the full SDUI JSON document.","Affiche le sous-arbre du widget extrait du document JSON SDUI complet.",0,"Affiche le sous-arbre du widget extrait du document JSON SDUI complet."
+cms,widget_preview.template_scope_note,,fr_FR,"This support check only looks at the resolved preview HTML template of the widget root node.","Cette vérification ne regarde que le template HTML d’aperçu résolu du nœud racine du widget.",0,"Cette vérification ne regarde que le template HTML d’aperçu résolu du nœud racine du widget."
+social,disqus.brand,,fr_FR,Disqus,Disqus,0,Disqus
+layout,public_2row.brand,,fr_FR,TeamSolution,TeamSolution,0,TeamSolution
+theme,template_engine_demo.col.name,,fr_FR,Name,Nom,0,Nom
+theme,template_engine_demo.col.email,,fr_FR,Email,Email,0,Email
+theme,template_engine_demo.col.role,,fr_FR,Role,Rôle,0,Rôle
+theme,template_engine_demo.engine_title,,fr_FR,"{engine} Template Engine","Moteur de template {engine}",0,"Moteur de template {engine}"
+theme,template_engine_demo.source_title,,fr_FR,"Template Source","Source du template",0,"Source du template"
+theme,template_engine_demo.rendered_output_title,,fr_FR,"Rendered Output","Sortie rendue",0,"Sortie rendue"
+layout,admin_empty.sign_in_to_continue,,fr_FR,"Sign in to continue.","Connectez-vous pour continuer.",0,"Connectez-vous pour continuer."

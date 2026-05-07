@@ -55,3 +55,5 @@ form,widget_connection_params.name,,hu_HU,Content box display settings,Tartalomd
 form,widget_connection_settings.description,,hu_HU,Configure width and row placement for the content box,A tartalomdoboz szélességének és sorelhelyezésének beállítása,0,A tartalomdoboz szélességének és sorelhelyezésének beállítása
 form,widget_connection_settings.name,,hu_HU,Content formatting,Tartalom formázás,0,Tartalom formázás
 form,widget_connection_settings.title,,hu_HU,Content formatting,Tartalom formázás,0,Tartalom formázás
+form,closer.title,,hu_HU,Closer page,Bezáró oldal,0,Bezáró oldal
+form,closer.close_window,,hu_HU,Close this window!,Zárd be ezt az ablakot!,0,Zárd be ezt az ablakot!

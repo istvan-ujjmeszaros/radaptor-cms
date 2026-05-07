@@ -55,3 +55,5 @@ form,widget_connection_params.name,,pl_PL,Content box display settings,Ustawieni
 form,widget_connection_settings.description,,pl_PL,Configure width and row placement for the content box,Skonfiguruj szerokość i położenie wiersza dla pola treści,0,Skonfiguruj szerokość i położenie wiersza dla pola treści
 form,widget_connection_settings.name,,pl_PL,Content formatting,Formatowanie treści,0,Formatowanie treści
 form,widget_connection_settings.title,,pl_PL,Content formatting,Formatowanie treści,0,Formatowanie treści
+form,closer.title,,pl_PL,Closer page,Strona zamykania,0,Strona zamykania
+form,closer.close_window,,pl_PL,Close this window!,Zamknij to okno!,0,Zamknij to okno!

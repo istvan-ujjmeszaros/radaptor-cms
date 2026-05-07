@@ -55,3 +55,5 @@ form,widget_connection_params.name,,ja_JP,Content box display settings,コンテ
 form,widget_connection_settings.description,,ja_JP,Configure width and row placement for the content box,コンテンツボックスの幅と行配置を設定,0,コンテンツボックスの幅と行配置を設定
 form,widget_connection_settings.name,,ja_JP,Content formatting,コンテンツの書式,0,コンテンツの書式
 form,widget_connection_settings.title,,ja_JP,Content formatting,コンテンツの書式,0,コンテンツの書式
+form,closer.title,,ja_JP,Closer page,終了ページ,0,終了ページ
+form,closer.close_window,,ja_JP,Close this window!,このウィンドウを閉じてください！,0,このウィンドウを閉じてください！

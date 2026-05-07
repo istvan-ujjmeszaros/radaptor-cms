@@ -55,3 +55,5 @@ form,widget_connection_params.name,,it_IT,Content box display settings,Impostazi
 form,widget_connection_settings.description,,it_IT,Configure width and row placement for the content box,Configura larghezza e posizione nella riga del blocco contenuto,0,Configura larghezza e posizione nella riga del blocco contenuto
 form,widget_connection_settings.name,,it_IT,Content formatting,Formattazione contenuto,0,Formattazione contenuto
 form,widget_connection_settings.title,,it_IT,Content formatting,Formattazione contenuto,0,Formattazione contenuto
+form,closer.title,,it_IT,Closer page,Pagina di chiusura,0,Pagina di chiusura
+form,closer.close_window,,it_IT,Close this window!,Chiudi questa finestra!,0,Chiudi questa finestra!

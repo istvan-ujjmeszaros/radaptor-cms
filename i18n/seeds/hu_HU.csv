@@ -589,3 +589,59 @@ widget,widget_preview.name,,hu_HU,"Widget preview","Widget előnézet",0,"Widget
 workbench,tm_apply,,hu_HU,Apply,Alkalmaz,0,Alkalmaz
 workbench,tm_no_results,,hu_HU,"No suggestions","Nincsenek javaslatok",0,"Nincsenek javaslatok"
 workbench,tm_uses,,hu_HU,uses,használat,0,használat
+admin,menu.mailpit,,hu_HU,Mailpit,Mailpit,0,Mailpit
+admin,email_outbox.recipients_delivery_counts,,hu_HU,"({sent} sent / {failed} failed)","({sent} elküldve / {failed} sikertelen)",0,"({sent} elküldve / {failed} sikertelen)"
+admin,email_outbox.col.job,,hu_HU,Job,Feladat,0,Feladat
+admin,email_outbox.col.dead_lettered,,hu_HU,"Dead lettered","Hibásként félretéve",0,"Hibásként félretéve"
+admin,email_outbox.pagination.previous,,hu_HU,Previous,Előző,0,Előző
+admin,email_outbox.pagination.next,,hu_HU,Next,Következő,0,Következő
+runtime_diagnostics,card.package_roots,,hu_HU,"Package roots",Csomaggyökerek,0,Csomaggyökerek
+runtime_diagnostics,field.environment,,hu_HU,Environment,Környezet,0,Környezet
+runtime_diagnostics,field.application,,hu_HU,Application,Alkalmazás,0,Alkalmazás
+runtime_diagnostics,field.domain_context,,hu_HU,"Domain context","Domain kontextus",0,"Domain kontextus"
+runtime_diagnostics,field.runtime,,hu_HU,Runtime,Futásidő,0,Futásidő
+runtime_diagnostics,field.smtp_host,,hu_HU,"SMTP host","SMTP hoszt",0,"SMTP hoszt"
+runtime_diagnostics,field.smtp_port,,hu_HU,"SMTP port","SMTP port",0,"SMTP port"
+runtime_diagnostics,field.using_catcher,,hu_HU,"Using catcher","Catcher használatban",0,"Catcher használatban"
+runtime_diagnostics,field.catcher_host,,hu_HU,"Catcher host","Catcher hoszt",0,"Catcher hoszt"
+runtime_diagnostics,field.catcher_smtp_port,,hu_HU,"Catcher SMTP port","Catcher SMTP-port",0,"Catcher SMTP-port"
+runtime_diagnostics,field.mailpit_ui_url,,hu_HU,"Mailpit UI URL","Mailpit UI URL",0,"Mailpit UI URL"
+runtime_diagnostics,field.driver,,hu_HU,Driver,Driver,0,Driver
+runtime_diagnostics,field.host,,hu_HU,Host,Hoszt,0,Hoszt
+runtime_diagnostics,field.port,,hu_HU,Port,Port,0,Port
+runtime_diagnostics,field.database,,hu_HU,Database,Adatbázis,0,Adatbázis
+runtime_diagnostics,field.username,,hu_HU,Username,Felhasználónév,0,Felhasználónév
+runtime_diagnostics,field.password,,hu_HU,Password,Jelszó,0,Jelszó
+runtime_diagnostics,field.dsn,,hu_HU,DSN,DSN,0,DSN
+runtime_diagnostics,field.session,,hu_HU,Session,Munkamenet,0,Munkamenet
+runtime_diagnostics,field.cache,,hu_HU,Cache,Gyorsítótár,0,Gyorsítótár
+runtime_diagnostics,field.test,,hu_HU,Test,Teszt,0,Teszt
+runtime_diagnostics,field.public_url,,hu_HU,"Public URL","Publikus URL",0,"Publikus URL"
+runtime_diagnostics,field.allowed_origins,,hu_HU,"Allowed origins","Engedélyezett origin-ek",0,"Engedélyezett origin-ek"
+runtime_diagnostics,field.enabled_hint,,hu_HU,"Enabled hint","Engedélyezési jelzés",0,"Engedélyezési jelzés"
+runtime_diagnostics,field.mode,,hu_HU,Mode,Mód,0,Mód
+runtime_diagnostics,field.local_manifest,,hu_HU,"Local manifest","Lokális manifest",0,"Lokális manifest"
+runtime_diagnostics,field.local_lock,,hu_HU,"Local lock","Lokális lock",0,"Lokális lock"
+runtime_diagnostics,field.workspace_dev_mode,,hu_HU,"Workspace dev mode","Workspace fejlesztői mód",0,"Workspace fejlesztői mód"
+runtime_diagnostics,field.local_overrides_disabled,,hu_HU,"Local overrides disabled","Lokális override-ok tiltva",0,"Lokális override-ok tiltva"
+runtime_diagnostics,col.package,,hu_HU,Package,Csomag,0,Csomag
+runtime_diagnostics,col.source,,hu_HU,Source,Forrás,0,Forrás
+runtime_diagnostics,col.version,,hu_HU,Version,Verzió,0,Verzió
+runtime_diagnostics,col.active_path,,hu_HU,"Active path","Aktív útvonal",0,"Aktív útvonal"
+cms,template.missing,,hu_HU,"Missing template:","Hiányzó sablon:",0,"Hiányzó sablon:"
+cms,widget_preview.server_html_preview,,hu_HU,"Server HTML preview","Szerver HTML előnézet",0,"Szerver HTML előnézet"
+cms,widget_preview.subtree_json,,hu_HU,"Widget subtree JSON","Widget részfa JSON",0,"Widget részfa JSON"
+cms,widget_preview.subtree_json_description,,hu_HU,"Extracted from the same SDUI JSON document available through Open JSON.","Ugyanabból az SDUI JSON dokumentumból kinyerve, amely a JSON megnyitásával érhető el.",0,"Ugyanabból az SDUI JSON dokumentumból kinyerve, amely a JSON megnyitásával érhető el."
+cms,widget_preview.open_json,,hu_HU,"Open JSON","JSON megnyitása",0,"JSON megnyitása"
+cms,widget_preview.loading_json_preview,,hu_HU,"Loading JSON preview...","JSON előnézet betöltése...",0,"JSON előnézet betöltése..."
+cms,widget_preview.sdui_subtree_help,,hu_HU,"Showing the widget subtree extracted from the full SDUI JSON document.","A teljes SDUI JSON dokumentumból kinyert widget részfát mutatja.",0,"A teljes SDUI JSON dokumentumból kinyert widget részfát mutatja."
+cms,widget_preview.template_scope_note,,hu_HU,"This support check only looks at the resolved preview HTML template of the widget root node.","Ez a támogatási ellenőrzés csak a widget gyökércsomópontjának feloldott HTML előnézeti sablonját vizsgálja.",0,"Ez a támogatási ellenőrzés csak a widget gyökércsomópontjának feloldott HTML előnézeti sablonját vizsgálja."
+social,disqus.brand,,hu_HU,Disqus,Disqus,0,Disqus
+layout,public_2row.brand,,hu_HU,TeamSolution,TeamSolution,0,TeamSolution
+theme,template_engine_demo.col.name,,hu_HU,Name,Név,0,Név
+theme,template_engine_demo.col.email,,hu_HU,Email,Email,0,Email
+theme,template_engine_demo.col.role,,hu_HU,Role,Szerep,0,Szerep
+theme,template_engine_demo.engine_title,,hu_HU,"{engine} Template Engine","{engine} sablonmotor",0,"{engine} sablonmotor"
+theme,template_engine_demo.source_title,,hu_HU,"Template Source","Sablon forrás",0,"Sablon forrás"
+theme,template_engine_demo.rendered_output_title,,hu_HU,"Rendered Output","Renderelt kimenet",0,"Renderelt kimenet"
+layout,admin_empty.sign_in_to_continue,,hu_HU,"Sign in to continue.","Jelentkezz be a folytatáshoz.",0,"Jelentkezz be a folytatáshoz."

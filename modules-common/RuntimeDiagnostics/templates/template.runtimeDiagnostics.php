@@ -53,13 +53,13 @@ $package_roots = is_array($packages['package_roots'] ?? null) ? $packages['packa
 	<section class="col-12 col-xl-6">
 		<div class="card card-hover h-100">
 			<div class="card-body">
-				<h2 class="h5 mb-3"><?= e($this->strings['runtime_diagnostics.card.environment'] ?? 'Environment') ?></h2>
-				<?php $renderRows([
-					'Environment' => $environment['environment'] ?? null,
-					'Application' => $environment['application_identifier'] ?? null,
-					'Domain context' => $environment['domain_context'] ?? null,
-					'Runtime' => $environment['runtime'] ?? null,
-				]); ?>
+					<h2 class="h5 mb-3"><?= e($this->strings['runtime_diagnostics.card.environment'] ?? 'Environment') ?></h2>
+					<?php $renderRows([
+						($this->strings['runtime_diagnostics.field.environment'] ?? t('runtime_diagnostics.field.environment')) => $environment['environment'] ?? null,
+						($this->strings['runtime_diagnostics.field.application'] ?? t('runtime_diagnostics.field.application')) => $environment['application_identifier'] ?? null,
+						($this->strings['runtime_diagnostics.field.domain_context'] ?? t('runtime_diagnostics.field.domain_context')) => $environment['domain_context'] ?? null,
+						($this->strings['runtime_diagnostics.field.runtime'] ?? t('runtime_diagnostics.field.runtime')) => $environment['runtime'] ?? null,
+					]); ?>
 			</div>
 		</div>
 	</section>
@@ -70,12 +70,12 @@ $package_roots = is_array($packages['package_roots'] ?? null) ? $packages['packa
 				<h2 class="h5 mb-3"><?= e($this->strings['runtime_diagnostics.card.email'] ?? 'Email safety') ?></h2>
 				<?php $renderRows([
 					$this->strings['runtime_diagnostics.safe_to_test'] ?? 'Safe to test' => $email['safe_to_test'] ?? false,
-					'SMTP host' => $transport['host'] ?? null,
-					'SMTP port' => $transport['port'] ?? null,
-					'Using catcher' => $email['using_catcher'] ?? false,
-					'Catcher host' => $catcher['host'] ?? null,
-					'Catcher SMTP port' => $catcher['smtp_port'] ?? null,
-					'Mailpit UI URL' => $catcher['mailpit_ui_url'] ?? null,
+					($this->strings['runtime_diagnostics.field.smtp_host'] ?? t('runtime_diagnostics.field.smtp_host')) => $transport['host'] ?? null,
+					($this->strings['runtime_diagnostics.field.smtp_port'] ?? t('runtime_diagnostics.field.smtp_port')) => $transport['port'] ?? null,
+					($this->strings['runtime_diagnostics.field.using_catcher'] ?? t('runtime_diagnostics.field.using_catcher')) => $email['using_catcher'] ?? false,
+					($this->strings['runtime_diagnostics.field.catcher_host'] ?? t('runtime_diagnostics.field.catcher_host')) => $catcher['host'] ?? null,
+					($this->strings['runtime_diagnostics.field.catcher_smtp_port'] ?? t('runtime_diagnostics.field.catcher_smtp_port')) => $catcher['smtp_port'] ?? null,
+					($this->strings['runtime_diagnostics.field.mailpit_ui_url'] ?? t('runtime_diagnostics.field.mailpit_ui_url')) => $catcher['mailpit_ui_url'] ?? null,
 				]); ?>
 			</div>
 		</div>
@@ -86,13 +86,13 @@ $package_roots = is_array($packages['package_roots'] ?? null) ? $packages['packa
 			<div class="card-body">
 				<h2 class="h5 mb-3"><?= e($this->strings['runtime_diagnostics.card.database'] ?? 'Database') ?></h2>
 				<?php $renderRows([
-					'Driver' => $database['driver'] ?? null,
-					'Host' => $database['host'] ?? null,
-					'Port' => $database['port'] ?? null,
-					'Database' => $database['database'] ?? null,
-					'Username' => $database['username'] ?? null,
-					'Password' => $database['password'] ?? null,
-					'DSN' => $database['redacted_dsn'] ?? null,
+					($this->strings['runtime_diagnostics.field.driver'] ?? t('runtime_diagnostics.field.driver')) => $database['driver'] ?? null,
+					($this->strings['runtime_diagnostics.field.host'] ?? t('runtime_diagnostics.field.host')) => $database['host'] ?? null,
+					($this->strings['runtime_diagnostics.field.port'] ?? t('runtime_diagnostics.field.port')) => $database['port'] ?? null,
+					($this->strings['runtime_diagnostics.field.database'] ?? t('runtime_diagnostics.field.database')) => $database['database'] ?? null,
+					($this->strings['runtime_diagnostics.field.username'] ?? t('runtime_diagnostics.field.username')) => $database['username'] ?? null,
+					($this->strings['runtime_diagnostics.field.password'] ?? t('runtime_diagnostics.field.password')) => $database['password'] ?? null,
+					($this->strings['runtime_diagnostics.field.dsn'] ?? t('runtime_diagnostics.field.dsn')) => $database['redacted_dsn'] ?? null,
 				]); ?>
 			</div>
 		</div>
@@ -103,9 +103,9 @@ $package_roots = is_array($packages['package_roots'] ?? null) ? $packages['packa
 			<div class="card-body">
 				<h2 class="h5 mb-3"><?= e($this->strings['runtime_diagnostics.card.redis'] ?? 'Redis') ?></h2>
 				<?php $renderRows([
-					'Session' => $redis['session'] ?? null,
-					'Cache' => $redis['cache'] ?? null,
-					'Test' => $redis['test'] ?? null,
+					($this->strings['runtime_diagnostics.field.session'] ?? t('runtime_diagnostics.field.session')) => $redis['session'] ?? null,
+					($this->strings['runtime_diagnostics.field.cache'] ?? t('runtime_diagnostics.field.cache')) => $redis['cache'] ?? null,
+					($this->strings['runtime_diagnostics.field.test'] ?? t('runtime_diagnostics.field.test')) => $redis['test'] ?? null,
 				]); ?>
 			</div>
 		</div>
@@ -116,10 +116,10 @@ $package_roots = is_array($packages['package_roots'] ?? null) ? $packages['packa
 			<div class="card-body">
 				<h2 class="h5 mb-3"><?= e($this->strings['runtime_diagnostics.card.mcp'] ?? 'MCP') ?></h2>
 				<?php $renderRows([
-					'Public URL' => $mcp['public_url'] ?? null,
-					'Port' => $mcp['port'] ?? null,
-					'Allowed origins' => $mcp['allowed_origins'] ?? null,
-					'Enabled hint' => $mcp['enabled_hint'] ?? null,
+					($this->strings['runtime_diagnostics.field.public_url'] ?? t('runtime_diagnostics.field.public_url')) => $mcp['public_url'] ?? null,
+					($this->strings['runtime_diagnostics.field.port'] ?? t('runtime_diagnostics.field.port')) => $mcp['port'] ?? null,
+					($this->strings['runtime_diagnostics.field.allowed_origins'] ?? t('runtime_diagnostics.field.allowed_origins')) => $mcp['allowed_origins'] ?? null,
+					($this->strings['runtime_diagnostics.field.enabled_hint'] ?? t('runtime_diagnostics.field.enabled_hint')) => $mcp['enabled_hint'] ?? null,
 				]); ?>
 			</div>
 		</div>
@@ -130,11 +130,11 @@ $package_roots = is_array($packages['package_roots'] ?? null) ? $packages['packa
 			<div class="card-body">
 				<h2 class="h5 mb-3"><?= e($this->strings['runtime_diagnostics.card.packages'] ?? 'Packages') ?></h2>
 				<?php $renderRows([
-					'Mode' => $packages['mode'] ?? null,
-					'Local manifest' => $packages['local_manifest_present'] ?? null,
-					'Local lock' => $packages['local_lock_present'] ?? null,
-					'Workspace dev mode' => $packages['workspace_dev_mode_enabled'] ?? null,
-					'Local overrides disabled' => $packages['local_overrides_disabled'] ?? null,
+					($this->strings['runtime_diagnostics.field.mode'] ?? t('runtime_diagnostics.field.mode')) => $packages['mode'] ?? null,
+					($this->strings['runtime_diagnostics.field.local_manifest'] ?? t('runtime_diagnostics.field.local_manifest')) => $packages['local_manifest_present'] ?? null,
+					($this->strings['runtime_diagnostics.field.local_lock'] ?? t('runtime_diagnostics.field.local_lock')) => $packages['local_lock_present'] ?? null,
+					($this->strings['runtime_diagnostics.field.workspace_dev_mode'] ?? t('runtime_diagnostics.field.workspace_dev_mode')) => $packages['workspace_dev_mode_enabled'] ?? null,
+					($this->strings['runtime_diagnostics.field.local_overrides_disabled'] ?? t('runtime_diagnostics.field.local_overrides_disabled')) => $packages['local_overrides_disabled'] ?? null,
 				]); ?>
 			</div>
 		</div>
@@ -143,7 +143,7 @@ $package_roots = is_array($packages['package_roots'] ?? null) ? $packages['packa
 	<section class="col-12">
 		<div class="card card-hover">
 			<div class="card-body">
-				<h2 class="h5 mb-3"><?= e($this->strings['runtime_diagnostics.card.packages'] ?? 'Packages') ?> - roots</h2>
+				<h2 class="h5 mb-3"><?= e($this->strings['runtime_diagnostics.card.package_roots'] ?? t('runtime_diagnostics.card.package_roots')) ?></h2>
 				<?php if ($package_roots === []) { ?>
 					<p class="mb-0 text-muted"><?= e($this->strings['runtime_diagnostics.none'] ?? 'None') ?></p>
 				<?php } else { ?>
@@ -151,10 +151,10 @@ $package_roots = is_array($packages['package_roots'] ?? null) ? $packages['packa
 						<table class="table table-sm align-middle mb-0">
 							<thead>
 							<tr>
-								<th>Package</th>
-								<th>Source</th>
-								<th>Version</th>
-								<th>Active path</th>
+								<th><?= e($this->strings['runtime_diagnostics.col.package'] ?? t('runtime_diagnostics.col.package')) ?></th>
+								<th><?= e($this->strings['runtime_diagnostics.col.source'] ?? t('runtime_diagnostics.col.source')) ?></th>
+								<th><?= e($this->strings['runtime_diagnostics.col.version'] ?? t('runtime_diagnostics.col.version')) ?></th>
+								<th><?= e($this->strings['runtime_diagnostics.col.active_path'] ?? t('runtime_diagnostics.col.active_path')) ?></th>
 							</tr>
 							</thead>
 							<tbody>

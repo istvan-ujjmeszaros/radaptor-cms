@@ -55,3 +55,5 @@ form,widget_connection_params.name,,ko_KR,Content box display settings,콘텐츠
 form,widget_connection_settings.description,,ko_KR,Configure width and row placement for the content box,콘텐츠 박스의 너비 및 행 배치 설정,0,콘텐츠 박스의 너비 및 행 배치 설정
 form,widget_connection_settings.name,,ko_KR,Content formatting,콘텐츠 형식,0,콘텐츠 형식
 form,widget_connection_settings.title,,ko_KR,Content formatting,콘텐츠 형식,0,콘텐츠 형식
+form,closer.title,,ko_KR,Closer page,닫기 페이지,0,닫기 페이지
+form,closer.close_window,,ko_KR,Close this window!,이 창을 닫으세요!,0,이 창을 닫으세요!

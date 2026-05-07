@@ -55,3 +55,5 @@ form,widget_connection_params.name,,de_DE,Content box display settings,Inhaltsbe
 form,widget_connection_settings.description,,de_DE,Configure width and row placement for the content box,Breite und Zeilenplatzierung für den Inhaltsbereich konfigurieren,0,Breite und Zeilenplatzierung für den Inhaltsbereich konfigurieren
 form,widget_connection_settings.name,,de_DE,Content formatting,Inhaltsformatierung,0,Inhaltsformatierung
 form,widget_connection_settings.title,,de_DE,Content formatting,Inhaltsformatierung,0,Inhaltsformatierung
+form,closer.title,,de_DE,Closer page,Schließseite,0,Schließseite
+form,closer.close_window,,de_DE,Close this window!,Schließen Sie dieses Fenster!,0,Schließen Sie dieses Fenster!

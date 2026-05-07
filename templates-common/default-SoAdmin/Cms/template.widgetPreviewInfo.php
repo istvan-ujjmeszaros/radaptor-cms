@@ -8,10 +8,10 @@ $themesWithWidgetTemplate = $this->props['themesWithWidgetTemplate'];
 $allThemes = $this->props['allThemes'];
 $themesWithoutWidgetTemplate = array_diff($allThemes, $themesWithWidgetTemplate);
 $jsonPreviewUrl = (string)($this->props['jsonPreviewUrl'] ?? '');
-$serverPreviewTitle = (string)($this->props['serverPreviewTitle'] ?? 'Server HTML preview');
-$jsonPreviewTitle = (string)($this->props['jsonPreviewTitle'] ?? 'Widget subtree JSON');
+$serverPreviewTitle = (string)($this->props['serverPreviewTitle'] ?? t('cms.widget_preview.server_html_preview'));
+$jsonPreviewTitle = (string)($this->props['jsonPreviewTitle'] ?? t('cms.widget_preview.subtree_json'));
 $jsonPreviewDescription = (string)($this->props['jsonPreviewDescription'] ?? '');
-$openJsonLabel = (string)($this->props['openJsonLabel'] ?? 'Open JSON');
+$openJsonLabel = (string)($this->props['openJsonLabel'] ?? t('cms.widget_preview.open_json'));
 ?>
 <div class="widget-preview-info" style="margin-bottom: 20px; padding: 15px; background: #f5f5f5; border: 1px solid #ddd; border-radius: 4px;">
 	<h4 style="margin-top: 0;"><?= e($this->strings['cms.widget_preview.info.title']) ?></h4>
@@ -75,9 +75,9 @@ $openJsonLabel = (string)($this->props['openJsonLabel'] ?? 'Open JSON');
 			<a href="<?= e($jsonPreviewUrl) ?>" target="_blank" rel="noreferrer"><?= e($openJsonLabel) ?></a>
 		<?php endif; ?>
 	</div>
-	<div style="padding: 16px;">
-		<div style="margin-bottom: 12px; padding: 10px 12px; border: 1px solid #ddd; background: #f8f9fa;" data-sdui-json-preview-target="status">Loading JSON preview…</div>
-		<div style="color: #666; font-size: 12px; margin-bottom: 12px;"><?= e('Showing the widget subtree extracted from the full SDUI JSON document.') ?></div>
+		<div style="padding: 16px;">
+			<div style="margin-bottom: 12px; padding: 10px 12px; border: 1px solid #ddd; background: #f8f9fa;" data-sdui-json-preview-target="status"><?= e(t('cms.widget_preview.loading_json_preview')) ?></div>
+			<div style="color: #666; font-size: 12px; margin-bottom: 12px;"><?= e(t('cms.widget_preview.sdui_subtree_help')) ?></div>
 		<pre style="overflow: auto; margin: 0; padding: 12px; border-radius: 4px; background: #111827; color: #f9fafb; font-size: 12px; min-height: 480px;" data-sdui-json-preview-target="source"></pre>
 	</div>
 </div>

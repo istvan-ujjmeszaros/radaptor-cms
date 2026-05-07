@@ -55,3 +55,5 @@ form,widget_connection_params.name,,en_US,Content box display settings,Content b
 form,widget_connection_settings.description,,en_US,Configure width and row placement for the content box,Configure width and row placement for the content box,0,Configure width and row placement for the content box
 form,widget_connection_settings.name,,en_US,Content formatting,Content formatting,0,Content formatting
 form,widget_connection_settings.title,,en_US,Content formatting,Content formatting,0,Content formatting
+form,closer.title,,en_US,Closer page,Closer page,0,Closer page
+form,closer.close_window,,en_US,Close this window!,Close this window!,0,Close this window!

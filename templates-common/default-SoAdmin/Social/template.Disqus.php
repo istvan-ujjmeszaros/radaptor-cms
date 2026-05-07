@@ -15,4 +15,4 @@
 </script>
 <noscript><?= e($this->strings['social.disqus.enable_javascript']) ?> <a href="https:///disqus.com/?ref_noscript"><?= e($this->strings['social.disqus.comments_link']) ?></a>.
 </noscript>
-<a href="https:///disqus.com" class="dsq-brlink"><?= e($this->strings['social.disqus.powered_by']) ?> <span class="logo-disqus">Disqus</span></a>
+<a href="https:///disqus.com" class="dsq-brlink"><?= e($this->strings['social.disqus.powered_by']) ?> <span class="logo-disqus"><?= e(t('social.disqus.brand')) ?></span></a>

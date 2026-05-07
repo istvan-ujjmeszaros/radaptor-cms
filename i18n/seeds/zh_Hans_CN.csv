@@ -6,16 +6,16 @@ admin,email_outbox.col.recipients,,zh_Hans_CN,Recipients,Recipients,0,Recipients
 admin,email_outbox.col.sent_at,,zh_Hans_CN,Sent,Sent,0,Sent
 admin,email_outbox.col.status,,zh_Hans_CN,Status,状态,0,状态
 admin,email_outbox.col.subject,,zh_Hans_CN,Subject,主题,0,主题
-admin,email_outbox.description,,zh_Hans_CN,"Read-only transactional email delivery history.","只读的事务邮件投递历史。",0,"只读的事务邮件投递历史。"
-admin,email_outbox.failures.title,,zh_Hans_CN,"Recent dead letters","最近的未投递邮件",0,"最近的未投递邮件"
+admin,email_outbox.description,,zh_Hans_CN,"Read-only transactional email delivery history.",只读的事务邮件投递历史。,0,只读的事务邮件投递历史。
+admin,email_outbox.failures.title,,zh_Hans_CN,"Recent dead letters",最近的未投递邮件,0,最近的未投递邮件
 admin,email_outbox.filters.apply,,zh_Hans_CN,"Apply filters","Apply filters",0,"Apply filters"
 admin,email_outbox.filters.reset,,zh_Hans_CN,Reset,Reset,0,Reset
 admin,email_outbox.filters.search,,zh_Hans_CN,Search,搜索,0,搜索
 admin,email_outbox.filters.search_placeholder,,zh_Hans_CN,"Subject, message UID, or recipient email","主题、消息 UID 或收件人邮箱",0,"主题、消息 UID 或收件人邮箱"
 admin,email_outbox.filters.status,,zh_Hans_CN,Status,状态,0,状态
 admin,email_outbox.filters.title,,zh_Hans_CN,Filters,Filters,0,Filters
-admin,email_outbox.list.title,,zh_Hans_CN,"Recent outbox entries","最近的发件箱记录",0,"最近的发件箱记录"
-admin,email_outbox.none,,zh_Hans_CN,"No emails match the current filter.","没有邮件符合当前筛选条件。",0,"没有邮件符合当前筛选条件。"
+admin,email_outbox.list.title,,zh_Hans_CN,"Recent outbox entries",最近的发件箱记录,0,最近的发件箱记录
+admin,email_outbox.none,,zh_Hans_CN,"No emails match the current filter.",没有邮件符合当前筛选条件。,0,没有邮件符合当前筛选条件。
 admin,email_outbox.pagination.page,,zh_Hans_CN,Page,页面,0,页面
 admin,email_outbox.status.all,,zh_Hans_CN,"All statuses","All statuses",0,"All statuses"
 admin,email_outbox.status.failed,,zh_Hans_CN,Failed,Failed,0,Failed
@@ -26,10 +26,10 @@ admin,email_outbox.status.sent,,zh_Hans_CN,Sent,Sent,0,Sent
 admin,email_outbox.summary.title,,zh_Hans_CN,"Queue summary","Queue summary",0,"Queue summary"
 admin,email_outbox.title,,zh_Hans_CN,"Email outbox",邮件发件箱,0,邮件发件箱
 admin,email_queue.dead_letter,,zh_Hans_CN,"Dead letter","Dead letter",0,"Dead letter"
-admin,email_queue.empty,,zh_Hans_CN,"No email jobs are waiting right now.","当前没有等待中的邮件任务。",0,"当前没有等待中的邮件任务。"
+admin,email_queue.empty,,zh_Hans_CN,"No email jobs are waiting right now.",当前没有等待中的邮件任务。,0,当前没有等待中的邮件任务。
 admin,email_queue.last_processed,,zh_Hans_CN,"Last processed","Last processed",0,"Last processed"
 admin,email_queue.last_seen,,zh_Hans_CN,"Last seen","Last seen",0,"Last seen"
-admin,email_queue.open_outbox,,zh_Hans_CN,"Open email outbox","打开邮件发件箱",0,"打开邮件发件箱"
+admin,email_queue.open_outbox,,zh_Hans_CN,"Open email outbox",打开邮件发件箱,0,打开邮件发件箱
 admin,email_queue.pending,,zh_Hans_CN,Pending,Pending,0,Pending
 admin,email_queue.retry_wait,,zh_Hans_CN,"Retry wait","Retry wait",0,"Retry wait"
 admin,email_queue.sent_last_24h,,zh_Hans_CN,"Sent in last 24h","Sent in last 24h",0,"Sent in last 24h"
@@ -37,7 +37,7 @@ admin,email_queue.status.never_seen,,zh_Hans_CN,"Never seen","Never seen",0,"Nev
 admin,email_queue.status.running,,zh_Hans_CN,Running,Running,0,Running
 admin,email_queue.status.stale,,zh_Hans_CN,Stale,过期,0,过期
 admin,email_queue.status.unavailable,,zh_Hans_CN,Unavailable,Unavailable,0,Unavailable
-admin,email_queue.subtitle,,zh_Hans_CN,"Transactional delivery health at a glance.","一目了然查看事务投递状态。",0,"一目了然查看事务投递状态。"
+admin,email_queue.subtitle,,zh_Hans_CN,"Transactional delivery health at a glance.",一目了然查看事务投递状态。,0,一目了然查看事务投递状态。
 admin,email_queue.title,,zh_Hans_CN,"Email queue",邮件队列,0,邮件队列
 admin,email_queue.worker,,zh_Hans_CN,Worker,Worker,0,Worker
 admin,i18n.col.domain,,zh_Hans_CN,Domain,域,0,域
@@ -454,7 +454,7 @@ mcp,tokens.col.prefix,,zh_Hans_CN,Prefix,Prefix,0,Prefix
 mcp,tokens.col.status,,zh_Hans_CN,Status,状态,0,状态
 mcp,tokens.create,,zh_Hans_CN,"Create token","Create token",0,"Create token"
 mcp,tokens.create_title,,zh_Hans_CN,"Create token","Create token",0,"Create token"
-mcp,tokens.created_help,,zh_Hans_CN,"Copy this user-bound token now. It will not be shown again.","请立即复制这个绑定到用户的令牌。它不会再次显示。",0,"请立即复制这个绑定到用户的令牌。它不会再次显示。"
+mcp,tokens.created_help,,zh_Hans_CN,"Copy this user-bound token now. It will not be shown again.",请立即复制这个绑定到用户的令牌。它不会再次显示。,0,请立即复制这个绑定到用户的令牌。它不会再次显示。
 mcp,tokens.created_title,,zh_Hans_CN,"Token created","Token created",0,"Token created"
 mcp,tokens.description,,zh_Hans_CN,"Create and revoke MCP access tokens tied to your user account.","创建和撤销绑定到你用户账户的 MCP 访问令牌。",0,"创建和撤销绑定到你用户账户的 MCP 访问令牌。"
 mcp,tokens.empty,,zh_Hans_CN,"No MCP tokens yet.","还没有 MCP 令牌。",0,"还没有 MCP 令牌。"
@@ -506,7 +506,7 @@ runtime_diagnostics,card.warnings,,zh_Hans_CN,Warnings,Warnings,0,Warnings
 runtime_diagnostics,no,,zh_Hans_CN,no,no,0,no
 runtime_diagnostics,none,,zh_Hans_CN,None,None,0,None
 runtime_diagnostics,safe_to_test,,zh_Hans_CN,"Safe to test","Safe to test",0,"Safe to test"
-runtime_diagnostics,subtitle,,zh_Hans_CN,"Effective runtime state with secrets redacted.","已隐藏敏感信息的实际运行时状态。",0,"已隐藏敏感信息的实际运行时状态。"
+runtime_diagnostics,subtitle,,zh_Hans_CN,"Effective runtime state with secrets redacted.",已隐藏敏感信息的实际运行时状态。,0,已隐藏敏感信息的实际运行时状态。
 runtime_diagnostics,title,,zh_Hans_CN,"Runtime diagnostics",运行时诊断,0,运行时诊断
 runtime_diagnostics,yes,,zh_Hans_CN,yes,yes,0,yes
 selection,delete_invalid_entry_confirm,,zh_Hans_CN,"Are you sure you want to delete this invalid entry?",确定要删除此无效条目吗？,0,确定要删除此无效条目吗？
@@ -589,3 +589,59 @@ widget,widget_preview.name,,zh_Hans_CN,"Widget preview",组件预览,0,组件预
 workbench,tm_apply,,zh_Hans_CN,Apply,应用,0,应用
 workbench,tm_no_results,,zh_Hans_CN,"No suggestions",无建议,0,无建议
 workbench,tm_uses,,zh_Hans_CN,uses,使用,0,使用
+admin,menu.mailpit,,zh_Hans_CN,Mailpit,Mailpit,0,Mailpit
+admin,email_outbox.recipients_delivery_counts,,zh_Hans_CN,"({sent} sent / {failed} failed)","（已发送 {sent} / 失败 {failed}）",0,"（已发送 {sent} / 失败 {failed}）"
+admin,email_outbox.col.job,,zh_Hans_CN,Job,作业,0,作业
+admin,email_outbox.col.dead_lettered,,zh_Hans_CN,"Dead lettered",已转为死信,0,已转为死信
+admin,email_outbox.pagination.previous,,zh_Hans_CN,Previous,上一页,0,上一页
+admin,email_outbox.pagination.next,,zh_Hans_CN,Next,下一页,0,下一页
+runtime_diagnostics,card.package_roots,,zh_Hans_CN,"Package roots",包根路径,0,包根路径
+runtime_diagnostics,field.environment,,zh_Hans_CN,Environment,环境,0,环境
+runtime_diagnostics,field.application,,zh_Hans_CN,Application,应用,0,应用
+runtime_diagnostics,field.domain_context,,zh_Hans_CN,"Domain context",域上下文,0,域上下文
+runtime_diagnostics,field.runtime,,zh_Hans_CN,Runtime,运行时,0,运行时
+runtime_diagnostics,field.smtp_host,,zh_Hans_CN,"SMTP host","SMTP 主机",0,"SMTP 主机"
+runtime_diagnostics,field.smtp_port,,zh_Hans_CN,"SMTP port","SMTP 端口",0,"SMTP 端口"
+runtime_diagnostics,field.using_catcher,,zh_Hans_CN,"Using catcher","正在使用 catcher",0,"正在使用 catcher"
+runtime_diagnostics,field.catcher_host,,zh_Hans_CN,"Catcher host","Catcher 主机",0,"Catcher 主机"
+runtime_diagnostics,field.catcher_smtp_port,,zh_Hans_CN,"Catcher SMTP port","Catcher SMTP 端口",0,"Catcher SMTP 端口"
+runtime_diagnostics,field.mailpit_ui_url,,zh_Hans_CN,"Mailpit UI URL","Mailpit UI URL",0,"Mailpit UI URL"
+runtime_diagnostics,field.driver,,zh_Hans_CN,Driver,驱动,0,驱动
+runtime_diagnostics,field.host,,zh_Hans_CN,Host,主机,0,主机
+runtime_diagnostics,field.port,,zh_Hans_CN,Port,端口,0,端口
+runtime_diagnostics,field.database,,zh_Hans_CN,Database,数据库,0,数据库
+runtime_diagnostics,field.username,,zh_Hans_CN,Username,用户名,0,用户名
+runtime_diagnostics,field.password,,zh_Hans_CN,Password,密码,0,密码
+runtime_diagnostics,field.dsn,,zh_Hans_CN,DSN,DSN,0,DSN
+runtime_diagnostics,field.session,,zh_Hans_CN,Session,会话,0,会话
+runtime_diagnostics,field.cache,,zh_Hans_CN,Cache,缓存,0,缓存
+runtime_diagnostics,field.test,,zh_Hans_CN,Test,测试,0,测试
+runtime_diagnostics,field.public_url,,zh_Hans_CN,"Public URL","公共 URL",0,"公共 URL"
+runtime_diagnostics,field.allowed_origins,,zh_Hans_CN,"Allowed origins",允许的来源,0,允许的来源
+runtime_diagnostics,field.enabled_hint,,zh_Hans_CN,"Enabled hint",启用提示,0,启用提示
+runtime_diagnostics,field.mode,,zh_Hans_CN,Mode,模式,0,模式
+runtime_diagnostics,field.local_manifest,,zh_Hans_CN,"Local manifest",本地清单,0,本地清单
+runtime_diagnostics,field.local_lock,,zh_Hans_CN,"Local lock",本地锁定,0,本地锁定
+runtime_diagnostics,field.workspace_dev_mode,,zh_Hans_CN,"Workspace dev mode",工作区开发模式,0,工作区开发模式
+runtime_diagnostics,field.local_overrides_disabled,,zh_Hans_CN,"Local overrides disabled",本地覆盖已禁用,0,本地覆盖已禁用
+runtime_diagnostics,col.package,,zh_Hans_CN,Package,包,0,包
+runtime_diagnostics,col.source,,zh_Hans_CN,Source,来源,0,来源
+runtime_diagnostics,col.version,,zh_Hans_CN,Version,版本,0,版本
+runtime_diagnostics,col.active_path,,zh_Hans_CN,"Active path",活动路径,0,活动路径
+cms,template.missing,,zh_Hans_CN,"Missing template:",缺少模板：,0,缺少模板：
+cms,widget_preview.server_html_preview,,zh_Hans_CN,"Server HTML preview","服务器 HTML 预览",0,"服务器 HTML 预览"
+cms,widget_preview.subtree_json,,zh_Hans_CN,"Widget subtree JSON","组件子树 JSON",0,"组件子树 JSON"
+cms,widget_preview.subtree_json_description,,zh_Hans_CN,"Extracted from the same SDUI JSON document available through Open JSON.","从“打开 JSON”可用的同一 SDUI JSON 文档中提取。",0,"从“打开 JSON”可用的同一 SDUI JSON 文档中提取。"
+cms,widget_preview.open_json,,zh_Hans_CN,"Open JSON","打开 JSON",0,"打开 JSON"
+cms,widget_preview.loading_json_preview,,zh_Hans_CN,"Loading JSON preview...","正在加载 JSON 预览...",0,"正在加载 JSON 预览..."
+cms,widget_preview.sdui_subtree_help,,zh_Hans_CN,"Showing the widget subtree extracted from the full SDUI JSON document.","显示从完整 SDUI JSON 文档中提取的组件子树。",0,"显示从完整 SDUI JSON 文档中提取的组件子树。"
+cms,widget_preview.template_scope_note,,zh_Hans_CN,"This support check only looks at the resolved preview HTML template of the widget root node.","此支持检查仅查看组件根节点解析后的预览 HTML 模板。",0,"此支持检查仅查看组件根节点解析后的预览 HTML 模板。"
+social,disqus.brand,,zh_Hans_CN,Disqus,Disqus,0,Disqus
+layout,public_2row.brand,,zh_Hans_CN,TeamSolution,TeamSolution,0,TeamSolution
+theme,template_engine_demo.col.name,,zh_Hans_CN,Name,名称,0,名称
+theme,template_engine_demo.col.email,,zh_Hans_CN,Email,邮箱,0,邮箱
+theme,template_engine_demo.col.role,,zh_Hans_CN,Role,角色,0,角色
+theme,template_engine_demo.engine_title,,zh_Hans_CN,"{engine} Template Engine","{engine} 模板引擎",0,"{engine} 模板引擎"
+theme,template_engine_demo.source_title,,zh_Hans_CN,"Template Source",模板源码,0,模板源码
+theme,template_engine_demo.rendered_output_title,,zh_Hans_CN,"Rendered Output",渲染输出,0,渲染输出
+layout,admin_empty.sign_in_to_continue,,zh_Hans_CN,"Sign in to continue.",请登录以继续。,0,请登录以继续。

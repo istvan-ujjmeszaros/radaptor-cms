@@ -55,3 +55,5 @@ form,widget_connection_params.name,,es_ES,Content box display settings,Configura
 form,widget_connection_settings.description,,es_ES,Configure width and row placement for the content box,Configurar el ancho y la posición en fila del bloque de contenido,0,Configurar el ancho y la posición en fila del bloque de contenido
 form,widget_connection_settings.name,,es_ES,Content formatting,Formato del contenido,0,Formato del contenido
 form,widget_connection_settings.title,,es_ES,Content formatting,Formato del contenido,0,Formato del contenido
+form,closer.title,,es_ES,Closer page,Página de cierre,0,Página de cierre
+form,closer.close_window,,es_ES,Close this window!,¡Cierra esta ventana!,0,¡Cierra esta ventana!

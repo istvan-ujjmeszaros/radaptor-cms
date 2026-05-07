@@ -1,0 +1,52 @@
+domain,key,context,locale,source_text,expected_text,human_reviewed,text
+mailpit,title,,pl_PL,Mailpit,Mailpit,0,Mailpit
+mailpit,subtitle,,pl_PL,"Captured development emails","Przechwycone e-maile deweloperskie",0,"Przechwycone e-maile deweloperskie"
+mailpit,inbox,,pl_PL,Inbox,"Skrzynka odbiorcza",0,"Skrzynka odbiorcza"
+mailpit,search,,pl_PL,Search,Szukaj,0,Szukaj
+mailpit,refresh,,pl_PL,Refresh,Odśwież,0,Odśwież
+mailpit,back_to_inbox,,pl_PL,"Back to inbox","Wróć do skrzynki odbiorczej",0,"Wróć do skrzynki odbiorczej"
+mailpit,messages,,pl_PL,Messages,Wiadomości,0,Wiadomości
+mailpit,unread,,pl_PL,Unread,Nieprzeczytane,0,Nieprzeczytane
+mailpit,empty,,pl_PL,"No captured emails found.","Nie znaleziono przechwyconych e-maili.",0,"Nie znaleziono przechwyconych e-maili."
+mailpit,unavailable,,pl_PL,"Mailpit is unavailable","Mailpit jest niedostępny",0,"Mailpit jest niedostępny"
+mailpit,not_found,,pl_PL,"Mailpit view not found","Nie znaleziono widoku Mailpit",0,"Nie znaleziono widoku Mailpit"
+mailpit,access_denied,,pl_PL,"Mailpit catcher is only available in non-production for email admins and system developers.","Catcher Mailpit jest dostępny poza produkcją tylko dla administratorów e-mail i deweloperów systemu.",0,"Catcher Mailpit jest dostępny poza produkcją tylko dla administratorów e-mail i deweloperów systemu."
+mailpit,page_not_resolved,,pl_PL,"Mailpit catcher page could not be resolved.","Nie można rozpoznać strony catchera Mailpit.",0,"Nie można rozpoznać strony catchera Mailpit."
+mailpit,col.subject,,pl_PL,Subject,Temat,0,Temat
+mailpit,col.from,,pl_PL,From,Od,0,Od
+mailpit,col.to,,pl_PL,To,Do,0,Do
+mailpit,col.received,,pl_PL,Received,Odebrano,0,Odebrano
+mailpit,col.size,,pl_PL,Size,Rozmiar,0,Rozmiar
+mailpit,pagination.previous,,pl_PL,Previous,Poprzednia,0,Poprzednia
+mailpit,pagination.next,,pl_PL,Next,Następna,0,Następna
+mailpit,no_subject,,pl_PL,"(no subject)","(brak tematu)",0,"(brak tematu)"
+mailpit,delete,,pl_PL,Delete,Usuń,0,Usuń
+mailpit,meta.from,,pl_PL,From,Od,0,Od
+mailpit,meta.to,,pl_PL,To,Do,0,Do
+mailpit,meta.cc,,pl_PL,Cc,Cc,0,Cc
+mailpit,meta.bcc,,pl_PL,Bcc,Bcc,0,Bcc
+mailpit,meta.date,,pl_PL,Date,Data,0,Data
+mailpit,meta.size,,pl_PL,Size,Rozmiar,0,Rozmiar
+mailpit,html_empty,,pl_PL,"This message has no HTML body.","Ta wiadomość nie ma treści HTML.",0,"Ta wiadomość nie ma treści HTML."
+mailpit,html_preview_title,,pl_PL,"Mailpit HTML preview","Podgląd HTML Mailpit",0,"Podgląd HTML Mailpit"
+mailpit,check.supported,,pl_PL,Supported,Obsługiwane,0,Obsługiwane
+mailpit,check.partial,,pl_PL,Partial,Częściowe,0,Częściowe
+mailpit,check.unsupported,,pl_PL,Unsupported,Nieobsługiwane,0,Nieobsługiwane
+mailpit,check.tests,,pl_PL,Tests,Testy,0,Testy
+mailpit,check.no_warnings,,pl_PL,"No HTML compatibility warnings.","Brak ostrzeżeń zgodności HTML.",0,"Brak ostrzeżeń zgodności HTML."
+mailpit,warning_fallback,,pl_PL,Warning,Ostrzeżenie,0,Ostrzeżenie
+mailpit,links.status,,pl_PL,Status,Status,0,Status
+mailpit,links.none,,pl_PL,"No links found.","Nie znaleziono linków.",0,"Nie znaleziono linków."
+mailpit,attachments,,pl_PL,Attachments,Załączniki,0,Załączniki
+mailpit,inline_attachments,,pl_PL,"Inline attachments","Załączniki inline",0,"Załączniki inline"
+mailpit,attachment_fallback,,pl_PL,attachment,załącznik,0,załącznik
+mailpit,tab_error,,pl_PL,"Mailpit tab content could not be loaded.","Nie można załadować zawartości karty Mailpit.",0,"Nie można załadować zawartości karty Mailpit."
+mailpit,tab.html,,pl_PL,HTML,HTML,0,HTML
+mailpit,tab.html_source,,pl_PL,"HTML Source","Źródło HTML",0,"Źródło HTML"
+mailpit,tab.text,,pl_PL,Text,Tekst,0,Tekst
+mailpit,tab.headers,,pl_PL,Headers,Nagłówki,0,Nagłówki
+mailpit,tab.raw,,pl_PL,Raw,Surowe,0,Surowe
+mailpit,tab.html_check,,pl_PL,"HTML Check","Sprawdzenie HTML",0,"Sprawdzenie HTML"
+mailpit,tab.link_check,,pl_PL,"Link Check","Sprawdzenie linków",0,"Sprawdzenie linków"
+widget,mailpit.name,,pl_PL,"Mailpit catcher","Catcher Mailpit",0,"Catcher Mailpit"
+widget,mailpit.description,,pl_PL,"Shows captured Mailpit emails inside the admin UI.","Pokazuje e-maile przechwycone przez Mailpit w UI administracyjnym.",0,"Pokazuje e-maile przechwycone przez Mailpit w UI administracyjnym."

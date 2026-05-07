@@ -1,0 +1,52 @@
+domain,key,context,locale,source_text,expected_text,human_reviewed,text
+mailpit,title,,de_DE,Mailpit,Mailpit,0,Mailpit
+mailpit,subtitle,,de_DE,"Captured development emails","Abgefangene Entwicklungs-E-Mails",0,"Abgefangene Entwicklungs-E-Mails"
+mailpit,inbox,,de_DE,Inbox,Posteingang,0,Posteingang
+mailpit,search,,de_DE,Search,Suchen,0,Suchen
+mailpit,refresh,,de_DE,Refresh,Aktualisieren,0,Aktualisieren
+mailpit,back_to_inbox,,de_DE,"Back to inbox","Zurück zum Posteingang",0,"Zurück zum Posteingang"
+mailpit,messages,,de_DE,Messages,Nachrichten,0,Nachrichten
+mailpit,unread,,de_DE,Unread,Ungelesen,0,Ungelesen
+mailpit,empty,,de_DE,"No captured emails found.","Keine abgefangenen E-Mails gefunden.",0,"Keine abgefangenen E-Mails gefunden."
+mailpit,unavailable,,de_DE,"Mailpit is unavailable","Mailpit ist nicht verfügbar",0,"Mailpit ist nicht verfügbar"
+mailpit,not_found,,de_DE,"Mailpit view not found","Mailpit-Ansicht nicht gefunden",0,"Mailpit-Ansicht nicht gefunden"
+mailpit,access_denied,,de_DE,"Mailpit catcher is only available in non-production for email admins and system developers.","Der Mailpit-Catcher ist nur außerhalb der Produktion für E-Mail-Admins und Systementwickler verfügbar.",0,"Der Mailpit-Catcher ist nur außerhalb der Produktion für E-Mail-Admins und Systementwickler verfügbar."
+mailpit,page_not_resolved,,de_DE,"Mailpit catcher page could not be resolved.","Die Mailpit-Catcher-Seite konnte nicht aufgelöst werden.",0,"Die Mailpit-Catcher-Seite konnte nicht aufgelöst werden."
+mailpit,col.subject,,de_DE,Subject,Betreff,0,Betreff
+mailpit,col.from,,de_DE,From,Von,0,Von
+mailpit,col.to,,de_DE,To,An,0,An
+mailpit,col.received,,de_DE,Received,Empfangen,0,Empfangen
+mailpit,col.size,,de_DE,Size,Größe,0,Größe
+mailpit,pagination.previous,,de_DE,Previous,Zurück,0,Zurück
+mailpit,pagination.next,,de_DE,Next,Weiter,0,Weiter
+mailpit,no_subject,,de_DE,"(no subject)","(kein Betreff)",0,"(kein Betreff)"
+mailpit,delete,,de_DE,Delete,Löschen,0,Löschen
+mailpit,meta.from,,de_DE,From,Von,0,Von
+mailpit,meta.to,,de_DE,To,An,0,An
+mailpit,meta.cc,,de_DE,Cc,Cc,0,Cc
+mailpit,meta.bcc,,de_DE,Bcc,Bcc,0,Bcc
+mailpit,meta.date,,de_DE,Date,Datum,0,Datum
+mailpit,meta.size,,de_DE,Size,Größe,0,Größe
+mailpit,html_empty,,de_DE,"This message has no HTML body.","Diese Nachricht hat keinen HTML-Inhalt.",0,"Diese Nachricht hat keinen HTML-Inhalt."
+mailpit,html_preview_title,,de_DE,"Mailpit HTML preview",Mailpit-HTML-Vorschau,0,Mailpit-HTML-Vorschau
+mailpit,check.supported,,de_DE,Supported,Unterstützt,0,Unterstützt
+mailpit,check.partial,,de_DE,Partial,Teilweise,0,Teilweise
+mailpit,check.unsupported,,de_DE,Unsupported,"Nicht unterstützt",0,"Nicht unterstützt"
+mailpit,check.tests,,de_DE,Tests,Tests,0,Tests
+mailpit,check.no_warnings,,de_DE,"No HTML compatibility warnings.","Keine HTML-Kompatibilitätswarnungen.",0,"Keine HTML-Kompatibilitätswarnungen."
+mailpit,warning_fallback,,de_DE,Warning,Warnung,0,Warnung
+mailpit,links.status,,de_DE,Status,Status,0,Status
+mailpit,links.none,,de_DE,"No links found.","Keine Links gefunden.",0,"Keine Links gefunden."
+mailpit,attachments,,de_DE,Attachments,Anhänge,0,Anhänge
+mailpit,inline_attachments,,de_DE,"Inline attachments",Inline-Anhänge,0,Inline-Anhänge
+mailpit,attachment_fallback,,de_DE,attachment,Anhang,0,Anhang
+mailpit,tab_error,,de_DE,"Mailpit tab content could not be loaded.","Der Mailpit-Tabinhalt konnte nicht geladen werden.",0,"Der Mailpit-Tabinhalt konnte nicht geladen werden."
+mailpit,tab.html,,de_DE,HTML,HTML,0,HTML
+mailpit,tab.html_source,,de_DE,"HTML Source",HTML-Quelltext,0,HTML-Quelltext
+mailpit,tab.text,,de_DE,Text,Text,0,Text
+mailpit,tab.headers,,de_DE,Headers,Header,0,Header
+mailpit,tab.raw,,de_DE,Raw,Rohdaten,0,Rohdaten
+mailpit,tab.html_check,,de_DE,"HTML Check",HTML-Prüfung,0,HTML-Prüfung
+mailpit,tab.link_check,,de_DE,"Link Check",Link-Prüfung,0,Link-Prüfung
+widget,mailpit.name,,de_DE,"Mailpit catcher",Mailpit-Catcher,0,Mailpit-Catcher
+widget,mailpit.description,,de_DE,"Shows captured Mailpit emails inside the admin UI.","Zeigt abgefangene Mailpit-E-Mails in der Admin-Oberfläche.",0,"Zeigt abgefangene Mailpit-E-Mails in der Admin-Oberfläche."

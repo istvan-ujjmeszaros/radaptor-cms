@@ -5,7 +5,7 @@ declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
 
 if (!enum_exists('Config', false)) {
-	enum Config: string
+	enum MailpitClientTestConfig: string
 	{
 		case EMAIL_CATCHER_HOST = 'EMAIL_CATCHER_HOST';
 
@@ -16,6 +16,8 @@ if (!enum_exists('Config', false)) {
 			};
 		}
 	}
+
+	class_alias(MailpitClientTestConfig::class, 'Config');
 }
 
 require_once dirname(__DIR__) . '/modules-common/Mailpit/classes/class.MailpitClientException.php';

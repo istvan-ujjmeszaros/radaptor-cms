@@ -12,7 +12,7 @@ if (!function_exists('t')) {
 }
 
 if (!class_exists('CatcherRouteMap', false)) {
-	final class CatcherRouteMap
+	final class MailpitReadModelTestCatcherRouteMap
 	{
 		/**
 		 * @param array<string, mixed> $query
@@ -24,10 +24,12 @@ if (!class_exists('CatcherRouteMap', false)) {
 			return $query === [] ? $url : $url . '?' . http_build_query($query);
 		}
 	}
+
+	class_alias(MailpitReadModelTestCatcherRouteMap::class, 'CatcherRouteMap');
 }
 
 if (!class_exists('Url', false)) {
-	final class Url
+	final class MailpitReadModelTestUrl
 	{
 		/**
 		 * @param array<string, mixed> $customparams
@@ -42,6 +44,8 @@ if (!class_exists('Url', false)) {
 			], '', $ampersand);
 		}
 	}
+
+	class_alias(MailpitReadModelTestUrl::class, 'Url');
 }
 
 require_once dirname(__DIR__) . '/modules-common/Mailpit/classes/class.MailpitClientException.php';

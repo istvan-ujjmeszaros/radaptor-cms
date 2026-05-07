@@ -140,6 +140,8 @@ class EventResourceView extends AbstractEvent implements iBrowserEventDocumentab
 		RequestContextHolder::disablePersistentCacheWrite();
 
 		if (!$resource->getView()->getLayoutType() instanceof iPartialNavigableLayout) {
+			$this->emitFragmentFallbackHeader('layout-not-partial-navigable');
+
 			if ($hx_request === 'true') {
 				header('HX-Redirect: ' . $this->canonicalCurrentUrl());
 			} else {
@@ -158,6 +160,8 @@ class EventResourceView extends AbstractEvent implements iBrowserEventDocumentab
 			$renderer = new CmsFragmentRenderer($resource);
 			echo $is_fragment_context ? $renderer->renderTargets($targets) : $renderer->renderDefaultPageFragment();
 		} catch (Throwable) {
+			$this->emitFragmentFallbackHeader('render-error');
+
 			if ($hx_request === 'true') {
 				header('HX-Redirect: ' . $this->canonicalCurrentUrl());
 			} else {
@@ -168,10 +172,15 @@ class EventResourceView extends AbstractEvent implements iBrowserEventDocumentab
 		return true;
 	}
 
+	private function emitFragmentFallbackHeader(string $reason): void
+	{
+		header('X-Radaptor-Fragment-Fallback: ' . $reason);
+	}
+
 	private function canonicalCurrentUrl(): string
 	{
 		$params = Request::getGET();
-		unset($params['context'], $params['event'], $params['targets']);
+		unset($params['context'], $params['event'], $params['targets'], $params['folder'], $params['resource']);
 		$path = (string)(parse_url((string)($_SERVER['REQUEST_URI'] ?? '/'), PHP_URL_PATH) ?: '/');
 		$query = http_build_query($params);
 

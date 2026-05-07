@@ -1,6 +1,6 @@
 <?php
 
-class LayoutTypeAdminDefault extends AbstractLayoutType
+class LayoutTypeAdminDefault extends AbstractLayoutType implements iPartialNavigableLayout
 {
 	public const string ID = 'admin_default';
 
@@ -24,6 +24,18 @@ class LayoutTypeAdminDefault extends AbstractLayoutType
 	public static function getSlots(): array
 	{
 		return self::$_SLOTS;
+	}
+
+	public static function getPageFragmentTargets(): array
+	{
+		return [
+			'slot:content',
+		];
+	}
+
+	public static function getFragmentLayoutComponents(): array
+	{
+		return [];
 	}
 
 	/**

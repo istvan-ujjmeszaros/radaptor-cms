@@ -1574,10 +1574,24 @@ class ResourceTreeHandler extends ResourceAcl
 			);
 		}
 
+		if (!ResourceAcl::canAccessResource($resource_id, ResourceAcl::_ACL_EDIT)) {
+			return new ApiError(
+				'RESOURCE_MOVE_DENIED',
+				t('response_error.access_denied'),
+				[],
+				[
+					'resource_id' => $resource_id,
+					'parent_id' => $parent_id,
+					'denied_resource_id' => $resource_id,
+					'required_operation' => ResourceAcl::_ACL_EDIT,
+				]
+			);
+		}
+
 		foreach (NestedSet::getDescendants('resource_tree', $resource_id, [], 'lft ASC') as $node) {
 			$node_id = (int) ($node['node_id'] ?? 0);
 
-			if ($node_id <= 0 || ResourceAcl::canAccessResource($node_id, ResourceAcl::_ACL_EDIT)) {
+			if ($node_id <= 0 || $node_id === $resource_id || ResourceAcl::canAccessResource($node_id, ResourceAcl::_ACL_EDIT)) {
 				continue;
 			}
 

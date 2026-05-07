@@ -12,6 +12,7 @@ final class HtmxAuthorizationGuardTest extends TestCase
 
 		$this->assertStringContainsString('getResourceMoveAclError($resource_id, $parent_id)', $source);
 		$this->assertStringContainsString('ResourceAcl::canAccessResource($parent_id, ResourceAcl::_ACL_CREATE)', $source);
+		$this->assertStringContainsString('ResourceAcl::canAccessResource($resource_id, ResourceAcl::_ACL_EDIT)', $source);
 		$this->assertStringContainsString("NestedSet::getDescendants('resource_tree', \$resource_id", $source);
 		$this->assertStringContainsString('ResourceAcl::canAccessResource($node_id, ResourceAcl::_ACL_EDIT)', $source);
 		$this->assertStringContainsString('RESOURCE_MOVE_DENIED', $source);

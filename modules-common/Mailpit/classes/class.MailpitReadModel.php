@@ -105,8 +105,8 @@ final class MailpitReadModel
 			'urls' => [
 				'inbox' => MailpitCatcherUrls::page($page_id),
 				'inbox_fragment' => MailpitCatcherUrls::fragment($page_id, $connection_id),
-				'delete' => MailpitCatcherUrls::event('messages-delete'),
-				'mark_read' => MailpitCatcherUrls::event('messages-read'),
+				'delete' => MailpitCatcherUrls::event('messagesDelete'),
+				'mark_read' => MailpitCatcherUrls::event('messagesRead'),
 			],
 		];
 	}

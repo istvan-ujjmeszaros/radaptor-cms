@@ -83,7 +83,7 @@ class LibrariesSoAdmin extends LibrariesCommon
 	 * htmx 2.0.4 from CDN.
 	 */
 	public const string HTMX = '
-		js:https://unpkg.com/htmx.org@2.0.4,
+		js:https://unpkg.com/htmx.org@2.0.10,
 	';
 
 	/**

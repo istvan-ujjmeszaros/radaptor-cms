@@ -76,7 +76,7 @@ class LibrariesCommon
         /assets/_common/libraries/common.js,
     ';
 	public const string HTMX = '
-        js:^https://unpkg.com/htmx.org@2.0.4/dist/htmx.min.js,
+        js:^https://unpkg.com/htmx.org@2.0.10/dist/htmx.min.js,
     ';
 	public const string RADAPTOR_PARTIAL_NAVIGATION = '
         HTMX,

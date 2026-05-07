@@ -69,6 +69,13 @@ class EventFragmentRender extends AbstractEvent implements iBrowserEventDocument
 
 	private function fallbackToFullNavigation(int $status_code): void
 	{
+		header('X-Radaptor-Fragment-Fallback: ' . match ($status_code) {
+			400 => 'render-error',
+			403 => 'forbidden',
+			404 => 'not-found',
+			default => 'fallback',
+		});
+
 		if ((string)($_SERVER['HTTP_HX_REQUEST'] ?? '') === 'true') {
 			http_response_code(200);
 			header('HX-Redirect: ' . $this->canonicalCurrentUrl());
@@ -82,7 +89,7 @@ class EventFragmentRender extends AbstractEvent implements iBrowserEventDocument
 	private function canonicalCurrentUrl(): string
 	{
 		$params = Request::getGET();
-		unset($params['context'], $params['event'], $params['targets']);
+		unset($params['context'], $params['event'], $params['targets'], $params['folder'], $params['resource']);
 		$path = (string)(parse_url((string)($_SERVER['REQUEST_URI'] ?? '/'), PHP_URL_PATH) ?: '/');
 		$query = http_build_query($params);
 

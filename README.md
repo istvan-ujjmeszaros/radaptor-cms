@@ -62,9 +62,10 @@ widget connections, and layout components; layouts that do not implement the
 interface keep the previous DOM shape and do not expose connection ids.
 
 Stable containers are emitted consistently for the whole page composition:
-slots render as `id="slot-{slot_name}"`, widget connections as
-`id="widget-{connection_id}"`, and fragment-renderable layout components as
-`id="component-{name}"`. Widget-internal partial templates are not wrapped
+slots render as `id="slot-{slot_name}"`, widget fragment targets as
+`id="fragment-widget-{connection_id}"`, and fragment-renderable layout
+components as `id="component-{name}"`. Edit-mode chrome uses its own
+`edit-*` id namespace. Widget-internal partial templates are not wrapped
 automatically; if a widget needs finer-grained htmx behavior inside its own
 markup, the widget author must add those ids explicitly.
 
@@ -80,6 +81,11 @@ The canonical page URL provides the page context, ACL, locale, edit mode, and
 preview state. A request with `context=fragment` and no explicit `targets[]`
 uses the layout's `getPageFragmentTargets()` list. Responses are ordinary htmx
 OOB swaps, so no custom SPA shell is required.
+
+Fragment fallback responses emit `X-Radaptor-Fragment-Fallback: {reason}`. For
+htmx requests this is sent next to `HX-Redirect`; for non-htmx fragment-context
+requests it is sent with the error response. Treat this header as a diagnostic
+signal that partial navigation did not return the requested fragment.
 
 `CmsRenderVersion` touches `resource_tree.last_modified` when page widget
 composition or widget attributes change. In v1 fragment responses bypass cache;

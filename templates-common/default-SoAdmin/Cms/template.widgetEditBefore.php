@@ -1,7 +1,7 @@
 <?php assert(isset($this) && $this instanceof Template); ?>
 
-<div id="widget-<?= $this->getWidgetConnection()->connection_id; ?>" class="widget-area editable-special-background<?php if ($this->props['class'] != ''): ?> <?= $this->props['class']; ?><?php endif; ?>"<?php if ($this->props['style'] != ''): ?> style="<?= $this->props['style']; ?>"<?php endif; ?>>
-	<div id="edit-<?= $this->getWidgetConnection()->connection_id; ?>" class="widget-edit">
+<div id="edit-widget-<?= $this->getWidgetConnection()->connection_id; ?>" class="widget-area editable-special-background<?php if ($this->props['class'] != ''): ?> <?= $this->props['class']; ?><?php endif; ?>"<?php if ($this->props['style'] != ''): ?> style="<?= $this->props['style']; ?>"<?php endif; ?>>
+	<div id="edit-widget-toolbar-<?= $this->getWidgetConnection()->connection_id; ?>" class="widget-edit">
 		<?= $this->fetchContent('edit_bar'); ?>
 	</div>
 	<div style="clear:both;"></div>

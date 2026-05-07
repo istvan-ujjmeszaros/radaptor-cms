@@ -154,7 +154,7 @@ class WebpageTreeBuilder
 		];
 
 		if ($this->shouldEmitStableContainers()) {
-			$meta['stable_container_id'] = 'widget-' . $connection->getConnectionId();
+			$meta['stable_container_id'] = 'fragment-widget-' . $connection->getConnectionId();
 		}
 
 		$wrapped_tree = SduiNode::create(

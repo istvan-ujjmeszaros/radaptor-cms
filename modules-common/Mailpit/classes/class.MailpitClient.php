@@ -131,8 +131,12 @@ final class MailpitClient
 	/**
 	 * @param list<string> $ids
 	 */
-	public function setRead(array $ids, bool $read, string $search = '', string $timezone = ''): string
+	public function setRead(array $ids, bool $read, string $search = '', string $timezone = '', bool $all = false): string
 	{
+		if ($ids === [] && $search === '' && !$all) {
+			throw new MailpitClientException('Mailpit read target is required.');
+		}
+
 		$params = [];
 
 		if ($timezone !== '') {
@@ -301,11 +305,18 @@ final class MailpitClient
 		$host = trim((string) self::configValue('EMAIL_CATCHER_HOST', 'mailpit'));
 		$port = (int) self::configValue('EMAIL_CATCHER_HTTP_PORT', null);
 
-		if ($port < 1) {
-			$port = self::envInt('APP_MAILPIT_HTTP_PORT') ?? 8025;
-		}
+		$port = $port > 0 ? $port : self::defaultHttpPort($host);
 
 		return $host . ':' . $port;
+	}
+
+	private static function defaultHttpPort(string $host): int
+	{
+		if (self::usesPublishedHostPort($host)) {
+			return self::envInt('APP_MAILPIT_HTTP_PORT') ?? 8025;
+		}
+
+		return 8025;
 	}
 
 	private static function configValue(string $name, mixed $fallback): mixed
@@ -334,6 +345,13 @@ final class MailpitClient
 		$int_value = (int) $value;
 
 		return $int_value > 0 ? $int_value : null;
+	}
+
+	private static function usesPublishedHostPort(string $host): bool
+	{
+		$host = trim(strtolower($host), " \t\n\r\0\x0B[]");
+
+		return in_array($host, ['', 'localhost', '127.0.0.1', '::1', 'host.docker.internal'], true);
 	}
 
 	private static function normalizeBaseUrl(string $base_url): string

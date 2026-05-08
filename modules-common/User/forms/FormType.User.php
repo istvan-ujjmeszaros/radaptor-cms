@@ -121,7 +121,40 @@ class FormTypeUser extends AbstractForm
 		$locale = new FormInputSelect('locale', $this);
 		$locale->label = t('user.field.locale.label');
 		$locale->explanation = t('user.field.locale.explanation');
-		$locale->values = I18nRuntime::getAvailableLocales();
+		$current_locale = LocaleService::tryCanonicalize((string) ($this->initvalues['locale'] ?? ''));
+		$locale->initvalue = $current_locale ?? LocaleService::getDefaultLocale();
+		$locale->values = $this->buildLocaleOptions($current_locale);
+	}
+
+	/**
+	 * @return list<array{value: string, label: string}>
+	 */
+	private function buildLocaleOptions(?string $current_locale): array
+	{
+		$enabled_locales = LocaleService::enabledForUserChoice();
+		$enabled = array_fill_keys($enabled_locales, true);
+		$locales = $enabled_locales;
+
+		if ($current_locale !== null && !in_array($current_locale, $locales, true)) {
+			$locales[] = $current_locale;
+		}
+
+		$options = [];
+
+		foreach ($locales as $locale) {
+			$label = LocaleRegistry::getDisplayLabel($locale);
+
+			if (!isset($enabled[$locale])) {
+				$label .= ' (' . t('locale_admin.status.disabled') . ', ' . t('user.locale.current_label') . ')';
+			}
+
+			$options[] = [
+				'value' => $locale,
+				'label' => $label,
+			];
+		}
+
+		return $options;
 	}
 
 	protected function _validateData(): void

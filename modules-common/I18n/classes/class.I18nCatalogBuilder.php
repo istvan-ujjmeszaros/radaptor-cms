@@ -17,8 +17,10 @@ class I18nCatalogBuilder
 			mkdir($outputDir, 0o755, true);
 		}
 
+		self::_removeLegacyCatalogFiles($outputDir);
+
 		$locales = $localeFilter !== ''
-			? [$localeFilter]
+			? [LocaleService::canonicalize($localeFilter)]
 			: self::_getAllLocales();
 
 		foreach ($locales as $locale) {
@@ -30,6 +32,7 @@ class I18nCatalogBuilder
 
 	private static function _buildLocale(string $locale, string $outputDir): void
 	{
+		$locale = LocaleService::canonicalize($locale);
 		$pdo = Db::instance();
 
 		$stmt = $pdo->prepare(
@@ -75,8 +78,31 @@ class I18nCatalogBuilder
 	private static function _getAllLocales(): array
 	{
 		$rows = DbHelper::selectMany('i18n_translations', []);
-		$locales = array_unique(array_column($rows, 'locale'));
+		$locales = [];
 
-		return array_values($locales);
+		foreach (array_column($rows, 'locale') as $locale) {
+			$canonical = LocaleService::tryCanonicalize((string) $locale);
+
+			if ($canonical !== null) {
+				$locales[$canonical] = true;
+			}
+		}
+
+		$locales = array_keys($locales);
+		sort($locales);
+
+		return $locales;
+	}
+
+	private static function _removeLegacyCatalogFiles(string $outputDir): void
+	{
+		foreach (glob($outputDir . '*_*.php') ?: [] as $file) {
+			$basename = basename($file, '.php');
+			$canonical = LocaleService::tryCanonicalize($basename);
+
+			if ($canonical !== null && $canonical !== $basename) {
+				@unlink($file);
+			}
+		}
 	}
 }

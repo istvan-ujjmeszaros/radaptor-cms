@@ -1,7 +1,7 @@
 <?php assert(isset($this) && $this instanceof Template); ?>
 <?php $this->registerLibrary('__ADMIN_SITE'); ?>
 <?php
-$lang = (string)($this->props['lang'] ?? substr(Kernel::getLocale(), 0, 2));
+$lang = (string)($this->props['lang'] ?? Kernel::getLocale());
 $site_name = (string)($this->props['site_name'] ?? Config::APP_SITE_NAME->value());
 $administration_label = (string)($this->props['administration_label'] ?? '');
 $document_title = (string)($this->props['document_title'] ?? ($administration_label !== '' ? $administration_label . ' - ' . $site_name : $site_name));

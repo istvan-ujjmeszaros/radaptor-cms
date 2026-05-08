@@ -286,6 +286,14 @@ class CmsResourceSpecService
 			throw new RuntimeException("Unable to assign widget {$widget_name} to {$path} slot {$slot_name}.");
 		}
 
+		try {
+			self::assertConnectionAttributesLocaleCompatible($connection_id, $widget_name, $attributes);
+		} catch (Throwable $exception) {
+			Widget::removeWidgetFromWebpage($connection_id);
+
+			throw $exception;
+		}
+
 		self::replaceConnectionAttributes($connection_id, $attributes);
 		self::replaceConnectionSettings($connection_id, $widget_name, $settings);
 
@@ -324,6 +332,8 @@ class CmsResourceSpecService
 			$next_settings = $settings ?? $existing_settings;
 			$target_seq ??= (int) ($connection['seq'] ?? 0);
 
+			self::assertConnectionAttributesLocaleCompatible($connection_id, (string) $connection['widget_name'], $next_attributes);
+
 			if (!Widget::removeWidgetFromWebpage($connection_id)) {
 				throw new RuntimeException("Unable to remove widget connection {$connection_id} before move.");
 			}
@@ -350,6 +360,7 @@ class CmsResourceSpecService
 		}
 
 		if ($attributes !== null) {
+			self::assertConnectionAttributesLocaleCompatible($target_connection_id, (string) $connection['widget_name'], $attributes);
 			self::replaceConnectionAttributes($target_connection_id, $attributes);
 		}
 
@@ -670,6 +681,18 @@ class CmsResourceSpecService
 
 		if ($attributes !== []) {
 			AttributeHandler::addAttribute($resource, $attributes, true);
+		}
+	}
+
+	/**
+	 * @param array<string, scalar|null> $attributes
+	 */
+	private static function assertConnectionAttributesLocaleCompatible(int $connection_id, string $widget_name, array $attributes): void
+	{
+		$strategy = Widget::getContentLocaleStrategy($widget_name);
+
+		if ($strategy !== null) {
+			$strategy->assertConnectionAttributesCompatible($connection_id, $attributes);
 		}
 	}
 

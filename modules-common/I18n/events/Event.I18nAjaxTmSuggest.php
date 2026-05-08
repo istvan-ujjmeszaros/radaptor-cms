@@ -45,7 +45,7 @@ class EventI18nAjaxTmSuggest extends AbstractEvent implements iBrowserEventDocum
 		$domain  = Request::_GET('domain', '');
 		$key     = Request::_GET('key', '');
 		$context = Request::_GET('message_context', '');
-		$locale  = Request::_GET('locale', '');
+		$locale  = LocaleService::tryCanonicalize((string) Request::_GET('locale', '')) ?? '';
 
 		$suggestions = I18nWorkbench::getTmSuggestions($domain, $key, $context, $locale);
 

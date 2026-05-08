@@ -1,0 +1,679 @@
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
+admin,email_outbox.col.created_at,,ru-RU,Created,Created,0,Created
+admin,email_outbox.col.id,,ru-RU,ID,ID,0,ID
+admin,email_outbox.col.last_error,,ru-RU,"Last error","Last error",0,"Last error"
+admin,email_outbox.col.recipients,,ru-RU,Recipients,Recipients,0,Recipients
+admin,email_outbox.col.sent_at,,ru-RU,Sent,Sent,0,Sent
+admin,email_outbox.col.status,,ru-RU,Status,Статус,0,Статус
+admin,email_outbox.col.subject,,ru-RU,Subject,Субъект,0,Субъект
+admin,email_outbox.description,,ru-RU,"Read-only transactional email delivery history.","История доставки транзакционных писем только для чтения.",0,"История доставки транзакционных писем только для чтения."
+admin,email_outbox.failures.title,,ru-RU,"Recent dead letters","Недавние недоставленные письма",0,"Недавние недоставленные письма"
+admin,email_outbox.filters.apply,,ru-RU,"Apply filters","Apply filters",0,"Apply filters"
+admin,email_outbox.filters.reset,,ru-RU,Reset,Reset,0,Reset
+admin,email_outbox.filters.search,,ru-RU,Search,Поиск,0,Поиск
+admin,email_outbox.filters.search_placeholder,,ru-RU,"Subject, message UID, or recipient email","Тема, UID сообщения или email получателя",0,"Тема, UID сообщения или email получателя"
+admin,email_outbox.filters.status,,ru-RU,Status,Статус,0,Статус
+admin,email_outbox.filters.title,,ru-RU,Filters,Filters,0,Filters
+admin,email_outbox.list.title,,ru-RU,"Recent outbox entries","Недавние записи исходящей почты",0,"Недавние записи исходящей почты"
+admin,email_outbox.none,,ru-RU,"No emails match the current filter.","Нет писем, соответствующих текущему фильтру.",0,"Нет писем, соответствующих текущему фильтру."
+admin,email_outbox.pagination.page,,ru-RU,Page,Страница,0,Страница
+admin,email_outbox.status.all,,ru-RU,"All statuses","All statuses",0,"All statuses"
+admin,email_outbox.status.failed,,ru-RU,Failed,Failed,0,Failed
+admin,email_outbox.status.partial_failed,,ru-RU,"Partial failed","Partial failed",0,"Partial failed"
+admin,email_outbox.status.processing,,ru-RU,Processing,Processing,0,Processing
+admin,email_outbox.status.queued,,ru-RU,Queued,Queued,0,Queued
+admin,email_outbox.status.sent,,ru-RU,Sent,Sent,0,Sent
+admin,email_outbox.summary.title,,ru-RU,"Queue summary","Queue summary",0,"Queue summary"
+admin,email_outbox.title,,ru-RU,"Email outbox","Исходящая почта",0,"Исходящая почта"
+admin,email_queue.dead_letter,,ru-RU,"Dead letter","Dead letter",0,"Dead letter"
+admin,email_queue.empty,,ru-RU,"No email jobs are waiting right now.","Сейчас нет ожидающих email-заданий.",0,"Сейчас нет ожидающих email-заданий."
+admin,email_queue.last_processed,,ru-RU,"Last processed","Last processed",0,"Last processed"
+admin,email_queue.last_seen,,ru-RU,"Last seen","Last seen",0,"Last seen"
+admin,email_queue.open_outbox,,ru-RU,"Open email outbox","Открыть исходящую email-почту",0,"Открыть исходящую email-почту"
+admin,email_queue.pending,,ru-RU,Pending,Pending,0,Pending
+admin,email_queue.retry_wait,,ru-RU,"Retry wait","Retry wait",0,"Retry wait"
+admin,email_queue.sent_last_24h,,ru-RU,"Sent in last 24h","Sent in last 24h",0,"Sent in last 24h"
+admin,email_queue.status.never_seen,,ru-RU,"Never seen","Never seen",0,"Never seen"
+admin,email_queue.status.running,,ru-RU,Running,Running,0,Running
+admin,email_queue.status.stale,,ru-RU,Stale,Устарело,0,Устарело
+admin,email_queue.status.unavailable,,ru-RU,Unavailable,Unavailable,0,Unavailable
+admin,email_queue.subtitle,,ru-RU,"Transactional delivery health at a glance.","Состояние транзакционной доставки с первого взгляда.",0,"Состояние транзакционной доставки с первого взгляда."
+admin,email_queue.title,,ru-RU,"Email queue","Очередь email",0,"Очередь email"
+admin,email_queue.worker,,ru-RU,Worker,Worker,0,Worker
+admin,i18n.col.domain,,ru-RU,Domain,Домен,0,Домен
+admin,i18n.col.key,,ru-RU,Key,Ключ,0,Ключ
+admin,i18n.col.reviewed,,ru-RU,Reviewed,Проверено,0,Проверено
+admin,i18n.col.source,,ru-RU,Source,Источник,0,Источник
+admin,i18n.col.status,,ru-RU,Status,Статус,0,Статус
+admin,i18n.col.translation,,ru-RU,Translation,Перевод,0,Перевод
+admin,i18n.coverage.missing,,ru-RU,Missing,Отсутствует,0,Отсутствует
+admin,i18n.coverage.reviewed,,ru-RU,Reviewed,Проверено,0,Проверено
+admin,i18n.coverage.stale,,ru-RU,Stale,Устарело,0,Устарело
+admin,i18n.coverage.title,,ru-RU,"Translation coverage","Покрытие переводов",0,"Покрытие переводов"
+admin,i18n.coverage.translated,,ru-RU,Translated,Переведено,0,Переведено
+admin,i18n.domain,,ru-RU,Domain,Домен,0,Домен
+admin,i18n.locale,,ru-RU,Locale,Локаль,0,Локаль
+admin,i18n.search_placeholder,,ru-RU,"Search source or translation","Поиск по источнику или переводу",0,"Поиск по источнику или переводу"
+admin,i18n.status,,ru-RU,Status,Статус,0,Статус
+admin,i18n.status.ai_generated,,ru-RU,AI-generated,"Сгенерировано ИИ",0,"Сгенерировано ИИ"
+admin,i18n.status.approved,,ru-RU,Approved,Одобрено,0,Одобрено
+admin,i18n.status.missing,,ru-RU,Missing,Отсутствует,0,Отсутствует
+admin,i18n.status.needs_review,,ru-RU,"Needs review","Требует проверки",0,"Требует проверки"
+admin,i18n.status.translated,,ru-RU,Translated,Переведено,0,Переведено
+admin,i18n.title,,ru-RU,"Translation workbench","Рабочая область переводов",0,"Рабочая область переводов"
+admin,i18n.tm.exact_match_only,,ru-RU,"Exact-match suggestions only","Только предложения с точным совпадением",0,"Только предложения с точным совпадением"
+admin,i18n.tm.exact_matches,,ru-RU,"Exact matches","Точные совпадения",0,"Точные совпадения"
+admin,i18n.tm.exact_then_similar,,ru-RU,"Exact matches load first. Similar matches load afterwards.","Точные совпадения загружаются первыми. Похожие совпадения загружаются позже.",0,"Точные совпадения загружаются первыми. Похожие совпадения загружаются позже."
+admin,i18n.tm.no_exact_matches,,ru-RU,"No exact matches","Точных совпадений нет",0,"Точных совпадений нет"
+admin,i18n.tm.no_similar_matches,,ru-RU,"No similar matches","Похожих совпадений нет",0,"Похожих совпадений нет"
+admin,i18n.tm.origin,,ru-RU,Origin,Источник,0,Источник
+admin,i18n.tm.review_placeholders,,ru-RU,"Review placeholders","Проверить заполнители",0,"Проверить заполнители"
+admin,i18n.tm.safe,,ru-RU,Safe,Безопасно,0,Безопасно
+admin,i18n.tm.similar_matches,,ru-RU,"Similar matches","Похожие совпадения",0,"Похожие совпадения"
+admin,i18n.tm.similarity,,ru-RU,Similarity,Сходство,0,Сходство
+admin,i18n.tm.source_example,,ru-RU,"Source example","Пример источника",0,"Пример источника"
+admin,i18n.tm.title,,ru-RU,"Translation memory suggestions","Предложения из памяти переводов",0,"Предложения из памяти переводов"
+admin,menu.admin_menu,,ru-RU,"Admin menu","Меню администрирования",0,"Меню администрирования"
+admin,menu.blog,,ru-RU,Blog,Блог,0,Блог
+admin,menu.cli_runner,,ru-RU,"CLI Runner","Запуск CLI",0,"Запуск CLI"
+admin,menu.custom_menu,,ru-RU,"Custom menu","Пользовательское меню",0,"Пользовательское меню"
+admin,menu.email_outbox,,ru-RU,"Email outbox","Исходящая почта",0,"Исходящая почта"
+admin,menu.home,,ru-RU,"Admin home","Главная администратора",0,"Главная администратора"
+admin,menu.import_export,,ru-RU,"Import / Export","Импорт / Экспорт",0,"Импорт / Экспорт"
+admin,menu.mcp_tokens,,ru-RU,"MCP tokens","Токены MCP",0,"Токены MCP"
+admin,menu.phpinfo,,ru-RU,PHPinfo,PHPinfo,0,PHPinfo
+admin,menu.resource_tree,,ru-RU,"Website structure","Структура сайта",0,"Структура сайта"
+admin,menu.roles,,ru-RU,Roles,Роли,0,Роли
+admin,menu.runtime_diagnostics,,ru-RU,"Runtime diagnostics","Диагностика выполнения",0,"Диагностика выполнения"
+admin,menu.section.administration,,ru-RU,Administration,Администрирование,0,Администрирование
+admin,menu.section.configuration,,ru-RU,Configuration,Конфигурация,0,Конфигурация
+admin,menu.section.content,,ru-RU,Content,Содержимое,0,Содержимое
+admin,menu.section.developer_tools,,ru-RU,"Developer tools","Инструменты разработчика",0,"Инструменты разработчика"
+admin,menu.template_engines,,ru-RU,"Template engines",Шаблонизаторы,0,Шаблонизаторы
+admin,menu.theme_selector,,ru-RU,"Theme selection","Выбор темы",0,"Выбор темы"
+admin,menu.translations,,ru-RU,Translations,Переводы,0,Переводы
+admin,menu.usergroups,,ru-RU,"User groups","Группы пользователей",0,"Группы пользователей"
+admin,menu.widget_preview,,ru-RU,"Widget preview","Предпросмотр виджета",0,"Предпросмотр виджета"
+cms,admin_dropdown.edit_mode,,ru-RU,"Edit mode","Режим редактирования",0,"Режим редактирования"
+cms,admin_dropdown.edit_mode_off,,ru-RU,off,выкл,0,выкл
+cms,admin_dropdown.edit_mode_on,,ru-RU,on,вкл,0,вкл
+cms,admin_dropdown.seo,,ru-RU,SEO,SEO,0,SEO
+cms,admin_dropdown.turn_edit_mode_off,,ru-RU,"Turn edit mode off","Выключить режим редактирования",0,"Выключить режим редактирования"
+cms,admin_dropdown.turn_edit_mode_on,,ru-RU,"Turn edit mode on","Включить режим редактирования",0,"Включить режим редактирования"
+cms,admin_menu.form.name,,ru-RU,"Admin menu administration","Управление меню администратора",0,"Управление меню администратора"
+cms,admin_menu.form.title_create,,ru-RU,"Create admin menu item","Создать пункт меню администратора",0,"Создать пункт меню администратора"
+cms,admin_menu.form.title_edit,,ru-RU,"Edit admin menu item","Редактировать пункт меню администратора",0,"Редактировать пункт меню администратора"
+cms,edit,,ru-RU,Edit,Редактировать,0,Редактировать
+cms,edit_mode.disabled,,ru-RU,"Edit mode disabled","Режим редактирования отключён",0,"Режим редактирования отключён"
+cms,edit_mode.enabled,,ru-RU,"Edit mode enabled","Режим редактирования включён",0,"Режим редактирования включён"
+cms,edit_mode.save_error,,ru-RU,"Error: Unable to save configuration","Ошибка: не удалось сохранить конфигурацию",0,"Ошибка: не удалось сохранить конфигурацию"
+cms,error.login_page_missing,,ru-RU,"Login page not found - create it manually","Страница входа не найдена — создайте её вручную",0,"Страница входа не найдена — создайте её вручную"
+cms,file.missing_ref_id,,ru-RU,"Missing file reference","Отсутствует ссылка на файл",0,"Отсутствует ссылка на файл"
+cms,file.upload_error,,ru-RU,"Error: File upload failed","Ошибка: загрузка файла не удалась",0,"Ошибка: загрузка файла не удалась"
+cms,file.uploaded,,ru-RU,"File uploaded","Файл загружен",0,"Файл загружен"
+cms,file_upload.destination_path,,ru-RU,"Destination path","Путь назначения",0,"Путь назначения"
+cms,file_upload.unknown_destination,,ru-RU,"Unknown destination path","Неизвестный путь назначения",0,"Неизвестный путь назначения"
+cms,form.field.form_id.explanation,,ru-RU,"Select from the predefined forms","Выберите из предопределённых форм",0,"Выберите из предопределённых форм"
+cms,form.field.form_id.label,,ru-RU,Form,Форма,0,Форма
+cms,form.missing_widget_id,,ru-RU,"Widget ID is missing","Отсутствует ID виджета",0,"Отсутствует ID виджета"
+cms,form.no_form_page_warning,,ru-RU,"Create at least one page with a blank form","Создайте хотя бы одну страницу с пустой формой",0,"Создайте хотя бы одну страницу с пустой формой"
+cms,form.no_id,,ru-RU,"No form ID given","ID формы не указан",0,"ID формы не указан"
+cms,form.settings_subtitle,,ru-RU,"Page: {page}","Страница: {page}",0,"Страница: {page}"
+cms,library.folder,,ru-RU,Folder,Папка,0,Папка
+cms,library.resource,,ru-RU,Resource,Ресурс,0,Ресурс
+cms,library.unknown,,ru-RU,"Unknown library","Неизвестная библиотека",0,"Неизвестная библиотека"
+cms,menu.delete_confirm,,ru-RU,"Are you sure you want to delete this menu item?","Вы уверены, что хотите удалить этот пункт меню?",0,"Вы уверены, что хотите удалить этот пункт меню?"
+cms,menu.delete_failed,,ru-RU,"Delete failed","Удаление не удалось",0,"Удаление не удалось"
+cms,menu.delete_forbidden,,ru-RU,"Menu item deletion is not allowed: {name}","Удаление пункта меню не разрешено: {name}",0,"Удаление пункта меню не разрешено: {name}"
+cms,menu.delete_unknown_error,,ru-RU,"Error: An unknown error occurred while deleting the menu item","Ошибка: при удалении пункта меню произошла неизвестная ошибка",0,"Ошибка: при удалении пункта меню произошла неизвестная ошибка"
+cms,menu.deleted,,ru-RU,"Menu item deleted: {name}","Пункт меню удалён: {name}",0,"Пункт меню удалён: {name}"
+cms,menu.external_link,,ru-RU,"External link","Внешняя ссылка",0,"Внешняя ссылка"
+cms,menu.field.node_name.label,,ru-RU,"Display text","Отображаемый текст",0,"Отображаемый текст"
+cms,menu.field.page.explanation,,ru-RU,"Select the page this menu item points to","Выберите страницу, на которую указывает этот пункт меню",0,"Выберите страницу, на которую указывает этот пункт меню"
+cms,menu.field.page.label,,ru-RU,Page,Страница,0,Страница
+cms,menu.field.type.external,,ru-RU,"Points to external page","Указывает на внешнюю страницу",0,"Указывает на внешнюю страницу"
+cms,menu.field.type.internal,,ru-RU,"Points to internal page","Указывает на внутреннюю страницу",0,"Указывает на внутреннюю страницу"
+cms,menu.field.type.label,,ru-RU,"Link type","Тип ссылки",0,"Тип ссылки"
+cms,menu.field.url.explanation,,ru-RU,"You can enter a custom URL (including mailto:// links)","Вы можете ввести собственный URL (включая ссылки mailto://)",0,"Вы можете ввести собственный URL (включая ссылки mailto://)"
+cms,menu.field.url.label,,ru-RU,"Custom URL","Пользовательский URL",0,"Пользовательский URL"
+cms,menu.form.name,,ru-RU,"Main menu item","Основной пункт меню",0,"Основной пункт меню"
+cms,menu.form.title_create,,ru-RU,"Create menu item","Создать пункт меню",0,"Создать пункт меню"
+cms,menu.form.title_edit,,ru-RU,"Edit menu item","Редактировать пункт меню",0,"Редактировать пункт меню"
+cms,menu.internal_link,,ru-RU,"Internal link","Внутренняя ссылка",0,"Внутренняя ссылка"
+cms,menu.move_error,,ru-RU,"Error: Unable to move menu item","Ошибка: не удалось переместить пункт меню",0,"Ошибка: не удалось переместить пункт меню"
+cms,menu.move_success,,ru-RU,"Menu item moved: {name}","Пункт меню перемещён: {name}",0,"Пункт меню перемещён: {name}"
+cms,menu.new_child,,ru-RU,"New submenu item","Новый подпункт меню",0,"Новый подпункт меню"
+cms,menu.new_item,,ru-RU,"New menu item","Новый пункт меню",0,"Новый пункт меню"
+cms,menu.no_link_configured,,ru-RU,"No link configured","Ссылка не настроена",0,"Ссылка не настроена"
+cms,menu.root,,ru-RU,"Main menu","Главное меню",0,"Главное меню"
+cms,menu.saved,,ru-RU,"Menu item saved","Пункт меню сохранён",0,"Пункт меню сохранён"
+cms,menu.selection_help,,ru-RU,"Select a menu item to edit it, or create a new one.","Выберите пункт меню для редактирования или создайте новый.",0,"Выберите пункт меню для редактирования или создайте новый."
+cms,menu.updated,,ru-RU,"Menu item updated","Пункт меню обновлён",0,"Пункт меню обновлён"
+cms,menu.validation.node_name_max_length,,ru-RU,"Display text must not exceed 255 characters","Отображаемый текст не должен превышать 255 символов",0,"Отображаемый текст не должен превышать 255 символов"
+cms,menu.validation.type_required,,ru-RU,"Choose whether the link points to an internal or external page","Выберите, ведёт ли ссылка на внутреннюю или внешнюю страницу",0,"Выберите, ведёт ли ссылка на внутреннюю или внешнюю страницу"
+cms,menu.validation.url_max_length,,ru-RU,"URL must not exceed 255 characters","URL не должен превышать 255 символов",0,"URL не должен превышать 255 символов"
+cms,menu.validation.url_required,,ru-RU,"Select a page or enter a URL","Выберите страницу или введите URL",0,"Выберите страницу или введите URL"
+cms,plainhtml.field.content.explanation,,ru-RU,"The HTML code you enter will appear on the website without modifications.","Введённый HTML-код появится на сайте без изменений.",0,"Введённый HTML-код появится на сайте без изменений."
+cms,plainhtml.field.content.label,,ru-RU,"HTML code",HTML-код,0,HTML-код
+cms,plainhtml.form.name,,ru-RU,"HTML code (embed)","HTML-код (встраивание)",0,"HTML-код (встраивание)"
+cms,plainhtml.form.title,,ru-RU,"Edit HTML content","Редактировать HTML-содержимое",0,"Редактировать HTML-содержимое"
+cms,plainhtml.not_set,,ru-RU,"Configure the content","Настроить содержимое",0,"Настроить содержимое"
+cms,resource.delete_error,,ru-RU,"Error: Unable to delete resource(s)","Ошибка: не удалось удалить ресурс(ы)",0,"Ошибка: не удалось удалить ресурс(ы)"
+cms,resource.delete_failed,,ru-RU,"Delete failed","Удаление не удалось",0,"Удаление не удалось"
+cms,resource.delete_partial_error,,ru-RU,"{count} error(s) occurred during deletion","Во время удаления произошло ошибок: {count}",0,"Во время удаления произошло ошибок: {count}"
+cms,resource.deleted,,ru-RU,"Resource deleted","Ресурс удалён",0,"Ресурс удалён"
+cms,resource.deleted_multiple,,ru-RU,"Resources deleted","Ресурсы удалены",0,"Ресурсы удалены"
+cms,resource.error.add_failed,,ru-RU,"Unable to add resource tree entry.","Не удалось добавить запись дерева ресурсов.",0,"Не удалось добавить запись дерева ресурсов."
+cms,resource.error.create_failed_for_path,,ru-RU,"Unable to create resource: {path}","Не удалось создать ресурс: {path}",0,"Не удалось создать ресурс: {path}"
+cms,resource.error.delete_denied,,ru-RU,"Delete denied for resource: {resource_id}","Удаление ресурса запрещено: {resource_id}",0,"Удаление ресурса запрещено: {resource_id}"
+cms,resource.error.delete_failed_for_id,,ru-RU,"Unable to delete resource: {resource_id}","Не удалось удалить ресурс: {resource_id}",0,"Не удалось удалить ресурс: {resource_id}"
+cms,resource.error.file_delete_failed_for_id,,ru-RU,"Unable to delete file for resource: {resource_id}","Не удалось удалить файл ресурса: {resource_id}",0,"Не удалось удалить файл ресурса: {resource_id}"
+cms,resource.error.import_file_failed,,ru-RU,"Unable to import file: {path}","Не удалось импортировать файл: {path}",0,"Не удалось импортировать файл: {path}"
+cms,resource.error.move_failed_for_id,,ru-RU,"Unable to move resource: {resource_id}","Не удалось переместить ресурс: {resource_id}",0,"Не удалось переместить ресурс: {resource_id}"
+cms,resource.error.not_found_by_id,,ru-RU,"Resource not found: {resource_id}","Ресурс не найден: {resource_id}",0,"Ресурс не найден: {resource_id}"
+cms,resource.error.path_exists_not_file,,ru-RU,"Resource path exists and is not a file: {path}","Путь ресурса существует и не является файлом: {path}",0,"Путь ресурса существует и не является файлом: {path}"
+cms,resource.error.protected_mutation,,ru-RU,"Protected system resource cannot be modified: {path}","Защищенный системный ресурс нельзя изменить: {path}",0,"Защищенный системный ресурс нельзя изменить: {path}"
+cms,resource.error.protected_path_mutation,,ru-RU,"Protected system resource path cannot be created or modified: {path}","Путь защищенного системного ресурса нельзя создать или изменить: {path}",0,"Путь защищенного системного ресурса нельзя создать или изменить: {path}"
+cms,resource.error.protected_subtree_mutation,,ru-RU,"A protected system resource in this subtree cannot be modified: {path}","Защищенный системный ресурс в этом поддереве нельзя изменить: {path}",0,"Защищенный системный ресурс в этом поддереве нельзя изменить: {path}"
+cms,resource.error.target_folder_not_found,,ru-RU,"Target folder not found after creation: {path}","Целевая папка не найдена после создания: {path}",0,"Целевая папка не найдена после создания: {path}"
+cms,resource.error.update_failed_for_path,,ru-RU,"Unable to update resource: {path}","Не удалось обновить ресурс: {path}",0,"Не удалось обновить ресурс: {path}"
+cms,resource.folder_count,,ru-RU,"{count} folder(s)","{count} папка(ок)",0,"{count} папка(ок)"
+cms,resource.move_error,,ru-RU,"Error: Unable to move resource","Ошибка: не удалось переместить ресурс",0,"Ошибка: не удалось переместить ресурс"
+cms,resource.move_failed,,ru-RU,"Move failed","Перемещение не удалось",0,"Перемещение не удалось"
+cms,resource.moved,,ru-RU,"Resource moved","Ресурс перемещён",0,"Ресурс перемещён"
+cms,resource.page_count,,ru-RU,"{count} page(s)","{count} страница(ы)",0,"{count} страница(ы)"
+cms,resource.renamed,,ru-RU,Renamed,Переименовано,0,Переименовано
+cms,resource.view_forbidden,,ru-RU,"403 - You do not have permission to view this content!","403 — у вас нет прав для просмотра этого содержимого!",0,"403 — у вас нет прав для просмотра этого содержимого!"
+cms,resource_acl.acl_not_found,,ru-RU,"ACL entry not found: {id}","Запись ACL не найдена: {id}",0,"Запись ACL не найдена: {id}"
+cms,resource_acl.assign,,ru-RU,Assign,Назначить,0,Назначить
+cms,resource_acl.deleted,,ru-RU,"Assignment removed.","Назначение удалено.",0,"Назначение удалено."
+cms,resource_acl.error_ambiguous_subject,,ru-RU,"The name {name} matches both a user and a user group. Select the correct type from the list.","Имя {name} совпадает и с пользователем, и с группой пользователей. Выберите правильный тип из списка.",0,"Имя {name} совпадает и с пользователем, и с группой пользователей. Выберите правильный тип из списка."
+cms,resource_acl.error_ambiguous_subject_short,,ru-RU,"Ambiguous assignment","Неоднозначное назначение",0,"Неоднозначное назначение"
+cms,resource_acl.error_delete,,ru-RU,"Error: Unable to remove assignment.","Ошибка: не удалось удалить назначение.",0,"Ошибка: не удалось удалить назначение."
+cms,resource_acl.error_missing_resource_id,,ru-RU,"Resource ID is missing","Отсутствует ID ресурса",0,"Отсутствует ID ресурса"
+cms,resource_acl.error_save,,ru-RU,"Error: Unable to save access settings.","Ошибка: не удалось сохранить настройки доступа.",0,"Ошибка: не удалось сохранить настройки доступа."
+cms,resource_acl.error_subject_not_found,,ru-RU,"No user or user group found with the name {name}","Пользователь или группа пользователей с именем {name} не найдены",0,"Пользователь или группа пользователей с именем {name} не найдены"
+cms,resource_acl.error_subject_not_found_short,,ru-RU,"No matching subject found","Подходящий субъект не найден",0,"Подходящий субъект не найден"
+cms,resource_acl.inherit_help,,ru-RU,"When inheritance is enabled, the parent folder's permissions also apply to this resource.","Когда наследование включено, разрешения родительской папки также применяются к этому ресурсу.",0,"Когда наследование включено, разрешения родительской папки также применяются к этому ресурсу."
+cms,resource_acl.inherit_label,,ru-RU,"Inherit permissions from parent folder","Наследовать разрешения от родительской папки",0,"Наследовать разрешения от родительской папки"
+cms,resource_acl.inherited_title,,ru-RU,"Inherited permissions","Наследуемые разрешения",0,"Наследуемые разрешения"
+cms,resource_acl.new_assignment,,ru-RU,"New assignment:","Новое назначение:",0,"Новое назначение:"
+cms,resource_acl.permission.create,,ru-RU,Create,Создать,0,Создать
+cms,resource_acl.permission.delete,,ru-RU,Delete,Удалить,0,Удалить
+cms,resource_acl.permission.edit,,ru-RU,Edit,Редактировать,0,Редактировать
+cms,resource_acl.permission.list,,ru-RU,List,Список,0,Список
+cms,resource_acl.permission.view,,ru-RU,View,Просмотр,0,Просмотр
+cms,resource_acl.resource_not_found,,ru-RU,"Resource not found: {id}","Ресурс не найден: {id}",0,"Ресурс не найден: {id}"
+cms,resource_acl.search_placeholder,,ru-RU,"Search for user or group...","Поиск пользователя или группы...",0,"Поиск пользователя или группы..."
+cms,resource_acl.specific_help,,ru-RU,"Specific permissions always apply, regardless of the inheritance setting.","Специальные разрешения всегда применяются независимо от настройки наследования.",0,"Специальные разрешения всегда применяются независимо от настройки наследования."
+cms,resource_acl.specific_title,,ru-RU,"Specific permissions","Специальные разрешения",0,"Специальные разрешения"
+cms,resource_acl.subject,,ru-RU,Subject,Субъект,0,Субъект
+cms,resource_acl.title,,ru-RU,Access,Доступ,0,Доступ
+cms,resource_acl.unknown_subject_type,,ru-RU,"Unknown ACL subject type: {type}","Неизвестный тип субъекта ACL: {type}",0,"Неизвестный тип субъекта ACL: {type}"
+cms,resource_acl.unknown_type,,ru-RU,"Unknown ACL list type: {type}","Неизвестный тип списка ACL: {type}",0,"Неизвестный тип списка ACL: {type}"
+cms,resource_acl.usergroup_assignment.added,,ru-RU,"User group assigned to resource:<br>{group} -> {target}","Группа пользователей назначена ресурсу:<br>{group} -> {target}",0,"Группа пользователей назначена ресурсу:<br>{group} -> {target}"
+cms,resource_acl.usergroup_assignment.error_add,,ru-RU,"Error: Unable to assign user group to resource:<br>{group} -> {target}","Ошибка: не удалось назначить группу пользователей ресурсу:<br>{group} -> {target}",0,"Ошибка: не удалось назначить группу пользователей ресурсу:<br>{group} -> {target}"
+cms,resource_acl.usergroup_assignment.error_add_generic,,ru-RU,"Error: Unable to assign user group to resource.","Ошибка: не удалось назначить группу пользователей ресурсу.",0,"Ошибка: не удалось назначить группу пользователей ресурсу."
+cms,resource_acl.usergroup_assignment.error_remove,,ru-RU,"Error: Unable to remove user group from resource:<br>{group} -> {target}","Ошибка: не удалось удалить группу пользователей из ресурса:<br>{group} -> {target}",0,"Ошибка: не удалось удалить группу пользователей из ресурса:<br>{group} -> {target}"
+cms,resource_acl.usergroup_assignment.error_remove_generic,,ru-RU,"Error: Unable to remove user group from resource.","Ошибка: не удалось удалить группу пользователей из ресурса.",0,"Ошибка: не удалось удалить группу пользователей из ресурса."
+cms,resource_acl.usergroup_assignment.removed,,ru-RU,"User group assignment removed:<br>{group} -> {target}","Назначение группы пользователей удалено:<br>{group} -> {target}",0,"Назначение группы пользователей удалено:<br>{group} -> {target}"
+cms,resource_browser.create_index_page,,ru-RU,"Create index page!","Создать индексную страницу!",0,"Создать индексную страницу!"
+cms,resource_browser.delete_file_confirm,,ru-RU,"Are you sure you want to delete this file?","Вы уверены, что хотите удалить этот файл?",0,"Вы уверены, что хотите удалить этот файл?"
+cms,resource_browser.delete_folder_confirm,,ru-RU,"Are you sure you want to delete this folder and all its contents?","Вы уверены, что хотите удалить эту папку и всё её содержимое?",0,"Вы уверены, что хотите удалить эту папку и всё её содержимое?"
+cms,resource_browser.delete_invalid_confirm,,ru-RU,"Are you sure you want to delete this invalid entry?","Вы уверены, что хотите удалить эту недействительную запись?",0,"Вы уверены, что хотите удалить эту недействительную запись?"
+cms,resource_browser.delete_webpage_confirm,,ru-RU,"Are you sure you want to delete this webpage?","Вы уверены, что хотите удалить эту веб-страницу?",0,"Вы уверены, что хотите удалить эту веб-страницу?"
+cms,resource_browser.help_create,,ru-RU,"Create folders and webpages within them.","Создавайте папки и веб-страницы внутри них.",0,"Создавайте папки и веб-страницы внутри них."
+cms,resource_browser.help_move,,ru-RU,"Drag and drop to move items between folders.","Перетаскивайте элементы для перемещения между папками.",0,"Перетаскивайте элементы для перемещения между папками."
+cms,resource_browser.insert,,ru-RU,Insert,Вставить,0,Вставить
+cms,resource_browser.invalid_entry,,ru-RU,"Invalid entry","Недействительная запись",0,"Недействительная запись"
+cms,resource_browser.new_domain,,ru-RU,"New domain","Новый домен",0,"Новый домен"
+cms,resource_browser.preview_index_page,,ru-RU,"Preview (index page)","Предпросмотр (индексная страница)",0,"Предпросмотр (индексная страница)"
+cms,resource_browser.root_not_found,,ru-RU,"Root node not found for the resource tree","Корневой узел для дерева ресурсов не найден",0,"Корневой узел для дерева ресурсов не найден"
+cms,resource_browser.select_tree_item,,ru-RU,"Select an item from the tree","Выберите элемент из дерева",0,"Выберите элемент из дерева"
+cms,resource_browser.site_structure,,ru-RU,"Site structure","Структура сайта",0,"Структура сайта"
+cms,richtext.assigned,,ru-RU,"Text content assigned","Текстовое содержимое назначено",0,"Текстовое содержимое назначено"
+cms,richtext.field.content.explanation,,ru-RU,"Format text freely, add images, and embed external content (e.g. YouTube). Use HTML view for embed codes.","Свободно форматируйте текст, добавляйте изображения и встраивайте внешний контент (например, YouTube). Для кодов встраивания используйте HTML-режим.",0,"Свободно форматируйте текст, добавляйте изображения и встраивайте внешний контент (например, YouTube). Для кодов встраивания используйте HTML-режим."
+cms,richtext.field.content.label,,ru-RU,Content,Содержимое,0,Содержимое
+cms,richtext.field.name.explanation,,ru-RU,"Visible in the admin area only. Use this to identify the content when selecting it for display on public pages. Must be unique.","Видно только в области администратора. Используйте это для идентификации содержимого при выборе для показа на публичных страницах. Значение должно быть уникальным.",0,"Видно только в области администратора. Используйте это для идентификации содержимого при выборе для показа на публичных страницах. Значение должно быть уникальным."
+cms,richtext.field.name.label,,ru-RU,"Name (identifier)","Имя (идентификатор)",0,"Имя (идентификатор)"
+cms,richtext.field.name.unique_error,,ru-RU,"An information content item with this name already exists","Элемент информационного содержимого с таким именем уже существует",0,"Элемент информационного содержимого с таким именем уже существует"
+cms,richtext.field.title.explanation,,ru-RU,"Appears as a title above the text. Leave empty for no title.","Отображается как заголовок над текстом. Оставьте пустым, если заголовок не нужен.",0,"Отображается как заголовок над текстом. Оставьте пустым, если заголовок не нужен."
+cms,richtext.field.title.label,,ru-RU,Heading,Заголовок,0,Заголовок
+cms,richtext.form.name,,ru-RU,"Text content","Текстовое содержимое",0,"Текстовое содержимое"
+cms,richtext.form.title_create,,ru-RU,"Create text content","Создать текстовое содержимое",0,"Создать текстовое содержимое"
+cms,richtext.form.title_edit,,ru-RU,"Edit text content","Редактировать текстовое содержимое",0,"Редактировать текстовое содержимое"
+cms,richtext.not_set,,ru-RU,"No content chosen","Содержимое не выбрано",0,"Содержимое не выбрано"
+cms,richtext.saved,,ru-RU,"Content saved","Содержимое сохранено",0,"Содержимое сохранено"
+cms,richtext.select.form.title,,ru-RU,"Select text content","Выбрать текстовое содержимое",0,"Выбрать текстовое содержимое"
+cms,richtext.updated,,ru-RU,"Content updated","Содержимое обновлено",0,"Содержимое обновлено"
+cms,richtext.widget.choose,,ru-RU,"Select text content","Выбрать текстовое содержимое",0,"Выбрать текстовое содержимое"
+cms,richtext.widget.create,,ru-RU,"Create text content","Создать текстовое содержимое",0,"Создать текстовое содержимое"
+cms,richtext.widget.description,,ru-RU,"Freely editable text with images","Свободно редактируемый текст с изображениями",0,"Свободно редактируемый текст с изображениями"
+cms,richtext.widget.edit,,ru-RU,"Edit text content","Редактировать текстовое содержимое",0,"Редактировать текстовое содержимое"
+cms,richtext.widget.name,,ru-RU,"Editable text","Редактируемый текст",0,"Редактируемый текст"
+cms,tree.field.type.explanation,,ru-RU,"Select from the predefined trees","Выберите из предопределённых деревьев",0,"Выберите из предопределённых деревьев"
+cms,tree.field.type.label,,ru-RU,Tree,Дерево,0,Дерево
+cms,tree.invalid_parent_id,,ru-RU,"Invalid parent ID","Недействительный ID родителя",0,"Недействительный ID родителя"
+cms,tree.missing_type,,ru-RU,"Missing tree type","Отсутствует тип дерева",0,"Отсутствует тип дерева"
+cms,tree.no_connection_id,,ru-RU,"No widget connection ID given","ID связи виджета не указан",0,"ID связи виджета не указан"
+cms,tree.select_menu_item,,ru-RU,"Select a menu item from the tree","Выберите пункт меню из дерева",0,"Выберите пункт меню из дерева"
+cms,tree.unknown_type,,ru-RU,"Unknown tree item type: {type}","Неизвестный тип элемента дерева: {type}",0,"Неизвестный тип элемента дерева: {type}"
+cms,webpage.create_for_params,,ru-RU,"Create a webpage for the following parameters: <br>{param_name}, {param_value}","Создать веб-страницу для следующих параметров: <br>{param_name}, {param_value}",0,"Создать веб-страницу для следующих параметров: <br>{param_name}, {param_value}"
+cms,webpage.create_for_widget,,ru-RU,"Create a webpage with the following content: <br><b>{widget}</b>","Создать веб-страницу со следующим содержимым: <br><b>{widget}</b>",0,"Создать веб-страницу со следующим содержимым: <br><b>{widget}</b>"
+cms,webpage.field.layout.explanation,,ru-RU,"The webpage layout structure determines where content elements can be placed on the page.","Структура макета веб-страницы определяет, где на странице можно размещать элементы содержимого.",0,"Структура макета веб-страницы определяет, где на странице можно размещать элементы содержимого."
+cms,webpage.field.layout.label,,ru-RU,"Page type","Тип страницы",0,"Тип страницы"
+cms,webpage_domain.field.resource_name.explanation,,ru-RU,"Set this domain name in the DOMAIN_CONTEXT configuration so this domain and its child pages become active.","Укажите это доменное имя в конфигурации DOMAIN_CONTEXT, чтобы этот домен и его дочерние страницы стали активными.",0,"Укажите это доменное имя в конфигурации DOMAIN_CONTEXT, чтобы этот домен и его дочерние страницы стали активными."
+cms,webpage_domain.field.resource_name.label,,ru-RU,"Domain name","Доменное имя",0,"Доменное имя"
+cms,webpage_domain.title_create,,ru-RU,"Add new domain","Добавить новый домен",0,"Добавить новый домен"
+cms,webpage_domain.title_edit,,ru-RU,"Edit domain","Редактировать домен",0,"Редактировать домен"
+cms,webpage_file.field.resource_name.explanation,,ru-RU,"This is the file name used in the URL. Avoid accented characters and spaces, and keep the correct file extension.","Это имя файла, используемое в URL. Избегайте символов с диакритикой и пробелов и сохраняйте правильное расширение файла.",0,"Это имя файла, используемое в URL. Избегайте символов с диакритикой и пробелов и сохраняйте правильное расширение файла."
+cms,webpage_file.field.resource_name.label,,ru-RU,"SEO-friendly URL name","SEO-дружественное имя URL",0,"SEO-дружественное имя URL"
+cms,webpage_file.field.text.explanation,,ru-RU,"For images this may appear as a longer description below the title.","Для изображений это может отображаться как более длинное описание под заголовком.",0,"Для изображений это может отображаться как более длинное описание под заголовком."
+cms,webpage_file.field.text.label,,ru-RU,Description,Описание,0,Описание
+cms,webpage_file.field.title.explanation,,ru-RU,"For images this may appear below the image.","Для изображений это может отображаться под изображением.",0,"Для изображений это может отображаться под изображением."
+cms,webpage_file.field.title.label,,ru-RU,Title,Заголовок,0,Заголовок
+cms,webpage_file.title_edit,,ru-RU,"Edit file name","Редактировать имя файла",0,"Редактировать имя файла"
+cms,webpage_folder.field.resource_name.explanation,,ru-RU,"This is the real folder name used in the URL. Changing it later may cause visitors from search engines to see a 404 page.","Это реальное имя папки, используемое в URL. Позднейшее изменение может привести к тому, что посетители из поисковых систем увидят страницу 404.",0,"Это реальное имя папки, используемое в URL. Позднейшее изменение может привести к тому, что посетители из поисковых систем увидят страницу 404."
+cms,webpage_folder.field.resource_name.label,,ru-RU,"SEO-friendly folder URL name","SEO-дружественное имя URL папки",0,"SEO-дружественное имя URL папки"
+cms,webpage_folder.title_create,,ru-RU,"Create new folder","Создать новую папку",0,"Создать новую папку"
+cms,webpage_folder.title_edit,,ru-RU,"Edit folder","Редактировать папку",0,"Редактировать папку"
+cms,webpage_from_path.subtitle,,ru-RU,"If you want to create this webpage, you can do it here. Before doing so, make sure the URL was not mistyped.","Если вы хотите создать эту веб-страницу, вы можете сделать это здесь. Перед этим убедитесь, что URL не введён с ошибкой.",0,"Если вы хотите создать эту веб-страницу, вы можете сделать это здесь. Перед этим убедитесь, что URL не введён с ошибкой."
+cms,webpage_from_path.title,,ru-RU,"The requested webpage was not found!","Запрошенная веб-страница не найдена!",0,"Запрошенная веб-страница не найдена!"
+cms,webpage_page.field.description.explanation,,ru-RU,"Description meta tag, usually shown under the URL in search results.","Мета-тег description, обычно показывается под URL в результатах поиска.",0,"Мета-тег description, обычно показывается под URL в результатах поиска."
+cms,webpage_page.field.description.label,,ru-RU,Description,Описание,0,Описание
+cms,webpage_page.field.keywords.explanation,,ru-RU,"Keywords meta tag with comma-separated values.","Мета-тег keywords со значениями, разделёнными запятыми.",0,"Мета-тег keywords со значениями, разделёнными запятыми."
+cms,webpage_page.field.keywords.label,,ru-RU,Keywords,"Ключевые слова",0,"Ключевые слова"
+cms,webpage_page.field.resource_name.explanation,,ru-RU,"This is the real URL name of the page. Change it later only when necessary.","Это реальное имя URL страницы. Меняйте его позже только при необходимости.",0,"Это реальное имя URL страницы. Меняйте его позже только при необходимости."
+cms,webpage_page.field.resource_name.label,,ru-RU,"SEO-friendly URL name","SEO-дружественное имя URL",0,"SEO-дружественное имя URL"
+cms,webpage_page.field.title.explanation,,ru-RU,"HTML title meta tag shown in the browser window title.","Мета-тег HTML title, показываемый в заголовке окна браузера.",0,"Мета-тег HTML title, показываемый в заголовке окна браузера."
+cms,webpage_page.field.title.label,,ru-RU,Title,Заголовок,0,Заголовок
+cms,webpage_page.title_create,,ru-RU,"Create new webpage","Создать новую веб-страницу",0,"Создать новую веб-страницу"
+cms,webpage_page.title_edit,,ru-RU,"Edit webpage","Редактировать веб-страницу",0,"Редактировать веб-страницу"
+cms,widget.insert.button,,ru-RU,Insert,Вставить,0,Вставить
+cms,widget.insert.icon_title,,ru-RU,"Insert content","Вставить содержимое",0,"Вставить содержимое"
+cms,widget.insert.placeholder,,ru-RU,"-- Insert content --","-- Вставить содержимое --",0,"-- Вставить содержимое --"
+cms,widget.insert_from_clipboard,,ru-RU,"Insert clipboard content here","Вставьте сюда содержимое буфера обмена",0,"Вставьте сюда содержимое буфера обмена"
+cms,widget_connection.added,,ru-RU,"Content element placed on the webpage","Элемент содержимого размещён на веб-странице",0,"Элемент содержимого размещён на веб-странице"
+cms,widget_connection.copied_to_clipboard,,ru-RU,"Content copied to clipboard","Содержимое скопировано в буфер обмена",0,"Содержимое скопировано в буфер обмена"
+cms,widget_connection.duplicate_not_allowed,,ru-RU,"This content element is already on this block and multiple placement is not allowed.","Этот элемент содержимого уже находится в этом блоке, и множественное размещение не разрешено.",0,"Этот элемент содержимого уже находится в этом блоке, и множественное размещение не разрешено."
+cms,widget_connection.moved,,ru-RU,"Content element moved","Элемент содержимого перемещён",0,"Элемент содержимого перемещён"
+cms,widget_connection.remove_from_webpage,,ru-RU,"Remove from this webpage","Удалить с этой веб-страницы",0,"Удалить с этой веб-страницы"
+cms,widget_connection.removed,,ru-RU,"Content element removed from the webpage","Элемент содержимого удалён с веб-страницы",0,"Элемент содержимого удалён с веб-страницы"
+cms,widget_connection.select_widget_type,,ru-RU,"Choose the content type to insert","Выберите тип содержимого для вставки",0,"Выберите тип содержимого для вставки"
+cms,widget_connection_params.field.anchor.explanation,,ru-RU,"Anchor name that can be used in links to jump to this content on the page.","Имя якоря, которое можно использовать в ссылках для перехода к этому содержимому на странице.",0,"Имя якоря, которое можно использовать в ссылках для перехода к этому содержимому на странице."
+cms,widget_connection_params.field.anchor.label,,ru-RU,Anchor,Якорь,0,Якорь
+cms,widget_connection_params.field.float.clear,,ru-RU,"New row","Новая строка",0,"Новая строка"
+cms,widget_connection_params.field.float.explanation,,ru-RU,"Content box alignment. Floated elements can appear next to each other.","Выравнивание блока содержимого. Плавающие элементы могут отображаться рядом друг с другом.",0,"Выравнивание блока содержимого. Плавающие элементы могут отображаться рядом друг с другом."
+cms,widget_connection_params.field.float.label,,ru-RU,Alignment,Выравнивание,0,Выравнивание
+cms,widget_connection_params.field.float.left,,ru-RU,"Floated left","С выравниванием влево",0,"С выравниванием влево"
+cms,widget_connection_params.field.float.left_clear,,ru-RU,"Floated left in new row","С выравниванием влево в новой строке",0,"С выравниванием влево в новой строке"
+cms,widget_connection_params.field.float.none,,ru-RU,"No special alignment","Без специального выравнивания",0,"Без специального выравнивания"
+cms,widget_connection_params.field.float.right,,ru-RU,"Floated right","С выравниванием вправо",0,"С выравниванием вправо"
+cms,widget_connection_params.field.float.right_clear,,ru-RU,"Floated right in new row","С выравниванием вправо в новой строке",0,"С выравниванием вправо в новой строке"
+cms,widget_connection_params.field.height.explanation,,ru-RU,"Height in CSS format with unit (for example 100%, 200px, or auto).","Высота в формате CSS с единицей измерения (например, 100%, 200px или auto).",0,"Высота в формате CSS с единицей измерения (например, 100%, 200px или auto)."
+cms,widget_connection_params.field.height.label,,ru-RU,Height,Высота,0,Высота
+cms,widget_connection_params.field.margin_bottom.explanation,,ru-RU,"Bottom margin in CSS format with unit (for example 100% or 200px).","Нижний отступ в формате CSS с единицей измерения (например, 100% или 200px).",0,"Нижний отступ в формате CSS с единицей измерения (например, 100% или 200px)."
+cms,widget_connection_params.field.margin_bottom.label,,ru-RU,"Bottom margin","Нижний отступ",0,"Нижний отступ"
+cms,widget_connection_params.field.margin_left.explanation,,ru-RU,"Left margin in CSS format with unit (for example 100% or 200px).","Левый отступ в формате CSS с единицей измерения (например, 100% или 200px).",0,"Левый отступ в формате CSS с единицей измерения (например, 100% или 200px)."
+cms,widget_connection_params.field.margin_left.label,,ru-RU,"Left margin","Левый отступ",0,"Левый отступ"
+cms,widget_connection_params.field.margin_right.explanation,,ru-RU,"Right margin in CSS format with unit (for example 100% or 200px).","Правый отступ в формате CSS с единицей измерения (например, 100% или 200px).",0,"Правый отступ в формате CSS с единицей измерения (например, 100% или 200px)."
+cms,widget_connection_params.field.margin_right.label,,ru-RU,"Right margin","Правый отступ",0,"Правый отступ"
+cms,widget_connection_params.field.margin_top.explanation,,ru-RU,"Top margin in CSS format with unit (for example 100% or 200px).","Верхний отступ в формате CSS с единицей измерения (например, 100% или 200px).",0,"Верхний отступ в формате CSS с единицей измерения (например, 100% или 200px)."
+cms,widget_connection_params.field.margin_top.label,,ru-RU,"Top margin","Верхний отступ",0,"Верхний отступ"
+cms,widget_connection_params.field.width.explanation,,ru-RU,"Width in CSS format with unit (for example 100%, 200px, or auto).","Ширина в формате CSS с единицей измерения (например, 100%, 200px или auto).",0,"Ширина в формате CSS с единицей измерения (например, 100%, 200px или auto)."
+cms,widget_connection_params.field.width.label,,ru-RU,Width,Ширина,0,Ширина
+cms,widget_connection_params.missing_widget_id,,ru-RU,"Widget ID is missing","Отсутствует ID виджета",0,"Отсутствует ID виджета"
+cms,widget_connection_params.no_content_id,,ru-RU,"No content ID given","ID содержимого не указан",0,"ID содержимого не указан"
+cms,widget_connection_params.subtitle,,ru-RU,"Webpage: {page}","Веб-страница: {page}",0,"Веб-страница: {page}"
+cms,widget_connection_params.title,,ru-RU,"Edit display settings","Редактировать настройки отображения",0,"Редактировать настройки отображения"
+cms,widget_connection_settings.field.is_last.explanation,,ru-RU,"Check this if this is the last column in the row. This helps keep spacing correct and prevents overlapping or broken layout.","Отметьте это, если это последний столбец в строке. Это помогает сохранить правильные отступы и предотвращает наложение или поломку макета.",0,"Отметьте это, если это последний столбец в строке. Это помогает сохранить правильные отступы и предотвращает наложение или поломку макета."
+cms,widget_connection_settings.field.is_last.label,,ru-RU,"Last in row","Последний в строке",0,"Последний в строке"
+cms,widget_connection_settings.field.widget_width.label,,ru-RU,"Content width","Ширина содержимого",0,"Ширина содержимого"
+cms,widget_connection_settings.missing_widget_id,,ru-RU,"Widget ID is missing","Отсутствует ID виджета",0,"Отсутствует ID виджета"
+cms,widget_connection_settings.subtitle,,ru-RU,"Webpage: {page}","Веб-страница: {page}",0,"Веб-страница: {page}"
+cms,widget_group.begin_delete_error,,ru-RU,"Error: Unable to delete opening block","Ошибка: не удалось удалить открывающий блок",0,"Ошибка: не удалось удалить открывающий блок"
+cms,widget_group.both_delete_error,,ru-RU,"Error: Unable to delete opening or closing block","Ошибка: не удалось удалить открывающий или закрывающий блок",0,"Ошибка: не удалось удалить открывающий или закрывающий блок"
+cms,widget_group.end_delete_error,,ru-RU,"Error: Unable to delete closing block","Ошибка: не удалось удалить закрывающий блок",0,"Ошибка: не удалось удалить закрывающий блок"
+cms,widget_group.end_missing_delete_error,,ru-RU,"Closing block not found and opening block deletion failed","Закрывающий блок не найден, и удаление открывающего блока не удалось",0,"Закрывающий блок не найден, и удаление открывающего блока не удалось"
+cms,widget_group.end_missing_removed_beginning,,ru-RU,"Closing block not found, opening block removed successfully","Закрывающий блок не найден, открывающий блок успешно удалён",0,"Закрывающий блок не найден, открывающий блок успешно удалён"
+cms,widget_group.remove_block,,ru-RU,"Remove block","Удалить блок",0,"Удалить блок"
+cms,widget_group.removed,,ru-RU,"Block removed from webpage","Блок удалён с веб-страницы",0,"Блок удалён с веб-страницы"
+cms,widget_preview.description,,ru-RU,Description,Описание,0,Описание
+cms,widget_preview.implemented,,ru-RU,Implemented,Реализовано,0,Реализовано
+cms,widget_preview.info.current_theme,,ru-RU,"Current theme","Текущая тема",0,"Текущая тема"
+cms,widget_preview.info.fallback,,ru-RU,Fallback,"Резервный вариант",0,"Резервный вариант"
+cms,widget_preview.info.implemented,,ru-RU,Implemented,Реализовано,0,Реализовано
+cms,widget_preview.info.template,,ru-RU,Template,Шаблон,0,Шаблон
+cms,widget_preview.info.title,,ru-RU,"Widget preview","Предпросмотр виджета",0,"Предпросмотр виджета"
+cms,widget_preview.info.widget,,ru-RU,Widget,Виджет,0,Виджет
+cms,widget_preview.none,,ru-RU,"No mockable widgets found.","Не найдено виджетов с поддержкой мок-данных.",0,"Не найдено виджетов с поддержкой мок-данных."
+cms,widget_preview.not_implemented,,ru-RU,"Not implemented","Не реализовано",0,"Не реализовано"
+cms,widget_preview.not_mockable_prefix,,ru-RU,Widget,Виджет,0,Виджет
+cms,widget_preview.not_mockable_suffix,,ru-RU,"does not implement iMockable.","не реализует iMockable.",0,"не реализует iMockable."
+cms,widget_preview.not_registered,,ru-RU,"Widget not registered: {widget}","Виджет не зарегистрирован: {widget}",0,"Виджет не зарегистрирован: {widget}"
+cms,widget_preview.redirecting,,ru-RU,"Redirecting to the correct theme...","Перенаправление на правильную тему...",0,"Перенаправление на правильную тему..."
+cms,widget_preview.title,,ru-RU,"Available widgets for preview","Доступные виджеты для предпросмотра",0,"Доступные виджеты для предпросмотра"
+cms,widget_preview.widget,,ru-RU,Widget,Виджет,0,Виджет
+common,actions,,ru-RU,Actions,Действия,0,Действия
+common,all,,ru-RU,All,Все,0,Все
+common,back,,ru-RU,Back,Назад,0,Назад
+common,calendar,,ru-RU,Calendar,Календарь,0,Календарь
+common,cancel,,ru-RU,Cancel,Отмена,0,Отмена
+common,choose_placeholder,,ru-RU,"-- Choose --","-- Выберите --",0,"-- Выберите --"
+common,delete,,ru-RU,Delete,Удалить,0,Удалить
+common,download,,ru-RU,Download,Скачать,0,Скачать
+common,edit,,ru-RU,Edit,Редактировать,0,Редактировать
+common,error,,ru-RU,Error,Ошибка,0,Ошибка
+common,error_save,,ru-RU,"Error: Unable to save","Ошибка: не удалось сохранить",0,"Ошибка: не удалось сохранить"
+common,id,,ru-RU,ID,ID,0,ID
+common,loading,,ru-RU,Loading...,Загрузка...,0,Загрузка...
+common,logout,,ru-RU,"Log out",Выйти,0,Выйти
+common,missing_required_url_params,,ru-RU,"Missing required URL parameters","Отсутствуют обязательные параметры URL",0,"Отсутствуют обязательные параметры URL"
+common,move_down,,ru-RU,"Move down","Переместить вниз",0,"Переместить вниз"
+common,move_up,,ru-RU,"Move up","Переместить вверх",0,"Переместить вверх"
+common,never,,ru-RU,Never,Никогда,0,Никогда
+common,no,,ru-RU,No,Нет,0,Нет
+common,no_changes,,ru-RU,"No changes made","Изменения не внесены",0,"Изменения не внесены"
+common,no_data,,ru-RU,"No data","Нет данных",0,"Нет данных"
+common,no_description,,ru-RU,"No description","Нет описания",0,"Нет описания"
+common,not_set,,ru-RU,"[not set]","[не задано]",0,"[не задано]"
+common,open,,ru-RU,Open,Открыть,0,Открыть
+common,operations,,ru-RU,Operations,Операции,0,Операции
+common,preview,,ru-RU,Preview,Предпросмотр,0,Предпросмотр
+common,read_more,,ru-RU,"Read more","Читать далее",0,"Читать далее"
+common,renamed,,ru-RU,Renamed,Переименовано,0,Переименовано
+common,save,,ru-RU,Save,Сохранить,0,Сохранить
+common,saved,,ru-RU,"Record saved","Запись сохранена",0,"Запись сохранена"
+common,saved_short,,ru-RU,Saved,Сохранено,0,Сохранено
+common,search,,ru-RU,Search,Поиск,0,Поиск
+common,unknown,,ru-RU,Unknown,Неизвестно,0,Неизвестно
+common,upload,,ru-RU,Upload,Загрузить,0,Загрузить
+common,user,,ru-RU,User,Пользователь,0,Пользователь
+common,width,,ru-RU,Width,Ширина,0,Ширина
+common,yes,,ru-RU,Yes,Да,0,Да
+datatable,column_visibility,,ru-RU,"Visible columns","Видимые столбцы",0,"Видимые столбцы"
+datatable,displayed_columns,,ru-RU,"Displayed columns","Отображаемые столбцы",0,"Отображаемые столбцы"
+datatable,empty_table,,ru-RU,"No data","Нет данных",0,"Нет данных"
+datatable,first,,ru-RU,First,Первая,0,Первая
+datatable,info_compact,,ru-RU,"_START_ - _END_ / _TOTAL_ items","_START_ - _END_ / _TOTAL_ элементов",0,"_START_ - _END_ / _TOTAL_ элементов"
+datatable,info_empty,,ru-RU,"No results","Нет результатов",0,"Нет результатов"
+datatable,info_filtered_compact,,ru-RU,"(filtered from _MAX_ items)","(отфильтровано из _MAX_ элементов)",0,"(отфильтровано из _MAX_ элементов)"
+datatable,info_filtered_html,,ru-RU,"<br><i>filtered from _MAX_ rows</i>","<br><i>отфильтровано из _MAX_ строк</i>",0,"<br><i>отфильтровано из _MAX_ строк</i>"
+datatable,info_full,,ru-RU,"_TOTAL_ displayable items (showing: _START_ - _END_)","_TOTAL_ отображаемых элементов (показано: _START_ - _END_)",0,"_TOTAL_ отображаемых элементов (показано: _START_ - _END_)"
+datatable,last,,ru-RU,Last,Последняя,0,Последняя
+datatable,length_menu,,ru-RU,"_MENU_ items/page","_MENU_ элементов/страницу",0,"_MENU_ элементов/страницу"
+datatable,loading_records,,ru-RU,Loading...,Загрузка...,0,Загрузка...
+datatable,next,,ru-RU,Next,Следующая,0,Следующая
+datatable,previous,,ru-RU,Previous,Предыдущая,0,Предыдущая
+datatable,processing,,ru-RU,Processing...,Обработка...,0,Обработка...
+datatable,search,,ru-RU,Search,Поиск,0,Поиск
+datatable,zero_records,,ru-RU,"No displayable items","Нет отображаемых элементов",0,"Нет отображаемых элементов"
+layout,admin_default.description,,ru-RU,"Single-column admin layout","Одноколоночный макет админки",0,"Одноколоночный макет админки"
+layout,admin_default.name,,ru-RU,"Admin 1-column","Админка 1 колонка",0,"Админка 1 колонка"
+layout,admin_empty.description,,ru-RU,"Empty admin layout","Пустой макет админки",0,"Пустой макет админки"
+layout,admin_empty.name,,ru-RU,"Empty admin","Пустая админка",0,"Пустая админка"
+layout,admin_login.description,,ru-RU,"Admin login layout","Макет входа администратора",0,"Макет входа администратора"
+layout,admin_login.name,,ru-RU,"Admin login","Вход администратора",0,"Вход администратора"
+layout,admin_menu.description,,ru-RU,"Displays the admin menu","Отображает меню администратора",0,"Отображает меню администратора"
+layout,admin_menu.name,,ru-RU,"Admin menu","Меню администрирования",0,"Меню администрирования"
+layout,admin_nomenu.description,,ru-RU,"Admin layout without menu","Макет админки без меню",0,"Макет админки без меню"
+layout,admin_nomenu.name,,ru-RU,"Admin without menu","Админка без меню",0,"Админка без меню"
+layout,header_right.description,,ru-RU,"Displays the quick access menu","Отображает меню быстрого доступа",0,"Отображает меню быстрого доступа"
+layout,header_right.name,,ru-RU,"Quick menu","Быстрое меню",0,"Быстрое меню"
+layout,main_menu.description,,ru-RU,"Displays the main menu","Отображает главное меню",0,"Отображает главное меню"
+layout,main_menu.name,,ru-RU,"Main menu","Главное меню",0,"Главное меню"
+layout,public_2row.description,,ru-RU,"Two-column public layout","Публичный макет с двумя колонками",0,"Публичный макет с двумя колонками"
+layout,public_2row.hero.balanced_life,,ru-RU,"Want to live a more balanced life?","Хотите жить более сбалансированной жизнью?",0,"Хотите жить более сбалансированной жизнью?"
+layout,public_2row.hero.better_quality_of_life,,ru-RU,"Want a better quality of life?","Хотите лучшего качества жизни?",0,"Хотите лучшего качества жизни?"
+layout,public_2row.hero.conflict_management,,ru-RU,"Want to handle conflicts better?","Хотите лучше справляться с конфликтами?",0,"Хотите лучше справляться с конфликтами?"
+layout,public_2row.hero.equal_partner,,ru-RU,"Want to be treated as an equal partner?","Хотите, чтобы к вам относились как к равному партнёру?",0,"Хотите, чтобы к вам относились как к равному партнёру?"
+layout,public_2row.hero.self_discovery,,ru-RU,"Want to understand yourself better?","Хотите лучше понимать себя?",0,"Хотите лучше понимать себя?"
+layout,public_2row.hero.solution,,ru-RU,"The solution: TeamSolution!","Решение: TeamSolution!",0,"Решение: TeamSolution!"
+layout,public_2row.hero.success_and_happiness,,ru-RU,"Want to be successful and happy?","Хотите быть успешными и счастливыми?",0,"Хотите быть успешными и счастливыми?"
+layout,public_2row.name,,ru-RU,2-column,"2 колонки",0,"2 колонки"
+layout,public_default.description,,ru-RU,"Single-column public layout","Публичный макет с одной колонкой",0,"Публичный макет с одной колонкой"
+layout,public_default.name,,ru-RU,1-column,"1 колонка",0,"1 колонка"
+layout,public_empty.description,,ru-RU,"Empty layout for simple responses","Пустой макет для простых ответов",0,"Пустой макет для простых ответов"
+layout,public_empty.name,,ru-RU,Empty,Пусто,0,Пусто
+layout,public_login.description,,ru-RU,"Login layout","Макет страницы входа",0,"Макет страницы входа"
+layout,public_login.name,,ru-RU,Login,Вход,0,Вход
+layout,public_preview.description,,ru-RU,"Preview layout","Макет предпросмотра",0,"Макет предпросмотра"
+layout,public_preview.name,,ru-RU,Preview,Предпросмотр,0,Предпросмотр
+layout,top_menu_admin.description,,ru-RU,"Displays the admin top menu","Отображает верхнее меню администратора",0,"Отображает верхнее меню администратора"
+layout,top_menu_admin.name,,ru-RU,"Admin top menu","Верхнее меню администратора",0,"Верхнее меню администратора"
+layout,unknown.description,,ru-RU,"Layout not configured","Макет не настроен",0,"Макет не настроен"
+layout,unknown.name,,ru-RU,"Unknown layout","Неизвестный макет",0,"Неизвестный макет"
+layout,widget_previewer.description,,ru-RU,"Minimal layout for widget previews","Минимальный макет для предпросмотра виджетов",0,"Минимальный макет для предпросмотра виджетов"
+layout,widget_previewer.name,,ru-RU,"Widget previewer","Средство предпросмотра виджетов",0,"Средство предпросмотра виджетов"
+mcp,tokens.col.actions,,ru-RU,Actions,Действия,0,Действия
+mcp,tokens.col.created,,ru-RU,Created,Created,0,Created
+mcp,tokens.col.expires,,ru-RU,Expires,Expires,0,Expires
+mcp,tokens.col.last_used,,ru-RU,"Last used","Last used",0,"Last used"
+mcp,tokens.col.name,,ru-RU,Name,Name,0,Name
+mcp,tokens.col.prefix,,ru-RU,Prefix,Prefix,0,Prefix
+mcp,tokens.col.status,,ru-RU,Status,Статус,0,Статус
+mcp,tokens.create,,ru-RU,"Create token","Create token",0,"Create token"
+mcp,tokens.create_title,,ru-RU,"Create token","Create token",0,"Create token"
+mcp,tokens.created_help,,ru-RU,"Copy this user-bound token now. It will not be shown again.","Скопируйте этот токен, привязанный к пользователю, сейчас. Он больше не будет показан.",0,"Скопируйте этот токен, привязанный к пользователю, сейчас. Он больше не будет показан."
+mcp,tokens.created_title,,ru-RU,"Token created","Token created",0,"Token created"
+mcp,tokens.description,,ru-RU,"Create and revoke MCP access tokens tied to your user account.","Создавайте и отзывайте токены доступа MCP, привязанные к вашей учетной записи.",0,"Создавайте и отзывайте токены доступа MCP, привязанные к вашей учетной записи."
+mcp,tokens.empty,,ru-RU,"No MCP tokens yet.","Токенов MCP пока нет.",0,"Токенов MCP пока нет."
+mcp,tokens.endpoint,,ru-RU,"MCP endpoint","MCP endpoint",0,"MCP endpoint"
+mcp,tokens.existing_title,,ru-RU,"Existing tokens","Existing tokens",0,"Existing tokens"
+mcp,tokens.expiry,,ru-RU,Expiry,Expiry,0,Expiry
+mcp,tokens.expiry_30,,ru-RU,"30 days","30 days",0,"30 days"
+mcp,tokens.expiry_365,,ru-RU,"1 year","1 year",0,"1 year"
+mcp,tokens.expiry_90,,ru-RU,"90 days","90 days",0,"90 days"
+mcp,tokens.expiry_never,,ru-RU,"No expiry","No expiry",0,"No expiry"
+mcp,tokens.name,,ru-RU,Name,Name,0,Name
+mcp,tokens.name_placeholder,,ru-RU,"Claude Desktop - local","Claude Desktop - local",0,"Claude Desktop - local"
+mcp,tokens.never,,ru-RU,Never,Никогда,0,Никогда
+mcp,tokens.revoke,,ru-RU,Revoke,Revoke,0,Revoke
+mcp,tokens.revoke_confirm,,ru-RU,"Revoke this MCP token?","Отозвать этот токен MCP?",0,"Отозвать этот токен MCP?"
+mcp,tokens.security_note,,ru-RU,"MCP clients using one of these tokens run as your Radaptor user and have the same permissions you have. Keep tokens secret and revoke any token you no longer use.","Клиенты MCP, использующие один из этих токенов, работают от имени вашего пользователя Radaptor и имеют те же права. Храните токены в секрете и отзывайте те, которые больше не используете.",0,"Клиенты MCP, использующие один из этих токенов, работают от имени вашего пользователя Radaptor и имеют те же права. Храните токены в секрете и отзывайте те, которые больше не используете."
+mcp,tokens.status.active,,ru-RU,Active,Active,0,Active
+mcp,tokens.status.expired,,ru-RU,Expired,Expired,0,Expired
+mcp,tokens.status.revoked,,ru-RU,Revoked,Revoked,0,Revoked
+mcp,tokens.title,,ru-RU,"MCP tokens","Токены MCP",0,"Токены MCP"
+record_action,datasheet,,ru-RU,Datasheet,Карточка,0,Карточка
+record_action,versions,,ru-RU,Versions,Версии,0,Версии
+record_meta,created_by,,ru-RU,"Created by","Создано пользователем",0,"Создано пользователем"
+record_meta,last_modified,,ru-RU,"Last modified","Последнее изменение",0,"Последнее изменение"
+resource,new_folder,,ru-RU,"New folder","Новая папка",0,"Новая папка"
+resource,new_webpage,,ru-RU,"New webpage","Новая веб-страница",0,"Новая веб-страница"
+resource,properties,,ru-RU,Properties,Свойства,0,Свойства
+resource,security,,ru-RU,Security,Безопасность,0,Безопасность
+resource,upload_file,,ru-RU,"Upload file...","Загрузить файл...",0,"Загрузить файл..."
+response_error,access_denied,,ru-RU,"Access denied","Доступ запрещён",0,"Доступ запрещён"
+response_error,access_restricted,,ru-RU,"Access restricted","Доступ ограничен",0,"Доступ ограничен"
+response_error,forbidden.message,,ru-RU,"You do not have permission to access this resource.","У вас нет прав для доступа к этому ресурсу.",0,"У вас нет прав для доступа к этому ресурсу."
+response_error,forbidden.title,,ru-RU,Forbidden,Запрещено,0,Запрещено
+response_error,internal.contact_support,,ru-RU,"If the problem persists, please contact our support team.","Если проблема сохраняется, пожалуйста, свяжитесь с нашей службой поддержки.",0,"Если проблема сохраняется, пожалуйста, свяжитесь с нашей службой поддержки."
+response_error,internal.go_back_previous_page,,ru-RU,"Go back to the previous page using your browser's back button","Вернитесь на предыдущую страницу с помощью кнопки «Назад» в браузере",0,"Вернитесь на предыдущую страницу с помощью кнопки «Назад» в браузере"
+response_error,internal.intro,,ru-RU,"We apologize for the inconvenience. Our team has been notified and we are working to fix this issue.","Приносим извинения за неудобства. Наша команда уведомлена и работает над устранением этой проблемы.",0,"Приносим извинения за неудобства. Наша команда уведомлена и работает над устранением этой проблемы."
+response_error,internal.reference_label,,ru-RU,Reference,Ссылка,0,Ссылка
+response_error,internal.refresh_page,,ru-RU,"Refresh this page","Обновить эту страницу",0,"Обновить эту страницу"
+response_error,internal.title,,ru-RU,"Oops! Something went wrong on our end.","Упс! С нашей стороны что-то пошло не так.",0,"Упс! С нашей стороны что-то пошло не так."
+response_error,internal.try_actions,,ru-RU,"You can try to:","Вы можете попробовать:",0,"Вы можете попробовать:"
+response_error,internal.try_again_in_a_few_minutes,,ru-RU,"Try again in a few minutes","Повторите попытку через несколько минут",0,"Повторите попытку через несколько минут"
+runtime_diagnostics,card.database,,ru-RU,Database,Database,0,Database
+runtime_diagnostics,card.email,,ru-RU,"Email safety","Email safety",0,"Email safety"
+runtime_diagnostics,card.environment,,ru-RU,Environment,Environment,0,Environment
+runtime_diagnostics,card.mcp,,ru-RU,MCP,MCP,0,MCP
+runtime_diagnostics,card.packages,,ru-RU,Packages,Packages,0,Packages
+runtime_diagnostics,card.redis,,ru-RU,Redis,Redis,0,Redis
+runtime_diagnostics,card.warnings,,ru-RU,Warnings,Warnings,0,Warnings
+runtime_diagnostics,no,,ru-RU,no,no,0,no
+runtime_diagnostics,none,,ru-RU,None,None,0,None
+runtime_diagnostics,safe_to_test,,ru-RU,"Safe to test","Safe to test",0,"Safe to test"
+runtime_diagnostics,subtitle,,ru-RU,"Effective runtime state with secrets redacted.","Фактическое состояние выполнения с замаскированными секретами.",0,"Фактическое состояние выполнения с замаскированными секретами."
+runtime_diagnostics,title,,ru-RU,"Runtime diagnostics","Диагностика выполнения",0,"Диагностика выполнения"
+runtime_diagnostics,yes,,ru-RU,yes,yes,0,yes
+selection,delete_invalid_entry_confirm,,ru-RU,"Are you sure you want to delete this invalid entry?","Вы уверены, что хотите удалить эту недействительную запись?",0,"Вы уверены, что хотите удалить эту недействительную запись?"
+selection,delete_selected,,ru-RU,"Delete selected","Удалить выбранное",0,"Удалить выбранное"
+selection,delete_selected_confirm,,ru-RU,"Are you sure you want to delete all selected items?","Вы уверены, что хотите удалить все выбранные элементы?",0,"Вы уверены, что хотите удалить все выбранные элементы?"
+selection,group,,ru-RU,"Group selection","Групповой выбор",0,"Групповой выбор"
+selection,invalid_entry,,ru-RU,"Invalid entry","Недействительная запись",0,"Недействительная запись"
+selection,multiple,,ru-RU,"Multiple selection","Множественный выбор",0,"Множественный выбор"
+selection,selected_items,,ru-RU,"Selected items","Выбранные элементы",0,"Выбранные элементы"
+social,disqus.comments_link,,ru-RU,"Disqus comments","Комментарии Disqus",0,"Комментарии Disqus"
+social,disqus.enable_javascript,,ru-RU,"JavaScript must be enabled to display","Для отображения должен быть включён JavaScript",0,"Для отображения должен быть включён JavaScript"
+social,disqus.powered_by,,ru-RU,"comments powered by","комментарии предоставлены",0,"комментарии предоставлены"
+system_message,default_header,,ru-RU,"System message","Системное сообщение",0,"Системное сообщение"
+theme,error.description,,ru-RU,"Fallback error theme","Резервная тема ошибок",0,"Резервная тема ошибок"
+theme,error.name,,ru-RU,Error,Ошибка,0,Ошибка
+theme,radaptor_portal_admin.description,,ru-RU,"Bootstrap 5 admin theme with portal neon/glass styling","Тема админки Bootstrap 5 со стилем portal neon/glass",0,"Тема админки Bootstrap 5 со стилем portal neon/glass"
+theme,radaptor_portal_admin.name,,ru-RU,RadaptorPortalAdmin,RadaptorPortalAdmin,0,RadaptorPortalAdmin
+theme,so_admin.description,,ru-RU,"SO-like admin theme","Тема админки в стиле SO",0,"Тема админки в стиле SO"
+theme,so_admin.name,,ru-RU,SO-Admin,SO-Admin,0,SO-Admin
+widget,admin_menu.description,,ru-RU,"Manage the admin menu tree","Управление деревом меню администратора",0,"Управление деревом меню администратора"
+widget,admin_menu.name,,ru-RU,"Admin menu administration","Управление меню администратора",0,"Управление меню администратора"
+widget,blog.description,,ru-RU,Blog,Блог,0,Блог
+widget,blog.name,,ru-RU,Blog,Блог,0,Блог
+widget,blog_list.description,,ru-RU,"Blog list","Список блога",0,"Список блога"
+widget,blog_list.name,,ru-RU,"Blog list","Список блога",0,"Список блога"
+widget,cli_runner.description,,ru-RU,"Run CLI commands from the admin panel.","Запускайте CLI-команды из панели администратора.",0,"Запускайте CLI-команды из панели администратора."
+widget,cli_runner.name,,ru-RU,"CLI Runner","Запуск CLI",0,"Запуск CLI"
+widget,file_upload.description,,ru-RU,"File upload","Загрузка файла",0,"Загрузка файла"
+widget,file_upload.name,,ru-RU,"File upload","Загрузка файла",0,"Загрузка файла"
+widget,form.description,,ru-RU,"Displays a configured form","Отображает настроенную форму",0,"Отображает настроенную форму"
+widget,form.name,,ru-RU,Form,Форма,0,Форма
+widget,group_beginning.description,,ru-RU,"Separately managed content unit that can contain jointly styled elements.","Отдельно управляемая единица содержимого, которая может содержать совместно оформленные элементы.",0,"Отдельно управляемая единица содержимого, которая может содержать совместно оформленные элементы."
+widget,group_beginning.name,,ru-RU,"Content block","Блок содержимого",0,"Блок содержимого"
+widget,group_end.description,,ru-RU,"End of a separately managed content unit.","Конец отдельно управляемой единицы содержимого.",0,"Конец отдельно управляемой единицы содержимого."
+widget,group_end.name,,ru-RU,"End of content block","Конец блока содержимого",0,"Конец блока содержимого"
+widget,import_export.description,,ru-RU,"Central CSV import and export tools","Центральные инструменты импорта и экспорта CSV",0,"Центральные инструменты импорта и экспорта CSV"
+widget,import_export.name,,ru-RU,"Import / Export","Импорт / Экспорт",0,"Импорт / Экспорт"
+widget,js_tree.description,,ru-RU,"Displays and manages a hierarchical tree of admin resources","Отображает и управляет иерархическим деревом ресурсов администратора",0,"Отображает и управляет иерархическим деревом ресурсов администратора"
+widget,js_tree.name,,ru-RU,"Tree browser","Браузер дерева",0,"Браузер дерева"
+widget,js_tree.settings,,ru-RU,"Tree settings","Настройки дерева",0,"Настройки дерева"
+widget,main_menu.description,,ru-RU,"Manage the main menu tree","Управление деревом главного меню",0,"Управление деревом главного меню"
+widget,main_menu.name,,ru-RU,"Main menu administration","Управление главным меню",0,"Управление главным меню"
+widget,phpinfo_frame.description,,ru-RU,"Show PHP runtime information inside the admin layout.","Показывает информацию о среде выполнения PHP внутри административного макета.",0,"Показывает информацию о среде выполнения PHP внутри административного макета."
+widget,phpinfo_frame.name,,ru-RU,"PHPinfo frame","Фрейм PHPinfo",0,"Фрейм PHPinfo"
+widget,phpinfo_frame.open_raw,,ru-RU,"Open raw","Открыть сырой вид",0,"Открыть сырой вид"
+widget,phpinfo_frame.title,,ru-RU,PHPinfo,PHPinfo,0,PHPinfo
+widget,plain_html.description,,ru-RU,"HTML code (embed)","HTML-код (встраивание)",0,"HTML-код (встраивание)"
+widget,plain_html.name,,ru-RU,"HTML code (embed)","HTML-код (встраивание)",0,"HTML-код (встраивание)"
+widget,resource_acl_selector.description,,ru-RU,"Configure resource access permissions","Настройка прав доступа к ресурсам",0,"Настройка прав доступа к ресурсам"
+widget,resource_acl_selector.name,,ru-RU,"Resource access settings","Настройки доступа к ресурсам",0,"Настройки доступа к ресурсам"
+widget,resource_tree.description,,ru-RU,"Manage webpages, web folders, and uploaded files here.","Здесь можно управлять веб-страницами, веб-папками и загруженными файлами.",0,"Здесь можно управлять веб-страницами, веб-папками и загруженными файлами."
+widget,resource_tree.name,,ru-RU,"Webpage structure","Структура веб-страницы",0,"Структура веб-страницы"
+widget,rich_text.description,,ru-RU,"Freely editable text with images","Свободно редактируемый текст с изображениями",0,"Свободно редактируемый текст с изображениями"
+widget,rich_text.name,,ru-RU,"Editable text","Редактируемый текст",0,"Редактируемый текст"
+widget,role_list.description,,ru-RU,"Displays the role tree","Отображает дерево ролей",0,"Отображает дерево ролей"
+widget,role_list.name,,ru-RU,"Role list","Список ролей",0,"Список ролей"
+widget,role_selector.description,,ru-RU,"Role selector","Выбор роли",0,"Выбор роли"
+widget,role_selector.name,,ru-RU,"Role selector","Выбор роли",0,"Выбор роли"
+widget,tag_list.description,,ru-RU,"Tag list","Список тегов",0,"Список тегов"
+widget,tag_list.name,,ru-RU,"Tag list","Список тегов",0,"Список тегов"
+widget,template_engine_demo_blade.description,,ru-RU,"Demonstrates rendering a Blade template inside Radaptor.","Демонстрирует рендеринг шаблона Blade внутри Radaptor.",0,"Демонстрирует рендеринг шаблона Blade внутри Radaptor."
+widget,template_engine_demo_blade.name,,ru-RU,"Blade template engine demo","Демо движка шаблонов Blade",0,"Демо движка шаблонов Blade"
+widget,template_engine_demo_php.description,,ru-RU,"Demonstrates rendering a native PHP template inside Radaptor.","Демонстрирует рендеринг нативного PHP-шаблона внутри Radaptor.",0,"Демонстрирует рендеринг нативного PHP-шаблона внутри Radaptor."
+widget,template_engine_demo_php.name,,ru-RU,"PHP template engine demo","Демо движка шаблонов PHP",0,"Демо движка шаблонов PHP"
+widget,template_engine_demo_twig.description,,ru-RU,"Demonstrates rendering a Twig template inside Radaptor.","Демонстрирует рендеринг шаблона Twig внутри Radaptor.",0,"Демонстрирует рендеринг шаблона Twig внутри Radaptor."
+widget,template_engine_demo_twig.name,,ru-RU,"Twig template engine demo","Демо движка шаблонов Twig",0,"Демо движка шаблонов Twig"
+widget,user_description.description,,ru-RU,"Displays the details of a user","Отображает сведения о пользователе",0,"Отображает сведения о пользователе"
+widget,user_description.name,,ru-RU,"User details","Сведения о пользователе",0,"Сведения о пользователе"
+widget,user_list.description,,ru-RU,"User list","Список пользователей",0,"Список пользователей"
+widget,user_list.name,,ru-RU,"User list","Список пользователей",0,"Список пользователей"
+widget,usergroup_list.description,,ru-RU,"Displays the user group tree","Отображает дерево групп пользователей",0,"Отображает дерево групп пользователей"
+widget,usergroup_list.name,,ru-RU,"User group list","Список групп пользователей",0,"Список групп пользователей"
+widget,usergroup_selector.description,,ru-RU,"Select user groups for a user","Выберите группы пользователей для пользователя",0,"Выберите группы пользователей для пользователя"
+widget,usergroup_selector.name,,ru-RU,"User group selector","Выбор группы пользователей",0,"Выбор группы пользователей"
+widget,widget_error.description,,ru-RU,"Invalid widget","Недопустимый виджет",0,"Недопустимый виджет"
+widget,widget_error.invalid_type,,ru-RU,"Non-existent content type: {type}","Несуществующий тип содержимого: {type}",0,"Несуществующий тип содержимого: {type}"
+widget,widget_error.name,,ru-RU,"Invalid widget","Недопустимый виджет",0,"Недопустимый виджет"
+widget,widget_preview.description,,ru-RU,"Preview any widget with mock data. URL params: widget (required), theme (optional)","Предпросмотр любого виджета с мок-данными. Параметры URL: widget (обязательный), theme (необязательный)",0,"Предпросмотр любого виджета с мок-данными. Параметры URL: widget (обязательный), theme (необязательный)"
+widget,widget_preview.name,,ru-RU,"Widget preview","Предпросмотр виджета",0,"Предпросмотр виджета"
+workbench,tm_apply,,ru-RU,Apply,Применить,0,Применить
+workbench,tm_no_results,,ru-RU,"No suggestions","Нет предложений",0,"Нет предложений"
+workbench,tm_uses,,ru-RU,uses,использует,0,использует
+admin,menu.mailpit,,ru-RU,Mailpit,Mailpit,0,Mailpit
+admin,email_outbox.recipients_delivery_counts,,ru-RU,"({sent} sent / {failed} failed)","({sent} отправлено / {failed} с ошибкой)",0,"({sent} отправлено / {failed} с ошибкой)"
+admin,email_outbox.col.job,,ru-RU,Job,Задание,0,Задание
+admin,email_outbox.col.dead_lettered,,ru-RU,"Dead lettered","Перемещено в dead letter",0,"Перемещено в dead letter"
+admin,email_outbox.pagination.previous,,ru-RU,Previous,Назад,0,Назад
+admin,email_outbox.pagination.next,,ru-RU,Next,Далее,0,Далее
+runtime_diagnostics,card.package_roots,,ru-RU,"Package roots","Корни пакетов",0,"Корни пакетов"
+runtime_diagnostics,field.environment,,ru-RU,Environment,Окружение,0,Окружение
+runtime_diagnostics,field.application,,ru-RU,Application,Приложение,0,Приложение
+runtime_diagnostics,field.domain_context,,ru-RU,"Domain context","Контекст домена",0,"Контекст домена"
+runtime_diagnostics,field.runtime,,ru-RU,Runtime,"Среда выполнения",0,"Среда выполнения"
+runtime_diagnostics,field.smtp_host,,ru-RU,"SMTP host",SMTP-хост,0,SMTP-хост
+runtime_diagnostics,field.smtp_port,,ru-RU,"SMTP port",SMTP-порт,0,SMTP-порт
+runtime_diagnostics,field.using_catcher,,ru-RU,"Using catcher","Используется catcher",0,"Используется catcher"
+runtime_diagnostics,field.catcher_host,,ru-RU,"Catcher host","Хост catcher",0,"Хост catcher"
+runtime_diagnostics,field.catcher_smtp_port,,ru-RU,"Catcher SMTP port","SMTP-порт catcher",0,"SMTP-порт catcher"
+runtime_diagnostics,field.mailpit_ui_url,,ru-RU,"Mailpit UI URL","URL интерфейса Mailpit",0,"URL интерфейса Mailpit"
+runtime_diagnostics,field.driver,,ru-RU,Driver,Драйвер,0,Драйвер
+runtime_diagnostics,field.host,,ru-RU,Host,Хост,0,Хост
+runtime_diagnostics,field.port,,ru-RU,Port,Порт,0,Порт
+runtime_diagnostics,field.database,,ru-RU,Database,"База данных",0,"База данных"
+runtime_diagnostics,field.username,,ru-RU,Username,"Имя пользователя",0,"Имя пользователя"
+runtime_diagnostics,field.password,,ru-RU,Password,Пароль,0,Пароль
+runtime_diagnostics,field.dsn,,ru-RU,DSN,DSN,0,DSN
+runtime_diagnostics,field.session,,ru-RU,Session,Сессия,0,Сессия
+runtime_diagnostics,field.cache,,ru-RU,Cache,Кэш,0,Кэш
+runtime_diagnostics,field.test,,ru-RU,Test,Тест,0,Тест
+runtime_diagnostics,field.public_url,,ru-RU,"Public URL","Публичный URL",0,"Публичный URL"
+runtime_diagnostics,field.allowed_origins,,ru-RU,"Allowed origins","Разрешенные источники",0,"Разрешенные источники"
+runtime_diagnostics,field.enabled_hint,,ru-RU,"Enabled hint","Подсказка включения",0,"Подсказка включения"
+runtime_diagnostics,field.mode,,ru-RU,Mode,Режим,0,Режим
+runtime_diagnostics,field.local_manifest,,ru-RU,"Local manifest","Локальный манифест",0,"Локальный манифест"
+runtime_diagnostics,field.local_lock,,ru-RU,"Local lock","Локальный lock-файл",0,"Локальный lock-файл"
+runtime_diagnostics,field.workspace_dev_mode,,ru-RU,"Workspace dev mode","Dev-режим workspace",0,"Dev-режим workspace"
+runtime_diagnostics,field.local_overrides_disabled,,ru-RU,"Local overrides disabled","Локальные override отключены",0,"Локальные override отключены"
+runtime_diagnostics,col.package,,ru-RU,Package,Пакет,0,Пакет
+runtime_diagnostics,col.source,,ru-RU,Source,Источник,0,Источник
+runtime_diagnostics,col.version,,ru-RU,Version,Версия,0,Версия
+runtime_diagnostics,col.active_path,,ru-RU,"Active path","Активный путь",0,"Активный путь"
+cms,template.missing,,ru-RU,"Missing template:","Отсутствует шаблон:",0,"Отсутствует шаблон:"
+cms,widget_preview.server_html_preview,,ru-RU,"Server HTML preview","Предпросмотр HTML сервера",0,"Предпросмотр HTML сервера"
+cms,widget_preview.subtree_json,,ru-RU,"Widget subtree JSON","JSON поддерева виджета",0,"JSON поддерева виджета"
+cms,widget_preview.subtree_json_description,,ru-RU,"Extracted from the same SDUI JSON document available through Open JSON.","Извлечено из того же документа SDUI JSON, доступного через «Открыть JSON».",0,"Извлечено из того же документа SDUI JSON, доступного через «Открыть JSON»."
+cms,widget_preview.open_json,,ru-RU,"Open JSON","Открыть JSON",0,"Открыть JSON"
+cms,widget_preview.loading_json_preview,,ru-RU,"Loading JSON preview...","Загрузка предпросмотра JSON...",0,"Загрузка предпросмотра JSON..."
+cms,widget_preview.sdui_subtree_help,,ru-RU,"Showing the widget subtree extracted from the full SDUI JSON document.","Показывает поддерево виджета, извлеченное из полного документа SDUI JSON.",0,"Показывает поддерево виджета, извлеченное из полного документа SDUI JSON."
+cms,widget_preview.template_scope_note,,ru-RU,"This support check only looks at the resolved preview HTML template of the widget root node.","Эта проверка смотрит только разрешенный HTML-шаблон предпросмотра корневого узла виджета.",0,"Эта проверка смотрит только разрешенный HTML-шаблон предпросмотра корневого узла виджета."
+social,disqus.brand,,ru-RU,Disqus,Disqus,0,Disqus
+layout,public_2row.brand,,ru-RU,TeamSolution,TeamSolution,0,TeamSolution
+theme,template_engine_demo.col.name,,ru-RU,Name,Имя,0,Имя
+theme,template_engine_demo.col.email,,ru-RU,Email,Email,0,Email
+theme,template_engine_demo.col.role,,ru-RU,Role,Роль,0,Роль
+theme,template_engine_demo.engine_title,,ru-RU,"{engine} Template Engine","Шаблонизатор {engine}",0,"Шаблонизатор {engine}"
+theme,template_engine_demo.source_title,,ru-RU,"Template Source","Исходник шаблона",0,"Исходник шаблона"
+theme,template_engine_demo.rendered_output_title,,ru-RU,"Rendered Output","Рендеринг результата",0,"Рендеринг результата"
+layout,admin_empty.sign_in_to_continue,,ru-RU,"Sign in to continue.","Войдите, чтобы продолжить.",0,"Войдите, чтобы продолжить."
+cms,resource.field.locale.label,,ru-RU,"Content locale","Локаль содержимого",0,"Локаль содержимого"
+cms,resource.field.locale.explanation,,ru-RU,"Select a fixed locale for this resource, or leave it dynamic/inherited.","Выберите фиксированную локаль для этого ресурса или оставьте динамическую/унаследованную.",0,"Выберите фиксированную локаль для этого ресурса или оставьте динамическую/унаследованную."
+cms,resource.field.locale.dynamic,,ru-RU,"Dynamic / inherit","Динамическая / унаследованная",0,"Динамическая / унаследованная"
+cms,richtext.field.locale.label,,ru-RU,"Content locale","Локаль содержимого",0,"Локаль содержимого"
+cms,richtext.field.locale.explanation,,ru-RU,"The locale this text content belongs to.","Локаль, к которой относится это текстовое содержимое.",0,"Локаль, к которой относится это текстовое содержимое."
+cms,richtext.locale_mismatch,,ru-RU,"The selected text content does not match the page locale.","Выбранное текстовое содержимое не соответствует локали страницы.",0,"Выбранное текстовое содержимое не соответствует локали страницы."
+widget,locale_admin.name,,ru-RU,"Locale administration","Locale administration",0,"Locale administration"
+widget,locale_admin.description,,ru-RU,"Manage enabled application locales.","Manage enabled application locales.",0,"Manage enabled application locales."
+locale_admin,title,,ru-RU,Locales,Locales,0,Locales
+locale_admin,subtitle,,ru-RU,"Enable or disable locales offered for new admin content. Existing content is not deleted.","Enable or disable locales offered for new admin content. Existing content is not deleted.",0,"Enable or disable locales offered for new admin content. Existing content is not deleted."
+locale_admin,add_title,,ru-RU,"Add locale","Add locale",0,"Add locale"
+locale_admin,field.locale,,ru-RU,Locale,Locale,0,Locale
+locale_admin,placeholder.locale,,ru-RU,en-US,en-US,0,en-US
+locale_admin,action.add_enabled,,ru-RU,"Add enabled","Add enabled",0,"Add enabled"
+locale_admin,action.enable,,ru-RU,Enable,Enable,0,Enable
+locale_admin,action.disable,,ru-RU,Disable,Disable,0,Disable
+locale_admin,col.locale,,ru-RU,Locale,Locale,0,Locale
+locale_admin,col.label,,ru-RU,Label,Label,0,Label
+locale_admin,col.native_label,,ru-RU,"Native label","Native label",0,"Native label"
+locale_admin,col.status,,ru-RU,Status,Status,0,Status
+locale_admin,col.home,,ru-RU,"Home resources","Home resources",0,"Home resources"
+locale_admin,col.usage,,ru-RU,Usage,Usage,0,Usage
+locale_admin,col.actions,,ru-RU,Actions,Actions,0,Actions
+locale_admin,status.enabled,,ru-RU,Enabled,Enabled,0,Enabled
+locale_admin,status.disabled,,ru-RU,Disabled,Disabled,0,Disabled
+locale_admin,status.default,,ru-RU,Default,Default,0,Default
+locale_admin,home_count,,ru-RU,"{count} home target(s)","{count} home target(s)",0,"{count} home target(s)"
+locale_admin,usage.none,,ru-RU,"No usage","No usage",0,"No usage"
+locale_admin,message.enabled,,ru-RU,"Locale {locale} enabled.","Locale {locale} enabled.",0,"Locale {locale} enabled."
+locale_admin,message.disabled,,ru-RU,"Locale {locale} disabled.","Locale {locale} disabled.",0,"Locale {locale} disabled."
+locale_admin,message.error,,ru-RU,"Locale {locale} could not be updated.","Locale {locale} could not be updated.",0,"Locale {locale} could not be updated."
+locale_admin,message.invalid_locale,,ru-RU,"Invalid locale.","Invalid locale.",0,"Invalid locale."

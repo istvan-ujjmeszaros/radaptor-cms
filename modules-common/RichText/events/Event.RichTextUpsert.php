@@ -23,6 +23,7 @@ class EventRichTextUpsert extends AbstractEvent implements iBrowserEventDocument
 				'method' => 'POST',
 				'params' => [
 					BrowserEventDocumentationHelper::param('name', 'body', 'string', true, 'Stable RichText name.'),
+					BrowserEventDocumentationHelper::param('locale', 'body', 'string', false, 'BCP 47 content locale. Defaults to the current request locale.'),
 					BrowserEventDocumentationHelper::param('title', 'body', 'string', false, 'Human-readable RichText title. Leave empty when the rendered widget should not show a heading.'),
 					BrowserEventDocumentationHelper::param('content', 'body', 'string', true, 'HTML content.'),
 					BrowserEventDocumentationHelper::param('content_type', 'body', 'string', false, 'Content type, defaults to article.'),
@@ -50,18 +51,33 @@ class EventRichTextUpsert extends AbstractEvent implements iBrowserEventDocument
 	public function run(): void
 	{
 		$name = trim((string) Request::_POST('name', ''));
+		$raw_locale = RequestContextHolder::current()->POST['locale'] ?? null;
+		$locale = Kernel::getLocale();
+
+		if ($raw_locale !== null && trim((string) $raw_locale) !== '') {
+			$posted_locale = LocaleService::tryCanonicalize((string) $raw_locale);
+
+			if ($posted_locale === null) {
+				ApiResponse::renderError('INVALID_LOCALE', t('locale_admin.message.invalid_locale'), 400);
+
+				return;
+			}
+
+			$locale = $posted_locale;
+		}
+
 		$title = trim((string) Request::_POST('title', ''));
 		$content = (string) Request::_POST('content', '');
 		$content_type = trim((string) Request::_POST('content_type', 'article'));
 
 		if ($name === '') {
-			ApiResponse::renderError('MISSING_NAME', 'name is required.', 400);
+			ApiResponse::renderError('MISSING_NAME', t('common.missing_required_url_params'), 400);
 
 			return;
 		}
 
 		if (trim($content) === '') {
-			ApiResponse::renderError('MISSING_CONTENT', 'content is required.', 400);
+			ApiResponse::renderError('MISSING_CONTENT', t('common.missing_required_url_params'), 400);
 
 			return;
 		}
@@ -71,16 +87,23 @@ class EventRichTextUpsert extends AbstractEvent implements iBrowserEventDocument
 		}
 
 		try {
-			$content_id = EntityRichtext::getContentIdByName($name);
+			$content_id = EntityRichtext::getContentIdByName($name, $locale);
 
 			if ($content_id === EntityRichtext::ERROR_MULTIPLE) {
-				ApiResponse::renderError('RICHTEXT_NAME_NOT_UNIQUE', "Multiple RichText records use name {$name}.", 400);
+				ApiResponse::renderError('RICHTEXT_NAME_NOT_UNIQUE', t('cms.richtext.field.name.unique_error'), 400);
+
+				return;
+			}
+
+			if ($content_id === EntityRichtext::ERROR_NOT_FOUND && !LocaleService::isEnabled($locale)) {
+				ApiResponse::renderError('INVALID_LOCALE', t('locale_admin.message.invalid_locale'), 400);
 
 				return;
 			}
 
 			$data = [
 				'name' => $name,
+				'locale' => $locale,
 				'title' => $title,
 				'content' => $content,
 				'content_type' => $content_type,
@@ -98,12 +121,13 @@ class EventRichTextUpsert extends AbstractEvent implements iBrowserEventDocument
 			ApiResponse::renderSuccess([
 				'content_id' => $content_id,
 				'name' => $name,
+				'locale' => $locale,
 				'title' => $title,
 				'content_type' => $content_type,
 				'created' => $created,
 			]);
-		} catch (Throwable $exception) {
-			ApiResponse::renderError('RICHTEXT_UPSERT_FAILED', $exception->getMessage(), 400);
+		} catch (Throwable) {
+			ApiResponse::renderError('RICHTEXT_UPSERT_FAILED', t('common.error_save'), 400);
 		}
 	}
 }

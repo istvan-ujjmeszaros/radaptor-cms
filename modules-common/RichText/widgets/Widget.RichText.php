@@ -33,6 +33,11 @@ class WidgetRichText extends AbstractWidget
 		return false;
 	}
 
+	public static function getContentLocaleStrategy(): ?WidgetContentLocaleStrategy
+	{
+		return new RichTextWidgetContentLocaleStrategy();
+	}
+
 	protected function buildAuthorizedTree(iTreeBuildContext $tree_build_context, WidgetConnection $connection, array $build_context = []): array
 	{
 		if ($connection->getExtraparam('content_id')) {
@@ -44,7 +49,22 @@ class WidgetRichText extends AbstractWidget
 			]);
 		}
 
+		if (!RichTextLocaleService::contentMatchesConnectionLocale((int) $content_id, $connection->connection_id)) {
+			return $this->buildStatusTree([
+				'severity' => 'warning',
+				'message' => t('cms.richtext.locale_mismatch'),
+			]);
+		}
+
 		$contents = EntityRichtext::findById($content_id)?->dto();
+
+		if (!is_array($contents)) {
+			return $this->buildStatusTree([
+				'severity' => 'warning',
+				'message' => t('cms.richtext.not_set'),
+			]);
+		}
+
 		$settings = WidgetSettings::getSettings($connection->connection_id);
 
 		return $this->createComponentTree('RichText', [

@@ -1,0 +1,14 @@
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
+tags,field.context.label,,ja-JP,Context,コンテキスト,0,コンテキスト
+tags,field.description.label,,ja-JP,"Tag description",タグの説明,0,タグの説明
+tags,field.name.explanation,,ja-JP,"No spaces, short and concise. Do not create synonyms for existing tags.",スペースなし、短く簡潔に。既存タグの同義語を作成しないでください。,0,スペースなし、短く簡潔に。既存タグの同義語を作成しないでください。
+tags,field.name.label,,ja-JP,"Tag name",タグ名,0,タグ名
+tags,field.type.explanation,,ja-JP,"Select the tag type",タグタイプを選択,0,タグタイプを選択
+tags,field.type.label,,ja-JP,Type,タイプ,0,タイプ
+tags,form.name,,ja-JP,Tag,タグ,0,タグ
+tags,form.title_create,,ja-JP,"New tag",新しいタグ,0,新しいタグ
+tags,form.title_edit,,ja-JP,"Edit tag",タグを編集,0,タグを編集
+tags,list.title,,ja-JP,Tags,タグ,0,タグ
+tags,saved,,ja-JP,"Tags saved",タグを保存しました,0,タグを保存しました
+tags,updated,,ja-JP,"Tag updated",タグを更新しました,0,タグを更新しました
+tags,validation.name_max_length,,ja-JP,"Tag name must not exceed 255 characters",タグ名は255文字以内にしてください,0,タグ名は255文字以内にしてください

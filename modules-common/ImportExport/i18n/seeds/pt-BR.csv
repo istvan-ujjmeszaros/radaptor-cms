@@ -1,0 +1,62 @@
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
+import_export,action.export_csv,,pt-BR,"Export CSV","Exportar CSV",0,"Exportar CSV"
+import_export,action.preview_import,,pt-BR,"Preview import","Visualizar importação",0,"Visualizar importação"
+import_export,action.run_import,,pt-BR,"Run import","Executar importação",0,"Executar importação"
+import_export,dataset.i18n_translations.description,,pt-BR,"Export and import translation rows as CSV.","Exportar e importar linhas de tradução como CSV.",0,"Exportar e importar linhas de tradução como CSV."
+import_export,dataset.i18n_translations.name,,pt-BR,"I18n translations","Traduções i18n",0,"Traduções i18n"
+import_export,error.dataset_not_found,,pt-BR,"Import/export dataset not found.","Conjunto de dados de importação/exportação não encontrado.",0,"Conjunto de dados de importação/exportação não encontrado."
+import_export,error.file_read,,pt-BR,"Unable to read the uploaded CSV file.","Não foi possível ler o arquivo CSV enviado.",0,"Não foi possível ler o arquivo CSV enviado."
+import_export,error.file_required,,pt-BR,"Please select a CSV file to import.","Selecione um arquivo CSV para importar.",0,"Selecione um arquivo CSV para importar."
+import_export,error.invalid_format,,pt-BR,"Invalid format","Formato inválido",0,"Formato inválido"
+import_export,error.invalid_mode,,pt-BR,"Invalid import mode.","Modo de importação inválido.",0,"Modo de importação inválido."
+import_export,error.locale_required,,pt-BR,"Locale is required for export.","O idioma é obrigatório para exportação.",0,"O idioma é obrigatório para exportação."
+import_export,export.title,,pt-BR,"Export CSV","Exportar CSV",0,"Exportar CSV"
+import_export,field.dataset.label,,pt-BR,Dataset,"Conjunto de dados",0,"Conjunto de dados"
+import_export,field.expect_locale.any,,pt-BR,"Any locale in file","Qualquer idioma no arquivo",0,"Qualquer idioma no arquivo"
+import_export,field.expect_locale.help,,pt-BR,"Optional for insert_new and upsert. Sync should normally set this explicitly and always uses a single-locale scope, even when importing wide CSV.","Opcional para insert_new e upsert. Sync normalmente deve definir isso explicitamente e sempre usa um escopo de idioma único, mesmo ao importar CSV amplo.",0,"Opcional para insert_new e upsert. Sync normalmente deve definir isso explicitamente e sempre usa um escopo de idioma único, mesmo ao importar CSV amplo."
+import_export,field.expect_locale.label,,pt-BR,"Expected locale","Idioma esperado",0,"Idioma esperado"
+import_export,field.file.help,,pt-BR,"Upload a CSV file exported from the same dataset.","Envie um arquivo CSV exportado do mesmo conjunto de dados.",0,"Envie um arquivo CSV exportado do mesmo conjunto de dados."
+import_export,field.file.label,,pt-BR,"CSV file","Arquivo CSV",0,"Arquivo CSV"
+import_export,field.format.help,,pt-BR,"Normalized keeps one row per locale. Wide groups locales into text:<locale> columns.","Normalizado mantém uma linha por idioma. Amplo agrupa idiomas em colunas text:<locale>.",0,"Normalizado mantém uma linha por idioma. Amplo agrupa idiomas em colunas text:<locale>."
+import_export,field.format.label,,pt-BR,Format,Formato,0,Formato
+import_export,field.locale.all,,pt-BR,"All locales","Todos os idiomas",0,"Todos os idiomas"
+import_export,field.locale.help,,pt-BR,"Leave empty to export all locales, or choose one locale for a smaller file. Wide format puts locale values into text:<locale> columns.","Deixe em branco para exportar todos os idiomas, ou escolha um idioma para um arquivo menor. O formato amplo coloca os valores de idioma em colunas text:<locale>.",0,"Deixe em branco para exportar todos os idiomas, ou escolha um idioma para um arquivo menor. O formato amplo coloca os valores de idioma em colunas text:<locale>."
+import_export,field.locale.label,,pt-BR,Locale,Idioma,0,Idioma
+import_export,field.mode.help,,pt-BR,"Sync is destructive: it deletes rows missing from the imported locale slice and only supports single-locale files.","A sincronização é destrutiva: ela exclui linhas ausentes na fatia de idioma importada e suporta apenas arquivos de idioma único.",0,"A sincronização é destrutiva: ela exclui linhas ausentes na fatia de idioma importada e suporta apenas arquivos de idioma único."
+import_export,field.mode.label,,pt-BR,"Import mode","Modo de importação",0,"Modo de importação"
+import_export,format.auto,,pt-BR,Auto-detect,"Detecção automática",0,"Detecção automática"
+import_export,format.normalized,,pt-BR,Normalized,Normalizado,0,Normalizado
+import_export,format.wide,,pt-BR,Wide,Amplo,0,Amplo
+import_export,import.title,,pt-BR,"Import CSV","Importar CSV",0,"Importar CSV"
+import_export,mode.insert_new,,pt-BR,"Insert new only","Inserir apenas novos",0,"Inserir apenas novos"
+import_export,mode.sync,,pt-BR,"Sync locale slice","Sincronizar fatia de idioma",0,"Sincronizar fatia de idioma"
+import_export,mode.upsert,,pt-BR,"Upsert existing","Atualizar ou inserir",0,"Atualizar ou inserir"
+import_export,result.deleted,,pt-BR,Deleted,Excluído,0,Excluído
+import_export,result.detected_locale,,pt-BR,"Detected locale","Idioma detectado",0,"Idioma detectado"
+import_export,result.detected_locales,,pt-BR,"Detected locales","Idiomas detectados",0,"Idiomas detectados"
+import_export,result.dry_run_summary,,pt-BR,"Dry-run summary for {dataset}.","Resumo de simulação para {dataset}.",0,"Resumo de simulação para {dataset}."
+import_export,result.error_summary,,pt-BR,"Import finished with errors for {dataset}.","Importação concluída com erros para {dataset}.",0,"Importação concluída com erros para {dataset}."
+import_export,result.format,,pt-BR,Format,Formato,0,Formato
+import_export,result.imported,,pt-BR,Imported,Importado,0,Importado
+import_export,result.inserted,,pt-BR,Inserted,Inserido,0,Inserido
+import_export,result.mode,,pt-BR,Mode,Modo,0,Modo
+import_export,result.processed,,pt-BR,Processed,Processado,0,Processado
+import_export,result.skipped,,pt-BR,Skipped,Ignorado,0,Ignorado
+import_export,result.success_summary,,pt-BR,"Import completed successfully for {dataset}.","Importação concluída com sucesso para {dataset}.",0,"Importação concluída com sucesso para {dataset}."
+import_export,result.updated,,pt-BR,Updated,Atualizado,0,Atualizado
+import_export,workbench.description,,pt-BR,"Export data to CSV or import CSV files into registered datasets.","Exportar dados para CSV ou importar arquivos CSV em conjuntos de dados registrados.",0,"Exportar dados para CSV ou importar arquivos CSV em conjuntos de dados registrados."
+import_export,workbench.no_datasets,,pt-BR,"No import/export datasets are available.","Nenhum conjunto de dados de importação/exportação disponível.",0,"Nenhum conjunto de dados de importação/exportação disponível."
+import_export,workbench.title,,pt-BR,"Import / Export","Importar / Exportar",0,"Importar / Exportar"
+import_export,error.upload_backup_required,,pt-BR,"Confirm the uploaded files backup before exporting the site snapshot.","Confirme o backup dos arquivos enviados antes de exportar o snapshot do site.",0,"Confirme o backup dos arquivos enviados antes de exportar o snapshot do site."
+import_export,dataset.site_snapshot.name,,pt-BR,"Site snapshot","Snapshot do site",0,"Snapshot do site"
+import_export,dataset.site_snapshot.description,,pt-BR,"Export or restore database-backed site content and identity data as a JSON disaster-recovery snapshot.","Exporte ou restaure conteúdo do site e dados de identidade baseados em banco como um snapshot JSON de recuperação de desastre.",0,"Exporte ou restaure conteúdo do site e dados de identidade baseados em banco como um snapshot JSON de recuperação de desastre."
+import_export,field.uploads_backed_up.label,,pt-BR,"Uploaded files backed up","Arquivos enviados com backup",0,"Arquivos enviados com backup"
+import_export,field.uploads_backed_up.help,,pt-BR,"Confirm that the upload directory has been copied separately before downloading the JSON snapshot.","Confirme que o diretório de uploads foi copiado separadamente antes de baixar o snapshot JSON.",0,"Confirme que o diretório de uploads foi copiado separadamente antes de baixar o snapshot JSON."
+import_export,field.site_snapshot_file.label,,pt-BR,"Site snapshot JSON","JSON do snapshot do site",0,"JSON do snapshot do site"
+import_export,field.site_snapshot_file.help,,pt-BR,"Upload a JSON snapshot exported from the same Radaptor schema. Copy the upload directory before applying the import.","Envie um snapshot JSON exportado do mesmo esquema Radaptor. Copie o diretório de uploads antes de aplicar a importação.",0,"Envie um snapshot JSON exportado do mesmo esquema Radaptor. Copie o diretório de uploads antes de aplicar a importação."
+import_export,field.replace_confirmed.label,,pt-BR,"Replace current site data","Substituir dados atuais do site",0,"Substituir dados atuais do site"
+import_export,field.replace_confirmed.help,,pt-BR,"Required for the real import. The restore replaces the snapshot-managed database tables.","Obrigatório para a importação real. A restauração substitui as tabelas de banco gerenciadas pelo snapshot.",0,"Obrigatório para a importação real. A restauração substitui as tabelas de banco gerenciadas pelo snapshot."
+import_export,site_snapshot.export.title,,pt-BR,"Export JSON snapshot","Exportar snapshot JSON",0,"Exportar snapshot JSON"
+import_export,site_snapshot.import.title,,pt-BR,"Import JSON snapshot","Importar snapshot JSON",0,"Importar snapshot JSON"
+import_export,site_snapshot.action.export,,pt-BR,"Export JSON","Exportar JSON",0,"Exportar JSON"
+import_export,confirm.site_snapshot_replace,,pt-BR,"This import will replace the current site database content with the uploaded snapshot. Continue?","Esta importação substituirá o conteúdo atual do banco de dados do site pelo snapshot enviado. Continuar?",0,"Esta importação substituirá o conteúdo atual do banco de dados do site pelo snapshot enviado. Continuar?"

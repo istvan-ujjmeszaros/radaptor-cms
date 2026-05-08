@@ -4,9 +4,7 @@ class EventUserSetLocale extends AbstractEvent implements iBrowserEventDocumenta
 {
 	public function authorize(PolicyContext $policyContext): PolicyDecision
 	{
-		return $policyContext->principal->inGroup(Usergroups::SYSTEMUSERGROUP_LOGGEDIN)
-			? PolicyDecision::allow()
-			: PolicyDecision::deny();
+		return PolicyDecision::allow();
 	}
 
 	public static function describeBrowserEvent(): array
@@ -15,13 +13,13 @@ class EventUserSetLocale extends AbstractEvent implements iBrowserEventDocumenta
 			'event_name' => 'user.set-locale',
 			'group' => 'Runtime',
 			'name' => 'Set current user locale',
-			'summary' => 'Updates the current user interface language and redirects back.',
-			'description' => 'Persists a selected available locale on the logged-in user and refreshes the current session data.',
+			'summary' => 'Updates the current request language and redirects back.',
+			'description' => 'Persists a selected enabled locale on the logged-in user or anonymous session, then redirects to the same dynamic page or the selected locale home resource for fixed-locale content.',
 			'request' => [
 				'method' => 'POST',
 				'params' => [
-					BrowserEventDocumentationHelper::param('locale', 'body', 'string', true, 'Available locale code to store on the current user.'),
-					BrowserEventDocumentationHelper::param('referer', 'query', 'string', false, 'Optional sanitized return URL after saving the locale.'),
+					BrowserEventDocumentationHelper::param('locale', 'body', 'string', true, 'Enabled BCP 47 locale code.'),
+					BrowserEventDocumentationHelper::param('referer', 'query', 'string', false, 'Optional same-site return URL after saving the locale.'),
 				],
 			],
 			'response' => [
@@ -30,16 +28,16 @@ class EventUserSetLocale extends AbstractEvent implements iBrowserEventDocumenta
 				'description' => 'Redirects back after updating the user locale.',
 			],
 			'authorization' => [
-				'visibility' => 'logged-in users',
-				'description' => 'Requires membership in the logged-in system usergroup.',
+				'visibility' => 'public',
+				'description' => 'Public locale switcher endpoint. Logged-in users also get users.locale updated.',
 			],
 			'notes' => BrowserEventDocumentationHelper::lines(
-				'Locale values are limited to locales available through the runtime locale registry.',
-				'Referer is sanitized before redirect.'
+				'Locale values are limited to enabled locales.',
+				'Referer is sanitized to a same-site URL before redirect.'
 			),
 			'side_effects' => BrowserEventDocumentationHelper::lines(
-				'Writes the users.locale field for the current user.',
-				'Refreshes the current user session.',
+				'Writes users.locale for logged-in users.',
+				'Stores anonymous locale in session and cookie.',
 				'Queues a success/error system message.'
 			),
 		];
@@ -48,33 +46,42 @@ class EventUserSetLocale extends AbstractEvent implements iBrowserEventDocumenta
 	public function run(): void
 	{
 		$referer = $this->_getReferer();
-		$locale = trim((string) Request::_POST('locale', ''));
-		$available_locales = I18nRuntime::getAvailableLocaleCodes();
+		$redirect_status = self::getRedirectStatusForMethod(Request::getMethod());
+		$locale = LocaleService::tryCanonicalize((string) Request::_POST('locale', '')) ?? '';
 
-		if (!in_array($locale, $available_locales, true)) {
+		if ($locale === '' || !LocaleService::isEnabled($locale)) {
 			SystemMessages::_error(t('user.locale.invalid'));
-			Url::redirect($referer);
+			Url::redirect($referer, $redirect_status);
 		}
 
 		$user_id = User::getCurrentUserId();
 
-		if ($user_id <= 0) {
-			SystemMessages::_error(t('user.locale.invalid'));
-			Url::redirect($referer);
+		if ($user_id > 0) {
+			DbHelper::updateHelper('users', ['locale' => $locale], $user_id);
+			User::refreshUserSession();
+		} elseif (class_exists(LocaleSwitchService::class)) {
+			LocaleSwitchService::persistAnonymousLocale($locale);
 		}
 
-		DbHelper::updateHelper('users', ['locale' => $locale], $user_id);
-		User::refreshUserSession();
 		Kernel::setRequestLocale($locale);
 
 		SystemMessages::_notice(t('user.locale.updated'));
-		Url::redirect($referer);
+		Url::redirect(class_exists(LocaleSwitchService::class)
+			? LocaleSwitchService::resolveRedirectUrlForLocale($referer, $locale)
+			: $referer, $redirect_status);
+	}
+
+	public static function getRedirectStatusForMethod(string $method): int
+	{
+		return strtoupper($method) === 'POST' ? 303 : 302;
 	}
 
 	private function _getReferer(): string
 	{
-		if (Request::_GET('referer', Request::DEFAULT_ERROR)) {
-			$referer = Url::sanitizeRefererUrl((string) Request::_GET('referer', Request::DEFAULT_ERROR));
+		if (Request::_GET('referer', '') !== '') {
+			$referer = class_exists(LocaleSwitchService::class)
+				? LocaleSwitchService::sanitizeSameSiteReturnUrl((string) Request::_GET('referer', ''))
+				: Url::sanitizeRefererUrl((string) Request::_GET('referer', ''));
 
 			return $referer !== '' ? $referer : Url::getCurrentHost();
 		}

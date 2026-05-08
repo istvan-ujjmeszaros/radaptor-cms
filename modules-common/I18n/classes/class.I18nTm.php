@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 class I18nTm
 {
-	public const string CANONICAL_SOURCE_LOCALE = 'en_US';
+	public const string CANONICAL_SOURCE_LOCALE = 'en-US';
 	private const int EXACT_LIMIT = 3;
 	private const int FUZZY_LIMIT = 5;
 	private const int FUZZY_CANDIDATE_LIMIT = 250;
@@ -23,6 +23,8 @@ class I18nTm
 		string $context,
 		string $quality
 	): void {
+		$sourceLoc = LocaleService::canonicalize($sourceLoc);
+		$targetLoc = LocaleService::canonicalize($targetLoc);
 		$sourceHash = md5($sourceText);
 
 		$existing = DbHelper::selectOne('i18n_tm_entries', [
@@ -77,6 +79,8 @@ class I18nTm
 		string $sourceHash,
 		string $targetLocale
 	): void {
+		$targetLocale = LocaleService::canonicalize($targetLocale);
+
 		if ($sourceHash === '') {
 			return;
 		}
@@ -191,6 +195,9 @@ class I18nTm
 	public static function rebuildFromTranslations(?string $targetLocale = null): int
 	{
 		$pdo = Db::instance();
+		$targetLocale = $targetLocale !== null && $targetLocale !== ''
+			? LocaleService::canonicalize($targetLocale)
+			: $targetLocale;
 
 		if ($targetLocale === null || $targetLocale === '') {
 			$pdo->exec("DELETE FROM i18n_tm_entries");

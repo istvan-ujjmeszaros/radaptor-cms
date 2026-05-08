@@ -56,7 +56,7 @@ class LayoutTypeAdminDefault extends AbstractLayoutType implements iPartialNavig
 		$userMenu = new LayoutComponentUserMenu($webpage_composer);
 
 		return $this->createLayoutTree('layout_admin_default', [
-			'lang' => substr(Kernel::getLocale(), 0, 2),
+			'lang' => Kernel::getLocale(),
 			'site_name' => Config::APP_SITE_NAME->value(),
 			'administration_label' => t('admin.menu.section.administration'),
 			'document_title' => t('admin.menu.section.administration') . ' - ' . Config::APP_SITE_NAME->value(),

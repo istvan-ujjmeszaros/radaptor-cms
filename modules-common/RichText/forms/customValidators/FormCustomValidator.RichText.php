@@ -15,7 +15,11 @@ abstract class FormCustomValidatorRichText extends AbstractForm
 			return;
 		}
 
-		$id = EntityRichtext::getContentIdByName($this->getInput('name')->getValue());
+		$locale_input = $this->getInput('locale');
+		$locale = $locale_input !== null && trim((string) $locale_input->getValue()) !== ''
+			? LocaleService::canonicalize((string) $locale_input->getValue())
+			: RichTextLocaleService::getLocaleForCurrentRequest();
+		$id = EntityRichtext::getContentIdByName($this->getInput('name')->getValue(), $locale);
 
 		if ($id == EntityRichtext::ERROR_NOT_FOUND) {
 			return;

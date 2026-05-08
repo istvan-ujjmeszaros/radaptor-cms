@@ -1,0 +1,59 @@
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
+form,admin_menu_item.description,,ja-JP,Admin menu item,管理メニュー項目,0,管理メニュー項目
+form,admin_menu_item.name,,ja-JP,Admin menu item,管理メニュー項目,0,管理メニュー項目
+form,blog.description,,ja-JP,Blog post,ブログ記事,0,ブログ記事
+form,blog.name,,ja-JP,Blog post,ブログ記事,0,ブログ記事
+form,close_page.close_window,,ja-JP,Close this window!,このウィンドウを閉じる！,0,このウィンドウを閉じる！
+form,close_page.title,,ja-JP,Close page,ページを閉じる,0,ページを閉じる
+form,form_settings.description,,ja-JP,Select which form to display,表示するフォームを選択,0,表示するフォームを選択
+form,form_settings.name,,ja-JP,Form settings,フォーム設定,0,フォーム設定
+form,form_settings.title,,ja-JP,Select form,フォームを選択,0,フォームを選択
+form,js_tree_settings.description,,ja-JP,Select which tree to display,表示するツリーを選択,0,表示するツリーを選択
+form,js_tree_settings.name,,ja-JP,Tree settings,ツリー設定,0,ツリー設定
+form,js_tree_settings.title,,ja-JP,Select tree,ツリーを選択,0,ツリーを選択
+form,main_menu_item.description,,ja-JP,Main menu item,メインメニュー項目,0,メインメニュー項目
+form,main_menu_item.name,,ja-JP,Main menu item,メインメニュー項目,0,メインメニュー項目
+form,plain_html.description,,ja-JP,HTML code (embed),HTMLコード（埋め込み）,0,HTMLコード（埋め込み）
+form,plain_html.name,,ja-JP,HTML code (embed),HTMLコード（埋め込み）,0,HTMLコード（埋め込み）
+form,rich_text_select.description,,ja-JP,Select text content,テキストコンテンツを選択,0,テキストコンテンツを選択
+form,rich_text_select.name,,ja-JP,Select text content,テキストコンテンツを選択,0,テキストコンテンツを選択
+form,rich_text.description,,ja-JP,Text content,テキストコンテンツ,0,テキストコンテンツ
+form,rich_text.name,,ja-JP,Text content,テキストコンテンツ,0,テキストコンテンツ
+form,role.description,,ja-JP,Role,ロール,0,ロール
+form,role.name,,ja-JP,Role,ロール,0,ロール
+form,tag.description,,ja-JP,Tag,タグ,0,タグ
+form,tag.name,,ja-JP,Tag,タグ,0,タグ
+form,theme_selector.description,,ja-JP,Select which theme renders each layout,各レイアウトのテーマを選択,0,各レイアウトのテーマを選択
+form,theme_selector.name,,ja-JP,Theme selection,テーマ選択,0,テーマ選択
+form,theme_selector.title,,ja-JP,Select themes for layouts,レイアウト用テーマを選択,0,レイアウト用テーマを選択
+form,ticket_priority.description,,ja-JP,Ticket priority,チケット優先度,0,チケット優先度
+form,ticket_priority.name,,ja-JP,Ticket priority,チケット優先度,0,チケット優先度
+form,ticket_state.description,,ja-JP,Ticket status,チケットステータス,0,チケットステータス
+form,ticket_state.name,,ja-JP,Ticket status,チケットステータス,0,チケットステータス
+form,user_login.description,,ja-JP,Login,ログイン,0,ログイン
+form,user_login.name,,ja-JP,Login,ログイン,0,ログイン
+form,user_signup.description,,ja-JP,Sign up,新規登録,0,新規登録
+form,user_signup.name,,ja-JP,Sign up,新規登録,0,新規登録
+form,user.description,,ja-JP,User,ユーザー,0,ユーザー
+form,user.name,,ja-JP,User,ユーザー,0,ユーザー
+form,usergroup.description,,ja-JP,User group,ユーザーグループ,0,ユーザーグループ
+form,usergroup.name,,ja-JP,User group,ユーザーグループ,0,ユーザーグループ
+form,validation.max_length,,ja-JP,Maximum {max} characters,最大{max}文字,0,最大{max}文字
+form,validation.required,,ja-JP,Required,必須,0,必須
+form,webpage_domain.description,,ja-JP,Domain properties,ドメインのプロパティ,0,ドメインのプロパティ
+form,webpage_domain.name,,ja-JP,Domain properties,ドメインのプロパティ,0,ドメインのプロパティ
+form,webpage_file.description,,ja-JP,File properties,ファイルのプロパティ,0,ファイルのプロパティ
+form,webpage_file.name,,ja-JP,File properties,ファイルのプロパティ,0,ファイルのプロパティ
+form,webpage_folder.description,,ja-JP,Website folder properties,ウェブサイトフォルダのプロパティ,0,ウェブサイトフォルダのプロパティ
+form,webpage_folder.name,,ja-JP,Website folder properties,ウェブサイトフォルダのプロパティ,0,ウェブサイトフォルダのプロパティ
+form,webpage_from_path.description,,ja-JP,Create webpage from path,パスからウェブページを作成,0,パスからウェブページを作成
+form,webpage_from_path.name,,ja-JP,Create webpage from path,パスからウェブページを作成,0,パスからウェブページを作成
+form,webpage_page.description,,ja-JP,Webpage properties,ウェブページのプロパティ,0,ウェブページのプロパティ
+form,webpage_page.name,,ja-JP,Webpage properties,ウェブページのプロパティ,0,ウェブページのプロパティ
+form,widget_connection_params.description,,ja-JP,Display settings for a content box,コンテンツボックスの表示設定,0,コンテンツボックスの表示設定
+form,widget_connection_params.name,,ja-JP,Content box display settings,コンテンツボックスの表示設定,0,コンテンツボックスの表示設定
+form,widget_connection_settings.description,,ja-JP,Configure width and row placement for the content box,コンテンツボックスの幅と行配置を設定,0,コンテンツボックスの幅と行配置を設定
+form,widget_connection_settings.name,,ja-JP,Content formatting,コンテンツの書式,0,コンテンツの書式
+form,widget_connection_settings.title,,ja-JP,Content formatting,コンテンツの書式,0,コンテンツの書式
+form,closer.title,,ja-JP,Closer page,終了ページ,0,終了ページ
+form,closer.close_window,,ja-JP,Close this window!,このウィンドウを閉じてください！,0,このウィンドウを閉じてください！

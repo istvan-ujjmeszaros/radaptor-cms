@@ -101,6 +101,11 @@ abstract class AbstractWidget implements iWidget, iListable
 		return [];
 	}
 
+	public static function getContentLocaleStrategy(): ?WidgetContentLocaleStrategy
+	{
+		return null;
+	}
+
 	public static function isCatcher(): bool
 	{
 		return false;

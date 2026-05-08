@@ -3,11 +3,11 @@
 <?php header("X-UA-Compatible: IE=Edge"); ?>
 <!DOCTYPE html>
 <!--[if IE 7]>
-<html class="ie7 no-js" lang="<?= substr(Kernel::getLocale(), 0, 2) ?>">     <![endif]-->
+<html class="ie7 no-js" lang="<?= e(Kernel::getLocale()) ?>">     <![endif]-->
 <!--[if lte IE 8]>
-<html class="ie8 no-js" lang="<?= substr(Kernel::getLocale(), 0, 2) ?>">     <![endif]-->
+<html class="ie8 no-js" lang="<?= e(Kernel::getLocale()) ?>">     <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
-<html class="not-ie no-js" lang="<?= substr(Kernel::getLocale(), 0, 2) ?>">  <!--<![endif]-->
+<html class="not-ie no-js" lang="<?= e(Kernel::getLocale()) ?>">  <!--<![endif]-->
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>

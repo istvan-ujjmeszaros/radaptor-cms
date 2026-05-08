@@ -26,7 +26,7 @@ final class I18nTranslationService
 		$domain = trim($domain);
 		$key = trim($key);
 		$context = trim($context);
-		$locale = trim($locale);
+		$locale = LocaleService::canonicalize($locale);
 		$naturalKey = self::_buildNaturalKey($domain, $key, $context, $locale);
 
 		if ($domain === '' || $key === '' || $locale === '') {
@@ -140,7 +140,7 @@ final class I18nTranslationService
 		$domain = trim($domain);
 		$key = trim($key);
 		$context = trim($context);
-		$locale = trim($locale);
+		$locale = LocaleService::canonicalize($locale);
 		$naturalKey = self::_buildNaturalKey($domain, $key, $context, $locale);
 
 		$existing = EntityI18n_translation::findById([
@@ -218,7 +218,8 @@ final class I18nTranslationService
 		$domain  = trim((string) ($row['domain'] ?? ''));
 		$key     = trim((string) ($row['key'] ?? ''));
 		$context = trim((string) ($row['context'] ?? ''));
-		$locale  = trim((string) ($row['locale'] ?? ''));
+		$locale  = LocaleService::canonicalize((string) ($row['locale'] ?? ''));
+		$row['locale'] = $locale;
 		$text    = (string) ($row['text'] ?? '');
 		$expectedText = (string) ($row['expected_text'] ?? '');
 		$requestedHumanReviewed = self::_normalizeImportedHumanReviewed($row['human_reviewed'] ?? '');

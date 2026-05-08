@@ -8,7 +8,7 @@ abstract class AbstractForm implements iForm, iListable
 	public const string _SUBMIT_VALUE_SAVE = 'save';
 
 	public array $savedata = [];
-	public array $initvalues;
+	public array $initvalues = [];
 	protected string $_form_id;
 	protected string $_mode;
 	private int $_inputCounter = 0;
@@ -296,6 +296,11 @@ abstract class AbstractForm implements iForm, iListable
 			$rows[] = $this->buildRowTree((string)$current_row_id, $current_row_items);
 		}
 
+		$contents = [
+			'hidden_fields' => $hidden_fields,
+			'rows' => $rows,
+		];
+
 		return [
 			'type' => 'widget',
 			'component' => 'form',
@@ -315,10 +320,8 @@ abstract class AbstractForm implements iForm, iListable
 				'post_javascript_file' => $this->getMeta()->postJavascriptFile,
 				'field_refs' => $this->buildFieldRefs(),
 			],
-			'contents' => [
-				'hidden_fields' => $hidden_fields,
-				'rows' => $rows,
-			],
+			'contents' => $contents,
+			'slots' => $contents,
 			'meta' => [
 				'html' => [
 					'wrapper_template' => $this->getMeta()->template,
@@ -333,15 +336,18 @@ abstract class AbstractForm implements iForm, iListable
 	 */
 	private function buildRowTree(string $row_id, array $items): array
 	{
+		$contents = [
+			'content' => $items,
+		];
+
 		return [
 			'type' => 'sub',
 			'component' => 'form.row',
 			'props' => [
 				'row_id' => $row_id,
 			],
-			'contents' => [
-				'content' => $items,
-			],
+			'contents' => $contents,
+			'slots' => $contents,
 		];
 	}
 

@@ -42,7 +42,7 @@ $localeOptions = $this->props['locale_options'] ?? [];
 
 /** @var list<array{value: string, label: string}> $domainOptions */
 $domainOptions = $this->props['domain_options'] ?? [];
-$selectedLocale = (string) ($this->props['selected_locale'] ?? 'en_US');
+$selectedLocale = (string) ($this->props['selected_locale'] ?? 'en-US');
 $selectedDomain = (string) ($this->props['selected_domain'] ?? '');
 $selectedSearch = (string) ($this->props['selected_search'] ?? '');
 $coverageSummary = is_array($this->props['coverage_summary'] ?? null) ? $this->props['coverage_summary'] : [];

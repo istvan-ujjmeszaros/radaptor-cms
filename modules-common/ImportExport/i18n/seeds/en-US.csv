@@ -1,0 +1,62 @@
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
+import_export,action.export_csv,,en-US,"Export CSV","Export CSV",0,"Export CSV"
+import_export,action.preview_import,,en-US,"Preview import","Preview import",0,"Preview import"
+import_export,action.run_import,,en-US,"Run import","Run import",0,"Run import"
+import_export,dataset.i18n_translations.description,,en-US,"Export and import translation rows as CSV.","Export and import translation rows as CSV.",0,"Export and import translation rows as CSV."
+import_export,dataset.i18n_translations.name,,en-US,"I18n translations","I18n translations",0,"I18n translations"
+import_export,error.dataset_not_found,,en-US,"Import/export dataset not found.","Import/export dataset not found.",0,"Import/export dataset not found."
+import_export,error.file_read,,en-US,"Unable to read the uploaded CSV file.","Unable to read the uploaded CSV file.",0,"Unable to read the uploaded CSV file."
+import_export,error.file_required,,en-US,"Please select a CSV file to import.","Please select a CSV file to import.",0,"Please select a CSV file to import."
+import_export,error.invalid_format,,en-US,"Invalid format","Invalid format",0,"Invalid format"
+import_export,error.invalid_mode,,en-US,"Invalid import mode.","Invalid import mode.",0,"Invalid import mode."
+import_export,error.locale_required,,en-US,"Locale is required for export.","Locale is required for export.",0,"Locale is required for export."
+import_export,error.upload_backup_required,,en-US,"Confirm the uploaded files backup before exporting the site snapshot.","Confirm the uploaded files backup before exporting the site snapshot.",0,"Confirm the uploaded files backup before exporting the site snapshot."
+import_export,export.title,,en-US,"Export CSV","Export CSV",0,"Export CSV"
+import_export,field.dataset.label,,en-US,Dataset,Dataset,0,Dataset
+import_export,field.expect_locale.any,,en-US,"Any locale in file","Any locale in file",0,"Any locale in file"
+import_export,field.expect_locale.help,,en-US,"Optional for insert_new and upsert. Sync should normally set this explicitly and always uses a single-locale scope, even when importing wide CSV.","Optional for insert_new and upsert. Sync should normally set this explicitly and always uses a single-locale scope, even when importing wide CSV.",0,"Optional for insert_new and upsert. Sync should normally set this explicitly and always uses a single-locale scope, even when importing wide CSV."
+import_export,field.expect_locale.label,,en-US,"Expected locale","Expected locale",0,"Expected locale"
+import_export,field.file.help,,en-US,"Upload a CSV file exported from the same dataset.","Upload a CSV file exported from the same dataset.",0,"Upload a CSV file exported from the same dataset."
+import_export,field.file.label,,en-US,"CSV file","CSV file",0,"CSV file"
+import_export,field.format.help,,en-US,"Normalized keeps one row per locale. Wide groups locales into text:<locale> columns.","Normalized keeps one row per locale. Wide groups locales into text:<locale> columns.",0,"Normalized keeps one row per locale. Wide groups locales into text:<locale> columns."
+import_export,field.format.label,,en-US,Format,Format,0,Format
+import_export,field.locale.all,,en-US,"All locales","All locales",0,"All locales"
+import_export,field.locale.help,,en-US,"Leave empty to export all locales, or choose one locale for a smaller file. Wide format puts locale values into text:<locale> columns.","Leave empty to export all locales, or choose one locale for a smaller file. Wide format puts locale values into text:<locale> columns.",0,"Leave empty to export all locales, or choose one locale for a smaller file. Wide format puts locale values into text:<locale> columns."
+import_export,field.locale.label,,en-US,Locale,Locale,0,Locale
+import_export,field.mode.help,,en-US,"Sync is destructive: it deletes rows missing from the imported locale slice and only supports single-locale files.","Sync is destructive: it deletes rows missing from the imported locale slice and only supports single-locale files.",0,"Sync is destructive: it deletes rows missing from the imported locale slice and only supports single-locale files."
+import_export,field.mode.label,,en-US,"Import mode","Import mode",0,"Import mode"
+import_export,format.auto,,en-US,Auto-detect,Auto-detect,0,Auto-detect
+import_export,format.normalized,,en-US,Normalized,Normalized,0,Normalized
+import_export,format.wide,,en-US,Wide,Wide,0,Wide
+import_export,import.title,,en-US,"Import CSV","Import CSV",0,"Import CSV"
+import_export,mode.insert_new,,en-US,"Insert new only","Insert new only",0,"Insert new only"
+import_export,mode.sync,,en-US,"Sync locale slice","Sync locale slice",0,"Sync locale slice"
+import_export,mode.upsert,,en-US,"Upsert existing","Upsert existing",0,"Upsert existing"
+import_export,result.deleted,,en-US,Deleted,Deleted,0,Deleted
+import_export,result.detected_locale,,en-US,"Detected locale","Detected locale",0,"Detected locale"
+import_export,result.detected_locales,,en-US,"Detected locales","Detected locales",0,"Detected locales"
+import_export,result.dry_run_summary,,en-US,"Dry-run summary for {dataset}.","Dry-run summary for {dataset}.",0,"Dry-run summary for {dataset}."
+import_export,result.error_summary,,en-US,"Import finished with errors for {dataset}.","Import finished with errors for {dataset}.",0,"Import finished with errors for {dataset}."
+import_export,result.format,,en-US,Format,Format,0,Format
+import_export,result.imported,,en-US,Imported,Imported,0,Imported
+import_export,result.inserted,,en-US,Inserted,Inserted,0,Inserted
+import_export,result.mode,,en-US,Mode,Mode,0,Mode
+import_export,result.processed,,en-US,Processed,Processed,0,Processed
+import_export,result.skipped,,en-US,Skipped,Skipped,0,Skipped
+import_export,result.success_summary,,en-US,"Import completed successfully for {dataset}.","Import completed successfully for {dataset}.",0,"Import completed successfully for {dataset}."
+import_export,result.updated,,en-US,Updated,Updated,0,Updated
+import_export,workbench.description,,en-US,"Export data to CSV or import CSV files into registered datasets.","Export data to CSV or import CSV files into registered datasets.",0,"Export data to CSV or import CSV files into registered datasets."
+import_export,workbench.no_datasets,,en-US,"No import/export datasets are available.","No import/export datasets are available.",0,"No import/export datasets are available."
+import_export,workbench.title,,en-US,"Import / Export","Import / Export",0,"Import / Export"
+import_export,dataset.site_snapshot.name,,en-US,"Site snapshot","Site snapshot",0,"Site snapshot"
+import_export,dataset.site_snapshot.description,,en-US,"Export or restore database-backed site content and identity data as a JSON disaster-recovery snapshot.","Export or restore database-backed site content and identity data as a JSON disaster-recovery snapshot.",0,"Export or restore database-backed site content and identity data as a JSON disaster-recovery snapshot."
+import_export,field.uploads_backed_up.label,,en-US,"Uploaded files backed up","Uploaded files backed up",0,"Uploaded files backed up"
+import_export,field.uploads_backed_up.help,,en-US,"Confirm that the upload directory has been copied separately before downloading the JSON snapshot.","Confirm that the upload directory has been copied separately before downloading the JSON snapshot.",0,"Confirm that the upload directory has been copied separately before downloading the JSON snapshot."
+import_export,field.site_snapshot_file.label,,en-US,"Site snapshot JSON","Site snapshot JSON",0,"Site snapshot JSON"
+import_export,field.site_snapshot_file.help,,en-US,"Upload a JSON snapshot exported from the same Radaptor schema. Copy the upload directory before applying the import.","Upload a JSON snapshot exported from the same Radaptor schema. Copy the upload directory before applying the import.",0,"Upload a JSON snapshot exported from the same Radaptor schema. Copy the upload directory before applying the import."
+import_export,field.replace_confirmed.label,,en-US,"Replace current site data","Replace current site data",0,"Replace current site data"
+import_export,field.replace_confirmed.help,,en-US,"Required for the real import. The restore replaces the snapshot-managed database tables.","Required for the real import. The restore replaces the snapshot-managed database tables.",0,"Required for the real import. The restore replaces the snapshot-managed database tables."
+import_export,site_snapshot.export.title,,en-US,"Export JSON snapshot","Export JSON snapshot",0,"Export JSON snapshot"
+import_export,site_snapshot.import.title,,en-US,"Import JSON snapshot","Import JSON snapshot",0,"Import JSON snapshot"
+import_export,site_snapshot.action.export,,en-US,"Export JSON","Export JSON",0,"Export JSON"
+import_export,confirm.site_snapshot_replace,,en-US,"This import will replace the current site database content with the uploaded snapshot. Continue?","This import will replace the current site database content with the uploaded snapshot. Continue?",0,"This import will replace the current site database content with the uploaded snapshot. Continue?"

@@ -209,7 +209,7 @@ final class LayoutTemplateContractInspector
 				continue;
 			}
 
-			if ($method === 'fetchContent' && self::methodCallContainsStringArgument($tokens, $index + 1, 'page_chrome')) {
+			if (in_array($method, ['fetchContent', 'fetchSlot'], true) && self::methodCallContainsStringArgument($tokens, $index + 1, 'page_chrome')) {
 				$lines['page_chrome'][] = (int) $name_token[2];
 			}
 		}

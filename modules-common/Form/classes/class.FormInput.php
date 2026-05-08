@@ -265,6 +265,9 @@ abstract class FormInput implements iFormInput, Stringable
 				'required' => $this instanceof FormInputSelect ? $this->required : true,
 				'placeholder_label' => t('common.choose_placeholder'),
 			],
+			FormInputLinkGroup::INPUTTYPE => [
+				'values' => $this instanceof FormInputLinkGroup ? $this->values : [],
+			],
 			FormInputCheckbox::INPUTTYPE => [
 				'checked' => (bool)$this->getValue(),
 			],

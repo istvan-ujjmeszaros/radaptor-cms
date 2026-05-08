@@ -1,0 +1,62 @@
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
+import_export,action.export_csv,,hu-HU,"Export CSV","CSV exportálása",0,"CSV exportálása"
+import_export,action.preview_import,,hu-HU,"Preview import","Import előnézet",0,"Import előnézet"
+import_export,action.run_import,,hu-HU,"Run import","Import futtatása",0,"Import futtatása"
+import_export,dataset.i18n_translations.description,,hu-HU,"Export and import translation rows as CSV.","Fordítási sorok exportálása és importálása CSV formátumban.",0,"Fordítási sorok exportálása és importálása CSV formátumban."
+import_export,dataset.i18n_translations.name,,hu-HU,"I18n translations","I18n fordítások",0,"I18n fordítások"
+import_export,error.dataset_not_found,,hu-HU,"Import/export dataset not found.","Az import/export adatkészlet nem található.",0,"Az import/export adatkészlet nem található."
+import_export,error.file_read,,hu-HU,"Unable to read the uploaded CSV file.","A feltöltött CSV fájl nem olvasható.",0,"A feltöltött CSV fájl nem olvasható."
+import_export,error.file_required,,hu-HU,"Please select a CSV file to import.","Válassz ki egy importálandó CSV fájlt.",0,"Válassz ki egy importálandó CSV fájlt."
+import_export,error.invalid_format,,hu-HU,"Invalid format","Érvénytelen formátum",0,"Érvénytelen formátum"
+import_export,error.invalid_mode,,hu-HU,"Invalid import mode.","Érvénytelen import mód.",0,"Érvénytelen import mód."
+import_export,error.locale_required,,hu-HU,"Locale is required for export.","Az exporthoz locale megadása kötelező.",0,"Az exporthoz locale megadása kötelező."
+import_export,error.upload_backup_required,,hu-HU,"Confirm the uploaded files backup before exporting the site snapshot.","Erősítsd meg a feltöltött fájlok mentését a weboldal snapshot exportálása előtt.",0,"Erősítsd meg a feltöltött fájlok mentését a weboldal snapshot exportálása előtt."
+import_export,export.title,,hu-HU,"Export CSV","CSV export",0,"CSV export"
+import_export,field.dataset.label,,hu-HU,Dataset,Adatkészlet,0,Adatkészlet
+import_export,field.expect_locale.any,,hu-HU,"Any locale in file","Bármely locale a fájlban",0,"Bármely locale a fájlban"
+import_export,field.expect_locale.help,,hu-HU,"Optional for insert_new and upsert. Sync should normally set this explicitly and always uses a single-locale scope, even when importing wide CSV.","Az insert_new és az upsert esetén opcionális. Sync módban célszerű ezt megadni, és ott mindig egyetlen locale-szelet használható, még wide CSV import esetén is.",0,"Az insert_new és az upsert esetén opcionális. Sync módban célszerű ezt megadni, és ott mindig egyetlen locale-szelet használható, még wide CSV import esetén is."
+import_export,field.expect_locale.label,,hu-HU,"Expected locale","Elvárt locale",0,"Elvárt locale"
+import_export,field.file.help,,hu-HU,"Upload a CSV file exported from the same dataset.","Tölts fel egy ugyanebből az adatkészletből exportált CSV fájlt.",0,"Tölts fel egy ugyanebből az adatkészletből exportált CSV fájlt."
+import_export,field.file.label,,hu-HU,"CSV file","CSV fájl",0,"CSV fájl"
+import_export,field.format.help,,hu-HU,"Normalized keeps one row per locale. Wide groups locales into text:<locale> columns.","A normalizált formátum locale-onként egy sort tart meg. A széles formátum a locale-okat text:<locale> oszlopokba rendezi.",0,"A normalizált formátum locale-onként egy sort tart meg. A széles formátum a locale-okat text:<locale> oszlopokba rendezi."
+import_export,field.format.label,,hu-HU,Format,Formátum,0,Formátum
+import_export,field.locale.all,,hu-HU,"All locales","Összes locale",0,"Összes locale"
+import_export,field.locale.help,,hu-HU,"Leave empty to export all locales, or choose one locale for a smaller file. Wide format puts locale values into text:<locale> columns.","Hagyd üresen az összes locale exportálásához, vagy válassz egy locale-t a kisebb fájlhoz. A széles formátum a locale értékeket text:<locale> oszlopokba teszi.",0,"Hagyd üresen az összes locale exportálásához, vagy válassz egy locale-t a kisebb fájlhoz. A széles formátum a locale értékeket text:<locale> oszlopokba teszi."
+import_export,field.locale.label,,hu-HU,Locale,"Nyelvi környezet",0,"Nyelvi környezet"
+import_export,field.mode.help,,hu-HU,"Sync is destructive: it deletes rows missing from the imported locale slice and only supports single-locale files.","A sync destruktív: törli az importált locale-szeletből hiányzó sorokat, és csak egyetlen locale-t tartalmazó fájlt támogat.",0,"A sync destruktív: törli az importált locale-szeletből hiányzó sorokat, és csak egyetlen locale-t tartalmazó fájlt támogat."
+import_export,field.mode.label,,hu-HU,"Import mode","Import mód",0,"Import mód"
+import_export,format.auto,,hu-HU,Auto-detect,"Automatikus felismerés",0,"Automatikus felismerés"
+import_export,format.normalized,,hu-HU,Normalized,Normalizált,0,Normalizált
+import_export,format.wide,,hu-HU,Wide,Széles,0,Széles
+import_export,import.title,,hu-HU,"Import CSV","CSV import",0,"CSV import"
+import_export,mode.insert_new,,hu-HU,"Insert new only","Csak újak beszúrása",0,"Csak újak beszúrása"
+import_export,mode.sync,,hu-HU,"Sync locale slice","Locale-szelet szinkronizálása",0,"Locale-szelet szinkronizálása"
+import_export,mode.upsert,,hu-HU,"Upsert existing","Meglévők frissítése is",0,"Meglévők frissítése is"
+import_export,result.deleted,,hu-HU,Deleted,Törölve,0,Törölve
+import_export,result.detected_locale,,hu-HU,"Detected locale","Észlelt locale",0,"Észlelt locale"
+import_export,result.detected_locales,,hu-HU,"Detected locales","Észlelt locale-ok",0,"Észlelt locale-ok"
+import_export,result.dry_run_summary,,hu-HU,"Dry-run summary for {dataset}.","Dry-run összegzés ennél: {dataset}.",0,"Dry-run összegzés ennél: {dataset}."
+import_export,result.error_summary,,hu-HU,"Import finished with errors for {dataset}.","Az import hibákkal fejeződött be ennél: {dataset}.",0,"Az import hibákkal fejeződött be ennél: {dataset}."
+import_export,result.format,,hu-HU,Format,Formátum,0,Formátum
+import_export,result.imported,,hu-HU,Imported,Importálva,0,Importálva
+import_export,result.inserted,,hu-HU,Inserted,Beszúrva,0,Beszúrva
+import_export,result.mode,,hu-HU,Mode,Mód,0,Mód
+import_export,result.processed,,hu-HU,Processed,Feldolgozva,0,Feldolgozva
+import_export,result.skipped,,hu-HU,Skipped,Kihagyva,0,Kihagyva
+import_export,result.success_summary,,hu-HU,"Import completed successfully for {dataset}.","Az import sikeresen befejeződött ennél: {dataset}.",0,"Az import sikeresen befejeződött ennél: {dataset}."
+import_export,result.updated,,hu-HU,Updated,Frissítve,0,Frissítve
+import_export,workbench.description,,hu-HU,"Export data to CSV or import CSV files into registered datasets.","Adatok exportálása CSV-be vagy CSV fájlok importálása a regisztrált adatkészletekbe.",0,"Adatok exportálása CSV-be vagy CSV fájlok importálása a regisztrált adatkészletekbe."
+import_export,workbench.no_datasets,,hu-HU,"No import/export datasets are available.","Nincsenek elérhető import/export adatkészletek.",0,"Nincsenek elérhető import/export adatkészletek."
+import_export,workbench.title,,hu-HU,"Import / Export","Import / Export",0,"Import / Export"
+import_export,dataset.site_snapshot.name,,hu-HU,"Site snapshot","Weboldal snapshot",0,"Weboldal snapshot"
+import_export,dataset.site_snapshot.description,,hu-HU,"Export or restore database-backed site content and identity data as a JSON disaster-recovery snapshot.","Adatbázisban tárolt weboldal-tartalom és identity adatok exportálása vagy visszaállítása JSON katasztrófa-mentésként.",0,"Adatbázisban tárolt weboldal-tartalom és identity adatok exportálása vagy visszaállítása JSON katasztrófa-mentésként."
+import_export,field.uploads_backed_up.label,,hu-HU,"Uploaded files backed up","Feltöltött fájlok lementve",0,"Feltöltött fájlok lementve"
+import_export,field.uploads_backed_up.help,,hu-HU,"Confirm that the upload directory has been copied separately before downloading the JSON snapshot.","Erősítsd meg, hogy a feltöltött fájlok mappáját külön lementetted a JSON snapshot letöltése előtt.",0,"Erősítsd meg, hogy a feltöltött fájlok mappáját külön lementetted a JSON snapshot letöltése előtt."
+import_export,field.site_snapshot_file.label,,hu-HU,"Site snapshot JSON","Weboldal snapshot JSON",0,"Weboldal snapshot JSON"
+import_export,field.site_snapshot_file.help,,hu-HU,"Upload a JSON snapshot exported from the same Radaptor schema. Copy the upload directory before applying the import.","Ugyanebből a Radaptor sémából exportált JSON snapshotot tölts fel. Az import alkalmazása előtt másold be a feltöltött fájlok mappáját.",0,"Ugyanebből a Radaptor sémából exportált JSON snapshotot tölts fel. Az import alkalmazása előtt másold be a feltöltött fájlok mappáját."
+import_export,field.replace_confirmed.label,,hu-HU,"Replace current site data","Jelenlegi weboldal-adatok cseréje",0,"Jelenlegi weboldal-adatok cseréje"
+import_export,field.replace_confirmed.help,,hu-HU,"Required for the real import. The restore replaces the snapshot-managed database tables.","Valódi importhoz kötelező. A visszaállítás lecseréli a snapshot által kezelt adatbázis táblákat.",0,"Valódi importhoz kötelező. A visszaállítás lecseréli a snapshot által kezelt adatbázis táblákat."
+import_export,site_snapshot.export.title,,hu-HU,"Export JSON snapshot","JSON snapshot export",0,"JSON snapshot export"
+import_export,site_snapshot.import.title,,hu-HU,"Import JSON snapshot","JSON snapshot import",0,"JSON snapshot import"
+import_export,site_snapshot.action.export,,hu-HU,"Export JSON","JSON export",0,"JSON export"
+import_export,confirm.site_snapshot_replace,,hu-HU,"This import will replace the current site database content with the uploaded snapshot. Continue?","Ez az import lecseréli a jelenlegi weboldal adatbázisban tárolt tartalmát a feltöltött snapshotra. Folytatod?",0,"Ez az import lecseréli a jelenlegi weboldal adatbázisban tárolt tartalmát a feltöltött snapshotra. Folytatod?"

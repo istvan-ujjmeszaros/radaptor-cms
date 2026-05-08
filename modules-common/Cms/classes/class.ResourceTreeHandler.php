@@ -801,6 +801,14 @@ class ResourceTreeHandler extends ResourceAcl
 		return is_array($resource_data) ? $resource_data['path'] . $resource_data['resource_name'] : '';
 	}
 
+	/**
+	 * @param array<string, mixed> $resource_data
+	 */
+	public static function buildPathFromNodeData(array $resource_data): string
+	{
+		return self::buildPathFromResourceData($resource_data);
+	}
+
 	private static function sanitizeResourceTreeEntryNameInSavedata(array &$savedata, string $dsn = ''): void
 	{
 		if (isset($savedata['resource_name'])) {
@@ -830,6 +838,7 @@ class ResourceTreeHandler extends ResourceAcl
 			'resource_name',
 			'catcher_page',
 			'comment',
+			'locale',
 			'node_type',
 			'path',
 			'is_inheriting_acl',
@@ -1192,7 +1201,13 @@ class ResourceTreeHandler extends ResourceAcl
 
 	public static function rebuildPath(int $from_node_id = 0): int
 	{
-		return NestedSet::rebuildPath('resource_tree', $from_node_id);
+		$result = NestedSet::rebuildPath('resource_tree', $from_node_id);
+
+		if (class_exists(LocaleHomeResourceService::class)) {
+			LocaleHomeResourceService::refreshAll();
+		}
+
+		return $result;
 	}
 
 	public static function deleteResourceEntry(int $resource_id): bool
@@ -1248,6 +1263,16 @@ class ResourceTreeHandler extends ResourceAcl
 		}
 
 		AttributeHandler::deleteAttributes($attribute_resource);
+
+		if (class_exists(LocaleHomeResourceService::class)) {
+			$site_context = ResourceLocaleService::getSiteContextForResourceId((int) ($resource_data['parent_id'] ?? 0));
+
+			if ($site_context !== null) {
+				LocaleHomeResourceService::refreshSiteContext($site_context);
+			} else {
+				LocaleHomeResourceService::refreshAll();
+			}
+		}
 
 		if ($node_type !== 'file' || $file_id <= 0) {
 			return ResourceTreeMutationResult::success(true);
@@ -1499,6 +1524,7 @@ class ResourceTreeHandler extends ResourceAcl
 	public static function moveResourceEntryToPositionResult(int $resource_id, int $parent_id, int $position): ResourceTreeMutationResult
 	{
 		$error = self::getRootResourceMutationError($resource_id, 'move')
+			?? self::getProtectedResourceMutationError($resource_id, 'move')
 			?? self::getProtectedResourceSubtreeMutationError($resource_id, 'move')
 			?? self::getProtectedResourceMutationError($parent_id, 'move into');
 
@@ -1527,16 +1553,16 @@ class ResourceTreeHandler extends ResourceAcl
 			);
 		}
 
-		$error = self::getResourceMoveAclError($resource_id, $parent_id);
+		$error = self::getProtectedResourcePathMutationError(
+			self::buildChildPathFromParentData($parent_data, $resource_data),
+			'move into'
+		);
 
 		if ($error !== null) {
 			return ResourceTreeMutationResult::failure($error);
 		}
 
-		$error = self::getProtectedResourcePathMutationError(
-			self::buildChildPathFromParentData($parent_data, $resource_data),
-			'move into'
-		);
+		$error = self::getResourceMoveAclError($resource_id, $parent_id);
 
 		if ($error !== null) {
 			return ResourceTreeMutationResult::failure($error);

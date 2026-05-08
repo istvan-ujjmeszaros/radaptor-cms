@@ -12,7 +12,8 @@ class SduiNode
 	 * @param array<string, list<array<string, mixed>>> $contents
 	 * @param array<string, mixed> $meta
 	 * @param array<string, mixed> $strings
-	 * @return array{type: string, component: string, props: array<string, mixed>, contents: array<string, list<array<string, mixed>>>, strings: array<string, mixed>, meta: array<string, mixed>}
+	 * @param null|array<string, list<array<string, mixed>>> $slots
+	 * @return array{type: string, component: string, props: array<string, mixed>, contents: array<string, list<array<string, mixed>>>, slots: array<string, list<array<string, mixed>>>, strings: array<string, mixed>, meta: array<string, mixed>}
 	 */
 	public static function create(
 		string $component,
@@ -21,12 +22,16 @@ class SduiNode
 		string $type = self::TYPE_SUB,
 		array $meta = [],
 		array $strings = [],
+		?array $slots = null,
 	): array {
+		$contents = $slots ?? $contents;
+
 		return [
 			'type'      => $type,
 			'component' => $component,
 			'props'     => $props,
 			'contents'  => $contents,
+			'slots'     => $contents,
 			'strings'   => $strings,
 			'meta'      => $meta,
 		];
@@ -34,19 +39,21 @@ class SduiNode
 
 	/**
 	 * @param array<string, mixed> $node
-	 * @return array{type: string, component: string, props: array<string, mixed>, contents: array<string, list<array<string, mixed>>>, strings: array<string, mixed>, meta?: array<string, mixed>}
+	 * @return array{type: string, component: string, props: array<string, mixed>, contents: array<string, list<array<string, mixed>>>, slots: array<string, list<array<string, mixed>>>, strings: array<string, mixed>, meta?: array<string, mixed>}
 	 */
 	public static function normalize(array $node): array
 	{
 		$props = is_array($node['props'] ?? null) ? $node['props'] : [];
 		$meta = is_array($node['meta'] ?? null) ? $node['meta'] : [];
 		$strings = is_array($node['strings'] ?? null) ? $node['strings'] : [];
+		$contents = is_array($node['contents'] ?? null) ? $node['contents'] : (is_array($node['slots'] ?? null) ? $node['slots'] : []);
 
 		$normalized = [
 			'type'      => (string)($node['type'] ?? self::TYPE_SUB),
 			'component' => (string)($node['component'] ?? '_missing'),
 			'props'     => $props,
-			'contents'  => is_array($node['contents'] ?? null) ? $node['contents'] : [],
+			'contents'  => $contents,
+			'slots'     => $contents,
 			'strings'   => $strings,
 		];
 

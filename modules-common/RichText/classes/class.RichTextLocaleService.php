@@ -1,0 +1,39 @@
+<?php
+
+declare(strict_types=1);
+
+final class RichTextLocaleService
+{
+	public static function getLocaleForConnectionId(int|string|null $connection_id): string
+	{
+		$connection_id = (int) $connection_id;
+
+		if ($connection_id > 0) {
+			$page_id = WidgetConnection::getOwnerWebpageId($connection_id);
+
+			if ($page_id !== null && class_exists(ResourceLocaleService::class)) {
+				return ResourceLocaleService::getRenderLocale((int) $page_id);
+			}
+		}
+
+		return Kernel::getLocale();
+	}
+
+	public static function getLocaleForCurrentRequest(): string
+	{
+		return self::getLocaleForConnectionId(Request::_GET('connection_id', null));
+	}
+
+	public static function contentMatchesConnectionLocale(int $content_id, int|string|null $connection_id): bool
+	{
+		$content = EntityRichtext::findById($content_id)?->dto();
+
+		if (!is_array($content)) {
+			return false;
+		}
+
+		$content_locale = LocaleService::tryCanonicalize((string) ($content['locale'] ?? ''));
+
+		return $content_locale !== null && $content_locale === self::getLocaleForConnectionId($connection_id);
+	}
+}

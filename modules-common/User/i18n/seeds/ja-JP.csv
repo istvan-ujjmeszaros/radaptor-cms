@@ -1,0 +1,129 @@
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
+user,action.datasheet,,ja-JP,Datasheet,データシート,0,データシート
+user,action.edit,,ja-JP,Edit,編集,0,編集
+user,action.roles,,ja-JP,"Custom roles",カスタムロール,0,カスタムロール
+user,action.usergroups,,ja-JP,"Group memberships",グループメンバーシップ,0,グループメンバーシップ
+user,col.actions,,ja-JP,Actions,操作,0,操作
+user,col.username,,ja-JP,Username,ユーザー名,0,ユーザー名
+user,description.action.edit,,ja-JP,"Edit user",ユーザーを編集,0,ユーザーを編集
+user,description.tab.active,,ja-JP,Active,有効,0,有効
+user,description.tab.service,,ja-JP,Service,サービス,0,サービス
+user,description.tab.shipping,,ja-JP,"Awaiting shipment",出荷待ち,0,出荷待ち
+user,description.title,,ja-JP,User,ユーザー,0,ユーザー
+user,error_missing_user_id,,ja-JP,"User ID is missing",ユーザーIDが不足しています,0,ユーザーIDが不足しています
+user,error_no_selector_specified,,ja-JP,"No user or user group specified",ユーザーまたはユーザーグループが指定されていません,0,ユーザーまたはユーザーグループが指定されていません
+user,error_not_found,,ja-JP,"User not found",ユーザーが見つかりません,0,ユーザーが見つかりません
+user,error_not_found_with_id,,ja-JP,"User not found: {id}",ユーザーが見つかりません：{id},0,ユーザーが見つかりません：{id}
+user,error_parameter_mismatch,,ja-JP,"Parameter mismatch",パラメータの不一致,0,パラメータの不一致
+user,error_save,,ja-JP,"Error: Unable to save user",エラー：ユーザーを保存できません,0,エラー：ユーザーを保存できません
+user,field.locale.explanation,,ja-JP,"Interface language for this user",このユーザーのインターフェース言語,0,このユーザーのインターフェース言語
+user,field.locale.label,,ja-JP,Language,言語,0,言語
+user,field.password_confirm.explanation,,ja-JP,"Re-enter the password",パスワードを再入力,0,パスワードを再入力
+user,field.password_confirm.label,,ja-JP,"Confirm password",パスワードを確認,0,パスワードを確認
+user,field.password.explanation,,ja-JP,"Enter the password",パスワードを入力,0,パスワードを入力
+user,field.password.label,,ja-JP,Password,パスワード,0,パスワード
+user,field.timezone.explanation,,ja-JP,"IANA timezone identifier (e.g. Europe/Budapest). Leave empty for UTC.",IANAタイムゾーン識別子（例：Asia/Tokyo）。UTCの場合は空欄にしてください。,0,IANAタイムゾーン識別子（例：Asia/Tokyo）。UTCの場合は空欄にしてください。
+user,field.timezone.label,,ja-JP,Timezone,タイムゾーン,0,タイムゾーン
+user,field.user_id.label,,ja-JP,"User ID",ユーザーID,0,ユーザーID
+user,field.username.explanation,,ja-JP,"Enter the desired username",希望するユーザー名を入力,0,希望するユーザー名を入力
+user,field.username.label,,ja-JP,Username,ユーザー名,0,ユーザー名
+user,form.name,,ja-JP,User,ユーザー,0,ユーザー
+user,form.title_create,,ja-JP,"New user",新しいユーザー,0,新しいユーザー
+user,form.title_edit,,ja-JP,"Edit user",ユーザーを編集,0,ユーザーを編集
+user,list.new,,ja-JP,"New user",新しいユーザー,0,新しいユーザー
+user,list.title,,ja-JP,Users,ユーザー,0,ユーザー
+user,login.button,,ja-JP,Login,ログイン,0,ログイン
+user,login.error_invalid_credentials,,ja-JP,"Wrong username or password",ユーザー名またはパスワードが違います,0,ユーザー名またはパスワードが違います
+user,login.title,,ja-JP,Login,ログイン,0,ログイン
+user,logout.success,,ja-JP,"You are logged out",ログアウトしました,0,ログアウトしました
+user,no_changes,,ja-JP,"No changes made",変更はありません,0,変更はありません
+user,role_assignment.added,,ja-JP,"Role assigned:<br>{role} -> {target}","ロールを割り当てました：<br>{role} -> {target}",0,"ロールを割り当てました：<br>{role} -> {target}"
+user,role_assignment.error_add,,ja-JP,"Error: Unable to assign role:<br>{role} -> {target}","エラー：ロールを割り当てできません：<br>{role} -> {target}",0,"エラー：ロールを割り当てできません：<br>{role} -> {target}"
+user,role_assignment.error_add_generic,,ja-JP,"Error: Unable to assign role.",エラー：ロールを割り当てできません。,0,エラー：ロールを割り当てできません。
+user,role_assignment.error_remove,,ja-JP,"Error: Unable to remove role assignment:<br>{role} -> {target}","エラー：ロールの割り当てを削除できません：<br>{role} -> {target}",0,"エラー：ロールの割り当てを削除できません：<br>{role} -> {target}"
+user,role_assignment.error_remove_generic,,ja-JP,"Error: Unable to remove role assignment.",エラー：ロールの割り当てを削除できません。,0,エラー：ロールの割り当てを削除できません。
+user,role_assignment.removed,,ja-JP,"Role assignment removed:<br>{role} -> {target}","ロールの割り当てを削除しました：<br>{role} -> {target}",0,"ロールの割り当てを削除しました：<br>{role} -> {target}"
+user,role_selector.available_roles,,ja-JP,"Available roles",利用可能なロール,0,利用可能なロール
+user,role_selector.help,,ja-JP,"Check a parent role to grant all child roles automatically. Child roles will be highlighted in green to show they are inherited.",親ロールをチェックすると、すべての子ロールが自動的に付与されます。継承された子ロールは緑色で強調表示されます。,0,親ロールをチェックすると、すべての子ロールが自動的に付与されます。継承された子ロールは緑色で強調表示されます。
+user,role_selector.title,,ja-JP,"Role assignment",ロールの割り当て,0,ロールの割り当て
+user,role.all,,ja-JP,"All roles",すべてのロール,0,すべてのロール
+user,role.delete_confirm,,ja-JP,"Are you sure you want to delete this role and all its children?",このロールとすべての子ロールを削除しますか？,0,このロールとすべての子ロールを削除しますか？
+user,role.delete_error,,ja-JP,"Error: Unable to delete role(s)!",エラー：ロールを削除できません！,0,エラー：ロールを削除できません！
+user,role.delete_failed,,ja-JP,"Delete failed",削除に失敗しました,0,削除に失敗しました
+user,role.deleted,,ja-JP,"Role deleted!<br><i>{title}</i>",ロールを削除しました！<br><i>{title}</i>,0,ロールを削除しました！<br><i>{title}</i>
+user,role.deleted_multiple,,ja-JP,"Roles deleted!<br><i>{titles}</i><br><i>({count} total)</i>",ロールを削除しました！<br><i>{titles}</i><br><i>（合計{count}件）</i>,0,ロールを削除しました！<br><i>{titles}</i><br><i>（合計{count}件）</i>
+user,role.error_save,,ja-JP,"Error: Unable to save role",エラー：ロールを保存できません,0,エラー：ロールを保存できません
+user,role.field.description,,ja-JP,Description,説明,0,説明
+user,role.field.description.explanation,,ja-JP,"Purpose of the role",ロールの目的,0,ロールの目的
+user,role.field.role,,ja-JP,Role,ロール,0,ロール
+user,role.field.role.explanation,,ja-JP,"System-level name. 32 characters maximum",システムレベルの名前。最大32文字,0,システムレベルの名前。最大32文字
+user,role.field.title,,ja-JP,"Display name",表示名,0,表示名
+user,role.field.title.explanation,,ja-JP,"Role display name. 255 characters maximum",ロールの表示名。最大255文字,0,ロールの表示名。最大255文字
+user,role.help_create,,ja-JP,"Create a hierarchical structure of roles.",ロールの階層構造を作成します。,0,ロールの階層構造を作成します。
+user,role.help_move,,ja-JP,"Drag and drop to move roles under a different parent.",ドラッグ＆ドロップで別の親の下にロールを移動。,0,ドラッグ＆ドロップで別の親の下にロールを移動。
+user,role.invalid_type,,ja-JP,"Unknown role type: {type}",不明なロールタイプ：{type},0,不明なロールタイプ：{type}
+user,role.move_error,,ja-JP,"Error: Unable to move role!",エラー：ロールを移動できません！,0,エラー：ロールを移動できません！
+user,role.move_success,,ja-JP,"Role moved!<br><i>({title})</i>",ロールを移動しました！<br><i>({title})</i>,0,ロールを移動しました！<br><i>({title})</i>
+user,role.new,,ja-JP,"New role",新しいロール,0,新しいロール
+user,role.new_child,,ja-JP,"New child role",新しい子ロール,0,新しい子ロール
+user,role.not_found,,ja-JP,"Role not found: {id}",ロールが見つかりません：{id},0,ロールが見つかりません：{id}
+user,role.saved,,ja-JP,"Role saved",ロールを保存しました,0,ロールを保存しました
+user,role.title_create,,ja-JP,"New role",新しいロール,0,新しいロール
+user,role.title_edit,,ja-JP,"Edit role",ロールを編集,0,ロールを編集
+user,role.updated,,ja-JP,"Role updated",ロールを更新しました,0,ロールを更新しました
+user,role.validation.role_invalid_chars,,ja-JP,"Role name can only contain letters without accents and underscores",ロール名にはアクセントなしの文字とアンダースコアのみ使用できます,0,ロール名にはアクセントなしの文字とアンダースコアのみ使用できます
+user,role.validation.role_max_length,,ja-JP,"Role name must be 32 characters or fewer",ロール名は32文字以内にしてください,0,ロール名は32文字以内にしてください
+user,role.validation.title_max_length,,ja-JP,"Display name must be 255 characters or fewer",表示名は255文字以内にしてください,0,表示名は255文字以内にしてください
+user,saved,,ja-JP,"User saved",ユーザーを保存しました,0,ユーザーを保存しました
+user,signup.button,,ja-JP,"Sign up",新規登録,0,新規登録
+user,signup.error_password_min_length,,ja-JP,"Password must be at least 6 characters long",パスワードは6文字以上にしてください,0,パスワードは6文字以上にしてください
+user,signup.error_username_required,,ja-JP,"You must specify a username",ユーザー名を指定してください,0,ユーザー名を指定してください
+user,signup.error_username_taken,,ja-JP,"Username already taken. Please choose another",ユーザー名は既に使用されています。別の名前を選択してください,0,ユーザー名は既に使用されています。別の名前を選択してください
+user,signup.title,,ja-JP,Register,登録,0,登録
+user,updated,,ja-JP,"User updated",ユーザーを更新しました,0,ユーザーを更新しました
+user,usergroup_assignment.added,,ja-JP,"User assigned to group:<br>{group} -> {user}","ユーザーをグループに割り当てました：<br>{group} -> {user}",0,"ユーザーをグループに割り当てました：<br>{group} -> {user}"
+user,usergroup_assignment.error_add,,ja-JP,"Error: Unable to assign user to group:<br>{group} -> {user}","エラー：ユーザーをグループに割り当てできません：<br>{group} -> {user}",0,"エラー：ユーザーをグループに割り当てできません：<br>{group} -> {user}"
+user,usergroup_assignment.error_add_generic,,ja-JP,"Error: Unable to assign user to group.",エラー：ユーザーをグループに割り当てできません。,0,エラー：ユーザーをグループに割り当てできません。
+user,usergroup_assignment.error_remove,,ja-JP,"Error: Unable to remove user from group:<br>{group} -> {user}","エラー：ユーザーをグループから削除できません：<br>{group} -> {user}",0,"エラー：ユーザーをグループから削除できません：<br>{group} -> {user}"
+user,usergroup_assignment.error_remove_generic,,ja-JP,"Error: Unable to remove user from group.",エラー：ユーザーをグループから削除できません。,0,エラー：ユーザーをグループから削除できません。
+user,usergroup_assignment.removed,,ja-JP,"User assignment removed:<br>{group} -> {user}","ユーザーの割り当てを削除しました：<br>{group} -> {user}",0,"ユーザーの割り当てを削除しました：<br>{group} -> {user}"
+user,usergroup_selector.available_usergroups,,ja-JP,"Available usergroups",利用可能なユーザーグループ,0,利用可能なユーザーグループ
+user,usergroup_selector.help,,ja-JP,"Check usergroups to assign the user to them. Uncheck to remove the user from a usergroup.",チェックでユーザーをグループに追加、外すとグループから削除します。,0,チェックでユーザーをグループに追加、外すとグループから削除します。
+user,usergroup_selector.title,,ja-JP,"Usergroup assignment",ユーザーグループの割り当て,0,ユーザーグループの割り当て
+user,usergroup.all,,ja-JP,"User groups",ユーザーグループ,0,ユーザーグループ
+user,usergroup.delete_confirm,,ja-JP,"Are you sure you want to delete this user group and all its children?",このユーザーグループとすべての子グループを削除しますか？,0,このユーザーグループとすべての子グループを削除しますか？
+user,usergroup.delete_error,,ja-JP,"Error: Unable to delete user group(s)!",エラー：ユーザーグループを削除できません！,0,エラー：ユーザーグループを削除できません！
+user,usergroup.delete_failed,,ja-JP,"Delete failed",削除に失敗しました,0,削除に失敗しました
+user,usergroup.deleted,,ja-JP,"User group deleted!<br><i>{title}</i>",ユーザーグループを削除しました！<br><i>{title}</i>,0,ユーザーグループを削除しました！<br><i>{title}</i>
+user,usergroup.deleted_multiple,,ja-JP,"User groups deleted!<br><i>{titles}</i><br><i>({count} total)</i>",ユーザーグループを削除しました！<br><i>{titles}</i><br><i>（合計{count}件）</i>,0,ユーザーグループを削除しました！<br><i>{titles}</i><br><i>（合計{count}件）</i>
+user,usergroup.error_save,,ja-JP,"Error: Unable to save user group",エラー：ユーザーグループを保存できません,0,エラー：ユーザーグループを保存できません
+user,usergroup.field.description,,ja-JP,Description,説明,0,説明
+user,usergroup.field.description.explanation,,ja-JP,"Purpose of the user group",ユーザーグループの目的,0,ユーザーグループの目的
+user,usergroup.field.is_system_group,,ja-JP,"System group",システムグループ,0,システムグループ
+user,usergroup.field.is_system_group.explanation,,ja-JP,"Examples: Everyone, Registered users",例：全員、登録ユーザー,0,例：全員、登録ユーザー
+user,usergroup.field.title,,ja-JP,"Display name",表示名,0,表示名
+user,usergroup.field.title.explanation,,ja-JP,"User group name. 255 characters maximum",ユーザーグループ名。最大255文字,0,ユーザーグループ名。最大255文字
+user,usergroup.help_create,,ja-JP,"Create a hierarchical structure of user groups.",ユーザーグループの階層構造を作成します。,0,ユーザーグループの階層構造を作成します。
+user,usergroup.help_move,,ja-JP,"Drag and drop to move groups under a different parent.",ドラッグ＆ドロップで別の親の下にグループを移動。,0,ドラッグ＆ドロップで別の親の下にグループを移動。
+user,usergroup.move_error,,ja-JP,"Error: Unable to move user group!",エラー：ユーザーグループを移動できません！,0,エラー：ユーザーグループを移動できません！
+user,usergroup.move_success,,ja-JP,"User group moved!<br><i>({title})</i>",ユーザーグループを移動しました！<br><i>({title})</i>,0,ユーザーグループを移動しました！<br><i>({title})</i>
+user,usergroup.new,,ja-JP,"New user group",新しいユーザーグループ,0,新しいユーザーグループ
+user,usergroup.new_child,,ja-JP,"New child group",新しい子グループ,0,新しい子グループ
+user,usergroup.not_found,,ja-JP,"User group not found: {id}",ユーザーグループが見つかりません：{id},0,ユーザーグループが見つかりません：{id}
+user,usergroup.roles,,ja-JP,Roles,ロール,0,ロール
+user,usergroup.saved,,ja-JP,"User group saved",ユーザーグループを保存しました,0,ユーザーグループを保存しました
+user,usergroup.system_managed_help,,ja-JP,"System-managed group. Use CLI commands to manage (radaptor usergroup:*).","システム管理グループ。CLIコマンドで管理してください（radaptor usergroup:*）。",0,"システム管理グループ。CLIコマンドで管理してください（radaptor usergroup:*）。"
+user,usergroup.title_create,,ja-JP,"New user group",新しいユーザーグループ,0,新しいユーザーグループ
+user,usergroup.title_edit,,ja-JP,"Edit user group",ユーザーグループを編集,0,ユーザーグループを編集
+user,usergroup.updated,,ja-JP,"User group updated",ユーザーグループを更新しました,0,ユーザーグループを更新しました
+user,usergroup.validation.title_max_length,,ja-JP,"Display name must be 255 characters or fewer",表示名は255文字以内にしてください,0,表示名は255文字以内にしてください
+user,validation.password_max_length,,ja-JP,"Password must be 255 characters or fewer",パスワードは255文字以内にしてください,0,パスワードは255文字以内にしてください
+user,validation.password_mismatch,,ja-JP,"Passwords do not match",パスワードが一致しません,0,パスワードが一致しません
+user,validation.password_required,,ja-JP,"Password is required",パスワードは必須です,0,パスワードは必須です
+user,validation.timezone_invalid,,ja-JP,"Invalid timezone. Use an IANA name (e.g. Europe/Budapest).",無効なタイムゾーンです。IANA名を使用してください（例：Asia/Tokyo）。,0,無効なタイムゾーンです。IANA名を使用してください（例：Asia/Tokyo）。
+user,validation.username_max_length,,ja-JP,"Username must be 32 characters or fewer",ユーザー名は32文字以内にしてください,0,ユーザー名は32文字以内にしてください
+user,validation.username_taken,,ja-JP,"Username is already taken",ユーザー名は既に使用されています,0,ユーザー名は既に使用されています
+user,locale.current_label,,ja-JP,"Current language",現在の言語,0,現在の言語
+user,locale.invalid,,ja-JP,"Selected language is not available",選択した言語は利用できません,0,選択した言語は利用できません
+user,locale.menu_label,,ja-JP,Language,言語,0,言語
+user,locale.updated,,ja-JP,"Language updated",言語を更新しました,0,言語を更新しました

@@ -1,0 +1,52 @@
+domain,key,context,locale,source_text,expected_text,human_reviewed,text
+mailpit,title,,zh-Hans-CN,Mailpit,Mailpit,0,Mailpit
+mailpit,subtitle,,zh-Hans-CN,"Captured development emails",捕获的开发邮件,0,捕获的开发邮件
+mailpit,inbox,,zh-Hans-CN,Inbox,收件箱,0,收件箱
+mailpit,search,,zh-Hans-CN,Search,搜索,0,搜索
+mailpit,refresh,,zh-Hans-CN,Refresh,刷新,0,刷新
+mailpit,back_to_inbox,,zh-Hans-CN,"Back to inbox",返回收件箱,0,返回收件箱
+mailpit,messages,,zh-Hans-CN,Messages,消息,0,消息
+mailpit,unread,,zh-Hans-CN,Unread,未读,0,未读
+mailpit,empty,,zh-Hans-CN,"No captured emails found.",未找到捕获的邮件。,0,未找到捕获的邮件。
+mailpit,unavailable,,zh-Hans-CN,"Mailpit is unavailable","Mailpit 不可用",0,"Mailpit 不可用"
+mailpit,not_found,,zh-Hans-CN,"Mailpit view not found","未找到 Mailpit 视图",0,"未找到 Mailpit 视图"
+mailpit,access_denied,,zh-Hans-CN,"Mailpit catcher is only available in non-production for email admins and system developers.","Mailpit catcher 仅在非生产环境中供邮件管理员和系统开发者使用。",0,"Mailpit catcher 仅在非生产环境中供邮件管理员和系统开发者使用。"
+mailpit,page_not_resolved,,zh-Hans-CN,"Mailpit catcher page could not be resolved.","无法解析 Mailpit catcher 页面。",0,"无法解析 Mailpit catcher 页面。"
+mailpit,col.subject,,zh-Hans-CN,Subject,主题,0,主题
+mailpit,col.from,,zh-Hans-CN,From,发件人,0,发件人
+mailpit,col.to,,zh-Hans-CN,To,收件人,0,收件人
+mailpit,col.received,,zh-Hans-CN,Received,已接收,0,已接收
+mailpit,col.size,,zh-Hans-CN,Size,大小,0,大小
+mailpit,pagination.previous,,zh-Hans-CN,Previous,上一页,0,上一页
+mailpit,pagination.next,,zh-Hans-CN,Next,下一页,0,下一页
+mailpit,no_subject,,zh-Hans-CN,"(no subject)",（无主题）,0,（无主题）
+mailpit,delete,,zh-Hans-CN,Delete,删除,0,删除
+mailpit,meta.from,,zh-Hans-CN,From,发件人,0,发件人
+mailpit,meta.to,,zh-Hans-CN,To,收件人,0,收件人
+mailpit,meta.cc,,zh-Hans-CN,Cc,Cc,0,Cc
+mailpit,meta.bcc,,zh-Hans-CN,Bcc,Bcc,0,Bcc
+mailpit,meta.date,,zh-Hans-CN,Date,日期,0,日期
+mailpit,meta.size,,zh-Hans-CN,Size,大小,0,大小
+mailpit,html_empty,,zh-Hans-CN,"This message has no HTML body.","此消息没有 HTML 正文。",0,"此消息没有 HTML 正文。"
+mailpit,html_preview_title,,zh-Hans-CN,"Mailpit HTML preview","Mailpit HTML 预览",0,"Mailpit HTML 预览"
+mailpit,check.supported,,zh-Hans-CN,Supported,支持,0,支持
+mailpit,check.partial,,zh-Hans-CN,Partial,部分,0,部分
+mailpit,check.unsupported,,zh-Hans-CN,Unsupported,不支持,0,不支持
+mailpit,check.tests,,zh-Hans-CN,Tests,测试,0,测试
+mailpit,check.no_warnings,,zh-Hans-CN,"No HTML compatibility warnings.","没有 HTML 兼容性警告。",0,"没有 HTML 兼容性警告。"
+mailpit,warning_fallback,,zh-Hans-CN,Warning,警告,0,警告
+mailpit,links.status,,zh-Hans-CN,Status,状态,0,状态
+mailpit,links.none,,zh-Hans-CN,"No links found.",未找到链接。,0,未找到链接。
+mailpit,attachments,,zh-Hans-CN,Attachments,附件,0,附件
+mailpit,inline_attachments,,zh-Hans-CN,"Inline attachments",内联附件,0,内联附件
+mailpit,attachment_fallback,,zh-Hans-CN,attachment,附件,0,附件
+mailpit,tab_error,,zh-Hans-CN,"Mailpit tab content could not be loaded.","无法加载 Mailpit 选项卡内容。",0,"无法加载 Mailpit 选项卡内容。"
+mailpit,tab.html,,zh-Hans-CN,HTML,HTML,0,HTML
+mailpit,tab.html_source,,zh-Hans-CN,"HTML Source","HTML 源码",0,"HTML 源码"
+mailpit,tab.text,,zh-Hans-CN,Text,文本,0,文本
+mailpit,tab.headers,,zh-Hans-CN,Headers,标头,0,标头
+mailpit,tab.raw,,zh-Hans-CN,Raw,原始,0,原始
+mailpit,tab.html_check,,zh-Hans-CN,"HTML Check","HTML 检查",0,"HTML 检查"
+mailpit,tab.link_check,,zh-Hans-CN,"Link Check",链接检查,0,链接检查
+widget,mailpit.name,,zh-Hans-CN,"Mailpit catcher","Mailpit catcher",0,"Mailpit catcher"
+widget,mailpit.description,,zh-Hans-CN,"Shows captured Mailpit emails inside the admin UI.","在管理 UI 中显示 Mailpit 捕获的邮件。",0,"在管理 UI 中显示 Mailpit 捕获的邮件。"

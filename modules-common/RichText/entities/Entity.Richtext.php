@@ -4,6 +4,7 @@
  * @phpstan-type ShapeEntityRichtext array{
  *     id?: int,
  *     content_type: string,
+ *     locale?: string,
  *     name?: string|null,
  *     title?: string|null,
  *     content?: string|null,
@@ -12,6 +13,7 @@
  *
  * @property ?int $id (auto_increment)
  * @property ?string $content_type
+ * @property ?string $locale
  * @property ?string $name
  * @property ?string $title
  * @property ?string $content
@@ -35,14 +37,28 @@ class EntityRichtext extends SQLEntity
 		return static::pluckFirst('title', ['id' => $id]) ?? '';
 	}
 
+	public static function getContentLocale(int $id): ?string
+	{
+		$locale = static::pluckFirst('locale', ['id' => $id]);
+
+		return is_string($locale) ? LocaleService::tryCanonicalize($locale) : null;
+	}
+
 	public static function getContentList(): array
 	{
 		return DbHelper::selectMany('richtext');
 	}
 
-	public static function getContentIdByName(mixed $name): int
+	public static function getContentIdByName(mixed $name, ?string $locale = null): int
 	{
-		$data = DbHelper::selectMany('richtext', ['name' => trim((string) $name)], false, '', 'id');
+		$where = ['name' => trim((string) $name)];
+		$locale = $locale !== null ? LocaleService::tryCanonicalize($locale) : null;
+
+		if ($locale !== null) {
+			$where['locale'] = $locale;
+		}
+
+		$data = DbHelper::selectMany('richtext', $where, false, '', 'id');
 
 		if (count($data) > 1) {
 			return self::ERROR_MULTIPLE;
@@ -60,17 +76,37 @@ class EntityRichtext extends SQLEntity
 		return History::getAllModificationsWithComments('richtext', $id);
 	}
 
-	public static function getListForSelect(): array
+	public static function getListForSelect(?string $locale = null, ?int $currentId = null, bool $appendLocale = false): array
 	{
 		$return = [];
+		$params = [];
+		$where = '';
+		$locale = $locale !== null ? LocaleService::tryCanonicalize($locale) : null;
 
-		$info_contents = DbHelper::selectManyFromQuery("SELECT * FROM richtext ORDER BY title");
+		if ($locale !== null) {
+			$where = 'WHERE `locale` = ?';
+			$params[] = $locale;
+
+			if ($currentId !== null && $currentId > 0) {
+				$where .= ' OR `id` = ?';
+				$params[] = $currentId;
+			}
+		}
+
+		$info_contents = DbHelper::selectManyFromQuery("SELECT * FROM richtext {$where} ORDER BY title", $params);
 
 		foreach ($info_contents as $value) {
+			$value_locale = LocaleService::tryCanonicalize((string) ($value['locale'] ?? '')) ?? '';
+			$label = (string) ($value['name'] ?? '');
+
+			if ($value_locale !== '' && ($appendLocale || ($locale !== null && $value_locale !== $locale))) {
+				$label .= ' (' . $value_locale . ')';
+			}
+
 			$return[] = [
 				'inputtype' => 'option',
 				'value' => $value['id'],
-				'label' => $value['name'],
+				'label' => $label,
 			];
 		}
 

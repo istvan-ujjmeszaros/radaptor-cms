@@ -1,0 +1,679 @@
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
+admin,email_outbox.col.created_at,,ja-JP,Created,Created,0,Created
+admin,email_outbox.col.id,,ja-JP,ID,ID,0,ID
+admin,email_outbox.col.last_error,,ja-JP,"Last error","Last error",0,"Last error"
+admin,email_outbox.col.recipients,,ja-JP,Recipients,Recipients,0,Recipients
+admin,email_outbox.col.sent_at,,ja-JP,Sent,Sent,0,Sent
+admin,email_outbox.col.status,,ja-JP,Status,ステータス,0,ステータス
+admin,email_outbox.col.subject,,ja-JP,Subject,件名,0,件名
+admin,email_outbox.description,,ja-JP,"Read-only transactional email delivery history.",トランザクションメール配信履歴を読み取り専用で表示します。,0,トランザクションメール配信履歴を読み取り専用で表示します。
+admin,email_outbox.failures.title,,ja-JP,"Recent dead letters",最近の配信不能メール,0,最近の配信不能メール
+admin,email_outbox.filters.apply,,ja-JP,"Apply filters","Apply filters",0,"Apply filters"
+admin,email_outbox.filters.reset,,ja-JP,Reset,Reset,0,Reset
+admin,email_outbox.filters.search,,ja-JP,Search,検索,0,検索
+admin,email_outbox.filters.search_placeholder,,ja-JP,"Subject, message UID, or recipient email",件名、メッセージUID、または受信者メール,0,件名、メッセージUID、または受信者メール
+admin,email_outbox.filters.status,,ja-JP,Status,ステータス,0,ステータス
+admin,email_outbox.filters.title,,ja-JP,Filters,Filters,0,Filters
+admin,email_outbox.list.title,,ja-JP,"Recent outbox entries",最近の送信箱エントリ,0,最近の送信箱エントリ
+admin,email_outbox.none,,ja-JP,"No emails match the current filter.",現在のフィルターに一致するメールはありません。,0,現在のフィルターに一致するメールはありません。
+admin,email_outbox.pagination.page,,ja-JP,Page,ページ,0,ページ
+admin,email_outbox.status.all,,ja-JP,"All statuses","All statuses",0,"All statuses"
+admin,email_outbox.status.failed,,ja-JP,Failed,Failed,0,Failed
+admin,email_outbox.status.partial_failed,,ja-JP,"Partial failed","Partial failed",0,"Partial failed"
+admin,email_outbox.status.processing,,ja-JP,Processing,Processing,0,Processing
+admin,email_outbox.status.queued,,ja-JP,Queued,Queued,0,Queued
+admin,email_outbox.status.sent,,ja-JP,Sent,Sent,0,Sent
+admin,email_outbox.summary.title,,ja-JP,"Queue summary","Queue summary",0,"Queue summary"
+admin,email_outbox.title,,ja-JP,"Email outbox",メール送信箱,0,メール送信箱
+admin,email_queue.dead_letter,,ja-JP,"Dead letter","Dead letter",0,"Dead letter"
+admin,email_queue.empty,,ja-JP,"No email jobs are waiting right now.",現在待機中のメールジョブはありません。,0,現在待機中のメールジョブはありません。
+admin,email_queue.last_processed,,ja-JP,"Last processed","Last processed",0,"Last processed"
+admin,email_queue.last_seen,,ja-JP,"Last seen","Last seen",0,"Last seen"
+admin,email_queue.open_outbox,,ja-JP,"Open email outbox",メール送信箱を開く,0,メール送信箱を開く
+admin,email_queue.pending,,ja-JP,Pending,Pending,0,Pending
+admin,email_queue.retry_wait,,ja-JP,"Retry wait","Retry wait",0,"Retry wait"
+admin,email_queue.sent_last_24h,,ja-JP,"Sent in last 24h","Sent in last 24h",0,"Sent in last 24h"
+admin,email_queue.status.never_seen,,ja-JP,"Never seen","Never seen",0,"Never seen"
+admin,email_queue.status.running,,ja-JP,Running,Running,0,Running
+admin,email_queue.status.stale,,ja-JP,Stale,古い,0,古い
+admin,email_queue.status.unavailable,,ja-JP,Unavailable,Unavailable,0,Unavailable
+admin,email_queue.subtitle,,ja-JP,"Transactional delivery health at a glance.",トランザクション配信の状態をひと目で確認できます。,0,トランザクション配信の状態をひと目で確認できます。
+admin,email_queue.title,,ja-JP,"Email queue",メールキュー,0,メールキュー
+admin,email_queue.worker,,ja-JP,Worker,Worker,0,Worker
+admin,i18n.col.domain,,ja-JP,Domain,ドメイン,0,ドメイン
+admin,i18n.col.key,,ja-JP,Key,キー,0,キー
+admin,i18n.col.reviewed,,ja-JP,Reviewed,レビュー済み,0,レビュー済み
+admin,i18n.col.source,,ja-JP,Source,ソース,0,ソース
+admin,i18n.col.status,,ja-JP,Status,ステータス,0,ステータス
+admin,i18n.col.translation,,ja-JP,Translation,翻訳,0,翻訳
+admin,i18n.coverage.missing,,ja-JP,Missing,未翻訳,0,未翻訳
+admin,i18n.coverage.reviewed,,ja-JP,Reviewed,レビュー済み,0,レビュー済み
+admin,i18n.coverage.stale,,ja-JP,Stale,古い,0,古い
+admin,i18n.coverage.title,,ja-JP,"Translation coverage",翻訳カバレッジ,0,翻訳カバレッジ
+admin,i18n.coverage.translated,,ja-JP,Translated,翻訳済み,0,翻訳済み
+admin,i18n.domain,,ja-JP,Domain,ドメイン,0,ドメイン
+admin,i18n.locale,,ja-JP,Locale,ロケール,0,ロケール
+admin,i18n.search_placeholder,,ja-JP,"Search source or translation",ソースまたは翻訳を検索,0,ソースまたは翻訳を検索
+admin,i18n.status,,ja-JP,Status,ステータス,0,ステータス
+admin,i18n.status.ai_generated,,ja-JP,AI-generated,AI生成,0,AI生成
+admin,i18n.status.approved,,ja-JP,Approved,承認済み,0,承認済み
+admin,i18n.status.missing,,ja-JP,Missing,不足,0,不足
+admin,i18n.status.needs_review,,ja-JP,"Needs review",レビュー必要,0,レビュー必要
+admin,i18n.status.translated,,ja-JP,Translated,翻訳済み,0,翻訳済み
+admin,i18n.title,,ja-JP,"Translation workbench",翻訳ワークベンチ,0,翻訳ワークベンチ
+admin,i18n.tm.exact_match_only,,ja-JP,"Exact-match suggestions only",完全一致の候補のみ,0,完全一致の候補のみ
+admin,i18n.tm.exact_matches,,ja-JP,"Exact matches",完全一致,0,完全一致
+admin,i18n.tm.exact_then_similar,,ja-JP,"Exact matches load first. Similar matches load afterwards.",完全一致を先に読み込み、類似一致をその後に読み込みます。,0,完全一致を先に読み込み、類似一致をその後に読み込みます。
+admin,i18n.tm.no_exact_matches,,ja-JP,"No exact matches",完全一致なし,0,完全一致なし
+admin,i18n.tm.no_similar_matches,,ja-JP,"No similar matches",類似一致なし,0,類似一致なし
+admin,i18n.tm.origin,,ja-JP,Origin,元,0,元
+admin,i18n.tm.review_placeholders,,ja-JP,"Review placeholders",プレースホルダーを確認,0,プレースホルダーを確認
+admin,i18n.tm.safe,,ja-JP,Safe,安全,0,安全
+admin,i18n.tm.similar_matches,,ja-JP,"Similar matches",類似一致,0,類似一致
+admin,i18n.tm.similarity,,ja-JP,Similarity,類似度,0,類似度
+admin,i18n.tm.source_example,,ja-JP,"Source example",ソース例,0,ソース例
+admin,i18n.tm.title,,ja-JP,"Translation memory suggestions",翻訳メモリーの候補,0,翻訳メモリーの候補
+admin,menu.admin_menu,,ja-JP,"Admin menu",管理メニュー,0,管理メニュー
+admin,menu.blog,,ja-JP,Blog,ブログ,0,ブログ
+admin,menu.cli_runner,,ja-JP,"CLI Runner",CLIランナー,0,CLIランナー
+admin,menu.custom_menu,,ja-JP,"Custom menu",カスタムメニュー,0,カスタムメニュー
+admin,menu.email_outbox,,ja-JP,"Email outbox",メール送信箱,0,メール送信箱
+admin,menu.home,,ja-JP,"Admin home",管理ホーム,0,管理ホーム
+admin,menu.import_export,,ja-JP,"Import / Export","インポート / エクスポート",0,"インポート / エクスポート"
+admin,menu.mcp_tokens,,ja-JP,"MCP tokens",MCPトークン,0,MCPトークン
+admin,menu.phpinfo,,ja-JP,PHPinfo,PHP情報,0,PHP情報
+admin,menu.resource_tree,,ja-JP,"Website structure",ウェブサイト構造,0,ウェブサイト構造
+admin,menu.roles,,ja-JP,Roles,ロール,0,ロール
+admin,menu.runtime_diagnostics,,ja-JP,"Runtime diagnostics",ランタイム診断,0,ランタイム診断
+admin,menu.section.administration,,ja-JP,Administration,管理,0,管理
+admin,menu.section.configuration,,ja-JP,Configuration,設定,0,設定
+admin,menu.section.content,,ja-JP,Content,コンテンツ,0,コンテンツ
+admin,menu.section.developer_tools,,ja-JP,"Developer tools",開発者ツール,0,開発者ツール
+admin,menu.template_engines,,ja-JP,"Template engines",テンプレートエンジン,0,テンプレートエンジン
+admin,menu.theme_selector,,ja-JP,"Theme selection",テーマ選択,0,テーマ選択
+admin,menu.translations,,ja-JP,Translations,翻訳,0,翻訳
+admin,menu.usergroups,,ja-JP,"User groups",ユーザーグループ,0,ユーザーグループ
+admin,menu.widget_preview,,ja-JP,"Widget preview",ウィジェットプレビュー,0,ウィジェットプレビュー
+cms,admin_dropdown.edit_mode,,ja-JP,"Edit mode",編集モード,0,編集モード
+cms,admin_dropdown.edit_mode_off,,ja-JP,off,オフ,0,オフ
+cms,admin_dropdown.edit_mode_on,,ja-JP,on,オン,0,オン
+cms,admin_dropdown.seo,,ja-JP,SEO,SEO,0,SEO
+cms,admin_dropdown.turn_edit_mode_off,,ja-JP,"Turn edit mode off",編集モードをオフにする,0,編集モードをオフにする
+cms,admin_dropdown.turn_edit_mode_on,,ja-JP,"Turn edit mode on",編集モードをオンにする,0,編集モードをオンにする
+cms,admin_menu.form.name,,ja-JP,"Admin menu administration",管理メニュー管理,0,管理メニュー管理
+cms,admin_menu.form.title_create,,ja-JP,"Create admin menu item",管理メニュー項目を作成,0,管理メニュー項目を作成
+cms,admin_menu.form.title_edit,,ja-JP,"Edit admin menu item",管理メニュー項目を編集,0,管理メニュー項目を編集
+cms,edit,,ja-JP,Edit,編集,0,編集
+cms,edit_mode.disabled,,ja-JP,"Edit mode disabled",編集モードを無効にしました,0,編集モードを無効にしました
+cms,edit_mode.enabled,,ja-JP,"Edit mode enabled",編集モードを有効にしました,0,編集モードを有効にしました
+cms,edit_mode.save_error,,ja-JP,"Error: Unable to save configuration",エラー：設定を保存できません,0,エラー：設定を保存できません
+cms,error.login_page_missing,,ja-JP,"Login page not found - create it manually","ログインページが見つかりません - 手動で作成してください",0,"ログインページが見つかりません - 手動で作成してください"
+cms,file.missing_ref_id,,ja-JP,"Missing file reference",ファイル参照が不足しています,0,ファイル参照が不足しています
+cms,file.upload_error,,ja-JP,"Error: File upload failed",エラー：ファイルのアップロードに失敗しました,0,エラー：ファイルのアップロードに失敗しました
+cms,file.uploaded,,ja-JP,"File uploaded",ファイルをアップロードしました,0,ファイルをアップロードしました
+cms,file_upload.destination_path,,ja-JP,"Destination path",移動先パス,0,移動先パス
+cms,file_upload.unknown_destination,,ja-JP,"Unknown destination path",不明な移動先パス,0,不明な移動先パス
+cms,form.field.form_id.explanation,,ja-JP,"Select from the predefined forms",定義済みフォームから選択,0,定義済みフォームから選択
+cms,form.field.form_id.label,,ja-JP,Form,フォーム,0,フォーム
+cms,form.missing_widget_id,,ja-JP,"Widget ID is missing",ウィジェットIDが不足しています,0,ウィジェットIDが不足しています
+cms,form.no_form_page_warning,,ja-JP,"Create at least one page with a blank form",空白のフォームを持つページを少なくとも1つ作成してください,0,空白のフォームを持つページを少なくとも1つ作成してください
+cms,form.no_id,,ja-JP,"No form ID given",フォームIDが指定されていません,0,フォームIDが指定されていません
+cms,form.settings_subtitle,,ja-JP,"Page: {page}",ページ：{page},0,ページ：{page}
+cms,library.folder,,ja-JP,Folder,フォルダ,0,フォルダ
+cms,library.resource,,ja-JP,Resource,リソース,0,リソース
+cms,library.unknown,,ja-JP,"Unknown library",不明なライブラリ,0,不明なライブラリ
+cms,menu.delete_confirm,,ja-JP,"Are you sure you want to delete this menu item?",このメニュー項目を削除しますか？,0,このメニュー項目を削除しますか？
+cms,menu.delete_failed,,ja-JP,"Delete failed",削除に失敗しました,0,削除に失敗しました
+cms,menu.delete_forbidden,,ja-JP,"Menu item deletion is not allowed: {name}",メニュー項目の削除は許可されていません：{name},0,メニュー項目の削除は許可されていません：{name}
+cms,menu.delete_unknown_error,,ja-JP,"Error: An unknown error occurred while deleting the menu item",エラー：メニュー項目の削除中に不明なエラーが発生しました,0,エラー：メニュー項目の削除中に不明なエラーが発生しました
+cms,menu.deleted,,ja-JP,"Menu item deleted: {name}",メニュー項目を削除しました：{name},0,メニュー項目を削除しました：{name}
+cms,menu.external_link,,ja-JP,"External link",外部リンク,0,外部リンク
+cms,menu.field.node_name.label,,ja-JP,"Display text",表示テキスト,0,表示テキスト
+cms,menu.field.page.explanation,,ja-JP,"Select the page this menu item points to",このメニュー項目が指すページを選択,0,このメニュー項目が指すページを選択
+cms,menu.field.page.label,,ja-JP,Page,ページ,0,ページ
+cms,menu.field.type.external,,ja-JP,"Points to external page",外部ページを指しています,0,外部ページを指しています
+cms,menu.field.type.internal,,ja-JP,"Points to internal page",内部ページを指しています,0,内部ページを指しています
+cms,menu.field.type.label,,ja-JP,"Link type",リンクタイプ,0,リンクタイプ
+cms,menu.field.url.explanation,,ja-JP,"You can enter a custom URL (including mailto:// links)",カスタムURL（mailto://リンクを含む）を入力できます,0,カスタムURL（mailto://リンクを含む）を入力できます
+cms,menu.field.url.label,,ja-JP,"Custom URL",カスタムURL,0,カスタムURL
+cms,menu.form.name,,ja-JP,"Main menu item",メインメニュー項目,0,メインメニュー項目
+cms,menu.form.title_create,,ja-JP,"Create menu item",メニュー項目を作成,0,メニュー項目を作成
+cms,menu.form.title_edit,,ja-JP,"Edit menu item",メニュー項目を編集,0,メニュー項目を編集
+cms,menu.internal_link,,ja-JP,"Internal link",内部リンク,0,内部リンク
+cms,menu.move_error,,ja-JP,"Error: Unable to move menu item",エラー：メニュー項目を移動できません,0,エラー：メニュー項目を移動できません
+cms,menu.move_success,,ja-JP,"Menu item moved: {name}",メニュー項目を移動しました：{name},0,メニュー項目を移動しました：{name}
+cms,menu.new_child,,ja-JP,"New submenu item",新しいサブメニュー項目,0,新しいサブメニュー項目
+cms,menu.new_item,,ja-JP,"New menu item",新しいメニュー項目,0,新しいメニュー項目
+cms,menu.no_link_configured,,ja-JP,"No link configured",リンクが設定されていません,0,リンクが設定されていません
+cms,menu.root,,ja-JP,"Main menu",メインメニュー,0,メインメニュー
+cms,menu.saved,,ja-JP,"Menu item saved",メニュー項目を保存しました,0,メニュー項目を保存しました
+cms,menu.selection_help,,ja-JP,"Select a menu item to edit it, or create a new one.",メニュー項目を選択して編集するか、新しく作成してください。,0,メニュー項目を選択して編集するか、新しく作成してください。
+cms,menu.updated,,ja-JP,"Menu item updated",メニュー項目を更新しました,0,メニュー項目を更新しました
+cms,menu.validation.node_name_max_length,,ja-JP,"Display text must not exceed 255 characters",表示テキストは255文字以内にしてください,0,表示テキストは255文字以内にしてください
+cms,menu.validation.type_required,,ja-JP,"Choose whether the link points to an internal or external page",リンクが内部ページか外部ページかを選択,0,リンクが内部ページか外部ページかを選択
+cms,menu.validation.url_max_length,,ja-JP,"URL must not exceed 255 characters",URLは255文字以内にしてください,0,URLは255文字以内にしてください
+cms,menu.validation.url_required,,ja-JP,"Select a page or enter a URL",ページを選択またはURLを入力,0,ページを選択またはURLを入力
+cms,plainhtml.field.content.explanation,,ja-JP,"The HTML code you enter will appear on the website without modifications.",入力したHTMLコードはそのままウェブサイトに表示されます。,0,入力したHTMLコードはそのままウェブサイトに表示されます。
+cms,plainhtml.field.content.label,,ja-JP,"HTML code",HTMLコード,0,HTMLコード
+cms,plainhtml.form.name,,ja-JP,"HTML code (embed)",HTMLコード（埋め込み）,0,HTMLコード（埋め込み）
+cms,plainhtml.form.title,,ja-JP,"Edit HTML content",HTMLコンテンツを編集,0,HTMLコンテンツを編集
+cms,plainhtml.not_set,,ja-JP,"Configure the content",コンテンツを設定,0,コンテンツを設定
+cms,resource.delete_error,,ja-JP,"Error: Unable to delete resource(s)",エラー：リソースを削除できません,0,エラー：リソースを削除できません
+cms,resource.delete_failed,,ja-JP,"Delete failed",削除に失敗しました,0,削除に失敗しました
+cms,resource.delete_partial_error,,ja-JP,"{count} error(s) occurred during deletion",削除中に{count}件のエラーが発生しました,0,削除中に{count}件のエラーが発生しました
+cms,resource.deleted,,ja-JP,"Resource deleted",リソースを削除しました,0,リソースを削除しました
+cms,resource.deleted_multiple,,ja-JP,"Resources deleted",リソースを削除しました,0,リソースを削除しました
+cms,resource.error.add_failed,,ja-JP,"Unable to add resource tree entry.",リソースツリー項目を追加できません。,0,リソースツリー項目を追加できません。
+cms,resource.error.create_failed_for_path,,ja-JP,"Unable to create resource: {path}","リソースを作成できません: {path}",0,"リソースを作成できません: {path}"
+cms,resource.error.delete_denied,,ja-JP,"Delete denied for resource: {resource_id}","リソースの削除が拒否されました: {resource_id}",0,"リソースの削除が拒否されました: {resource_id}"
+cms,resource.error.delete_failed_for_id,,ja-JP,"Unable to delete resource: {resource_id}","リソースを削除できません: {resource_id}",0,"リソースを削除できません: {resource_id}"
+cms,resource.error.file_delete_failed_for_id,,ja-JP,"Unable to delete file for resource: {resource_id}","リソースのファイルを削除できません: {resource_id}",0,"リソースのファイルを削除できません: {resource_id}"
+cms,resource.error.import_file_failed,,ja-JP,"Unable to import file: {path}","ファイルをインポートできません: {path}",0,"ファイルをインポートできません: {path}"
+cms,resource.error.move_failed_for_id,,ja-JP,"Unable to move resource: {resource_id}","リソースを移動できません: {resource_id}",0,"リソースを移動できません: {resource_id}"
+cms,resource.error.not_found_by_id,,ja-JP,"Resource not found: {resource_id}","リソースが見つかりません: {resource_id}",0,"リソースが見つかりません: {resource_id}"
+cms,resource.error.path_exists_not_file,,ja-JP,"Resource path exists and is not a file: {path}","リソースパスは存在しますがファイルではありません: {path}",0,"リソースパスは存在しますがファイルではありません: {path}"
+cms,resource.error.protected_mutation,,ja-JP,"Protected system resource cannot be modified: {path}","保護されたシステムリソースは変更できません: {path}",0,"保護されたシステムリソースは変更できません: {path}"
+cms,resource.error.protected_path_mutation,,ja-JP,"Protected system resource path cannot be created or modified: {path}","保護されたシステムリソースパスは作成または変更できません: {path}",0,"保護されたシステムリソースパスは作成または変更できません: {path}"
+cms,resource.error.protected_subtree_mutation,,ja-JP,"A protected system resource in this subtree cannot be modified: {path}","このサブツリー内の保護されたシステムリソースは変更できません: {path}",0,"このサブツリー内の保護されたシステムリソースは変更できません: {path}"
+cms,resource.error.target_folder_not_found,,ja-JP,"Target folder not found after creation: {path}","作成後に対象フォルダーが見つかりません: {path}",0,"作成後に対象フォルダーが見つかりません: {path}"
+cms,resource.error.update_failed_for_path,,ja-JP,"Unable to update resource: {path}","リソースを更新できません: {path}",0,"リソースを更新できません: {path}"
+cms,resource.folder_count,,ja-JP,"{count} folder(s)","{count} フォルダ",0,"{count} フォルダ"
+cms,resource.move_error,,ja-JP,"Error: Unable to move resource",エラー：リソースを移動できません,0,エラー：リソースを移動できません
+cms,resource.move_failed,,ja-JP,"Move failed",移動に失敗しました,0,移動に失敗しました
+cms,resource.moved,,ja-JP,"Resource moved",リソースを移動しました,0,リソースを移動しました
+cms,resource.page_count,,ja-JP,"{count} page(s)","{count} ページ",0,"{count} ページ"
+cms,resource.renamed,,ja-JP,Renamed,名前を変更しました,0,名前を変更しました
+cms,resource.view_forbidden,,ja-JP,"403 - You do not have permission to view this content!","403 - このコンテンツを表示する権限がありません！",0,"403 - このコンテンツを表示する権限がありません！"
+cms,resource_acl.acl_not_found,,ja-JP,"ACL entry not found: {id}",ACLエントリが見つかりません：{id},0,ACLエントリが見つかりません：{id}
+cms,resource_acl.assign,,ja-JP,Assign,割り当て,0,割り当て
+cms,resource_acl.deleted,,ja-JP,"Assignment removed.",割り当てを削除しました。,0,割り当てを削除しました。
+cms,resource_acl.error_ambiguous_subject,,ja-JP,"The name {name} matches both a user and a user group. Select the correct type from the list.","名前 {name} はユーザーとユーザーグループの両方に一致します。一覧から正しいタイプを選択してください。",0,"名前 {name} はユーザーとユーザーグループの両方に一致します。一覧から正しいタイプを選択してください。"
+cms,resource_acl.error_ambiguous_subject_short,,ja-JP,"Ambiguous assignment",割り当てが曖昧です,0,割り当てが曖昧です
+cms,resource_acl.error_delete,,ja-JP,"Error: Unable to remove assignment.",エラー：割り当てを削除できません。,0,エラー：割り当てを削除できません。
+cms,resource_acl.error_missing_resource_id,,ja-JP,"Resource ID is missing",リソースIDが不足しています,0,リソースIDが不足しています
+cms,resource_acl.error_save,,ja-JP,"Error: Unable to save access settings.",エラー：アクセス設定を保存できません。,0,エラー：アクセス設定を保存できません。
+cms,resource_acl.error_subject_not_found,,ja-JP,"No user or user group found with the name {name}","{name} という名前のユーザーまたはユーザーグループが見つかりません",0,"{name} という名前のユーザーまたはユーザーグループが見つかりません"
+cms,resource_acl.error_subject_not_found_short,,ja-JP,"No matching subject found",一致する件名が見つかりません,0,一致する件名が見つかりません
+cms,resource_acl.inherit_help,,ja-JP,"When inheritance is enabled, the parent folder's permissions also apply to this resource.",継承が有効な場合、親フォルダの権限もこのリソースに適用されます。,0,継承が有効な場合、親フォルダの権限もこのリソースに適用されます。
+cms,resource_acl.inherit_label,,ja-JP,"Inherit permissions from parent folder",親フォルダから権限を継承,0,親フォルダから権限を継承
+cms,resource_acl.inherited_title,,ja-JP,"Inherited permissions",継承された権限,0,継承された権限
+cms,resource_acl.new_assignment,,ja-JP,"New assignment:",新しい割り当て：,0,新しい割り当て：
+cms,resource_acl.permission.create,,ja-JP,Create,作成,0,作成
+cms,resource_acl.permission.delete,,ja-JP,Delete,削除,0,削除
+cms,resource_acl.permission.edit,,ja-JP,Edit,編集,0,編集
+cms,resource_acl.permission.list,,ja-JP,List,一覧,0,一覧
+cms,resource_acl.permission.view,,ja-JP,View,表示,0,表示
+cms,resource_acl.resource_not_found,,ja-JP,"Resource not found: {id}",リソースが見つかりません：{id},0,リソースが見つかりません：{id}
+cms,resource_acl.search_placeholder,,ja-JP,"Search for user or group...",ユーザーまたはグループを検索...,0,ユーザーまたはグループを検索...
+cms,resource_acl.specific_help,,ja-JP,"Specific permissions always apply, regardless of the inheritance setting.",特定の権限は継承設定に関わらず常に適用されます。,0,特定の権限は継承設定に関わらず常に適用されます。
+cms,resource_acl.specific_title,,ja-JP,"Specific permissions",特定の権限,0,特定の権限
+cms,resource_acl.subject,,ja-JP,Subject,件名,0,件名
+cms,resource_acl.title,,ja-JP,Access,アクセス,0,アクセス
+cms,resource_acl.unknown_subject_type,,ja-JP,"Unknown ACL subject type: {type}",不明なACLサブジェクトタイプ：{type},0,不明なACLサブジェクトタイプ：{type}
+cms,resource_acl.unknown_type,,ja-JP,"Unknown ACL list type: {type}",不明なACLリストタイプ：{type},0,不明なACLリストタイプ：{type}
+cms,resource_acl.usergroup_assignment.added,,ja-JP,"User group assigned to resource:<br>{group} -> {target}","ユーザーグループをリソースに割り当てました：<br>{group} -> {target}",0,"ユーザーグループをリソースに割り当てました：<br>{group} -> {target}"
+cms,resource_acl.usergroup_assignment.error_add,,ja-JP,"Error: Unable to assign user group to resource:<br>{group} -> {target}","エラー：ユーザーグループをリソースに割り当てできません：<br>{group} -> {target}",0,"エラー：ユーザーグループをリソースに割り当てできません：<br>{group} -> {target}"
+cms,resource_acl.usergroup_assignment.error_add_generic,,ja-JP,"Error: Unable to assign user group to resource.",エラー：ユーザーグループをリソースに割り当てできません。,0,エラー：ユーザーグループをリソースに割り当てできません。
+cms,resource_acl.usergroup_assignment.error_remove,,ja-JP,"Error: Unable to remove user group from resource:<br>{group} -> {target}","エラー：ユーザーグループをリソースから削除できません：<br>{group} -> {target}",0,"エラー：ユーザーグループをリソースから削除できません：<br>{group} -> {target}"
+cms,resource_acl.usergroup_assignment.error_remove_generic,,ja-JP,"Error: Unable to remove user group from resource.",エラー：ユーザーグループをリソースから削除できません。,0,エラー：ユーザーグループをリソースから削除できません。
+cms,resource_acl.usergroup_assignment.removed,,ja-JP,"User group assignment removed:<br>{group} -> {target}","ユーザーグループの割り当てを削除しました：<br>{group} -> {target}",0,"ユーザーグループの割り当てを削除しました：<br>{group} -> {target}"
+cms,resource_browser.create_index_page,,ja-JP,"Create index page!",インデックスページを作成！,0,インデックスページを作成！
+cms,resource_browser.delete_file_confirm,,ja-JP,"Are you sure you want to delete this file?",このファイルを削除しますか？,0,このファイルを削除しますか？
+cms,resource_browser.delete_folder_confirm,,ja-JP,"Are you sure you want to delete this folder and all its contents?",このフォルダとすべての内容を削除しますか？,0,このフォルダとすべての内容を削除しますか？
+cms,resource_browser.delete_invalid_confirm,,ja-JP,"Are you sure you want to delete this invalid entry?",この無効なエントリを削除しますか？,0,この無効なエントリを削除しますか？
+cms,resource_browser.delete_webpage_confirm,,ja-JP,"Are you sure you want to delete this webpage?",このウェブページを削除しますか？,0,このウェブページを削除しますか？
+cms,resource_browser.help_create,,ja-JP,"Create folders and webpages within them.",フォルダとその中のウェブページを作成します。,0,フォルダとその中のウェブページを作成します。
+cms,resource_browser.help_move,,ja-JP,"Drag and drop to move items between folders.",ドラッグ＆ドロップでフォルダ間にアイテムを移動。,0,ドラッグ＆ドロップでフォルダ間にアイテムを移動。
+cms,resource_browser.insert,,ja-JP,Insert,挿入,0,挿入
+cms,resource_browser.invalid_entry,,ja-JP,"Invalid entry",無効なエントリ,0,無効なエントリ
+cms,resource_browser.new_domain,,ja-JP,"New domain",新しいドメイン,0,新しいドメイン
+cms,resource_browser.preview_index_page,,ja-JP,"Preview (index page)",プレビュー（インデックスページ）,0,プレビュー（インデックスページ）
+cms,resource_browser.root_not_found,,ja-JP,"Root node not found for the resource tree",リソースツリーのルートノードが見つかりません,0,リソースツリーのルートノードが見つかりません
+cms,resource_browser.select_tree_item,,ja-JP,"Select an item from the tree",ツリーから項目を選択,0,ツリーから項目を選択
+cms,resource_browser.site_structure,,ja-JP,"Site structure",サイト構造,0,サイト構造
+cms,richtext.assigned,,ja-JP,"Text content assigned",テキストコンテンツを割り当てました,0,テキストコンテンツを割り当てました
+cms,richtext.field.content.explanation,,ja-JP,"Format text freely, add images, and embed external content (e.g. YouTube). Use HTML view for embed codes.",テキストを自由にフォーマットし、画像を追加し、外部コンテンツ（例：YouTube）を埋め込めます。埋め込みコードにはHTMLビューを使用してください。,0,テキストを自由にフォーマットし、画像を追加し、外部コンテンツ（例：YouTube）を埋め込めます。埋め込みコードにはHTMLビューを使用してください。
+cms,richtext.field.content.label,,ja-JP,Content,コンテンツ,0,コンテンツ
+cms,richtext.field.name.explanation,,ja-JP,"Visible in the admin area only. Use this to identify the content when selecting it for display on public pages. Must be unique.",管理エリアにのみ表示されます。公開ページへの表示選択時にコンテンツを識別するために使用します。一意である必要があります。,0,管理エリアにのみ表示されます。公開ページへの表示選択時にコンテンツを識別するために使用します。一意である必要があります。
+cms,richtext.field.name.label,,ja-JP,"Name (identifier)",名前（識別子）,0,名前（識別子）
+cms,richtext.field.name.unique_error,,ja-JP,"An information content item with this name already exists",同名の情報コンテンツが既に存在します,0,同名の情報コンテンツが既に存在します
+cms,richtext.field.title.explanation,,ja-JP,"Appears as a title above the text. Leave empty for no title.",テキスト上部にタイトルとして表示されます。タイトルなしの場合は空欄にしてください。,0,テキスト上部にタイトルとして表示されます。タイトルなしの場合は空欄にしてください。
+cms,richtext.field.title.label,,ja-JP,Heading,見出し,0,見出し
+cms,richtext.form.name,,ja-JP,"Text content",テキストコンテンツ,0,テキストコンテンツ
+cms,richtext.form.title_create,,ja-JP,"Create text content",テキストコンテンツを作成,0,テキストコンテンツを作成
+cms,richtext.form.title_edit,,ja-JP,"Edit text content",テキストコンテンツを編集,0,テキストコンテンツを編集
+cms,richtext.not_set,,ja-JP,"No content chosen",コンテンツが選択されていません,0,コンテンツが選択されていません
+cms,richtext.saved,,ja-JP,"Content saved",コンテンツを保存しました,0,コンテンツを保存しました
+cms,richtext.select.form.title,,ja-JP,"Select text content",テキストコンテンツを選択,0,テキストコンテンツを選択
+cms,richtext.updated,,ja-JP,"Content updated",コンテンツを更新しました,0,コンテンツを更新しました
+cms,richtext.widget.choose,,ja-JP,"Select text content",テキストコンテンツを選択,0,テキストコンテンツを選択
+cms,richtext.widget.create,,ja-JP,"Create text content",テキストコンテンツを作成,0,テキストコンテンツを作成
+cms,richtext.widget.description,,ja-JP,"Freely editable text with images",画像付き自由編集テキスト,0,画像付き自由編集テキスト
+cms,richtext.widget.edit,,ja-JP,"Edit text content",テキストコンテンツを編集,0,テキストコンテンツを編集
+cms,richtext.widget.name,,ja-JP,"Editable text",編集可能テキスト,0,編集可能テキスト
+cms,tree.field.type.explanation,,ja-JP,"Select from the predefined trees",定義済みツリーから選択,0,定義済みツリーから選択
+cms,tree.field.type.label,,ja-JP,Tree,ツリー,0,ツリー
+cms,tree.invalid_parent_id,,ja-JP,"Invalid parent ID",無効な親ID,0,無効な親ID
+cms,tree.missing_type,,ja-JP,"Missing tree type",ツリータイプが不足しています,0,ツリータイプが不足しています
+cms,tree.no_connection_id,,ja-JP,"No widget connection ID given",ウィジェット接続IDが指定されていません,0,ウィジェット接続IDが指定されていません
+cms,tree.select_menu_item,,ja-JP,"Select a menu item from the tree",ツリーからメニュー項目を選択,0,ツリーからメニュー項目を選択
+cms,tree.unknown_type,,ja-JP,"Unknown tree item type: {type}",不明なツリー項目タイプ：{type},0,不明なツリー項目タイプ：{type}
+cms,webpage.create_for_params,,ja-JP,"Create a webpage for the following parameters: <br>{param_name}, {param_value}","次のパラメータのウェブページを作成：<br>{param_name}, {param_value}",0,"次のパラメータのウェブページを作成：<br>{param_name}, {param_value}"
+cms,webpage.create_for_widget,,ja-JP,"Create a webpage with the following content: <br><b>{widget}</b>",次のコンテンツを含むウェブページを作成：<br><b>{widget}</b>,0,次のコンテンツを含むウェブページを作成：<br><b>{widget}</b>
+cms,webpage.field.layout.explanation,,ja-JP,"The webpage layout structure determines where content elements can be placed on the page.",ウェブページのレイアウト構造によって、コンテンツ要素をページ上に配置できる場所が決まります。,0,ウェブページのレイアウト構造によって、コンテンツ要素をページ上に配置できる場所が決まります。
+cms,webpage.field.layout.label,,ja-JP,"Page type",ページタイプ,0,ページタイプ
+cms,webpage_domain.field.resource_name.explanation,,ja-JP,"Set this domain name in the DOMAIN_CONTEXT configuration so this domain and its child pages become active.",このドメイン名をDOMAIN_CONTEXT設定に設定して、このドメインとその子ページをアクティブにしてください。,0,このドメイン名をDOMAIN_CONTEXT設定に設定して、このドメインとその子ページをアクティブにしてください。
+cms,webpage_domain.field.resource_name.label,,ja-JP,"Domain name",ドメイン名,0,ドメイン名
+cms,webpage_domain.title_create,,ja-JP,"Add new domain",新しいドメインを追加,0,新しいドメインを追加
+cms,webpage_domain.title_edit,,ja-JP,"Edit domain",ドメインを編集,0,ドメインを編集
+cms,webpage_file.field.resource_name.explanation,,ja-JP,"This is the file name used in the URL. Avoid accented characters and spaces, and keep the correct file extension.",URLで使用するファイル名です。アクセント文字とスペースは避け、正しい拡張子を維持してください。,0,URLで使用するファイル名です。アクセント文字とスペースは避け、正しい拡張子を維持してください。
+cms,webpage_file.field.resource_name.label,,ja-JP,"SEO-friendly URL name",SEOフレンドリーなURL名,0,SEOフレンドリーなURL名
+cms,webpage_file.field.text.explanation,,ja-JP,"For images this may appear as a longer description below the title.",画像の場合、タイトル下に長い説明として表示される場合があります。,0,画像の場合、タイトル下に長い説明として表示される場合があります。
+cms,webpage_file.field.text.label,,ja-JP,Description,説明,0,説明
+cms,webpage_file.field.title.explanation,,ja-JP,"For images this may appear below the image.",画像の場合、画像の下に表示される場合があります。,0,画像の場合、画像の下に表示される場合があります。
+cms,webpage_file.field.title.label,,ja-JP,Title,タイトル,0,タイトル
+cms,webpage_file.title_edit,,ja-JP,"Edit file name",ファイル名を編集,0,ファイル名を編集
+cms,webpage_folder.field.resource_name.explanation,,ja-JP,"This is the real folder name used in the URL. Changing it later may cause visitors from search engines to see a 404 page.",これはURLで使用される実際のフォルダ名です。後で変更すると、検索エンジンからの訪問者に404ページが表示される可能性があります。,0,これはURLで使用される実際のフォルダ名です。後で変更すると、検索エンジンからの訪問者に404ページが表示される可能性があります。
+cms,webpage_folder.field.resource_name.label,,ja-JP,"SEO-friendly folder URL name",SEOフレンドリーなフォルダURL名,0,SEOフレンドリーなフォルダURL名
+cms,webpage_folder.title_create,,ja-JP,"Create new folder",新しいフォルダを作成,0,新しいフォルダを作成
+cms,webpage_folder.title_edit,,ja-JP,"Edit folder",フォルダを編集,0,フォルダを編集
+cms,webpage_from_path.subtitle,,ja-JP,"If you want to create this webpage, you can do it here. Before doing so, make sure the URL was not mistyped.",このウェブページを作成する場合はここで行えます。その前にURLが正しく入力されているか確認してください。,0,このウェブページを作成する場合はここで行えます。その前にURLが正しく入力されているか確認してください。
+cms,webpage_from_path.title,,ja-JP,"The requested webpage was not found!",要求されたウェブページが見つかりません！,0,要求されたウェブページが見つかりません！
+cms,webpage_page.field.description.explanation,,ja-JP,"Description meta tag, usually shown under the URL in search results.",説明メタタグ。通常、検索結果のURL下に表示されます。,0,説明メタタグ。通常、検索結果のURL下に表示されます。
+cms,webpage_page.field.description.label,,ja-JP,Description,説明,0,説明
+cms,webpage_page.field.keywords.explanation,,ja-JP,"Keywords meta tag with comma-separated values.",カンマ区切りのキーワードメタタグ。,0,カンマ区切りのキーワードメタタグ。
+cms,webpage_page.field.keywords.label,,ja-JP,Keywords,キーワード,0,キーワード
+cms,webpage_page.field.resource_name.explanation,,ja-JP,"This is the real URL name of the page. Change it later only when necessary.",これがページの実際のURL名です。必要な場合のみ後で変更してください。,0,これがページの実際のURL名です。必要な場合のみ後で変更してください。
+cms,webpage_page.field.resource_name.label,,ja-JP,"SEO-friendly URL name",SEOフレンドリーなURL名,0,SEOフレンドリーなURL名
+cms,webpage_page.field.title.explanation,,ja-JP,"HTML title meta tag shown in the browser window title.",ブラウザウィンドウのタイトルに表示されるHTMLタイトルメタタグ。,0,ブラウザウィンドウのタイトルに表示されるHTMLタイトルメタタグ。
+cms,webpage_page.field.title.label,,ja-JP,Title,タイトル,0,タイトル
+cms,webpage_page.title_create,,ja-JP,"Create new webpage",新しいウェブページを作成,0,新しいウェブページを作成
+cms,webpage_page.title_edit,,ja-JP,"Edit webpage",ウェブページを編集,0,ウェブページを編集
+cms,widget.insert.button,,ja-JP,Insert,挿入,0,挿入
+cms,widget.insert.icon_title,,ja-JP,"Insert content",コンテンツを挿入,0,コンテンツを挿入
+cms,widget.insert.placeholder,,ja-JP,"-- Insert content --","-- コンテンツを挿入 --",0,"-- コンテンツを挿入 --"
+cms,widget.insert_from_clipboard,,ja-JP,"Insert clipboard content here",ここにクリップボードの内容を挿入,0,ここにクリップボードの内容を挿入
+cms,widget_connection.added,,ja-JP,"Content element placed on the webpage",コンテンツ要素をウェブページに配置しました,0,コンテンツ要素をウェブページに配置しました
+cms,widget_connection.copied_to_clipboard,,ja-JP,"Content copied to clipboard",コンテンツをクリップボードにコピーしました,0,コンテンツをクリップボードにコピーしました
+cms,widget_connection.duplicate_not_allowed,,ja-JP,"This content element is already on this block and multiple placement is not allowed.",このコンテンツ要素はすでにこのブロックにあり、複数配置はできません。,0,このコンテンツ要素はすでにこのブロックにあり、複数配置はできません。
+cms,widget_connection.moved,,ja-JP,"Content element moved",コンテンツ要素を移動しました,0,コンテンツ要素を移動しました
+cms,widget_connection.remove_from_webpage,,ja-JP,"Remove from this webpage",このウェブページから削除,0,このウェブページから削除
+cms,widget_connection.removed,,ja-JP,"Content element removed from the webpage",コンテンツ要素をウェブページから削除しました,0,コンテンツ要素をウェブページから削除しました
+cms,widget_connection.select_widget_type,,ja-JP,"Choose the content type to insert",挿入するコンテンツタイプを選択,0,挿入するコンテンツタイプを選択
+cms,widget_connection_params.field.anchor.explanation,,ja-JP,"Anchor name that can be used in links to jump to this content on the page.",ページ上のこのコンテンツへジャンプするリンクで使用できるアンカー名。,0,ページ上のこのコンテンツへジャンプするリンクで使用できるアンカー名。
+cms,widget_connection_params.field.anchor.label,,ja-JP,Anchor,アンカー,0,アンカー
+cms,widget_connection_params.field.float.clear,,ja-JP,"New row",新しい行,0,新しい行
+cms,widget_connection_params.field.float.explanation,,ja-JP,"Content box alignment. Floated elements can appear next to each other.",コンテンツボックスの配置。フロート要素は横に並べることができます。,0,コンテンツボックスの配置。フロート要素は横に並べることができます。
+cms,widget_connection_params.field.float.label,,ja-JP,Alignment,配置,0,配置
+cms,widget_connection_params.field.float.left,,ja-JP,"Floated left",左フロート,0,左フロート
+cms,widget_connection_params.field.float.left_clear,,ja-JP,"Floated left in new row",新しい行で左フロート,0,新しい行で左フロート
+cms,widget_connection_params.field.float.none,,ja-JP,"No special alignment",特別な配置なし,0,特別な配置なし
+cms,widget_connection_params.field.float.right,,ja-JP,"Floated right",右フロート,0,右フロート
+cms,widget_connection_params.field.float.right_clear,,ja-JP,"Floated right in new row",新しい行で右フロート,0,新しい行で右フロート
+cms,widget_connection_params.field.height.explanation,,ja-JP,"Height in CSS format with unit (for example 100%, 200px, or auto).",単位付きCSS形式の高さ（例：100%、200px、またはauto）。,0,単位付きCSS形式の高さ（例：100%、200px、またはauto）。
+cms,widget_connection_params.field.height.label,,ja-JP,Height,高さ,0,高さ
+cms,widget_connection_params.field.margin_bottom.explanation,,ja-JP,"Bottom margin in CSS format with unit (for example 100% or 200px).",単位付きCSS形式の下マージン（例：100%または200px）。,0,単位付きCSS形式の下マージン（例：100%または200px）。
+cms,widget_connection_params.field.margin_bottom.label,,ja-JP,"Bottom margin",下マージン,0,下マージン
+cms,widget_connection_params.field.margin_left.explanation,,ja-JP,"Left margin in CSS format with unit (for example 100% or 200px).",単位付きCSS形式の左マージン（例：100%または200px）。,0,単位付きCSS形式の左マージン（例：100%または200px）。
+cms,widget_connection_params.field.margin_left.label,,ja-JP,"Left margin",左マージン,0,左マージン
+cms,widget_connection_params.field.margin_right.explanation,,ja-JP,"Right margin in CSS format with unit (for example 100% or 200px).",単位付きCSS形式の右マージン（例：100%または200px）。,0,単位付きCSS形式の右マージン（例：100%または200px）。
+cms,widget_connection_params.field.margin_right.label,,ja-JP,"Right margin",右マージン,0,右マージン
+cms,widget_connection_params.field.margin_top.explanation,,ja-JP,"Top margin in CSS format with unit (for example 100% or 200px).",単位付きCSS形式の上マージン（例：100%または200px）。,0,単位付きCSS形式の上マージン（例：100%または200px）。
+cms,widget_connection_params.field.margin_top.label,,ja-JP,"Top margin",上マージン,0,上マージン
+cms,widget_connection_params.field.width.explanation,,ja-JP,"Width in CSS format with unit (for example 100%, 200px, or auto).",単位付きCSS形式の幅（例：100%、200px、またはauto）。,0,単位付きCSS形式の幅（例：100%、200px、またはauto）。
+cms,widget_connection_params.field.width.label,,ja-JP,Width,幅,0,幅
+cms,widget_connection_params.missing_widget_id,,ja-JP,"Widget ID is missing",ウィジェットIDが不足しています,0,ウィジェットIDが不足しています
+cms,widget_connection_params.no_content_id,,ja-JP,"No content ID given",コンテンツIDが指定されていません,0,コンテンツIDが指定されていません
+cms,widget_connection_params.subtitle,,ja-JP,"Webpage: {page}",ウェブページ：{page},0,ウェブページ：{page}
+cms,widget_connection_params.title,,ja-JP,"Edit display settings",表示設定を編集,0,表示設定を編集
+cms,widget_connection_settings.field.is_last.explanation,,ja-JP,"Check this if this is the last column in the row. This helps keep spacing correct and prevents overlapping or broken layout.",行の最後の列の場合はチェックしてください。間隔を正しく保ち、重なりや崩れを防ぎます。,0,行の最後の列の場合はチェックしてください。間隔を正しく保ち、重なりや崩れを防ぎます。
+cms,widget_connection_settings.field.is_last.label,,ja-JP,"Last in row",行の最後,0,行の最後
+cms,widget_connection_settings.field.widget_width.label,,ja-JP,"Content width",コンテンツ幅,0,コンテンツ幅
+cms,widget_connection_settings.missing_widget_id,,ja-JP,"Widget ID is missing",ウィジェットIDが不足しています,0,ウィジェットIDが不足しています
+cms,widget_connection_settings.subtitle,,ja-JP,"Webpage: {page}",ウェブページ：{page},0,ウェブページ：{page}
+cms,widget_group.begin_delete_error,,ja-JP,"Error: Unable to delete opening block",エラー：開始ブロックを削除できません,0,エラー：開始ブロックを削除できません
+cms,widget_group.both_delete_error,,ja-JP,"Error: Unable to delete opening or closing block",エラー：開始または終了ブロックを削除できません,0,エラー：開始または終了ブロックを削除できません
+cms,widget_group.end_delete_error,,ja-JP,"Error: Unable to delete closing block",エラー：終了ブロックを削除できません,0,エラー：終了ブロックを削除できません
+cms,widget_group.end_missing_delete_error,,ja-JP,"Closing block not found and opening block deletion failed",終了ブロックが見つからず、開始ブロックの削除に失敗しました,0,終了ブロックが見つからず、開始ブロックの削除に失敗しました
+cms,widget_group.end_missing_removed_beginning,,ja-JP,"Closing block not found, opening block removed successfully",終了ブロックが見つかりません。開始ブロックを削除しました,0,終了ブロックが見つかりません。開始ブロックを削除しました
+cms,widget_group.remove_block,,ja-JP,"Remove block",ブロックを削除,0,ブロックを削除
+cms,widget_group.removed,,ja-JP,"Block removed from webpage",ブロックをウェブページから削除しました,0,ブロックをウェブページから削除しました
+cms,widget_preview.description,,ja-JP,Description,説明,0,説明
+cms,widget_preview.implemented,,ja-JP,Implemented,実装済み,0,実装済み
+cms,widget_preview.info.current_theme,,ja-JP,"Current theme",現在のテーマ,0,現在のテーマ
+cms,widget_preview.info.fallback,,ja-JP,Fallback,フォールバック,0,フォールバック
+cms,widget_preview.info.implemented,,ja-JP,Implemented,実装済み,0,実装済み
+cms,widget_preview.info.template,,ja-JP,Template,テンプレート,0,テンプレート
+cms,widget_preview.info.title,,ja-JP,"Widget preview",ウィジェットプレビュー,0,ウィジェットプレビュー
+cms,widget_preview.info.widget,,ja-JP,Widget,ウィジェット,0,ウィジェット
+cms,widget_preview.none,,ja-JP,"No mockable widgets found.",モック可能なウィジェットが見つかりません。,0,モック可能なウィジェットが見つかりません。
+cms,widget_preview.not_implemented,,ja-JP,"Not implemented",未実装,0,未実装
+cms,widget_preview.not_mockable_prefix,,ja-JP,Widget,ウィジェット,0,ウィジェット
+cms,widget_preview.not_mockable_suffix,,ja-JP,"does not implement iMockable.",iMockableを実装していません。,0,iMockableを実装していません。
+cms,widget_preview.not_registered,,ja-JP,"Widget not registered: {widget}",ウィジェットが登録されていません：{widget},0,ウィジェットが登録されていません：{widget}
+cms,widget_preview.redirecting,,ja-JP,"Redirecting to the correct theme...",正しいテーマにリダイレクト中...,0,正しいテーマにリダイレクト中...
+cms,widget_preview.title,,ja-JP,"Available widgets for preview",プレビュー用ウィジェット,0,プレビュー用ウィジェット
+cms,widget_preview.widget,,ja-JP,Widget,ウィジェット,0,ウィジェット
+common,actions,,ja-JP,Actions,操作,0,操作
+common,all,,ja-JP,All,すべて,0,すべて
+common,back,,ja-JP,Back,戻る,0,戻る
+common,calendar,,ja-JP,Calendar,カレンダー,0,カレンダー
+common,cancel,,ja-JP,Cancel,キャンセル,0,キャンセル
+common,choose_placeholder,,ja-JP,"-- Choose --","-- 選択してください --",0,"-- 選択してください --"
+common,delete,,ja-JP,Delete,削除,0,削除
+common,download,,ja-JP,Download,ダウンロード,0,ダウンロード
+common,edit,,ja-JP,Edit,編集,0,編集
+common,error,,ja-JP,Error,エラー,0,エラー
+common,error_save,,ja-JP,"Error: Unable to save",エラー：保存できません,0,エラー：保存できません
+common,id,,ja-JP,ID,ID,0,ID
+common,loading,,ja-JP,Loading...,読み込み中...,0,読み込み中...
+common,logout,,ja-JP,"Log out",ログアウト,0,ログアウト
+common,missing_required_url_params,,ja-JP,"Missing required URL parameters",必須URLパラメータが不足しています,0,必須URLパラメータが不足しています
+common,move_down,,ja-JP,"Move down",下に移動,0,下に移動
+common,move_up,,ja-JP,"Move up",上に移動,0,上に移動
+common,never,,ja-JP,Never,なし,0,なし
+common,no,,ja-JP,No,いいえ,0,いいえ
+common,no_changes,,ja-JP,"No changes made",変更はありません,0,変更はありません
+common,no_data,,ja-JP,"No data",データなし,0,データなし
+common,no_description,,ja-JP,"No description",説明なし,0,説明なし
+common,not_set,,ja-JP,"[not set]",【未設定】,0,【未設定】
+common,open,,ja-JP,Open,オープン,0,オープン
+common,operations,,ja-JP,Operations,操作,0,操作
+common,preview,,ja-JP,Preview,プレビュー,0,プレビュー
+common,read_more,,ja-JP,"Read more",続きを読む,0,続きを読む
+common,renamed,,ja-JP,Renamed,名前を変更しました,0,名前を変更しました
+common,save,,ja-JP,Save,保存,0,保存
+common,saved,,ja-JP,"Record saved",レコードを保存しました,0,レコードを保存しました
+common,saved_short,,ja-JP,Saved,保存済み,0,保存済み
+common,search,,ja-JP,Search,検索,0,検索
+common,unknown,,ja-JP,Unknown,不明,0,不明
+common,upload,,ja-JP,Upload,アップロード,0,アップロード
+common,user,,ja-JP,User,ユーザー,0,ユーザー
+common,width,,ja-JP,Width,幅,0,幅
+common,yes,,ja-JP,Yes,はい,0,はい
+datatable,column_visibility,,ja-JP,"Visible columns",表示列,0,表示列
+datatable,displayed_columns,,ja-JP,"Displayed columns",表示列,0,表示列
+datatable,empty_table,,ja-JP,"No data",データなし,0,データなし
+datatable,first,,ja-JP,First,最初,0,最初
+datatable,info_compact,,ja-JP,"_START_ - _END_ / _TOTAL_ items","_START_ - _END_ / 全_TOTAL_ 件",0,"_START_ - _END_ / 全_TOTAL_ 件"
+datatable,info_empty,,ja-JP,"No results",結果なし,0,結果なし
+datatable,info_filtered_compact,,ja-JP,"(filtered from _MAX_ items)","（_MAX_ 件中絞り込み）",0,"（_MAX_ 件中絞り込み）"
+datatable,info_filtered_html,,ja-JP,"<br><i>filtered from _MAX_ rows</i>","<br><i>_MAX_ 行中絞り込み</i>",0,"<br><i>_MAX_ 行中絞り込み</i>"
+datatable,info_full,,ja-JP,"_TOTAL_ displayable items (showing: _START_ - _END_)","表示可能 _TOTAL_ 件（表示中：_START_ - _END_）",0,"表示可能 _TOTAL_ 件（表示中：_START_ - _END_）"
+datatable,last,,ja-JP,Last,最後,0,最後
+datatable,length_menu,,ja-JP,"_MENU_ items/page","_MENU_ 件/ページ",0,"_MENU_ 件/ページ"
+datatable,loading_records,,ja-JP,Loading...,読み込み中...,0,読み込み中...
+datatable,next,,ja-JP,Next,次へ,0,次へ
+datatable,previous,,ja-JP,Previous,前へ,0,前へ
+datatable,processing,,ja-JP,Processing...,処理中...,0,処理中...
+datatable,search,,ja-JP,Search,検索,0,検索
+datatable,zero_records,,ja-JP,"No displayable items",表示可能な項目がありません,0,表示可能な項目がありません
+layout,admin_default.description,,ja-JP,"Single-column admin layout",シングルカラム管理レイアウト,0,シングルカラム管理レイアウト
+layout,admin_default.name,,ja-JP,"Admin 1-column","管理 1列",0,"管理 1列"
+layout,admin_empty.description,,ja-JP,"Empty admin layout",空の管理レイアウト,0,空の管理レイアウト
+layout,admin_empty.name,,ja-JP,"Empty admin",空の管理,0,空の管理
+layout,admin_login.description,,ja-JP,"Admin login layout",管理ログインレイアウト,0,管理ログインレイアウト
+layout,admin_login.name,,ja-JP,"Admin login",管理ログイン,0,管理ログイン
+layout,admin_menu.description,,ja-JP,"Displays the admin menu",管理メニューを表示,0,管理メニューを表示
+layout,admin_menu.name,,ja-JP,"Admin menu",管理メニュー,0,管理メニュー
+layout,admin_nomenu.description,,ja-JP,"Admin layout without menu",メニューなし管理レイアウト,0,メニューなし管理レイアウト
+layout,admin_nomenu.name,,ja-JP,"Admin without menu",メニューなし管理,0,メニューなし管理
+layout,header_right.description,,ja-JP,"Displays the quick access menu",クイックアクセスメニューを表示,0,クイックアクセスメニューを表示
+layout,header_right.name,,ja-JP,"Quick menu",クイックメニュー,0,クイックメニュー
+layout,main_menu.description,,ja-JP,"Displays the main menu",メインメニューを表示,0,メインメニューを表示
+layout,main_menu.name,,ja-JP,"Main menu",メインメニュー,0,メインメニュー
+layout,public_2row.description,,ja-JP,"Two-column public layout",2カラム公開レイアウト,0,2カラム公開レイアウト
+layout,public_2row.hero.balanced_life,,ja-JP,"Want to live a more balanced life?",よりバランスのとれた生活を送りたいですか？,0,よりバランスのとれた生活を送りたいですか？
+layout,public_2row.hero.better_quality_of_life,,ja-JP,"Want a better quality of life?",より良い生活の質を望みますか？,0,より良い生活の質を望みますか？
+layout,public_2row.hero.conflict_management,,ja-JP,"Want to handle conflicts better?",紛争をより上手く処理したいですか？,0,紛争をより上手く処理したいですか？
+layout,public_2row.hero.equal_partner,,ja-JP,"Want to be treated as an equal partner?",対等なパートナーとして扱われたいですか？,0,対等なパートナーとして扱われたいですか？
+layout,public_2row.hero.self_discovery,,ja-JP,"Want to understand yourself better?",自分自身をより深く理解したいですか？,0,自分自身をより深く理解したいですか？
+layout,public_2row.hero.solution,,ja-JP,"The solution: TeamSolution!",ソリューション：TeamSolution！,0,ソリューション：TeamSolution！
+layout,public_2row.hero.success_and_happiness,,ja-JP,"Want to be successful and happy?",成功して幸せになりたいですか？,0,成功して幸せになりたいですか？
+layout,public_2row.name,,ja-JP,2-column,2列,0,2列
+layout,public_default.description,,ja-JP,"Single-column public layout",シングルカラム公開レイアウト,0,シングルカラム公開レイアウト
+layout,public_default.name,,ja-JP,1-column,1列,0,1列
+layout,public_empty.description,,ja-JP,"Empty layout for simple responses",シンプルなレスポンス用の空レイアウト,0,シンプルなレスポンス用の空レイアウト
+layout,public_empty.name,,ja-JP,Empty,空,0,空
+layout,public_login.description,,ja-JP,"Login layout",ログインレイアウト,0,ログインレイアウト
+layout,public_login.name,,ja-JP,Login,ログイン,0,ログイン
+layout,public_preview.description,,ja-JP,"Preview layout",レイアウトをプレビュー,0,レイアウトをプレビュー
+layout,public_preview.name,,ja-JP,Preview,プレビュー,0,プレビュー
+layout,top_menu_admin.description,,ja-JP,"Displays the admin top menu",管理トップメニューを表示,0,管理トップメニューを表示
+layout,top_menu_admin.name,,ja-JP,"Admin top menu",管理トップメニュー,0,管理トップメニュー
+layout,unknown.description,,ja-JP,"Layout not configured",レイアウトが設定されていません,0,レイアウトが設定されていません
+layout,unknown.name,,ja-JP,"Unknown layout",不明なレイアウト,0,不明なレイアウト
+layout,widget_previewer.description,,ja-JP,"Minimal layout for widget previews",ウィジェットプレビュー用の最小レイアウト,0,ウィジェットプレビュー用の最小レイアウト
+layout,widget_previewer.name,,ja-JP,"Widget previewer",ウィジェットプレビューツール,0,ウィジェットプレビューツール
+mcp,tokens.col.actions,,ja-JP,Actions,操作,0,操作
+mcp,tokens.col.created,,ja-JP,Created,Created,0,Created
+mcp,tokens.col.expires,,ja-JP,Expires,Expires,0,Expires
+mcp,tokens.col.last_used,,ja-JP,"Last used","Last used",0,"Last used"
+mcp,tokens.col.name,,ja-JP,Name,Name,0,Name
+mcp,tokens.col.prefix,,ja-JP,Prefix,Prefix,0,Prefix
+mcp,tokens.col.status,,ja-JP,Status,ステータス,0,ステータス
+mcp,tokens.create,,ja-JP,"Create token","Create token",0,"Create token"
+mcp,tokens.create_title,,ja-JP,"Create token","Create token",0,"Create token"
+mcp,tokens.created_help,,ja-JP,"Copy this user-bound token now. It will not be shown again.",このユーザーに紐づくトークンを今すぐコピーしてください。再表示されません。,0,このユーザーに紐づくトークンを今すぐコピーしてください。再表示されません。
+mcp,tokens.created_title,,ja-JP,"Token created","Token created",0,"Token created"
+mcp,tokens.description,,ja-JP,"Create and revoke MCP access tokens tied to your user account.",ユーザーアカウントに紐づくMCPアクセストークンを作成・失効できます。,0,ユーザーアカウントに紐づくMCPアクセストークンを作成・失効できます。
+mcp,tokens.empty,,ja-JP,"No MCP tokens yet.",MCPトークンはまだありません。,0,MCPトークンはまだありません。
+mcp,tokens.endpoint,,ja-JP,"MCP endpoint","MCP endpoint",0,"MCP endpoint"
+mcp,tokens.existing_title,,ja-JP,"Existing tokens","Existing tokens",0,"Existing tokens"
+mcp,tokens.expiry,,ja-JP,Expiry,Expiry,0,Expiry
+mcp,tokens.expiry_30,,ja-JP,"30 days","30 days",0,"30 days"
+mcp,tokens.expiry_365,,ja-JP,"1 year","1 year",0,"1 year"
+mcp,tokens.expiry_90,,ja-JP,"90 days","90 days",0,"90 days"
+mcp,tokens.expiry_never,,ja-JP,"No expiry","No expiry",0,"No expiry"
+mcp,tokens.name,,ja-JP,Name,Name,0,Name
+mcp,tokens.name_placeholder,,ja-JP,"Claude Desktop - local","Claude Desktop - local",0,"Claude Desktop - local"
+mcp,tokens.never,,ja-JP,Never,なし,0,なし
+mcp,tokens.revoke,,ja-JP,Revoke,Revoke,0,Revoke
+mcp,tokens.revoke_confirm,,ja-JP,"Revoke this MCP token?",このMCPトークンを失効しますか？,0,このMCPトークンを失効しますか？
+mcp,tokens.security_note,,ja-JP,"MCP clients using one of these tokens run as your Radaptor user and have the same permissions you have. Keep tokens secret and revoke any token you no longer use.",これらのトークンを使うMCPクライアントは、あなたのRadaptorユーザーとして実行され、同じ権限を持ちます。トークンは秘密に保ち、不要になったものは失効してください。,0,これらのトークンを使うMCPクライアントは、あなたのRadaptorユーザーとして実行され、同じ権限を持ちます。トークンは秘密に保ち、不要になったものは失効してください。
+mcp,tokens.status.active,,ja-JP,Active,Active,0,Active
+mcp,tokens.status.expired,,ja-JP,Expired,Expired,0,Expired
+mcp,tokens.status.revoked,,ja-JP,Revoked,Revoked,0,Revoked
+mcp,tokens.title,,ja-JP,"MCP tokens",MCPトークン,0,MCPトークン
+record_action,datasheet,,ja-JP,Datasheet,データシート,0,データシート
+record_action,versions,,ja-JP,Versions,バージョン,0,バージョン
+record_meta,created_by,,ja-JP,"Created by",作成者,0,作成者
+record_meta,last_modified,,ja-JP,"Last modified",最終更新,0,最終更新
+resource,new_folder,,ja-JP,"New folder",新しいフォルダ,0,新しいフォルダ
+resource,new_webpage,,ja-JP,"New webpage",新しいウェブページ,0,新しいウェブページ
+resource,properties,,ja-JP,Properties,プロパティ,0,プロパティ
+resource,security,,ja-JP,Security,セキュリティ,0,セキュリティ
+resource,upload_file,,ja-JP,"Upload file...",ファイルをアップロード...,0,ファイルをアップロード...
+response_error,access_denied,,ja-JP,"Access denied",アクセス拒否,0,アクセス拒否
+response_error,access_restricted,,ja-JP,"Access restricted",アクセス制限,0,アクセス制限
+response_error,forbidden.message,,ja-JP,"You do not have permission to access this resource.",このリソースへのアクセス権限がありません。,0,このリソースへのアクセス権限がありません。
+response_error,forbidden.title,,ja-JP,Forbidden,アクセス禁止,0,アクセス禁止
+response_error,internal.contact_support,,ja-JP,"If the problem persists, please contact our support team.",問題が解決しない場合は、サポートチームにお問い合わせください。,0,問題が解決しない場合は、サポートチームにお問い合わせください。
+response_error,internal.go_back_previous_page,,ja-JP,"Go back to the previous page using your browser's back button",ブラウザの戻るボタンで前のページに戻る,0,ブラウザの戻るボタンで前のページに戻る
+response_error,internal.intro,,ja-JP,"We apologize for the inconvenience. Our team has been notified and we are working to fix this issue.",ご不便をおかけして申し訳ございません。チームに通知し、問題の解決に取り組んでいます。,0,ご不便をおかけして申し訳ございません。チームに通知し、問題の解決に取り組んでいます。
+response_error,internal.reference_label,,ja-JP,Reference,参照,0,参照
+response_error,internal.refresh_page,,ja-JP,"Refresh this page",このページを更新,0,このページを更新
+response_error,internal.title,,ja-JP,"Oops! Something went wrong on our end.",申し訳ございません。システムエラーが発生しました。,0,申し訳ございません。システムエラーが発生しました。
+response_error,internal.try_actions,,ja-JP,"You can try to:",以下をお試しください：,0,以下をお試しください：
+response_error,internal.try_again_in_a_few_minutes,,ja-JP,"Try again in a few minutes",数分後にもう一度お試しください,0,数分後にもう一度お試しください
+runtime_diagnostics,card.database,,ja-JP,Database,Database,0,Database
+runtime_diagnostics,card.email,,ja-JP,"Email safety","Email safety",0,"Email safety"
+runtime_diagnostics,card.environment,,ja-JP,Environment,Environment,0,Environment
+runtime_diagnostics,card.mcp,,ja-JP,MCP,MCP,0,MCP
+runtime_diagnostics,card.packages,,ja-JP,Packages,Packages,0,Packages
+runtime_diagnostics,card.redis,,ja-JP,Redis,Redis,0,Redis
+runtime_diagnostics,card.warnings,,ja-JP,Warnings,Warnings,0,Warnings
+runtime_diagnostics,no,,ja-JP,no,no,0,no
+runtime_diagnostics,none,,ja-JP,None,None,0,None
+runtime_diagnostics,safe_to_test,,ja-JP,"Safe to test","Safe to test",0,"Safe to test"
+runtime_diagnostics,subtitle,,ja-JP,"Effective runtime state with secrets redacted.",シークレットを伏せた有効なランタイム状態です。,0,シークレットを伏せた有効なランタイム状態です。
+runtime_diagnostics,title,,ja-JP,"Runtime diagnostics",ランタイム診断,0,ランタイム診断
+runtime_diagnostics,yes,,ja-JP,yes,yes,0,yes
+selection,delete_invalid_entry_confirm,,ja-JP,"Are you sure you want to delete this invalid entry?",この無効なエントリを削除しますか？,0,この無効なエントリを削除しますか？
+selection,delete_selected,,ja-JP,"Delete selected",選択を削除,0,選択を削除
+selection,delete_selected_confirm,,ja-JP,"Are you sure you want to delete all selected items?",選択したすべての項目を削除しますか？,0,選択したすべての項目を削除しますか？
+selection,group,,ja-JP,"Group selection",グループ選択,0,グループ選択
+selection,invalid_entry,,ja-JP,"Invalid entry",無効なエントリ,0,無効なエントリ
+selection,multiple,,ja-JP,"Multiple selection",複数選択,0,複数選択
+selection,selected_items,,ja-JP,"Selected items",選択した項目,0,選択した項目
+social,disqus.comments_link,,ja-JP,"Disqus comments",Disqusコメント,0,Disqusコメント
+social,disqus.enable_javascript,,ja-JP,"JavaScript must be enabled to display",表示するにはJavaScriptを有効にしてください,0,表示するにはJavaScriptを有効にしてください
+social,disqus.powered_by,,ja-JP,"comments powered by",コメント提供：,0,コメント提供：
+system_message,default_header,,ja-JP,"System message",システムメッセージ,0,システムメッセージ
+theme,error.description,,ja-JP,"Fallback error theme",フォールバックエラーテーマ,0,フォールバックエラーテーマ
+theme,error.name,,ja-JP,Error,エラー,0,エラー
+theme,radaptor_portal_admin.description,,ja-JP,"Bootstrap 5 admin theme with portal neon/glass styling","ポータルネオン/ガラススタイルのBootstrap 5管理テーマ",0,"ポータルネオン/ガラススタイルのBootstrap 5管理テーマ"
+theme,radaptor_portal_admin.name,,ja-JP,RadaptorPortalAdmin,RadaptorPortalAdmin,0,RadaptorPortalAdmin
+theme,so_admin.description,,ja-JP,"SO-like admin theme",SOスタイル管理テーマ,0,SOスタイル管理テーマ
+theme,so_admin.name,,ja-JP,SO-Admin,SO-Admin,0,SO-Admin
+widget,admin_menu.description,,ja-JP,"Manage the admin menu tree",管理メニューツリーを管理,0,管理メニューツリーを管理
+widget,admin_menu.name,,ja-JP,"Admin menu administration",管理メニュー管理,0,管理メニュー管理
+widget,blog.description,,ja-JP,Blog,ブログ,0,ブログ
+widget,blog.name,,ja-JP,Blog,ブログ,0,ブログ
+widget,blog_list.description,,ja-JP,"Blog list",ブログ一覧,0,ブログ一覧
+widget,blog_list.name,,ja-JP,"Blog list",ブログ一覧,0,ブログ一覧
+widget,cli_runner.description,,ja-JP,"Run CLI commands from the admin panel.",管理パネルからCLIコマンドを実行します。,0,管理パネルからCLIコマンドを実行します。
+widget,cli_runner.name,,ja-JP,"CLI Runner",CLIランナー,0,CLIランナー
+widget,file_upload.description,,ja-JP,"File upload",ファイルアップロード,0,ファイルアップロード
+widget,file_upload.name,,ja-JP,"File upload",ファイルアップロード,0,ファイルアップロード
+widget,form.description,,ja-JP,"Displays a configured form",設定済みフォームを表示,0,設定済みフォームを表示
+widget,form.name,,ja-JP,Form,フォーム,0,フォーム
+widget,group_beginning.description,,ja-JP,"Separately managed content unit that can contain jointly styled elements.",共通スタイルの要素を含むことができる、独立管理のコンテンツユニット。,0,共通スタイルの要素を含むことができる、独立管理のコンテンツユニット。
+widget,group_beginning.name,,ja-JP,"Content block",コンテンツブロック,0,コンテンツブロック
+widget,group_end.description,,ja-JP,"End of a separately managed content unit.",独立管理コンテンツユニットの終端。,0,独立管理コンテンツユニットの終端。
+widget,group_end.name,,ja-JP,"End of content block",コンテンツブロックの終端,0,コンテンツブロックの終端
+widget,import_export.description,,ja-JP,"Central CSV import and export tools",CSVインポート・エクスポートツール,0,CSVインポート・エクスポートツール
+widget,import_export.name,,ja-JP,"Import / Export","インポート / エクスポート",0,"インポート / エクスポート"
+widget,js_tree.description,,ja-JP,"Displays and manages a hierarchical tree of admin resources",管理リソースの階層ツリーを表示・管理,0,管理リソースの階層ツリーを表示・管理
+widget,js_tree.name,,ja-JP,"Tree browser",ツリーブラウザ,0,ツリーブラウザ
+widget,js_tree.settings,,ja-JP,"Tree settings",ツリー設定,0,ツリー設定
+widget,main_menu.description,,ja-JP,"Manage the main menu tree",メインメニューツリーを管理,0,メインメニューツリーを管理
+widget,main_menu.name,,ja-JP,"Main menu administration",メインメニュー管理,0,メインメニュー管理
+widget,phpinfo_frame.description,,ja-JP,"Show PHP runtime information inside the admin layout.",管理レイアウト内にPHP実行環境情報を表示します。,0,管理レイアウト内にPHP実行環境情報を表示します。
+widget,phpinfo_frame.name,,ja-JP,"PHPinfo frame",PHPinfoフレーム,0,PHPinfoフレーム
+widget,phpinfo_frame.open_raw,,ja-JP,"Open raw",生データを開く,0,生データを開く
+widget,phpinfo_frame.title,,ja-JP,PHPinfo,PHPinfo,0,PHPinfo
+widget,plain_html.description,,ja-JP,"HTML code (embed)",HTMLコード（埋め込み）,0,HTMLコード（埋め込み）
+widget,plain_html.name,,ja-JP,"HTML code (embed)",HTMLコード（埋め込み）,0,HTMLコード（埋め込み）
+widget,resource_acl_selector.description,,ja-JP,"Configure resource access permissions",リソースアクセス権限を設定,0,リソースアクセス権限を設定
+widget,resource_acl_selector.name,,ja-JP,"Resource access settings",リソースアクセス設定,0,リソースアクセス設定
+widget,resource_tree.description,,ja-JP,"Manage webpages, web folders, and uploaded files here.",ウェブページ、ウェブフォルダ、アップロードファイルをここで管理します。,0,ウェブページ、ウェブフォルダ、アップロードファイルをここで管理します。
+widget,resource_tree.name,,ja-JP,"Webpage structure",ウェブページ構造,0,ウェブページ構造
+widget,rich_text.description,,ja-JP,"Freely editable text with images",画像付き自由編集テキスト,0,画像付き自由編集テキスト
+widget,rich_text.name,,ja-JP,"Editable text",編集可能テキスト,0,編集可能テキスト
+widget,role_list.description,,ja-JP,"Displays the role tree",ロールツリーを表示,0,ロールツリーを表示
+widget,role_list.name,,ja-JP,"Role list",ロール一覧,0,ロール一覧
+widget,role_selector.description,,ja-JP,"Role selector",ロール選択,0,ロール選択
+widget,role_selector.name,,ja-JP,"Role selector",ロール選択,0,ロール選択
+widget,tag_list.description,,ja-JP,"Tag list",タグ一覧,0,タグ一覧
+widget,tag_list.name,,ja-JP,"Tag list",タグ一覧,0,タグ一覧
+widget,template_engine_demo_blade.description,,ja-JP,"Demonstrates rendering a Blade template inside Radaptor.",Radaptor内でBladeテンプレートをレンダリングするデモです。,0,Radaptor内でBladeテンプレートをレンダリングするデモです。
+widget,template_engine_demo_blade.name,,ja-JP,"Blade template engine demo",Bladeテンプレートエンジンデモ,0,Bladeテンプレートエンジンデモ
+widget,template_engine_demo_php.description,,ja-JP,"Demonstrates rendering a native PHP template inside Radaptor.",Radaptor内でネイティブPHPテンプレートをレンダリングするデモです。,0,Radaptor内でネイティブPHPテンプレートをレンダリングするデモです。
+widget,template_engine_demo_php.name,,ja-JP,"PHP template engine demo",PHPテンプレートエンジンデモ,0,PHPテンプレートエンジンデモ
+widget,template_engine_demo_twig.description,,ja-JP,"Demonstrates rendering a Twig template inside Radaptor.",Radaptor内でTwigテンプレートをレンダリングするデモです。,0,Radaptor内でTwigテンプレートをレンダリングするデモです。
+widget,template_engine_demo_twig.name,,ja-JP,"Twig template engine demo",Twigテンプレートエンジンデモ,0,Twigテンプレートエンジンデモ
+widget,user_description.description,,ja-JP,"Displays the details of a user",ユーザーの詳細を表示,0,ユーザーの詳細を表示
+widget,user_description.name,,ja-JP,"User details",ユーザー詳細,0,ユーザー詳細
+widget,user_list.description,,ja-JP,"User list",ユーザー一覧,0,ユーザー一覧
+widget,user_list.name,,ja-JP,"User list",ユーザー一覧,0,ユーザー一覧
+widget,usergroup_list.description,,ja-JP,"Displays the user group tree",ユーザーグループツリーを表示,0,ユーザーグループツリーを表示
+widget,usergroup_list.name,,ja-JP,"User group list",ユーザーグループ一覧,0,ユーザーグループ一覧
+widget,usergroup_selector.description,,ja-JP,"Select user groups for a user",ユーザーのユーザーグループを選択,0,ユーザーのユーザーグループを選択
+widget,usergroup_selector.name,,ja-JP,"User group selector",ユーザーグループ選択,0,ユーザーグループ選択
+widget,widget_error.description,,ja-JP,"Invalid widget",無効なウィジェット,0,無効なウィジェット
+widget,widget_error.invalid_type,,ja-JP,"Non-existent content type: {type}",存在しないコンテンツタイプ：{type},0,存在しないコンテンツタイプ：{type}
+widget,widget_error.name,,ja-JP,"Invalid widget",無効なウィジェット,0,無効なウィジェット
+widget,widget_preview.description,,ja-JP,"Preview any widget with mock data. URL params: widget (required), theme (optional)",モックデータでウィジェットをプレビューします。URLパラメータ：widget（必須）、theme（オプション）,0,モックデータでウィジェットをプレビューします。URLパラメータ：widget（必須）、theme（オプション）
+widget,widget_preview.name,,ja-JP,"Widget preview",ウィジェットプレビュー,0,ウィジェットプレビュー
+workbench,tm_apply,,ja-JP,Apply,適用,0,適用
+workbench,tm_no_results,,ja-JP,"No suggestions",候補なし,0,候補なし
+workbench,tm_uses,,ja-JP,uses,使用,0,使用
+admin,menu.mailpit,,ja-JP,Mailpit,Mailpit,0,Mailpit
+admin,email_outbox.recipients_delivery_counts,,ja-JP,"({sent} sent / {failed} failed)","({sent} 件送信 / {failed} 件失敗)",0,"({sent} 件送信 / {failed} 件失敗)"
+admin,email_outbox.col.job,,ja-JP,Job,ジョブ,0,ジョブ
+admin,email_outbox.col.dead_lettered,,ja-JP,"Dead lettered",デッドレター化,0,デッドレター化
+admin,email_outbox.pagination.previous,,ja-JP,Previous,前へ,0,前へ
+admin,email_outbox.pagination.next,,ja-JP,Next,次へ,0,次へ
+runtime_diagnostics,card.package_roots,,ja-JP,"Package roots",パッケージルート,0,パッケージルート
+runtime_diagnostics,field.environment,,ja-JP,Environment,環境,0,環境
+runtime_diagnostics,field.application,,ja-JP,Application,アプリケーション,0,アプリケーション
+runtime_diagnostics,field.domain_context,,ja-JP,"Domain context",ドメインコンテキスト,0,ドメインコンテキスト
+runtime_diagnostics,field.runtime,,ja-JP,Runtime,ランタイム,0,ランタイム
+runtime_diagnostics,field.smtp_host,,ja-JP,"SMTP host",SMTPホスト,0,SMTPホスト
+runtime_diagnostics,field.smtp_port,,ja-JP,"SMTP port",SMTPポート,0,SMTPポート
+runtime_diagnostics,field.using_catcher,,ja-JP,"Using catcher",キャッチャー使用中,0,キャッチャー使用中
+runtime_diagnostics,field.catcher_host,,ja-JP,"Catcher host",キャッチャーホスト,0,キャッチャーホスト
+runtime_diagnostics,field.catcher_smtp_port,,ja-JP,"Catcher SMTP port",キャッチャーSMTPポート,0,キャッチャーSMTPポート
+runtime_diagnostics,field.mailpit_ui_url,,ja-JP,"Mailpit UI URL","Mailpit UI URL",0,"Mailpit UI URL"
+runtime_diagnostics,field.driver,,ja-JP,Driver,ドライバー,0,ドライバー
+runtime_diagnostics,field.host,,ja-JP,Host,ホスト,0,ホスト
+runtime_diagnostics,field.port,,ja-JP,Port,ポート,0,ポート
+runtime_diagnostics,field.database,,ja-JP,Database,データベース,0,データベース
+runtime_diagnostics,field.username,,ja-JP,Username,ユーザー名,0,ユーザー名
+runtime_diagnostics,field.password,,ja-JP,Password,パスワード,0,パスワード
+runtime_diagnostics,field.dsn,,ja-JP,DSN,DSN,0,DSN
+runtime_diagnostics,field.session,,ja-JP,Session,セッション,0,セッション
+runtime_diagnostics,field.cache,,ja-JP,Cache,キャッシュ,0,キャッシュ
+runtime_diagnostics,field.test,,ja-JP,Test,テスト,0,テスト
+runtime_diagnostics,field.public_url,,ja-JP,"Public URL",公開URL,0,公開URL
+runtime_diagnostics,field.allowed_origins,,ja-JP,"Allowed origins",許可されたオリジン,0,許可されたオリジン
+runtime_diagnostics,field.enabled_hint,,ja-JP,"Enabled hint",有効化ヒント,0,有効化ヒント
+runtime_diagnostics,field.mode,,ja-JP,Mode,モード,0,モード
+runtime_diagnostics,field.local_manifest,,ja-JP,"Local manifest",ローカルマニフェスト,0,ローカルマニフェスト
+runtime_diagnostics,field.local_lock,,ja-JP,"Local lock",ローカルロック,0,ローカルロック
+runtime_diagnostics,field.workspace_dev_mode,,ja-JP,"Workspace dev mode",ワークスペース開発モード,0,ワークスペース開発モード
+runtime_diagnostics,field.local_overrides_disabled,,ja-JP,"Local overrides disabled",ローカル上書き無効,0,ローカル上書き無効
+runtime_diagnostics,col.package,,ja-JP,Package,パッケージ,0,パッケージ
+runtime_diagnostics,col.source,,ja-JP,Source,ソース,0,ソース
+runtime_diagnostics,col.version,,ja-JP,Version,バージョン,0,バージョン
+runtime_diagnostics,col.active_path,,ja-JP,"Active path",有効なパス,0,有効なパス
+cms,template.missing,,ja-JP,"Missing template:",テンプレートがありません:,0,テンプレートがありません:
+cms,widget_preview.server_html_preview,,ja-JP,"Server HTML preview",サーバーHTMLプレビュー,0,サーバーHTMLプレビュー
+cms,widget_preview.subtree_json,,ja-JP,"Widget subtree JSON",ウィジェットサブツリーJSON,0,ウィジェットサブツリーJSON
+cms,widget_preview.subtree_json_description,,ja-JP,"Extracted from the same SDUI JSON document available through Open JSON.","「JSONを開く」から利用できる同じSDUI JSONドキュメントから抽出されます。",0,"「JSONを開く」から利用できる同じSDUI JSONドキュメントから抽出されます。"
+cms,widget_preview.open_json,,ja-JP,"Open JSON",JSONを開く,0,JSONを開く
+cms,widget_preview.loading_json_preview,,ja-JP,"Loading JSON preview...",JSONプレビューを読み込み中...,0,JSONプレビューを読み込み中...
+cms,widget_preview.sdui_subtree_help,,ja-JP,"Showing the widget subtree extracted from the full SDUI JSON document.","完全なSDUI JSONドキュメントから抽出したウィジェットサブツリーを表示しています。",0,"完全なSDUI JSONドキュメントから抽出したウィジェットサブツリーを表示しています。"
+cms,widget_preview.template_scope_note,,ja-JP,"This support check only looks at the resolved preview HTML template of the widget root node.",このサポートチェックは、ウィジェットルートノードの解決済みプレビューHTMLテンプレートのみを確認します。,0,このサポートチェックは、ウィジェットルートノードの解決済みプレビューHTMLテンプレートのみを確認します。
+social,disqus.brand,,ja-JP,Disqus,Disqus,0,Disqus
+layout,public_2row.brand,,ja-JP,TeamSolution,TeamSolution,0,TeamSolution
+theme,template_engine_demo.col.name,,ja-JP,Name,名前,0,名前
+theme,template_engine_demo.col.email,,ja-JP,Email,メール,0,メール
+theme,template_engine_demo.col.role,,ja-JP,Role,ロール,0,ロール
+theme,template_engine_demo.engine_title,,ja-JP,"{engine} Template Engine",{engine}テンプレートエンジン,0,{engine}テンプレートエンジン
+theme,template_engine_demo.source_title,,ja-JP,"Template Source",テンプレートソース,0,テンプレートソース
+theme,template_engine_demo.rendered_output_title,,ja-JP,"Rendered Output",レンダリング結果,0,レンダリング結果
+layout,admin_empty.sign_in_to_continue,,ja-JP,"Sign in to continue.",続行するにはログインしてください。,0,続行するにはログインしてください。
+cms,resource.field.locale.label,,ja-JP,"Content locale",コンテンツロケール,0,コンテンツロケール
+cms,resource.field.locale.explanation,,ja-JP,"Select a fixed locale for this resource, or leave it dynamic/inherited.","このリソースに固定ロケールを選択するか、動的/継承のままにします。",0,"このリソースに固定ロケールを選択するか、動的/継承のままにします。"
+cms,resource.field.locale.dynamic,,ja-JP,"Dynamic / inherit","動的 / 継承",0,"動的 / 継承"
+cms,richtext.field.locale.label,,ja-JP,"Content locale",コンテンツロケール,0,コンテンツロケール
+cms,richtext.field.locale.explanation,,ja-JP,"The locale this text content belongs to.","このテキストコンテンツが属するロケールです。",0,"このテキストコンテンツが属するロケールです。"
+cms,richtext.locale_mismatch,,ja-JP,"The selected text content does not match the page locale.","選択したテキストコンテンツはページのロケールと一致しません。",0,"選択したテキストコンテンツはページのロケールと一致しません。"
+widget,locale_admin.name,,ja-JP,"Locale administration","Locale administration",0,"Locale administration"
+widget,locale_admin.description,,ja-JP,"Manage enabled application locales.","Manage enabled application locales.",0,"Manage enabled application locales."
+locale_admin,title,,ja-JP,Locales,Locales,0,Locales
+locale_admin,subtitle,,ja-JP,"Enable or disable locales offered for new admin content. Existing content is not deleted.","Enable or disable locales offered for new admin content. Existing content is not deleted.",0,"Enable or disable locales offered for new admin content. Existing content is not deleted."
+locale_admin,add_title,,ja-JP,"Add locale","Add locale",0,"Add locale"
+locale_admin,field.locale,,ja-JP,Locale,Locale,0,Locale
+locale_admin,placeholder.locale,,ja-JP,en-US,en-US,0,en-US
+locale_admin,action.add_enabled,,ja-JP,"Add enabled","Add enabled",0,"Add enabled"
+locale_admin,action.enable,,ja-JP,Enable,Enable,0,Enable
+locale_admin,action.disable,,ja-JP,Disable,Disable,0,Disable
+locale_admin,col.locale,,ja-JP,Locale,Locale,0,Locale
+locale_admin,col.label,,ja-JP,Label,Label,0,Label
+locale_admin,col.native_label,,ja-JP,"Native label","Native label",0,"Native label"
+locale_admin,col.status,,ja-JP,Status,Status,0,Status
+locale_admin,col.home,,ja-JP,"Home resources","Home resources",0,"Home resources"
+locale_admin,col.usage,,ja-JP,Usage,Usage,0,Usage
+locale_admin,col.actions,,ja-JP,Actions,Actions,0,Actions
+locale_admin,status.enabled,,ja-JP,Enabled,Enabled,0,Enabled
+locale_admin,status.disabled,,ja-JP,Disabled,Disabled,0,Disabled
+locale_admin,status.default,,ja-JP,Default,Default,0,Default
+locale_admin,home_count,,ja-JP,"{count} home target(s)","{count} home target(s)",0,"{count} home target(s)"
+locale_admin,usage.none,,ja-JP,"No usage","No usage",0,"No usage"
+locale_admin,message.enabled,,ja-JP,"Locale {locale} enabled.","Locale {locale} enabled.",0,"Locale {locale} enabled."
+locale_admin,message.disabled,,ja-JP,"Locale {locale} disabled.","Locale {locale} disabled.",0,"Locale {locale} disabled."
+locale_admin,message.error,,ja-JP,"Locale {locale} could not be updated.","Locale {locale} could not be updated.",0,"Locale {locale} could not be updated."
+locale_admin,message.invalid_locale,,ja-JP,"Invalid locale.","Invalid locale.",0,"Invalid locale."

@@ -103,25 +103,43 @@ class EventResourceView extends AbstractEvent implements iBrowserEventDocumentab
 			RequestContextHolder::disablePersistentCacheWrite();
 		}
 
-		if (User::getCurrentUser() && $resource instanceof ResourceTypeWebpage) {
-			self::_setCacheHeaders($resource);
+		$previous_locale = Kernel::getLocale();
+		$resource_locale_applied = false;
 
-			if ($resource->getView()->isHtmlOutputChannel()) {
-				SystemMessages::setSystemMessagesDependencies($resource->getView());
+		if ($resource instanceof ResourceTypeWebpage && class_exists(ResourceLocaleService::class)) {
+			$resource_id = (int) ($resource->getData('node_id') ?? 0);
+
+			if ($resource_id > 0) {
+				Kernel::setRequestLocale(ResourceLocaleService::getRenderLocale($resource_id));
+				$resource_locale_applied = true;
 			}
+		}
 
-			if ($this->renderFragmentIfRequested($resource)) {
-				return;
+		try {
+			if (User::getCurrentUser() && $resource instanceof ResourceTypeWebpage) {
+				self::_setCacheHeaders($resource);
+
+				if ($resource->getView()->isHtmlOutputChannel()) {
+					SystemMessages::setSystemMessagesDependencies($resource->getView());
+				}
+
+				if ($this->renderFragmentIfRequested($resource)) {
+					return;
+				}
+
+				$resource->view();
+			} else {
+				self::_setCacheHeaders($resource);
+
+				if ($resource instanceof ResourceTypeWebpage && $this->renderFragmentIfRequested($resource)) {
+					return;
+				}
+				$resource->view();
 			}
-
-			$resource->view();
-		} else {
-			self::_setCacheHeaders($resource);
-
-			if ($resource instanceof ResourceTypeWebpage && $this->renderFragmentIfRequested($resource)) {
-				return;
+		} finally {
+			if ($resource_locale_applied) {
+				Kernel::setRequestLocale($previous_locale);
 			}
-			$resource->view();
 		}
 	}
 

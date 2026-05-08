@@ -1,0 +1,14 @@
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
+tags,field.context.label,,ko-KR,Context,컨텍스트,0,컨텍스트
+tags,field.description.label,,ko-KR,"Tag description","태그 설명",0,"태그 설명"
+tags,field.name.explanation,,ko-KR,"No spaces, short and concise. Do not create synonyms for existing tags.","공백 없음, 간결하게 작성하세요. 기존 태그의 동의어를 만들지 마세요.",0,"공백 없음, 간결하게 작성하세요. 기존 태그의 동의어를 만들지 마세요."
+tags,field.name.label,,ko-KR,"Tag name","태그 이름",0,"태그 이름"
+tags,field.type.explanation,,ko-KR,"Select the tag type","태그 유형을 선택하세요",0,"태그 유형을 선택하세요"
+tags,field.type.label,,ko-KR,Type,유형,0,유형
+tags,form.name,,ko-KR,Tag,태그,0,태그
+tags,form.title_create,,ko-KR,"New tag","새 태그",0,"새 태그"
+tags,form.title_edit,,ko-KR,"Edit tag","태그 편집",0,"태그 편집"
+tags,list.title,,ko-KR,Tags,태그,0,태그
+tags,saved,,ko-KR,"Tags saved","태그 저장됨",0,"태그 저장됨"
+tags,updated,,ko-KR,"Tag updated","태그 업데이트됨",0,"태그 업데이트됨"
+tags,validation.name_max_length,,ko-KR,"Tag name must not exceed 255 characters","태그 이름은 255자를 초과할 수 없습니다",0,"태그 이름은 255자를 초과할 수 없습니다"

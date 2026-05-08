@@ -31,7 +31,7 @@ final class PackageSmokeTest extends TestCase
 		$this->assertFileExists($root . '/modules-common/Mailpit/classes/class.MailpitClient.php');
 		$this->assertFileExists($root . '/modules-common/Mailpit/widgets/Widget.Mailpit.php');
 		$this->assertFileExists($root . '/modules-common/Mailpit/templates/template.mailpit.inbox.php');
-		$this->assertFileExists($root . '/modules-common/Mailpit/i18n/seeds/en_US.csv');
+		$this->assertFileExists($root . '/modules-common/Mailpit/i18n/seeds/en-US.csv');
 		$this->assertDirectoryExists($root . '/templates-common');
 	}
 }

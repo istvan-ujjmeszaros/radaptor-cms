@@ -13,15 +13,19 @@ class I18nWorkbench
 	 */
 	public static function getTranslations(string $locale, array $filters, int $start, int $length): array
 	{
+		$locale = LocaleService::canonicalize($locale);
+		$legacy_locale = LocaleService::toIntlLocale($locale);
 		$pdo = Db::instance();
 		[$totalWhere, $totalParams] = self::_buildWhere($filters, false);
 		$totalParams[':locale'] = $locale;
+		$totalParams[':legacy_locale'] = $legacy_locale;
 
 		// Unfiltered total for the current scope — apply non-search filters such as domain,
 		// but ignore the free-text search term so DataTables totals stay meaningful.
 		$unfilteredStmt = $pdo->prepare(
 			"SELECT COUNT(*) FROM i18n_messages m
 			LEFT JOIN i18n_translations t ON t.domain = m.domain AND t.`key` = m.`key` AND t.context = m.context AND t.locale = :locale
+			LEFT JOIN i18n_translations tl ON tl.domain = m.domain AND tl.`key` = m.`key` AND tl.context = m.context AND tl.locale = :legacy_locale AND tl.locale <> :locale
 			{$totalWhere}"
 		);
 		$unfilteredStmt->execute($totalParams);
@@ -29,10 +33,12 @@ class I18nWorkbench
 
 		[$where, $params] = self::_buildWhere($filters);
 		$params[':locale'] = $locale;
+		$params[':legacy_locale'] = $legacy_locale;
 
 		// Filtered count
 		$countSql = "SELECT COUNT(*) FROM i18n_messages m
 			LEFT JOIN i18n_translations t ON t.domain = m.domain AND t.`key` = m.`key` AND t.context = m.context AND t.locale = :locale
+			LEFT JOIN i18n_translations tl ON tl.domain = m.domain AND tl.`key` = m.`key` AND tl.context = m.context AND tl.locale = :legacy_locale AND tl.locale <> :locale
 			{$where}";
 		$countStmt = $pdo->prepare($countSql);
 		$countStmt->execute($params);
@@ -43,15 +49,17 @@ class I18nWorkbench
 				m.`key`,
 				m.context,
 				m.source_text,
-				COALESCE(t.text, '') AS text,
-				CASE WHEN t.human_reviewed = 1 THEN 1 ELSE 0 END AS human_reviewed,
+				COALESCE(t.text, tl.text, '') AS text,
+				CASE WHEN COALESCE(t.human_reviewed, tl.human_reviewed, 0) = 1 THEN 1 ELSE 0 END AS human_reviewed,
 				CASE
-					WHEN t.`key` IS NULL OR TRIM(COALESCE(t.text, '')) = '' THEN 1
+					WHEN t.`key` IS NULL AND tl.`key` IS NULL THEN 1
+					WHEN TRIM(COALESCE(t.text, tl.text, '')) = '' THEN 1
 					ELSE 0
 				END AS is_missing,
-				t.source_hash_snapshot
+				COALESCE(t.source_hash_snapshot, tl.source_hash_snapshot) AS source_hash_snapshot
 			FROM i18n_messages m
 			LEFT JOIN i18n_translations t ON t.domain = m.domain AND t.`key` = m.`key` AND t.context = m.context AND t.locale = :locale
+			LEFT JOIN i18n_translations tl ON tl.domain = m.domain AND tl.`key` = m.`key` AND tl.context = m.context AND tl.locale = :legacy_locale AND tl.locale <> :locale
 			{$where}
 			ORDER BY m.domain, m.`key`, m.context
 			LIMIT :length OFFSET :start";
@@ -135,7 +143,7 @@ class I18nWorkbench
 			$conditions[] = "(
 				m.`key` LIKE :search_key
 				OR m.source_text LIKE :search_source
-				OR t.text LIKE :search_text
+				OR COALESCE(t.text, tl.text, '') LIKE :search_text
 				OR CONCAT(m.domain, '.', m.`key`) LIKE :search_qualified
 				OR CONCAT(m.domain, '.', m.`key`, '.', m.context) LIKE :search_qualified_with_context
 			)";

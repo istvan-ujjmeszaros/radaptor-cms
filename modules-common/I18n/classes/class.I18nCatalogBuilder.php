@@ -17,11 +17,11 @@ class I18nCatalogBuilder
 			mkdir($outputDir, 0o755, true);
 		}
 
-		self::_removeLegacyCatalogFiles($outputDir);
-
 		$locales = $localeFilter !== ''
 			? [LocaleService::canonicalize($localeFilter)]
 			: self::_getAllLocales();
+
+		self::_removeLegacyCatalogFiles($outputDir, $locales);
 
 		foreach ($locales as $locale) {
 			self::_buildLocale($locale, $outputDir);
@@ -98,14 +98,18 @@ class I18nCatalogBuilder
 		return $locales;
 	}
 
-	private static function _removeLegacyCatalogFiles(string $outputDir): void
+	/**
+	 * @param list<string> $locales
+	 */
+	private static function _removeLegacyCatalogFiles(string $outputDir, array $locales): void
 	{
-		foreach (glob($outputDir . '*_*.php') ?: [] as $file) {
-			$basename = basename($file, '.php');
-			$canonical = LocaleService::tryCanonicalize($basename);
+		foreach ($locales as $locale) {
+			$canonical = LocaleService::canonicalize($locale);
+			$legacy = LocaleService::toIntlLocale($canonical);
+			$legacy_path = $outputDir . $legacy . '.php';
 
-			if ($canonical !== null && $canonical !== $basename) {
-				@unlink($file);
+			if ($legacy !== $canonical && is_file($legacy_path)) {
+				unlink($legacy_path);
 			}
 		}
 	}

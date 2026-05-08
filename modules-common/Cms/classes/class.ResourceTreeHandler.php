@@ -833,16 +833,21 @@ class ResourceTreeHandler extends ResourceAcl
 	 */
 	private static function splitResourceAndAttributesData(array $savedata): array
 	{
-		$resource_keys = array_flip([
+		$resource_keys = [
 			'node_id',
 			'resource_name',
 			'catcher_page',
 			'comment',
-			'locale',
 			'node_type',
 			'path',
 			'is_inheriting_acl',
-		]);
+		];
+
+		if (class_exists(ResourceLocaleService::class) && ResourceLocaleService::hasResourceLocaleColumn()) {
+			$resource_keys[] = 'locale';
+		}
+
+		$resource_keys = array_flip($resource_keys);
 
 		$resource_savedata = array_intersect_key($savedata, $resource_keys);
 		$attribute_savedata = array_diff_key($savedata, $resource_keys);

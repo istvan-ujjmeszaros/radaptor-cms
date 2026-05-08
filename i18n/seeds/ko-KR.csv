@@ -678,3 +678,4 @@ locale_admin,message.enabled,,ko-KR,"Locale {locale} enabled.","Locale {locale} 
 locale_admin,message.disabled,,ko-KR,"Locale {locale} disabled.","Locale {locale} disabled.",0,"Locale {locale} disabled."
 locale_admin,message.error,,ko-KR,"Locale {locale} could not be updated.","Locale {locale} could not be updated.",0,"Locale {locale} could not be updated."
 locale_admin,message.invalid_locale,,ko-KR,"Invalid locale.","Invalid locale.",0,"Invalid locale."
+locale_admin,message.service_unavailable,,ko-KR,"Locale administration is unavailable until the locale infrastructure is installed.",로케일 인프라가 설치될 때까지 로케일 관리를 사용할 수 없습니다.,0,로케일 인프라가 설치될 때까지 로케일 관리를 사용할 수 없습니다.

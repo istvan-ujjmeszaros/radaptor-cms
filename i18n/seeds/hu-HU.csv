@@ -678,3 +678,4 @@ locale_admin,message.enabled,,hu-HU,"Locale {locale} enabled.","A(z) {locale} lo
 locale_admin,message.disabled,,hu-HU,"Locale {locale} disabled.","A(z) {locale} locale kikapcsolva.",0,"A(z) {locale} locale kikapcsolva."
 locale_admin,message.error,,hu-HU,"Locale {locale} could not be updated.","A(z) {locale} locale nem módosítható.",0,"A(z) {locale} locale nem módosítható."
 locale_admin,message.invalid_locale,,hu-HU,"Invalid locale.","Érvénytelen locale.",0,"Érvénytelen locale."
+locale_admin,message.service_unavailable,,hu-HU,"Locale administration is unavailable until the locale infrastructure is installed.","A nyelvkezelés nem érhető el, amíg a locale infrastruktúra nincs telepítve.",0,"A nyelvkezelés nem érhető el, amíg a locale infrastruktúra nincs telepítve."

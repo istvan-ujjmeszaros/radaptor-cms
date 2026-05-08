@@ -58,6 +58,11 @@ class EventLocaleSetEnabled extends AbstractEvent implements iBrowserEventDocume
 			Url::redirect($referer);
 		}
 
+		if (!class_exists(LocaleAdminService::class)) {
+			SystemMessages::_error(t('locale_admin.message.service_unavailable'));
+			Url::redirect($referer);
+		}
+
 		try {
 			$locale = LocaleAdminService::setEnabled($locale, $enabled);
 			SystemMessages::_notice(t(

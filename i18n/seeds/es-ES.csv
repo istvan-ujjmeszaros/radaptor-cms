@@ -678,3 +678,4 @@ locale_admin,message.enabled,,es-ES,"Locale {locale} enabled.","Locale {locale} 
 locale_admin,message.disabled,,es-ES,"Locale {locale} disabled.","Locale {locale} disabled.",0,"Locale {locale} disabled."
 locale_admin,message.error,,es-ES,"Locale {locale} could not be updated.","Locale {locale} could not be updated.",0,"Locale {locale} could not be updated."
 locale_admin,message.invalid_locale,,es-ES,"Invalid locale.","Invalid locale.",0,"Invalid locale."
+locale_admin,message.service_unavailable,,es-ES,"Locale administration is unavailable until the locale infrastructure is installed.","La administración de locales no está disponible hasta que la infraestructura de locales esté instalada.",0,"La administración de locales no está disponible hasta que la infraestructura de locales esté instalada."

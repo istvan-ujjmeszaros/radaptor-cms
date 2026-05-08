@@ -678,3 +678,4 @@ locale_admin,message.enabled,,zh-Hans-CN,"Locale {locale} enabled.","Locale {loc
 locale_admin,message.disabled,,zh-Hans-CN,"Locale {locale} disabled.","Locale {locale} disabled.",0,"Locale {locale} disabled."
 locale_admin,message.error,,zh-Hans-CN,"Locale {locale} could not be updated.","Locale {locale} could not be updated.",0,"Locale {locale} could not be updated."
 locale_admin,message.invalid_locale,,zh-Hans-CN,"Invalid locale.","Invalid locale.",0,"Invalid locale."
+locale_admin,message.service_unavailable,,zh-Hans-CN,"Locale administration is unavailable until the locale infrastructure is installed.",在安装 locale 基础设施之前，locale 管理不可用。,0,在安装 locale 基础设施之前，locale 管理不可用。

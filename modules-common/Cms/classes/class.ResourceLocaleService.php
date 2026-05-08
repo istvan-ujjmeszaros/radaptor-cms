@@ -58,7 +58,7 @@ final class ResourceLocaleService
 		return ResourceTreeHandler::getDomainContextForResourceTreeEntryData($data);
 	}
 
-	private static function hasResourceLocaleColumn(): bool
+	public static function hasResourceLocaleColumn(): bool
 	{
 		try {
 			$stmt = Db::instance()->prepare("SHOW COLUMNS FROM `resource_tree` LIKE 'locale'");

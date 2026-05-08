@@ -32,6 +32,13 @@ class WidgetLocaleAdmin extends AbstractWidget
 
 	protected function buildAuthorizedTree(iTreeBuildContext $tree_build_context, WidgetConnection $connection, array $build_context = []): array
 	{
+		if (!class_exists(LocaleAdminService::class)) {
+			return $this->buildStatusTree([
+				'severity' => 'warning',
+				'message' => t('locale_admin.message.service_unavailable'),
+			]);
+		}
+
 		return $this->createComponentTree('localeAdmin', [
 			'locales' => LocaleAdminService::listLocales(),
 			'action_url' => Url::getUrl('locale.set-enabled', [

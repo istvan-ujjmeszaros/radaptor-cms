@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 final class RichTextLocaleService
 {
+	private static ?bool $_hasRichTextLocaleColumn = null;
+
 	public static function getLocaleForConnectionId(int|string|null $connection_id): string
 	{
 		$connection_id = (int) $connection_id;
@@ -22,5 +24,27 @@ final class RichTextLocaleService
 	public static function getLocaleForCurrentRequest(): string
 	{
 		return self::getLocaleForConnectionId(Request::_GET('connection_id', null));
+	}
+
+	public static function hasRichTextLocaleColumn(): bool
+	{
+		if (self::$_hasRichTextLocaleColumn !== null) {
+			return self::$_hasRichTextLocaleColumn;
+		}
+
+		try {
+			$stmt = Db::instance()->prepare(
+				"SELECT 1
+				FROM information_schema.COLUMNS
+				WHERE TABLE_SCHEMA = DATABASE()
+					AND TABLE_NAME = 'richtext'
+					AND COLUMN_NAME = 'locale'"
+			);
+			$stmt->execute();
+
+			return self::$_hasRichTextLocaleColumn = (bool) $stmt->fetchColumn();
+		} catch (Throwable) {
+			return self::$_hasRichTextLocaleColumn = false;
+		}
 	}
 }

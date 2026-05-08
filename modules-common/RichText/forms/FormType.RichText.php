@@ -39,7 +39,10 @@ class FormTypeRichText extends FormCustomValidatorRichText
 			case self::_MODE_CREATE:
 
 				$connection_id = Request::_GET('connection_id', Request::DEFAULT_ERROR);
-				$this->savedata['locale'] = $this->resolveLocale();
+
+				if (RichTextLocaleService::hasRichTextLocaleColumn()) {
+					$this->savedata['locale'] = $this->resolveLocale();
+				}
 
 				$content_id = EntityRichtext::createFromArray($this->savedata)->pkey();
 
@@ -57,7 +60,10 @@ class FormTypeRichText extends FormCustomValidatorRichText
 
 			case self::_MODE_UPDATE:
 
-				$this->savedata['locale'] = $this->resolveLocale();
+				if (RichTextLocaleService::hasRichTextLocaleColumn()) {
+					$this->savedata['locale'] = $this->resolveLocale();
+				}
+
 				EntityRichtext::updateById($this->getItemId(), $this->savedata);
 				SystemMessages::addSystemMessage(t('cms.richtext.updated'));
 
@@ -102,6 +108,10 @@ class FormTypeRichText extends FormCustomValidatorRichText
 
 	private function addLocaleInput(): void
 	{
+		if (!RichTextLocaleService::hasRichTextLocaleColumn()) {
+			return;
+		}
+
 		if (Request::_GET('connection_id', null) !== null) {
 			return;
 		}

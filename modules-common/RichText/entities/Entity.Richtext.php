@@ -39,6 +39,10 @@ class EntityRichtext extends SQLEntity
 
 	public static function getContentLocale(int $id): ?string
 	{
+		if (!RichTextLocaleService::hasRichTextLocaleColumn()) {
+			return null;
+		}
+
 		$locale = static::pluckFirst('locale', ['id' => $id]);
 
 		return is_string($locale) ? LocaleService::tryCanonicalize($locale) : null;
@@ -54,7 +58,7 @@ class EntityRichtext extends SQLEntity
 		$where = ['name' => trim((string) $name)];
 		$locale = $locale !== null ? LocaleService::tryCanonicalize($locale) : null;
 
-		if ($locale !== null) {
+		if ($locale !== null && RichTextLocaleService::hasRichTextLocaleColumn()) {
 			$where['locale'] = $locale;
 		}
 
@@ -82,8 +86,9 @@ class EntityRichtext extends SQLEntity
 		$params = [];
 		$where = '';
 		$locale = $locale !== null ? LocaleService::tryCanonicalize($locale) : null;
+		$has_locale_column = RichTextLocaleService::hasRichTextLocaleColumn();
 
-		if ($locale !== null) {
+		if ($locale !== null && $has_locale_column) {
 			$where = 'WHERE `locale` = ?';
 			$params[] = $locale;
 
@@ -96,7 +101,9 @@ class EntityRichtext extends SQLEntity
 		$info_contents = DbHelper::selectManyFromQuery("SELECT * FROM richtext {$where} ORDER BY title", $params);
 
 		foreach ($info_contents as $value) {
-			$value_locale = LocaleService::tryCanonicalize((string) ($value['locale'] ?? '')) ?? '';
+			$value_locale = $has_locale_column
+				? LocaleService::tryCanonicalize((string) ($value['locale'] ?? '')) ?? ''
+				: '';
 			$label = (string) ($value['name'] ?? '');
 
 			if ($value_locale !== '' && ($appendLocale || ($locale !== null && $value_locale !== $locale))) {

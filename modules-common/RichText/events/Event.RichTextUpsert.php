@@ -87,6 +87,7 @@ class EventRichTextUpsert extends AbstractEvent implements iBrowserEventDocument
 		}
 
 		try {
+			$has_locale_column = RichTextLocaleService::hasRichTextLocaleColumn();
 			$content_id = EntityRichtext::getContentIdByName($name, $locale);
 
 			if ($content_id === EntityRichtext::ERROR_MULTIPLE) {
@@ -95,7 +96,7 @@ class EventRichTextUpsert extends AbstractEvent implements iBrowserEventDocument
 				return;
 			}
 
-			if ($content_id === EntityRichtext::ERROR_NOT_FOUND && !LocaleService::isEnabled($locale)) {
+			if ($has_locale_column && $content_id === EntityRichtext::ERROR_NOT_FOUND && !LocaleService::isEnabled($locale)) {
 				ApiResponse::renderError('INVALID_LOCALE', t('locale_admin.message.invalid_locale'), 400);
 
 				return;
@@ -103,11 +104,14 @@ class EventRichTextUpsert extends AbstractEvent implements iBrowserEventDocument
 
 			$data = [
 				'name' => $name,
-				'locale' => $locale,
 				'title' => $title,
 				'content' => $content,
 				'content_type' => $content_type,
 			];
+
+			if ($has_locale_column) {
+				$data['locale'] = $locale;
+			}
 			$created = false;
 
 			if ($content_id === EntityRichtext::ERROR_NOT_FOUND) {

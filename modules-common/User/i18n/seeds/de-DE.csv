@@ -127,3 +127,4 @@ user,locale.current_label,,de-DE,"Current language","Aktuelle Sprache",0,"Aktuel
 user,locale.invalid,,de-DE,"Selected language is not available","Die ausgewählte Sprache ist nicht verfügbar",0,"Die ausgewählte Sprache ist nicht verfügbar"
 user,locale.menu_label,,de-DE,Language,Sprache,0,Sprache
 user,locale.updated,,de-DE,"Language updated","Sprache aktualisiert",0,"Sprache aktualisiert"
+user,locale.home_missing,,de-DE,"No home page is configured for the selected language; staying on the current page.","Für die ausgewählte Sprache ist keine Startseite konfiguriert; die aktuelle Seite bleibt geöffnet.",0,"Für die ausgewählte Sprache ist keine Startseite konfiguriert; die aktuelle Seite bleibt geöffnet."

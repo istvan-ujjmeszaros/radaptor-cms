@@ -127,3 +127,4 @@ user,locale.current_label,,hu-HU,"Current language","Jelenlegi nyelv",0,"Jelenle
 user,locale.invalid,,hu-HU,"Selected language is not available","A kiválasztott nyelv nem érhető el",0,"A kiválasztott nyelv nem érhető el"
 user,locale.menu_label,,hu-HU,Language,Nyelv,0,Nyelv
 user,locale.updated,,hu-HU,"Language updated","Nyelv frissítve",0,"Nyelv frissítve"
+user,locale.home_missing,,hu-HU,"No home page is configured for the selected language; staying on the current page.","A kiválasztott nyelvhez nincs kezdőoldal beállítva; az aktuális oldalon maradunk.",0,"A kiválasztott nyelvhez nincs kezdőoldal beállítva; az aktuális oldalon maradunk."

@@ -127,3 +127,4 @@ user,locale.current_label,,ru-RU,"Current language","Текущий язык",0,
 user,locale.invalid,,ru-RU,"Selected language is not available","Выбранный язык недоступен",0,"Выбранный язык недоступен"
 user,locale.menu_label,,ru-RU,Language,Язык,0,Язык
 user,locale.updated,,ru-RU,"Language updated","Язык обновлён",0,"Язык обновлён"
+user,locale.home_missing,,ru-RU,"No home page is configured for the selected language; staying on the current page.","Для выбранного языка не настроена главная страница; остаёмся на текущей странице.",0,"Для выбранного языка не настроена главная страница; остаёмся на текущей странице."

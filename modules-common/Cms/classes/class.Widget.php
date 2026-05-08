@@ -56,17 +56,6 @@ class Widget extends WidgetList
 		return array_values(self::$_widgetNames);
 	}
 
-	public static function getContentLocaleStrategy(string $widget_name): ?WidgetContentLocaleStrategy
-	{
-		if (!self::checkWidgetExists($widget_name)) {
-			return null;
-		}
-
-		$widget = self::factory($widget_name);
-
-		return $widget::getContentLocaleStrategy();
-	}
-
 	public static function getWidgetDescription(string $widget_name): string
 	{
 		if (!self::checkWidgetExists($widget_name)) {

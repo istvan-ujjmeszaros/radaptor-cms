@@ -42,9 +42,9 @@ class I18nCatalogBuilder
 			FROM i18n_messages m
 			JOIN i18n_translations t ON t.domain = m.domain AND t.`key` = m.`key` AND t.context = m.context
 			WHERE t.locale IN ({$placeholders}) AND TRIM(t.text) <> ''
-			ORDER BY m.domain, m.`key`, m.context"
+			ORDER BY m.domain, m.`key`, m.context, CASE WHEN t.locale = ? THEN 0 ELSE 1 END"
 		);
-		$stmt->execute($storage_locales);
+		$stmt->execute([...$storage_locales, $locale]);
 		$rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
 		$catalog = [];
@@ -56,6 +56,8 @@ class I18nCatalogBuilder
 				$flatKey .= '.' . $row['context'];
 			}
 
+			// BCP 47 catalog rows win over legacy storage aliases. The SQL order
+			// makes this deterministic; the condition keeps the rule explicit.
 			if (!isset($catalog[$flatKey]) || $row['locale'] === $locale) {
 				$catalog[$flatKey] = $row['text'];
 			}

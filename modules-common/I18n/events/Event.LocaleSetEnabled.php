@@ -55,11 +55,13 @@ class EventLocaleSetEnabled extends AbstractEvent implements iBrowserEventDocume
 
 		if ($locale === '') {
 			SystemMessages::_error(t('locale_admin.message.invalid_locale'));
+			// Url::redirect() is typed never and exits; this error branch cannot fall through to mutation.
 			Url::redirect($referer);
 		}
 
 		if (!class_exists(LocaleAdminService::class)) {
 			SystemMessages::_error(t('locale_admin.message.service_unavailable'));
+			// Url::redirect() is typed never and exits; this error branch cannot fall through to mutation.
 			Url::redirect($referer);
 		}
 

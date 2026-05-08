@@ -127,3 +127,4 @@ user,locale.current_label,,en-US,"Current language","Current language",0,"Curren
 user,locale.invalid,,en-US,"Selected language is not available","Selected language is not available",0,"Selected language is not available"
 user,locale.menu_label,,en-US,Language,Language,0,Language
 user,locale.updated,,en-US,"Language updated","Language updated",0,"Language updated"
+user,locale.home_missing,,en-US,"No home page is configured for the selected language; staying on the current page.","No home page is configured for the selected language; staying on the current page.",0,"No home page is configured for the selected language; staying on the current page."

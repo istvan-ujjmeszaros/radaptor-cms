@@ -89,13 +89,15 @@ class EntityRichtext extends SQLEntity
 		$has_locale_column = RichTextLocaleService::hasRichTextLocaleColumn();
 
 		if ($locale !== null && $has_locale_column) {
-			$where = 'WHERE `locale` = ?';
+			$where = 'WHERE (`locale` = ?';
 			$params[] = $locale;
 
 			if ($currentId !== null && $currentId > 0) {
 				$where .= ' OR `id` = ?';
 				$params[] = $currentId;
 			}
+
+			$where .= ')';
 		}
 
 		$info_contents = DbHelper::selectManyFromQuery("SELECT * FROM richtext {$where} ORDER BY title", $params);

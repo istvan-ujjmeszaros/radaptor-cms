@@ -6,6 +6,14 @@ final class LocaleSwitchService
 {
 	private const string SESSION_KEY = 'radaptor_locale';
 	private const string COOKIE_KEY = 'radaptor_locale';
+	private const int COOKIE_LIFETIME_SECONDS = 365 * 86400;
+
+	public const string REDIRECT_REASON_SOURCE_NOT_FOUND = 'source_not_found';
+	public const string REDIRECT_REASON_DYNAMIC_RESOURCE = 'dynamic_resource';
+	public const string REDIRECT_REASON_MISSING_SITE_CONTEXT = 'missing_site_context';
+	public const string REDIRECT_REASON_MISSING_LOCALE_HOME = 'missing_locale_home';
+	public const string REDIRECT_REASON_HOME_URL_UNAVAILABLE = 'home_url_unavailable';
+	public const string REDIRECT_REASON_LOCALE_HOME = 'locale_home';
 
 	public static function getStoredRequestLocale(): ?string
 	{
@@ -27,47 +35,89 @@ final class LocaleSwitchService
 		Request::saveSessionData([self::SESSION_KEY], $locale);
 
 		if (!headers_sent()) {
-			setcookie(self::COOKIE_KEY, $locale, [
-				'expires' => time() + 31536000,
-				'path' => '/',
-				'secure' => self::isSecureRequest(),
-				'httponly' => false,
-				'samesite' => 'Lax',
-			]);
+			setcookie(self::COOKIE_KEY, $locale, self::getAnonymousLocaleCookieOptions());
 		}
 
 		RequestContextHolder::current()->COOKIE[self::COOKIE_KEY] = $locale;
 	}
 
-	public static function resolveRedirectUrlForLocale(string $return_url, string $locale): string
+	/**
+	 * @return array{expires: int, path: string, secure: bool, httponly: bool, samesite: string}
+	 */
+	public static function getAnonymousLocaleCookieOptions(?int $now = null): array
+	{
+		return [
+			'expires' => ($now ?? time()) + self::COOKIE_LIFETIME_SECONDS,
+			'path' => '/',
+			'secure' => self::isSecureRequest(),
+			'httponly' => true,
+			'samesite' => 'Lax',
+		];
+	}
+
+	public static function isSameOriginPostRequest(): bool
+	{
+		if (Request::getMethod() !== 'POST') {
+			return false;
+		}
+
+		// Reverse proxies must pass the public scheme/host/port into the runtime
+		// server context, otherwise the browser Origin cannot match safely.
+		$server = self::getServerContext();
+		$origin = trim(self::getServerValue($server, 'HTTP_ORIGIN'));
+
+		if ($origin !== '') {
+			return strtolower($origin) !== 'null' && self::isSameOriginUrl($origin);
+		}
+
+		$referer = trim(self::getServerValue($server, 'HTTP_REFERER'));
+
+		return $referer !== '' && self::isSameOriginUrl($referer);
+	}
+
+	/**
+	 * @return array{url: string, reason: string}
+	 */
+	public static function resolveRedirectDecisionForLocale(string $return_url, string $locale): array
 	{
 		$return_url = self::sanitizeSameSiteReturnUrl($return_url);
 		$locale = LocaleService::canonicalize($locale);
 		$resource = self::resolveResourceFromUrl($return_url);
 
 		if (!is_array($resource)) {
-			return $return_url;
+			return self::redirectDecision($return_url, self::REDIRECT_REASON_SOURCE_NOT_FOUND);
 		}
 
 		$resource_id = (int) ($resource['node_id'] ?? 0);
 
 		if ($resource_id <= 0 || ResourceLocaleService::getInheritedContentLocale($resource_id) === null) {
-			return $return_url;
+			return self::redirectDecision($return_url, self::REDIRECT_REASON_DYNAMIC_RESOURCE);
 		}
 
 		$site_context = ResourceLocaleService::getSiteContextForResourceId($resource_id);
 
 		if ($site_context === null) {
-			return Url::getCurrentHost();
+			return self::redirectDecision($return_url, self::REDIRECT_REASON_MISSING_SITE_CONTEXT);
 		}
 
 		$home_id = LocaleHomeResourceService::getEffectiveHomeResourceId($site_context, $locale);
 
 		if ($home_id === null) {
-			return Url::getCurrentHost();
+			return self::redirectDecision($return_url, self::REDIRECT_REASON_MISSING_LOCALE_HOME);
 		}
 
-		return Url::getSeoUrl($home_id) ?? Url::getCurrentHost();
+		$home_url = Url::getSeoUrl($home_id);
+
+		if ($home_url === null) {
+			return self::redirectDecision($return_url, self::REDIRECT_REASON_HOME_URL_UNAVAILABLE);
+		}
+
+		return self::redirectDecision($home_url, self::REDIRECT_REASON_LOCALE_HOME);
+	}
+
+	public static function resolveRedirectUrlForLocale(string $return_url, string $locale): string
+	{
+		return self::resolveRedirectDecisionForLocale($return_url, $locale)['url'];
 	}
 
 	public static function sanitizeSameSiteReturnUrl(string $url): string
@@ -167,9 +217,64 @@ final class LocaleSwitchService
 
 	private static function isSecureRequest(): bool
 	{
-		$server = RequestContextHolder::current()->SERVER;
+		$server = self::getServerContext();
 
 		return !empty($server['HTTPS']) && strtolower((string) $server['HTTPS']) !== 'off';
+	}
+
+	/**
+	 * @return array<string, mixed>
+	 */
+	private static function redirectDecision(string $url, string $reason): array
+	{
+		return [
+			'url' => $url,
+			'reason' => $reason,
+		];
+	}
+
+	private static function isSameOriginUrl(string $url): bool
+	{
+		$parsed = parse_url($url);
+
+		if (!is_array($parsed) || !isset($parsed['scheme'], $parsed['host'])) {
+			return false;
+		}
+
+		if (!in_array(strtolower((string) $parsed['scheme']), ['http', 'https'], true)) {
+			return false;
+		}
+
+		$current = parse_url(Url::getCurrentHost(false));
+
+		return is_array($current)
+			&& strcasecmp((string) $parsed['scheme'], (string) ($current['scheme'] ?? '')) === 0
+			&& strcasecmp((string) $parsed['host'], (string) ($current['host'] ?? '')) === 0
+			&& self::effectivePort($parsed) === self::effectivePort($current);
+	}
+
+	/**
+	 * @return array<string, mixed>
+	 */
+	private static function getServerContext(): array
+	{
+		try {
+			$server = RequestContextHolder::current()->SERVER;
+		} catch (Throwable) {
+			$server = [];
+		}
+
+		return $server !== [] ? $server : $_SERVER;
+	}
+
+	/**
+	 * @param array<string, mixed> $server
+	 */
+	private static function getServerValue(array $server, string $key): string
+	{
+		$lower_key = strtolower($key);
+
+		return (string) ($server[$key] ?? $server[$lower_key] ?? '');
 	}
 
 	/**

@@ -1209,7 +1209,7 @@ class ResourceTreeHandler extends ResourceAcl
 		$result = NestedSet::rebuildPath('resource_tree', $from_node_id);
 
 		if (class_exists(LocaleHomeResourceService::class)) {
-			LocaleHomeResourceService::refreshAll();
+			LocaleHomeResourceService::refreshForResourceId($from_node_id);
 		}
 
 		return $result;
@@ -1573,6 +1573,9 @@ class ResourceTreeHandler extends ResourceAcl
 			return ResourceTreeMutationResult::failure($error);
 		}
 
+		$old_site_context = class_exists(ResourceLocaleService::class)
+			? ResourceLocaleService::getSiteContextForResourceId($resource_id)
+			: null;
 		$move = NestedSet::moveToPosition('resource_tree', $resource_id, $parent_id, $position);
 
 		if (!$move) {
@@ -1585,6 +1588,16 @@ class ResourceTreeHandler extends ResourceAcl
 		}
 
 		self::rebuildPath($resource_id);
+
+		if (class_exists(LocaleHomeResourceService::class) && $old_site_context !== null) {
+			$new_site_context = class_exists(ResourceLocaleService::class)
+				? ResourceLocaleService::getSiteContextForResourceId($resource_id)
+				: null;
+
+			if ($old_site_context !== $new_site_context) {
+				LocaleHomeResourceService::refreshSiteContext($old_site_context);
+			}
+		}
 
 		return ResourceTreeMutationResult::success(true);
 	}

@@ -51,7 +51,7 @@ class EventRichTextUpsert extends AbstractEvent implements iBrowserEventDocument
 	public function run(): void
 	{
 		$name = trim((string) Request::_POST('name', ''));
-		$raw_locale = RequestContextHolder::current()->POST['locale'] ?? null;
+		$raw_locale = Request::_POST('locale', null);
 		$locale = Kernel::getLocale();
 
 		if ($raw_locale !== null && trim((string) $raw_locale) !== '') {
@@ -130,7 +130,14 @@ class EventRichTextUpsert extends AbstractEvent implements iBrowserEventDocument
 				'content_type' => $content_type,
 				'created' => $created,
 			]);
-		} catch (Throwable) {
+		} catch (Throwable $exception) {
+			error_log(sprintf(
+				'RichText upsert failed: [%s] %s in %s:%d',
+				$exception::class,
+				$exception->getMessage(),
+				$exception->getFile(),
+				$exception->getLine()
+			));
 			ApiResponse::renderError('RICHTEXT_UPSERT_FAILED', t('common.error_save'), 400);
 		}
 	}

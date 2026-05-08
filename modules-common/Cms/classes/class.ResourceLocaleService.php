@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 final class ResourceLocaleService
 {
+	private static ?bool $_hasResourceLocaleColumn = null;
+
 	public static function getInheritedContentLocale(int $resource_id): ?string
 	{
 		if (!self::hasResourceLocaleColumn()) {
@@ -60,13 +62,17 @@ final class ResourceLocaleService
 
 	public static function hasResourceLocaleColumn(): bool
 	{
+		if (self::$_hasResourceLocaleColumn !== null) {
+			return self::$_hasResourceLocaleColumn;
+		}
+
 		try {
 			$stmt = Db::instance()->prepare("SHOW COLUMNS FROM `resource_tree` LIKE 'locale'");
 			$stmt->execute();
 
-			return $stmt->rowCount() > 0;
+			return self::$_hasResourceLocaleColumn = $stmt->rowCount() > 0;
 		} catch (Throwable) {
-			return false;
+			return self::$_hasResourceLocaleColumn = false;
 		}
 	}
 }

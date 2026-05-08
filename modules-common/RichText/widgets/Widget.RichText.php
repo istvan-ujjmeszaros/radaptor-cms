@@ -33,11 +33,6 @@ class WidgetRichText extends AbstractWidget
 		return false;
 	}
 
-	public static function getContentLocaleStrategy(): ?WidgetContentLocaleStrategy
-	{
-		return new RichTextWidgetContentLocaleStrategy();
-	}
-
 	protected function buildAuthorizedTree(iTreeBuildContext $tree_build_context, WidgetConnection $connection, array $build_context = []): array
 	{
 		if ($connection->getExtraparam('content_id')) {

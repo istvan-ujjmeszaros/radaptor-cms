@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 final class LocaleHomeResourceService
 {
+	private static ?bool $_tablesExist = null;
+
 	public static function refreshAll(): void
 	{
 		if (!self::tablesExist()) {
@@ -13,6 +15,25 @@ final class LocaleHomeResourceService
 		foreach (CmsSiteContext::getRootRows() as $root) {
 			self::refreshSiteContext((string) ($root['resource_name'] ?? ''));
 		}
+	}
+
+	public static function refreshForResourceId(int $resource_id): void
+	{
+		if ($resource_id <= 0) {
+			self::refreshAll();
+
+			return;
+		}
+
+		$site_context = ResourceLocaleService::getSiteContextForResourceId($resource_id);
+
+		if ($site_context !== null) {
+			self::refreshSiteContext($site_context);
+
+			return;
+		}
+
+		self::refreshAll();
 	}
 
 	public static function refreshSiteContext(string $site_context): void
@@ -167,13 +188,19 @@ final class LocaleHomeResourceService
 
 	private static function tablesExist(): bool
 	{
+		if (self::$_tablesExist !== null) {
+			return self::$_tablesExist;
+		}
+
 		try {
 			$pdo = Db::instance();
 
-			return $pdo->query("SHOW TABLES LIKE 'locale_home_resources'")->rowCount() > 0
-				&& $pdo->query("SHOW TABLES LIKE 'locales'")->rowCount() > 0;
+			return self::$_tablesExist = (
+				$pdo->query("SHOW TABLES LIKE 'locale_home_resources'")->rowCount() > 0
+				&& $pdo->query("SHOW TABLES LIKE 'locales'")->rowCount() > 0
+			);
 		} catch (Throwable) {
-			return false;
+			return self::$_tablesExist = false;
 		}
 	}
 }

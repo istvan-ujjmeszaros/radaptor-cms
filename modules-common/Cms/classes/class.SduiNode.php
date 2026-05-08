@@ -7,6 +7,8 @@ class SduiNode
 	public const string TYPE_WIDGET = 'widget';
 	public const string TYPE_SUB = 'sub';
 
+	// slots is an internal compatibility alias for authoring helpers. Public SDUI
+	// JSON transport is serialized through SduiJsonSerializer and exposes contents.
 	/**
 	 * @param array<string, mixed> $props
 	 * @param array<string, list<array<string, mixed>>> $contents

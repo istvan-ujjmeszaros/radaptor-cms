@@ -34,8 +34,6 @@ interface iWidget
 	 */
 	public static function getDefaultPathForCreation(): array;
 
-	public static function getContentLocaleStrategy(): ?WidgetContentLocaleStrategy;
-
 	public static function isCatcher(): bool;
 
 	/**

@@ -127,3 +127,4 @@ user,locale.current_label,,pt-BR,"Current language","Idioma atual",0,"Idioma atu
 user,locale.invalid,,pt-BR,"Selected language is not available","O idioma selecionado não está disponível",0,"O idioma selecionado não está disponível"
 user,locale.menu_label,,pt-BR,Language,Idioma,0,Idioma
 user,locale.updated,,pt-BR,"Language updated","Idioma atualizado",0,"Idioma atualizado"
+user,locale.home_missing,,pt-BR,"No home page is configured for the selected language; staying on the current page.","Nenhuma página inicial está configurada para o idioma selecionado; você continuará na página atual.",0,"Nenhuma página inicial está configurada para o idioma selecionado; você continuará na página atual."

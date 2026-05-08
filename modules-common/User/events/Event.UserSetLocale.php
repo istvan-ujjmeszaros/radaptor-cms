@@ -33,7 +33,8 @@ class EventUserSetLocale extends AbstractEvent implements iBrowserEventDocumenta
 			],
 			'notes' => BrowserEventDocumentationHelper::lines(
 				'Locale values are limited to enabled locales.',
-				'Referer is sanitized to a same-site URL before redirect.'
+				'Referer is sanitized to a same-site URL before redirect.',
+				'POST requests must pass same-origin Origin/Referer validation.'
 			),
 			'side_effects' => BrowserEventDocumentationHelper::lines(
 				'Writes users.locale for logged-in users.',
@@ -45,12 +46,25 @@ class EventUserSetLocale extends AbstractEvent implements iBrowserEventDocumenta
 
 	public function run(): void
 	{
+		if (Request::getMethod() !== 'POST') {
+			$this->_renderMethodNotAllowed();
+
+			return;
+		}
+
+		if (class_exists(LocaleSwitchService::class) && !LocaleSwitchService::isSameOriginPostRequest()) {
+			$this->_renderForbidden();
+
+			return;
+		}
+
 		$referer = $this->_getReferer();
 		$redirect_status = self::getRedirectStatusForMethod(Request::getMethod());
 		$locale = LocaleService::tryCanonicalize((string) Request::_POST('locale', '')) ?? '';
 
 		if ($locale === '' || !LocaleService::isEnabled($locale)) {
 			SystemMessages::_error(t('user.locale.invalid'));
+			// Url::redirect() is typed never and exits; this error branch cannot fall through to mutation.
 			Url::redirect($referer, $redirect_status);
 		}
 
@@ -65,10 +79,22 @@ class EventUserSetLocale extends AbstractEvent implements iBrowserEventDocumenta
 
 		Kernel::setRequestLocale($locale);
 
+		$redirect_url = $referer;
+
+		if (class_exists(LocaleSwitchService::class)) {
+			$decision = LocaleSwitchService::resolveRedirectDecisionForLocale($referer, $locale);
+			$redirect_url = $decision['url'];
+
+			if (in_array($decision['reason'], [
+				LocaleSwitchService::REDIRECT_REASON_MISSING_LOCALE_HOME,
+				LocaleSwitchService::REDIRECT_REASON_HOME_URL_UNAVAILABLE,
+			], true)) {
+				SystemMessages::_warning(t('user.locale.home_missing'));
+			}
+		}
+
 		SystemMessages::_notice(t('user.locale.updated'));
-		Url::redirect(class_exists(LocaleSwitchService::class)
-			? LocaleSwitchService::resolveRedirectUrlForLocale($referer, $locale)
-			: $referer, $redirect_status);
+		Url::redirect($redirect_url, $redirect_status);
 	}
 
 	public static function getRedirectStatusForMethod(string $method): int
@@ -87,5 +113,16 @@ class EventUserSetLocale extends AbstractEvent implements iBrowserEventDocumenta
 		}
 
 		return Url::getCurrentHost();
+	}
+
+	private function _renderForbidden(): void
+	{
+		http_response_code(403);
+	}
+
+	private function _renderMethodNotAllowed(): void
+	{
+		WebpageView::header('Allow: POST');
+		http_response_code(405);
 	}
 }

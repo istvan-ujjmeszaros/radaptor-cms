@@ -33,16 +33,18 @@ class I18nCatalogBuilder
 	private static function _buildLocale(string $locale, string $outputDir): void
 	{
 		$locale = LocaleService::canonicalize($locale);
+		$storage_locales = self::_getStorageLocaleAliases($locale);
+		$placeholders = implode(', ', array_fill(0, count($storage_locales), '?'));
 		$pdo = Db::instance();
 
 		$stmt = $pdo->prepare(
-			"SELECT m.domain, m.`key`, m.context, t.text
+			"SELECT m.domain, m.`key`, m.context, t.locale, t.text
 			FROM i18n_messages m
 			JOIN i18n_translations t ON t.domain = m.domain AND t.`key` = m.`key` AND t.context = m.context
-			WHERE t.locale = :locale AND TRIM(t.text) <> ''
+			WHERE t.locale IN ({$placeholders}) AND TRIM(t.text) <> ''
 			ORDER BY m.domain, m.`key`, m.context"
 		);
-		$stmt->execute([':locale' => $locale]);
+		$stmt->execute($storage_locales);
 		$rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
 		$catalog = [];
@@ -54,7 +56,9 @@ class I18nCatalogBuilder
 				$flatKey .= '.' . $row['context'];
 			}
 
-			$catalog[$flatKey] = $row['text'];
+			if (!isset($catalog[$flatKey]) || $row['locale'] === $locale) {
+				$catalog[$flatKey] = $row['text'];
+			}
 		}
 
 		$hash = md5(serialize($catalog));
@@ -104,5 +108,21 @@ class I18nCatalogBuilder
 				@unlink($file);
 			}
 		}
+	}
+
+	/**
+	 * @return list<string>
+	 */
+	private static function _getStorageLocaleAliases(string $locale): array
+	{
+		$canonical = LocaleService::canonicalize($locale);
+		$aliases = [$canonical => true];
+		$legacy = LocaleService::toIntlLocale($canonical);
+
+		if ($legacy !== $canonical) {
+			$aliases[$legacy] = true;
+		}
+
+		return array_keys($aliases);
 	}
 }

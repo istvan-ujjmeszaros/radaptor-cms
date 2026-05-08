@@ -9,18 +9,8 @@ final class RichTextWidgetContentLocaleStrategy extends WidgetContentLocaleStrat
 	 */
 	public function assertConnectionAttributesCompatible(int $connection_id, array $attributes): void
 	{
-		if (!array_key_exists('content_id', $attributes)) {
-			return;
-		}
-
-		$content_id = (int) ($attributes['content_id'] ?? 0);
-
-		if ($content_id <= 0) {
-			return;
-		}
-
-		if (!RichTextLocaleService::contentMatchesConnectionLocale($content_id, $connection_id)) {
-			throw new RuntimeException(t('cms.richtext.locale_mismatch'));
-		}
+		// RichText locale is authoring metadata only. Existing content remains renderable
+		// on any page locale; selector filtering is just an editor convenience.
+		unset($connection_id, $attributes);
 	}
 }

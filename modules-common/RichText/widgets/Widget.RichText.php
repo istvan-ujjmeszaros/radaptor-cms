@@ -49,13 +49,6 @@ class WidgetRichText extends AbstractWidget
 			]);
 		}
 
-		if (!RichTextLocaleService::contentMatchesConnectionLocale((int) $content_id, $connection->connection_id)) {
-			return $this->buildStatusTree([
-				'severity' => 'warning',
-				'message' => t('cms.richtext.locale_mismatch'),
-			]);
-		}
-
 		$contents = EntityRichtext::findById($content_id)?->dto();
 
 		if (!is_array($contents)) {

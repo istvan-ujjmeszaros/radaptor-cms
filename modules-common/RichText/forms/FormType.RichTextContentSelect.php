@@ -43,12 +43,6 @@ class FormTypeRichTextContentSelect extends AbstractForm
 				$connection_id = Request::_GET('connection_id', Request::DEFAULT_ERROR);
 				$content_id = (int) ($this->savedata['content_id'] ?? 0);
 
-				if (!RichTextLocaleService::contentMatchesConnectionLocale($content_id, $connection_id)) {
-					SystemMessages::addSystemMessage(t('cms.richtext.locale_mismatch'));
-
-					break;
-				}
-
 				if (AttributeHandler::addAttribute(new AttributeResourceIdentifier(ResourceNames::WIDGET_CONNECTION, $connection_id), ['content_id' => $content_id])) {
 					SystemMessages::addSystemMessage(t('cms.richtext.assigned'));
 				} else {

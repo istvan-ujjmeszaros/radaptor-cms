@@ -23,17 +23,4 @@ final class RichTextLocaleService
 	{
 		return self::getLocaleForConnectionId(Request::_GET('connection_id', null));
 	}
-
-	public static function contentMatchesConnectionLocale(int $content_id, int|string|null $connection_id): bool
-	{
-		$content = EntityRichtext::findById($content_id)?->dto();
-
-		if (!is_array($content)) {
-			return false;
-		}
-
-		$content_locale = LocaleService::tryCanonicalize((string) ($content['locale'] ?? ''));
-
-		return $content_locale !== null && $content_locale === self::getLocaleForConnectionId($connection_id);
-	}
 }

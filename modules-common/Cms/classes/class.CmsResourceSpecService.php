@@ -556,10 +556,13 @@ class CmsResourceSpecService
 			}
 
 			foreach ($ordered_specs as $index => $widget_spec) {
+				$widget_name = (string) $widget_spec['widget'];
+				$attributes = (array) ($widget_spec['attributes'] ?? []);
+
 				$connection_id = Widget::assignWidgetToWebpage(
 					$page_id,
 					$slot_name,
-					(string) $widget_spec['widget'],
+					$widget_name,
 					$index,
 					true
 				);
@@ -568,8 +571,16 @@ class CmsResourceSpecService
 					throw new RuntimeException("Unable to sync widget {$widget_spec['widget']} on slot {$slot_name}.");
 				}
 
-				self::replaceConnectionAttributes($connection_id, (array) ($widget_spec['attributes'] ?? []));
-				self::replaceConnectionSettings($connection_id, (string) $widget_spec['widget'], (array) ($widget_spec['settings'] ?? []));
+				try {
+					self::assertConnectionAttributesLocaleCompatible($connection_id, $widget_name, $attributes);
+				} catch (Throwable $exception) {
+					Widget::removeWidgetFromWebpage($connection_id);
+
+					throw $exception;
+				}
+
+				self::replaceConnectionAttributes($connection_id, $attributes);
+				self::replaceConnectionSettings($connection_id, $widget_name, (array) ($widget_spec['settings'] ?? []));
 				$created[] = self::getWidgetConnectionSnapshot($connection_id);
 			}
 

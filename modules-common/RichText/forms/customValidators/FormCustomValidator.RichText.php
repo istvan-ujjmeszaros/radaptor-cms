@@ -11,11 +11,13 @@ abstract class FormCustomValidatorRichText extends AbstractForm
 
 	private function validateName(): void
 	{
-		if (!$this->isModified('name')) {
+		$locale_input = $this->getInput('locale');
+		$locale_modified = $locale_input !== null && $this->isModified('locale');
+
+		if (!$this->isModified('name') && !$locale_modified) {
 			return;
 		}
 
-		$locale_input = $this->getInput('locale');
 		$locale = $locale_input !== null && trim((string) $locale_input->getValue()) !== ''
 			? LocaleService::canonicalize((string) $locale_input->getValue())
 			: RichTextLocaleService::getLocaleForCurrentRequest();

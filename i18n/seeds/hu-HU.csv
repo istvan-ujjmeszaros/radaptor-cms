@@ -359,6 +359,7 @@ common,all,,hu-HU,All,Összes,0,Összes
 common,back,,hu-HU,Back,Vissza,0,Vissza
 common,calendar,,hu-HU,Calendar,Naptár,0,Naptár
 common,cancel,,hu-HU,Cancel,Mégse,0,Mégse
+common,close,,hu-HU,Close,Bezárás,0,Bezárás
 common,choose_placeholder,,hu-HU,"-- Choose --","-- Válassz! --",0,"-- Válassz! --"
 common,delete,,hu-HU,Delete,Törlés,0,Törlés
 common,download,,hu-HU,Download,Letöltés,0,Letöltés

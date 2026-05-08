@@ -10,6 +10,7 @@ import_export,error.file_required,,hu-HU,"Please select a CSV file to import.","
 import_export,error.invalid_format,,hu-HU,"Invalid format","Érvénytelen formátum",0,"Érvénytelen formátum"
 import_export,error.invalid_mode,,hu-HU,"Invalid import mode.","Érvénytelen import mód.",0,"Érvénytelen import mód."
 import_export,error.locale_required,,hu-HU,"Locale is required for export.","Az exporthoz locale megadása kötelező.",0,"Az exporthoz locale megadása kötelező."
+import_export,error.wide_no_locale_columns,,hu-HU,"Wide CSV must contain at least one text:<locale> column.","A wide CSV-nek legalább egy text:<locale> oszlopot tartalmaznia kell.",0,"A wide CSV-nek legalább egy text:<locale> oszlopot tartalmaznia kell."
 import_export,error.upload_backup_required,,hu-HU,"Confirm the uploaded files backup before exporting the site snapshot.","Erősítsd meg a feltöltött fájlok mentését a weboldal snapshot exportálása előtt.",0,"Erősítsd meg a feltöltött fájlok mentését a weboldal snapshot exportálása előtt."
 import_export,export.title,,hu-HU,"Export CSV","CSV export",0,"CSV export"
 import_export,field.dataset.label,,hu-HU,Dataset,Adatkészlet,0,Adatkészlet

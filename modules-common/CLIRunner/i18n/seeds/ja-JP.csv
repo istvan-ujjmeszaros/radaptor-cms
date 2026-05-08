@@ -5,6 +5,8 @@ cli_runner,select_command,,ja-JP,"Select a command from the list to get started.
 cli_runner,action.run,,ja-JP,Run,実行,0,実行
 cli_runner,action.confirm,,ja-JP,"Confirm & Run",確認して実行,0,確認して実行
 cli_runner,action.clear,,ja-JP,Clear,クリア,0,クリア
+cli_runner,action.copy,,ja-JP,Copy,コピー,0,コピー
+cli_runner,action.copied,,ja-JP,Copied,コピーしました,0,コピーしました
 cli_runner,confirm.title,,ja-JP,"Confirm Command",コマンドの確認,0,コマンドの確認
 cli_runner,confirm.message,,ja-JP,"This command will modify data or system state. Are you sure?",このコマンドはデータまたはシステム状態を変更します。よろしいですか？,0,このコマンドはデータまたはシステム状態を変更します。よろしいですか？
 cli_runner,output.title,,ja-JP,Output,出力,0,出力

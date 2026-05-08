@@ -5,6 +5,8 @@ cli_runner,select_command,,ru-RU,"Select a command from the list to get started.
 cli_runner,action.run,,ru-RU,Run,Запустить,0,Запустить
 cli_runner,action.confirm,,ru-RU,"Confirm & Run","Подтвердить и запустить",0,"Подтвердить и запустить"
 cli_runner,action.clear,,ru-RU,Clear,Очистить,0,Очистить
+cli_runner,action.copy,,ru-RU,Copy,Копировать,0,Копировать
+cli_runner,action.copied,,ru-RU,Copied,Скопировано,0,Скопировано
 cli_runner,confirm.title,,ru-RU,"Confirm Command","Подтвердить команду",0,"Подтвердить команду"
 cli_runner,confirm.message,,ru-RU,"This command will modify data or system state. Are you sure?","Эта команда изменит данные или состояние системы. Вы уверены?",0,"Эта команда изменит данные или состояние системы. Вы уверены?"
 cli_runner,output.title,,ru-RU,Output,Вывод,0,Вывод

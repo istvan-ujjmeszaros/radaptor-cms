@@ -359,6 +359,7 @@ common,all,,fr-FR,All,Tout,0,Tout
 common,back,,fr-FR,Back,Retour,0,Retour
 common,calendar,,fr-FR,Calendar,Calendrier,0,Calendrier
 common,cancel,,fr-FR,Cancel,Annuler,0,Annuler
+common,close,,fr-FR,Close,Fermer,0,Fermer
 common,choose_placeholder,,fr-FR,"-- Choose --","-- Choisir --",0,"-- Choisir --"
 common,delete,,fr-FR,Delete,Supprimer,0,Supprimer
 common,download,,fr-FR,Download,Télécharger,0,Télécharger

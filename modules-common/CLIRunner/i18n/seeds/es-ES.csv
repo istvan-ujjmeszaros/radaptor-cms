@@ -5,6 +5,8 @@ cli_runner,select_command,,es-ES,"Select a command from the list to get started.
 cli_runner,action.run,,es-ES,Run,Ejecutar,0,Ejecutar
 cli_runner,action.confirm,,es-ES,"Confirm & Run","Confirmar y ejecutar",0,"Confirmar y ejecutar"
 cli_runner,action.clear,,es-ES,Clear,Limpiar,0,Limpiar
+cli_runner,action.copy,,es-ES,Copy,Copiar,0,Copiar
+cli_runner,action.copied,,es-ES,Copied,Copiado,0,Copiado
 cli_runner,confirm.title,,es-ES,"Confirm Command","Confirmar comando",0,"Confirmar comando"
 cli_runner,confirm.message,,es-ES,"This command will modify data or system state. Are you sure?","Este comando modificará datos o el estado del sistema. ¿Está seguro?",0,"Este comando modificará datos o el estado del sistema. ¿Está seguro?"
 cli_runner,output.title,,es-ES,Output,Salida,0,Salida

@@ -5,6 +5,8 @@ cli_runner,select_command,,en-US,"Select a command from the list to get started.
 cli_runner,action.run,,en-US,"Run","Run",0,"Run"
 cli_runner,action.confirm,,en-US,"Confirm & Run","Confirm & Run",0,"Confirm & Run"
 cli_runner,action.clear,,en-US,"Clear","Clear",0,"Clear"
+cli_runner,action.copy,,en-US,Copy,Copy,0,Copy
+cli_runner,action.copied,,en-US,Copied,Copied,0,Copied
 cli_runner,confirm.title,,en-US,"Confirm Command","Confirm Command",0,"Confirm Command"
 cli_runner,confirm.message,,en-US,"This command will modify data or system state. Are you sure?","This command will modify data or system state. Are you sure?",0,"This command will modify data or system state. Are you sure?"
 cli_runner,output.title,,en-US,"Output","Output",0,"Output"

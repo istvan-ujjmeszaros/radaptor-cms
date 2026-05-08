@@ -359,6 +359,7 @@ common,all,,pl-PL,All,Wszystko,0,Wszystko
 common,back,,pl-PL,Back,Wstecz,0,Wstecz
 common,calendar,,pl-PL,Calendar,Kalendarz,0,Kalendarz
 common,cancel,,pl-PL,Cancel,Anuluj,0,Anuluj
+common,close,,pl-PL,Close,Zamknij,0,Zamknij
 common,choose_placeholder,,pl-PL,"-- Choose --","-- Wybierz --",0,"-- Wybierz --"
 common,delete,,pl-PL,Delete,Usuń,0,Usuń
 common,download,,pl-PL,Download,Pobierz,0,Pobierz

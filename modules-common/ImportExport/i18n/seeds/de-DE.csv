@@ -10,6 +10,7 @@ import_export,error.file_required,,de-DE,"Please select a CSV file to import.","
 import_export,error.invalid_format,,de-DE,"Invalid format","Ungültiges Format",0,"Ungültiges Format"
 import_export,error.invalid_mode,,de-DE,"Invalid import mode.","Ungültiger Importmodus.",0,"Ungültiger Importmodus."
 import_export,error.locale_required,,de-DE,"Locale is required for export.","Für den Export ist ein Locale erforderlich.",0,"Für den Export ist ein Locale erforderlich."
+import_export,error.wide_no_locale_columns,,de-DE,"Wide CSV must contain at least one text:<locale> column.","Die Wide-CSV muss mindestens eine text:<locale>-Spalte enthalten.",0,"Die Wide-CSV muss mindestens eine text:<locale>-Spalte enthalten."
 import_export,export.title,,de-DE,"Export CSV","CSV exportieren",0,"CSV exportieren"
 import_export,field.dataset.label,,de-DE,Dataset,Datensatz,0,Datensatz
 import_export,field.expect_locale.any,,de-DE,"Any locale in file","Beliebiges Locale in der Datei",0,"Beliebiges Locale in der Datei"

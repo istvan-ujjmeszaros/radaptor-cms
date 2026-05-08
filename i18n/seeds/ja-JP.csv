@@ -359,6 +359,7 @@ common,all,,ja-JP,All,すべて,0,すべて
 common,back,,ja-JP,Back,戻る,0,戻る
 common,calendar,,ja-JP,Calendar,カレンダー,0,カレンダー
 common,cancel,,ja-JP,Cancel,キャンセル,0,キャンセル
+common,close,,ja-JP,Close,閉じる,0,閉じる
 common,choose_placeholder,,ja-JP,"-- Choose --","-- 選択してください --",0,"-- 選択してください --"
 common,delete,,ja-JP,Delete,削除,0,削除
 common,download,,ja-JP,Download,ダウンロード,0,ダウンロード

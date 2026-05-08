@@ -10,6 +10,7 @@ import_export,error.file_required,,zh-Hans-CN,"Please select a CSV file to impor
 import_export,error.invalid_format,,zh-Hans-CN,"Invalid format",无效格式,0,无效格式
 import_export,error.invalid_mode,,zh-Hans-CN,"Invalid import mode.",无效的导入模式。,0,无效的导入模式。
 import_export,error.locale_required,,zh-Hans-CN,"Locale is required for export.",导出时必须指定语言。,0,导出时必须指定语言。
+import_export,error.wide_no_locale_columns,,zh-Hans-CN,"Wide CSV must contain at least one text:<locale> column.","宽 CSV 必须至少包含一个 text:<locale> 列。",0,"宽 CSV 必须至少包含一个 text:<locale> 列。"
 import_export,export.title,,zh-Hans-CN,"Export CSV","导出 CSV",0,"导出 CSV"
 import_export,field.dataset.label,,zh-Hans-CN,Dataset,数据集,0,数据集
 import_export,field.expect_locale.any,,zh-Hans-CN,"Any locale in file",文件中的任意语言,0,文件中的任意语言

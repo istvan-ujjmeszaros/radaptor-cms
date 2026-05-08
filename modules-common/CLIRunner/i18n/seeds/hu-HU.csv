@@ -5,6 +5,8 @@ cli_runner,select_command,,hu-HU,"Select a command from the list to get started.
 cli_runner,action.run,,hu-HU,"Run","Futtatás",0,"Futtatás"
 cli_runner,action.confirm,,hu-HU,"Confirm & Run","Megerősítés és futtatás",0,"Megerősítés és futtatás"
 cli_runner,action.clear,,hu-HU,"Clear","Törlés",0,"Törlés"
+cli_runner,action.copy,,hu-HU,Copy,Másolás,0,Másolás
+cli_runner,action.copied,,hu-HU,Copied,Másolva,0,Másolva
 cli_runner,confirm.title,,hu-HU,"Confirm Command","Parancs megerősítése",0,"Parancs megerősítése"
 cli_runner,confirm.message,,hu-HU,"This command will modify data or system state. Are you sure?","Ez a parancs adatokat vagy rendszerállapotot módosít. Biztosan futtatod?",0,"Ez a parancs adatokat vagy rendszerállapotot módosít. Biztosan futtatod?"
 cli_runner,output.title,,hu-HU,"Output","Kimenet",0,"Kimenet"

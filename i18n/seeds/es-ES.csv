@@ -359,6 +359,7 @@ common,all,,es-ES,All,Todo,0,Todo
 common,back,,es-ES,Back,Volver,0,Volver
 common,calendar,,es-ES,Calendar,Calendario,0,Calendario
 common,cancel,,es-ES,Cancel,Cancelar,0,Cancelar
+common,close,,es-ES,Close,Cerrar,0,Cerrar
 common,choose_placeholder,,es-ES,"-- Choose --","-- Elegir --",0,"-- Elegir --"
 common,delete,,es-ES,Delete,Eliminar,0,Eliminar
 common,download,,es-ES,Download,Descargar,0,Descargar

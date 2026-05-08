@@ -359,6 +359,7 @@ common,all,,ko-KR,All,전체,0,전체
 common,back,,ko-KR,Back,뒤로,0,뒤로
 common,calendar,,ko-KR,Calendar,달력,0,달력
 common,cancel,,ko-KR,Cancel,취소,0,취소
+common,close,,ko-KR,Close,닫기,0,닫기
 common,choose_placeholder,,ko-KR,"-- Choose --","-- 선택 --",0,"-- 선택 --"
 common,delete,,ko-KR,Delete,삭제,0,삭제
 common,download,,ko-KR,Download,다운로드,0,다운로드

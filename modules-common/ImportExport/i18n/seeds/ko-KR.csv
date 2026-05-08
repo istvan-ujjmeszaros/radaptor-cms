@@ -10,6 +10,7 @@ import_export,error.file_required,,ko-KR,"Please select a CSV file to import.","
 import_export,error.invalid_format,,ko-KR,"Invalid format","잘못된 형식",0,"잘못된 형식"
 import_export,error.invalid_mode,,ko-KR,"Invalid import mode.","잘못된 가져오기 모드.",0,"잘못된 가져오기 모드."
 import_export,error.locale_required,,ko-KR,"Locale is required for export.","내보내기에는 로케일이 필요합니다.",0,"내보내기에는 로케일이 필요합니다."
+import_export,error.wide_no_locale_columns,,ko-KR,"Wide CSV must contain at least one text:<locale> column.","와이드 CSV에는 text:<locale> 열이 하나 이상 있어야 합니다.",0,"와이드 CSV에는 text:<locale> 열이 하나 이상 있어야 합니다."
 import_export,export.title,,ko-KR,"Export CSV","CSV 내보내기",0,"CSV 내보내기"
 import_export,field.dataset.label,,ko-KR,Dataset,데이터셋,0,데이터셋
 import_export,field.expect_locale.any,,ko-KR,"Any locale in file","파일의 모든 로케일",0,"파일의 모든 로케일"

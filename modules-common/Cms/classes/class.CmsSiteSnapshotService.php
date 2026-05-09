@@ -45,6 +45,7 @@ class CmsSiteSnapshotService
 		'email_queue_dead_letter',
 		'mcp_tokens',
 		'mcp_audit',
+		'cms_mutation_audit',
 	];
 
 	/**
@@ -170,6 +171,16 @@ class CmsSiteSnapshotService
 				'summary' => $summary,
 				'uploads' => self::summarizeUploadsReport($uploads_report),
 			];
+		}
+
+		if (class_exists(CmsMutationAuditService::class)) {
+			CmsMutationAuditService::recordLeaf('site.import.replace_tables', [
+				'affected_count' => array_sum($summary),
+				'summary' => [
+					'tables' => count($summary),
+					'rows' => array_sum($summary),
+				],
+			]);
 		}
 
 		self::replaceTables($snapshot);

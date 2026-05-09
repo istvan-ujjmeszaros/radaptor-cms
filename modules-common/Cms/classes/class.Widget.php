@@ -182,6 +182,13 @@ class Widget extends WidgetList
 		$page_id = (int) $connection_data['page_id'];
 		$widget_name = $connection_data['widget_name'];
 		$slot_name = (string) ($connection_data['slot_name'] ?? '');
+		$before = [
+			'connection' => $connection_data,
+			'attributes' => AttributeHandler::getAttributes(
+				new AttributeResourceIdentifier(ResourceNames::WIDGET_CONNECTION, (string) $connection_id)
+			),
+			'settings' => self::getWidgetSettings((string) $widget_name, $connection_id),
+		];
 
 		// Check if the widget being removed is a catcher widget
 		$widgetClassname = 'Widget' . ucwords($widget_name);
@@ -197,6 +204,7 @@ class Widget extends WidgetList
 		}
 
 		AttributeHandler::deleteAttributes(new AttributeResourceIdentifier(ResourceNames::WIDGET_CONNECTION, (string) $connection_id));
+		self::deleteWidgetSettings($widget_name, $connection_id);
 
 		$update_seq_query = "
 	            UPDATE widget_connections
@@ -217,7 +225,92 @@ class Widget extends WidgetList
 			CmsRenderVersion::touchWebpage($page_id);
 		}
 
+		self::auditWidgetRemoval($connection_id, $page_id, $slot_name, (string) $widget_name, $before, $deleted);
+
 		return $deleted;
+	}
+
+	/**
+	 * @return array<string, mixed>
+	 */
+	private static function getWidgetSettings(string $widget_name, int $connection_id): array
+	{
+		$settings_handler = self::getWidgetSettingsHandler($widget_name);
+
+		if ($settings_handler !== null) {
+			return $settings_handler::getSettings($connection_id);
+		}
+
+		return WidgetSettings::getSettings($connection_id);
+	}
+
+	/**
+	 * @param array<string, mixed> $before
+	 */
+	private static function auditWidgetRemoval(
+		int $connection_id,
+		int $page_id,
+		string $slot_name,
+		string $widget_name,
+		array $before,
+		bool $deleted
+	): void {
+		if (!class_exists(CmsMutationAuditService::class)) {
+			return;
+		}
+
+		CmsMutationAuditService::recordLeaf('widget.remove', [
+			'page_id' => $page_id,
+			'widget_connection_id' => $connection_id,
+			'slot_name' => $slot_name,
+			'widget_name' => $widget_name,
+			'result_status' => $deleted ? 'success' : 'failed',
+			'affected_count' => $deleted ? 1 : 0,
+			'before' => $before,
+			'after' => [
+				'deleted' => $deleted,
+			],
+		]);
+	}
+
+	private static function deleteWidgetSettings(string $widget_name, int $connection_id): void
+	{
+		$resource_names = [WidgetSettings::_RESOURCENAME];
+		$settings_handler = self::getWidgetSettingsHandler($widget_name);
+
+		if ($settings_handler !== null && defined($settings_handler . '::_RESOURCENAME')) {
+			/** @var string $resource_name */
+			$resource_name = constant($settings_handler . '::_RESOURCENAME');
+			$resource_names[] = $resource_name;
+		}
+
+		foreach (array_unique($resource_names) as $resource_name) {
+			AttributeHandler::deleteAttributes(new AttributeResourceIdentifier($resource_name, (string) $connection_id));
+		}
+	}
+
+	private static function getWidgetSettingsHandler(string $widget_name): ?string
+	{
+		if ($widget_name === '') {
+			return null;
+		}
+
+		$candidates = [];
+		$widget_class_name = 'Widget' . ucwords($widget_name);
+
+		if (class_exists($widget_class_name)) {
+			$candidates[] = preg_replace('/^Widget/', '', $widget_class_name) ?: '';
+		}
+
+		$candidates[] = $widget_name;
+
+		foreach (array_unique(array_filter($candidates, static fn (string $candidate): bool => $candidate !== '')) as $candidate) {
+			if (class_exists($candidate) && method_exists($candidate, 'saveSettings') && method_exists($candidate, 'getSettings')) {
+				return $candidate;
+			}
+		}
+
+		return null;
 	}
 
 	/**

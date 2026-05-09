@@ -25,7 +25,8 @@
  *     attributes?: array<string, scalar|null>,
  *     catcher?: bool,
  *     acl?: CmsAclSpec,
- *     slots?: array<string, list<CmsWidgetSpec>>
+ *     slots?: array<string, list<CmsWidgetSpec>>,
+ *     replace_slots?: bool
  * }
  * @phpstan-type CmsFolderSpec array{
  *     path: string,
@@ -139,7 +140,11 @@ class CmsResourceSpecService
 		}
 
 		if (is_array($spec['slots'] ?? null)) {
-			self::syncAllSlots((int) $page['node_id'], $spec['slots']);
+			if ((bool) ($spec['replace_slots'] ?? false)) {
+				self::syncAllSlots((int) $page['node_id'], $spec['slots']);
+			} else {
+				self::syncSlots((int) $page['node_id'], $spec['slots']);
+			}
 		}
 
 		return (int) $page['node_id'];
@@ -370,6 +375,59 @@ class CmsResourceSpecService
 		?string $widget_name = null,
 		bool $all = false
 	): array {
+		$targets = self::resolveWidgetRemovalTargets($path, $slot_name, $connection_id, $widget_name, $all);
+		$removed = [];
+
+		foreach ($targets as $target_id) {
+			if (Widget::removeWidgetFromWebpage((int) $target_id)) {
+				$removed[] = ['connection_id' => (int) $target_id];
+			}
+		}
+
+		return $removed;
+	}
+
+	/**
+	 * @return array<string, mixed>
+	 */
+	public static function previewRemoveWidget(
+		string $path,
+		string $slot_name,
+		?int $connection_id = null,
+		?string $widget_name = null,
+		bool $all = false
+	): array {
+		$targets = self::resolveWidgetRemovalTargets($path, $slot_name, $connection_id, $widget_name, $all);
+		$snapshots = array_map(
+			static fn (int $target_id): array => self::getWidgetConnectionSnapshot($target_id),
+			$targets
+		);
+
+		return [
+			'status' => 'success',
+			'dry_run' => true,
+			'path' => $path,
+			'slot' => $slot_name,
+			'summary' => [
+				'touched_pages' => 1,
+				'touched_slots' => 1,
+				'deleted_widgets' => count($snapshots),
+				'emptied_slots' => $snapshots !== [] && count($snapshots) === count(self::getSlotSnapshots((int) $snapshots[0]['page_id'], $slot_name)) ? 1 : 0,
+			],
+			'targets' => $snapshots,
+		];
+	}
+
+	/**
+	 * @return list<int>
+	 */
+	private static function resolveWidgetRemovalTargets(
+		string $path,
+		string $slot_name,
+		?int $connection_id,
+		?string $widget_name,
+		bool $all
+	): array {
 		$page = CmsPathHelper::resolveWebpage($path);
 
 		if (!is_array($page)) {
@@ -410,15 +468,7 @@ class CmsResourceSpecService
 			}
 		}
 
-		$removed = [];
-
-		foreach ($targets as $target_id) {
-			if (Widget::removeWidgetFromWebpage((int) $target_id)) {
-				$removed[] = ['connection_id' => (int) $target_id];
-			}
-		}
-
-		return $removed;
+		return $targets;
 	}
 
 	/**
@@ -434,6 +484,70 @@ class CmsResourceSpecService
 		}
 
 		return self::syncSlot((int) $page['node_id'], $slot_name, $spec);
+	}
+
+	/**
+	 * @param list<CmsWidgetSpec> $spec
+	 * @return array<string, mixed>
+	 */
+	public static function previewWidgetSlotSync(string $path, string $slot_name, array $spec): array
+	{
+		$page = CmsPathHelper::resolveWebpage($path);
+
+		if (!is_array($page)) {
+			throw new RuntimeException("Webpage not found: {$path}");
+		}
+
+		$ordered_specs = self::normalizeWidgetSpecs($spec);
+		self::assertWidgetSpecsAssignable($ordered_specs);
+
+		return [
+			'status' => 'success',
+			'dry_run' => true,
+			'path' => $path,
+			'slot' => $slot_name,
+			'summary' => self::buildSlotSyncSummary((int) $page['node_id'], $slot_name, $ordered_specs),
+		];
+	}
+
+	/**
+	 * @param list<CmsWidgetSpec> $spec
+	 * @return array<string, mixed>
+	 */
+	public static function syncWidgetSlotWithSummary(string $path, string $slot_name, array $spec): array
+	{
+		$page = CmsPathHelper::resolveWebpage($path);
+
+		if (!is_array($page)) {
+			throw new RuntimeException("Webpage not found: {$path}");
+		}
+
+		$ordered_specs = self::normalizeWidgetSpecs($spec);
+		self::assertWidgetSpecsAssignable($ordered_specs);
+		$summary = self::buildSlotSyncSummary((int) $page['node_id'], $slot_name, $ordered_specs);
+		$connections = self::syncSlot((int) $page['node_id'], $slot_name, $ordered_specs);
+
+		if (class_exists(CmsMutationAuditService::class)) {
+			CmsMutationAuditService::recordLeaf('widget.slot_sync', [
+				'page_id' => (int) $page['node_id'],
+				'resource_path' => $path,
+				'slot_name' => $slot_name,
+				'affected_count' => ($summary['removed_widgets'] ?? 0) + ($summary['created_widgets'] ?? 0),
+				'summary' => $summary,
+				'after' => [
+					'connections' => $connections,
+				],
+			]);
+		}
+
+		return [
+			'status' => 'success',
+			'dry_run' => false,
+			'path' => $path,
+			'slot' => $slot_name,
+			'summary' => $summary,
+			'connections' => $connections,
+		];
 	}
 
 	/**
@@ -512,6 +626,14 @@ class CmsResourceSpecService
 			}
 		}
 
+		self::syncSlots($page_id, $slot_specs);
+	}
+
+	/**
+	 * @param array<string, list<CmsWidgetSpec>> $slot_specs
+	 */
+	private static function syncSlots(int $page_id, array $slot_specs): void
+	{
 		foreach ($slot_specs as $slot_name => $widgets) {
 			self::syncSlot($page_id, (string) $slot_name, $widgets);
 		}
@@ -538,15 +660,24 @@ class CmsResourceSpecService
 				$pdo->beginTransaction();
 			}
 
-			$existing = WidgetConnection::getWidgetsForSlot($page_id, $slot_name);
+			$existing_snapshots = self::getSlotSnapshots($page_id, $slot_name);
 
-			foreach ($existing as $connection) {
-				Widget::removeWidgetFromWebpage($connection->getConnectionId());
+			foreach ($existing_snapshots as $snapshot) {
+				Widget::removeWidgetFromWebpage((int) $snapshot['connection_id']);
 			}
 
 			foreach ($ordered_specs as $index => $widget_spec) {
 				$widget_name = (string) $widget_spec['widget'];
-				$attributes = (array) ($widget_spec['attributes'] ?? []);
+				$previous_snapshot = is_array($existing_snapshots[$index] ?? null)
+					&& (string) ($existing_snapshots[$index]['widget'] ?? '') === $widget_name
+					? $existing_snapshots[$index]
+					: null;
+				$attributes = array_key_exists('attributes', $widget_spec)
+					? (array) $widget_spec['attributes']
+					: (array) ($previous_snapshot['attributes'] ?? []);
+				$settings = array_key_exists('settings', $widget_spec)
+					? (array) $widget_spec['settings']
+					: (array) ($previous_snapshot['settings'] ?? []);
 
 				$connection_id = Widget::assignWidgetToWebpage(
 					$page_id,
@@ -561,7 +692,7 @@ class CmsResourceSpecService
 				}
 
 				self::replaceConnectionAttributes($connection_id, $attributes);
-				self::replaceConnectionSettings($connection_id, $widget_name, (array) ($widget_spec['settings'] ?? []));
+				self::replaceConnectionSettings($connection_id, $widget_name, $settings);
 				$created[] = self::getWidgetConnectionSnapshot($connection_id);
 			}
 
@@ -577,6 +708,66 @@ class CmsResourceSpecService
 		}
 
 		return $created;
+	}
+
+	/**
+	 * @param list<CmsWidgetSpec> $ordered_specs
+	 * @return array<string, int>
+	 */
+	private static function buildSlotSyncSummary(int $page_id, string $slot_name, array $ordered_specs): array
+	{
+		if (trim($slot_name) === '') {
+			throw new InvalidArgumentException('Slot name is required.');
+		}
+
+		$existing_snapshots = self::getSlotSnapshots($page_id, $slot_name);
+		$preserved_settings = 0;
+		$preserved_attributes = 0;
+
+		foreach ($ordered_specs as $index => $widget_spec) {
+			$previous_snapshot = is_array($existing_snapshots[$index] ?? null)
+				&& (string) ($existing_snapshots[$index]['widget'] ?? '') === (string) $widget_spec['widget']
+				? $existing_snapshots[$index]
+				: null;
+
+			if ($previous_snapshot === null) {
+				continue;
+			}
+
+			if (!array_key_exists('settings', $widget_spec) && !empty($previous_snapshot['settings'])) {
+				++$preserved_settings;
+			}
+
+			if (!array_key_exists('attributes', $widget_spec) && !empty($previous_snapshot['attributes'])) {
+				++$preserved_attributes;
+			}
+		}
+
+		return [
+			'touched_pages' => 1,
+			'touched_slots' => 1,
+			'existing_widgets' => count($existing_snapshots),
+			'desired_widgets' => count($ordered_specs),
+			'removed_widgets' => count($existing_snapshots),
+			'created_widgets' => count($ordered_specs),
+			'emptied_slots' => $ordered_specs === [] && $existing_snapshots !== [] ? 1 : 0,
+			'preserved_widget_settings' => $preserved_settings,
+			'preserved_widget_attributes' => $preserved_attributes,
+		];
+	}
+
+	/**
+	 * @return list<array<string, mixed>>
+	 */
+	private static function getSlotSnapshots(int $page_id, string $slot_name): array
+	{
+		$snapshots = [];
+
+		foreach (WidgetConnection::getWidgetsForSlot($page_id, $slot_name) as $connection) {
+			$snapshots[] = self::getWidgetConnectionSnapshot($connection->getConnectionId());
+		}
+
+		return $snapshots;
 	}
 
 	/**

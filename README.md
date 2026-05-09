@@ -23,8 +23,21 @@ pipe operator (`|>`).
 
 From `.registry-package.json`:
 
-- `radaptor/core/framework` (`^0.1.25`)
+- `radaptor/core/framework` (`^0.1.29`)
 - PHP (`^8.5`)
+
+## Resource Spec Compatibility
+
+BREAKING (CMS resource-spec): `slots` is now partial by default. Only mentioned
+slots are touched, omitted slots are preserved. To restore the previous
+wipe-on-omit behavior, set `replace_slots: true`. Use
+`radaptor resource-spec:compat-scan <path>` to find specs that may need this
+flag.
+
+Destructive CMS CLI commands use dry-run by default and require `--apply` to
+write changes. `--apply --dry-run` is a hard error. CMS mutation audit rows are
+stored in `cms_mutation_audit` with a correlation id; prune them with
+`radaptor cms:mutation-audit-prune --days 180 --apply`.
 
 ## Layout Terminology
 

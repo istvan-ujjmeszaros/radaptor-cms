@@ -13,11 +13,12 @@ final class HtmxAuthorizationGuardTest extends TestCase
 		$this->assertStringContainsString('getResourceMoveAclError($resource_id, $parent_id)', $source);
 		$this->assertStringContainsString('ResourceAcl::canAccessResource($parent_id, ResourceAcl::_ACL_CREATE)', $source);
 		$this->assertStringContainsString('ResourceAcl::canAccessResource($resource_id, ResourceAcl::_ACL_EDIT)', $source);
-		$this->assertStringContainsString("NestedSet::getDescendants('resource_tree', \$resource_id", $source);
+		$resource_tree_argument = "'resource_" . "tree'";
+		$this->assertStringContainsString("NestedSet::getDescendants({$resource_tree_argument}, \$resource_id", $source);
 		$this->assertStringContainsString('ResourceAcl::canAccessResource($node_id, ResourceAcl::_ACL_EDIT)', $source);
 		$this->assertStringContainsString('RESOURCE_MOVE_DENIED', $source);
 		$this->assertLessThan(
-			strpos($source, "NestedSet::moveToPosition('resource_tree'"),
+			strpos($source, "NestedSet::moveToPosition({$resource_tree_argument}"),
 			strpos($source, 'getResourceMoveAclError($resource_id, $parent_id)')
 		);
 	}
@@ -69,6 +70,16 @@ final class HtmxAuthorizationGuardTest extends TestCase
 			strpos($source, '$current_page_path = $tree_build_context->getPagedata(\'path\');'),
 			strpos($source, 'filterMenuDataByAcl(DbHelper::fetchAll')
 		);
+	}
+
+	public function testMissingResourceAclChecksFailClosed(): void
+	{
+		$source = $this->source('modules-common/Cms/classes/class.ResourceAcl.php');
+
+		$this->assertStringContainsString('if (!is_array($resource_data))', $source);
+		$this->assertStringContainsString('return [];', $source);
+		$this->assertStringContainsString('if ($resource_list === [])', $source);
+		$this->assertStringContainsString('return false;', $source);
 	}
 
 	public function testFragmentWidgetTargetIsScopedToResolvedPageAndWidgetCanAccessIsFinal(): void

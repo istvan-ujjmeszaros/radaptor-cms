@@ -6,7 +6,7 @@ final class LocaleSwitchService
 {
 	private const string SESSION_KEY = 'radaptor_locale';
 	private const string COOKIE_KEY = 'radaptor_locale';
-	private const int COOKIE_LIFETIME_SECONDS = 365 * 86400;
+	private const int ANONYMOUS_LOCALE_COOKIE_LIFETIME_SECONDS = 365 * 86400;
 
 	public const string REDIRECT_REASON_SOURCE_NOT_FOUND = 'source_not_found';
 	public const string REDIRECT_REASON_DYNAMIC_RESOURCE = 'dynamic_resource';
@@ -47,7 +47,7 @@ final class LocaleSwitchService
 	public static function getAnonymousLocaleCookieOptions(?int $now = null): array
 	{
 		return [
-			'expires' => ($now ?? time()) + self::COOKIE_LIFETIME_SECONDS,
+			'expires' => ($now ?? time()) + self::ANONYMOUS_LOCALE_COOKIE_LIFETIME_SECONDS,
 			'path' => '/',
 			'secure' => self::isSecureRequest(),
 			'httponly' => true,

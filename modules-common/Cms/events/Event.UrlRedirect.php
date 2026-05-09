@@ -48,6 +48,6 @@ class EventUrlRedirect extends AbstractEvent implements iBrowserEventDocumentabl
 			ResourceTreeHandler::drop404("Unable to resolve SEO URL for resource {$id}.");
 		}
 
-		Url::redirect($url);
+		Url::redirect($url, 301);
 	}
 }

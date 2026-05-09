@@ -38,6 +38,7 @@ abstract class AbstractLayoutType implements iLayoutType, iListable
 	 */
 	protected function createLayoutTree(string $component_name, array $props = [], array $strings = [], array $contents = [], array $meta = [], ?array $slots = null): array
 	{
+		// TODO(remove-after 0.2.0, see #23): drop the slots alias once all callers use contents.
 		$contents = $slots ?? $contents;
 
 		return SduiNode::create(

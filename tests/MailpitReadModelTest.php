@@ -31,6 +31,8 @@ if (!class_exists('CatcherRouteMap', false)) {
 if (!class_exists('Url', false)) {
 	final class MailpitReadModelTestUrl
 	{
+		public static string $currentHost = 'https://example.test';
+
 		/**
 		 * @param array<string, mixed> $customparams
 		 */
@@ -42,6 +44,18 @@ if (!class_exists('Url', false)) {
 				'context' => $context,
 				'event' => $event,
 			], '', $ampersand);
+		}
+
+		public static function sanitizeRefererUrl(string $url): string
+		{
+			$url = trim($url);
+
+			return preg_match('/[\r\n]/', $url) ? '' : $url;
+		}
+
+		public static function getCurrentHost(bool $includeRequestUri = true): string
+		{
+			return self::$currentHost;
 		}
 	}
 

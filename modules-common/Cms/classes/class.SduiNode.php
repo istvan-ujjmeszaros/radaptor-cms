@@ -7,6 +7,7 @@ class SduiNode
 	public const string TYPE_WIDGET = 'widget';
 	public const string TYPE_SUB = 'sub';
 
+	// TODO(remove-after 0.2.0, see #23): drop the slots alias once all callers use contents.
 	// slots is an internal compatibility alias for authoring helpers. Public SDUI
 	// JSON transport is serialized through SduiJsonSerializer and exposes contents.
 	/**

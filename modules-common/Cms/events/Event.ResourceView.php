@@ -145,11 +145,9 @@ class EventResourceView extends AbstractEvent implements iBrowserEventDocumentab
 
 	private function renderFragmentIfRequested(ResourceTypeWebpage $resource): bool
 	{
-		$server = RequestContextHolder::current()->SERVER ?: $_SERVER;
-		$hx_request = strtolower(trim((string)($server['HTTP_HX_REQUEST'] ?? $server['http_hx_request'] ?? '')));
-		$hx_boosted = strtolower(trim((string)($server['HTTP_HX_BOOSTED'] ?? $server['http_hx_boosted'] ?? '')));
 		$is_fragment_context = (string)Request::_GET('context', '') === 'fragment';
-		$is_boosted_fragment_request = $hx_request === 'true' && $hx_boosted === 'true';
+		$is_htmx_request = Request::isHtmxRequest();
+		$is_boosted_fragment_request = Request::isHtmxBoostedRequest();
 
 		if (!$is_fragment_context && !$is_boosted_fragment_request) {
 			return false;
@@ -160,7 +158,7 @@ class EventResourceView extends AbstractEvent implements iBrowserEventDocumentab
 		if (!$resource->getView()->getLayoutType() instanceof iPartialNavigableLayout) {
 			$this->emitFragmentFallbackHeader('layout-not-partial-navigable');
 
-			if ($hx_request === 'true') {
+			if ($is_htmx_request) {
 				header('HX-Redirect: ' . $this->canonicalCurrentUrl());
 			} else {
 				http_response_code(400);
@@ -180,7 +178,7 @@ class EventResourceView extends AbstractEvent implements iBrowserEventDocumentab
 		} catch (Throwable) {
 			$this->emitFragmentFallbackHeader('render-error');
 
-			if ($hx_request === 'true') {
+			if ($is_htmx_request) {
 				header('HX-Redirect: ' . $this->canonicalCurrentUrl());
 			} else {
 				http_response_code(400);
@@ -234,7 +232,7 @@ class EventResourceView extends AbstractEvent implements iBrowserEventDocumentab
 		$query = parse_url($request_uri, PHP_URL_QUERY);
 		$target = $target_path . (is_string($query) && $query !== '' ? "?{$query}" : '');
 
-		Url::redirect($target);
+		Url::redirect($target, 301);
 	}
 
 	/**

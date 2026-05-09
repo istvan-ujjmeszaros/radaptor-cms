@@ -131,13 +131,7 @@ class EventRichTextUpsert extends AbstractEvent implements iBrowserEventDocument
 				'created' => $created,
 			]);
 		} catch (Throwable $exception) {
-			error_log(sprintf(
-				'RichText upsert failed: [%s] %s in %s:%d',
-				$exception::class,
-				$exception->getMessage(),
-				$exception->getFile(),
-				$exception->getLine()
-			));
+			Kernel::logException($exception, 'RichText upsert failed');
 			ApiResponse::renderError('RICHTEXT_UPSERT_FAILED', t('common.error_save'), 400);
 		}
 	}

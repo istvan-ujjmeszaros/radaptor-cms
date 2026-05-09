@@ -104,6 +104,10 @@ final class LocaleHomeResourceService
 
 	/**
 	 * @param array<string, mixed> $root
+	 *
+	 * Locale home fallback is intentionally strict: only the first explicit-locale
+	 * folder/webpage under the site root is considered. A later sibling with an
+	 * index page must not hide a broken first locale folder.
 	 */
 	private static function computeHomeResourceId(array $root, string $locale): ?int
 	{

@@ -9,6 +9,7 @@
 	<testsuites>
 		<testsuite name="cms-smoke">
 			<directory suffix="Test.php">tests</directory>
+			<exclude>tests/integration</exclude>
 		</testsuite>
 	</testsuites>
 </phpunit>

@@ -38,7 +38,8 @@ class EventLocaleSetEnabled extends AbstractEvent implements iBrowserEventDocume
 			],
 			'notes' => BrowserEventDocumentationHelper::lines(
 				'APP_DEFAULT_LOCALE cannot be disabled.',
-				'Disabling a locale does not delete rows that already use it.'
+				'Disabling a locale does not delete rows that already use it.',
+				'POST requests must pass same-origin Origin/Referer validation.'
 			),
 			'side_effects' => BrowserEventDocumentationHelper::lines(
 				'Updates locales.is_enabled.',
@@ -49,20 +50,33 @@ class EventLocaleSetEnabled extends AbstractEvent implements iBrowserEventDocume
 
 	public function run(): void
 	{
+		if (Request::getMethod() !== 'POST') {
+			$this->_renderMethodNotAllowed();
+
+			return;
+		}
+
+		if (class_exists(LocaleSwitchService::class) && !LocaleSwitchService::isSameOriginPostRequest()) {
+			$this->_renderForbidden();
+
+			return;
+		}
+
 		$referer = $this->_getReferer();
+		$redirect_status = EventUserSetLocale::getRedirectStatusForMethod(Request::getMethod());
 		$locale = LocaleService::tryCanonicalize((string) Request::_POST('locale', '')) ?? '';
 		$enabled = $this->_isTruthy((string) Request::_POST('enabled', '0'));
 
 		if ($locale === '') {
 			SystemMessages::_error(t('locale_admin.message.invalid_locale'));
 			// Url::redirect() is typed never and exits; this error branch cannot fall through to mutation.
-			Url::redirect($referer);
+			Url::redirect($referer, $redirect_status);
 		}
 
 		if (!class_exists(LocaleAdminService::class)) {
 			SystemMessages::_error(t('locale_admin.message.service_unavailable'));
 			// Url::redirect() is typed never and exits; this error branch cannot fall through to mutation.
-			Url::redirect($referer);
+			Url::redirect($referer, $redirect_status);
 		}
 
 		try {
@@ -75,7 +89,7 @@ class EventLocaleSetEnabled extends AbstractEvent implements iBrowserEventDocume
 			SystemMessages::_error(t('locale_admin.message.error', ['locale' => $locale]));
 		}
 
-		Url::redirect($referer);
+		Url::redirect($referer, $redirect_status);
 	}
 
 	private function _getReferer(): string
@@ -90,5 +104,18 @@ class EventLocaleSetEnabled extends AbstractEvent implements iBrowserEventDocume
 	private function _isTruthy(string $value): bool
 	{
 		return in_array(strtolower(trim($value)), ['1', 'true', 'on', 'yes'], true);
+	}
+
+	private function _renderForbidden(): void
+	{
+		http_response_code(403);
+		echo t('user.locale.forbidden');
+	}
+
+	private function _renderMethodNotAllowed(): void
+	{
+		http_response_code(405);
+		header('Allow: POST');
+		echo t('user.locale.method_not_allowed');
 	}
 }

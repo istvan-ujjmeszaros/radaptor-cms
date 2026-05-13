@@ -8,8 +8,10 @@ final class LayoutTemplateContractInspector
 		'getCss',
 		'getJsTop',
 		'getJs',
-		'page_chrome',
 		'fetchClosingHtml',
+	];
+	private const array RETIRED_ITEMS = [
+		'page_chrome',
 	];
 
 	/**
@@ -156,6 +158,12 @@ final class LayoutTemplateContractInspector
 
 				if (preg_match('/\breason=(?:"([^"]+)"|\'([^\']+)\')/', $tail, $reason_match) === 1) {
 					$reason = trim((string) ($reason_match[1] !== '' ? $reason_match[1] : $reason_match[2]));
+				}
+
+				if (in_array($item, self::RETIRED_ITEMS, true)) {
+					$skips[$item] = $reason !== '' ? $reason : 'Retired layout contract item.';
+
+					continue;
 				}
 
 				if (!in_array($item, self::REQUIRED_ITEMS, true)) {

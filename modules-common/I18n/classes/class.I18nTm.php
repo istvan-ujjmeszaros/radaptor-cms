@@ -5,6 +5,7 @@ declare(strict_types=1);
 class I18nTm
 {
 	public const string CANONICAL_SOURCE_LOCALE = 'en-US';
+	private const array LEGACY_SOURCE_LOCALES = ['en_US'];
 	private const int EXACT_LIMIT = 3;
 	private const int FUZZY_LIMIT = 5;
 	private const int FUZZY_CANDIDATE_LIMIT = 250;
@@ -23,18 +24,11 @@ class I18nTm
 		string $context,
 		string $quality
 	): void {
-		$sourceLoc = LocaleService::canonicalize($sourceLoc);
-		$targetLoc = LocaleService::canonicalize($targetLoc);
+		$sourceLoc = self::_canonicalizeLocale($sourceLoc);
+		$targetLoc = self::_canonicalizeLocale($targetLoc);
 		$sourceHash = md5($sourceText);
 
-		$existing = DbHelper::selectOne('i18n_tm_entries', [
-			'source_locale' => $sourceLoc,
-			'target_locale' => $targetLoc,
-			'source_hash'   => $sourceHash,
-			'domain'        => $domain,
-			'source_key'    => $sourceKey,
-			'context'       => $context,
-		]);
+		$existing = self::_findExistingSignature($sourceLoc, $targetLoc, $sourceHash, $domain, $sourceKey, $context);
 
 		$now = date('Y-m-d H:i:s');
 
@@ -79,30 +73,26 @@ class I18nTm
 		string $sourceHash,
 		string $targetLocale
 	): void {
-		$targetLocale = LocaleService::canonicalize($targetLocale);
-
 		if ($sourceHash === '') {
 			return;
 		}
 
 		$pdo = Db::instance();
+		$targetLocale = self::_canonicalizeLocale($targetLocale);
+		$source_locale_values = self::_sourceLocaleLookupValues();
+		$target_locale_values = self::_localeLookupValues($targetLocale);
+		$source_placeholders = self::_placeholders($source_locale_values);
+		$target_placeholders = self::_placeholders($target_locale_values);
 		$delete = $pdo->prepare(
 			"DELETE FROM i18n_tm_entries
-			WHERE source_locale = :source_locale
-				AND target_locale = :target_locale
-				AND domain = :domain
-				AND source_key = :source_key
-				AND context = :context
-				AND source_hash = :source_hash"
+			WHERE source_locale IN ({$source_placeholders})
+				AND target_locale IN ({$target_placeholders})
+				AND domain = ?
+				AND source_key = ?
+				AND context = ?
+				AND source_hash = ?"
 		);
-		$delete->execute([
-			':source_locale' => self::CANONICAL_SOURCE_LOCALE,
-			':target_locale' => $targetLocale,
-			':domain' => $domain,
-			':source_key' => $sourceKey,
-			':context' => $context,
-			':source_hash' => $sourceHash,
-		]);
+		$delete->execute([...$source_locale_values, ...$target_locale_values, $domain, $sourceKey, $context, $sourceHash]);
 
 		$rows = $pdo->prepare(
 			"SELECT
@@ -113,21 +103,15 @@ class I18nTm
 			FROM i18n_messages m
 			JOIN i18n_translations t
 				ON t.domain = m.domain AND t.`key` = m.`key` AND t.context = m.context
-			WHERE m.domain = :domain
-				AND m.`key` = :source_key
-				AND m.context = :context
-				AND m.source_hash = :source_hash
+			WHERE m.domain = ?
+				AND m.`key` = ?
+				AND m.context = ?
+				AND m.source_hash = ?
 				AND m.source_text <> ''
-				AND t.locale = :target_locale
+				AND t.locale IN ({$target_placeholders})
 				AND TRIM(t.text) <> ''"
 		);
-		$rows->execute([
-			':domain' => $domain,
-			':source_key' => $sourceKey,
-			':context' => $context,
-			':source_hash' => $sourceHash,
-			':target_locale' => $targetLocale,
-		]);
+		$rows->execute([$domain, $sourceKey, $context, $sourceHash, ...$target_locale_values]);
 		$matches = $rows->fetchAll(\PDO::FETCH_ASSOC);
 
 		if (empty($matches)) {
@@ -202,8 +186,10 @@ class I18nTm
 		if ($targetLocale === null || $targetLocale === '') {
 			$pdo->exec("DELETE FROM i18n_tm_entries");
 		} else {
-			$stmt = $pdo->prepare("DELETE FROM i18n_tm_entries WHERE target_locale = ?");
-			$stmt->execute([$targetLocale]);
+			$targetLocale = self::_canonicalizeLocale($targetLocale);
+			$target_locale_values = self::_localeLookupValues($targetLocale);
+			$stmt = $pdo->prepare("DELETE FROM i18n_tm_entries WHERE target_locale IN (" . self::_placeholders($target_locale_values) . ")");
+			$stmt->execute($target_locale_values);
 		}
 
 		$where = "WHERE m.source_text <> ''
@@ -211,8 +197,9 @@ class I18nTm
 		$params = [];
 
 		if ($targetLocale !== null && $targetLocale !== '') {
-			$where .= " AND t.locale = :target_locale";
-			$params[':target_locale'] = $targetLocale;
+			$target_locale_values = self::_localeLookupValues($targetLocale);
+			$where .= " AND t.locale IN (" . self::_placeholders($target_locale_values) . ")";
+			$params = $target_locale_values;
 		}
 
 		$stmt = $pdo->prepare(
@@ -275,7 +262,7 @@ class I18nTm
 		foreach ($rows as $row) {
 			$insert->execute([
 				':source_locale' => self::CANONICAL_SOURCE_LOCALE,
-				':target_locale' => $row['target_locale'],
+				':target_locale' => self::_canonicalizeLocale((string) $row['target_locale']),
 				':source_text_normalized' => self::_normalize($row['source_text']),
 				':source_text_raw' => $row['source_text'],
 				':target_text' => $row['target_text'],
@@ -304,11 +291,8 @@ class I18nTm
 		}
 
 		$sourceHash = md5($sourceText);
-		$rows = DbHelper::selectMany('i18n_tm_entries', [
-			'source_locale' => self::CANONICAL_SOURCE_LOCALE,
-			'target_locale' => $targetLocale,
-			'source_hash' => $sourceHash,
-		]);
+		$targetLocale = self::_canonicalizeLocale($targetLocale);
+		$rows = self::_fetchExactRows($sourceHash, $targetLocale);
 
 		usort($rows, function (array $a, array $b): int {
 			$qualityDiff = self::_qualityRank((string) $b['quality_score']) <=> self::_qualityRank((string) $a['quality_score']);
@@ -423,6 +407,11 @@ class I18nTm
 		$length = max(1, mb_strlen($normalized, 'UTF-8'));
 		$minLength = max(1, (int) floor($length * 0.5));
 		$maxLength = max($length + 15, (int) ceil($length * 1.8));
+		$targetLocale = self::_canonicalizeLocale($targetLocale);
+		$source_locale_values = self::_sourceLocaleLookupValues();
+		$target_locale_values = self::_localeLookupValues($targetLocale);
+		$source_placeholders = self::_placeholders($source_locale_values);
+		$target_placeholders = self::_placeholders($target_locale_values);
 		$pdo = Db::instance();
 		$stmt = $pdo->prepare(
 			"SELECT
@@ -435,24 +424,130 @@ class I18nTm
 				source_hash,
 				usage_count,
 				quality_score
-			FROM i18n_tm_entries
-			WHERE source_locale = :source_locale
-				AND target_locale = :target_locale
-				AND source_hash <> :source_hash
-				AND source_text_normalized <> ''
-				AND target_text <> ''
-				AND CHAR_LENGTH(source_text_normalized) BETWEEN :min_length AND :max_length
-			ORDER BY usage_count DESC, updated_at DESC
-			LIMIT " . self::FUZZY_CANDIDATE_LIMIT
+				FROM i18n_tm_entries
+				WHERE source_locale IN ({$source_placeholders})
+					AND target_locale IN ({$target_placeholders})
+					AND source_hash <> ?
+					AND source_text_normalized <> ''
+					AND target_text <> ''
+					AND CHAR_LENGTH(source_text_normalized) BETWEEN ? AND ?
+				ORDER BY usage_count DESC, updated_at DESC
+				LIMIT " . self::FUZZY_CANDIDATE_LIMIT
 		);
-		$stmt->bindValue(':source_locale', self::CANONICAL_SOURCE_LOCALE);
-		$stmt->bindValue(':target_locale', $targetLocale);
-		$stmt->bindValue(':source_hash', $sourceHash);
-		$stmt->bindValue(':min_length', $minLength, \PDO::PARAM_INT);
-		$stmt->bindValue(':max_length', $maxLength, \PDO::PARAM_INT);
-		$stmt->execute();
+		$stmt->execute([...$source_locale_values, ...$target_locale_values, $sourceHash, $minLength, $maxLength]);
 
 		return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+	}
+
+	/**
+	 * @return array<string, mixed>|false
+	 */
+	private static function _findExistingSignature(
+		string $sourceLocale,
+		string $targetLocale,
+		string $sourceHash,
+		string $domain,
+		string $sourceKey,
+		string $context
+	): array|false {
+		$source_locale_values = self::_localeLookupValues($sourceLocale);
+		$target_locale_values = self::_localeLookupValues($targetLocale);
+		$source_placeholders = self::_placeholders($source_locale_values);
+		$target_placeholders = self::_placeholders($target_locale_values);
+		$stmt = Db::instance()->prepare(
+			"SELECT *
+			FROM i18n_tm_entries
+			WHERE source_locale IN ({$source_placeholders})
+				AND target_locale IN ({$target_placeholders})
+				AND source_hash = ?
+				AND domain = ?
+				AND source_key = ?
+				AND context = ?
+			ORDER BY source_locale = ? DESC
+			LIMIT 1"
+		);
+		$stmt->execute([...$source_locale_values, ...$target_locale_values, $sourceHash, $domain, $sourceKey, $context, $sourceLocale]);
+		$row = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+		return is_array($row) ? $row : false;
+	}
+
+	/**
+	 * @return list<array<string, mixed>>
+	 */
+	private static function _fetchExactRows(string $sourceHash, string $targetLocale): array
+	{
+		$source_locale_values = self::_sourceLocaleLookupValues();
+		$target_locale_values = self::_localeLookupValues($targetLocale);
+		$stmt = Db::instance()->prepare(
+			"SELECT *
+			FROM i18n_tm_entries
+			WHERE source_locale IN (" . self::_placeholders($source_locale_values) . ")
+				AND target_locale IN (" . self::_placeholders($target_locale_values) . ")
+				AND source_hash = ?"
+		);
+		$stmt->execute([...$source_locale_values, ...$target_locale_values, $sourceHash]);
+		$rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+		return is_array($rows) ? $rows : [];
+	}
+
+	private static function _canonicalizeLocale(string $locale): string
+	{
+		if (class_exists(LocaleService::class)) {
+			$canonical = LocaleService::tryCanonicalize($locale);
+
+			if (is_string($canonical) && $canonical !== '' && $canonical !== 'und') {
+				return $canonical;
+			}
+		}
+
+		return str_replace('_', '-', $locale);
+	}
+
+	/**
+	 * @return list<string>
+	 */
+	private static function _sourceLocaleLookupValues(): array
+	{
+		return self::_unique([self::CANONICAL_SOURCE_LOCALE, ...self::LEGACY_SOURCE_LOCALES]);
+	}
+
+	/**
+	 * @return list<string>
+	 */
+	private static function _localeLookupValues(string $locale): array
+	{
+		$canonical = self::_canonicalizeLocale($locale);
+
+		return self::_unique([$canonical, $locale, str_replace('-', '_', $canonical)]);
+	}
+
+	/**
+	 * @param list<string> $values
+	 */
+	private static function _placeholders(array $values): string
+	{
+		return implode(', ', array_fill(0, max(1, count($values)), '?'));
+	}
+
+	/**
+	 * @param list<string> $values
+	 * @return list<string>
+	 */
+	private static function _unique(array $values): array
+	{
+		$unique = [];
+
+		foreach ($values as $value) {
+			if ($value === '') {
+				continue;
+			}
+
+			$unique[$value] = $value;
+		}
+
+		return array_values($unique);
 	}
 
 	/**

@@ -61,3 +61,5 @@ import_export,site_snapshot.export.title,,en-US,"Export JSON snapshot","Export J
 import_export,site_snapshot.import.title,,en-US,"Import JSON snapshot","Import JSON snapshot",0,"Import JSON snapshot"
 import_export,site_snapshot.action.export,,en-US,"Export JSON","Export JSON",0,"Export JSON"
 import_export,confirm.site_snapshot_replace,,en-US,"This import will replace the current site database content with the uploaded snapshot. Continue?","This import will replace the current site database content with the uploaded snapshot. Continue?",0,"This import will replace the current site database content with the uploaded snapshot. Continue?"
+import_export,field.allow_environment_mismatch.label,,en-US,"Allow environment mismatch","Allow environment mismatch",0,"Allow environment mismatch"
+import_export,field.allow_environment_mismatch.help,,en-US,"Required only when importing a snapshot into a different environment. Leave disabled for normal restores.","Required only when importing a snapshot into a different environment. Leave disabled for normal restores.",0,"Required only when importing a snapshot into a different environment. Leave disabled for normal restores."

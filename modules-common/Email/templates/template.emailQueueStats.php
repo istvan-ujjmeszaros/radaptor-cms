@@ -2,6 +2,7 @@
 <?php
 $summary = is_array($this->props['summary'] ?? null) ? $this->props['summary'] : [];
 $worker = is_array($summary['worker'] ?? null) ? $summary['worker'] : [];
+$workerInstances = is_array($worker['instances'] ?? null) ? $worker['instances'] : [];
 $outbox_url = (string) ($this->props['outbox_url'] ?? '');
 $worker_status = (string) ($worker['status'] ?? 'unavailable');
 $worker_status_label_key = 'admin.email_queue.status.' . $worker_status;
@@ -75,6 +76,35 @@ $metrics = [
 						</div>
 					</div>
 				</div>
+
+				<?php if ($workerInstances !== []) { ?>
+					<div class="mt-3">
+						<div class="email-admin-dashboard__metric-label mb-2"><?= e($this->strings['admin.email_queue.instances'] ?? 'Worker instances') ?></div>
+						<div class="table-responsive">
+							<table class="table table-sm align-middle mb-0">
+								<thead>
+									<tr>
+										<th><?= e($this->strings['admin.email_queue.instance_state'] ?? 'State') ?></th>
+										<th><?= e($this->strings['admin.email_queue.current_job'] ?? 'Current job') ?></th>
+										<th><?= e($this->strings['admin.email_queue.last_seen'] ?? 'Last seen') ?></th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php foreach ($workerInstances as $workerInstance) { ?>
+										<?php if (!is_array($workerInstance)) {
+											continue;
+										} ?>
+										<tr>
+											<td><?= e((string) ($workerInstance['effective_status'] ?? $workerInstance['state'] ?? 'unknown')) ?></td>
+											<td><?= e((string) ($workerInstance['current_job_id'] ?? '—')) ?></td>
+											<td><?= e((string) ($workerInstance['last_seen_at'] ?? '—')) ?></td>
+										</tr>
+									<?php } ?>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				<?php } ?>
 			</div>
 		</div>
 

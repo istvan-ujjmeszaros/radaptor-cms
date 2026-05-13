@@ -24,12 +24,34 @@ class ImportExportDatasetSiteSnapshot extends AbstractImportExportDataset
 	public function getExportFieldDefinitions(): array
 	{
 		return [
+			'profile' => [
+				'type' => 'select',
+				'label' => self::translate('import_export.field.snapshot_profile.label', 'Snapshot profile'),
+				'required' => true,
+				'default' => CmsSiteSnapshotService::PROFILE_DISASTER_RECOVERY,
+				'help' => self::translate('import_export.field.snapshot_profile.help', 'Choose Disaster Recovery for safe backups or Site Migration to include queue/outbox state.'),
+				'options' => [
+					CmsSiteSnapshotService::PROFILE_DISASTER_RECOVERY => self::translate('import_export.profile.disaster_recovery', 'Disaster Recovery'),
+					CmsSiteSnapshotService::PROFILE_SITE_MIGRATION => self::translate('import_export.profile.site_migration', 'Site Migration'),
+				],
+			],
 			'uploads_backed_up' => [
 				'type' => 'select',
 				'label' => t('import_export.field.uploads_backed_up.label'),
 				'required' => true,
 				'default' => '0',
 				'help' => t('import_export.field.uploads_backed_up.help'),
+				'options' => [
+					'0' => t('common.no'),
+					'1' => t('common.yes'),
+				],
+			],
+			'pause_source_workers' => [
+				'type' => 'select',
+				'label' => self::translate('import_export.field.pause_source_workers.label', 'Pause source workers'),
+				'required' => true,
+				'default' => '1',
+				'help' => self::translate('import_export.field.pause_source_workers.help', 'Site Migration exports should pause source workers and wait for confirmation before the snapshot is written.'),
 				'options' => [
 					'0' => t('common.no'),
 					'1' => t('common.yes'),
@@ -54,6 +76,28 @@ class ImportExportDatasetSiteSnapshot extends AbstractImportExportDataset
 				'required' => true,
 				'default' => '0',
 				'help' => t('import_export.field.replace_confirmed.help'),
+				'options' => [
+					'0' => t('common.no'),
+					'1' => t('common.yes'),
+				],
+			],
+			'allow_environment_mismatch' => [
+				'type' => 'select',
+				'label' => t('import_export.field.allow_environment_mismatch.label'),
+				'required' => true,
+				'default' => '0',
+				'help' => t('import_export.field.allow_environment_mismatch.help'),
+				'options' => [
+					'0' => t('common.no'),
+					'1' => t('common.yes'),
+				],
+			],
+			'pause_target_workers' => [
+				'type' => 'select',
+				'label' => self::translate('import_export.field.pause_target_workers.label', 'Pause target workers'),
+				'required' => true,
+				'default' => '1',
+				'help' => self::translate('import_export.field.pause_target_workers.help', 'Site Migration restores should pause target workers and leave them paused until explicitly resumed.'),
 				'options' => [
 					'0' => t('common.no'),
 					'1' => t('common.yes'),
@@ -93,7 +137,10 @@ class ImportExportDatasetSiteSnapshot extends AbstractImportExportDataset
 			throw new InvalidArgumentException(t('import_export.error.upload_backup_required'));
 		}
 
-		$snapshot = CmsSiteSnapshotService::exportSnapshot(true);
+		$snapshot = CmsSiteSnapshotService::exportSnapshot(true, (string) ($options['profile'] ?? CmsSiteSnapshotService::PROFILE_DISASTER_RECOVERY), [
+			'pause_source_workers' => ($options['pause_source_workers'] ?? '0') === '1',
+			'pause_context' => 'admin_import_export',
+		]);
 
 		return CmsSiteSnapshotService::encodeSnapshot($snapshot);
 	}
@@ -102,8 +149,12 @@ class ImportExportDatasetSiteSnapshot extends AbstractImportExportDataset
 	{
 		$dry_run = ($options['dry_run'] ?? '0') === '1';
 		$replace_confirmed = ($options['replace_confirmed'] ?? '0') === '1';
+		$allow_environment_mismatch = ($options['allow_environment_mismatch'] ?? '0') === '1';
 		$snapshot = CmsSiteSnapshotService::decodeSnapshot($csvContent);
-		$result = CmsSiteSnapshotService::importSnapshot($snapshot, $dry_run, $replace_confirmed);
+		$result = CmsSiteSnapshotService::importSnapshot($snapshot, $dry_run, $replace_confirmed, $allow_environment_mismatch, [
+			'pause_target_workers' => ($options['pause_target_workers'] ?? '1') === '1',
+			'pause_context' => 'admin_import_export',
+		]);
 		$processed = array_sum(array_map('intval', $result['summary'] ?? []));
 
 		return [
@@ -137,5 +188,12 @@ class ImportExportDatasetSiteSnapshot extends AbstractImportExportDataset
 		}
 
 		return $row_results;
+	}
+
+	private static function translate(string $key, string $fallback): string
+	{
+		$translated = t($key);
+
+		return $translated === $key ? $fallback : $translated;
 	}
 }

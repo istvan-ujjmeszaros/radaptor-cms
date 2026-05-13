@@ -559,10 +559,29 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 		$template->setContents($content_html);
 		$template->setRenderContext($node_render_context);
 
-		return $this->wrapStableContainer($template->fetch(), $meta);
+		$html = $template->fetch();
+
+		if (($content_html['page_chrome'] ?? '') !== '' && !$template->hasFetchedContent('page_chrome')) {
+			$html = $this->appendPageChrome($html, $content_html['page_chrome']);
+		}
+
+		return $this->wrapStableContainer($html, $meta);
 	}
 
 	// ── Private helpers ───────────────────────────────────────────────────────
+
+	private function appendPageChrome(string $html, string $page_chrome): string
+	{
+		$body_close_position = strripos($html, '</body>');
+
+		if ($body_close_position === false) {
+			return $html . $page_chrome;
+		}
+
+		return substr($html, 0, $body_close_position)
+			. $page_chrome
+			. substr($html, $body_close_position);
+	}
 
 	/**
 	 * @param array<string, mixed> $meta

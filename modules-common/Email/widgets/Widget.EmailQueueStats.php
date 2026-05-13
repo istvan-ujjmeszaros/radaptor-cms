@@ -21,11 +21,16 @@ class WidgetEmailQueueStats extends AbstractWidget
 			'admin.email_queue.worker' => self::translate('admin.email_queue.worker', 'Worker'),
 			'admin.email_queue.open_outbox' => self::translate('admin.email_queue.open_outbox', 'Open email outbox'),
 			'admin.email_queue.status.running' => self::translate('admin.email_queue.status.running', 'Running'),
+			'admin.email_queue.status.pausing' => self::translate('admin.email_queue.status.pausing', 'Pausing'),
+			'admin.email_queue.status.paused' => self::translate('admin.email_queue.status.paused', 'Paused'),
 			'admin.email_queue.status.stale' => self::translate('admin.email_queue.status.stale', 'Stale'),
 			'admin.email_queue.status.never_seen' => self::translate('admin.email_queue.status.never_seen', 'Never seen'),
 			'admin.email_queue.status.unavailable' => self::translate('admin.email_queue.status.unavailable', 'Unavailable'),
 			'admin.email_queue.last_seen' => self::translate('admin.email_queue.last_seen', 'Last seen'),
 			'admin.email_queue.last_processed' => self::translate('admin.email_queue.last_processed', 'Last processed'),
+			'admin.email_queue.instances' => self::translate('admin.email_queue.instances', 'Worker instances'),
+			'admin.email_queue.instance_state' => self::translate('admin.email_queue.instance_state', 'State'),
+			'admin.email_queue.current_job' => self::translate('admin.email_queue.current_job', 'Current job'),
 			'admin.email_queue.empty' => self::translate('admin.email_queue.empty', 'No email jobs are waiting right now.'),
 		];
 	}

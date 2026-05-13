@@ -3,6 +3,7 @@
 $view = is_array($this->props['view'] ?? null) ? $this->props['view'] : [];
 $summary = is_array($view['summary'] ?? null) ? $view['summary'] : [];
 $worker = is_array($summary['worker'] ?? null) ? $summary['worker'] : [];
+$workerInstances = is_array($worker['instances'] ?? null) ? $worker['instances'] : [];
 $outboxRows = is_array($view['outbox_rows'] ?? null) ? $view['outbox_rows'] : [];
 $recentFailures = is_array($view['recent_failures'] ?? null) ? $view['recent_failures'] : [];
 $page = max(1, (int) ($view['page'] ?? 1));
@@ -100,6 +101,35 @@ $summaryMetrics = [
 									</div>
 								</div>
 							</div>
+
+							<?php if ($workerInstances !== []) { ?>
+								<div class="mt-3">
+									<div class="email-admin-dashboard__metric-label mb-2"><?= e($this->strings['admin.email_queue.instances'] ?? 'Worker instances') ?></div>
+									<div class="table-responsive">
+										<table class="table table-sm align-middle mb-0">
+											<thead>
+												<tr>
+													<th><?= e($this->strings['admin.email_queue.instance_state'] ?? 'State') ?></th>
+													<th><?= e($this->strings['admin.email_queue.current_job'] ?? 'Current job') ?></th>
+													<th><?= e($this->strings['admin.email_queue.last_seen'] ?? 'Last seen') ?></th>
+												</tr>
+											</thead>
+											<tbody>
+												<?php foreach ($workerInstances as $workerInstance) { ?>
+													<?php if (!is_array($workerInstance)) {
+														continue;
+													} ?>
+													<tr>
+														<td><?= e((string) ($workerInstance['effective_status'] ?? $workerInstance['state'] ?? 'unknown')) ?></td>
+														<td><?= e((string) ($workerInstance['current_job_id'] ?? '—')) ?></td>
+														<td><?= e((string) ($workerInstance['last_seen_at'] ?? '—')) ?></td>
+													</tr>
+												<?php } ?>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							<?php } ?>
 						</div>
 					</div>
 				</div>

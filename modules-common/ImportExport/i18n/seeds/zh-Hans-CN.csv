@@ -61,3 +61,6 @@ import_export,site_snapshot.export.title,,zh-Hans-CN,"Export JSON snapshot","导
 import_export,site_snapshot.import.title,,zh-Hans-CN,"Import JSON snapshot","导入 JSON 快照",0,"导入 JSON 快照"
 import_export,site_snapshot.action.export,,zh-Hans-CN,"Export JSON","导出 JSON",0,"导出 JSON"
 import_export,confirm.site_snapshot_replace,,zh-Hans-CN,"This import will replace the current site database content with the uploaded snapshot. Continue?",此导入会用上传的快照替换当前站点数据库内容。是否继续？,0,此导入会用上传的快照替换当前站点数据库内容。是否继续？
+import_export,field.allow_environment_mismatch.label,,zh-Hans-CN,"Allow environment mismatch",允许环境不匹配,0,允许环境不匹配
+import_export,field.allow_environment_mismatch.help,,zh-Hans-CN,"Required only when importing a snapshot into a different environment. Leave disabled for normal restores.",仅在将快照导入不同环境时需要。正常恢复请保持关闭。,0,仅在将快照导入不同环境时需要。正常恢复请保持关闭。
+import_export,error.source_cutover_required,,zh-Hans-CN,"Source site cutover lock was not active before site migration export.","站点迁移导出前，源站点切换锁未处于活动状态。",0,"站点迁移导出前，源站点切换锁未处于活动状态。"

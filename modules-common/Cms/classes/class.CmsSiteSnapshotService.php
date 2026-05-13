@@ -6,6 +6,29 @@ class CmsSiteSnapshotService
 {
 	public const string FORMAT = 'radaptor.site_snapshot';
 	public const int VERSION = 1;
+	public const string PROFILE_DISASTER_RECOVERY = 'disaster_recovery';
+	public const string PROFILE_SITE_MIGRATION = 'site_migration';
+	private const string TABLE_COMMENT_NOEXPORT = '__noexport';
+	private const array EXPECTED_EXPORT_COMMENT_TOKENS = [
+		'runtime_worker_instances' => ['__noexport'],
+		'runtime_worker_pause_requests' => ['__noexport'],
+		'runtime_site_locks' => ['__noexport'],
+		'mcp_tokens' => ['__noexport'],
+		'mcp_audit' => ['__noexport'],
+		'i18n_build_state' => ['__noexport'],
+		'i18n_tm_entries' => ['__noexport'],
+		'email_queue_transactional' => ['__noexport:disaster_recovery'],
+		'email_queue_bulk' => ['__noexport:disaster_recovery'],
+		'queued_jobs' => ['__noexport:disaster_recovery'],
+		'email_queue_archive' => ['__noexport:disaster_recovery'],
+		'email_queue_dead_letter' => ['__noexport:disaster_recovery'],
+		'queued_jobs_archive' => ['__noexport:disaster_recovery'],
+		'queued_jobs_dead_letter' => ['__noexport:disaster_recovery'],
+		'email_outbox' => ['__noexport:disaster_recovery'],
+		'email_outbox_recipients' => ['__noexport:disaster_recovery'],
+		'email_attachments' => ['__noexport:disaster_recovery'],
+		'email_outbox_attachments' => ['__noexport:disaster_recovery'],
+	];
 
 	private const array PREFERRED_TABLE_ORDER = [
 		'roles_tree',
@@ -33,31 +56,31 @@ class CmsSiteSnapshotService
 		'i18n_translations',
 	];
 
-	private const array EXCLUDED_OPERATIONAL_TABLES = [
-		'migrations',
-		'seeds',
-		'i18n_build_state',
-		'i18n_tm_entries',
-		'email_outbox',
-		'email_outbox_recipients',
-		'email_queue_transactional',
-		'email_queue_archive',
-		'email_queue_dead_letter',
-		'mcp_tokens',
-		'mcp_audit',
-		'cms_mutation_audit',
-	];
-
 	/**
 	 * @return array<string, mixed>
 	 */
-	public static function exportSnapshot(bool $uploads_backed_up): array
-	{
+	public static function exportSnapshot(
+		bool $uploads_backed_up,
+		string $profile = self::PROFILE_DISASTER_RECOVERY,
+		array $options = []
+	): array {
 		if (!$uploads_backed_up) {
 			throw new InvalidArgumentException('Uploaded files must be backed up before exporting a site snapshot. Re-run with --uploads-backed-up after copying the upload directory.');
 		}
 
-		$export_data = self::readExportSnapshotFromDatabase();
+		$profile = self::normalizeProfile($profile);
+		$source_cutover_report = self::prepareExportSourceCutover($profile, $options);
+		$worker_pause_report = self::prepareExportWorkerPause($profile, $options, $source_cutover_report);
+
+		if (($source_cutover_report['required'] ?? false) === true && ($source_cutover_report['active'] ?? false) !== true) {
+			throw new RuntimeException(t('import_export.error.source_cutover_required'));
+		}
+
+		if (($worker_pause_report['required'] ?? false) === true && ($worker_pause_report['confirmed'] ?? false) !== true) {
+			throw new RuntimeException('Source email queue workers did not confirm pause before site migration export.');
+		}
+
+		$export_data = self::readExportSnapshotFromDatabase($profile);
 		$uploads_report = self::checkUploadManifest($export_data['upload_manifest']);
 
 		if (!$uploads_report['ok']) {
@@ -67,7 +90,9 @@ class CmsSiteSnapshotService
 		return [
 			'format' => self::FORMAT,
 			'version' => self::VERSION,
+			'profile' => $profile,
 			'created_at' => gmdate(DATE_ATOM),
+			'environment' => self::buildCurrentEnvironmentMetadata(),
 			'app' => [
 				'domain_context' => Config::APP_DOMAIN_CONTEXT->value(),
 				'site_context' => class_exists(CmsSiteContext::class)
@@ -77,21 +102,27 @@ class CmsSiteSnapshotService
 			'schema' => $export_data['schema'],
 			'table_counts' => $export_data['table_counts'],
 			'tables' => $export_data['table_rows'],
+			'excluded_tables' => $export_data['excluded_tables'],
+			'source_cutover_lock' => $source_cutover_report,
+			'worker_pause' => $worker_pause_report,
 			'uploads' => [
 				'directory' => self::getUploadDirectoryRelativePath(),
 				'backed_up_confirmed' => true,
 				'files' => $export_data['upload_manifest'],
 			],
-			'excluded_operational_tables' => self::EXCLUDED_OPERATIONAL_TABLES,
 		];
 	}
 
 	/**
 	 * @return array<string, mixed>
 	 */
-	public static function writeSnapshot(string $output_path, bool $uploads_backed_up): array
-	{
-		$snapshot = self::exportSnapshot($uploads_backed_up);
+	public static function writeSnapshot(
+		string $output_path,
+		bool $uploads_backed_up,
+		string $profile = self::PROFILE_DISASTER_RECOVERY,
+		array $options = []
+	): array {
+		$snapshot = self::exportSnapshot($uploads_backed_up, $profile, $options);
 		$target = self::resolveDeployPath($output_path);
 		$directory = dirname($target);
 
@@ -111,6 +142,10 @@ class CmsSiteSnapshotService
 			'table_counts' => $snapshot['table_counts'],
 			'upload_count' => count($snapshot['uploads']['files']),
 			'schema_signature' => $snapshot['schema']['signature'],
+			'excluded_table_count' => count($snapshot['excluded_tables'] ?? []),
+			'profile' => $snapshot['profile'] ?? self::PROFILE_DISASTER_RECOVERY,
+			'source_cutover_lock' => $snapshot['source_cutover_lock'] ?? null,
+			'worker_pause' => $snapshot['worker_pause'] ?? null,
 		];
 	}
 
@@ -138,13 +173,21 @@ class CmsSiteSnapshotService
 	 * @param array<string, mixed> $snapshot
 	 * @return array<string, mixed>
 	 */
-	public static function importSnapshot(array $snapshot, bool $dry_run, bool $replace): array
-	{
+	public static function importSnapshot(
+		array $snapshot,
+		bool $dry_run,
+		bool $replace,
+		bool $allow_environment_mismatch = false,
+		array $options = []
+	): array {
 		self::validateSnapshot($snapshot);
 
 		$tables = array_keys($snapshot['tables']);
+		$profile = self::normalizeProfile((string) ($snapshot['profile'] ?? self::PROFILE_DISASTER_RECOVERY));
 		$current_schema = self::buildSchema($tables);
+		$environment_check = self::checkSnapshotEnvironment($snapshot, $allow_environment_mismatch);
 		$errors = [];
+		$worker_pause_report = self::buildImportWorkerPausePreview($profile, $options);
 
 		if (($snapshot['schema']['signature'] ?? '') !== $current_schema['signature']) {
 			$errors[] = 'Snapshot schema signature does not match the current database schema.';
@@ -160,16 +203,31 @@ class CmsSiteSnapshotService
 			$errors[] = 'Refusing destructive import without --replace.';
 		}
 
+		if (!$dry_run && !$allow_environment_mismatch && ($environment_check['match'] ?? false) !== true) {
+			$errors[] = 'Snapshot environment does not match the current environment. Re-run with --allow-environment-mismatch only if this restore target is intentional.';
+		}
+
 		$summary = self::buildImportSummary($snapshot);
+
+		if (!$dry_run && $errors === []) {
+			$worker_pause_report = self::prepareImportWorkerPause($profile, $options);
+
+			if (($worker_pause_report['required'] ?? false) === true && ($worker_pause_report['confirmed'] ?? false) !== true) {
+				$errors[] = 'Target email queue workers did not confirm pause before site migration restore.';
+			}
+		}
 
 		if ($dry_run || $errors !== []) {
 			return [
 				'status' => $errors === [] ? 'success' : 'error',
 				'dry_run' => $dry_run,
 				'applied' => false,
+				'profile' => $profile,
 				'errors' => $errors,
 				'summary' => $summary,
 				'uploads' => self::summarizeUploadsReport($uploads_report),
+				'environment_check' => $environment_check,
+				'worker_pause' => $worker_pause_report,
 			];
 		}
 
@@ -205,9 +263,12 @@ class CmsSiteSnapshotService
 			'status' => $errors === [] ? 'success' : 'error',
 			'dry_run' => false,
 			'applied' => true,
+			'profile' => $profile,
 			'errors' => $errors,
 			'summary' => $summary,
 			'uploads' => self::summarizeUploadsReport(self::checkUploads($snapshot)),
+			'environment_check' => $environment_check,
+			'worker_pause' => $worker_pause_report,
 			'post_import_build' => $post_import_maintenance['steps']['build_all']['result'] ?? null,
 			'i18n_shipped_sync' => $post_import_maintenance['steps']['i18n_shipped_sync']['result'] ?? null,
 			'i18n_tag_sync' => $post_import_maintenance['steps']['i18n_tag_sync']['result'] ?? null,
@@ -228,6 +289,234 @@ class CmsSiteSnapshotService
 			: self::extractUploadManifestFromSnapshot($snapshot);
 
 		return self::checkUploadManifest($manifest);
+	}
+
+	/**
+	 * @param array<string, mixed> $options
+	 * @return array<string, mixed>|null
+	 */
+	private static function prepareExportSourceCutover(string $profile, array $options): ?array
+	{
+		if (self::normalizeProfile($profile) !== self::PROFILE_SITE_MIGRATION) {
+			return null;
+		}
+
+		if (!class_exists(RuntimeSiteCutoverGuard::class)) {
+			return [
+				'required' => true,
+				'requested' => false,
+				'active' => false,
+				'available' => false,
+			];
+		}
+
+		return RuntimeSiteCutoverGuard::activateSourceCutover(
+			'site_migration_export',
+			(string) ($options['pause_context'] ?? 'site_snapshot_export'),
+			['source' => self::FORMAT]
+		);
+	}
+
+	/**
+	 * @param array<string, mixed> $options
+	 * @return array<string, mixed>|null
+	 */
+	private static function prepareExportWorkerPause(string $profile, array $options, ?array $source_cutover_report = null): ?array
+	{
+		if (self::normalizeProfile($profile) !== self::PROFILE_SITE_MIGRATION) {
+			return null;
+		}
+
+		if (!self::optionBool($options, 'pause_source_workers', false)) {
+			return [
+				'required' => false,
+				'requested' => false,
+				'confirmed' => true,
+				'skipped' => true,
+				'scope' => self::emailQueueWorkerScope(),
+			];
+		}
+
+		$metadata = [
+			'source' => self::FORMAT,
+		];
+		$cutover_lock_id = self::extractCutoverLockId($source_cutover_report);
+
+		if ($cutover_lock_id !== '') {
+			$metadata['cutover_lock_id'] = $cutover_lock_id;
+		}
+
+		$result = self::requestAndWaitForEmailWorkerPause('site_migration_export', (string) ($options['pause_context'] ?? 'site_snapshot_export'), $options, $metadata);
+		$pause_request_id = (string) ($result['request']['pause_request_id'] ?? '');
+		$request_status = (string) ($result['request']['status'] ?? '');
+
+		if (
+			$cutover_lock_id !== ''
+			&& $pause_request_id !== ''
+			&& class_exists(RuntimeWorkerPauseControl::class)
+			&& $request_status === RuntimeWorkerPauseControl::STATUS_REQUESTED
+			&& class_exists(RuntimeSiteCutoverGuard::class)
+		) {
+			$result['cutover_worker_pause_link'] = RuntimeSiteCutoverGuard::attachWorkerPauseRequest($cutover_lock_id, $pause_request_id);
+		}
+
+		return $result;
+	}
+
+	/**
+	 * @param array<string, mixed> $options
+	 * @return array<string, mixed>|null
+	 */
+	private static function buildImportWorkerPausePreview(string $profile, array $options): ?array
+	{
+		if (self::normalizeProfile($profile) !== self::PROFILE_SITE_MIGRATION) {
+			return null;
+		}
+
+		return [
+			'required' => true,
+			'requested' => false,
+			'confirmed' => false,
+			'will_pause_target_workers' => self::optionBool($options, 'pause_target_workers', true),
+			'scope' => self::emailQueueWorkerScope(),
+		];
+	}
+
+	/**
+	 * @param array<string, mixed> $options
+	 * @return array<string, mixed>|null
+	 */
+	private static function prepareImportWorkerPause(string $profile, array $options): ?array
+	{
+		if (self::normalizeProfile($profile) !== self::PROFILE_SITE_MIGRATION) {
+			return null;
+		}
+
+		if (!self::optionBool($options, 'pause_target_workers', true)) {
+			return [
+				'required' => false,
+				'requested' => false,
+				'confirmed' => true,
+				'skipped' => true,
+				'scope' => self::emailQueueWorkerScope(),
+			];
+		}
+
+		return self::requestAndWaitForEmailWorkerPause('site_migration_restore', (string) ($options['pause_context'] ?? 'site_snapshot_restore'), $options);
+	}
+
+	/**
+	 * @param array<string, mixed> $options
+	 * @return array<string, mixed>
+	 */
+	private static function requestAndWaitForEmailWorkerPause(string $reason, string $context, array $options, array $metadata = []): array
+	{
+		$scope = self::emailQueueWorkerScope();
+
+		if (!class_exists(RuntimeWorkerPauseControl::class) || !class_exists(EmailQueueWorker::class)) {
+			return [
+				'required' => true,
+				'requested' => false,
+				'confirmed' => false,
+				'available' => false,
+				'scope' => $scope,
+			];
+		}
+
+		$request = RuntimeWorkerPauseControl::requestPause(
+			EmailQueueWorker::WORKER_TYPE,
+			EmailQueueWorker::QUEUE_NAME,
+			$reason,
+			$context,
+			$metadata === [] ? ['source' => self::FORMAT] : $metadata
+		);
+		$pause_request_id = $request['pause_request_id'] ?? null;
+		$confirmation = null;
+
+		if (is_string($pause_request_id) && $pause_request_id !== '') {
+			$confirmation = RuntimeWorkerPauseControl::waitForPauseConfirmation(
+				EmailQueueWorker::WORKER_TYPE,
+				EmailQueueWorker::QUEUE_NAME,
+				$pause_request_id,
+				self::optionInt($options, 'pause_timeout_seconds', 30),
+				self::optionBool($options, 'allow_stale_workers', false)
+			);
+		}
+
+		return [
+			'required' => true,
+			'requested' => is_string($pause_request_id) && $pause_request_id !== '',
+			'confirmed' => (bool) ($confirmation['confirmed'] ?? false),
+			'skipped' => false,
+			'scope' => $scope,
+			'request' => $request,
+			'confirmation' => $confirmation,
+		];
+	}
+
+	/**
+	 * @param array<string, mixed>|null $source_cutover_report
+	 */
+	private static function extractCutoverLockId(?array $source_cutover_report): string
+	{
+		if (!is_array($source_cutover_report)) {
+			return '';
+		}
+
+		$lock = $source_cutover_report['lock'] ?? null;
+
+		if (!is_array($lock)) {
+			return '';
+		}
+
+		return (string) ($lock['lock_id'] ?? '');
+	}
+
+	/**
+	 * @return array{worker_type: string, queue_name: string}
+	 */
+	private static function emailQueueWorkerScope(): array
+	{
+		return [
+			'worker_type' => class_exists(EmailQueueWorker::class) ? EmailQueueWorker::WORKER_TYPE : 'email_queue',
+			'queue_name' => class_exists(EmailQueueWorker::class) ? EmailQueueWorker::QUEUE_NAME : 'transactional_email',
+		];
+	}
+
+	/**
+	 * @param array<string, mixed> $options
+	 */
+	private static function optionBool(array $options, string $key, bool $default): bool
+	{
+		if (!array_key_exists($key, $options)) {
+			return $default;
+		}
+
+		$value = $options[$key];
+
+		if (is_bool($value)) {
+			return $value;
+		}
+
+		if (is_int($value)) {
+			return $value === 1;
+		}
+
+		if (is_string($value)) {
+			return in_array(strtolower(trim($value)), ['1', 'true', 'yes', 'on'], true);
+		}
+
+		return $default;
+	}
+
+	/**
+	 * @param array<string, mixed> $options
+	 */
+	private static function optionInt(array $options, string $key, int $default): int
+	{
+		$value = $options[$key] ?? null;
+
+		return is_numeric($value) ? (int) $value : $default;
 	}
 
 	/**
@@ -571,6 +860,155 @@ class CmsSiteSnapshotService
 	/**
 	 * @return array<string, mixed>
 	 */
+	private static function buildCurrentEnvironmentMetadata(): array
+	{
+		$resolved_site_context = null;
+		$site_context_error = null;
+
+		if (class_exists(CmsSiteContext::class)) {
+			try {
+				$resolved_site_context = CmsSiteContext::resolve();
+			} catch (Throwable $exception) {
+				$site_context_error = $exception->getMessage();
+			}
+		}
+
+		$metadata = [
+			'environment' => Kernel::getEnvironment(),
+			'application_identifier' => Config::APP_APPLICATION_IDENTIFIER->value(),
+			'domain_context' => Config::APP_DOMAIN_CONTEXT->value(),
+			'configured_site_context' => class_exists(CmsSiteContext::class)
+				? CmsSiteContext::getConfiguredSiteKey()
+				: Config::APP_DOMAIN_CONTEXT->value(),
+			'resolved_site_context' => $resolved_site_context,
+			'database' => self::parseDsnForEnvironmentMetadata(Db::normalizeDsn((string) Config::DB_DEFAULT_DSN->value())),
+		];
+
+		if ($site_context_error !== null) {
+			$metadata['site_context_error'] = $site_context_error;
+		}
+
+		return $metadata;
+	}
+
+	/**
+	 * @return array<string, mixed>
+	 */
+	private static function parseDsnForEnvironmentMetadata(string $dsn): array
+	{
+		$driver = '';
+		$payload = $dsn;
+		$separator = strpos($dsn, ':');
+
+		if ($separator !== false) {
+			$driver = substr($dsn, 0, $separator);
+			$payload = substr($dsn, $separator + 1);
+		}
+
+		$parts = [
+			'driver' => $driver,
+		];
+
+		foreach (explode(';', $payload) as $part) {
+			$part = trim($part);
+
+			if ($part === '' || !str_contains($part, '=')) {
+				continue;
+			}
+
+			[$key, $value] = explode('=', $part, 2);
+			$key = strtolower(trim($key));
+
+			if (!in_array($key, ['host', 'port', 'dbname', 'unix_socket'], true)) {
+				continue;
+			}
+
+			$parts[$key] = trim($value);
+		}
+
+		return $parts;
+	}
+
+	/**
+	 * @param array<string, mixed> $snapshot
+	 * @return array<string, mixed>
+	 */
+	private static function checkSnapshotEnvironment(array $snapshot, bool $allow_environment_mismatch): array
+	{
+		$current = self::buildCurrentEnvironmentMetadata();
+		$snapshot_environment = $snapshot['environment'] ?? null;
+
+		if (!is_array($snapshot_environment)) {
+			return [
+				'status' => 'legacy_missing',
+				'match' => true,
+				'allowed' => true,
+				'legacy' => true,
+				'snapshot' => null,
+				'current' => $current,
+				'differences' => [],
+			];
+		}
+
+		$compared_paths = [
+			'environment',
+			'domain_context',
+			'configured_site_context',
+			'resolved_site_context',
+			'database.driver',
+			'database.host',
+			'database.port',
+			'database.dbname',
+			'database.unix_socket',
+		];
+		$differences = [];
+
+		foreach ($compared_paths as $path) {
+			$snapshot_value = self::getArrayPath($snapshot_environment, $path);
+			$current_value = self::getArrayPath($current, $path);
+
+			if ($snapshot_value === $current_value) {
+				continue;
+			}
+
+			$differences[] = [
+				'path' => $path,
+				'snapshot' => $snapshot_value,
+				'current' => $current_value,
+			];
+		}
+
+		return [
+			'status' => $differences === [] ? 'match' : 'mismatch',
+			'match' => $differences === [],
+			'allowed' => $allow_environment_mismatch,
+			'snapshot' => $snapshot_environment,
+			'current' => $current,
+			'differences' => $differences,
+		];
+	}
+
+	/**
+	 * @param array<string, mixed> $data
+	 */
+	private static function getArrayPath(array $data, string $path): mixed
+	{
+		$current = $data;
+
+		foreach (explode('.', $path) as $part) {
+			if (!is_array($current) || !array_key_exists($part, $current)) {
+				return null;
+			}
+
+			$current = $current[$part];
+		}
+
+		return $current;
+	}
+
+	/**
+	 * @return array<string, mixed>
+	 */
 	private static function runBuildAllAfterImport(): array
 	{
 		if (!class_exists('CLICommandBuildAll')) {
@@ -655,10 +1093,11 @@ class CmsSiteSnapshotService
 	 *     schema: array<string, mixed>,
 	 *     table_rows: array<string, list<array<string, mixed>>>,
 	 *     table_counts: array<string, int>,
-	 *     upload_manifest: list<array<string, mixed>>
+	 *     upload_manifest: list<array<string, mixed>>,
+	 *     excluded_tables: array<string, array<string, mixed>>
 	 * }
 	 */
-	private static function readExportSnapshotFromDatabase(): array
+	private static function readExportSnapshotFromDatabase(string $profile): array
 	{
 		$pdo = Db::instance();
 		$transaction_started = false;
@@ -670,7 +1109,9 @@ class CmsSiteSnapshotService
 				$transaction_started = true;
 			}
 
-			$tables = self::getSnapshotTables();
+			$table_selection = self::getSnapshotTableSelection($profile);
+			self::assertExpectedExportCommentTokens($table_selection['missing_expected_comments']);
+			$tables = $table_selection['tables'];
 			$schema = self::buildSchema($tables);
 			$table_rows = [];
 			$table_counts = [];
@@ -693,6 +1134,7 @@ class CmsSiteSnapshotService
 				'table_rows' => $table_rows,
 				'table_counts' => $table_counts,
 				'upload_manifest' => $upload_manifest,
+				'excluded_tables' => $table_selection['excluded_tables'],
 			];
 		} catch (Throwable $exception) {
 			if ($transaction_started && $pdo->inTransaction()) {
@@ -734,14 +1176,44 @@ class CmsSiteSnapshotService
 	/**
 	 * @return list<string>
 	 */
-	private static function getSnapshotTables(): array
+	private static function getSnapshotTables(string $profile = self::PROFILE_DISASTER_RECOVERY): array
 	{
+		return self::getSnapshotTableSelection($profile)['tables'];
+	}
+
+	/**
+	 * @return array{
+	 *     tables: list<string>,
+	 *     excluded_tables: array<string, array{reason: string, comment: string, tokens: list<string>}>,
+	 *     missing_expected_comments: list<array{table: string, token: string, comment: string}>
+	 * }
+	 */
+	private static function getSnapshotTableSelection(string $profile): array
+	{
+		$profile = self::normalizeProfile($profile);
 		$existing = self::getExistingTables();
-		$excluded = array_fill_keys(self::EXCLUDED_OPERATIONAL_TABLES, true);
+		$comments = self::getExistingTableComments();
 		$tables = [];
+		$excluded_tables = [];
+
+		foreach ($comments as $table => $comment) {
+			$exclude_reason = self::getTableExcludeReasonForProfile($comment, $profile);
+
+			if ($exclude_reason === null) {
+				continue;
+			}
+
+			$excluded_tables[$table] = [
+				'reason' => $exclude_reason,
+				'comment' => $comment,
+				'tokens' => self::parseTableCommentTokens($comment),
+			];
+		}
+
+		$missing_expected_comments = self::getMissingExpectedExportCommentTokens($existing, $comments, $profile);
 
 		foreach (self::PREFERRED_TABLE_ORDER as $table) {
-			if (isset($existing[$table])) {
+			if (isset($existing[$table]) && !isset($excluded_tables[$table])) {
 				$tables[] = $table;
 			}
 		}
@@ -750,14 +1222,19 @@ class CmsSiteSnapshotService
 		$remaining = [];
 
 		foreach (array_keys($existing) as $table) {
-			if (!isset($excluded[$table]) && !isset($selected[$table])) {
+			if (!isset($excluded_tables[$table]) && !isset($selected[$table])) {
 				$remaining[] = $table;
 			}
 		}
 
 		sort($remaining, SORT_STRING);
+		ksort($excluded_tables, SORT_STRING);
 
-		return [...$tables, ...$remaining];
+		return [
+			'tables' => [...$tables, ...$remaining],
+			'excluded_tables' => $excluded_tables,
+			'missing_expected_comments' => $missing_expected_comments,
+		];
 	}
 
 	/**
@@ -773,6 +1250,135 @@ class CmsSiteSnapshotService
 		}
 
 		return $tables;
+	}
+
+	/**
+	 * @return array<string, string>
+	 */
+	private static function getExistingTableComments(): array
+	{
+		$stmt = Db::instance()->query(
+			"SELECT TABLE_NAME, TABLE_COMMENT
+			 FROM information_schema.TABLES
+			 WHERE TABLE_SCHEMA = DATABASE()
+			   AND TABLE_TYPE = 'BASE TABLE'"
+		);
+		$comments = [];
+
+		foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
+			$comments[(string) $row['TABLE_NAME']] = (string) ($row['TABLE_COMMENT'] ?? '');
+		}
+
+		return $comments;
+	}
+
+	/**
+	 * @return list<string>
+	 */
+	private static function parseTableCommentTokens(string $comment): array
+	{
+		$tokens = [];
+
+		foreach (explode(',', $comment) as $token) {
+			$token = strtolower(trim($token));
+
+			if ($token === '') {
+				continue;
+			}
+
+			$tokens[$token] = true;
+		}
+
+		return array_keys($tokens);
+	}
+
+	private static function normalizeProfile(string $profile): string
+	{
+		$profile = strtolower(trim($profile));
+
+		return in_array($profile, [self::PROFILE_DISASTER_RECOVERY, self::PROFILE_SITE_MIGRATION], true)
+			? $profile
+			: self::PROFILE_DISASTER_RECOVERY;
+	}
+
+	private static function getTableExcludeReasonForProfile(string $comment, string $profile): ?string
+	{
+		if (self::tableCommentHasToken($comment, self::TABLE_COMMENT_NOEXPORT)) {
+			return self::TABLE_COMMENT_NOEXPORT;
+		}
+
+		$profile_token = self::TABLE_COMMENT_NOEXPORT . ':' . self::normalizeProfile($profile);
+
+		if (self::tableCommentHasToken($comment, $profile_token)) {
+			return $profile_token;
+		}
+
+		return null;
+	}
+
+	private static function tableCommentHasToken(string $comment, string $token): bool
+	{
+		return in_array(strtolower(trim($token)), self::parseTableCommentTokens($comment), true);
+	}
+
+	/**
+	 * @param array<string, true> $existing
+	 * @param array<string, string> $comments
+	 * @return list<array{table: string, token: string, comment: string}>
+	 */
+	private static function getMissingExpectedExportCommentTokens(array $existing, array $comments, string $profile): array
+	{
+		$missing = [];
+		$profile = self::normalizeProfile($profile);
+
+		foreach (self::EXPECTED_EXPORT_COMMENT_TOKENS as $table => $tokens) {
+			if (!isset($existing[$table])) {
+				continue;
+			}
+
+			$comment = $comments[$table] ?? '';
+
+			foreach ($tokens as $token) {
+				if (str_starts_with($token, self::TABLE_COMMENT_NOEXPORT . ':')) {
+					[, $token_profile] = explode(':', $token, 2);
+
+					if ($token_profile !== $profile) {
+						continue;
+					}
+				}
+
+				if (!self::tableCommentHasToken($comment, $token)) {
+					$missing[] = [
+						'table' => $table,
+						'token' => $token,
+						'comment' => $comment,
+					];
+				}
+			}
+		}
+
+		return $missing;
+	}
+
+	/**
+	 * @param list<array{table: string, token: string, comment: string}> $missing_expected_comments
+	 */
+	private static function assertExpectedExportCommentTokens(array $missing_expected_comments): void
+	{
+		if ($missing_expected_comments === []) {
+			return;
+		}
+
+		$items = array_map(
+			static fn (array $item): string => $item['table'] . ' requires table comment token ' . $item['token'],
+			$missing_expected_comments
+		);
+
+		throw new RuntimeException(
+			'Site snapshot export found operational tables without explicit export-safety comments. '
+			. 'Run pending migrations or add explicit __noexport table comments before exporting. '
+			. implode('; ', $items)
+		);
 	}
 
 	/**

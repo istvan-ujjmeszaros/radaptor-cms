@@ -26,6 +26,9 @@ class Template extends TemplateDebug
 	/** @var array<string, string> */
 	protected array $_contentHtml = [];
 
+	/** @var array<string, true> */
+	protected array $_fetchedContentNames = [];
+
 	/** @var array<string, mixed> */
 	protected array $_render_context = [];
 
@@ -66,6 +69,7 @@ class Template extends TemplateDebug
 	public function __clone(): void
 	{
 		$this->_content = null;
+		$this->_fetchedContentNames = [];
 	}
 
 	public static function checkTemplateIsRegistered(string $templateName): bool
@@ -304,6 +308,7 @@ class Template extends TemplateDebug
 	public function setContents(array $content_html): void
 	{
 		$this->_contentHtml = $content_html;
+		$this->_fetchedContentNames = [];
 	}
 
 	/**
@@ -311,7 +316,14 @@ class Template extends TemplateDebug
 	 */
 	public function fetchContent(string $name): string
 	{
+		$this->_fetchedContentNames[$name] = true;
+
 		return $this->_contentHtml[$name] ?? '';
+	}
+
+	public function hasFetchedContent(string $name): bool
+	{
+		return isset($this->_fetchedContentNames[$name]);
 	}
 
 	/**

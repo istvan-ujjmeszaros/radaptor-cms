@@ -142,6 +142,12 @@ Schema feature-detection caches are positive-only. If a migration adds `resource
 `locale_home_resources`, `richtext.locale`, or `cms_mutation_audit` while a long-running PHP process
 is alive, a previous negative check is re-probed on later calls.
 
+## Site Snapshots
+
+Site snapshots intentionally include `migrations` and `seeds` metadata. Restores without those rows
+can re-run historical package/app migrations or bootstrap seeds against an already-restored schema
+and content set.
+
 ## License
 
 This package is distributed under the proprietary evaluation license in

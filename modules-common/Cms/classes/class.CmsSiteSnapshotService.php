@@ -72,6 +72,10 @@ class CmsSiteSnapshotService
 		$source_cutover_report = self::prepareExportSourceCutover($profile, $options);
 		$worker_pause_report = self::prepareExportWorkerPause($profile, $options, $source_cutover_report);
 
+		if (($source_cutover_report['required'] ?? false) === true && ($source_cutover_report['active'] ?? false) !== true) {
+			throw new RuntimeException(t('import_export.error.source_cutover_required'));
+		}
+
 		if (($worker_pause_report['required'] ?? false) === true && ($worker_pause_report['confirmed'] ?? false) !== true) {
 			throw new RuntimeException('Source email queue workers did not confirm pause before site migration export.');
 		}
@@ -295,15 +299,6 @@ class CmsSiteSnapshotService
 	{
 		if (self::normalizeProfile($profile) !== self::PROFILE_SITE_MIGRATION) {
 			return null;
-		}
-
-		if (!self::optionBool($options, 'pause_source_workers', false)) {
-			return [
-				'required' => true,
-				'requested' => false,
-				'active' => false,
-				'skipped' => true,
-			];
 		}
 
 		if (!class_exists(RuntimeSiteCutoverGuard::class)) {

@@ -1219,7 +1219,15 @@ class ResourceTreeHandler extends ResourceAcl
 		$result = NestedSet::rebuildPath('resource_tree', $from_node_id);
 
 		if (class_exists(LocaleHomeResourceService::class)) {
-			LocaleHomeResourceService::refreshForResourceId($from_node_id);
+			if (class_exists(ResourceLocaleService::class)) {
+				ResourceLocaleService::resetRequestCache();
+			}
+
+			if ($from_node_id > 0) {
+				LocaleHomeResourceService::refreshForResourceId($from_node_id);
+			} else {
+				LocaleHomeResourceService::refreshAll();
+			}
 		}
 
 		return $result;
@@ -1302,8 +1310,6 @@ class ResourceTreeHandler extends ResourceAcl
 
 			if ($site_context !== null) {
 				LocaleHomeResourceService::refreshSiteContext($site_context);
-			} else {
-				LocaleHomeResourceService::refreshAll();
 			}
 		}
 

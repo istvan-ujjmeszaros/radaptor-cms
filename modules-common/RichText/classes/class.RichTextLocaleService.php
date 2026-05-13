@@ -28,8 +28,8 @@ final class RichTextLocaleService
 
 	public static function hasRichTextLocaleColumn(): bool
 	{
-		if (self::$_hasRichTextLocaleColumn !== null) {
-			return self::$_hasRichTextLocaleColumn;
+		if (self::$_hasRichTextLocaleColumn === true) {
+			return true;
 		}
 
 		try {
@@ -44,7 +44,9 @@ final class RichTextLocaleService
 
 			return self::$_hasRichTextLocaleColumn = (bool) $stmt->fetchColumn();
 		} catch (Throwable) {
-			return self::$_hasRichTextLocaleColumn = false;
+			self::$_hasRichTextLocaleColumn = false;
+
+			return false;
 		}
 	}
 }

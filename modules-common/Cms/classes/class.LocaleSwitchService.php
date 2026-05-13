@@ -180,24 +180,80 @@ final class LocaleSwitchService
 		}
 
 		if (isset($query['folder'], $query['resource'])) {
-			$folder = (string) $query['folder'];
-			$resource_name = (string) $query['resource'];
+			$lookup = self::normalizeResourceLookupParts((string) $query['folder'], (string) $query['resource']);
 		} else {
 			$path = (string) ($parsed['path'] ?? '/');
-
-			if ($path === '' || str_ends_with($path, '/')) {
-				$path .= 'index.html';
-			}
-
-			$info = pathinfo($path);
-			$folder = '/' . trim((string) ($info['dirname'] ?? '/'), '/') . '/';
-			$folder = $folder === '//' ? '/' : $folder;
-			$resource_name = (string) ($info['basename'] ?? 'index.html');
+			$lookup = self::normalizeResourceLookupPath($path);
 		}
 
-		$row = ResourceTreeHandler::getResourceTreeEntryData($folder, $resource_name);
+		if ($lookup === null) {
+			return null;
+		}
+
+		$row = ResourceTreeHandler::getResourceTreeEntryData($lookup['folder'], $lookup['resource_name']);
 
 		return is_array($row) ? $row : null;
+	}
+
+	/**
+	 * @return array{folder: string, resource_name: string}|null
+	 */
+	private static function normalizeResourceLookupParts(string $folder, string $resource_name): ?array
+	{
+		$resource_name = trim($resource_name);
+
+		if ($resource_name === '' || str_contains($resource_name, '/') || str_contains($resource_name, '\\')) {
+			return null;
+		}
+
+		return self::normalizeResourceLookupPath(rtrim($folder, '/') . '/' . $resource_name);
+	}
+
+	/**
+	 * @return array{folder: string, resource_name: string}|null
+	 */
+	private static function normalizeResourceLookupPath(string $path): ?array
+	{
+		$path = rawurldecode($path);
+
+		if ($path === '' || $path[0] !== '/' || str_contains($path, '\\')) {
+			return null;
+		}
+
+		if ($path === '' || str_ends_with($path, '/')) {
+			$path .= 'index.html';
+		}
+
+		$segments = [];
+
+		foreach (explode('/', $path) as $segment) {
+			if ($segment === '') {
+				continue;
+			}
+
+			if ($segment === '.' || $segment === '..') {
+				return null;
+			}
+
+			$segments[] = $segment;
+		}
+
+		if ($segments === []) {
+			$segments[] = 'index.html';
+		}
+
+		$resource_name = array_pop($segments);
+
+		if (!is_string($resource_name) || $resource_name === '') {
+			return null;
+		}
+
+		$folder = $segments === [] ? '/' : '/' . implode('/', $segments) . '/';
+
+		return [
+			'folder' => $folder,
+			'resource_name' => $resource_name,
+		];
 	}
 
 	private static function getCookieValue(): string

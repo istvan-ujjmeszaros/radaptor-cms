@@ -73,6 +73,10 @@ final class LocaleSwitchServiceTest extends TestCase
 {
 	protected function setUp(): void
 	{
+		$this->assertTrue(is_a(Request::class, LocaleSwitchServiceTestRequest::class, true));
+		$this->assertTrue(is_a(RequestContextHolder::class, LocaleSwitchServiceTestRequestContextHolder::class, true));
+		$this->assertTrue(is_a(Url::class, LocaleSwitchServiceTestUrl::class, true));
+
 		LocaleSwitchServiceTestRequest::$method = 'GET';
 		LocaleSwitchServiceTestUrl::$currentHost = 'https://example.test:8443';
 		LocaleSwitchServiceTestRequestContextHolder::$context = (object) [
@@ -147,5 +151,24 @@ final class LocaleSwitchServiceTest extends TestCase
 
 		LocaleSwitchServiceTestRequestContextHolder::$context->SERVER['HTTP_REFERER'] = 'https://other.test/admin/';
 		$this->assertFalse(LocaleSwitchService::isSameOriginPostRequest());
+	}
+
+	public function testResourceLookupPathNormalizationRejectsTraversalSegments(): void
+	{
+		$method = new ReflectionMethod(LocaleSwitchService::class, 'normalizeResourceLookupPath');
+
+		$this->assertNull($method->invoke(null, '/../page.html'));
+		$this->assertNull($method->invoke(null, '/foo/../bar.html'));
+		$this->assertNull($method->invoke(null, '/%2e%2e/page.html'));
+	}
+
+	public function testResourceLookupPathNormalizationBuildsFolderAndResourceName(): void
+	{
+		$method = new ReflectionMethod(LocaleSwitchService::class, 'normalizeResourceLookupPath');
+
+		$this->assertSame(['folder' => '/', 'resource_name' => 'index.html'], $method->invoke(null, '/'));
+		$this->assertSame(['folder' => '/', 'resource_name' => 'index.html'], $method->invoke(null, '/index.html'));
+		$this->assertSame(['folder' => '/folder/', 'resource_name' => 'index.html'], $method->invoke(null, '/folder/'));
+		$this->assertSame(['folder' => '/folder/', 'resource_name' => 'page.html'], $method->invoke(null, '/folder/page.html'));
 	}
 }

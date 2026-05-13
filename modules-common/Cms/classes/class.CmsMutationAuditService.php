@@ -229,8 +229,8 @@ final class CmsMutationAuditService
 
 	private static function tableExists(): bool
 	{
-		if (self::$_table_exists !== null) {
-			return self::$_table_exists;
+		if (self::$_table_exists === true) {
+			return true;
 		}
 
 		try {
@@ -238,7 +238,9 @@ final class CmsMutationAuditService
 
 			return self::$_table_exists = $stmt !== false && $stmt->rowCount() > 0;
 		} catch (Throwable) {
-			return self::$_table_exists = false;
+			self::$_table_exists = false;
+
+			return false;
 		}
 	}
 

@@ -20,8 +20,6 @@ final class LocaleHomeResourceService
 	public static function refreshForResourceId(int $resource_id): void
 	{
 		if ($resource_id <= 0) {
-			self::refreshAll();
-
 			return;
 		}
 
@@ -32,8 +30,6 @@ final class LocaleHomeResourceService
 
 			return;
 		}
-
-		self::refreshAll();
 	}
 
 	public static function refreshSiteContext(string $site_context): void
@@ -192,8 +188,8 @@ final class LocaleHomeResourceService
 
 	private static function tablesExist(): bool
 	{
-		if (self::$_tablesExist !== null) {
-			return self::$_tablesExist;
+		if (self::$_tablesExist === true) {
+			return true;
 		}
 
 		try {
@@ -204,7 +200,9 @@ final class LocaleHomeResourceService
 				&& $pdo->query("SHOW TABLES LIKE 'locales'")->rowCount() > 0
 			);
 		} catch (Throwable) {
-			return self::$_tablesExist = false;
+			self::$_tablesExist = false;
+
+			return false;
 		}
 	}
 }

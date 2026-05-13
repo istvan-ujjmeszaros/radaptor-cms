@@ -123,6 +123,25 @@ Site snapshot export/import lives in this package. CLI entrypoints are exposed b
 while the CMS service owns snapshot validation, destructive import replacement, upload-manifest
 checks, and post-import maintenance.
 
+## Locale-Aware Content Routing
+
+CMS resources may carry an explicit BCP 47 content locale. Descendant resources inherit the nearest
+ancestor locale, and request rendering temporarily switches the request locale to the resolved
+resource locale. The previous request locale is restored after rendering.
+
+Locale home resources are computed per site context and locale. `LocaleHomeResourceService` refreshes
+only the affected site context for normal resource mutations; full refreshes are explicit and used
+only for full tree rebuilds. Resource-locale inheritance uses request-scope cache stored on
+`RequestContext`, so repeated lookups during one render avoid duplicate ancestor queries without
+leaking across Swoole requests.
+
+Locale-switch return URLs are same-origin only and resource lookup paths reject traversal segments
+such as `.` and `..` before resolving through the resource tree.
+
+Schema feature-detection caches are positive-only. If a migration adds `resource_tree.locale`,
+`locale_home_resources`, `richtext.locale`, or `cms_mutation_audit` while a long-running PHP process
+is alive, a previous negative check is re-probed on later calls.
+
 ## License
 
 This package is distributed under the proprietary evaluation license in

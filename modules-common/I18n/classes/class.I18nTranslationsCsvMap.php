@@ -79,9 +79,15 @@ class I18nTranslationsCsvMap implements iCsvMap
 		$params = [];
 
 		if (!empty($filters['locale']) && is_string($filters['locale'])) {
-			$locale = LocaleService::tryCanonicalize($filters['locale']) ?? trim($filters['locale']);
-			$where_parts[] = 't.locale = ?';
-			$params[] = $locale;
+			$requested_locale = trim($filters['locale']);
+			$canonical_locale = LocaleService::tryCanonicalize($requested_locale) ?? $requested_locale;
+			$locale_values = array_values(array_unique(array_filter([
+				$canonical_locale,
+				$requested_locale,
+				LocaleService::toIntlLocale($canonical_locale),
+			], static fn (string $locale): bool => $locale !== '')));
+			$where_parts[] = 't.locale IN (' . implode(', ', array_fill(0, count($locale_values), '?')) . ')';
+			$params = [...$params, ...$locale_values];
 		}
 
 		if (!empty($filters['domains']) && is_array($filters['domains'])) {

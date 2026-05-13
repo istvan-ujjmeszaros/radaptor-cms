@@ -29,7 +29,7 @@ class LayoutTypeWidgetPreviewer extends AbstractLayoutType
 	public function buildTree(iTreeBuildContext $webpage_composer, array $slot_trees, array $build_context = []): array
 	{
 		return $this->createLayoutTree('layout_widget_previewer', [
-			'lang' => substr(Kernel::getLocale(), 0, 2),
+			'lang' => Kernel::getLocale(),
 			'document_title' => t('widget.widget_preview.name'),
 		], contents: [
 			'content' => $slot_trees['content'] ?? [],

@@ -47,7 +47,7 @@ class EventI18nAjaxTmSuggestFuzzy extends AbstractEvent implements iBrowserEvent
 		$domain = Request::_GET('domain', '');
 		$key = Request::_GET('key', '');
 		$context = Request::_GET('message_context', '');
-		$locale = Request::_GET('locale', '');
+		$locale = LocaleService::tryCanonicalize((string) Request::_GET('locale', '')) ?? '';
 		$sourceText = I18nWorkbench::getSourceText($domain, $key, $context) ?? '';
 		$suggestions = I18nTm::getFuzzySuggestions($sourceText, $locale, $domain, $context);
 

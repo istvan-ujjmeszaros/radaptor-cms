@@ -49,7 +49,7 @@ class FormTypeWebpagePage extends AbstractForm
 				$parent_id = Request::_GET('ref_id');
 
 				$this->savedata['node_type'] = 'webpage';
-				$this->savedata['lang_id'] = 'hu';
+				$this->savedata['locale'] = ResourceLocaleFormHelper::resolveSubmittedLocale($this, (int) $parent_id);
 
 				if ($parent_id == 0) {
 					$this->savedata['path'] = '/';
@@ -69,6 +69,7 @@ class FormTypeWebpagePage extends AbstractForm
 			case self::_MODE_UPDATE:
 
 				$this->savedata['node_id'] = $this->getItemId();
+				$this->savedata['locale'] = ResourceLocaleFormHelper::resolveSubmittedLocale($this, (int) $this->getItemId(), true);
 
 				if (ResourceTreeHandler::updateResourceTreeEntry($this->savedata, $this->getItemId())) {
 					ResourceTreeHandler::rebuildPath($this->getItemId());
@@ -120,6 +121,8 @@ class FormTypeWebpagePage extends AbstractForm
 		$layout->values = Layout::getLayoutListForSelect();
 		$layout->explanation = t('cms.webpage.field.layout.explanation');
 		$layout->addValidator(new FormValidatorSelected(t('form.validation.required')));
+
+		ResourceLocaleFormHelper::addLocaleInput($this, (int) ($this->getMode() === self::_MODE_CREATE ? Request::_GET('ref_id', 0) : $this->getItemId()));
 
 		$keywords = new FormInputText('keywords', $this);
 		$keywords->label = t('cms.webpage_page.field.keywords.label');

@@ -18,8 +18,10 @@ class I18nCatalogBuilder
 		}
 
 		$locales = $localeFilter !== ''
-			? [$localeFilter]
+			? [LocaleService::canonicalize($localeFilter)]
 			: self::_getAllLocales();
+
+		self::_removeLegacyCatalogFiles($outputDir, $locales);
 
 		foreach ($locales as $locale) {
 			self::_buildLocale($locale, $outputDir);
@@ -30,16 +32,19 @@ class I18nCatalogBuilder
 
 	private static function _buildLocale(string $locale, string $outputDir): void
 	{
+		$locale = LocaleService::canonicalize($locale);
+		$storage_locales = self::_getStorageLocaleAliases($locale);
+		$placeholders = implode(', ', array_fill(0, count($storage_locales), '?'));
 		$pdo = Db::instance();
 
 		$stmt = $pdo->prepare(
-			"SELECT m.domain, m.`key`, m.context, t.text
+			"SELECT m.domain, m.`key`, m.context, t.locale, t.text
 			FROM i18n_messages m
 			JOIN i18n_translations t ON t.domain = m.domain AND t.`key` = m.`key` AND t.context = m.context
-			WHERE t.locale = :locale AND TRIM(t.text) <> ''
-			ORDER BY m.domain, m.`key`, m.context"
+			WHERE t.locale IN ({$placeholders}) AND TRIM(t.text) <> ''
+			ORDER BY m.domain, m.`key`, m.context, CASE WHEN t.locale = ? THEN 0 ELSE 1 END"
 		);
-		$stmt->execute([':locale' => $locale]);
+		$stmt->execute([...$storage_locales, $locale]);
 		$rows = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
 		$catalog = [];
@@ -51,7 +56,11 @@ class I18nCatalogBuilder
 				$flatKey .= '.' . $row['context'];
 			}
 
-			$catalog[$flatKey] = $row['text'];
+			// BCP 47 catalog rows win over legacy storage aliases. The SQL order
+			// makes this deterministic; the condition keeps the rule explicit.
+			if (!isset($catalog[$flatKey]) || $row['locale'] === $locale) {
+				$catalog[$flatKey] = $row['text'];
+			}
 		}
 
 		$hash = md5(serialize($catalog));
@@ -75,8 +84,51 @@ class I18nCatalogBuilder
 	private static function _getAllLocales(): array
 	{
 		$rows = DbHelper::selectMany('i18n_translations', []);
-		$locales = array_unique(array_column($rows, 'locale'));
+		$locales = [];
 
-		return array_values($locales);
+		foreach (array_column($rows, 'locale') as $locale) {
+			$canonical = LocaleService::tryCanonicalize((string) $locale);
+
+			if ($canonical !== null) {
+				$locales[$canonical] = true;
+			}
+		}
+
+		$locales = array_keys($locales);
+		sort($locales);
+
+		return $locales;
+	}
+
+	/**
+	 * @param list<string> $locales
+	 */
+	private static function _removeLegacyCatalogFiles(string $outputDir, array $locales): void
+	{
+		foreach ($locales as $locale) {
+			$canonical = LocaleService::canonicalize($locale);
+			$legacy = LocaleService::toIntlLocale($canonical);
+			$legacy_path = $outputDir . $legacy . '.php';
+
+			if ($legacy !== $canonical && is_file($legacy_path)) {
+				unlink($legacy_path);
+			}
+		}
+	}
+
+	/**
+	 * @return list<string>
+	 */
+	private static function _getStorageLocaleAliases(string $locale): array
+	{
+		$canonical = LocaleService::canonicalize($locale);
+		$aliases = [$canonical => true];
+		$legacy = LocaleService::toIntlLocale($canonical);
+
+		if ($legacy !== $canonical) {
+			$aliases[$legacy] = true;
+		}
+
+		return array_keys($aliases);
 	}
 }

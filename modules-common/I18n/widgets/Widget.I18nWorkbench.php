@@ -32,7 +32,7 @@ class WidgetI18nWorkbench extends AbstractWidget
 	{
 		$localeOptions = I18nRuntime::getAvailableLocales();
 		$domainOptions = $this->_getDomainOptions();
-		$selectedLocale = Request::_GET('locale', Kernel::getLocale());
+		$selectedLocale = LocaleService::tryCanonicalize((string) Request::_GET('locale', Kernel::getLocale())) ?? Kernel::getLocale();
 		$selectedDomain = Request::_GET('domain', '');
 		$selectedSearch = Request::_GET('search', '');
 

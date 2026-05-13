@@ -40,6 +40,7 @@ class FormTypeWebpageFolder extends AbstractForm
 				$parent_id = Request::_GET('ref_id');
 
 				$this->savedata['node_type'] = 'folder';
+				$this->savedata['locale'] = ResourceLocaleFormHelper::resolveSubmittedLocale($this, (int) $parent_id);
 
 				if ($parent_id == 0) {
 					$this->savedata['path'] = '/';
@@ -58,6 +59,7 @@ class FormTypeWebpageFolder extends AbstractForm
 
 			case self::_MODE_UPDATE:
 				$this->savedata['node_id'] = $this->getItemId();
+				$this->savedata['locale'] = ResourceLocaleFormHelper::resolveSubmittedLocale($this, (int) $this->getItemId(), true);
 
 				$return_update = ResourceTreeHandler::updateResourceTreeEntry($this->savedata, $this->getItemId());
 
@@ -97,6 +99,8 @@ class FormTypeWebpageFolder extends AbstractForm
 		$v->min = 0;
 		$v->max = 128;
 		$resource_name->addValidator($v);
+
+		ResourceLocaleFormHelper::addLocaleInput($this, (int) ($this->getMode() === self::_MODE_CREATE ? Request::_GET('ref_id', 0) : $this->getItemId()));
 
 		if (Roles::hasRole(RoleList::ROLE_ACL_VIEWER) || Roles::hasRole(RoleList::ROLE_SYSTEM_DEVELOPER)) {
 			$is_inheriting_acl = new FormInputCheckbox('is_inheriting_acl', $this);

@@ -17,7 +17,7 @@ final class PackageSmokeTest extends TestCase
 		$this->assertSame('radaptor/core/cms', $decoded['package'] ?? null);
 		$this->assertSame('core', $decoded['type'] ?? null);
 		$this->assertSame('cms', $decoded['id'] ?? null);
-		$this->assertSame('^0.1.25', $decoded['dependencies']['radaptor/core/framework'] ?? null);
+		$this->assertSame('^0.1.29', $decoded['dependencies']['radaptor/core/framework'] ?? null);
 		$this->assertSame('^8.5', $decoded['composer']['require']['php'] ?? null);
 	}
 
@@ -31,7 +31,7 @@ final class PackageSmokeTest extends TestCase
 		$this->assertFileExists($root . '/modules-common/Mailpit/classes/class.MailpitClient.php');
 		$this->assertFileExists($root . '/modules-common/Mailpit/widgets/Widget.Mailpit.php');
 		$this->assertFileExists($root . '/modules-common/Mailpit/templates/template.mailpit.inbox.php');
-		$this->assertFileExists($root . '/modules-common/Mailpit/i18n/seeds/en_US.csv');
+		$this->assertFileExists($root . '/modules-common/Mailpit/i18n/seeds/en-US.csv');
 		$this->assertDirectoryExists($root . '/templates-common');
 	}
 }

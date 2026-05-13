@@ -23,8 +23,21 @@ pipe operator (`|>`).
 
 From `.registry-package.json`:
 
-- `radaptor/core/framework` (`^0.1.25`)
+- `radaptor/core/framework` (`^0.1.29`)
 - PHP (`^8.5`)
+
+## Resource Spec Compatibility
+
+BREAKING (CMS resource-spec): `slots` is now partial by default. Only mentioned
+slots are touched, omitted slots are preserved. To restore the previous
+wipe-on-omit behavior, set `replace_slots: true`. Use
+`radaptor resource-spec:compat-scan <path>` to find specs that may need this
+flag.
+
+Destructive CMS CLI commands use dry-run by default and require `--apply` to
+write changes. `--apply --dry-run` is a hard error. CMS mutation audit rows are
+stored in `cms_mutation_audit` with a correlation id; prune them with
+`radaptor cms:mutation-audit-prune --days 180 --apply`.
 
 ## Layout Terminology
 
@@ -109,6 +122,25 @@ the generated artifact through `radaptor_plugin_registry`.
 Site snapshot export/import lives in this package. CLI entrypoints are exposed by the framework,
 while the CMS service owns snapshot validation, destructive import replacement, upload-manifest
 checks, and post-import maintenance.
+
+## Locale-Aware Content Routing
+
+CMS resources may carry an explicit BCP 47 content locale. Descendant resources inherit the nearest
+ancestor locale, and request rendering temporarily switches the request locale to the resolved
+resource locale. The previous request locale is restored after rendering.
+
+Locale home resources are computed per site context and locale. `LocaleHomeResourceService` refreshes
+only the affected site context for normal resource mutations; full refreshes are explicit and used
+only for full tree rebuilds. Resource-locale inheritance uses request-scope cache stored on
+`RequestContext`, so repeated lookups during one render avoid duplicate ancestor queries without
+leaking across Swoole requests.
+
+Locale-switch return URLs are same-origin only and resource lookup paths reject traversal segments
+such as `.` and `..` before resolving through the resource tree.
+
+Schema feature-detection caches are positive-only. If a migration adds `resource_tree.locale`,
+`locale_home_resources`, `richtext.locale`, or `cms_mutation_audit` while a long-running PHP process
+is alive, a previous negative check is re-probed on later calls.
 
 ## License
 

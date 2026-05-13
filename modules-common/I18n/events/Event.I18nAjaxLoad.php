@@ -20,7 +20,7 @@ class EventI18nAjaxLoad extends AbstractEvent implements iBrowserEventDocumentab
 			'request' => [
 				'method' => 'GET',
 				'params' => [
-					BrowserEventDocumentationHelper::param('locale', 'query', 'string', false, 'Locale code to load, defaults to en_US.'),
+					BrowserEventDocumentationHelper::param('locale', 'query', 'string', false, 'Locale code to load, defaults to en-US.'),
 					BrowserEventDocumentationHelper::param('start', 'query', 'int', false, 'Result offset for paging.'),
 					BrowserEventDocumentationHelper::param('length', 'query', 'int', false, 'Page size for paging.'),
 					BrowserEventDocumentationHelper::param('draw', 'query', 'int', false, 'Opaque draw token echoed back to the caller.'),
@@ -44,7 +44,7 @@ class EventI18nAjaxLoad extends AbstractEvent implements iBrowserEventDocumentab
 
 	public function run(): void
 	{
-		$locale  = Request::_GET('locale', 'en_US');
+		$locale  = LocaleService::tryCanonicalize((string) Request::_GET('locale', LocaleService::getDefaultLocale())) ?? LocaleService::getDefaultLocale();
 		$start   = (int) Request::_GET('start', 0);
 		$length  = (int) Request::_GET('length', 25);
 		$draw    = (int) Request::_GET('draw', 1);

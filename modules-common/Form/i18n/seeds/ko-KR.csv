@@ -1,0 +1,59 @@
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
+form,admin_menu_item.description,,ko-KR,Admin menu item,관리자 메뉴 항목,0,관리자 메뉴 항목
+form,admin_menu_item.name,,ko-KR,Admin menu item,관리자 메뉴 항목,0,관리자 메뉴 항목
+form,blog.description,,ko-KR,Blog post,블로그 게시물,0,블로그 게시물
+form,blog.name,,ko-KR,Blog post,블로그 게시물,0,블로그 게시물
+form,close_page.close_window,,ko-KR,Close this window!,이 창 닫기!,0,이 창 닫기!
+form,close_page.title,,ko-KR,Close page,페이지 닫기,0,페이지 닫기
+form,form_settings.description,,ko-KR,Select which form to display,표시할 양식 선택,0,표시할 양식 선택
+form,form_settings.name,,ko-KR,Form settings,양식 설정,0,양식 설정
+form,form_settings.title,,ko-KR,Select form,양식 선택,0,양식 선택
+form,js_tree_settings.description,,ko-KR,Select which tree to display,표시할 트리 선택,0,표시할 트리 선택
+form,js_tree_settings.name,,ko-KR,Tree settings,트리 설정,0,트리 설정
+form,js_tree_settings.title,,ko-KR,Select tree,트리 선택,0,트리 선택
+form,main_menu_item.description,,ko-KR,Main menu item,메인 메뉴 항목,0,메인 메뉴 항목
+form,main_menu_item.name,,ko-KR,Main menu item,메인 메뉴 항목,0,메인 메뉴 항목
+form,plain_html.description,,ko-KR,HTML code (embed),HTML 코드 (삽입),0,HTML 코드 (삽입)
+form,plain_html.name,,ko-KR,HTML code (embed),HTML 코드 (삽입),0,HTML 코드 (삽입)
+form,rich_text_select.description,,ko-KR,Select text content,텍스트 콘텐츠 선택,0,텍스트 콘텐츠 선택
+form,rich_text_select.name,,ko-KR,Select text content,텍스트 콘텐츠 선택,0,텍스트 콘텐츠 선택
+form,rich_text.description,,ko-KR,Text content,텍스트 콘텐츠,0,텍스트 콘텐츠
+form,rich_text.name,,ko-KR,Text content,텍스트 콘텐츠,0,텍스트 콘텐츠
+form,role.description,,ko-KR,Role,역할,0,역할
+form,role.name,,ko-KR,Role,역할,0,역할
+form,tag.description,,ko-KR,Tag,태그,0,태그
+form,tag.name,,ko-KR,Tag,태그,0,태그
+form,theme_selector.description,,ko-KR,Select which theme renders each layout,각 레이아웃을 렌더링할 테마 선택,0,각 레이아웃을 렌더링할 테마 선택
+form,theme_selector.name,,ko-KR,Theme selection,테마 선택,0,테마 선택
+form,theme_selector.title,,ko-KR,Select themes for layouts,레이아웃의 테마 선택,0,레이아웃의 테마 선택
+form,ticket_priority.description,,ko-KR,Ticket priority,티켓 우선순위,0,티켓 우선순위
+form,ticket_priority.name,,ko-KR,Ticket priority,티켓 우선순위,0,티켓 우선순위
+form,ticket_state.description,,ko-KR,Ticket status,티켓 상태,0,티켓 상태
+form,ticket_state.name,,ko-KR,Ticket status,티켓 상태,0,티켓 상태
+form,user_login.description,,ko-KR,Login,로그인,0,로그인
+form,user_login.name,,ko-KR,Login,로그인,0,로그인
+form,user_signup.description,,ko-KR,Sign up,회원가입,0,회원가입
+form,user_signup.name,,ko-KR,Sign up,회원가입,0,회원가입
+form,user.description,,ko-KR,User,사용자,0,사용자
+form,user.name,,ko-KR,User,사용자,0,사용자
+form,usergroup.description,,ko-KR,User group,사용자 그룹,0,사용자 그룹
+form,usergroup.name,,ko-KR,User group,사용자 그룹,0,사용자 그룹
+form,validation.max_length,,ko-KR,Maximum {max} characters,최대 {max}자,0,최대 {max}자
+form,validation.required,,ko-KR,Required,필수,0,필수
+form,webpage_domain.description,,ko-KR,Domain properties,도메인 속성,0,도메인 속성
+form,webpage_domain.name,,ko-KR,Domain properties,도메인 속성,0,도메인 속성
+form,webpage_file.description,,ko-KR,File properties,파일 속성,0,파일 속성
+form,webpage_file.name,,ko-KR,File properties,파일 속성,0,파일 속성
+form,webpage_folder.description,,ko-KR,Website folder properties,웹사이트 폴더 속성,0,웹사이트 폴더 속성
+form,webpage_folder.name,,ko-KR,Website folder properties,웹사이트 폴더 속성,0,웹사이트 폴더 속성
+form,webpage_from_path.description,,ko-KR,Create webpage from path,경로에서 웹 페이지 만들기,0,경로에서 웹 페이지 만들기
+form,webpage_from_path.name,,ko-KR,Create webpage from path,경로에서 웹 페이지 만들기,0,경로에서 웹 페이지 만들기
+form,webpage_page.description,,ko-KR,Webpage properties,웹 페이지 속성,0,웹 페이지 속성
+form,webpage_page.name,,ko-KR,Webpage properties,웹 페이지 속성,0,웹 페이지 속성
+form,widget_connection_params.description,,ko-KR,Display settings for a content box,콘텐츠 박스 표시 설정,0,콘텐츠 박스 표시 설정
+form,widget_connection_params.name,,ko-KR,Content box display settings,콘텐츠 박스 표시 설정,0,콘텐츠 박스 표시 설정
+form,widget_connection_settings.description,,ko-KR,Configure width and row placement for the content box,콘텐츠 박스의 너비 및 행 배치 설정,0,콘텐츠 박스의 너비 및 행 배치 설정
+form,widget_connection_settings.name,,ko-KR,Content formatting,콘텐츠 형식,0,콘텐츠 형식
+form,widget_connection_settings.title,,ko-KR,Content formatting,콘텐츠 형식,0,콘텐츠 형식
+form,closer.title,,ko-KR,Closer page,닫기 페이지,0,닫기 페이지
+form,closer.close_window,,ko-KR,Close this window!,이 창을 닫으세요!,0,이 창을 닫으세요!

@@ -54,9 +54,19 @@ class ResourceTreeHandler extends ResourceAcl
 	{
 		$previous = self::$_protected_resource_mutation_bypass;
 		self::$_protected_resource_mutation_bypass = true;
+		$runner = static fn (): mixed => $callback();
 
 		try {
-			return $callback();
+			if (class_exists(CmsMutationAuditService::class)) {
+				return CmsMutationAuditService::withContextIfMissing(
+					'protected_resource_mutation_bypass',
+					[],
+					$runner,
+					['protected_resource_mutation_bypass' => true]
+				);
+			}
+
+			return $runner();
 		} finally {
 			self::$_protected_resource_mutation_bypass = $previous;
 		}
@@ -801,6 +811,14 @@ class ResourceTreeHandler extends ResourceAcl
 		return is_array($resource_data) ? $resource_data['path'] . $resource_data['resource_name'] : '';
 	}
 
+	/**
+	 * @param array<string, mixed> $resource_data
+	 */
+	public static function buildPathFromNodeData(array $resource_data): string
+	{
+		return self::buildPathFromResourceData($resource_data);
+	}
+
 	private static function sanitizeResourceTreeEntryNameInSavedata(array &$savedata, string $dsn = ''): void
 	{
 		if (isset($savedata['resource_name'])) {
@@ -825,7 +843,7 @@ class ResourceTreeHandler extends ResourceAcl
 	 */
 	private static function splitResourceAndAttributesData(array $savedata): array
 	{
-		$resource_keys = array_flip([
+		$resource_keys = [
 			'node_id',
 			'resource_name',
 			'catcher_page',
@@ -833,7 +851,13 @@ class ResourceTreeHandler extends ResourceAcl
 			'node_type',
 			'path',
 			'is_inheriting_acl',
-		]);
+		];
+
+		if (class_exists(ResourceLocaleService::class) && ResourceLocaleService::hasResourceLocaleColumn()) {
+			$resource_keys[] = 'locale';
+		}
+
+		$resource_keys = array_flip($resource_keys);
 
 		$resource_savedata = array_intersect_key($savedata, $resource_keys);
 		$attribute_savedata = array_diff_key($savedata, $resource_keys);
@@ -1192,7 +1216,21 @@ class ResourceTreeHandler extends ResourceAcl
 
 	public static function rebuildPath(int $from_node_id = 0): int
 	{
-		return NestedSet::rebuildPath('resource_tree', $from_node_id);
+		$result = NestedSet::rebuildPath('resource_tree', $from_node_id);
+
+		if (class_exists(LocaleHomeResourceService::class)) {
+			if (class_exists(ResourceLocaleService::class)) {
+				ResourceLocaleService::resetRequestCache();
+			}
+
+			if ($from_node_id > 0) {
+				LocaleHomeResourceService::refreshForResourceId($from_node_id);
+			} else {
+				LocaleHomeResourceService::refreshAll();
+			}
+		}
+
+		return $result;
 	}
 
 	public static function deleteResourceEntry(int $resource_id): bool
@@ -1206,71 +1244,112 @@ class ResourceTreeHandler extends ResourceAcl
 			?? self::getProtectedResourceMutationError($resource_id, 'delete');
 
 		if ($error !== null) {
-			return ResourceTreeMutationResult::failure($error);
+			$result = ResourceTreeMutationResult::failure($error);
+			self::auditResourceDelete($resource_id, null, $result);
+
+			return $result;
 		}
 
 		if (!ResourceAcl::canAccessResource($resource_id, ResourceAcl::_ACL_DELETE)) {
-			return ResourceTreeMutationResult::error(
+			$result = ResourceTreeMutationResult::error(
 				'RESOURCE_DELETE_DENIED',
 				t('cms.resource.error.delete_denied', ['resource_id' => $resource_id]),
 				[],
 				['resource_id' => $resource_id]
 			);
+			self::auditResourceDelete($resource_id, null, $result);
+
+			return $result;
 		}
 
 		$resource_data = self::getResourceTreeEntryDataById($resource_id);
 
 		if (!is_array($resource_data)) {
-			return ResourceTreeMutationResult::error(
+			$result = ResourceTreeMutationResult::error(
 				'RESOURCE_NOT_FOUND',
 				t('cms.resource.error.not_found_by_id', ['resource_id' => $resource_id]),
 				[],
 				['resource_id' => $resource_id]
 			);
+			self::auditResourceDelete($resource_id, null, $result);
+
+			return $result;
 		}
 
 		$node_type = (string) ($resource_data['node_type'] ?? '');
 		$attribute_resource = new AttributeResourceIdentifier(ResourceNames::RESOURCE_DATA, (string) $resource_id);
 		$attributes = AttributeHandler::getAttributes($attribute_resource);
 		$file_id = $node_type === 'file' ? (int) ($attributes['file_id'] ?? 0) : 0;
+		$before = [
+			'resource' => $resource_data,
+			'attributes' => $attributes,
+			'path' => self::buildPathFromResourceData($resource_data),
+			'file_id' => $file_id > 0 ? $file_id : null,
+		];
 
 		self::clearCatcherPage($resource_id);
 
 		Cache::flush();
 
 		if (!NestedSet::deleteNode('resource_tree', $resource_id)) {
-			return ResourceTreeMutationResult::error(
+			$result = ResourceTreeMutationResult::error(
 				'RESOURCE_DELETE_FAILED',
 				t('cms.resource.error.delete_failed_for_id', ['resource_id' => $resource_id]),
 				[],
 				['resource_id' => $resource_id]
 			);
+			self::auditResourceDelete($resource_id, $before, $result);
+
+			return $result;
 		}
 
 		AttributeHandler::deleteAttributes($attribute_resource);
 
+		if (class_exists(LocaleHomeResourceService::class)) {
+			$site_context = ResourceLocaleService::getSiteContextForResourceId((int) ($resource_data['parent_id'] ?? 0));
+
+			if ($site_context !== null) {
+				LocaleHomeResourceService::refreshSiteContext($site_context);
+			}
+		}
+
 		if ($node_type !== 'file' || $file_id <= 0) {
-			return ResourceTreeMutationResult::success(true);
+			$result = ResourceTreeMutationResult::success(true);
+			self::auditResourceDelete($resource_id, $before, $result);
+
+			return $result;
 		}
 
 		if (self::hasResourceReferencesForFileId($file_id)) {
-			return ResourceTreeMutationResult::success(true);
+			$result = ResourceTreeMutationResult::success(true);
+			self::auditResourceDelete($resource_id, $before, $result, ['file_deleted' => false, 'reason' => 'file_has_other_references']);
+
+			return $result;
 		}
 
 		if (FileContainer::getDataFromFileId($file_id) === false) {
-			return ResourceTreeMutationResult::success(true);
+			$result = ResourceTreeMutationResult::success(true);
+			self::auditResourceDelete($resource_id, $before, $result, ['file_deleted' => false, 'reason' => 'file_already_missing']);
+
+			return $result;
 		}
 
 		if (!FileContainer::delFile($file_id)) {
-			return ResourceTreeMutationResult::error(
+			$result = ResourceTreeMutationResult::error(
 				'RESOURCE_FILE_DELETE_FAILED',
 				t('cms.resource.error.file_delete_failed_for_id', ['resource_id' => $resource_id]),
 				[],
 				['resource_id' => $resource_id, 'file_id' => $file_id]
 			);
+			self::auditResourceDelete($resource_id, $before, $result, ['file_deleted' => false]);
+
+			return $result;
 		}
 
-		return ResourceTreeMutationResult::success(true);
+		$result = ResourceTreeMutationResult::success(true);
+		self::auditResourceDelete($resource_id, $before, $result, ['file_deleted' => true]);
+
+		return $result;
 	}
 
 	public static function deleteResourceEntriesRecursive(int $resource_id): array
@@ -1384,11 +1463,8 @@ class ResourceTreeHandler extends ResourceAcl
 			}
 		}
 
-		if ($erroneous_count + $folder_count + $webpage_count + $file_count > 0) {
-			$success = true;
-		} else {
-			$success = false;
-		}
+		$deleted_count = $folder_count + $webpage_count + $file_count;
+		$success = $erroneous_count === 0 && $deleted_count > 0;
 
 		$counts = [
 			'success' => $success,
@@ -1397,6 +1473,16 @@ class ResourceTreeHandler extends ResourceAcl
 			'webpage' => $webpage_count,
 			'file' => $file_count,
 		];
+
+		if (!$success) {
+			return ResourceTreeMutationResult::error(
+				'RESOURCE_DELETE_RECURSIVE_INCOMPLETE',
+				t('cms.resource.error.delete_failed_for_id', ['resource_id' => $resource_id]),
+				[],
+				['resource_id' => $resource_id] + $counts,
+				$counts
+			);
+		}
 
 		return ResourceTreeMutationResult::success($counts);
 	}
@@ -1413,6 +1499,34 @@ class ResourceTreeHandler extends ResourceAcl
 			'webpage' => 0,
 			'file' => 0,
 		];
+	}
+
+	/**
+	 * @param array<string, mixed>|null $before
+	 * @param array<string, mixed> $after
+	 */
+	private static function auditResourceDelete(
+		int $resource_id,
+		?array $before,
+		ResourceTreeMutationResult $result,
+		array $after = []
+	): void {
+		if (!class_exists(CmsMutationAuditService::class)) {
+			return;
+		}
+
+		$error = $result->error;
+		CmsMutationAuditService::recordLeaf('resource.delete', [
+			'resource_id' => $resource_id,
+			'resource_path' => is_array($before) ? (string) ($before['path'] ?? '') : null,
+			'result_status' => $result->ok ? 'success' : 'failed',
+			'affected_count' => $result->ok ? 1 : 0,
+			'error_code' => $error?->code,
+			'error_class' => $error !== null ? ApiError::class : null,
+			'error_message' => $error?->message,
+			'before' => $before,
+			'after' => $after + ['deleted' => $result->ok],
+		]);
 	}
 
 	public static function getIndexpageNodeId(int $containing_folder_resource_id): ?int
@@ -1499,6 +1613,7 @@ class ResourceTreeHandler extends ResourceAcl
 	public static function moveResourceEntryToPositionResult(int $resource_id, int $parent_id, int $position): ResourceTreeMutationResult
 	{
 		$error = self::getRootResourceMutationError($resource_id, 'move')
+			?? self::getProtectedResourceMutationError($resource_id, 'move')
 			?? self::getProtectedResourceSubtreeMutationError($resource_id, 'move')
 			?? self::getProtectedResourceMutationError($parent_id, 'move into');
 
@@ -1527,12 +1642,6 @@ class ResourceTreeHandler extends ResourceAcl
 			);
 		}
 
-		$error = self::getResourceMoveAclError($resource_id, $parent_id);
-
-		if ($error !== null) {
-			return ResourceTreeMutationResult::failure($error);
-		}
-
 		$error = self::getProtectedResourcePathMutationError(
 			self::buildChildPathFromParentData($parent_data, $resource_data),
 			'move into'
@@ -1542,6 +1651,15 @@ class ResourceTreeHandler extends ResourceAcl
 			return ResourceTreeMutationResult::failure($error);
 		}
 
+		$error = self::getResourceMoveAclError($resource_id, $parent_id);
+
+		if ($error !== null) {
+			return ResourceTreeMutationResult::failure($error);
+		}
+
+		$old_site_context = class_exists(ResourceLocaleService::class)
+			? ResourceLocaleService::getSiteContextForResourceId($resource_id)
+			: null;
 		$move = NestedSet::moveToPosition('resource_tree', $resource_id, $parent_id, $position);
 
 		if (!$move) {
@@ -1554,6 +1672,16 @@ class ResourceTreeHandler extends ResourceAcl
 		}
 
 		self::rebuildPath($resource_id);
+
+		if (class_exists(LocaleHomeResourceService::class) && $old_site_context !== null) {
+			$new_site_context = class_exists(ResourceLocaleService::class)
+				? ResourceLocaleService::getSiteContextForResourceId($resource_id)
+				: null;
+
+			if ($old_site_context !== $new_site_context) {
+				LocaleHomeResourceService::refreshSiteContext($old_site_context);
+			}
+		}
 
 		return ResourceTreeMutationResult::success(true);
 	}

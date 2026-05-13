@@ -51,7 +51,7 @@ class EventI18nAjaxSave extends AbstractEvent implements iBrowserEventDocumentab
 		$domain  = Request::_POST('domain', '');
 		$key     = Request::_POST('key', '');
 		$context = Request::_POST('context', '');
-		$locale  = Request::_POST('locale', '');
+		$locale  = LocaleService::tryCanonicalize((string) Request::_POST('locale', '')) ?? '';
 		$text    = Request::_POST('text', '');
 		$humanReviewedRaw = trim((string) Request::_POST('human_reviewed', '0'));
 		$humanReviewed = in_array($humanReviewedRaw, ['1', 'true', 'on', 'yes'], true);
@@ -60,7 +60,7 @@ class EventI18nAjaxSave extends AbstractEvent implements iBrowserEventDocumentab
 		if ($domain === '' || $key === '' || $locale === '') {
 			http_response_code(422);
 			header('Content-Type: application/json');
-			echo json_encode(['error' => 'domain, key and locale are required']);
+			echo json_encode(['error' => t('common.missing_required_url_params')]);
 
 			return;
 		}

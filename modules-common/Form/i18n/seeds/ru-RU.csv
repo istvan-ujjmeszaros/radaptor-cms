@@ -1,0 +1,59 @@
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
+form,admin_menu_item.description,,ru-RU,Admin menu item,Пункт меню администратора,0,Пункт меню администратора
+form,admin_menu_item.name,,ru-RU,Admin menu item,Пункт меню администратора,0,Пункт меню администратора
+form,blog.description,,ru-RU,Blog post,Запись блога,0,Запись блога
+form,blog.name,,ru-RU,Blog post,Запись блога,0,Запись блога
+form,close_page.close_window,,ru-RU,Close this window!,Закройте это окно!,0,Закройте это окно!
+form,close_page.title,,ru-RU,Close page,Закрыть страницу,0,Закрыть страницу
+form,form_settings.description,,ru-RU,Select which form to display,"Выберите, какую форму отображать",0,"Выберите, какую форму отображать"
+form,form_settings.name,,ru-RU,Form settings,Настройки формы,0,Настройки формы
+form,form_settings.title,,ru-RU,Select form,Выбрать форму,0,Выбрать форму
+form,js_tree_settings.description,,ru-RU,Select which tree to display,"Выберите, какое дерево отображать",0,"Выберите, какое дерево отображать"
+form,js_tree_settings.name,,ru-RU,Tree settings,Настройки дерева,0,Настройки дерева
+form,js_tree_settings.title,,ru-RU,Select tree,Выбрать дерево,0,Выбрать дерево
+form,main_menu_item.description,,ru-RU,Main menu item,Основной пункт меню,0,Основной пункт меню
+form,main_menu_item.name,,ru-RU,Main menu item,Основной пункт меню,0,Основной пункт меню
+form,plain_html.description,,ru-RU,HTML code (embed),HTML-код (встраивание),0,HTML-код (встраивание)
+form,plain_html.name,,ru-RU,HTML code (embed),HTML-код (встраивание),0,HTML-код (встраивание)
+form,rich_text_select.description,,ru-RU,Select text content,Выбрать текстовое содержимое,0,Выбрать текстовое содержимое
+form,rich_text_select.name,,ru-RU,Select text content,Выбрать текстовое содержимое,0,Выбрать текстовое содержимое
+form,rich_text.description,,ru-RU,Text content,Текстовое содержимое,0,Текстовое содержимое
+form,rich_text.name,,ru-RU,Text content,Текстовое содержимое,0,Текстовое содержимое
+form,role.description,,ru-RU,Role,Роль,0,Роль
+form,role.name,,ru-RU,Role,Роль,0,Роль
+form,tag.description,,ru-RU,Tag,Тег,0,Тег
+form,tag.name,,ru-RU,Tag,Тег,0,Тег
+form,theme_selector.description,,ru-RU,Select which theme renders each layout,"Выберите, какая тема отрисовывает каждый макет",0,"Выберите, какая тема отрисовывает каждый макет"
+form,theme_selector.name,,ru-RU,Theme selection,Выбор темы,0,Выбор темы
+form,theme_selector.title,,ru-RU,Select themes for layouts,Выберите темы для макетов,0,Выберите темы для макетов
+form,ticket_priority.description,,ru-RU,Ticket priority,Приоритет тикета,0,Приоритет тикета
+form,ticket_priority.name,,ru-RU,Ticket priority,Приоритет тикета,0,Приоритет тикета
+form,ticket_state.description,,ru-RU,Ticket status,Статус тикета,0,Статус тикета
+form,ticket_state.name,,ru-RU,Ticket status,Статус тикета,0,Статус тикета
+form,user_login.description,,ru-RU,Login,Вход,0,Вход
+form,user_login.name,,ru-RU,Login,Вход,0,Вход
+form,user_signup.description,,ru-RU,Sign up,Регистрация,0,Регистрация
+form,user_signup.name,,ru-RU,Sign up,Регистрация,0,Регистрация
+form,user.description,,ru-RU,User,Пользователь,0,Пользователь
+form,user.name,,ru-RU,User,Пользователь,0,Пользователь
+form,usergroup.description,,ru-RU,User group,Группа пользователей,0,Группа пользователей
+form,usergroup.name,,ru-RU,User group,Группа пользователей,0,Группа пользователей
+form,validation.max_length,,ru-RU,Maximum {max} characters,Максимум {max} символов,0,Максимум {max} символов
+form,validation.required,,ru-RU,Required,Обязательно,0,Обязательно
+form,webpage_domain.description,,ru-RU,Domain properties,Свойства домена,0,Свойства домена
+form,webpage_domain.name,,ru-RU,Domain properties,Свойства домена,0,Свойства домена
+form,webpage_file.description,,ru-RU,File properties,Свойства файла,0,Свойства файла
+form,webpage_file.name,,ru-RU,File properties,Свойства файла,0,Свойства файла
+form,webpage_folder.description,,ru-RU,Website folder properties,Свойства папки сайта,0,Свойства папки сайта
+form,webpage_folder.name,,ru-RU,Website folder properties,Свойства папки сайта,0,Свойства папки сайта
+form,webpage_from_path.description,,ru-RU,Create webpage from path,Создать веб-страницу из пути,0,Создать веб-страницу из пути
+form,webpage_from_path.name,,ru-RU,Create webpage from path,Создать веб-страницу из пути,0,Создать веб-страницу из пути
+form,webpage_page.description,,ru-RU,Webpage properties,Свойства веб-страницы,0,Свойства веб-страницы
+form,webpage_page.name,,ru-RU,Webpage properties,Свойства веб-страницы,0,Свойства веб-страницы
+form,widget_connection_params.description,,ru-RU,Display settings for a content box,Настройки отображения блока содержимого,0,Настройки отображения блока содержимого
+form,widget_connection_params.name,,ru-RU,Content box display settings,Настройки отображения блока содержимого,0,Настройки отображения блока содержимого
+form,widget_connection_settings.description,,ru-RU,Configure width and row placement for the content box,Настройте ширину и расположение блока содержимого в строке,0,Настройте ширину и расположение блока содержимого в строке
+form,widget_connection_settings.name,,ru-RU,Content formatting,Форматирование содержимого,0,Форматирование содержимого
+form,widget_connection_settings.title,,ru-RU,Content formatting,Форматирование содержимого,0,Форматирование содержимого
+form,closer.title,,ru-RU,Closer page,Страница закрытия,0,Страница закрытия
+form,closer.close_window,,ru-RU,Close this window!,Закройте это окно!,0,Закройте это окно!

@@ -50,6 +50,7 @@ class FormTypeUserSignup extends AbstractForm
 		unset($savedata['password2']);
 
 		$savedata['is_active'] = 1;
+		$savedata['locale'] = LocaleService::tryCanonicalize(Kernel::getLocale()) ?? LocaleService::getDefaultLocale();
 		$savedata['password'] = User::encodePassword($savedata['password']);
 
 		User::addUser($savedata);

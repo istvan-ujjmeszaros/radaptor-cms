@@ -45,6 +45,14 @@ class WidgetRichText extends AbstractWidget
 		}
 
 		$contents = EntityRichtext::findById($content_id)?->dto();
+
+		if (!is_array($contents)) {
+			return $this->buildStatusTree([
+				'severity' => 'warning',
+				'message' => t('cms.richtext.not_set'),
+			]);
+		}
+
 		$settings = WidgetSettings::getSettings($connection->connection_id);
 
 		return $this->createComponentTree('RichText', [

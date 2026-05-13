@@ -1,0 +1,59 @@
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
+form,admin_menu_item.description,,pl-PL,Admin menu item,Element menu admina,0,Element menu admina
+form,admin_menu_item.name,,pl-PL,Admin menu item,Element menu admina,0,Element menu admina
+form,blog.description,,pl-PL,Blog post,Wpis blogowy,0,Wpis blogowy
+form,blog.name,,pl-PL,Blog post,Wpis blogowy,0,Wpis blogowy
+form,close_page.close_window,,pl-PL,Close this window!,Zamknij to okno!,0,Zamknij to okno!
+form,close_page.title,,pl-PL,Close page,Zamknij stronę,0,Zamknij stronę
+form,form_settings.description,,pl-PL,Select which form to display,Wybierz formularz do wyświetlenia,0,Wybierz formularz do wyświetlenia
+form,form_settings.name,,pl-PL,Form settings,Ustawienia formularza,0,Ustawienia formularza
+form,form_settings.title,,pl-PL,Select form,Wybierz formularz,0,Wybierz formularz
+form,js_tree_settings.description,,pl-PL,Select which tree to display,Wybierz drzewo do wyświetlenia,0,Wybierz drzewo do wyświetlenia
+form,js_tree_settings.name,,pl-PL,Tree settings,Ustawienia drzewa,0,Ustawienia drzewa
+form,js_tree_settings.title,,pl-PL,Select tree,Wybierz drzewo,0,Wybierz drzewo
+form,main_menu_item.description,,pl-PL,Main menu item,Element menu głównego,0,Element menu głównego
+form,main_menu_item.name,,pl-PL,Main menu item,Element menu głównego,0,Element menu głównego
+form,plain_html.description,,pl-PL,HTML code (embed),Kod HTML (osadzenie),0,Kod HTML (osadzenie)
+form,plain_html.name,,pl-PL,HTML code (embed),Kod HTML (osadzenie),0,Kod HTML (osadzenie)
+form,rich_text_select.description,,pl-PL,Select text content,Wybierz treść tekstową,0,Wybierz treść tekstową
+form,rich_text_select.name,,pl-PL,Select text content,Wybierz treść tekstową,0,Wybierz treść tekstową
+form,rich_text.description,,pl-PL,Text content,Treść tekstowa,0,Treść tekstowa
+form,rich_text.name,,pl-PL,Text content,Treść tekstowa,0,Treść tekstowa
+form,role.description,,pl-PL,Role,Rola,0,Rola
+form,role.name,,pl-PL,Role,Rola,0,Rola
+form,tag.description,,pl-PL,Tag,Tag,0,Tag
+form,tag.name,,pl-PL,Tag,Tag,0,Tag
+form,theme_selector.description,,pl-PL,Select which theme renders each layout,Wybierz motyw renderujący każdy układ,0,Wybierz motyw renderujący każdy układ
+form,theme_selector.name,,pl-PL,Theme selection,Wybór motywu,0,Wybór motywu
+form,theme_selector.title,,pl-PL,Select themes for layouts,Wybierz motywy dla układów,0,Wybierz motywy dla układów
+form,ticket_priority.description,,pl-PL,Ticket priority,Priorytet zgłoszenia,0,Priorytet zgłoszenia
+form,ticket_priority.name,,pl-PL,Ticket priority,Priorytet zgłoszenia,0,Priorytet zgłoszenia
+form,ticket_state.description,,pl-PL,Ticket status,Status zgłoszenia,0,Status zgłoszenia
+form,ticket_state.name,,pl-PL,Ticket status,Status zgłoszenia,0,Status zgłoszenia
+form,user_login.description,,pl-PL,Login,Logowanie,0,Logowanie
+form,user_login.name,,pl-PL,Login,Logowanie,0,Logowanie
+form,user_signup.description,,pl-PL,Sign up,Zarejestruj się,0,Zarejestruj się
+form,user_signup.name,,pl-PL,Sign up,Zarejestruj się,0,Zarejestruj się
+form,user.description,,pl-PL,User,Użytkownik,0,Użytkownik
+form,user.name,,pl-PL,User,Użytkownik,0,Użytkownik
+form,usergroup.description,,pl-PL,User group,Grupa użytkowników,0,Grupa użytkowników
+form,usergroup.name,,pl-PL,User group,Grupa użytkowników,0,Grupa użytkowników
+form,validation.max_length,,pl-PL,Maximum {max} characters,Maksymalnie {max} znaków,0,Maksymalnie {max} znaków
+form,validation.required,,pl-PL,Required,Wymagane,0,Wymagane
+form,webpage_domain.description,,pl-PL,Domain properties,Właściwości domeny,0,Właściwości domeny
+form,webpage_domain.name,,pl-PL,Domain properties,Właściwości domeny,0,Właściwości domeny
+form,webpage_file.description,,pl-PL,File properties,Właściwości pliku,0,Właściwości pliku
+form,webpage_file.name,,pl-PL,File properties,Właściwości pliku,0,Właściwości pliku
+form,webpage_folder.description,,pl-PL,Website folder properties,Właściwości folderu strony,0,Właściwości folderu strony
+form,webpage_folder.name,,pl-PL,Website folder properties,Właściwości folderu strony,0,Właściwości folderu strony
+form,webpage_from_path.description,,pl-PL,Create webpage from path,Utwórz stronę ze ścieżki,0,Utwórz stronę ze ścieżki
+form,webpage_from_path.name,,pl-PL,Create webpage from path,Utwórz stronę ze ścieżki,0,Utwórz stronę ze ścieżki
+form,webpage_page.description,,pl-PL,Webpage properties,Właściwości strony,0,Właściwości strony
+form,webpage_page.name,,pl-PL,Webpage properties,Właściwości strony,0,Właściwości strony
+form,widget_connection_params.description,,pl-PL,Display settings for a content box,Ustawienia wyświetlania pola treści,0,Ustawienia wyświetlania pola treści
+form,widget_connection_params.name,,pl-PL,Content box display settings,Ustawienia wyświetlania pola treści,0,Ustawienia wyświetlania pola treści
+form,widget_connection_settings.description,,pl-PL,Configure width and row placement for the content box,Skonfiguruj szerokość i położenie wiersza dla pola treści,0,Skonfiguruj szerokość i położenie wiersza dla pola treści
+form,widget_connection_settings.name,,pl-PL,Content formatting,Formatowanie treści,0,Formatowanie treści
+form,widget_connection_settings.title,,pl-PL,Content formatting,Formatowanie treści,0,Formatowanie treści
+form,closer.title,,pl-PL,Closer page,Strona zamykania,0,Strona zamykania
+form,closer.close_window,,pl-PL,Close this window!,Zamknij to okno!,0,Zamknij to okno!

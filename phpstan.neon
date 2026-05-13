@@ -7,6 +7,7 @@ parameters:
 		- modules-common/Cms/classes/class.CmsPathHelper.php
 		- modules-common/Cms/classes/class.CmsResourceSpecService.php
 		- modules-common/Cms/classes/class.ImageManipulator.php
+		- modules-common/Cms/events/Event.ResourceView.php
 		- modules-common/ImportExport/events/Event.ImportExportImport.php
 		- modules-common/Comment/entities/Entity.Comment.php
 		- modules-common/I18n/entities/Entity.I18n_build_state.php

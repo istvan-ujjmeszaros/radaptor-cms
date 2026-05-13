@@ -25,7 +25,7 @@ declare(strict_types=1);
  *   domain        required  — e.g. 'user', 'ticket'
  *   key           required  — e.g. 'field.username.label'
  *   context       optional  — default ''
- *   locale        required  — e.g. 'hu_HU'
+ *   locale        required  — e.g. 'hu-HU'
  *   source_text   optional  — English canonical text; used to create a
  *                             missing i18n_messages row during import
  *   expected_text optional  — compare-and-swap guard for human-reviewed rows;
@@ -79,8 +79,15 @@ class I18nTranslationsCsvMap implements iCsvMap
 		$params = [];
 
 		if (!empty($filters['locale']) && is_string($filters['locale'])) {
-			$where_parts[] = 't.locale = ?';
-			$params[] = trim($filters['locale']);
+			$requested_locale = trim($filters['locale']);
+			$canonical_locale = LocaleService::tryCanonicalize($requested_locale) ?? $requested_locale;
+			$locale_values = array_values(array_unique(array_filter([
+				$canonical_locale,
+				$requested_locale,
+				LocaleService::toIntlLocale($canonical_locale),
+			], static fn (string $locale): bool => $locale !== '')));
+			$where_parts[] = 't.locale IN (' . implode(', ', array_fill(0, count($locale_values), '?')) . ')';
+			$params = [...$params, ...$locale_values];
 		}
 
 		if (!empty($filters['domains']) && is_array($filters['domains'])) {
@@ -152,6 +159,10 @@ class I18nTranslationsCsvMap implements iCsvMap
 	): array {
 		$expectedLocale = trim($expectedLocale);
 
+		if ($expectedLocale !== '') {
+			$expectedLocale = LocaleService::tryCanonicalize($expectedLocale) ?? $expectedLocale;
+		}
+
 		if ($expectedLocale !== '' && !LocaleRegistry::isKnownLocale($expectedLocale)) {
 			return [
 				'locales' => [],
@@ -203,13 +214,15 @@ class I18nTranslationsCsvMap implements iCsvMap
 				continue;
 			}
 
-			if (!LocaleRegistry::isKnownLocale($locale)) {
+			$canonicalLocale = LocaleService::tryCanonicalize($locale);
+
+			if ($canonicalLocale === null || !LocaleRegistry::isKnownLocale($canonicalLocale)) {
 				$errors[] = "Line {$lineNumber}: locale '{$locale}' is not a supported standard locale";
 
 				continue;
 			}
 
-			$locales[$locale] = true;
+			$locales[$canonicalLocale] = true;
 		}
 
 		fclose($handle);
@@ -249,7 +262,8 @@ class I18nTranslationsCsvMap implements iCsvMap
 	public function importRow(array $row, CsvImportMode $mode, bool $dryRun = false): array
 	{
 		$domain = trim((string) ($row['domain'] ?? ''));
-		$locale = trim((string) ($row['locale'] ?? ''));
+		$locale = LocaleService::canonicalize((string) ($row['locale'] ?? ''));
+		$row['locale'] = $locale;
 
 		if ($domain !== '') {
 			$this->_importedDomains[$domain] = true;

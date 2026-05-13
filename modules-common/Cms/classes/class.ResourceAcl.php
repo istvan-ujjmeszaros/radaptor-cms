@@ -100,6 +100,10 @@ class ResourceAcl
 
 		$resource_data = ResourceTreeHandler::getResourceTreeEntryDataById($resource_id);
 
+		if (!is_array($resource_data)) {
+			return [];
+		}
+
 		if (!$resource_data['is_inheriting_acl']) {
 			return $return;
 		}
@@ -152,6 +156,10 @@ class ResourceAcl
 
 		// 2. resource_id-k listája az öröklésekkel együtt
 		$resource_list = self::getInheritedResourcesList($resource_id);
+
+		if ($resource_list === []) {
+			return false;
+		}
 
 		// 3. user és csoport hozzárendelések keresése az összes resource_id-re
 		$query = "

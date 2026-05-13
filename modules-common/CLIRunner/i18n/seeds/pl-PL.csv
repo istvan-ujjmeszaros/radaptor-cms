@@ -1,0 +1,31 @@
+domain,key,context,locale,source_text,expected_text,human_reviewed,text
+cli_runner,title,,pl-PL,"CLI Command Runner","Uruchamianie poleceń CLI",0,"Uruchamianie poleceń CLI"
+cli_runner,subtitle,,pl-PL,"Execute Radaptor CLI commands from the browser.","Uruchamiaj polecenia CLI Radaptora z przeglądarki.",0,"Uruchamiaj polecenia CLI Radaptora z przeglądarki."
+cli_runner,select_command,,pl-PL,"Select a command from the list to get started.","Wybierz polecenie z listy, aby rozpocząć.",0,"Wybierz polecenie z listy, aby rozpocząć."
+cli_runner,action.run,,pl-PL,Run,Uruchom,0,Uruchom
+cli_runner,action.confirm,,pl-PL,"Confirm & Run","Potwierdź i uruchom",0,"Potwierdź i uruchom"
+cli_runner,action.clear,,pl-PL,Clear,Wyczyść,0,Wyczyść
+cli_runner,action.copy,,pl-PL,Copy,Kopiuj,0,Kopiuj
+cli_runner,action.copied,,pl-PL,Copied,Skopiowano,0,Skopiowano
+cli_runner,confirm.title,,pl-PL,"Confirm Command","Potwierdź polecenie",0,"Potwierdź polecenie"
+cli_runner,confirm.message,,pl-PL,"This command will modify data or system state. Are you sure?","To polecenie zmodyfikuje dane lub stan systemu. Czy na pewno?",0,"To polecenie zmodyfikuje dane lub stan systemu. Czy na pewno?"
+cli_runner,output.title,,pl-PL,Output,Wyjście,0,Wyjście
+cli_runner,output.empty,,pl-PL,"No output","Brak wyjścia",0,"Brak wyjścia"
+cli_runner,output.running,,pl-PL,"Running command...","Uruchamianie polecenia...",0,"Uruchamianie polecenia..."
+cli_runner,output.completed,,pl-PL,"Completed in {duration}ms","Ukończono w {duration}ms",0,"Ukończono w {duration}ms"
+cli_runner,output.failed,,pl-PL,"Command failed (exit code {code})","Polecenie nie powiodło się (kod wyjścia {code})",0,"Polecenie nie powiodło się (kod wyjścia {code})"
+cli_runner,output.timeout,,pl-PL,"Command timed out","Przekroczono limit czasu polecenia",0,"Przekroczono limit czasu polecenia"
+cli_runner,category.build,,pl-PL,Build,Build,0,Build
+cli_runner,category.db,,pl-PL,Database,"Baza danych",0,"Baza danych"
+cli_runner,category.emailqueue,,pl-PL,"Email Queue","Kolejka e-mail",0,"Kolejka e-mail"
+cli_runner,category.form,,pl-PL,Forms,Formularze,0,Formularze
+cli_runner,category.i18n,,pl-PL,Translations,Tłumaczenia,0,Tłumaczenia
+cli_runner,category.migrate,,pl-PL,Migrations,Migracje,0,Migracje
+cli_runner,category.plugin,,pl-PL,Plugins,Pluginy,0,Pluginy
+cli_runner,category.role,,pl-PL,Roles,Role,0,Role
+cli_runner,category.site,,pl-PL,Site,Witryna,0,Witryna
+cli_runner,category.user,,pl-PL,Users,Użytkownicy,0,Użytkownicy
+cli_runner,category.userconfig,,pl-PL,"User Config","Konfiguracja użytkownika",0,"Konfiguracja użytkownika"
+cli_runner,category.usergroup,,pl-PL,"User Groups","Grupy użytkowników",0,"Grupy użytkowników"
+cli_runner,category.webpage,,pl-PL,Webpages,"Strony web",0,"Strony web"
+cli_runner,category.widget,,pl-PL,Widgets,Widgety,0,Widgety

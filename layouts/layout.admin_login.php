@@ -29,7 +29,7 @@ class LayoutTypeAdminLogin extends AbstractLayoutType
 	public function buildTree(iTreeBuildContext $webpage_composer, array $slot_trees, array $build_context = []): array
 	{
 		return $this->createLayoutTree('layout_admin_login', [
-			'lang' => substr(Kernel::getLocale(), 0, 2),
+			'lang' => Kernel::getLocale(),
 			'site_name' => Config::APP_SITE_NAME->value(),
 			'document_title' => Config::APP_SITE_NAME->value(),
 		], contents: [

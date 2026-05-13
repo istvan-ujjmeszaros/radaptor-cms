@@ -1,0 +1,52 @@
+domain,key,context,locale,source_text,expected_text,human_reviewed,text
+mailpit,title,,ko-KR,Mailpit,Mailpit,0,Mailpit
+mailpit,subtitle,,ko-KR,"Captured development emails","캡처된 개발 이메일",0,"캡처된 개발 이메일"
+mailpit,inbox,,ko-KR,Inbox,"받은 편지함",0,"받은 편지함"
+mailpit,search,,ko-KR,Search,검색,0,검색
+mailpit,refresh,,ko-KR,Refresh,새로고침,0,새로고침
+mailpit,back_to_inbox,,ko-KR,"Back to inbox","받은 편지함으로 돌아가기",0,"받은 편지함으로 돌아가기"
+mailpit,messages,,ko-KR,Messages,메시지,0,메시지
+mailpit,unread,,ko-KR,Unread,"읽지 않음",0,"읽지 않음"
+mailpit,empty,,ko-KR,"No captured emails found.","캡처된 이메일이 없습니다.",0,"캡처된 이메일이 없습니다."
+mailpit,unavailable,,ko-KR,"Mailpit is unavailable","Mailpit을 사용할 수 없습니다",0,"Mailpit을 사용할 수 없습니다"
+mailpit,not_found,,ko-KR,"Mailpit view not found","Mailpit 뷰를 찾을 수 없습니다",0,"Mailpit 뷰를 찾을 수 없습니다"
+mailpit,access_denied,,ko-KR,"Mailpit catcher is only available in non-production for email admins and system developers.","Mailpit 캐처는 비프로덕션에서 이메일 관리자와 시스템 개발자만 사용할 수 있습니다.",0,"Mailpit 캐처는 비프로덕션에서 이메일 관리자와 시스템 개발자만 사용할 수 있습니다."
+mailpit,page_not_resolved,,ko-KR,"Mailpit catcher page could not be resolved.","Mailpit 캐처 페이지를 확인할 수 없습니다.",0,"Mailpit 캐처 페이지를 확인할 수 없습니다."
+mailpit,col.subject,,ko-KR,Subject,제목,0,제목
+mailpit,col.from,,ko-KR,From,"보낸 사람",0,"보낸 사람"
+mailpit,col.to,,ko-KR,To,"받는 사람",0,"받는 사람"
+mailpit,col.received,,ko-KR,Received,수신됨,0,수신됨
+mailpit,col.size,,ko-KR,Size,크기,0,크기
+mailpit,pagination.previous,,ko-KR,Previous,이전,0,이전
+mailpit,pagination.next,,ko-KR,Next,다음,0,다음
+mailpit,no_subject,,ko-KR,"(no subject)","(제목 없음)",0,"(제목 없음)"
+mailpit,delete,,ko-KR,Delete,삭제,0,삭제
+mailpit,meta.from,,ko-KR,From,"보낸 사람",0,"보낸 사람"
+mailpit,meta.to,,ko-KR,To,"받는 사람",0,"받는 사람"
+mailpit,meta.cc,,ko-KR,Cc,Cc,0,Cc
+mailpit,meta.bcc,,ko-KR,Bcc,Bcc,0,Bcc
+mailpit,meta.date,,ko-KR,Date,날짜,0,날짜
+mailpit,meta.size,,ko-KR,Size,크기,0,크기
+mailpit,html_empty,,ko-KR,"This message has no HTML body.","이 메시지에는 HTML 본문이 없습니다.",0,"이 메시지에는 HTML 본문이 없습니다."
+mailpit,html_preview_title,,ko-KR,"Mailpit HTML preview","Mailpit HTML 미리보기",0,"Mailpit HTML 미리보기"
+mailpit,check.supported,,ko-KR,Supported,지원됨,0,지원됨
+mailpit,check.partial,,ko-KR,Partial,"부분 지원",0,"부분 지원"
+mailpit,check.unsupported,,ko-KR,Unsupported,"지원되지 않음",0,"지원되지 않음"
+mailpit,check.tests,,ko-KR,Tests,테스트,0,테스트
+mailpit,check.no_warnings,,ko-KR,"No HTML compatibility warnings.","HTML 호환성 경고가 없습니다.",0,"HTML 호환성 경고가 없습니다."
+mailpit,warning_fallback,,ko-KR,Warning,경고,0,경고
+mailpit,links.status,,ko-KR,Status,상태,0,상태
+mailpit,links.none,,ko-KR,"No links found.","링크가 없습니다.",0,"링크가 없습니다."
+mailpit,attachments,,ko-KR,Attachments,"첨부 파일",0,"첨부 파일"
+mailpit,inline_attachments,,ko-KR,"Inline attachments","인라인 첨부 파일",0,"인라인 첨부 파일"
+mailpit,attachment_fallback,,ko-KR,attachment,"첨부 파일",0,"첨부 파일"
+mailpit,tab_error,,ko-KR,"Mailpit tab content could not be loaded.","Mailpit 탭 콘텐츠를 로드할 수 없습니다.",0,"Mailpit 탭 콘텐츠를 로드할 수 없습니다."
+mailpit,tab.html,,ko-KR,HTML,HTML,0,HTML
+mailpit,tab.html_source,,ko-KR,"HTML Source","HTML 소스",0,"HTML 소스"
+mailpit,tab.text,,ko-KR,Text,텍스트,0,텍스트
+mailpit,tab.headers,,ko-KR,Headers,헤더,0,헤더
+mailpit,tab.raw,,ko-KR,Raw,원본,0,원본
+mailpit,tab.html_check,,ko-KR,"HTML Check","HTML 검사",0,"HTML 검사"
+mailpit,tab.link_check,,ko-KR,"Link Check","링크 검사",0,"링크 검사"
+widget,mailpit.name,,ko-KR,"Mailpit catcher","Mailpit 캐처",0,"Mailpit 캐처"
+widget,mailpit.description,,ko-KR,"Shows captured Mailpit emails inside the admin UI.","관리 UI 안에서 Mailpit이 캡처한 이메일을 표시합니다.",0,"관리 UI 안에서 Mailpit이 캡처한 이메일을 표시합니다."

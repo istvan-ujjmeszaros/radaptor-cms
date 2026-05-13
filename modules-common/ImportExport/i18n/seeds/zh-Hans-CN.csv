@@ -1,0 +1,63 @@
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
+import_export,action.export_csv,,zh-Hans-CN,"Export CSV","导出 CSV",0,"导出 CSV"
+import_export,action.preview_import,,zh-Hans-CN,"Preview import",预览导入,0,预览导入
+import_export,action.run_import,,zh-Hans-CN,"Run import",运行导入,0,运行导入
+import_export,dataset.i18n_translations.description,,zh-Hans-CN,"Export and import translation rows as CSV.","以 CSV 格式导出和导入翻译行。",0,"以 CSV 格式导出和导入翻译行。"
+import_export,dataset.i18n_translations.name,,zh-Hans-CN,"I18n translations",国际化翻译,0,国际化翻译
+import_export,error.dataset_not_found,,zh-Hans-CN,"Import/export dataset not found.",未找到导入/导出数据集。,0,未找到导入/导出数据集。
+import_export,error.file_read,,zh-Hans-CN,"Unable to read the uploaded CSV file.","无法读取上传的 CSV 文件。",0,"无法读取上传的 CSV 文件。"
+import_export,error.file_required,,zh-Hans-CN,"Please select a CSV file to import.","请选择要导入的 CSV 文件。",0,"请选择要导入的 CSV 文件。"
+import_export,error.invalid_format,,zh-Hans-CN,"Invalid format",无效格式,0,无效格式
+import_export,error.invalid_mode,,zh-Hans-CN,"Invalid import mode.",无效的导入模式。,0,无效的导入模式。
+import_export,error.locale_required,,zh-Hans-CN,"Locale is required for export.",导出时必须指定语言。,0,导出时必须指定语言。
+import_export,error.wide_no_locale_columns,,zh-Hans-CN,"Wide CSV must contain at least one text:<locale> column.","宽 CSV 必须至少包含一个 text:<locale> 列。",0,"宽 CSV 必须至少包含一个 text:<locale> 列。"
+import_export,export.title,,zh-Hans-CN,"Export CSV","导出 CSV",0,"导出 CSV"
+import_export,field.dataset.label,,zh-Hans-CN,Dataset,数据集,0,数据集
+import_export,field.expect_locale.any,,zh-Hans-CN,"Any locale in file",文件中的任意语言,0,文件中的任意语言
+import_export,field.expect_locale.help,,zh-Hans-CN,"Optional for insert_new and upsert. Sync should normally set this explicitly and always uses a single-locale scope, even when importing wide CSV.","对于 insert_new 和 upsert 为可选。Sync 通常应明确设置此项，并始终使用单语言范围，即使在导入宽格式 CSV 时也是如此。",0,"对于 insert_new 和 upsert 为可选。Sync 通常应明确设置此项，并始终使用单语言范围，即使在导入宽格式 CSV 时也是如此。"
+import_export,field.expect_locale.label,,zh-Hans-CN,"Expected locale",预期语言,0,预期语言
+import_export,field.file.help,,zh-Hans-CN,"Upload a CSV file exported from the same dataset.","上传从同一数据集导出的 CSV 文件。",0,"上传从同一数据集导出的 CSV 文件。"
+import_export,field.file.label,,zh-Hans-CN,"CSV file","CSV 文件",0,"CSV 文件"
+import_export,field.format.help,,zh-Hans-CN,"Normalized keeps one row per locale. Wide groups locales into text:<locale> columns.","标准化格式每种语言保留一行。宽格式将语言分组到 text:<locale> 列中。",0,"标准化格式每种语言保留一行。宽格式将语言分组到 text:<locale> 列中。"
+import_export,field.format.label,,zh-Hans-CN,Format,格式,0,格式
+import_export,field.locale.all,,zh-Hans-CN,"All locales",所有语言,0,所有语言
+import_export,field.locale.help,,zh-Hans-CN,"Leave empty to export all locales, or choose one locale for a smaller file. Wide format puts locale values into text:<locale> columns.","留空以导出所有语言，或选择一种语言以获得较小的文件。宽格式将语言值放入 text:<locale> 列。",0,"留空以导出所有语言，或选择一种语言以获得较小的文件。宽格式将语言值放入 text:<locale> 列。"
+import_export,field.locale.label,,zh-Hans-CN,Locale,语言,0,语言
+import_export,field.mode.help,,zh-Hans-CN,"Sync is destructive: it deletes rows missing from the imported locale slice and only supports single-locale files.",同步具有破坏性：它会删除导入语言片段中缺少的行，且仅支持单语言文件。,0,同步具有破坏性：它会删除导入语言片段中缺少的行，且仅支持单语言文件。
+import_export,field.mode.label,,zh-Hans-CN,"Import mode",导入模式,0,导入模式
+import_export,format.auto,,zh-Hans-CN,Auto-detect,自动检测,0,自动检测
+import_export,format.normalized,,zh-Hans-CN,Normalized,标准化,0,标准化
+import_export,format.wide,,zh-Hans-CN,Wide,宽格式,0,宽格式
+import_export,import.title,,zh-Hans-CN,"Import CSV","导入 CSV",0,"导入 CSV"
+import_export,mode.insert_new,,zh-Hans-CN,"Insert new only",仅插入新项,0,仅插入新项
+import_export,mode.sync,,zh-Hans-CN,"Sync locale slice",同步语言片段,0,同步语言片段
+import_export,mode.upsert,,zh-Hans-CN,"Upsert existing",更新或插入,0,更新或插入
+import_export,result.deleted,,zh-Hans-CN,Deleted,已删除,0,已删除
+import_export,result.detected_locale,,zh-Hans-CN,"Detected locale",检测到的语言,0,检测到的语言
+import_export,result.detected_locales,,zh-Hans-CN,"Detected locales",检测到的语言,0,检测到的语言
+import_export,result.dry_run_summary,,zh-Hans-CN,"Dry-run summary for {dataset}.","{dataset} 的模拟运行摘要。",0,"{dataset} 的模拟运行摘要。"
+import_export,result.error_summary,,zh-Hans-CN,"Import finished with errors for {dataset}.","{dataset} 导入完成但有错误。",0,"{dataset} 导入完成但有错误。"
+import_export,result.format,,zh-Hans-CN,Format,格式,0,格式
+import_export,result.imported,,zh-Hans-CN,Imported,已导入,0,已导入
+import_export,result.inserted,,zh-Hans-CN,Inserted,已插入,0,已插入
+import_export,result.mode,,zh-Hans-CN,Mode,模式,0,模式
+import_export,result.processed,,zh-Hans-CN,Processed,已处理,0,已处理
+import_export,result.skipped,,zh-Hans-CN,Skipped,已跳过,0,已跳过
+import_export,result.success_summary,,zh-Hans-CN,"Import completed successfully for {dataset}.","{dataset} 导入成功完成。",0,"{dataset} 导入成功完成。"
+import_export,result.updated,,zh-Hans-CN,Updated,已更新,0,已更新
+import_export,workbench.description,,zh-Hans-CN,"Export data to CSV or import CSV files into registered datasets.","将数据导出为 CSV 或将 CSV 文件导入已注册的数据集。",0,"将数据导出为 CSV 或将 CSV 文件导入已注册的数据集。"
+import_export,workbench.no_datasets,,zh-Hans-CN,"No import/export datasets are available.",没有可用的导入/导出数据集。,0,没有可用的导入/导出数据集。
+import_export,workbench.title,,zh-Hans-CN,"Import / Export","导入 / 导出",0,"导入 / 导出"
+import_export,error.upload_backup_required,,zh-Hans-CN,"Confirm the uploaded files backup before exporting the site snapshot.",导出站点快照前，请确认已备份上传文件。,0,导出站点快照前，请确认已备份上传文件。
+import_export,dataset.site_snapshot.name,,zh-Hans-CN,"Site snapshot",站点快照,0,站点快照
+import_export,dataset.site_snapshot.description,,zh-Hans-CN,"Export or restore database-backed site content and identity data as a JSON disaster-recovery snapshot.","将数据库中的站点内容和身份数据导出或恢复为用于灾难恢复的 JSON 快照。",0,"将数据库中的站点内容和身份数据导出或恢复为用于灾难恢复的 JSON 快照。"
+import_export,field.uploads_backed_up.label,,zh-Hans-CN,"Uploaded files backed up",已备份上传文件,0,已备份上传文件
+import_export,field.uploads_backed_up.help,,zh-Hans-CN,"Confirm that the upload directory has been copied separately before downloading the JSON snapshot.","下载 JSON 快照前，请确认上传目录已单独复制。",0,"下载 JSON 快照前，请确认上传目录已单独复制。"
+import_export,field.site_snapshot_file.label,,zh-Hans-CN,"Site snapshot JSON","站点快照 JSON",0,"站点快照 JSON"
+import_export,field.site_snapshot_file.help,,zh-Hans-CN,"Upload a JSON snapshot exported from the same Radaptor schema. Copy the upload directory before applying the import.","上传从同一 Radaptor 架构导出的 JSON 快照。应用导入前请复制上传目录。",0,"上传从同一 Radaptor 架构导出的 JSON 快照。应用导入前请复制上传目录。"
+import_export,field.replace_confirmed.label,,zh-Hans-CN,"Replace current site data",替换当前站点数据,0,替换当前站点数据
+import_export,field.replace_confirmed.help,,zh-Hans-CN,"Required for the real import. The restore replaces the snapshot-managed database tables.",真实导入必须确认。恢复会替换快照管理的数据库表。,0,真实导入必须确认。恢复会替换快照管理的数据库表。
+import_export,site_snapshot.export.title,,zh-Hans-CN,"Export JSON snapshot","导出 JSON 快照",0,"导出 JSON 快照"
+import_export,site_snapshot.import.title,,zh-Hans-CN,"Import JSON snapshot","导入 JSON 快照",0,"导入 JSON 快照"
+import_export,site_snapshot.action.export,,zh-Hans-CN,"Export JSON","导出 JSON",0,"导出 JSON"
+import_export,confirm.site_snapshot_replace,,zh-Hans-CN,"This import will replace the current site database content with the uploaded snapshot. Continue?",此导入会用上传的快照替换当前站点数据库内容。是否继续？,0,此导入会用上传的快照替换当前站点数据库内容。是否继续？

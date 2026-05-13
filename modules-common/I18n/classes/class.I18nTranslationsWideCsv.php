@@ -50,6 +50,7 @@ final class I18nTranslationsWideCsv
 			$sourceText = (string) ($row['source_text'] ?? '');
 			$locale = (string) ($row['locale'] ?? '');
 			$text = (string) ($row['text'] ?? '');
+			$locale = LocaleService::tryCanonicalize($locale) ?? $locale;
 
 			if ($locale === '') {
 				continue;
@@ -146,7 +147,7 @@ final class I18nTranslationsWideCsv
 
 		foreach ($headers as $header) {
 			if (str_starts_with($header, 'text:')) {
-				$locale = trim(substr($header, 5));
+				$locale = LocaleService::tryCanonicalize(substr($header, 5)) ?? trim(substr($header, 5));
 
 				if ($locale === '') {
 					$errors[] = 'Wide CSV contains an empty locale column name';

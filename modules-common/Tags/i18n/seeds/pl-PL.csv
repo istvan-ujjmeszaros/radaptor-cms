@@ -1,0 +1,14 @@
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
+tags,field.context.label,,pl-PL,Context,Kontekst,0,Kontekst
+tags,field.description.label,,pl-PL,"Tag description","Opis tagu",0,"Opis tagu"
+tags,field.name.explanation,,pl-PL,"No spaces, short and concise. Do not create synonyms for existing tags.","Bez spacji, krótko i zwięźle. Nie twórz synonimów dla istniejących tagów.",0,"Bez spacji, krótko i zwięźle. Nie twórz synonimów dla istniejących tagów."
+tags,field.name.label,,pl-PL,"Tag name","Nazwa tagu",0,"Nazwa tagu"
+tags,field.type.explanation,,pl-PL,"Select the tag type","Wybierz typ tagu",0,"Wybierz typ tagu"
+tags,field.type.label,,pl-PL,Type,Typ,0,Typ
+tags,form.name,,pl-PL,Tag,Tag,0,Tag
+tags,form.title_create,,pl-PL,"New tag","Nowy tag",0,"Nowy tag"
+tags,form.title_edit,,pl-PL,"Edit tag","Edytuj tag",0,"Edytuj tag"
+tags,list.title,,pl-PL,Tags,Tagi,0,Tagi
+tags,saved,,pl-PL,"Tags saved","Zapisano tagi",0,"Zapisano tagi"
+tags,updated,,pl-PL,"Tag updated","Zaktualizowano tag",0,"Zaktualizowano tag"
+tags,validation.name_max_length,,pl-PL,"Tag name must not exceed 255 characters","Nazwa tagu nie może przekraczać 255 znaków",0,"Nazwa tagu nie może przekraczać 255 znaków"

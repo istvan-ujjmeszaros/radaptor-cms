@@ -1,0 +1,59 @@
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
+form,admin_menu_item.description,,zh-Hans-CN,Admin menu item,管理员菜单项,0,管理员菜单项
+form,admin_menu_item.name,,zh-Hans-CN,Admin menu item,管理员菜单项,0,管理员菜单项
+form,blog.description,,zh-Hans-CN,Blog post,博客文章,0,博客文章
+form,blog.name,,zh-Hans-CN,Blog post,博客文章,0,博客文章
+form,close_page.close_window,,zh-Hans-CN,Close this window!,关闭此窗口！,0,关闭此窗口！
+form,close_page.title,,zh-Hans-CN,Close page,关闭页面,0,关闭页面
+form,form_settings.description,,zh-Hans-CN,Select which form to display,选择要显示的表单,0,选择要显示的表单
+form,form_settings.name,,zh-Hans-CN,Form settings,表单设置,0,表单设置
+form,form_settings.title,,zh-Hans-CN,Select form,选择表单,0,选择表单
+form,js_tree_settings.description,,zh-Hans-CN,Select which tree to display,选择要显示的树,0,选择要显示的树
+form,js_tree_settings.name,,zh-Hans-CN,Tree settings,树设置,0,树设置
+form,js_tree_settings.title,,zh-Hans-CN,Select tree,选择树,0,选择树
+form,main_menu_item.description,,zh-Hans-CN,Main menu item,主菜单项,0,主菜单项
+form,main_menu_item.name,,zh-Hans-CN,Main menu item,主菜单项,0,主菜单项
+form,plain_html.description,,zh-Hans-CN,HTML code (embed),HTML 代码（嵌入）,0,HTML 代码（嵌入）
+form,plain_html.name,,zh-Hans-CN,HTML code (embed),HTML 代码（嵌入）,0,HTML 代码（嵌入）
+form,rich_text_select.description,,zh-Hans-CN,Select text content,选择文本内容,0,选择文本内容
+form,rich_text_select.name,,zh-Hans-CN,Select text content,选择文本内容,0,选择文本内容
+form,rich_text.description,,zh-Hans-CN,Text content,文本内容,0,文本内容
+form,rich_text.name,,zh-Hans-CN,Text content,文本内容,0,文本内容
+form,role.description,,zh-Hans-CN,Role,角色,0,角色
+form,role.name,,zh-Hans-CN,Role,角色,0,角色
+form,tag.description,,zh-Hans-CN,Tag,标签,0,标签
+form,tag.name,,zh-Hans-CN,Tag,标签,0,标签
+form,theme_selector.description,,zh-Hans-CN,Select which theme renders each layout,选择每种布局使用的主题,0,选择每种布局使用的主题
+form,theme_selector.name,,zh-Hans-CN,Theme selection,主题选择,0,主题选择
+form,theme_selector.title,,zh-Hans-CN,Select themes for layouts,为布局选择主题,0,为布局选择主题
+form,ticket_priority.description,,zh-Hans-CN,Ticket priority,工单优先级,0,工单优先级
+form,ticket_priority.name,,zh-Hans-CN,Ticket priority,工单优先级,0,工单优先级
+form,ticket_state.description,,zh-Hans-CN,Ticket status,工单状态,0,工单状态
+form,ticket_state.name,,zh-Hans-CN,Ticket status,工单状态,0,工单状态
+form,user_login.description,,zh-Hans-CN,Login,登录,0,登录
+form,user_login.name,,zh-Hans-CN,Login,登录,0,登录
+form,user_signup.description,,zh-Hans-CN,Sign up,注册,0,注册
+form,user_signup.name,,zh-Hans-CN,Sign up,注册,0,注册
+form,user.description,,zh-Hans-CN,User,用户,0,用户
+form,user.name,,zh-Hans-CN,User,用户,0,用户
+form,usergroup.description,,zh-Hans-CN,User group,用户组,0,用户组
+form,usergroup.name,,zh-Hans-CN,User group,用户组,0,用户组
+form,validation.max_length,,zh-Hans-CN,Maximum {max} characters,最多 {max} 个字符,0,最多 {max} 个字符
+form,validation.required,,zh-Hans-CN,Required,必填,0,必填
+form,webpage_domain.description,,zh-Hans-CN,Domain properties,域属性,0,域属性
+form,webpage_domain.name,,zh-Hans-CN,Domain properties,域属性,0,域属性
+form,webpage_file.description,,zh-Hans-CN,File properties,文件属性,0,文件属性
+form,webpage_file.name,,zh-Hans-CN,File properties,文件属性,0,文件属性
+form,webpage_folder.description,,zh-Hans-CN,Website folder properties,网站文件夹属性,0,网站文件夹属性
+form,webpage_folder.name,,zh-Hans-CN,Website folder properties,网站文件夹属性,0,网站文件夹属性
+form,webpage_from_path.description,,zh-Hans-CN,Create webpage from path,从路径创建网页,0,从路径创建网页
+form,webpage_from_path.name,,zh-Hans-CN,Create webpage from path,从路径创建网页,0,从路径创建网页
+form,webpage_page.description,,zh-Hans-CN,Webpage properties,网页属性,0,网页属性
+form,webpage_page.name,,zh-Hans-CN,Webpage properties,网页属性,0,网页属性
+form,widget_connection_params.description,,zh-Hans-CN,Display settings for a content box,内容框的显示设置,0,内容框的显示设置
+form,widget_connection_params.name,,zh-Hans-CN,Content box display settings,内容框显示设置,0,内容框显示设置
+form,widget_connection_settings.description,,zh-Hans-CN,Configure width and row placement for the content box,配置内容框的宽度和行位置,0,配置内容框的宽度和行位置
+form,widget_connection_settings.name,,zh-Hans-CN,Content formatting,内容格式,0,内容格式
+form,widget_connection_settings.title,,zh-Hans-CN,Content formatting,内容格式,0,内容格式
+form,closer.title,,zh-Hans-CN,Closer page,关闭页面,0,关闭页面
+form,closer.close_window,,zh-Hans-CN,Close this window!,请关闭此窗口！,0,请关闭此窗口！

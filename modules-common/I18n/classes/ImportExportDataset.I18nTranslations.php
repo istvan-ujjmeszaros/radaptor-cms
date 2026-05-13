@@ -88,7 +88,7 @@ class ImportExportDatasetI18nTranslations extends AbstractImportExportDataset
 	public function export(array $options): string
 	{
 		$format = $this->_normalizeFormat($options['format'] ?? 'normalized');
-		$locale = trim($options['locale'] ?? '');
+		$locale = LocaleService::tryCanonicalize((string) ($options['locale'] ?? '')) ?? trim((string) ($options['locale'] ?? ''));
 		$filters = [];
 
 		if ($locale !== '') {
@@ -121,7 +121,7 @@ class ImportExportDatasetI18nTranslations extends AbstractImportExportDataset
 	public function buildExportFilename(array $options): string
 	{
 		$format = $this->_normalizeFormat($options['format'] ?? 'normalized');
-		$locale = trim($options['locale'] ?? '');
+		$locale = LocaleService::tryCanonicalize((string) ($options['locale'] ?? '')) ?? trim((string) ($options['locale'] ?? ''));
 		$localeScope = $locale !== '' ? $locale : 'all_locales';
 		$timestamp = date('Ymd_His');
 
@@ -142,7 +142,7 @@ class ImportExportDatasetI18nTranslations extends AbstractImportExportDataset
 			throw new InvalidArgumentException(t('import_export.error.invalid_mode'));
 		}
 
-		$expectedLocale = trim($options['expect_locale'] ?? '');
+		$expectedLocale = LocaleService::tryCanonicalize((string) ($options['expect_locale'] ?? '')) ?? trim((string) ($options['expect_locale'] ?? ''));
 		$dryRun = ($options['dry_run'] ?? '0') === '1';
 		$normalizedCsv = $format === 'wide'
 			? I18nTranslationsWideCsv::toNormalizedCsv($csvContent)

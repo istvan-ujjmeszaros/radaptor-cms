@@ -138,6 +138,7 @@ final class CmsResourceTreeSpecService
 		return [
 			'status' => $summary['conflict'] > 0 ? 'conflict' : 'success',
 			'summary' => $summary,
+			'destructive_summary' => self::summarizeSlotMutations($spec),
 			'resources' => $results,
 		];
 	}
@@ -186,9 +187,21 @@ final class CmsResourceTreeSpecService
 			];
 		}
 
+		$destructive_summary = self::summarizeSlotMutations($spec);
+
+		if (class_exists(CmsMutationAuditService::class)) {
+			CmsMutationAuditService::recordLeaf('resource_spec.sync', [
+				'affected_count' => count($applied),
+				'summary' => $destructive_summary + [
+					'applied_resources' => count($applied),
+				],
+			]);
+		}
+
 		return [
 			'status' => 'success',
 			'dry_run' => false,
+			'destructive_summary' => $destructive_summary,
 			'applied' => $applied,
 			'after' => self::diffSpec($spec),
 		];
@@ -505,6 +518,83 @@ final class CmsResourceTreeSpecService
 		}
 
 		throw new RuntimeException("Resource spec file not found: {$path}");
+	}
+
+	/**
+	 * @param array<string, mixed> $spec
+	 * @return array<string, int>
+	 */
+	private static function summarizeSlotMutations(array $spec): array
+	{
+		$summary = [
+			'touched_pages' => 0,
+			'touched_slots' => 0,
+			'replace_slots_pages' => 0,
+			'emptied_slots' => 0,
+			'preserved_omitted_slots' => 0,
+			'wiped_omitted_slots' => 0,
+			'existing_widget_connections_in_touched_slots' => 0,
+			'desired_widget_connections' => 0,
+		];
+
+		foreach (self::flattenResources($spec) as $resource) {
+			$resource = self::normalizeResourceSpec($resource);
+
+			if (($resource['type'] ?? '') !== 'webpage' || !is_array($resource['slots'] ?? null)) {
+				continue;
+			}
+
+			++$summary['touched_pages'];
+			$replace_slots = (bool) ($resource['replace_slots'] ?? false);
+
+			if ($replace_slots) {
+				++$summary['replace_slots_pages'];
+			}
+
+			$current_slots = [];
+			$current = CmsPathHelper::resolveWebpage((string) $resource['path']);
+
+			if (is_array($current)) {
+				$current_spec = CmsResourceSpecService::exportWebpageSpec((string) $resource['path']);
+				$current_slots = is_array($current_spec['slots'] ?? null) ? $current_spec['slots'] : [];
+			}
+
+			$mentioned_slots = [];
+
+			foreach ($resource['slots'] as $slot_name => $widgets) {
+				$slot_name = (string) $slot_name;
+				$mentioned_slots[$slot_name] = true;
+				$current_widgets = is_array($current_slots[$slot_name] ?? null) ? $current_slots[$slot_name] : [];
+				$desired_widgets = is_array($widgets) ? array_values($widgets) : [];
+				++$summary['touched_slots'];
+				$summary['existing_widget_connections_in_touched_slots'] += count($current_widgets);
+				$summary['desired_widget_connections'] += count($desired_widgets);
+
+				if ($desired_widgets === [] && $current_widgets !== []) {
+					++$summary['emptied_slots'];
+				}
+			}
+
+			foreach ($current_slots as $slot_name => $current_widgets) {
+				if (isset($mentioned_slots[(string) $slot_name])) {
+					continue;
+				}
+
+				if ($replace_slots) {
+					++$summary['touched_slots'];
+					++$summary['wiped_omitted_slots'];
+
+					if (is_array($current_widgets) && $current_widgets !== []) {
+						++$summary['emptied_slots'];
+						$summary['existing_widget_connections_in_touched_slots'] += count($current_widgets);
+					}
+				} elseif (is_array($current_widgets) && $current_widgets !== []) {
+					++$summary['preserved_omitted_slots'];
+				}
+			}
+		}
+
+		return $summary;
 	}
 
 	/**

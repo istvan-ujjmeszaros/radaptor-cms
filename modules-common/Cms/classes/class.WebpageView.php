@@ -24,7 +24,13 @@ class WebpageView extends AbstractWebpageViewComposer implements Stringable
 
 	public function getLangId(): string
 	{
-		return $this->_resourceData['lang_id'];
+		$page_id = (int) ($this->_resourceData['node_id'] ?? 0);
+
+		if ($page_id > 0 && class_exists(ResourceLocaleService::class)) {
+			return ResourceLocaleService::getRenderLocale($page_id);
+		}
+
+		return LocaleService::tryCanonicalize((string) ($this->_resourceData['lang_id'] ?? '')) ?? Kernel::getLocale();
 	}
 
 	public function getType(): string

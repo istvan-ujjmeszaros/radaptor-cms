@@ -31,9 +31,16 @@ final class EventLocaleSetEnabledAuthorizeTest extends TestCase
 
 	protected function tearDown(): void
 	{
-		$this->impersonate(null);
+		if (
+			class_exists('RequestContextHolder', autoload: false)
+			&& class_exists('Cache', autoload: false)
+			&& class_exists('Roles', autoload: false)
+			&& class_exists('User', autoload: false)
+		) {
+			$this->impersonate(null);
+		}
 
-		if ($this->_transaction_started) {
+		if ($this->_transaction_started && class_exists('Db', autoload: false)) {
 			$pdo = Db::instance();
 
 			if ($pdo->inTransaction()) {

@@ -1,682 +1,684 @@
-﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
-admin,email_outbox.col.created_at,,en-US,Created,Created,0,Created
-admin,email_outbox.col.id,,en-US,ID,ID,0,ID
-admin,email_outbox.col.last_error,,en-US,"Last error","Last error",0,"Last error"
-admin,email_outbox.col.recipients,,en-US,Recipients,Recipients,0,Recipients
-admin,email_outbox.col.sent_at,,en-US,Sent,Sent,0,Sent
-admin,email_outbox.col.status,,en-US,Status,Status,0,Status
-admin,email_outbox.col.subject,,en-US,Subject,Subject,0,Subject
-admin,email_outbox.description,,en-US,"Read-only transactional email delivery history.","Read-only transactional email delivery history.",0,"Read-only transactional email delivery history."
-admin,email_outbox.failures.title,,en-US,"Recent dead letters","Recent dead letters",0,"Recent dead letters"
-admin,email_outbox.filters.apply,,en-US,"Apply filters","Apply filters",0,"Apply filters"
-admin,email_outbox.filters.reset,,en-US,Reset,Reset,0,Reset
-admin,email_outbox.filters.search,,en-US,Search,Search,0,Search
-admin,email_outbox.filters.search_placeholder,,en-US,"Subject, message UID, or recipient email","Subject, message UID, or recipient email",0,"Subject, message UID, or recipient email"
-admin,email_outbox.filters.status,,en-US,Status,Status,0,Status
-admin,email_outbox.filters.title,,en-US,Filters,Filters,0,Filters
-admin,email_outbox.list.title,,en-US,"Recent outbox entries","Recent outbox entries",0,"Recent outbox entries"
-admin,email_outbox.none,,en-US,"No emails match the current filter.","No emails match the current filter.",0,"No emails match the current filter."
-admin,email_outbox.pagination.page,,en-US,Page,Page,0,Page
-admin,email_outbox.status.all,,en-US,"All statuses","All statuses",0,"All statuses"
-admin,email_outbox.status.failed,,en-US,Failed,Failed,0,Failed
-admin,email_outbox.status.partial_failed,,en-US,"Partial failed","Partial failed",0,"Partial failed"
-admin,email_outbox.status.processing,,en-US,Processing,Processing,0,Processing
-admin,email_outbox.status.queued,,en-US,Queued,Queued,0,Queued
-admin,email_outbox.status.sent,,en-US,Sent,Sent,0,Sent
-admin,email_outbox.summary.title,,en-US,"Queue summary","Queue summary",0,"Queue summary"
-admin,email_outbox.title,,en-US,"Email outbox","Email outbox",0,"Email outbox"
-admin,email_queue.dead_letter,,en-US,"Dead letter","Dead letter",0,"Dead letter"
-admin,email_queue.empty,,en-US,"No email jobs are waiting right now.","No email jobs are waiting right now.",0,"No email jobs are waiting right now."
-admin,email_queue.last_processed,,en-US,"Last processed","Last processed",0,"Last processed"
-admin,email_queue.last_seen,,en-US,"Last seen","Last seen",0,"Last seen"
-admin,email_queue.open_outbox,,en-US,"Open email outbox","Open email outbox",0,"Open email outbox"
-admin,email_queue.pending,,en-US,Pending,Pending,0,Pending
-admin,email_queue.retry_wait,,en-US,"Retry wait","Retry wait",0,"Retry wait"
-admin,email_queue.sent_last_24h,,en-US,"Sent in last 24h","Sent in last 24h",0,"Sent in last 24h"
-admin,email_queue.status.never_seen,,en-US,"Never seen","Never seen",0,"Never seen"
-admin,email_queue.status.running,,en-US,Running,Running,0,Running
-admin,email_queue.status.stale,,en-US,Stale,Stale,0,Stale
-admin,email_queue.status.unavailable,,en-US,Unavailable,Unavailable,0,Unavailable
-admin,email_queue.subtitle,,en-US,"Transactional delivery health at a glance.","Transactional delivery health at a glance.",0,"Transactional delivery health at a glance."
-admin,email_queue.title,,en-US,"Email queue","Email queue",0,"Email queue"
-admin,email_queue.worker,,en-US,Worker,Worker,0,Worker
-admin,i18n.col.domain,,en-US,Domain,Domain,0,Domain
-admin,i18n.col.key,,en-US,Key,Key,0,Key
-admin,i18n.col.reviewed,,en-US,Reviewed,Reviewed,1,Reviewed
-admin,i18n.col.source,,en-US,Source,Source,0,Source
-admin,i18n.col.status,,en-US,Status,Status,0,Status
-admin,i18n.col.translation,,en-US,Translation,Translation,0,Translation
-admin,i18n.coverage.missing,,en-US,Missing,Missing,0,Missing
-admin,i18n.coverage.reviewed,,en-US,Reviewed,Reviewed,0,Reviewed
-admin,i18n.coverage.stale,,en-US,Stale,Stale,0,Stale
-admin,i18n.coverage.title,,en-US,"Translation coverage","Translation coverage",0,"Translation coverage"
-admin,i18n.coverage.translated,,en-US,Translated,Translated,0,Translated
-admin,i18n.domain,,en-US,Domain,Domain,0,Domain
-admin,i18n.locale,,en-US,Locale,Locale,0,Locale
-admin,i18n.search_placeholder,,en-US,"Search source or translation","Search source or translation",0,"Search source or translation"
-admin,i18n.status,,en-US,Status,Status,0,Status
-admin,i18n.status.ai_generated,,en-US,AI-generated,AI-generated,0,AI-generated
-admin,i18n.status.approved,,en-US,Approved,Approved,0,Approved
-admin,i18n.status.missing,,en-US,Missing,Missing,0,Missing
-admin,i18n.status.needs_review,,en-US,"Needs review","Needs review",0,"Needs review"
-admin,i18n.status.translated,,en-US,Translated,Translated,0,Translated
-admin,i18n.title,,en-US,"Translation workbench","Translation workbench",0,"Translation workbench"
-admin,i18n.tm.exact_match_only,,en-US,"Exact-match suggestions only","Exact-match suggestions only",0,"Exact-match suggestions only"
-admin,i18n.tm.exact_matches,,en-US,"Exact matches","Exact matches",0,"Exact matches"
-admin,i18n.tm.exact_then_similar,,en-US,"Exact matches load first. Similar matches load afterwards.","Exact matches load first. Similar matches load afterwards.",0,"Exact matches load first. Similar matches load afterwards."
-admin,i18n.tm.no_exact_matches,,en-US,"No exact matches","No exact matches",0,"No exact matches"
-admin,i18n.tm.no_similar_matches,,en-US,"No similar matches","No similar matches",0,"No similar matches"
-admin,i18n.tm.origin,,en-US,Origin,Origin,0,Origin
-admin,i18n.tm.review_placeholders,,en-US,"Review placeholders","Review placeholders",0,"Review placeholders"
-admin,i18n.tm.safe,,en-US,Safe,Safe,0,Safe
-admin,i18n.tm.similar_matches,,en-US,"Similar matches","Similar matches",0,"Similar matches"
-admin,i18n.tm.similarity,,en-US,Similarity,Similarity,0,Similarity
-admin,i18n.tm.source_example,,en-US,"Source example","Source example",0,"Source example"
-admin,i18n.tm.title,,en-US,"Translation memory suggestions","Translation memory suggestions",0,"Translation memory suggestions"
-admin,menu.admin_menu,,en-US,"Admin menu","Admin menu",0,"Admin menu"
-admin,menu.blog,,en-US,Blog,Blog,0,Blog
-admin,menu.cli_runner,,en-US,"CLI Runner","CLI Runner",0,"CLI Runner"
-admin,menu.custom_menu,,en-US,"Custom menu","Custom menu",0,"Custom menu"
-admin,menu.email_outbox,,en-US,"Email outbox","Email outbox",0,"Email outbox"
-admin,menu.home,,en-US,"Admin home","Admin home",0,"Admin home"
-admin,menu.import_export,,en-US,"Import / Export","Import / Export",0,"Import / Export"
-admin,menu.locales,,en-US,Locales,Locales,0,Locales
-admin,menu.mcp_tokens,,en-US,"MCP tokens","MCP tokens",0,"MCP tokens"
-admin,menu.phpinfo,,en-US,PHPinfo,PHPinfo,0,PHPinfo
-admin,menu.resource_tree,,en-US,"Website structure","Website structure",0,"Website structure"
-admin,menu.roles,,en-US,Roles,Roles,0,Roles
-admin,menu.runtime_diagnostics,,en-US,"Runtime diagnostics","Runtime diagnostics",0,"Runtime diagnostics"
-admin,menu.section.administration,,en-US,Administration,Administration,0,Administration
-admin,menu.section.configuration,,en-US,Configuration,Configuration,0,Configuration
-admin,menu.section.content,,en-US,Content,Content,0,Content
-admin,menu.section.developer_tools,,en-US,"Developer tools","Developer tools",0,"Developer tools"
-admin,menu.template_engines,,en-US,"Template engines","Template engines",0,"Template engines"
-admin,menu.theme_selector,,en-US,"Theme selection","Theme selection",0,"Theme selection"
-admin,menu.translations,,en-US,Translations,Translations,0,Translations
-admin,menu.usergroups,,en-US,"User groups","User groups",0,"User groups"
-admin,menu.widget_preview,,en-US,"Widget preview","Widget preview",0,"Widget preview"
-cms,admin_dropdown.edit_mode,,en-US,"Edit mode","Edit mode",0,"Edit mode"
-cms,admin_dropdown.edit_mode_off,,en-US,off,off,0,off
-cms,admin_dropdown.edit_mode_on,,en-US,on,on,0,on
-cms,admin_dropdown.seo,,en-US,SEO,SEO,0,SEO
-cms,admin_dropdown.turn_edit_mode_off,,en-US,"Turn edit mode off","Turn edit mode off",0,"Turn edit mode off"
-cms,admin_dropdown.turn_edit_mode_on,,en-US,"Turn edit mode on","Turn edit mode on",0,"Turn edit mode on"
-cms,admin_menu.form.name,,en-US,"Admin menu administration","Admin menu administration",0,"Admin menu administration"
-cms,admin_menu.form.title_create,,en-US,"Create admin menu item","Create admin menu item",0,"Create admin menu item"
-cms,admin_menu.form.title_edit,,en-US,"Edit admin menu item","Edit admin menu item",0,"Edit admin menu item"
-cms,edit,,en-US,Edit,Edit,0,Edit
-cms,edit_mode.disabled,,en-US,"Edit mode disabled","Edit mode disabled",0,"Edit mode disabled"
-cms,edit_mode.enabled,,en-US,"Edit mode enabled","Edit mode enabled",0,"Edit mode enabled"
-cms,edit_mode.save_error,,en-US,"Error: Unable to save configuration","Error: Unable to save configuration",0,"Error: Unable to save configuration"
-cms,error.login_page_missing,,en-US,"Login page not found - create it manually","Login page not found - create it manually",0,"Login page not found - create it manually"
-cms,file.missing_ref_id,,en-US,"Missing file reference","Missing file reference",0,"Missing file reference"
-cms,file.upload_error,,en-US,"Error: File upload failed","Error: File upload failed",0,"Error: File upload failed"
-cms,file.uploaded,,en-US,"File uploaded","File uploaded",0,"File uploaded"
-cms,file_upload.destination_path,,en-US,"Destination path","Destination path",0,"Destination path"
-cms,file_upload.unknown_destination,,en-US,"Unknown destination path","Unknown destination path",0,"Unknown destination path"
-cms,form.field.form_id.explanation,,en-US,"Select from the predefined forms","Select from the predefined forms",0,"Select from the predefined forms"
-cms,form.field.form_id.label,,en-US,Form,Form,0,Form
-cms,form.missing_widget_id,,en-US,"Widget ID is missing","Widget ID is missing",0,"Widget ID is missing"
-cms,form.no_form_page_warning,,en-US,"Create at least one page with a blank form","Create at least one page with a blank form",0,"Create at least one page with a blank form"
-cms,form.no_id,,en-US,"No form ID given","No form ID given",0,"No form ID given"
-cms,form.settings_subtitle,,en-US,"Page: {page}","Page: {page}",0,"Page: {page}"
-cms,library.folder,,en-US,Folder,Folder,0,Folder
-cms,library.resource,,en-US,Resource,Resource,0,Resource
-cms,library.unknown,,en-US,"Unknown library","Unknown library",0,"Unknown library"
-cms,menu.delete_confirm,,en-US,"Are you sure you want to delete this menu item?","Are you sure you want to delete this menu item?",0,"Are you sure you want to delete this menu item?"
-cms,menu.delete_failed,,en-US,"Delete failed","Delete failed",0,"Delete failed"
-cms,menu.delete_forbidden,,en-US,"Menu item deletion is not allowed: {name}","Menu item deletion is not allowed: {name}",0,"Menu item deletion is not allowed: {name}"
-cms,menu.delete_unknown_error,,en-US,"Error: An unknown error occurred while deleting the menu item","Error: An unknown error occurred while deleting the menu item",0,"Error: An unknown error occurred while deleting the menu item"
-cms,menu.deleted,,en-US,"Menu item deleted: {name}","Menu item deleted: {name}",0,"Menu item deleted: {name}"
-cms,menu.external_link,,en-US,"External link","External link",0,"External link"
-cms,menu.field.node_name.label,,en-US,"Display text","Display text",0,"Display text"
-cms,menu.field.page.explanation,,en-US,"Select the page this menu item points to","Select the page this menu item points to",0,"Select the page this menu item points to"
-cms,menu.field.page.label,,en-US,Page,Page,0,Page
-cms,menu.field.type.external,,en-US,"Points to external page","Points to external page",0,"Points to external page"
-cms,menu.field.type.internal,,en-US,"Points to internal page","Points to internal page",0,"Points to internal page"
-cms,menu.field.type.label,,en-US,"Link type","Link type",0,"Link type"
-cms,menu.field.url.explanation,,en-US,"You can enter a custom URL (including mailto:// links)","You can enter a custom URL (including mailto:// links)",0,"You can enter a custom URL (including mailto:// links)"
-cms,menu.field.url.label,,en-US,"Custom URL","Custom URL",0,"Custom URL"
-cms,menu.form.name,,en-US,"Main menu item","Main menu item",0,"Main menu item"
-cms,menu.form.title_create,,en-US,"Create menu item","Create menu item",0,"Create menu item"
-cms,menu.form.title_edit,,en-US,"Edit menu item","Edit menu item",0,"Edit menu item"
-cms,menu.internal_link,,en-US,"Internal link","Internal link",0,"Internal link"
-cms,menu.move_error,,en-US,"Error: Unable to move menu item","Error: Unable to move menu item",0,"Error: Unable to move menu item"
-cms,menu.move_success,,en-US,"Menu item moved: {name}","Menu item moved: {name}",0,"Menu item moved: {name}"
-cms,menu.new_child,,en-US,"New submenu item","New submenu item",0,"New submenu item"
-cms,menu.new_item,,en-US,"New menu item","New menu item",0,"New menu item"
-cms,menu.no_link_configured,,en-US,"No link configured","No link configured",0,"No link configured"
-cms,menu.root,,en-US,"Main menu","Main menu",0,"Main menu"
-cms,menu.saved,,en-US,"Menu item saved","Menu item saved",0,"Menu item saved"
-cms,menu.selection_help,,en-US,"Select a menu item to edit it, or create a new one.","Select a menu item to edit it, or create a new one.",0,"Select a menu item to edit it, or create a new one."
-cms,menu.updated,,en-US,"Menu item updated","Menu item updated",0,"Menu item updated"
-cms,menu.validation.node_name_max_length,,en-US,"Display text must not exceed 255 characters","Display text must not exceed 255 characters",0,"Display text must not exceed 255 characters"
-cms,menu.validation.type_required,,en-US,"Choose whether the link points to an internal or external page","Choose whether the link points to an internal or external page",0,"Choose whether the link points to an internal or external page"
-cms,menu.validation.url_max_length,,en-US,"URL must not exceed 255 characters","URL must not exceed 255 characters",0,"URL must not exceed 255 characters"
-cms,menu.validation.url_required,,en-US,"Select a page or enter a URL","Select a page or enter a URL",0,"Select a page or enter a URL"
-cms,plainhtml.field.content.explanation,,en-US,"The HTML code you enter will appear on the website without modifications.","The HTML code you enter will appear on the website without modifications.",0,"The HTML code you enter will appear on the website without modifications."
-cms,plainhtml.field.content.label,,en-US,"HTML code","HTML code",0,"HTML code"
-cms,plainhtml.form.name,,en-US,"HTML code (embed)","HTML code (embed)",0,"HTML code (embed)"
-cms,plainhtml.form.title,,en-US,"Edit HTML content","Edit HTML content",0,"Edit HTML content"
-cms,plainhtml.not_set,,en-US,"Configure the content","Configure the content",0,"Configure the content"
-cms,resource.delete_error,,en-US,"Error: Unable to delete resource(s)","Error: Unable to delete resource(s)",0,"Error: Unable to delete resource(s)"
-cms,resource.delete_failed,,en-US,"Delete failed","Delete failed",0,"Delete failed"
-cms,resource.delete_partial_error,,en-US,"{count} error(s) occurred during deletion","{count} error(s) occurred during deletion",0,"{count} error(s) occurred during deletion"
-cms,resource.deleted,,en-US,"Resource deleted","Resource deleted",0,"Resource deleted"
-cms,resource.deleted_multiple,,en-US,"Resources deleted","Resources deleted",0,"Resources deleted"
-cms,resource.error.add_failed,,en-US,"Unable to add resource tree entry.","Unable to add resource tree entry.",0,"Unable to add resource tree entry."
-cms,resource.error.create_failed_for_path,,en-US,"Unable to create resource: {path}","Unable to create resource: {path}",0,"Unable to create resource: {path}"
-cms,resource.error.delete_denied,,en-US,"Delete denied for resource: {resource_id}","Delete denied for resource: {resource_id}",0,"Delete denied for resource: {resource_id}"
-cms,resource.error.delete_failed_for_id,,en-US,"Unable to delete resource: {resource_id}","Unable to delete resource: {resource_id}",0,"Unable to delete resource: {resource_id}"
-cms,resource.error.file_delete_failed_for_id,,en-US,"Unable to delete file for resource: {resource_id}","Unable to delete file for resource: {resource_id}",0,"Unable to delete file for resource: {resource_id}"
-cms,resource.error.import_file_failed,,en-US,"Unable to import file: {path}","Unable to import file: {path}",0,"Unable to import file: {path}"
-cms,resource.error.move_failed_for_id,,en-US,"Unable to move resource: {resource_id}","Unable to move resource: {resource_id}",0,"Unable to move resource: {resource_id}"
-cms,resource.error.not_found_by_id,,en-US,"Resource not found: {resource_id}","Resource not found: {resource_id}",0,"Resource not found: {resource_id}"
-cms,resource.error.path_exists_not_file,,en-US,"Resource path exists and is not a file: {path}","Resource path exists and is not a file: {path}",0,"Resource path exists and is not a file: {path}"
-cms,resource.error.protected_mutation,,en-US,"Protected system resource cannot be modified: {path}","Protected system resource cannot be modified: {path}",0,"Protected system resource cannot be modified: {path}"
-cms,resource.error.protected_path_mutation,,en-US,"Protected system resource path cannot be created or modified: {path}","Protected system resource path cannot be created or modified: {path}",0,"Protected system resource path cannot be created or modified: {path}"
-cms,resource.error.protected_subtree_mutation,,en-US,"A protected system resource in this subtree cannot be modified: {path}","A protected system resource in this subtree cannot be modified: {path}",0,"A protected system resource in this subtree cannot be modified: {path}"
-cms,resource.error.target_folder_not_found,,en-US,"Target folder not found after creation: {path}","Target folder not found after creation: {path}",0,"Target folder not found after creation: {path}"
-cms,resource.error.update_failed_for_path,,en-US,"Unable to update resource: {path}","Unable to update resource: {path}",0,"Unable to update resource: {path}"
-cms,resource.folder_count,,en-US,"{count} folder(s)","{count} folder(s)",0,"{count} folder(s)"
-cms,resource.move_error,,en-US,"Error: Unable to move resource","Error: Unable to move resource",0,"Error: Unable to move resource"
-cms,resource.move_failed,,en-US,"Move failed","Move failed",0,"Move failed"
-cms,resource.moved,,en-US,"Resource moved","Resource moved",0,"Resource moved"
-cms,resource.page_count,,en-US,"{count} page(s)","{count} page(s)",0,"{count} page(s)"
-cms,resource.renamed,,en-US,Renamed,Renamed,0,Renamed
-cms,resource.view_forbidden,,en-US,"403 - You do not have permission to view this content!","403 - You do not have permission to view this content!",0,"403 - You do not have permission to view this content!"
-cms,resource_acl.acl_not_found,,en-US,"ACL entry not found: {id}","ACL entry not found: {id}",0,"ACL entry not found: {id}"
-cms,resource_acl.assign,,en-US,Assign,Assign,0,Assign
-cms,resource_acl.deleted,,en-US,"Assignment removed.","Assignment removed.",0,"Assignment removed."
-cms,resource_acl.error_ambiguous_subject,,en-US,"The name {name} matches both a user and a user group. Select the correct type from the list.","The name {name} matches both a user and a user group. Select the correct type from the list.",0,"The name {name} matches both a user and a user group. Select the correct type from the list."
-cms,resource_acl.error_ambiguous_subject_short,,en-US,"Ambiguous assignment","Ambiguous assignment",0,"Ambiguous assignment"
-cms,resource_acl.error_delete,,en-US,"Error: Unable to remove assignment.","Error: Unable to remove assignment.",0,"Error: Unable to remove assignment."
-cms,resource_acl.error_missing_resource_id,,en-US,"Resource ID is missing","Resource ID is missing",0,"Resource ID is missing"
-cms,resource_acl.error_save,,en-US,"Error: Unable to save access settings.","Error: Unable to save access settings.",0,"Error: Unable to save access settings."
-cms,resource_acl.error_subject_not_found,,en-US,"No user or user group found with the name {name}","No user or user group found with the name {name}",0,"No user or user group found with the name {name}"
-cms,resource_acl.error_subject_not_found_short,,en-US,"No matching subject found","No matching subject found",0,"No matching subject found"
-cms,resource_acl.inherit_help,,en-US,"When inheritance is enabled, the parent folder's permissions also apply to this resource.","When inheritance is enabled, the parent folder's permissions also apply to this resource.",0,"When inheritance is enabled, the parent folder's permissions also apply to this resource."
-cms,resource_acl.inherit_label,,en-US,"Inherit permissions from parent folder","Inherit permissions from parent folder",0,"Inherit permissions from parent folder"
-cms,resource_acl.inherited_title,,en-US,"Inherited permissions","Inherited permissions",0,"Inherited permissions"
-cms,resource_acl.new_assignment,,en-US,"New assignment:","New assignment:",0,"New assignment:"
-cms,resource_acl.permission.create,,en-US,Create,Create,0,Create
-cms,resource_acl.permission.delete,,en-US,Delete,Delete,0,Delete
-cms,resource_acl.permission.edit,,en-US,Edit,Edit,0,Edit
-cms,resource_acl.permission.list,,en-US,List,List,0,List
-cms,resource_acl.permission.view,,en-US,View,View,0,View
-cms,resource_acl.resource_not_found,,en-US,"Resource not found: {id}","Resource not found: {id}",0,"Resource not found: {id}"
-cms,resource_acl.search_placeholder,,en-US,"Search for user or group...","Search for user or group...",0,"Search for user or group..."
-cms,resource_acl.specific_help,,en-US,"Specific permissions always apply, regardless of the inheritance setting.","Specific permissions always apply, regardless of the inheritance setting.",0,"Specific permissions always apply, regardless of the inheritance setting."
-cms,resource_acl.specific_title,,en-US,"Specific permissions","Specific permissions",0,"Specific permissions"
-cms,resource_acl.subject,,en-US,Subject,Subject,0,Subject
-cms,resource_acl.title,,en-US,Access,Access,0,Access
-cms,resource_acl.unknown_subject_type,,en-US,"Unknown ACL subject type: {type}","Unknown ACL subject type: {type}",0,"Unknown ACL subject type: {type}"
-cms,resource_acl.unknown_type,,en-US,"Unknown ACL list type: {type}","Unknown ACL list type: {type}",0,"Unknown ACL list type: {type}"
-cms,resource_acl.usergroup_assignment.added,,en-US,"User group assigned to resource:<br>{group} -> {target}","User group assigned to resource:<br>{group} -> {target}",0,"User group assigned to resource:<br>{group} -> {target}"
-cms,resource_acl.usergroup_assignment.error_add,,en-US,"Error: Unable to assign user group to resource:<br>{group} -> {target}","Error: Unable to assign user group to resource:<br>{group} -> {target}",0,"Error: Unable to assign user group to resource:<br>{group} -> {target}"
-cms,resource_acl.usergroup_assignment.error_add_generic,,en-US,"Error: Unable to assign user group to resource.","Error: Unable to assign user group to resource.",0,"Error: Unable to assign user group to resource."
-cms,resource_acl.usergroup_assignment.error_remove,,en-US,"Error: Unable to remove user group from resource:<br>{group} -> {target}","Error: Unable to remove user group from resource:<br>{group} -> {target}",0,"Error: Unable to remove user group from resource:<br>{group} -> {target}"
-cms,resource_acl.usergroup_assignment.error_remove_generic,,en-US,"Error: Unable to remove user group from resource.","Error: Unable to remove user group from resource.",0,"Error: Unable to remove user group from resource."
-cms,resource_acl.usergroup_assignment.removed,,en-US,"User group assignment removed:<br>{group} -> {target}","User group assignment removed:<br>{group} -> {target}",0,"User group assignment removed:<br>{group} -> {target}"
-cms,resource_browser.create_index_page,,en-US,"Create index page!","Create index page!",0,"Create index page!"
-cms,resource_browser.delete_file_confirm,,en-US,"Are you sure you want to delete this file?","Are you sure you want to delete this file?",0,"Are you sure you want to delete this file?"
-cms,resource_browser.delete_folder_confirm,,en-US,"Are you sure you want to delete this folder and all its contents?","Are you sure you want to delete this folder and all its contents?",0,"Are you sure you want to delete this folder and all its contents?"
-cms,resource_browser.delete_invalid_confirm,,en-US,"Are you sure you want to delete this invalid entry?","Are you sure you want to delete this invalid entry?",0,"Are you sure you want to delete this invalid entry?"
-cms,resource_browser.delete_webpage_confirm,,en-US,"Are you sure you want to delete this webpage?","Are you sure you want to delete this webpage?",0,"Are you sure you want to delete this webpage?"
-cms,resource_browser.help_create,,en-US,"Create folders and webpages within them.","Create folders and webpages within them.",0,"Create folders and webpages within them."
-cms,resource_browser.help_move,,en-US,"Drag and drop to move items between folders.","Drag and drop to move items between folders.",0,"Drag and drop to move items between folders."
-cms,resource_browser.insert,,en-US,Insert,Insert,0,Insert
-cms,resource_browser.invalid_entry,,en-US,"Invalid entry","Invalid entry",0,"Invalid entry"
-cms,resource_browser.new_domain,,en-US,"New domain","New domain",0,"New domain"
-cms,resource_browser.preview_index_page,,en-US,"Preview (index page)","Preview (index page)",0,"Preview (index page)"
-cms,resource_browser.root_not_found,,en-US,"Root node not found for the resource tree","Root node not found for the resource tree",0,"Root node not found for the resource tree"
-cms,resource_browser.select_tree_item,,en-US,"Select an item from the tree","Select an item from the tree",0,"Select an item from the tree"
-cms,resource_browser.site_structure,,en-US,"Site structure","Site structure",0,"Site structure"
-cms,richtext.assigned,,en-US,"Text content assigned","Text content assigned",0,"Text content assigned"
-cms,richtext.field.content.explanation,,en-US,"Format text freely, add images, and embed external content (e.g. YouTube). Use HTML view for embed codes.","Format text freely, add images, and embed external content (e.g. YouTube). Use HTML view for embed codes.",0,"Format text freely, add images, and embed external content (e.g. YouTube). Use HTML view for embed codes."
-cms,richtext.field.content.label,,en-US,Content,Content,0,Content
-cms,richtext.field.name.explanation,,en-US,"Visible in the admin area only. Use this to identify the content when selecting it for display on public pages. Must be unique.","Visible in the admin area only. Use this to identify the content when selecting it for display on public pages. Must be unique.",0,"Visible in the admin area only. Use this to identify the content when selecting it for display on public pages. Must be unique."
-cms,richtext.field.name.label,,en-US,"Name (identifier)","Name (identifier)",0,"Name (identifier)"
-cms,richtext.field.name.unique_error,,en-US,"An information content item with this name already exists","An information content item with this name already exists",0,"An information content item with this name already exists"
-cms,richtext.field.title.explanation,,en-US,"Appears as a title above the text. Leave empty for no title.","Appears as a title above the text. Leave empty for no title.",0,"Appears as a title above the text. Leave empty for no title."
-cms,richtext.field.title.label,,en-US,Heading,Heading,0,Heading
-cms,richtext.form.name,,en-US,"Text content","Text content",0,"Text content"
-cms,richtext.form.title_create,,en-US,"Create text content","Create text content",0,"Create text content"
-cms,richtext.form.title_edit,,en-US,"Edit text content","Edit text content",0,"Edit text content"
-cms,richtext.not_set,,en-US,"No content chosen","No content chosen",0,"No content chosen"
-cms,richtext.saved,,en-US,"Content saved","Content saved",0,"Content saved"
-cms,richtext.select.form.title,,en-US,"Select text content","Select text content",0,"Select text content"
-cms,richtext.updated,,en-US,"Content updated","Content updated",0,"Content updated"
-cms,richtext.widget.choose,,en-US,"Select text content","Select text content",0,"Select text content"
-cms,richtext.widget.create,,en-US,"Create text content","Create text content",0,"Create text content"
-cms,richtext.widget.description,,en-US,"Freely editable text with images","Freely editable text with images",0,"Freely editable text with images"
-cms,richtext.widget.edit,,en-US,"Edit text content","Edit text content",0,"Edit text content"
-cms,richtext.widget.name,,en-US,"Editable text","Editable text",0,"Editable text"
-cms,tree.field.type.explanation,,en-US,"Select from the predefined trees","Select from the predefined trees",0,"Select from the predefined trees"
-cms,tree.field.type.label,,en-US,Tree,Tree,0,Tree
-cms,tree.invalid_parent_id,,en-US,"Invalid parent ID","Invalid parent ID",0,"Invalid parent ID"
-cms,tree.missing_type,,en-US,"Missing tree type","Missing tree type",0,"Missing tree type"
-cms,tree.no_connection_id,,en-US,"No widget connection ID given","No widget connection ID given",0,"No widget connection ID given"
-cms,tree.select_menu_item,,en-US,"Select a menu item from the tree","Select a menu item from the tree",0,"Select a menu item from the tree"
-cms,tree.unknown_type,,en-US,"Unknown tree item type: {type}","Unknown tree item type: {type}",0,"Unknown tree item type: {type}"
-cms,webpage.create_for_params,,en-US,"Create a webpage for the following parameters: <br>{param_name}, {param_value}","Create a webpage for the following parameters: <br>{param_name}, {param_value}",0,"Create a webpage for the following parameters: <br>{param_name}, {param_value}"
-cms,webpage.create_for_widget,,en-US,"Create a webpage with the following content: <br><b>{widget}</b>","Create a webpage with the following content: <br><b>{widget}</b>",0,"Create a webpage with the following content: <br><b>{widget}</b>"
-cms,webpage.field.layout.explanation,,en-US,"The webpage layout structure determines where content elements can be placed on the page.","The webpage layout structure determines where content elements can be placed on the page.",0,"The webpage layout structure determines where content elements can be placed on the page."
-cms,webpage.field.layout.label,,en-US,"Page type","Page type",0,"Page type"
-cms,webpage_domain.field.resource_name.explanation,,en-US,"Set this domain name in the DOMAIN_CONTEXT configuration so this domain and its child pages become active.","Set this domain name in the DOMAIN_CONTEXT configuration so this domain and its child pages become active.",0,"Set this domain name in the DOMAIN_CONTEXT configuration so this domain and its child pages become active."
-cms,webpage_domain.field.resource_name.label,,en-US,"Domain name","Domain name",0,"Domain name"
-cms,webpage_domain.title_create,,en-US,"Add new domain","Add new domain",0,"Add new domain"
-cms,webpage_domain.title_edit,,en-US,"Edit domain","Edit domain",0,"Edit domain"
-cms,webpage_file.field.resource_name.explanation,,en-US,"This is the file name used in the URL. Avoid accented characters and spaces, and keep the correct file extension.","This is the file name used in the URL. Avoid accented characters and spaces, and keep the correct file extension.",0,"This is the file name used in the URL. Avoid accented characters and spaces, and keep the correct file extension."
-cms,webpage_file.field.resource_name.label,,en-US,"SEO-friendly URL name","SEO-friendly URL name",0,"SEO-friendly URL name"
-cms,webpage_file.field.text.explanation,,en-US,"For images this may appear as a longer description below the title.","For images this may appear as a longer description below the title.",0,"For images this may appear as a longer description below the title."
-cms,webpage_file.field.text.label,,en-US,Description,Description,0,Description
-cms,webpage_file.field.title.explanation,,en-US,"For images this may appear below the image.","For images this may appear below the image.",0,"For images this may appear below the image."
-cms,webpage_file.field.title.label,,en-US,Title,Title,0,Title
-cms,webpage_file.title_edit,,en-US,"Edit file name","Edit file name",0,"Edit file name"
-cms,webpage_folder.field.resource_name.explanation,,en-US,"This is the real folder name used in the URL. Changing it later may cause visitors from search engines to see a 404 page.","This is the real folder name used in the URL. Changing it later may cause visitors from search engines to see a 404 page.",0,"This is the real folder name used in the URL. Changing it later may cause visitors from search engines to see a 404 page."
-cms,webpage_folder.field.resource_name.label,,en-US,"SEO-friendly folder URL name","SEO-friendly folder URL name",0,"SEO-friendly folder URL name"
-cms,webpage_folder.title_create,,en-US,"Create new folder","Create new folder",0,"Create new folder"
-cms,webpage_folder.title_edit,,en-US,"Edit folder","Edit folder",0,"Edit folder"
-cms,webpage_from_path.subtitle,,en-US,"If you want to create this webpage, you can do it here. Before doing so, make sure the URL was not mistyped.","If you want to create this webpage, you can do it here. Before doing so, make sure the URL was not mistyped.",0,"If you want to create this webpage, you can do it here. Before doing so, make sure the URL was not mistyped."
-cms,webpage_from_path.title,,en-US,"The requested webpage was not found!","The requested webpage was not found!",0,"The requested webpage was not found!"
-cms,webpage_page.field.description.explanation,,en-US,"Description meta tag, usually shown under the URL in search results.","Description meta tag, usually shown under the URL in search results.",0,"Description meta tag, usually shown under the URL in search results."
-cms,webpage_page.field.description.label,,en-US,Description,Description,0,Description
-cms,webpage_page.field.keywords.explanation,,en-US,"Keywords meta tag with comma-separated values.","Keywords meta tag with comma-separated values.",0,"Keywords meta tag with comma-separated values."
-cms,webpage_page.field.keywords.label,,en-US,Keywords,Keywords,0,Keywords
-cms,webpage_page.field.resource_name.explanation,,en-US,"This is the real URL name of the page. Change it later only when necessary.","This is the real URL name of the page. Change it later only when necessary.",0,"This is the real URL name of the page. Change it later only when necessary."
-cms,webpage_page.field.resource_name.label,,en-US,"SEO-friendly URL name","SEO-friendly URL name",0,"SEO-friendly URL name"
-cms,webpage_page.field.title.explanation,,en-US,"HTML title meta tag shown in the browser window title.","HTML title meta tag shown in the browser window title.",0,"HTML title meta tag shown in the browser window title."
-cms,webpage_page.field.title.label,,en-US,Title,Title,0,Title
-cms,webpage_page.title_create,,en-US,"Create new webpage","Create new webpage",0,"Create new webpage"
-cms,webpage_page.title_edit,,en-US,"Edit webpage","Edit webpage",0,"Edit webpage"
-cms,widget.insert.button,,en-US,Insert,Insert,0,Insert
-cms,widget.insert.icon_title,,en-US,"Insert content","Insert content",0,"Insert content"
-cms,widget.insert.placeholder,,en-US,"-- Insert content --","-- Insert content --",0,"-- Insert content --"
-cms,widget.insert_from_clipboard,,en-US,"Insert clipboard content here","Insert clipboard content here",0,"Insert clipboard content here"
-cms,widget_connection.added,,en-US,"Content element placed on the webpage","Content element placed on the webpage",0,"Content element placed on the webpage"
-cms,widget_connection.copied_to_clipboard,,en-US,"Content copied to clipboard","Content copied to clipboard",0,"Content copied to clipboard"
-cms,widget_connection.duplicate_not_allowed,,en-US,"This content element is already on this block and multiple placement is not allowed.","This content element is already on this block and multiple placement is not allowed.",0,"This content element is already on this block and multiple placement is not allowed."
-cms,widget_connection.moved,,en-US,"Content element moved","Content element moved",0,"Content element moved"
-cms,widget_connection.remove_from_webpage,,en-US,"Remove from this webpage","Remove from this webpage",0,"Remove from this webpage"
-cms,widget_connection.removed,,en-US,"Content element removed from the webpage","Content element removed from the webpage",0,"Content element removed from the webpage"
-cms,widget_connection.select_widget_type,,en-US,"Choose the content type to insert","Choose the content type to insert",0,"Choose the content type to insert"
-cms,widget_connection_params.field.anchor.explanation,,en-US,"Anchor name that can be used in links to jump to this content on the page.","Anchor name that can be used in links to jump to this content on the page.",0,"Anchor name that can be used in links to jump to this content on the page."
-cms,widget_connection_params.field.anchor.label,,en-US,Anchor,Anchor,0,Anchor
-cms,widget_connection_params.field.float.clear,,en-US,"New row","New row",0,"New row"
-cms,widget_connection_params.field.float.explanation,,en-US,"Content box alignment. Floated elements can appear next to each other.","Content box alignment. Floated elements can appear next to each other.",0,"Content box alignment. Floated elements can appear next to each other."
-cms,widget_connection_params.field.float.label,,en-US,Alignment,Alignment,0,Alignment
-cms,widget_connection_params.field.float.left,,en-US,"Floated left","Floated left",0,"Floated left"
-cms,widget_connection_params.field.float.left_clear,,en-US,"Floated left in new row","Floated left in new row",0,"Floated left in new row"
-cms,widget_connection_params.field.float.none,,en-US,"No special alignment","No special alignment",0,"No special alignment"
-cms,widget_connection_params.field.float.right,,en-US,"Floated right","Floated right",0,"Floated right"
-cms,widget_connection_params.field.float.right_clear,,en-US,"Floated right in new row","Floated right in new row",0,"Floated right in new row"
-cms,widget_connection_params.field.height.explanation,,en-US,"Height in CSS format with unit (for example 100%, 200px, or auto).","Height in CSS format with unit (for example 100%, 200px, or auto).",0,"Height in CSS format with unit (for example 100%, 200px, or auto)."
-cms,widget_connection_params.field.height.label,,en-US,Height,Height,0,Height
-cms,widget_connection_params.field.margin_bottom.explanation,,en-US,"Bottom margin in CSS format with unit (for example 100% or 200px).","Bottom margin in CSS format with unit (for example 100% or 200px).",0,"Bottom margin in CSS format with unit (for example 100% or 200px)."
-cms,widget_connection_params.field.margin_bottom.label,,en-US,"Bottom margin","Bottom margin",0,"Bottom margin"
-cms,widget_connection_params.field.margin_left.explanation,,en-US,"Left margin in CSS format with unit (for example 100% or 200px).","Left margin in CSS format with unit (for example 100% or 200px).",0,"Left margin in CSS format with unit (for example 100% or 200px)."
-cms,widget_connection_params.field.margin_left.label,,en-US,"Left margin","Left margin",0,"Left margin"
-cms,widget_connection_params.field.margin_right.explanation,,en-US,"Right margin in CSS format with unit (for example 100% or 200px).","Right margin in CSS format with unit (for example 100% or 200px).",0,"Right margin in CSS format with unit (for example 100% or 200px)."
-cms,widget_connection_params.field.margin_right.label,,en-US,"Right margin","Right margin",0,"Right margin"
-cms,widget_connection_params.field.margin_top.explanation,,en-US,"Top margin in CSS format with unit (for example 100% or 200px).","Top margin in CSS format with unit (for example 100% or 200px).",0,"Top margin in CSS format with unit (for example 100% or 200px)."
-cms,widget_connection_params.field.margin_top.label,,en-US,"Top margin","Top margin",0,"Top margin"
-cms,widget_connection_params.field.width.explanation,,en-US,"Width in CSS format with unit (for example 100%, 200px, or auto).","Width in CSS format with unit (for example 100%, 200px, or auto).",0,"Width in CSS format with unit (for example 100%, 200px, or auto)."
-cms,widget_connection_params.field.width.label,,en-US,Width,Width,0,Width
-cms,widget_connection_params.missing_widget_id,,en-US,"Widget ID is missing","Widget ID is missing",0,"Widget ID is missing"
-cms,widget_connection_params.no_content_id,,en-US,"No content ID given","No content ID given",0,"No content ID given"
-cms,widget_connection_params.subtitle,,en-US,"Webpage: {page}","Webpage: {page}",0,"Webpage: {page}"
-cms,widget_connection_params.title,,en-US,"Edit display settings","Edit display settings",0,"Edit display settings"
-cms,widget_connection_settings.field.is_last.explanation,,en-US,"Check this if this is the last column in the row. This helps keep spacing correct and prevents overlapping or broken layout.","Check this if this is the last column in the row. This helps keep spacing correct and prevents overlapping or broken layout.",0,"Check this if this is the last column in the row. This helps keep spacing correct and prevents overlapping or broken layout."
-cms,widget_connection_settings.field.is_last.label,,en-US,"Last in row","Last in row",0,"Last in row"
-cms,widget_connection_settings.field.widget_width.label,,en-US,"Content width","Content width",0,"Content width"
-cms,widget_connection_settings.missing_widget_id,,en-US,"Widget ID is missing","Widget ID is missing",0,"Widget ID is missing"
-cms,widget_connection_settings.subtitle,,en-US,"Webpage: {page}","Webpage: {page}",0,"Webpage: {page}"
-cms,widget_group.begin_delete_error,,en-US,"Error: Unable to delete opening block","Error: Unable to delete opening block",0,"Error: Unable to delete opening block"
-cms,widget_group.both_delete_error,,en-US,"Error: Unable to delete opening or closing block","Error: Unable to delete opening or closing block",0,"Error: Unable to delete opening or closing block"
-cms,widget_group.end_delete_error,,en-US,"Error: Unable to delete closing block","Error: Unable to delete closing block",0,"Error: Unable to delete closing block"
-cms,widget_group.end_missing_delete_error,,en-US,"Closing block not found and opening block deletion failed","Closing block not found and opening block deletion failed",0,"Closing block not found and opening block deletion failed"
-cms,widget_group.end_missing_removed_beginning,,en-US,"Closing block not found, opening block removed successfully","Closing block not found, opening block removed successfully",0,"Closing block not found, opening block removed successfully"
-cms,widget_group.remove_block,,en-US,"Remove block","Remove block",0,"Remove block"
-cms,widget_group.removed,,en-US,"Block removed from webpage","Block removed from webpage",0,"Block removed from webpage"
-cms,widget_preview.description,,en-US,Description,Description,0,Description
-cms,widget_preview.implemented,,en-US,Implemented,Implemented,0,Implemented
-cms,widget_preview.info.current_theme,,en-US,"Current theme","Current theme",0,"Current theme"
-cms,widget_preview.info.fallback,,en-US,Fallback,Fallback,0,Fallback
-cms,widget_preview.info.implemented,,en-US,Implemented,Implemented,0,Implemented
-cms,widget_preview.info.template,,en-US,Template,Template,0,Template
-cms,widget_preview.info.title,,en-US,"Widget preview","Widget preview",0,"Widget preview"
-cms,widget_preview.info.widget,,en-US,Widget,Widget,0,Widget
-cms,widget_preview.none,,en-US,"No mockable widgets found.","No mockable widgets found.",0,"No mockable widgets found."
-cms,widget_preview.not_implemented,,en-US,"Not implemented","Not implemented",0,"Not implemented"
-cms,widget_preview.not_mockable_prefix,,en-US,Widget,Widget,0,Widget
-cms,widget_preview.not_mockable_suffix,,en-US,"does not implement iMockable.","does not implement iMockable.",0,"does not implement iMockable."
-cms,widget_preview.not_registered,,en-US,"Widget not registered: {widget}","Widget not registered: {widget}",0,"Widget not registered: {widget}"
-cms,widget_preview.redirecting,,en-US,"Redirecting to the correct theme...","Redirecting to the correct theme...",0,"Redirecting to the correct theme..."
-cms,widget_preview.title,,en-US,"Available widgets for preview","Available widgets for preview",0,"Available widgets for preview"
-cms,widget_preview.widget,,en-US,Widget,Widget,0,Widget
-common,actions,,en-US,Actions,Actions,0,Actions
-common,all,,en-US,All,All,0,All
-common,back,,en-US,Back,Back,0,Back
-common,calendar,,en-US,Calendar,Calendar,0,Calendar
-common,cancel,,en-US,Cancel,Cancel,0,Cancel
-common,close,,en-US,Close,Close,0,Close
-common,choose_placeholder,,en-US,"-- Choose --","-- Choose --",0,"-- Choose --"
-common,delete,,en-US,Delete,Delete,0,Delete
-common,download,,en-US,Download,Download,0,Download
-common,edit,,en-US,Edit,Edit,0,Edit
-common,error,,en-US,Error,Error,0,Error
-common,error_save,,en-US,"Error: Unable to save","Error: Unable to save",0,"Error: Unable to save"
-common,id,,en-US,ID,ID,0,ID
-common,loading,,en-US,Loading...,Loading...,0,Loading...
-common,logout,,en-US,"Log out","Log out",0,"Log out"
-common,missing_required_url_params,,en-US,"Missing required URL parameters","Missing required URL parameters",0,"Missing required URL parameters"
-common,move_down,,en-US,"Move down","Move down",0,"Move down"
-common,move_up,,en-US,"Move up","Move up",0,"Move up"
-common,never,,en-US,Never,Never,0,Never
-common,no,,en-US,No,No,0,No
-common,no_changes,,en-US,"No changes made","No changes made",0,"No changes made"
-common,no_data,,en-US,"No data","No data",0,"No data"
-common,no_description,,en-US,"No description","No description",0,"No description"
-common,not_set,,en-US,"[not set]","[not set]",0,"[not set]"
-common,open,,en-US,Open,Open,0,Open
-common,operations,,en-US,Operations,Operations,0,Operations
-common,preview,,en-US,Preview,Preview,0,Preview
-common,read_more,,en-US,"Read more","Read more",0,"Read more"
-common,renamed,,en-US,Renamed,Renamed,0,Renamed
-common,save,,en-US,Save,Save,0,Save
-common,saved,,en-US,"Record saved","Record saved",0,"Record saved"
-common,saved_short,,en-US,Saved,Saved,0,Saved
-common,search,,en-US,Search,Search,0,Search
-common,unknown,,en-US,Unknown,Unknown,0,Unknown
-common,upload,,en-US,Upload,Upload,0,Upload
-common,user,,en-US,User,User,0,User
-common,width,,en-US,Width,Width,0,Width
-common,yes,,en-US,Yes,Yes,0,Yes
-datatable,column_visibility,,en-US,"Visible columns","Visible columns",0,"Visible columns"
-datatable,displayed_columns,,en-US,"Displayed columns","Displayed columns",0,"Displayed columns"
-datatable,empty_table,,en-US,"No data","No data",0,"No data"
-datatable,first,,en-US,First,First,0,First
-datatable,info_compact,,en-US,"_START_ - _END_ / _TOTAL_ items","_START_ - _END_ / _TOTAL_ items",0,"_START_ - _END_ / _TOTAL_ items"
-datatable,info_empty,,en-US,"No results","No results",0,"No results"
-datatable,info_filtered_compact,,en-US,"(filtered from _MAX_ items)","(filtered from _MAX_ items)",0,"(filtered from _MAX_ items)"
-datatable,info_filtered_html,,en-US,"<br><i>filtered from _MAX_ rows</i>","<br><i>filtered from _MAX_ rows</i>",0,"<br><i>filtered from _MAX_ rows</i>"
-datatable,info_full,,en-US,"_TOTAL_ displayable items (showing: _START_ - _END_)","_TOTAL_ displayable items (showing: _START_ - _END_)",0,"_TOTAL_ displayable items (showing: _START_ - _END_)"
-datatable,last,,en-US,Last,Last,0,Last
-datatable,length_menu,,en-US,"_MENU_ items/page","_MENU_ items/page",0,"_MENU_ items/page"
-datatable,loading_records,,en-US,Loading...,Loading...,0,Loading...
-datatable,next,,en-US,Next,Next,0,Next
-datatable,previous,,en-US,Previous,Previous,0,Previous
-datatable,processing,,en-US,Processing...,Processing...,0,Processing...
-datatable,search,,en-US,Search,Search,0,Search
-datatable,zero_records,,en-US,"No displayable items","No displayable items",0,"No displayable items"
-layout,admin_default.description,,en-US,"Single-column admin layout","Single-column admin layout",0,"Single-column admin layout"
-layout,admin_default.name,,en-US,"Admin 1-column","Admin 1-column",0,"Admin 1-column"
-layout,admin_empty.description,,en-US,"Empty admin layout","Empty admin layout",0,"Empty admin layout"
-layout,admin_empty.name,,en-US,"Empty admin","Empty admin",0,"Empty admin"
-layout,admin_login.description,,en-US,"Admin login layout","Admin login layout",0,"Admin login layout"
-layout,admin_login.name,,en-US,"Admin login","Admin login",0,"Admin login"
-layout,admin_menu.description,,en-US,"Displays the admin menu","Displays the admin menu",0,"Displays the admin menu"
-layout,admin_menu.name,,en-US,"Admin menu","Admin menu",0,"Admin menu"
-layout,admin_nomenu.description,,en-US,"Admin layout without menu","Admin layout without menu",0,"Admin layout without menu"
-layout,admin_nomenu.name,,en-US,"Admin without menu","Admin without menu",0,"Admin without menu"
-layout,header_right.description,,en-US,"Displays the quick access menu","Displays the quick access menu",0,"Displays the quick access menu"
-layout,header_right.name,,en-US,"Quick menu","Quick menu",0,"Quick menu"
-layout,main_menu.description,,en-US,"Displays the main menu","Displays the main menu",0,"Displays the main menu"
-layout,main_menu.name,,en-US,"Main menu","Main menu",0,"Main menu"
-layout,public_2row.description,,en-US,"Two-column public layout","Two-column public layout",0,"Two-column public layout"
-layout,public_2row.hero.balanced_life,,en-US,"Want to live a more balanced life?","Want to live a more balanced life?",0,"Want to live a more balanced life?"
-layout,public_2row.hero.better_quality_of_life,,en-US,"Want a better quality of life?","Want a better quality of life?",0,"Want a better quality of life?"
-layout,public_2row.hero.conflict_management,,en-US,"Want to handle conflicts better?","Want to handle conflicts better?",0,"Want to handle conflicts better?"
-layout,public_2row.hero.equal_partner,,en-US,"Want to be treated as an equal partner?","Want to be treated as an equal partner?",0,"Want to be treated as an equal partner?"
-layout,public_2row.hero.self_discovery,,en-US,"Want to understand yourself better?","Want to understand yourself better?",0,"Want to understand yourself better?"
-layout,public_2row.hero.solution,,en-US,"The solution: TeamSolution!","The solution: TeamSolution!",0,"The solution: TeamSolution!"
-layout,public_2row.hero.success_and_happiness,,en-US,"Want to be successful and happy?","Want to be successful and happy?",0,"Want to be successful and happy?"
-layout,public_2row.name,,en-US,2-column,2-column,0,2-column
-layout,public_default.description,,en-US,"Single-column public layout","Single-column public layout",0,"Single-column public layout"
-layout,public_default.name,,en-US,1-column,1-column,0,1-column
-layout,public_empty.description,,en-US,"Empty layout for simple responses","Empty layout for simple responses",0,"Empty layout for simple responses"
-layout,public_empty.name,,en-US,Empty,Empty,0,Empty
-layout,public_login.description,,en-US,"Login layout","Login layout",0,"Login layout"
-layout,public_login.name,,en-US,Login,Login,0,Login
-layout,public_preview.description,,en-US,"Preview layout","Preview layout",0,"Preview layout"
-layout,public_preview.name,,en-US,Preview,Preview,0,Preview
-layout,top_menu_admin.description,,en-US,"Displays the admin top menu","Displays the admin top menu",0,"Displays the admin top menu"
-layout,top_menu_admin.name,,en-US,"Admin top menu","Admin top menu",0,"Admin top menu"
-layout,unknown.description,,en-US,"Layout not configured","Layout not configured",0,"Layout not configured"
-layout,unknown.name,,en-US,"Unknown layout","Unknown layout",0,"Unknown layout"
-layout,widget_previewer.description,,en-US,"Minimal layout for widget previews","Minimal layout for widget previews",0,"Minimal layout for widget previews"
-layout,widget_previewer.name,,en-US,"Widget previewer","Widget previewer",0,"Widget previewer"
-mcp,tokens.col.actions,,en-US,Actions,Actions,0,Actions
-mcp,tokens.col.created,,en-US,Created,Created,0,Created
-mcp,tokens.col.expires,,en-US,Expires,Expires,0,Expires
-mcp,tokens.col.last_used,,en-US,"Last used","Last used",0,"Last used"
-mcp,tokens.col.name,,en-US,Name,Name,0,Name
-mcp,tokens.col.prefix,,en-US,Prefix,Prefix,0,Prefix
-mcp,tokens.col.status,,en-US,Status,Status,0,Status
-mcp,tokens.create,,en-US,"Create token","Create token",0,"Create token"
-mcp,tokens.create_title,,en-US,"Create token","Create token",0,"Create token"
-mcp,tokens.created_help,,en-US,"Copy this user-bound token now. It will not be shown again.","Copy this user-bound token now. It will not be shown again.",0,"Copy this user-bound token now. It will not be shown again."
-mcp,tokens.created_title,,en-US,"Token created","Token created",0,"Token created"
-mcp,tokens.description,,en-US,"Create and revoke MCP access tokens tied to your user account.","Create and revoke MCP access tokens tied to your user account.",0,"Create and revoke MCP access tokens tied to your user account."
-mcp,tokens.empty,,en-US,"No MCP tokens yet.","No MCP tokens yet.",0,"No MCP tokens yet."
-mcp,tokens.endpoint,,en-US,"MCP endpoint","MCP endpoint",0,"MCP endpoint"
-mcp,tokens.existing_title,,en-US,"Existing tokens","Existing tokens",0,"Existing tokens"
-mcp,tokens.expiry,,en-US,Expiry,Expiry,0,Expiry
-mcp,tokens.expiry_30,,en-US,"30 days","30 days",0,"30 days"
-mcp,tokens.expiry_365,,en-US,"1 year","1 year",0,"1 year"
-mcp,tokens.expiry_90,,en-US,"90 days","90 days",0,"90 days"
-mcp,tokens.expiry_never,,en-US,"No expiry","No expiry",0,"No expiry"
-mcp,tokens.name,,en-US,Name,Name,0,Name
-mcp,tokens.name_placeholder,,en-US,"Claude Desktop - local","Claude Desktop - local",0,"Claude Desktop - local"
-mcp,tokens.never,,en-US,Never,Never,0,Never
-mcp,tokens.revoke,,en-US,Revoke,Revoke,0,Revoke
-mcp,tokens.revoke_confirm,,en-US,"Revoke this MCP token?","Revoke this MCP token?",0,"Revoke this MCP token?"
-mcp,tokens.security_note,,en-US,"MCP clients using one of these tokens run as your Radaptor user and have the same permissions you have. Keep tokens secret and revoke any token you no longer use.","MCP clients using one of these tokens run as your Radaptor user and have the same permissions you have. Keep tokens secret and revoke any token you no longer use.",0,"MCP clients using one of these tokens run as your Radaptor user and have the same permissions you have. Keep tokens secret and revoke any token you no longer use."
-mcp,tokens.status.active,,en-US,Active,Active,0,Active
-mcp,tokens.status.expired,,en-US,Expired,Expired,0,Expired
-mcp,tokens.status.revoked,,en-US,Revoked,Revoked,0,Revoked
-mcp,tokens.title,,en-US,"MCP tokens","MCP tokens",0,"MCP tokens"
-record_action,datasheet,,en-US,Datasheet,Datasheet,0,Datasheet
-record_action,versions,,en-US,Versions,Versions,0,Versions
-record_meta,created_by,,en-US,"Created by","Created by",0,"Created by"
-record_meta,last_modified,,en-US,"Last modified","Last modified",0,"Last modified"
-resource,new_folder,,en-US,"New folder","New folder",0,"New folder"
-resource,new_webpage,,en-US,"New webpage","New webpage",0,"New webpage"
-resource,properties,,en-US,Properties,Properties,0,Properties
-resource,security,,en-US,Security,Security,0,Security
-resource,upload_file,,en-US,"Upload file...","Upload file...",0,"Upload file..."
-response_error,access_denied,,en-US,"Access denied","Access denied",0,"Access denied"
-response_error,access_restricted,,en-US,"Access restricted","Access restricted",0,"Access restricted"
-response_error,forbidden.message,,en-US,"You do not have permission to access this resource.","You do not have permission to access this resource.",0,"You do not have permission to access this resource."
-response_error,forbidden.title,,en-US,Forbidden,Forbidden,0,Forbidden
-response_error,internal.contact_support,,en-US,"If the problem persists, please contact our support team.","If the problem persists, please contact our support team.",0,"If the problem persists, please contact our support team."
-response_error,internal.go_back_previous_page,,en-US,"Go back to the previous page using your browser's back button","Go back to the previous page using your browser's back button",0,"Go back to the previous page using your browser's back button"
-response_error,internal.intro,,en-US,"We apologize for the inconvenience. Our team has been notified and we are working to fix this issue.","We apologize for the inconvenience. Our team has been notified and we are working to fix this issue.",0,"We apologize for the inconvenience. Our team has been notified and we are working to fix this issue."
-response_error,internal.reference_label,,en-US,Reference,Reference,0,Reference
-response_error,internal.refresh_page,,en-US,"Refresh this page","Refresh this page",0,"Refresh this page"
-response_error,internal.title,,en-US,"Oops! Something went wrong on our end.","Oops! Something went wrong on our end.",0,"Oops! Something went wrong on our end."
-response_error,internal.try_actions,,en-US,"You can try to:","You can try to:",0,"You can try to:"
-response_error,internal.try_again_in_a_few_minutes,,en-US,"Try again in a few minutes","Try again in a few minutes",0,"Try again in a few minutes"
-runtime_diagnostics,card.database,,en-US,Database,Database,0,Database
-runtime_diagnostics,card.email,,en-US,"Email safety","Email safety",0,"Email safety"
-runtime_diagnostics,card.environment,,en-US,Environment,Environment,0,Environment
-runtime_diagnostics,card.mcp,,en-US,MCP,MCP,0,MCP
-runtime_diagnostics,card.packages,,en-US,Packages,Packages,0,Packages
-runtime_diagnostics,card.redis,,en-US,Redis,Redis,0,Redis
-runtime_diagnostics,card.warnings,,en-US,Warnings,Warnings,0,Warnings
-runtime_diagnostics,no,,en-US,no,no,0,no
-runtime_diagnostics,none,,en-US,None,None,0,None
-runtime_diagnostics,safe_to_test,,en-US,"Safe to test","Safe to test",0,"Safe to test"
-runtime_diagnostics,subtitle,,en-US,"Effective runtime state with secrets redacted.","Effective runtime state with secrets redacted.",0,"Effective runtime state with secrets redacted."
-runtime_diagnostics,title,,en-US,"Runtime diagnostics","Runtime diagnostics",0,"Runtime diagnostics"
-runtime_diagnostics,yes,,en-US,yes,yes,0,yes
-selection,delete_invalid_entry_confirm,,en-US,"Are you sure you want to delete this invalid entry?","Are you sure you want to delete this invalid entry?",0,"Are you sure you want to delete this invalid entry?"
-selection,delete_selected,,en-US,"Delete selected","Delete selected",0,"Delete selected"
-selection,delete_selected_confirm,,en-US,"Are you sure you want to delete all selected items?","Are you sure you want to delete all selected items?",0,"Are you sure you want to delete all selected items?"
-selection,group,,en-US,"Group selection","Group selection",0,"Group selection"
-selection,invalid_entry,,en-US,"Invalid entry","Invalid entry",0,"Invalid entry"
-selection,multiple,,en-US,"Multiple selection","Multiple selection",0,"Multiple selection"
-selection,selected_items,,en-US,"Selected items","Selected items",0,"Selected items"
-social,disqus.comments_link,,en-US,"Disqus comments","Disqus comments",0,"Disqus comments"
-social,disqus.enable_javascript,,en-US,"JavaScript must be enabled to display","JavaScript must be enabled to display",0,"JavaScript must be enabled to display"
-social,disqus.powered_by,,en-US,"comments powered by","comments powered by",0,"comments powered by"
-system_message,default_header,,en-US,"System message","System message",0,"System message"
-theme,error.description,,en-US,"Fallback error theme","Fallback error theme",0,"Fallback error theme"
-theme,error.name,,en-US,Error,Error,0,Error
-theme,radaptor_portal_admin.description,,en-US,"Bootstrap 5 admin theme with portal neon/glass styling","Bootstrap 5 admin theme with portal neon/glass styling",0,"Bootstrap 5 admin theme with portal neon/glass styling"
-theme,radaptor_portal_admin.name,,en-US,RadaptorPortalAdmin,RadaptorPortalAdmin,0,RadaptorPortalAdmin
-theme,so_admin.description,,en-US,"SO-like admin theme","SO-like admin theme",0,"SO-like admin theme"
-theme,so_admin.name,,en-US,SO-Admin,SO-Admin,0,SO-Admin
-widget,admin_menu.description,,en-US,"Manage the admin menu tree","Manage the admin menu tree",0,"Manage the admin menu tree"
-widget,admin_menu.name,,en-US,"Admin menu administration","Admin menu administration",0,"Admin menu administration"
-widget,blog.description,,en-US,Blog,Blog,0,Blog
-widget,blog.name,,en-US,Blog,Blog,0,Blog
-widget,blog_list.description,,en-US,"Blog list","Blog list",0,"Blog list"
-widget,blog_list.name,,en-US,"Blog list","Blog list",0,"Blog list"
-widget,cli_runner.description,,en-US,"Run CLI commands from the admin panel.","Run CLI commands from the admin panel.",0,"Run CLI commands from the admin panel."
-widget,cli_runner.name,,en-US,"CLI Runner","CLI Runner",0,"CLI Runner"
-widget,file_upload.description,,en-US,"File upload","File upload",0,"File upload"
-widget,file_upload.name,,en-US,"File upload","File upload",0,"File upload"
-widget,form.description,,en-US,"Displays a configured form","Displays a configured form",0,"Displays a configured form"
-widget,form.name,,en-US,Form,Form,0,Form
-widget,group_beginning.description,,en-US,"Separately managed content unit that can contain jointly styled elements.","Separately managed content unit that can contain jointly styled elements.",0,"Separately managed content unit that can contain jointly styled elements."
-widget,group_beginning.name,,en-US,"Content block","Content block",0,"Content block"
-widget,group_end.description,,en-US,"End of a separately managed content unit.","End of a separately managed content unit.",0,"End of a separately managed content unit."
-widget,group_end.name,,en-US,"End of content block","End of content block",0,"End of content block"
-widget,import_export.description,,en-US,"Central CSV import and export tools","Central CSV import and export tools",0,"Central CSV import and export tools"
-widget,import_export.name,,en-US,"Import / Export","Import / Export",0,"Import / Export"
-widget,js_tree.description,,en-US,"Displays and manages a hierarchical tree of admin resources","Displays and manages a hierarchical tree of admin resources",0,"Displays and manages a hierarchical tree of admin resources"
-widget,js_tree.name,,en-US,"Tree browser","Tree browser",0,"Tree browser"
-widget,js_tree.settings,,en-US,"Tree settings","Tree settings",0,"Tree settings"
-widget,main_menu.description,,en-US,"Manage the main menu tree","Manage the main menu tree",0,"Manage the main menu tree"
-widget,main_menu.name,,en-US,"Main menu administration","Main menu administration",0,"Main menu administration"
-widget,phpinfo_frame.description,,en-US,"Show PHP runtime information inside the admin layout.","Show PHP runtime information inside the admin layout.",0,"Show PHP runtime information inside the admin layout."
-widget,phpinfo_frame.name,,en-US,"PHPinfo frame","PHPinfo frame",0,"PHPinfo frame"
-widget,phpinfo_frame.open_raw,,en-US,"Open raw","Open raw",0,"Open raw"
-widget,phpinfo_frame.title,,en-US,PHPinfo,PHPinfo,0,PHPinfo
-widget,plain_html.description,,en-US,"HTML code (embed)","HTML code (embed)",0,"HTML code (embed)"
-widget,plain_html.name,,en-US,"HTML code (embed)","HTML code (embed)",0,"HTML code (embed)"
-widget,resource_acl_selector.description,,en-US,"Configure resource access permissions","Configure resource access permissions",0,"Configure resource access permissions"
-widget,resource_acl_selector.name,,en-US,"Resource access settings","Resource access settings",0,"Resource access settings"
-widget,resource_tree.description,,en-US,"Manage webpages, web folders, and uploaded files here.","Manage webpages, web folders, and uploaded files here.",0,"Manage webpages, web folders, and uploaded files here."
-widget,resource_tree.name,,en-US,"Webpage structure","Webpage structure",0,"Webpage structure"
-widget,rich_text.description,,en-US,"Freely editable text with images","Freely editable text with images",0,"Freely editable text with images"
-widget,rich_text.name,,en-US,"Editable text","Editable text",0,"Editable text"
-widget,role_list.description,,en-US,"Displays the role tree","Displays the role tree",0,"Displays the role tree"
-widget,role_list.name,,en-US,"Role list","Role list",0,"Role list"
-widget,role_selector.description,,en-US,"Role selector","Role selector",0,"Role selector"
-widget,role_selector.name,,en-US,"Role selector","Role selector",0,"Role selector"
-widget,tag_list.description,,en-US,"Tag list","Tag list",0,"Tag list"
-widget,tag_list.name,,en-US,"Tag list","Tag list",0,"Tag list"
-widget,template_engine_demo_blade.description,,en-US,"Demonstrates rendering a Blade template inside Radaptor.","Demonstrates rendering a Blade template inside Radaptor.",0,"Demonstrates rendering a Blade template inside Radaptor."
-widget,template_engine_demo_blade.name,,en-US,"Blade template engine demo","Blade template engine demo",0,"Blade template engine demo"
-widget,template_engine_demo_php.description,,en-US,"Demonstrates rendering a native PHP template inside Radaptor.","Demonstrates rendering a native PHP template inside Radaptor.",0,"Demonstrates rendering a native PHP template inside Radaptor."
-widget,template_engine_demo_php.name,,en-US,"PHP template engine demo","PHP template engine demo",0,"PHP template engine demo"
-widget,template_engine_demo_twig.description,,en-US,"Demonstrates rendering a Twig template inside Radaptor.","Demonstrates rendering a Twig template inside Radaptor.",0,"Demonstrates rendering a Twig template inside Radaptor."
-widget,template_engine_demo_twig.name,,en-US,"Twig template engine demo","Twig template engine demo",0,"Twig template engine demo"
-widget,user_description.description,,en-US,"Displays the details of a user","Displays the details of a user",0,"Displays the details of a user"
-widget,user_description.name,,en-US,"User details","User details",0,"User details"
-widget,user_list.description,,en-US,"User list","User list",0,"User list"
-widget,user_list.name,,en-US,"User list","User list",0,"User list"
-widget,usergroup_list.description,,en-US,"Displays the user group tree","Displays the user group tree",0,"Displays the user group tree"
-widget,usergroup_list.name,,en-US,"User group list","User group list",0,"User group list"
-widget,usergroup_selector.description,,en-US,"Select user groups for a user","Select user groups for a user",0,"Select user groups for a user"
-widget,usergroup_selector.name,,en-US,"User group selector","User group selector",0,"User group selector"
-widget,widget_error.description,,en-US,"Invalid widget","Invalid widget",0,"Invalid widget"
-widget,widget_error.invalid_type,,en-US,"Non-existent content type: {type}","Non-existent content type: {type}",0,"Non-existent content type: {type}"
-widget,widget_error.name,,en-US,"Invalid widget","Invalid widget",0,"Invalid widget"
-widget,widget_preview.description,,en-US,"Preview any widget with mock data. URL params: widget (required), theme (optional)","Preview any widget with mock data. URL params: widget (required), theme (optional)",0,"Preview any widget with mock data. URL params: widget (required), theme (optional)"
-widget,widget_preview.name,,en-US,"Widget preview","Widget preview",0,"Widget preview"
-workbench,tm_apply,,en-US,Apply,Apply,0,Apply
-workbench,tm_no_results,,en-US,"No suggestions","No suggestions",0,"No suggestions"
-workbench,tm_uses,,en-US,uses,uses,0,uses
-admin,menu.mailpit,,en-US,Mailpit,Mailpit,0,Mailpit
-admin,email_outbox.recipients_delivery_counts,,en-US,"({sent} sent / {failed} failed)","({sent} sent / {failed} failed)",0,"({sent} sent / {failed} failed)"
-admin,email_outbox.col.job,,en-US,Job,Job,0,Job
-admin,email_outbox.col.dead_lettered,,en-US,"Dead lettered","Dead lettered",0,"Dead lettered"
-admin,email_outbox.pagination.previous,,en-US,Previous,Previous,0,Previous
-admin,email_outbox.pagination.next,,en-US,Next,Next,0,Next
-runtime_diagnostics,card.package_roots,,en-US,"Package roots","Package roots",0,"Package roots"
-runtime_diagnostics,field.environment,,en-US,Environment,Environment,0,Environment
-runtime_diagnostics,field.application,,en-US,Application,Application,0,Application
-runtime_diagnostics,field.domain_context,,en-US,"Domain context","Domain context",0,"Domain context"
-runtime_diagnostics,field.runtime,,en-US,Runtime,Runtime,0,Runtime
-runtime_diagnostics,field.smtp_host,,en-US,"SMTP host","SMTP host",0,"SMTP host"
-runtime_diagnostics,field.smtp_port,,en-US,"SMTP port","SMTP port",0,"SMTP port"
-runtime_diagnostics,field.using_catcher,,en-US,"Using catcher","Using catcher",0,"Using catcher"
-runtime_diagnostics,field.catcher_host,,en-US,"Catcher host","Catcher host",0,"Catcher host"
-runtime_diagnostics,field.catcher_smtp_port,,en-US,"Catcher SMTP port","Catcher SMTP port",0,"Catcher SMTP port"
-runtime_diagnostics,field.mailpit_ui_url,,en-US,"Mailpit UI URL","Mailpit UI URL",0,"Mailpit UI URL"
-runtime_diagnostics,field.driver,,en-US,Driver,Driver,0,Driver
-runtime_diagnostics,field.host,,en-US,Host,Host,0,Host
-runtime_diagnostics,field.port,,en-US,Port,Port,0,Port
-runtime_diagnostics,field.database,,en-US,Database,Database,0,Database
-runtime_diagnostics,field.username,,en-US,Username,Username,0,Username
-runtime_diagnostics,field.password,,en-US,Password,Password,0,Password
-runtime_diagnostics,field.dsn,,en-US,DSN,DSN,0,DSN
-runtime_diagnostics,field.session,,en-US,Session,Session,0,Session
-runtime_diagnostics,field.cache,,en-US,Cache,Cache,0,Cache
-runtime_diagnostics,field.test,,en-US,Test,Test,0,Test
-runtime_diagnostics,field.public_url,,en-US,"Public URL","Public URL",0,"Public URL"
-runtime_diagnostics,field.allowed_origins,,en-US,"Allowed origins","Allowed origins",0,"Allowed origins"
-runtime_diagnostics,field.enabled_hint,,en-US,"Enabled hint","Enabled hint",0,"Enabled hint"
-runtime_diagnostics,field.mode,,en-US,Mode,Mode,0,Mode
-runtime_diagnostics,field.local_manifest,,en-US,"Local manifest","Local manifest",0,"Local manifest"
-runtime_diagnostics,field.local_lock,,en-US,"Local lock","Local lock",0,"Local lock"
-runtime_diagnostics,field.workspace_dev_mode,,en-US,"Workspace dev mode","Workspace dev mode",0,"Workspace dev mode"
-runtime_diagnostics,field.local_overrides_disabled,,en-US,"Local overrides disabled","Local overrides disabled",0,"Local overrides disabled"
-runtime_diagnostics,col.package,,en-US,Package,Package,0,Package
-runtime_diagnostics,col.source,,en-US,Source,Source,0,Source
-runtime_diagnostics,col.version,,en-US,Version,Version,0,Version
-runtime_diagnostics,col.active_path,,en-US,"Active path","Active path",0,"Active path"
-cms,template.missing,,en-US,"Missing template:","Missing template:",0,"Missing template:"
-cms,widget_preview.server_html_preview,,en-US,"Server HTML preview","Server HTML preview",0,"Server HTML preview"
-cms,widget_preview.subtree_json,,en-US,"Widget subtree JSON","Widget subtree JSON",0,"Widget subtree JSON"
-cms,widget_preview.subtree_json_description,,en-US,"Extracted from the same SDUI JSON document available through Open JSON.","Extracted from the same SDUI JSON document available through Open JSON.",0,"Extracted from the same SDUI JSON document available through Open JSON."
-cms,widget_preview.open_json,,en-US,"Open JSON","Open JSON",0,"Open JSON"
-cms,widget_preview.loading_json_preview,,en-US,"Loading JSON preview...","Loading JSON preview...",0,"Loading JSON preview..."
-cms,widget_preview.sdui_subtree_help,,en-US,"Showing the widget subtree extracted from the full SDUI JSON document.","Showing the widget subtree extracted from the full SDUI JSON document.",0,"Showing the widget subtree extracted from the full SDUI JSON document."
-cms,widget_preview.template_scope_note,,en-US,"This support check only looks at the resolved preview HTML template of the widget root node.","This support check only looks at the resolved preview HTML template of the widget root node.",0,"This support check only looks at the resolved preview HTML template of the widget root node."
-social,disqus.brand,,en-US,Disqus,Disqus,0,Disqus
-layout,public_2row.brand,,en-US,TeamSolution,TeamSolution,0,TeamSolution
-theme,template_engine_demo.col.name,,en-US,Name,Name,0,Name
-theme,template_engine_demo.col.email,,en-US,Email,Email,0,Email
-theme,template_engine_demo.col.role,,en-US,Role,Role,0,Role
-theme,template_engine_demo.engine_title,,en-US,"{engine} Template Engine","{engine} Template Engine",0,"{engine} Template Engine"
-theme,template_engine_demo.source_title,,en-US,"Template Source","Template Source",0,"Template Source"
-theme,template_engine_demo.rendered_output_title,,en-US,"Rendered Output","Rendered Output",0,"Rendered Output"
-layout,admin_empty.sign_in_to_continue,,en-US,"Sign in to continue.","Sign in to continue.",0,"Sign in to continue."
-cms,resource.field.locale.label,,en-US,"Content locale","Content locale",0,"Content locale"
-cms,resource.field.locale.explanation,,en-US,"Select a fixed locale for this resource, or leave it dynamic/inherited.","Select a fixed locale for this resource, or leave it dynamic/inherited.",0,"Select a fixed locale for this resource, or leave it dynamic/inherited."
-cms,resource.field.locale.dynamic,,en-US,"Dynamic / inherit","Dynamic / inherit",0,"Dynamic / inherit"
-cms,richtext.field.locale.label,,en-US,"Content locale","Content locale",0,"Content locale"
-cms,richtext.field.locale.explanation,,en-US,"The locale this text content belongs to.","The locale this text content belongs to.",0,"The locale this text content belongs to."
-cms,richtext.locale_mismatch,,en-US,"The selected text content does not match the page locale.","The selected text content does not match the page locale.",0,"The selected text content does not match the page locale."
-widget,locale_admin.name,,en-US,"Locale administration","Locale administration",0,"Locale administration"
-widget,locale_admin.description,,en-US,"Manage enabled application locales.","Manage enabled application locales.",0,"Manage enabled application locales."
-locale_admin,title,,en-US,Locales,Locales,0,Locales
-locale_admin,subtitle,,en-US,"Enable or disable locales offered for new admin content. Existing content is not deleted.","Enable or disable locales offered for new admin content. Existing content is not deleted.",0,"Enable or disable locales offered for new admin content. Existing content is not deleted."
-locale_admin,add_title,,en-US,"Add locale","Add locale",0,"Add locale"
-locale_admin,field.locale,,en-US,Locale,Locale,0,Locale
-locale_admin,placeholder.locale,,en-US,en-US,en-US,0,en-US
-locale_admin,action.add_enabled,,en-US,"Add enabled","Add enabled",0,"Add enabled"
-locale_admin,action.enable,,en-US,Enable,Enable,0,Enable
-locale_admin,action.disable,,en-US,Disable,Disable,0,Disable
-locale_admin,col.locale,,en-US,Locale,Locale,0,Locale
-locale_admin,col.label,,en-US,Label,Label,0,Label
-locale_admin,col.native_label,,en-US,"Native label","Native label",0,"Native label"
-locale_admin,col.status,,en-US,Status,Status,0,Status
-locale_admin,col.home,,en-US,"Home resources","Home resources",0,"Home resources"
-locale_admin,col.usage,,en-US,Usage,Usage,0,Usage
-locale_admin,col.actions,,en-US,Actions,Actions,0,Actions
-locale_admin,status.enabled,,en-US,Enabled,Enabled,0,Enabled
-locale_admin,status.disabled,,en-US,Disabled,Disabled,0,Disabled
-locale_admin,status.default,,en-US,Default,Default,0,Default
-locale_admin,home_count,,en-US,"{count} home target(s)","{count} home target(s)",0,"{count} home target(s)"
-locale_admin,usage.none,,en-US,"No usage","No usage",0,"No usage"
-locale_admin,message.enabled,,en-US,"Locale {locale} enabled.","Locale {locale} enabled.",0,"Locale {locale} enabled."
-locale_admin,message.disabled,,en-US,"Locale {locale} disabled.","Locale {locale} disabled.",0,"Locale {locale} disabled."
-locale_admin,message.error,,en-US,"Locale {locale} could not be updated.","Locale {locale} could not be updated.",0,"Locale {locale} could not be updated."
-locale_admin,message.invalid_locale,,en-US,"Invalid locale.","Invalid locale.",0,"Invalid locale."
-locale_admin,message.service_unavailable,,en-US,"Locale administration is unavailable until the locale infrastructure is installed.","Locale administration is unavailable until the locale infrastructure is installed.",0,"Locale administration is unavailable until the locale infrastructure is installed."
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,allow_source_match,text
+admin,email_outbox.col.created_at,,en-US,Created,Created,0,0,Created
+admin,email_outbox.col.id,,en-US,ID,ID,0,0,ID
+admin,email_outbox.col.last_error,,en-US,"Last error","Last error",0,0,"Last error"
+admin,email_outbox.col.recipients,,en-US,Recipients,Recipients,0,0,Recipients
+admin,email_outbox.col.sent_at,,en-US,Sent,Sent,0,0,Sent
+admin,email_outbox.col.status,,en-US,Status,Status,0,0,Status
+admin,email_outbox.col.subject,,en-US,Subject,Subject,0,0,Subject
+admin,email_outbox.description,,en-US,"Read-only transactional email delivery history.","Read-only transactional email delivery history.",0,0,"Read-only transactional email delivery history."
+admin,email_outbox.failures.title,,en-US,"Recent dead letters","Recent dead letters",0,0,"Recent dead letters"
+admin,email_outbox.filters.apply,,en-US,"Apply filters","Apply filters",0,0,"Apply filters"
+admin,email_outbox.filters.reset,,en-US,Reset,Reset,0,0,Reset
+admin,email_outbox.filters.search,,en-US,Search,Search,0,0,Search
+admin,email_outbox.filters.search_placeholder,,en-US,"Subject, message UID, or recipient email","Subject, message UID, or recipient email",0,0,"Subject, message UID, or recipient email"
+admin,email_outbox.filters.status,,en-US,Status,Status,0,0,Status
+admin,email_outbox.filters.title,,en-US,Filters,Filters,0,0,Filters
+admin,email_outbox.list.title,,en-US,"Recent outbox entries","Recent outbox entries",0,0,"Recent outbox entries"
+admin,email_outbox.none,,en-US,"No emails match the current filter.","No emails match the current filter.",0,0,"No emails match the current filter."
+admin,email_outbox.pagination.page,,en-US,Page,Page,0,0,Page
+admin,email_outbox.status.all,,en-US,"All statuses","All statuses",0,0,"All statuses"
+admin,email_outbox.status.failed,,en-US,Failed,Failed,0,0,Failed
+admin,email_outbox.status.partial_failed,,en-US,"Partial failed","Partial failed",0,0,"Partial failed"
+admin,email_outbox.status.processing,,en-US,Processing,Processing,0,0,Processing
+admin,email_outbox.status.queued,,en-US,Queued,Queued,0,0,Queued
+admin,email_outbox.status.sent,,en-US,Sent,Sent,0,0,Sent
+admin,email_outbox.summary.title,,en-US,"Queue summary","Queue summary",0,0,"Queue summary"
+admin,email_outbox.title,,en-US,"Email outbox","Email outbox",0,0,"Email outbox"
+admin,email_queue.dead_letter,,en-US,"Dead letter","Dead letter",0,0,"Dead letter"
+admin,email_queue.empty,,en-US,"No email jobs are waiting right now.","No email jobs are waiting right now.",0,0,"No email jobs are waiting right now."
+admin,email_queue.last_processed,,en-US,"Last processed","Last processed",0,0,"Last processed"
+admin,email_queue.last_seen,,en-US,"Last seen","Last seen",0,0,"Last seen"
+admin,email_queue.open_outbox,,en-US,"Open email outbox","Open email outbox",0,0,"Open email outbox"
+admin,email_queue.pending,,en-US,Pending,Pending,0,0,Pending
+admin,email_queue.retry_wait,,en-US,"Retry wait","Retry wait",0,0,"Retry wait"
+admin,email_queue.sent_last_24h,,en-US,"Sent in last 24h","Sent in last 24h",0,0,"Sent in last 24h"
+admin,email_queue.status.never_seen,,en-US,"Never seen","Never seen",0,0,"Never seen"
+admin,email_queue.status.running,,en-US,Running,Running,0,0,Running
+admin,email_queue.status.stale,,en-US,Stale,Stale,0,0,Stale
+admin,email_queue.status.unavailable,,en-US,Unavailable,Unavailable,0,0,Unavailable
+admin,email_queue.subtitle,,en-US,"Transactional delivery health at a glance.","Transactional delivery health at a glance.",0,0,"Transactional delivery health at a glance."
+admin,email_queue.title,,en-US,"Email queue","Email queue",0,0,"Email queue"
+admin,email_queue.worker,,en-US,Worker,Worker,0,0,Worker
+admin,i18n.col.domain,,en-US,Domain,Domain,0,0,Domain
+admin,i18n.col.key,,en-US,Key,Key,0,0,Key
+admin,i18n.col.reviewed,,en-US,Reviewed,Reviewed,1,0,Reviewed
+admin,i18n.col.source,,en-US,Source,Source,0,0,Source
+admin,i18n.col.status,,en-US,Status,Status,0,0,Status
+admin,i18n.col.translation,,en-US,Translation,Translation,0,0,Translation
+admin,i18n.coverage.missing,,en-US,Missing,Missing,0,0,Missing
+admin,i18n.coverage.reviewed,,en-US,Reviewed,Reviewed,0,0,Reviewed
+admin,i18n.coverage.stale,,en-US,Stale,Stale,0,0,Stale
+admin,i18n.coverage.title,,en-US,"Translation coverage","Translation coverage",0,0,"Translation coverage"
+admin,i18n.coverage.translated,,en-US,Translated,Translated,0,0,Translated
+admin,i18n.domain,,en-US,Domain,Domain,0,0,Domain
+admin,i18n.locale,,en-US,Locale,Locale,0,0,Locale
+admin,i18n.search_placeholder,,en-US,"Search source or translation","Search source or translation",0,0,"Search source or translation"
+admin,i18n.status,,en-US,Status,Status,0,0,Status
+admin,i18n.status.ai_generated,,en-US,AI-generated,AI-generated,0,0,AI-generated
+admin,i18n.status.approved,,en-US,Approved,Approved,0,0,Approved
+admin,i18n.status.missing,,en-US,Missing,Missing,0,0,Missing
+admin,i18n.status.needs_review,,en-US,"Needs review","Needs review",0,0,"Needs review"
+admin,i18n.status.translated,,en-US,Translated,Translated,0,0,Translated
+admin,i18n.title,,en-US,"Translation workbench","Translation workbench",0,0,"Translation workbench"
+admin,i18n.tm.exact_match_only,,en-US,"Exact-match suggestions only","Exact-match suggestions only",0,0,"Exact-match suggestions only"
+admin,i18n.tm.exact_matches,,en-US,"Exact matches","Exact matches",0,0,"Exact matches"
+admin,i18n.tm.exact_then_similar,,en-US,"Exact matches load first. Similar matches load afterwards.","Exact matches load first. Similar matches load afterwards.",0,0,"Exact matches load first. Similar matches load afterwards."
+admin,i18n.tm.no_exact_matches,,en-US,"No exact matches","No exact matches",0,0,"No exact matches"
+admin,i18n.tm.no_similar_matches,,en-US,"No similar matches","No similar matches",0,0,"No similar matches"
+admin,i18n.tm.origin,,en-US,Origin,Origin,0,0,Origin
+admin,i18n.tm.review_placeholders,,en-US,"Review placeholders","Review placeholders",0,0,"Review placeholders"
+admin,i18n.tm.safe,,en-US,Safe,Safe,0,0,Safe
+admin,i18n.tm.similar_matches,,en-US,"Similar matches","Similar matches",0,0,"Similar matches"
+admin,i18n.tm.similarity,,en-US,Similarity,Similarity,0,0,Similarity
+admin,i18n.tm.source_example,,en-US,"Source example","Source example",0,0,"Source example"
+admin,i18n.tm.title,,en-US,"Translation memory suggestions","Translation memory suggestions",0,0,"Translation memory suggestions"
+admin,menu.admin_menu,,en-US,"Admin menu","Admin menu",0,0,"Admin menu"
+admin,menu.blog,,en-US,Blog,Blog,0,0,Blog
+admin,menu.cli_runner,,en-US,"CLI Runner","CLI Runner",0,0,"CLI Runner"
+admin,menu.custom_menu,,en-US,"Custom menu","Custom menu",0,0,"Custom menu"
+admin,menu.email_outbox,,en-US,"Email outbox","Email outbox",0,0,"Email outbox"
+admin,menu.home,,en-US,"Admin home","Admin home",0,0,"Admin home"
+admin,menu.import_export,,en-US,"Import / Export","Import / Export",0,0,"Import / Export"
+admin,menu.locales,,en-US,Locales,Locales,0,0,Locales
+admin,menu.mcp_tokens,,en-US,"MCP tokens","MCP tokens",0,0,"MCP tokens"
+admin,menu.phpinfo,,en-US,PHPinfo,PHPinfo,0,0,PHPinfo
+admin,menu.resource_tree,,en-US,"Website structure","Website structure",0,0,"Website structure"
+admin,menu.roles,,en-US,Roles,Roles,0,0,Roles
+admin,menu.runtime_diagnostics,,en-US,"Runtime diagnostics","Runtime diagnostics",0,0,"Runtime diagnostics"
+admin,menu.section.administration,,en-US,Administration,Administration,0,0,Administration
+admin,menu.section.configuration,,en-US,Configuration,Configuration,0,0,Configuration
+admin,menu.section.content,,en-US,Content,Content,0,0,Content
+admin,menu.section.developer_tools,,en-US,"Developer tools","Developer tools",0,0,"Developer tools"
+admin,menu.template_engines,,en-US,"Template engines","Template engines",0,0,"Template engines"
+admin,menu.theme_selector,,en-US,"Theme selection","Theme selection",0,0,"Theme selection"
+admin,menu.translations,,en-US,Translations,Translations,0,0,Translations
+admin,menu.usergroups,,en-US,"User groups","User groups",0,0,"User groups"
+admin,menu.widget_preview,,en-US,"Widget preview","Widget preview",0,0,"Widget preview"
+cms,admin_dropdown.edit_mode,,en-US,"Edit mode","Edit mode",0,0,"Edit mode"
+cms,admin_dropdown.edit_mode_off,,en-US,off,off,0,0,off
+cms,admin_dropdown.edit_mode_on,,en-US,on,on,0,0,on
+cms,admin_dropdown.seo,,en-US,SEO,SEO,0,0,SEO
+cms,admin_dropdown.turn_edit_mode_off,,en-US,"Turn edit mode off","Turn edit mode off",0,0,"Turn edit mode off"
+cms,admin_dropdown.turn_edit_mode_on,,en-US,"Turn edit mode on","Turn edit mode on",0,0,"Turn edit mode on"
+cms,admin_menu.form.name,,en-US,"Admin menu administration","Admin menu administration",0,0,"Admin menu administration"
+cms,admin_menu.form.title_create,,en-US,"Create admin menu item","Create admin menu item",0,0,"Create admin menu item"
+cms,admin_menu.form.title_edit,,en-US,"Edit admin menu item","Edit admin menu item",0,0,"Edit admin menu item"
+cms,edit,,en-US,Edit,Edit,0,0,Edit
+cms,edit_mode.disabled,,en-US,"Edit mode disabled","Edit mode disabled",0,0,"Edit mode disabled"
+cms,edit_mode.enabled,,en-US,"Edit mode enabled","Edit mode enabled",0,0,"Edit mode enabled"
+cms,edit_mode.save_error,,en-US,"Error: Unable to save configuration","Error: Unable to save configuration",0,0,"Error: Unable to save configuration"
+cms,error.login_page_missing,,en-US,"Login page not found - create it manually","Login page not found - create it manually",0,0,"Login page not found - create it manually"
+cms,file.missing_ref_id,,en-US,"Missing file reference","Missing file reference",0,0,"Missing file reference"
+cms,file.upload_error,,en-US,"Error: File upload failed","Error: File upload failed",0,0,"Error: File upload failed"
+cms,file.uploaded,,en-US,"File uploaded","File uploaded",0,0,"File uploaded"
+cms,file_upload.destination_path,,en-US,"Destination path","Destination path",0,0,"Destination path"
+cms,file_upload.unknown_destination,,en-US,"Unknown destination path","Unknown destination path",0,0,"Unknown destination path"
+cms,form.field.form_id.explanation,,en-US,"Select from the predefined forms","Select from the predefined forms",0,0,"Select from the predefined forms"
+cms,form.field.form_id.label,,en-US,Form,Form,0,0,Form
+cms,form.missing_widget_id,,en-US,"Widget ID is missing","Widget ID is missing",0,0,"Widget ID is missing"
+cms,form.no_form_page_warning,,en-US,"Create at least one page with a blank form","Create at least one page with a blank form",0,0,"Create at least one page with a blank form"
+cms,form.no_id,,en-US,"No form ID given","No form ID given",0,0,"No form ID given"
+cms,form.settings_subtitle,,en-US,"Page: {page}","Page: {page}",0,0,"Page: {page}"
+cms,library.folder,,en-US,Folder,Folder,0,0,Folder
+cms,library.resource,,en-US,Resource,Resource,0,0,Resource
+cms,library.unknown,,en-US,"Unknown library","Unknown library",0,0,"Unknown library"
+cms,menu.delete_confirm,,en-US,"Are you sure you want to delete this menu item?","Are you sure you want to delete this menu item?",0,0,"Are you sure you want to delete this menu item?"
+cms,menu.delete_failed,,en-US,"Delete failed","Delete failed",0,0,"Delete failed"
+cms,menu.delete_forbidden,,en-US,"Menu item deletion is not allowed: {name}","Menu item deletion is not allowed: {name}",0,0,"Menu item deletion is not allowed: {name}"
+cms,menu.delete_unknown_error,,en-US,"Error: An unknown error occurred while deleting the menu item","Error: An unknown error occurred while deleting the menu item",0,0,"Error: An unknown error occurred while deleting the menu item"
+cms,menu.deleted,,en-US,"Menu item deleted: {name}","Menu item deleted: {name}",0,0,"Menu item deleted: {name}"
+cms,menu.external_link,,en-US,"External link","External link",0,0,"External link"
+cms,menu.field.node_name.label,,en-US,"Display text","Display text",0,0,"Display text"
+cms,menu.field.page.explanation,,en-US,"Select the page this menu item points to","Select the page this menu item points to",0,0,"Select the page this menu item points to"
+cms,menu.field.page.label,,en-US,Page,Page,0,0,Page
+cms,menu.field.type.external,,en-US,"Points to external page","Points to external page",0,0,"Points to external page"
+cms,menu.field.type.internal,,en-US,"Points to internal page","Points to internal page",0,0,"Points to internal page"
+cms,menu.field.type.label,,en-US,"Link type","Link type",0,0,"Link type"
+cms,menu.field.url.explanation,,en-US,"You can enter a custom URL (including mailto:// links)","You can enter a custom URL (including mailto:// links)",0,0,"You can enter a custom URL (including mailto:// links)"
+cms,menu.field.url.label,,en-US,"Custom URL","Custom URL",0,0,"Custom URL"
+cms,menu.form.name,,en-US,"Main menu item","Main menu item",0,0,"Main menu item"
+cms,menu.form.title_create,,en-US,"Create menu item","Create menu item",0,0,"Create menu item"
+cms,menu.form.title_edit,,en-US,"Edit menu item","Edit menu item",0,0,"Edit menu item"
+cms,menu.internal_link,,en-US,"Internal link","Internal link",0,0,"Internal link"
+cms,menu.move_error,,en-US,"Error: Unable to move menu item","Error: Unable to move menu item",0,0,"Error: Unable to move menu item"
+cms,menu.move_success,,en-US,"Menu item moved: {name}","Menu item moved: {name}",0,0,"Menu item moved: {name}"
+cms,menu.new_child,,en-US,"New submenu item","New submenu item",0,0,"New submenu item"
+cms,menu.new_item,,en-US,"New menu item","New menu item",0,0,"New menu item"
+cms,menu.no_link_configured,,en-US,"No link configured","No link configured",0,0,"No link configured"
+cms,menu.root,,en-US,"Main menu","Main menu",0,0,"Main menu"
+cms,menu.saved,,en-US,"Menu item saved","Menu item saved",0,0,"Menu item saved"
+cms,menu.selection_help,,en-US,"Select a menu item to edit it, or create a new one.","Select a menu item to edit it, or create a new one.",0,0,"Select a menu item to edit it, or create a new one."
+cms,menu.updated,,en-US,"Menu item updated","Menu item updated",0,0,"Menu item updated"
+cms,menu.validation.node_name_max_length,,en-US,"Display text must not exceed 255 characters","Display text must not exceed 255 characters",0,0,"Display text must not exceed 255 characters"
+cms,menu.validation.type_required,,en-US,"Choose whether the link points to an internal or external page","Choose whether the link points to an internal or external page",0,0,"Choose whether the link points to an internal or external page"
+cms,menu.validation.url_max_length,,en-US,"URL must not exceed 255 characters","URL must not exceed 255 characters",0,0,"URL must not exceed 255 characters"
+cms,menu.validation.url_required,,en-US,"Select a page or enter a URL","Select a page or enter a URL",0,0,"Select a page or enter a URL"
+cms,plainhtml.field.content.explanation,,en-US,"The HTML code you enter will appear on the website without modifications.","The HTML code you enter will appear on the website without modifications.",0,0,"The HTML code you enter will appear on the website without modifications."
+cms,plainhtml.field.content.label,,en-US,"HTML code","HTML code",0,0,"HTML code"
+cms,plainhtml.form.name,,en-US,"HTML code (embed)","HTML code (embed)",0,0,"HTML code (embed)"
+cms,plainhtml.form.title,,en-US,"Edit HTML content","Edit HTML content",0,0,"Edit HTML content"
+cms,plainhtml.not_set,,en-US,"Configure the content","Configure the content",0,0,"Configure the content"
+cms,resource.delete_error,,en-US,"Error: Unable to delete resource(s)","Error: Unable to delete resource(s)",0,0,"Error: Unable to delete resource(s)"
+cms,resource.delete_failed,,en-US,"Delete failed","Delete failed",0,0,"Delete failed"
+cms,resource.delete_partial_error,,en-US,"{count} error(s) occurred during deletion","{count} error(s) occurred during deletion",0,0,"{count} error(s) occurred during deletion"
+cms,resource.deleted,,en-US,"Resource deleted","Resource deleted",0,0,"Resource deleted"
+cms,resource.deleted_multiple,,en-US,"Resources deleted","Resources deleted",0,0,"Resources deleted"
+cms,resource.error.add_failed,,en-US,"Unable to add resource tree entry.","Unable to add resource tree entry.",0,0,"Unable to add resource tree entry."
+cms,resource.error.create_failed_for_path,,en-US,"Unable to create resource: {path}","Unable to create resource: {path}",0,0,"Unable to create resource: {path}"
+cms,resource.error.delete_denied,,en-US,"Delete denied for resource: {resource_id}","Delete denied for resource: {resource_id}",0,0,"Delete denied for resource: {resource_id}"
+cms,resource.error.delete_failed_for_id,,en-US,"Unable to delete resource: {resource_id}","Unable to delete resource: {resource_id}",0,0,"Unable to delete resource: {resource_id}"
+cms,resource.error.file_delete_failed_for_id,,en-US,"Unable to delete file for resource: {resource_id}","Unable to delete file for resource: {resource_id}",0,0,"Unable to delete file for resource: {resource_id}"
+cms,resource.error.import_file_failed,,en-US,"Unable to import file: {path}","Unable to import file: {path}",0,0,"Unable to import file: {path}"
+cms,resource.error.move_failed_for_id,,en-US,"Unable to move resource: {resource_id}","Unable to move resource: {resource_id}",0,0,"Unable to move resource: {resource_id}"
+cms,resource.error.not_found_by_id,,en-US,"Resource not found: {resource_id}","Resource not found: {resource_id}",0,0,"Resource not found: {resource_id}"
+cms,resource.error.path_exists_not_file,,en-US,"Resource path exists and is not a file: {path}","Resource path exists and is not a file: {path}",0,0,"Resource path exists and is not a file: {path}"
+cms,resource.error.protected_mutation,,en-US,"Protected system resource cannot be modified: {path}","Protected system resource cannot be modified: {path}",0,0,"Protected system resource cannot be modified: {path}"
+cms,resource.error.protected_path_mutation,,en-US,"Protected system resource path cannot be created or modified: {path}","Protected system resource path cannot be created or modified: {path}",0,0,"Protected system resource path cannot be created or modified: {path}"
+cms,resource.error.protected_subtree_mutation,,en-US,"A protected system resource in this subtree cannot be modified: {path}","A protected system resource in this subtree cannot be modified: {path}",0,0,"A protected system resource in this subtree cannot be modified: {path}"
+cms,resource.error.target_folder_not_found,,en-US,"Target folder not found after creation: {path}","Target folder not found after creation: {path}",0,0,"Target folder not found after creation: {path}"
+cms,resource.error.update_failed_for_path,,en-US,"Unable to update resource: {path}","Unable to update resource: {path}",0,0,"Unable to update resource: {path}"
+cms,resource.folder_count,,en-US,"{count} folder(s)","{count} folder(s)",0,0,"{count} folder(s)"
+cms,resource.move_error,,en-US,"Error: Unable to move resource","Error: Unable to move resource",0,0,"Error: Unable to move resource"
+cms,resource.move_failed,,en-US,"Move failed","Move failed",0,0,"Move failed"
+cms,resource.moved,,en-US,"Resource moved","Resource moved",0,0,"Resource moved"
+cms,resource.page_count,,en-US,"{count} page(s)","{count} page(s)",0,0,"{count} page(s)"
+cms,resource.renamed,,en-US,Renamed,Renamed,0,0,Renamed
+cms,resource.view_forbidden,,en-US,"403 - You do not have permission to view this content!","403 - You do not have permission to view this content!",0,0,"403 - You do not have permission to view this content!"
+cms,resource_acl.acl_not_found,,en-US,"ACL entry not found: {id}","ACL entry not found: {id}",0,0,"ACL entry not found: {id}"
+cms,resource_acl.assign,,en-US,Assign,Assign,0,0,Assign
+cms,resource_acl.deleted,,en-US,"Assignment removed.","Assignment removed.",0,0,"Assignment removed."
+cms,resource_acl.error_ambiguous_subject,,en-US,"The name {name} matches both a user and a user group. Select the correct type from the list.","The name {name} matches both a user and a user group. Select the correct type from the list.",0,0,"The name {name} matches both a user and a user group. Select the correct type from the list."
+cms,resource_acl.error_ambiguous_subject_short,,en-US,"Ambiguous assignment","Ambiguous assignment",0,0,"Ambiguous assignment"
+cms,resource_acl.error_delete,,en-US,"Error: Unable to remove assignment.","Error: Unable to remove assignment.",0,0,"Error: Unable to remove assignment."
+cms,resource_acl.error_missing_resource_id,,en-US,"Resource ID is missing","Resource ID is missing",0,0,"Resource ID is missing"
+cms,resource_acl.error_save,,en-US,"Error: Unable to save access settings.","Error: Unable to save access settings.",0,0,"Error: Unable to save access settings."
+cms,resource_acl.error_subject_not_found,,en-US,"No user or user group found with the name {name}","No user or user group found with the name {name}",0,0,"No user or user group found with the name {name}"
+cms,resource_acl.error_subject_not_found_short,,en-US,"No matching subject found","No matching subject found",0,0,"No matching subject found"
+cms,resource_acl.inherit_help,,en-US,"When inheritance is enabled, the parent folder's permissions also apply to this resource.","When inheritance is enabled, the parent folder's permissions also apply to this resource.",0,0,"When inheritance is enabled, the parent folder's permissions also apply to this resource."
+cms,resource_acl.inherit_label,,en-US,"Inherit permissions from parent folder","Inherit permissions from parent folder",0,0,"Inherit permissions from parent folder"
+cms,resource_acl.inherited_title,,en-US,"Inherited permissions","Inherited permissions",0,0,"Inherited permissions"
+cms,resource_acl.new_assignment,,en-US,"New assignment:","New assignment:",0,0,"New assignment:"
+cms,resource_acl.permission.create,,en-US,Create,Create,0,0,Create
+cms,resource_acl.permission.delete,,en-US,Delete,Delete,0,0,Delete
+cms,resource_acl.permission.edit,,en-US,Edit,Edit,0,0,Edit
+cms,resource_acl.permission.list,,en-US,List,List,0,0,List
+cms,resource_acl.permission.view,,en-US,View,View,0,0,View
+cms,resource_acl.resource_not_found,,en-US,"Resource not found: {id}","Resource not found: {id}",0,0,"Resource not found: {id}"
+cms,resource_acl.search_placeholder,,en-US,"Search for user or group...","Search for user or group...",0,0,"Search for user or group..."
+cms,resource_acl.specific_help,,en-US,"Specific permissions always apply, regardless of the inheritance setting.","Specific permissions always apply, regardless of the inheritance setting.",0,0,"Specific permissions always apply, regardless of the inheritance setting."
+cms,resource_acl.specific_title,,en-US,"Specific permissions","Specific permissions",0,0,"Specific permissions"
+cms,resource_acl.subject,,en-US,Subject,Subject,0,0,Subject
+cms,resource_acl.title,,en-US,Access,Access,0,0,Access
+cms,resource_acl.unknown_subject_type,,en-US,"Unknown ACL subject type: {type}","Unknown ACL subject type: {type}",0,0,"Unknown ACL subject type: {type}"
+cms,resource_acl.unknown_type,,en-US,"Unknown ACL list type: {type}","Unknown ACL list type: {type}",0,0,"Unknown ACL list type: {type}"
+cms,resource_acl.usergroup_assignment.added,,en-US,"User group assigned to resource:<br>{group} -> {target}","User group assigned to resource:<br>{group} -> {target}",0,0,"User group assigned to resource:<br>{group} -> {target}"
+cms,resource_acl.usergroup_assignment.error_add,,en-US,"Error: Unable to assign user group to resource:<br>{group} -> {target}","Error: Unable to assign user group to resource:<br>{group} -> {target}",0,0,"Error: Unable to assign user group to resource:<br>{group} -> {target}"
+cms,resource_acl.usergroup_assignment.error_add_generic,,en-US,"Error: Unable to assign user group to resource.","Error: Unable to assign user group to resource.",0,0,"Error: Unable to assign user group to resource."
+cms,resource_acl.usergroup_assignment.error_remove,,en-US,"Error: Unable to remove user group from resource:<br>{group} -> {target}","Error: Unable to remove user group from resource:<br>{group} -> {target}",0,0,"Error: Unable to remove user group from resource:<br>{group} -> {target}"
+cms,resource_acl.usergroup_assignment.error_remove_generic,,en-US,"Error: Unable to remove user group from resource.","Error: Unable to remove user group from resource.",0,0,"Error: Unable to remove user group from resource."
+cms,resource_acl.usergroup_assignment.removed,,en-US,"User group assignment removed:<br>{group} -> {target}","User group assignment removed:<br>{group} -> {target}",0,0,"User group assignment removed:<br>{group} -> {target}"
+cms,resource_browser.create_index_page,,en-US,"Create index page!","Create index page!",0,0,"Create index page!"
+cms,resource_browser.delete_file_confirm,,en-US,"Are you sure you want to delete this file?","Are you sure you want to delete this file?",0,0,"Are you sure you want to delete this file?"
+cms,resource_browser.delete_folder_confirm,,en-US,"Are you sure you want to delete this folder and all its contents?","Are you sure you want to delete this folder and all its contents?",0,0,"Are you sure you want to delete this folder and all its contents?"
+cms,resource_browser.delete_invalid_confirm,,en-US,"Are you sure you want to delete this invalid entry?","Are you sure you want to delete this invalid entry?",0,0,"Are you sure you want to delete this invalid entry?"
+cms,resource_browser.delete_webpage_confirm,,en-US,"Are you sure you want to delete this webpage?","Are you sure you want to delete this webpage?",0,0,"Are you sure you want to delete this webpage?"
+cms,resource_browser.help_create,,en-US,"Create folders and webpages within them.","Create folders and webpages within them.",0,0,"Create folders and webpages within them."
+cms,resource_browser.help_move,,en-US,"Drag and drop to move items between folders.","Drag and drop to move items between folders.",0,0,"Drag and drop to move items between folders."
+cms,resource_browser.insert,,en-US,Insert,Insert,0,0,Insert
+cms,resource_browser.invalid_entry,,en-US,"Invalid entry","Invalid entry",0,0,"Invalid entry"
+cms,resource_browser.new_domain,,en-US,"New domain","New domain",0,0,"New domain"
+cms,resource_browser.preview_index_page,,en-US,"Preview (index page)","Preview (index page)",0,0,"Preview (index page)"
+cms,resource_browser.root_not_found,,en-US,"Root node not found for the resource tree","Root node not found for the resource tree",0,0,"Root node not found for the resource tree"
+cms,resource_browser.select_tree_item,,en-US,"Select an item from the tree","Select an item from the tree",0,0,"Select an item from the tree"
+cms,resource_browser.site_structure,,en-US,"Site structure","Site structure",0,0,"Site structure"
+cms,richtext.assigned,,en-US,"Text content assigned","Text content assigned",0,0,"Text content assigned"
+cms,richtext.field.content.explanation,,en-US,"Format text freely, add images, and embed external content (e.g. YouTube). Use HTML view for embed codes.","Format text freely, add images, and embed external content (e.g. YouTube). Use HTML view for embed codes.",0,0,"Format text freely, add images, and embed external content (e.g. YouTube). Use HTML view for embed codes."
+cms,richtext.field.content.label,,en-US,Content,Content,0,0,Content
+cms,richtext.field.name.explanation,,en-US,"Visible in the admin area only. Use this to identify the content when selecting it for display on public pages. Must be unique.","Visible in the admin area only. Use this to identify the content when selecting it for display on public pages. Must be unique.",0,0,"Visible in the admin area only. Use this to identify the content when selecting it for display on public pages. Must be unique."
+cms,richtext.field.name.label,,en-US,"Name (identifier)","Name (identifier)",0,0,"Name (identifier)"
+cms,richtext.field.name.unique_error,,en-US,"An information content item with this name already exists","An information content item with this name already exists",0,0,"An information content item with this name already exists"
+cms,richtext.field.title.explanation,,en-US,"Appears as a title above the text. Leave empty for no title.","Appears as a title above the text. Leave empty for no title.",0,0,"Appears as a title above the text. Leave empty for no title."
+cms,richtext.field.title.label,,en-US,Heading,Heading,0,0,Heading
+cms,richtext.form.name,,en-US,"Text content","Text content",0,0,"Text content"
+cms,richtext.form.title_create,,en-US,"Create text content","Create text content",0,0,"Create text content"
+cms,richtext.form.title_edit,,en-US,"Edit text content","Edit text content",0,0,"Edit text content"
+cms,richtext.not_set,,en-US,"No content chosen","No content chosen",0,0,"No content chosen"
+cms,richtext.saved,,en-US,"Content saved","Content saved",0,0,"Content saved"
+cms,richtext.select.form.title,,en-US,"Select text content","Select text content",0,0,"Select text content"
+cms,richtext.updated,,en-US,"Content updated","Content updated",0,0,"Content updated"
+cms,richtext.widget.choose,,en-US,"Select text content","Select text content",0,0,"Select text content"
+cms,richtext.widget.create,,en-US,"Create text content","Create text content",0,0,"Create text content"
+cms,richtext.widget.description,,en-US,"Freely editable text with images","Freely editable text with images",0,0,"Freely editable text with images"
+cms,richtext.widget.edit,,en-US,"Edit text content","Edit text content",0,0,"Edit text content"
+cms,richtext.widget.name,,en-US,"Editable text","Editable text",0,0,"Editable text"
+cms,tree.field.type.explanation,,en-US,"Select from the predefined trees","Select from the predefined trees",0,0,"Select from the predefined trees"
+cms,tree.field.type.label,,en-US,Tree,Tree,0,0,Tree
+cms,tree.invalid_parent_id,,en-US,"Invalid parent ID","Invalid parent ID",0,0,"Invalid parent ID"
+cms,tree.missing_type,,en-US,"Missing tree type","Missing tree type",0,0,"Missing tree type"
+cms,tree.no_connection_id,,en-US,"No widget connection ID given","No widget connection ID given",0,0,"No widget connection ID given"
+cms,tree.select_menu_item,,en-US,"Select a menu item from the tree","Select a menu item from the tree",0,0,"Select a menu item from the tree"
+cms,tree.unknown_type,,en-US,"Unknown tree item type: {type}","Unknown tree item type: {type}",0,0,"Unknown tree item type: {type}"
+cms,webpage.create_for_params,,en-US,"Create a webpage for the following parameters: <br>{param_name}, {param_value}","Create a webpage for the following parameters: <br>{param_name}, {param_value}",0,0,"Create a webpage for the following parameters: <br>{param_name}, {param_value}"
+cms,webpage.create_for_widget,,en-US,"Create a webpage with the following content: <br><b>{widget}</b>","Create a webpage with the following content: <br><b>{widget}</b>",0,0,"Create a webpage with the following content: <br><b>{widget}</b>"
+cms,webpage.field.layout.explanation,,en-US,"The webpage layout structure determines where content elements can be placed on the page.","The webpage layout structure determines where content elements can be placed on the page.",0,0,"The webpage layout structure determines where content elements can be placed on the page."
+cms,webpage.field.layout.label,,en-US,"Page type","Page type",0,0,"Page type"
+cms,webpage_domain.field.resource_name.explanation,,en-US,"Set this domain name in the DOMAIN_CONTEXT configuration so this domain and its child pages become active.","Set this domain name in the DOMAIN_CONTEXT configuration so this domain and its child pages become active.",0,0,"Set this domain name in the DOMAIN_CONTEXT configuration so this domain and its child pages become active."
+cms,webpage_domain.field.resource_name.label,,en-US,"Domain name","Domain name",0,0,"Domain name"
+cms,webpage_domain.title_create,,en-US,"Add new domain","Add new domain",0,0,"Add new domain"
+cms,webpage_domain.title_edit,,en-US,"Edit domain","Edit domain",0,0,"Edit domain"
+cms,webpage_file.field.resource_name.explanation,,en-US,"This is the file name used in the URL. Avoid accented characters and spaces, and keep the correct file extension.","This is the file name used in the URL. Avoid accented characters and spaces, and keep the correct file extension.",0,0,"This is the file name used in the URL. Avoid accented characters and spaces, and keep the correct file extension."
+cms,webpage_file.field.resource_name.label,,en-US,"SEO-friendly URL name","SEO-friendly URL name",0,0,"SEO-friendly URL name"
+cms,webpage_file.field.text.explanation,,en-US,"For images this may appear as a longer description below the title.","For images this may appear as a longer description below the title.",0,0,"For images this may appear as a longer description below the title."
+cms,webpage_file.field.text.label,,en-US,Description,Description,0,0,Description
+cms,webpage_file.field.title.explanation,,en-US,"For images this may appear below the image.","For images this may appear below the image.",0,0,"For images this may appear below the image."
+cms,webpage_file.field.title.label,,en-US,Title,Title,0,0,Title
+cms,webpage_file.title_edit,,en-US,"Edit file name","Edit file name",0,0,"Edit file name"
+cms,webpage_folder.field.resource_name.explanation,,en-US,"This is the real folder name used in the URL. Changing it later may cause visitors from search engines to see a 404 page.","This is the real folder name used in the URL. Changing it later may cause visitors from search engines to see a 404 page.",0,0,"This is the real folder name used in the URL. Changing it later may cause visitors from search engines to see a 404 page."
+cms,webpage_folder.field.resource_name.label,,en-US,"SEO-friendly folder URL name","SEO-friendly folder URL name",0,0,"SEO-friendly folder URL name"
+cms,webpage_folder.title_create,,en-US,"Create new folder","Create new folder",0,0,"Create new folder"
+cms,webpage_folder.title_edit,,en-US,"Edit folder","Edit folder",0,0,"Edit folder"
+cms,webpage_from_path.subtitle,,en-US,"If you want to create this webpage, you can do it here. Before doing so, make sure the URL was not mistyped.","If you want to create this webpage, you can do it here. Before doing so, make sure the URL was not mistyped.",0,0,"If you want to create this webpage, you can do it here. Before doing so, make sure the URL was not mistyped."
+cms,webpage_from_path.title,,en-US,"The requested webpage was not found!","The requested webpage was not found!",0,0,"The requested webpage was not found!"
+cms,webpage_page.field.description.explanation,,en-US,"Description meta tag, usually shown under the URL in search results.","Description meta tag, usually shown under the URL in search results.",0,0,"Description meta tag, usually shown under the URL in search results."
+cms,webpage_page.field.description.label,,en-US,Description,Description,0,0,Description
+cms,webpage_page.field.keywords.explanation,,en-US,"Keywords meta tag with comma-separated values.","Keywords meta tag with comma-separated values.",0,0,"Keywords meta tag with comma-separated values."
+cms,webpage_page.field.keywords.label,,en-US,Keywords,Keywords,0,0,Keywords
+cms,webpage_page.field.resource_name.explanation,,en-US,"This is the real URL name of the page. Change it later only when necessary.","This is the real URL name of the page. Change it later only when necessary.",0,0,"This is the real URL name of the page. Change it later only when necessary."
+cms,webpage_page.field.resource_name.label,,en-US,"SEO-friendly URL name","SEO-friendly URL name",0,0,"SEO-friendly URL name"
+cms,webpage_page.field.title.explanation,,en-US,"HTML title meta tag shown in the browser window title.","HTML title meta tag shown in the browser window title.",0,0,"HTML title meta tag shown in the browser window title."
+cms,webpage_page.field.title.label,,en-US,Title,Title,0,0,Title
+cms,webpage_page.title_create,,en-US,"Create new webpage","Create new webpage",0,0,"Create new webpage"
+cms,webpage_page.title_edit,,en-US,"Edit webpage","Edit webpage",0,0,"Edit webpage"
+cms,widget.insert.button,,en-US,Insert,Insert,0,0,Insert
+cms,widget.insert.icon_title,,en-US,"Insert content","Insert content",0,0,"Insert content"
+cms,widget.insert.placeholder,,en-US,"-- Insert content --","-- Insert content --",0,0,"-- Insert content --"
+cms,widget.insert_from_clipboard,,en-US,"Insert clipboard content here","Insert clipboard content here",0,0,"Insert clipboard content here"
+cms,widget_connection.added,,en-US,"Content element placed on the webpage","Content element placed on the webpage",0,0,"Content element placed on the webpage"
+cms,widget_connection.copied_to_clipboard,,en-US,"Content copied to clipboard","Content copied to clipboard",0,0,"Content copied to clipboard"
+cms,widget_connection.duplicate_not_allowed,,en-US,"This content element is already on this block and multiple placement is not allowed.","This content element is already on this block and multiple placement is not allowed.",0,0,"This content element is already on this block and multiple placement is not allowed."
+cms,widget_connection.moved,,en-US,"Content element moved","Content element moved",0,0,"Content element moved"
+cms,widget_connection.remove_from_webpage,,en-US,"Remove from this webpage","Remove from this webpage",0,0,"Remove from this webpage"
+cms,widget_connection.removed,,en-US,"Content element removed from the webpage","Content element removed from the webpage",0,0,"Content element removed from the webpage"
+cms,widget_connection.select_widget_type,,en-US,"Choose the content type to insert","Choose the content type to insert",0,0,"Choose the content type to insert"
+cms,widget_connection_params.field.anchor.explanation,,en-US,"Anchor name that can be used in links to jump to this content on the page.","Anchor name that can be used in links to jump to this content on the page.",0,0,"Anchor name that can be used in links to jump to this content on the page."
+cms,widget_connection_params.field.anchor.label,,en-US,Anchor,Anchor,0,0,Anchor
+cms,widget_connection_params.field.float.clear,,en-US,"New row","New row",0,0,"New row"
+cms,widget_connection_params.field.float.explanation,,en-US,"Content box alignment. Floated elements can appear next to each other.","Content box alignment. Floated elements can appear next to each other.",0,0,"Content box alignment. Floated elements can appear next to each other."
+cms,widget_connection_params.field.float.label,,en-US,Alignment,Alignment,0,0,Alignment
+cms,widget_connection_params.field.float.left,,en-US,"Floated left","Floated left",0,0,"Floated left"
+cms,widget_connection_params.field.float.left_clear,,en-US,"Floated left in new row","Floated left in new row",0,0,"Floated left in new row"
+cms,widget_connection_params.field.float.none,,en-US,"No special alignment","No special alignment",0,0,"No special alignment"
+cms,widget_connection_params.field.float.right,,en-US,"Floated right","Floated right",0,0,"Floated right"
+cms,widget_connection_params.field.float.right_clear,,en-US,"Floated right in new row","Floated right in new row",0,0,"Floated right in new row"
+cms,widget_connection_params.field.height.explanation,,en-US,"Height in CSS format with unit (for example 100%, 200px, or auto).","Height in CSS format with unit (for example 100%, 200px, or auto).",0,0,"Height in CSS format with unit (for example 100%, 200px, or auto)."
+cms,widget_connection_params.field.height.label,,en-US,Height,Height,0,0,Height
+cms,widget_connection_params.field.margin_bottom.explanation,,en-US,"Bottom margin in CSS format with unit (for example 100% or 200px).","Bottom margin in CSS format with unit (for example 100% or 200px).",0,0,"Bottom margin in CSS format with unit (for example 100% or 200px)."
+cms,widget_connection_params.field.margin_bottom.label,,en-US,"Bottom margin","Bottom margin",0,0,"Bottom margin"
+cms,widget_connection_params.field.margin_left.explanation,,en-US,"Left margin in CSS format with unit (for example 100% or 200px).","Left margin in CSS format with unit (for example 100% or 200px).",0,0,"Left margin in CSS format with unit (for example 100% or 200px)."
+cms,widget_connection_params.field.margin_left.label,,en-US,"Left margin","Left margin",0,0,"Left margin"
+cms,widget_connection_params.field.margin_right.explanation,,en-US,"Right margin in CSS format with unit (for example 100% or 200px).","Right margin in CSS format with unit (for example 100% or 200px).",0,0,"Right margin in CSS format with unit (for example 100% or 200px)."
+cms,widget_connection_params.field.margin_right.label,,en-US,"Right margin","Right margin",0,0,"Right margin"
+cms,widget_connection_params.field.margin_top.explanation,,en-US,"Top margin in CSS format with unit (for example 100% or 200px).","Top margin in CSS format with unit (for example 100% or 200px).",0,0,"Top margin in CSS format with unit (for example 100% or 200px)."
+cms,widget_connection_params.field.margin_top.label,,en-US,"Top margin","Top margin",0,0,"Top margin"
+cms,widget_connection_params.field.width.explanation,,en-US,"Width in CSS format with unit (for example 100%, 200px, or auto).","Width in CSS format with unit (for example 100%, 200px, or auto).",0,0,"Width in CSS format with unit (for example 100%, 200px, or auto)."
+cms,widget_connection_params.field.width.label,,en-US,Width,Width,0,0,Width
+cms,widget_connection_params.missing_widget_id,,en-US,"Widget ID is missing","Widget ID is missing",0,0,"Widget ID is missing"
+cms,widget_connection_params.no_content_id,,en-US,"No content ID given","No content ID given",0,0,"No content ID given"
+cms,widget_connection_params.subtitle,,en-US,"Webpage: {page}","Webpage: {page}",0,0,"Webpage: {page}"
+cms,widget_connection_params.title,,en-US,"Edit display settings","Edit display settings",0,0,"Edit display settings"
+cms,widget_connection_settings.field.is_last.explanation,,en-US,"Check this if this is the last column in the row. This helps keep spacing correct and prevents overlapping or broken layout.","Check this if this is the last column in the row. This helps keep spacing correct and prevents overlapping or broken layout.",0,0,"Check this if this is the last column in the row. This helps keep spacing correct and prevents overlapping or broken layout."
+cms,widget_connection_settings.field.is_last.label,,en-US,"Last in row","Last in row",0,0,"Last in row"
+cms,widget_connection_settings.field.widget_width.label,,en-US,"Content width","Content width",0,0,"Content width"
+cms,widget_connection_settings.missing_widget_id,,en-US,"Widget ID is missing","Widget ID is missing",0,0,"Widget ID is missing"
+cms,widget_connection_settings.subtitle,,en-US,"Webpage: {page}","Webpage: {page}",0,0,"Webpage: {page}"
+cms,widget_group.begin_delete_error,,en-US,"Error: Unable to delete opening block","Error: Unable to delete opening block",0,0,"Error: Unable to delete opening block"
+cms,widget_group.both_delete_error,,en-US,"Error: Unable to delete opening or closing block","Error: Unable to delete opening or closing block",0,0,"Error: Unable to delete opening or closing block"
+cms,widget_group.end_delete_error,,en-US,"Error: Unable to delete closing block","Error: Unable to delete closing block",0,0,"Error: Unable to delete closing block"
+cms,widget_group.end_missing_delete_error,,en-US,"Closing block not found and opening block deletion failed","Closing block not found and opening block deletion failed",0,0,"Closing block not found and opening block deletion failed"
+cms,widget_group.end_missing_removed_beginning,,en-US,"Closing block not found, opening block removed successfully","Closing block not found, opening block removed successfully",0,0,"Closing block not found, opening block removed successfully"
+cms,widget_group.remove_block,,en-US,"Remove block","Remove block",0,0,"Remove block"
+cms,widget_group.removed,,en-US,"Block removed from webpage","Block removed from webpage",0,0,"Block removed from webpage"
+cms,widget_preview.description,,en-US,Description,Description,0,0,Description
+cms,widget_preview.implemented,,en-US,Implemented,Implemented,0,0,Implemented
+cms,widget_preview.info.current_theme,,en-US,"Current theme","Current theme",0,0,"Current theme"
+cms,widget_preview.info.fallback,,en-US,Fallback,Fallback,0,0,Fallback
+cms,widget_preview.info.implemented,,en-US,Implemented,Implemented,0,0,Implemented
+cms,widget_preview.info.template,,en-US,Template,Template,0,0,Template
+cms,widget_preview.info.title,,en-US,"Widget preview","Widget preview",0,0,"Widget preview"
+cms,widget_preview.info.widget,,en-US,Widget,Widget,0,0,Widget
+cms,widget_preview.none,,en-US,"No mockable widgets found.","No mockable widgets found.",0,0,"No mockable widgets found."
+cms,widget_preview.not_implemented,,en-US,"Not implemented","Not implemented",0,0,"Not implemented"
+cms,widget_preview.not_mockable_prefix,,en-US,Widget,Widget,0,0,Widget
+cms,widget_preview.not_mockable_suffix,,en-US,"does not implement iMockable.","does not implement iMockable.",0,0,"does not implement iMockable."
+cms,widget_preview.not_registered,,en-US,"Widget not registered: {widget}","Widget not registered: {widget}",0,0,"Widget not registered: {widget}"
+cms,widget_preview.redirecting,,en-US,"Redirecting to the correct theme...","Redirecting to the correct theme...",0,0,"Redirecting to the correct theme..."
+cms,widget_preview.title,,en-US,"Available widgets for preview","Available widgets for preview",0,0,"Available widgets for preview"
+cms,widget_preview.widget,,en-US,Widget,Widget,0,0,Widget
+common,actions,,en-US,Actions,Actions,0,0,Actions
+common,all,,en-US,All,All,0,0,All
+common,back,,en-US,Back,Back,0,0,Back
+common,calendar,,en-US,Calendar,Calendar,0,0,Calendar
+common,cancel,,en-US,Cancel,Cancel,0,0,Cancel
+common,close,,en-US,Close,Close,0,0,Close
+common,choose_placeholder,,en-US,"-- Choose --","-- Choose --",0,0,"-- Choose --"
+common,delete,,en-US,Delete,Delete,0,0,Delete
+common,download,,en-US,Download,Download,0,0,Download
+common,edit,,en-US,Edit,Edit,0,0,Edit
+common,error,,en-US,Error,Error,0,0,Error
+common,error_save,,en-US,"Error: Unable to save","Error: Unable to save",0,0,"Error: Unable to save"
+common,id,,en-US,ID,ID,0,0,ID
+common,loading,,en-US,Loading...,Loading...,0,0,Loading...
+common,logout,,en-US,"Log out","Log out",0,0,"Log out"
+common,missing_required_url_params,,en-US,"Missing required URL parameters","Missing required URL parameters",0,0,"Missing required URL parameters"
+common,move_down,,en-US,"Move down","Move down",0,0,"Move down"
+common,move_up,,en-US,"Move up","Move up",0,0,"Move up"
+common,never,,en-US,Never,Never,0,0,Never
+common,no,,en-US,No,No,0,0,No
+common,no_changes,,en-US,"No changes made","No changes made",0,0,"No changes made"
+common,no_data,,en-US,"No data","No data",0,0,"No data"
+common,no_description,,en-US,"No description","No description",0,0,"No description"
+common,not_set,,en-US,"[not set]","[not set]",0,0,"[not set]"
+common,open,,en-US,Open,Open,0,0,Open
+common,operations,,en-US,Operations,Operations,0,0,Operations
+common,preview,,en-US,Preview,Preview,0,0,Preview
+common,read_more,,en-US,"Read more","Read more",0,0,"Read more"
+common,renamed,,en-US,Renamed,Renamed,0,0,Renamed
+common,save,,en-US,Save,Save,0,0,Save
+common,saved,,en-US,"Record saved","Record saved",0,0,"Record saved"
+common,saved_short,,en-US,Saved,Saved,0,0,Saved
+common,search,,en-US,Search,Search,0,0,Search
+common,unknown,,en-US,Unknown,Unknown,0,0,Unknown
+common,upload,,en-US,Upload,Upload,0,0,Upload
+common,user,,en-US,User,User,0,0,User
+common,width,,en-US,Width,Width,0,0,Width
+common,yes,,en-US,Yes,Yes,0,0,Yes
+datatable,column_visibility,,en-US,"Visible columns","Visible columns",0,0,"Visible columns"
+datatable,displayed_columns,,en-US,"Displayed columns","Displayed columns",0,0,"Displayed columns"
+datatable,empty_table,,en-US,"No data","No data",0,0,"No data"
+datatable,first,,en-US,First,First,0,0,First
+datatable,info_compact,,en-US,"_START_ - _END_ / _TOTAL_ items","_START_ - _END_ / _TOTAL_ items",0,0,"_START_ - _END_ / _TOTAL_ items"
+datatable,info_empty,,en-US,"No results","No results",0,0,"No results"
+datatable,info_filtered_compact,,en-US,"(filtered from _MAX_ items)","(filtered from _MAX_ items)",0,0,"(filtered from _MAX_ items)"
+datatable,info_filtered_html,,en-US,"<br><i>filtered from _MAX_ rows</i>","<br><i>filtered from _MAX_ rows</i>",0,0,"<br><i>filtered from _MAX_ rows</i>"
+datatable,info_full,,en-US,"_TOTAL_ displayable items (showing: _START_ - _END_)","_TOTAL_ displayable items (showing: _START_ - _END_)",0,0,"_TOTAL_ displayable items (showing: _START_ - _END_)"
+datatable,last,,en-US,Last,Last,0,0,Last
+datatable,length_menu,,en-US,"_MENU_ items/page","_MENU_ items/page",0,0,"_MENU_ items/page"
+datatable,loading_records,,en-US,Loading...,Loading...,0,0,Loading...
+datatable,next,,en-US,Next,Next,0,0,Next
+datatable,previous,,en-US,Previous,Previous,0,0,Previous
+datatable,processing,,en-US,Processing...,Processing...,0,0,Processing...
+datatable,search,,en-US,Search,Search,0,0,Search
+datatable,zero_records,,en-US,"No displayable items","No displayable items",0,0,"No displayable items"
+layout,admin_default.description,,en-US,"Single-column admin layout","Single-column admin layout",0,0,"Single-column admin layout"
+layout,admin_default.name,,en-US,"Admin 1-column","Admin 1-column",0,0,"Admin 1-column"
+layout,admin_empty.description,,en-US,"Empty admin layout","Empty admin layout",0,0,"Empty admin layout"
+layout,admin_empty.name,,en-US,"Empty admin","Empty admin",0,0,"Empty admin"
+layout,admin_login.description,,en-US,"Admin login layout","Admin login layout",0,0,"Admin login layout"
+layout,admin_login.name,,en-US,"Admin login","Admin login",0,0,"Admin login"
+layout,admin_menu.description,,en-US,"Displays the admin menu","Displays the admin menu",0,0,"Displays the admin menu"
+layout,admin_menu.name,,en-US,"Admin menu","Admin menu",0,0,"Admin menu"
+layout,admin_nomenu.description,,en-US,"Admin layout without menu","Admin layout without menu",0,0,"Admin layout without menu"
+layout,admin_nomenu.name,,en-US,"Admin without menu","Admin without menu",0,0,"Admin without menu"
+layout,header_right.description,,en-US,"Displays the quick access menu","Displays the quick access menu",0,0,"Displays the quick access menu"
+layout,header_right.name,,en-US,"Quick menu","Quick menu",0,0,"Quick menu"
+layout,main_menu.description,,en-US,"Displays the main menu","Displays the main menu",0,0,"Displays the main menu"
+layout,main_menu.name,,en-US,"Main menu","Main menu",0,0,"Main menu"
+layout,public_2row.description,,en-US,"Two-column public layout","Two-column public layout",0,0,"Two-column public layout"
+layout,public_2row.hero.balanced_life,,en-US,"Want to live a more balanced life?","Want to live a more balanced life?",0,0,"Want to live a more balanced life?"
+layout,public_2row.hero.better_quality_of_life,,en-US,"Want a better quality of life?","Want a better quality of life?",0,0,"Want a better quality of life?"
+layout,public_2row.hero.conflict_management,,en-US,"Want to handle conflicts better?","Want to handle conflicts better?",0,0,"Want to handle conflicts better?"
+layout,public_2row.hero.equal_partner,,en-US,"Want to be treated as an equal partner?","Want to be treated as an equal partner?",0,0,"Want to be treated as an equal partner?"
+layout,public_2row.hero.self_discovery,,en-US,"Want to understand yourself better?","Want to understand yourself better?",0,0,"Want to understand yourself better?"
+layout,public_2row.hero.solution,,en-US,"The solution: TeamSolution!","The solution: TeamSolution!",0,0,"The solution: TeamSolution!"
+layout,public_2row.hero.success_and_happiness,,en-US,"Want to be successful and happy?","Want to be successful and happy?",0,0,"Want to be successful and happy?"
+layout,public_2row.name,,en-US,2-column,2-column,0,0,2-column
+layout,public_default.description,,en-US,"Single-column public layout","Single-column public layout",0,0,"Single-column public layout"
+layout,public_default.name,,en-US,1-column,1-column,0,0,1-column
+layout,public_empty.description,,en-US,"Empty layout for simple responses","Empty layout for simple responses",0,0,"Empty layout for simple responses"
+layout,public_empty.name,,en-US,Empty,Empty,0,0,Empty
+layout,public_login.description,,en-US,"Login layout","Login layout",0,0,"Login layout"
+layout,public_login.name,,en-US,Login,Login,0,0,Login
+layout,public_preview.description,,en-US,"Preview layout","Preview layout",0,0,"Preview layout"
+layout,public_preview.name,,en-US,Preview,Preview,0,0,Preview
+layout,top_menu_admin.description,,en-US,"Displays the admin top menu","Displays the admin top menu",0,0,"Displays the admin top menu"
+layout,top_menu_admin.name,,en-US,"Admin top menu","Admin top menu",0,0,"Admin top menu"
+layout,unknown.description,,en-US,"Layout not configured","Layout not configured",0,0,"Layout not configured"
+layout,unknown.name,,en-US,"Unknown layout","Unknown layout",0,0,"Unknown layout"
+layout,widget_previewer.description,,en-US,"Minimal layout for widget previews","Minimal layout for widget previews",0,0,"Minimal layout for widget previews"
+layout,widget_previewer.name,,en-US,"Widget previewer","Widget previewer",0,0,"Widget previewer"
+mcp,tokens.col.actions,,en-US,Actions,Actions,0,0,Actions
+mcp,tokens.col.created,,en-US,Created,Created,0,0,Created
+mcp,tokens.col.expires,,en-US,Expires,Expires,0,0,Expires
+mcp,tokens.col.last_used,,en-US,"Last used","Last used",0,0,"Last used"
+mcp,tokens.col.name,,en-US,Name,Name,0,0,Name
+mcp,tokens.col.prefix,,en-US,Prefix,Prefix,0,0,Prefix
+mcp,tokens.col.status,,en-US,Status,Status,0,0,Status
+mcp,tokens.create,,en-US,"Create token","Create token",0,0,"Create token"
+mcp,tokens.create_title,,en-US,"Create token","Create token",0,0,"Create token"
+mcp,tokens.created_help,,en-US,"Copy this user-bound token now. It will not be shown again.","Copy this user-bound token now. It will not be shown again.",0,0,"Copy this user-bound token now. It will not be shown again."
+mcp,tokens.created_title,,en-US,"Token created","Token created",0,0,"Token created"
+mcp,tokens.description,,en-US,"Create and revoke MCP access tokens tied to your user account.","Create and revoke MCP access tokens tied to your user account.",0,0,"Create and revoke MCP access tokens tied to your user account."
+mcp,tokens.empty,,en-US,"No MCP tokens yet.","No MCP tokens yet.",0,0,"No MCP tokens yet."
+mcp,tokens.endpoint,,en-US,"MCP endpoint","MCP endpoint",0,0,"MCP endpoint"
+mcp,tokens.existing_title,,en-US,"Existing tokens","Existing tokens",0,0,"Existing tokens"
+mcp,tokens.expiry,,en-US,Expiry,Expiry,0,0,Expiry
+mcp,tokens.expiry_30,,en-US,"30 days","30 days",0,0,"30 days"
+mcp,tokens.expiry_365,,en-US,"1 year","1 year",0,0,"1 year"
+mcp,tokens.expiry_90,,en-US,"90 days","90 days",0,0,"90 days"
+mcp,tokens.expiry_never,,en-US,"No expiry","No expiry",0,0,"No expiry"
+mcp,tokens.name,,en-US,Name,Name,0,0,Name
+mcp,tokens.name_placeholder,,en-US,"Claude Desktop - local","Claude Desktop - local",0,0,"Claude Desktop - local"
+mcp,tokens.never,,en-US,Never,Never,0,0,Never
+mcp,tokens.revoke,,en-US,Revoke,Revoke,0,0,Revoke
+mcp,tokens.revoke_confirm,,en-US,"Revoke this MCP token?","Revoke this MCP token?",0,0,"Revoke this MCP token?"
+mcp,tokens.security_note,,en-US,"MCP clients using one of these tokens run as your Radaptor user and have the same permissions you have. Keep tokens secret and revoke any token you no longer use.","MCP clients using one of these tokens run as your Radaptor user and have the same permissions you have. Keep tokens secret and revoke any token you no longer use.",0,0,"MCP clients using one of these tokens run as your Radaptor user and have the same permissions you have. Keep tokens secret and revoke any token you no longer use."
+mcp,tokens.status.active,,en-US,Active,Active,0,0,Active
+mcp,tokens.status.expired,,en-US,Expired,Expired,0,0,Expired
+mcp,tokens.status.revoked,,en-US,Revoked,Revoked,0,0,Revoked
+mcp,tokens.title,,en-US,"MCP tokens","MCP tokens",0,0,"MCP tokens"
+record_action,datasheet,,en-US,Datasheet,Datasheet,0,0,Datasheet
+record_action,versions,,en-US,Versions,Versions,0,0,Versions
+record_meta,created_by,,en-US,"Created by","Created by",0,0,"Created by"
+record_meta,last_modified,,en-US,"Last modified","Last modified",0,0,"Last modified"
+resource,new_folder,,en-US,"New folder","New folder",0,0,"New folder"
+resource,new_webpage,,en-US,"New webpage","New webpage",0,0,"New webpage"
+resource,properties,,en-US,Properties,Properties,0,0,Properties
+resource,security,,en-US,Security,Security,0,0,Security
+resource,upload_file,,en-US,"Upload file...","Upload file...",0,0,"Upload file..."
+response_error,access_denied,,en-US,"Access denied","Access denied",0,0,"Access denied"
+response_error,access_restricted,,en-US,"Access restricted","Access restricted",0,0,"Access restricted"
+response_error,forbidden.message,,en-US,"You do not have permission to access this resource.","You do not have permission to access this resource.",0,0,"You do not have permission to access this resource."
+response_error,forbidden.title,,en-US,Forbidden,Forbidden,0,0,Forbidden
+response_error,internal.contact_support,,en-US,"If the problem persists, please contact our support team.","If the problem persists, please contact our support team.",0,0,"If the problem persists, please contact our support team."
+response_error,internal.go_back_previous_page,,en-US,"Go back to the previous page using your browser's back button","Go back to the previous page using your browser's back button",0,0,"Go back to the previous page using your browser's back button"
+response_error,internal.intro,,en-US,"We apologize for the inconvenience. Our team has been notified and we are working to fix this issue.","We apologize for the inconvenience. Our team has been notified and we are working to fix this issue.",0,0,"We apologize for the inconvenience. Our team has been notified and we are working to fix this issue."
+response_error,internal.reference_label,,en-US,Reference,Reference,0,0,Reference
+response_error,internal.refresh_page,,en-US,"Refresh this page","Refresh this page",0,0,"Refresh this page"
+response_error,internal.title,,en-US,"Oops! Something went wrong on our end.","Oops! Something went wrong on our end.",0,0,"Oops! Something went wrong on our end."
+response_error,internal.try_actions,,en-US,"You can try to:","You can try to:",0,0,"You can try to:"
+response_error,internal.try_again_in_a_few_minutes,,en-US,"Try again in a few minutes","Try again in a few minutes",0,0,"Try again in a few minutes"
+runtime_diagnostics,card.database,,en-US,Database,Database,0,0,Database
+runtime_diagnostics,card.email,,en-US,"Email safety","Email safety",0,0,"Email safety"
+runtime_diagnostics,card.environment,,en-US,Environment,Environment,0,0,Environment
+runtime_diagnostics,card.mcp,,en-US,MCP,MCP,0,0,MCP
+runtime_diagnostics,card.packages,,en-US,Packages,Packages,0,0,Packages
+runtime_diagnostics,card.redis,,en-US,Redis,Redis,0,0,Redis
+runtime_diagnostics,card.warnings,,en-US,Warnings,Warnings,0,0,Warnings
+runtime_diagnostics,no,,en-US,no,no,0,0,no
+runtime_diagnostics,none,,en-US,None,None,0,0,None
+runtime_diagnostics,safe_to_test,,en-US,"Safe to test","Safe to test",0,0,"Safe to test"
+runtime_diagnostics,subtitle,,en-US,"Effective runtime state with secrets redacted.","Effective runtime state with secrets redacted.",0,0,"Effective runtime state with secrets redacted."
+runtime_diagnostics,title,,en-US,"Runtime diagnostics","Runtime diagnostics",0,0,"Runtime diagnostics"
+runtime_diagnostics,yes,,en-US,yes,yes,0,0,yes
+selection,delete_invalid_entry_confirm,,en-US,"Are you sure you want to delete this invalid entry?","Are you sure you want to delete this invalid entry?",0,0,"Are you sure you want to delete this invalid entry?"
+selection,delete_selected,,en-US,"Delete selected","Delete selected",0,0,"Delete selected"
+selection,delete_selected_confirm,,en-US,"Are you sure you want to delete all selected items?","Are you sure you want to delete all selected items?",0,0,"Are you sure you want to delete all selected items?"
+selection,group,,en-US,"Group selection","Group selection",0,0,"Group selection"
+selection,invalid_entry,,en-US,"Invalid entry","Invalid entry",0,0,"Invalid entry"
+selection,multiple,,en-US,"Multiple selection","Multiple selection",0,0,"Multiple selection"
+selection,selected_items,,en-US,"Selected items","Selected items",0,0,"Selected items"
+social,disqus.comments_link,,en-US,"Disqus comments","Disqus comments",0,0,"Disqus comments"
+social,disqus.enable_javascript,,en-US,"JavaScript must be enabled to display","JavaScript must be enabled to display",0,0,"JavaScript must be enabled to display"
+social,disqus.powered_by,,en-US,"comments powered by","comments powered by",0,0,"comments powered by"
+system_message,default_header,,en-US,"System message","System message",0,0,"System message"
+theme,error.description,,en-US,"Fallback error theme","Fallback error theme",0,0,"Fallback error theme"
+theme,error.name,,en-US,Error,Error,0,0,Error
+theme,radaptor_portal_admin.description,,en-US,"Bootstrap 5 admin theme with portal neon/glass styling","Bootstrap 5 admin theme with portal neon/glass styling",0,0,"Bootstrap 5 admin theme with portal neon/glass styling"
+theme,radaptor_portal_admin.name,,en-US,RadaptorPortalAdmin,RadaptorPortalAdmin,0,0,RadaptorPortalAdmin
+theme,so_admin.description,,en-US,"SO-like admin theme","SO-like admin theme",0,0,"SO-like admin theme"
+theme,so_admin.name,,en-US,SO-Admin,SO-Admin,0,0,SO-Admin
+widget,admin_menu.description,,en-US,"Manage the admin menu tree","Manage the admin menu tree",0,0,"Manage the admin menu tree"
+widget,admin_menu.name,,en-US,"Admin menu administration","Admin menu administration",0,0,"Admin menu administration"
+widget,blog.description,,en-US,Blog,Blog,0,0,Blog
+widget,blog.name,,en-US,Blog,Blog,0,0,Blog
+widget,blog_list.description,,en-US,"Blog list","Blog list",0,0,"Blog list"
+widget,blog_list.name,,en-US,"Blog list","Blog list",0,0,"Blog list"
+widget,cli_runner.description,,en-US,"Run CLI commands from the admin panel.","Run CLI commands from the admin panel.",0,0,"Run CLI commands from the admin panel."
+widget,cli_runner.name,,en-US,"CLI Runner","CLI Runner",0,0,"CLI Runner"
+widget,file_upload.description,,en-US,"File upload","File upload",0,0,"File upload"
+widget,file_upload.name,,en-US,"File upload","File upload",0,0,"File upload"
+widget,form.description,,en-US,"Displays a configured form","Displays a configured form",0,0,"Displays a configured form"
+widget,form.name,,en-US,Form,Form,0,0,Form
+widget,group_beginning.description,,en-US,"Separately managed content unit that can contain jointly styled elements.","Separately managed content unit that can contain jointly styled elements.",0,0,"Separately managed content unit that can contain jointly styled elements."
+widget,group_beginning.name,,en-US,"Content block","Content block",0,0,"Content block"
+widget,group_end.description,,en-US,"End of a separately managed content unit.","End of a separately managed content unit.",0,0,"End of a separately managed content unit."
+widget,group_end.name,,en-US,"End of content block","End of content block",0,0,"End of content block"
+widget,import_export.description,,en-US,"Central CSV import and export tools","Central CSV import and export tools",0,0,"Central CSV import and export tools"
+widget,import_export.name,,en-US,"Import / Export","Import / Export",0,0,"Import / Export"
+widget,js_tree.description,,en-US,"Displays and manages a hierarchical tree of admin resources","Displays and manages a hierarchical tree of admin resources",0,0,"Displays and manages a hierarchical tree of admin resources"
+widget,js_tree.name,,en-US,"Tree browser","Tree browser",0,0,"Tree browser"
+widget,js_tree.settings,,en-US,"Tree settings","Tree settings",0,0,"Tree settings"
+widget,main_menu.description,,en-US,"Manage the main menu tree","Manage the main menu tree",0,0,"Manage the main menu tree"
+widget,main_menu.name,,en-US,"Main menu administration","Main menu administration",0,0,"Main menu administration"
+widget,phpinfo_frame.description,,en-US,"Show PHP runtime information inside the admin layout.","Show PHP runtime information inside the admin layout.",0,0,"Show PHP runtime information inside the admin layout."
+widget,phpinfo_frame.name,,en-US,"PHPinfo frame","PHPinfo frame",0,0,"PHPinfo frame"
+widget,phpinfo_frame.open_raw,,en-US,"Open raw","Open raw",0,0,"Open raw"
+widget,phpinfo_frame.title,,en-US,PHPinfo,PHPinfo,0,0,PHPinfo
+widget,plain_html.description,,en-US,"HTML code (embed)","HTML code (embed)",0,0,"HTML code (embed)"
+widget,plain_html.name,,en-US,"HTML code (embed)","HTML code (embed)",0,0,"HTML code (embed)"
+widget,resource_acl_selector.description,,en-US,"Configure resource access permissions","Configure resource access permissions",0,0,"Configure resource access permissions"
+widget,resource_acl_selector.name,,en-US,"Resource access settings","Resource access settings",0,0,"Resource access settings"
+widget,resource_tree.description,,en-US,"Manage webpages, web folders, and uploaded files here.","Manage webpages, web folders, and uploaded files here.",0,0,"Manage webpages, web folders, and uploaded files here."
+widget,resource_tree.name,,en-US,"Webpage structure","Webpage structure",0,0,"Webpage structure"
+widget,rich_text.description,,en-US,"Freely editable text with images","Freely editable text with images",0,0,"Freely editable text with images"
+widget,rich_text.name,,en-US,"Editable text","Editable text",0,0,"Editable text"
+widget,role_list.description,,en-US,"Displays the role tree","Displays the role tree",0,0,"Displays the role tree"
+widget,role_list.name,,en-US,"Role list","Role list",0,0,"Role list"
+widget,role_selector.description,,en-US,"Role selector","Role selector",0,0,"Role selector"
+widget,role_selector.name,,en-US,"Role selector","Role selector",0,0,"Role selector"
+widget,tag_list.description,,en-US,"Tag list","Tag list",0,0,"Tag list"
+widget,tag_list.name,,en-US,"Tag list","Tag list",0,0,"Tag list"
+widget,template_engine_demo_blade.description,,en-US,"Demonstrates rendering a Blade template inside Radaptor.","Demonstrates rendering a Blade template inside Radaptor.",0,0,"Demonstrates rendering a Blade template inside Radaptor."
+widget,template_engine_demo_blade.name,,en-US,"Blade template engine demo","Blade template engine demo",0,0,"Blade template engine demo"
+widget,template_engine_demo_php.description,,en-US,"Demonstrates rendering a native PHP template inside Radaptor.","Demonstrates rendering a native PHP template inside Radaptor.",0,0,"Demonstrates rendering a native PHP template inside Radaptor."
+widget,template_engine_demo_php.name,,en-US,"PHP template engine demo","PHP template engine demo",0,0,"PHP template engine demo"
+widget,template_engine_demo_twig.description,,en-US,"Demonstrates rendering a Twig template inside Radaptor.","Demonstrates rendering a Twig template inside Radaptor.",0,0,"Demonstrates rendering a Twig template inside Radaptor."
+widget,template_engine_demo_twig.name,,en-US,"Twig template engine demo","Twig template engine demo",0,0,"Twig template engine demo"
+widget,user_description.description,,en-US,"Displays the details of a user","Displays the details of a user",0,0,"Displays the details of a user"
+widget,user_description.name,,en-US,"User details","User details",0,0,"User details"
+widget,user_list.description,,en-US,"User list","User list",0,0,"User list"
+widget,user_list.name,,en-US,"User list","User list",0,0,"User list"
+widget,usergroup_list.description,,en-US,"Displays the user group tree","Displays the user group tree",0,0,"Displays the user group tree"
+widget,usergroup_list.name,,en-US,"User group list","User group list",0,0,"User group list"
+widget,usergroup_selector.description,,en-US,"Select user groups for a user","Select user groups for a user",0,0,"Select user groups for a user"
+widget,usergroup_selector.name,,en-US,"User group selector","User group selector",0,0,"User group selector"
+widget,widget_error.description,,en-US,"Invalid widget","Invalid widget",0,0,"Invalid widget"
+widget,widget_error.invalid_type,,en-US,"Non-existent content type: {type}","Non-existent content type: {type}",0,0,"Non-existent content type: {type}"
+widget,widget_error.name,,en-US,"Invalid widget","Invalid widget",0,0,"Invalid widget"
+widget,widget_preview.description,,en-US,"Preview any widget with mock data. URL params: widget (required), theme (optional)","Preview any widget with mock data. URL params: widget (required), theme (optional)",0,0,"Preview any widget with mock data. URL params: widget (required), theme (optional)"
+widget,widget_preview.name,,en-US,"Widget preview","Widget preview",0,0,"Widget preview"
+workbench,tm_apply,,en-US,Apply,Apply,0,0,Apply
+workbench,tm_no_results,,en-US,"No suggestions","No suggestions",0,0,"No suggestions"
+workbench,tm_uses,,en-US,uses,uses,0,0,uses
+admin,menu.mailpit,,en-US,Mailpit,Mailpit,0,0,Mailpit
+admin,email_outbox.recipients_delivery_counts,,en-US,"({sent} sent / {failed} failed)","({sent} sent / {failed} failed)",0,0,"({sent} sent / {failed} failed)"
+admin,email_outbox.col.job,,en-US,Job,Job,0,0,Job
+admin,email_outbox.col.dead_lettered,,en-US,"Dead lettered","Dead lettered",0,0,"Dead lettered"
+admin,email_outbox.pagination.previous,,en-US,Previous,Previous,0,0,Previous
+admin,email_outbox.pagination.next,,en-US,Next,Next,0,0,Next
+runtime_diagnostics,card.package_roots,,en-US,"Package roots","Package roots",0,0,"Package roots"
+runtime_diagnostics,field.environment,,en-US,Environment,Environment,0,0,Environment
+runtime_diagnostics,field.application,,en-US,Application,Application,0,0,Application
+runtime_diagnostics,field.domain_context,,en-US,"Domain context","Domain context",0,0,"Domain context"
+runtime_diagnostics,field.runtime,,en-US,Runtime,Runtime,0,0,Runtime
+runtime_diagnostics,field.smtp_host,,en-US,"SMTP host","SMTP host",0,0,"SMTP host"
+runtime_diagnostics,field.smtp_port,,en-US,"SMTP port","SMTP port",0,0,"SMTP port"
+runtime_diagnostics,field.using_catcher,,en-US,"Using catcher","Using catcher",0,0,"Using catcher"
+runtime_diagnostics,field.catcher_host,,en-US,"Catcher host","Catcher host",0,0,"Catcher host"
+runtime_diagnostics,field.catcher_smtp_port,,en-US,"Catcher SMTP port","Catcher SMTP port",0,0,"Catcher SMTP port"
+runtime_diagnostics,field.mailpit_ui_url,,en-US,"Mailpit UI URL","Mailpit UI URL",0,0,"Mailpit UI URL"
+runtime_diagnostics,field.driver,,en-US,Driver,Driver,0,0,Driver
+runtime_diagnostics,field.host,,en-US,Host,Host,0,0,Host
+runtime_diagnostics,field.port,,en-US,Port,Port,0,0,Port
+runtime_diagnostics,field.database,,en-US,Database,Database,0,0,Database
+runtime_diagnostics,field.username,,en-US,Username,Username,0,0,Username
+runtime_diagnostics,field.password,,en-US,Password,Password,0,0,Password
+runtime_diagnostics,field.dsn,,en-US,DSN,DSN,0,0,DSN
+runtime_diagnostics,field.session,,en-US,Session,Session,0,0,Session
+runtime_diagnostics,field.cache,,en-US,Cache,Cache,0,0,Cache
+runtime_diagnostics,field.test,,en-US,Test,Test,0,0,Test
+runtime_diagnostics,field.public_url,,en-US,"Public URL","Public URL",0,0,"Public URL"
+runtime_diagnostics,field.allowed_origins,,en-US,"Allowed origins","Allowed origins",0,0,"Allowed origins"
+runtime_diagnostics,field.enabled_hint,,en-US,"Enabled hint","Enabled hint",0,0,"Enabled hint"
+runtime_diagnostics,field.mode,,en-US,Mode,Mode,0,0,Mode
+runtime_diagnostics,field.local_manifest,,en-US,"Local manifest","Local manifest",0,0,"Local manifest"
+runtime_diagnostics,field.local_lock,,en-US,"Local lock","Local lock",0,0,"Local lock"
+runtime_diagnostics,field.workspace_dev_mode,,en-US,"Workspace dev mode","Workspace dev mode",0,0,"Workspace dev mode"
+runtime_diagnostics,field.local_overrides_disabled,,en-US,"Local overrides disabled","Local overrides disabled",0,0,"Local overrides disabled"
+runtime_diagnostics,col.package,,en-US,Package,Package,0,0,Package
+runtime_diagnostics,col.source,,en-US,Source,Source,0,0,Source
+runtime_diagnostics,col.version,,en-US,Version,Version,0,0,Version
+runtime_diagnostics,col.active_path,,en-US,"Active path","Active path",0,0,"Active path"
+cms,template.missing,,en-US,"Missing template:","Missing template:",0,0,"Missing template:"
+cms,widget_preview.server_html_preview,,en-US,"Server HTML preview","Server HTML preview",0,0,"Server HTML preview"
+cms,widget_preview.subtree_json,,en-US,"Widget subtree JSON","Widget subtree JSON",0,0,"Widget subtree JSON"
+cms,widget_preview.subtree_json_description,,en-US,"Extracted from the same SDUI JSON document available through Open JSON.","Extracted from the same SDUI JSON document available through Open JSON.",0,0,"Extracted from the same SDUI JSON document available through Open JSON."
+cms,widget_preview.open_json,,en-US,"Open JSON","Open JSON",0,0,"Open JSON"
+cms,widget_preview.loading_json_preview,,en-US,"Loading JSON preview...","Loading JSON preview...",0,0,"Loading JSON preview..."
+cms,widget_preview.sdui_subtree_help,,en-US,"Showing the widget subtree extracted from the full SDUI JSON document.","Showing the widget subtree extracted from the full SDUI JSON document.",0,0,"Showing the widget subtree extracted from the full SDUI JSON document."
+cms,widget_preview.template_scope_note,,en-US,"This support check only looks at the resolved preview HTML template of the widget root node.","This support check only looks at the resolved preview HTML template of the widget root node.",0,0,"This support check only looks at the resolved preview HTML template of the widget root node."
+social,disqus.brand,,en-US,Disqus,Disqus,0,0,Disqus
+layout,public_2row.brand,,en-US,TeamSolution,TeamSolution,0,0,TeamSolution
+theme,template_engine_demo.col.name,,en-US,Name,Name,0,0,Name
+theme,template_engine_demo.col.email,,en-US,Email,Email,0,0,Email
+theme,template_engine_demo.col.role,,en-US,Role,Role,0,0,Role
+theme,template_engine_demo.engine_title,,en-US,"{engine} Template Engine","{engine} Template Engine",0,0,"{engine} Template Engine"
+theme,template_engine_demo.source_title,,en-US,"Template Source","Template Source",0,0,"Template Source"
+theme,template_engine_demo.rendered_output_title,,en-US,"Rendered Output","Rendered Output",0,0,"Rendered Output"
+layout,admin_empty.sign_in_to_continue,,en-US,"Sign in to continue.","Sign in to continue.",0,0,"Sign in to continue."
+cms,resource.field.locale.label,,en-US,"Content locale","Content locale",0,0,"Content locale"
+cms,resource.field.locale.explanation,,en-US,"Select a fixed locale for this resource, or leave it dynamic/inherited.","Select a fixed locale for this resource, or leave it dynamic/inherited.",0,0,"Select a fixed locale for this resource, or leave it dynamic/inherited."
+cms,resource.field.locale.dynamic,,en-US,"Dynamic / inherit","Dynamic / inherit",0,0,"Dynamic / inherit"
+cms,richtext.field.locale.label,,en-US,"Content locale","Content locale",0,0,"Content locale"
+cms,richtext.field.locale.explanation,,en-US,"The locale this text content belongs to.","The locale this text content belongs to.",0,0,"The locale this text content belongs to."
+cms,richtext.locale_mismatch,,en-US,"The selected text content does not match the page locale.","The selected text content does not match the page locale.",0,0,"The selected text content does not match the page locale."
+widget,locale_admin.name,,en-US,"Locale administration","Locale administration",0,0,"Locale administration"
+widget,locale_admin.description,,en-US,"Manage enabled application locales.","Manage enabled application locales.",0,0,"Manage enabled application locales."
+locale_admin,title,,en-US,Locales,Locales,0,0,Locales
+locale_admin,subtitle,,en-US,"Enable or disable locales offered for new admin content. Existing content is not deleted.","Enable or disable locales offered for new admin content. Existing content is not deleted.",0,0,"Enable or disable locales offered for new admin content. Existing content is not deleted."
+locale_admin,add_title,,en-US,"Add locale","Add locale",0,0,"Add locale"
+locale_admin,field.locale,,en-US,Locale,Locale,0,0,Locale
+locale_admin,placeholder.locale,,en-US,en-US,en-US,0,0,en-US
+locale_admin,action.add_enabled,,en-US,"Add enabled","Add enabled",0,0,"Add enabled"
+locale_admin,action.enable,,en-US,Enable,Enable,0,0,Enable
+locale_admin,action.disable,,en-US,Disable,Disable,0,0,Disable
+locale_admin,col.locale,,en-US,Locale,Locale,0,0,Locale
+locale_admin,col.label,,en-US,Label,Label,0,0,Label
+locale_admin,col.native_label,,en-US,"Native label","Native label",0,0,"Native label"
+locale_admin,col.status,,en-US,Status,Status,0,0,Status
+locale_admin,col.home,,en-US,"Home resources","Home resources",0,0,"Home resources"
+locale_admin,col.usage,,en-US,Usage,Usage,0,0,Usage
+locale_admin,col.actions,,en-US,Actions,Actions,0,0,Actions
+locale_admin,status.enabled,,en-US,Enabled,Enabled,0,0,Enabled
+locale_admin,status.disabled,,en-US,Disabled,Disabled,0,0,Disabled
+locale_admin,status.default,,en-US,Default,Default,0,0,Default
+locale_admin,home_count,,en-US,"{count} home target(s)","{count} home target(s)",0,0,"{count} home target(s)"
+locale_admin,usage.none,,en-US,"No usage","No usage",0,0,"No usage"
+locale_admin,message.enabled,,en-US,"Locale {locale} enabled.","Locale {locale} enabled.",0,0,"Locale {locale} enabled."
+locale_admin,message.disabled,,en-US,"Locale {locale} disabled.","Locale {locale} disabled.",0,0,"Locale {locale} disabled."
+locale_admin,message.error,,en-US,"Locale {locale} could not be updated.","Locale {locale} could not be updated.",0,0,"Locale {locale} could not be updated."
+locale_admin,message.invalid_locale,,en-US,"Invalid locale.","Invalid locale.",0,0,"Invalid locale."
+locale_admin,message.service_unavailable,,en-US,"Locale administration is unavailable until the locale infrastructure is installed.","Locale administration is unavailable until the locale infrastructure is installed.",0,0,"Locale administration is unavailable until the locale infrastructure is installed."
+admin,i18n.col.allow_source_match,,en-US,"Source match","Source match",0,0,"Source match"
+admin,i18n.allow_source_match.help,,en-US,"Allow only when the translation intentionally matches the source text.","Allow only when the translation intentionally matches the source text.",0,0,"Allow only when the translation intentionally matches the source text."

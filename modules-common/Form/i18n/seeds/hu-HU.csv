@@ -1,59 +1,59 @@
-﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
-form,admin_menu_item.description,,hu-HU,Admin menu item,Admin menü elem,0,Admin menü elem
-form,admin_menu_item.name,,hu-HU,Admin menu item,Admin menü elem,0,Admin menü elem
-form,blog.description,,hu-HU,Blog post,Blogbejegyzés,0,Blogbejegyzés
-form,blog.name,,hu-HU,Blog post,Blogbejegyzés,0,Blogbejegyzés
-form,close_page.close_window,,hu-HU,Close this window!,Zárd be ezt az ablakot!,0,Zárd be ezt az ablakot!
-form,close_page.title,,hu-HU,Close page,Bezáró oldal,0,Bezáró oldal
-form,form_settings.description,,hu-HU,Select which form to display,"Válaszd ki, melyik űrlap jelenjen meg",0,"Válaszd ki, melyik űrlap jelenjen meg"
-form,form_settings.name,,hu-HU,Form settings,Űrlap beállításai,0,Űrlap beállításai
-form,form_settings.title,,hu-HU,Select form,Űrlap kiválasztása,0,Űrlap kiválasztása
-form,js_tree_settings.description,,hu-HU,Select which tree to display,"Válaszd ki, melyik fa jelenjen meg",0,"Válaszd ki, melyik fa jelenjen meg"
-form,js_tree_settings.name,,hu-HU,Tree settings,Fa beállítások,0,Fa beállítások
-form,js_tree_settings.title,,hu-HU,Select tree,Fa kiválasztása,0,Fa kiválasztása
-form,main_menu_item.description,,hu-HU,Main menu item,Főmenü elem,0,Főmenü elem
-form,main_menu_item.name,,hu-HU,Main menu item,Főmenü elem,0,Főmenü elem
-form,plain_html.description,,hu-HU,HTML code (embed),HTML kód (beágyazás),0,HTML kód (beágyazás)
-form,plain_html.name,,hu-HU,HTML code (embed),HTML kód (beágyazás),0,HTML kód (beágyazás)
-form,rich_text_select.description,,hu-HU,Select text content,Szöveges tartalom kiválasztása,0,Szöveges tartalom kiválasztása
-form,rich_text_select.name,,hu-HU,Select text content,Szöveges tartalom kiválasztása,0,Szöveges tartalom kiválasztása
-form,rich_text.description,,hu-HU,Text content,Szöveges tartalom,0,Szöveges tartalom
-form,rich_text.name,,hu-HU,Text content,Szöveges tartalom,0,Szöveges tartalom
-form,role.description,,hu-HU,Role,Szerep,0,Szerep
-form,role.name,,hu-HU,Role,Szerep,0,Szerep
-form,tag.description,,hu-HU,Tag,Címke,0,Címke
-form,tag.name,,hu-HU,Tag,Címke,0,Címke
-form,theme_selector.description,,hu-HU,Select which theme renders each layout,"Válaszd ki, hogy az egyes layoutokat melyik téma jelenítse meg",0,"Válaszd ki, hogy az egyes layoutokat melyik téma jelenítse meg"
-form,theme_selector.name,,hu-HU,Theme selection,Témák kiválasztása,0,Témák kiválasztása
-form,theme_selector.title,,hu-HU,Select themes for layouts,Témák kiválasztása a layout-okhoz,0,Témák kiválasztása a layout-okhoz
-form,ticket_priority.description,,hu-HU,Ticket priority,Jegy prioritás,0,Jegy prioritás
-form,ticket_priority.name,,hu-HU,Ticket priority,Jegy prioritás,0,Jegy prioritás
-form,ticket_state.description,,hu-HU,Ticket status,Jegy állapot,0,Jegy állapot
-form,ticket_state.name,,hu-HU,Ticket status,Jegy állapot,0,Jegy állapot
-form,user_login.description,,hu-HU,Login,Bejelentkezés,0,Bejelentkezés
-form,user_login.name,,hu-HU,Login,Bejelentkezés,0,Bejelentkezés
-form,user_signup.description,,hu-HU,Sign up,Regisztráció,0,Regisztráció
-form,user_signup.name,,hu-HU,Sign up,Regisztráció,0,Regisztráció
-form,user.description,,hu-HU,User,Felhasználó,0,Felhasználó
-form,user.name,,hu-HU,User,Felhasználó,0,Felhasználó
-form,usergroup.description,,hu-HU,User group,Felhasználói csoport,0,Felhasználói csoport
-form,usergroup.name,,hu-HU,User group,Felhasználói csoport,0,Felhasználói csoport
-form,validation.max_length,,hu-HU,Maximum {max} characters,Maximum {max} karakter hosszúságú,0,Maximum {max} karakter hosszúságú
-form,validation.required,,hu-HU,Required,Kötelező,0,Kötelező
-form,webpage_domain.description,,hu-HU,Domain properties,Domain tulajdonságai,0,Domain tulajdonságai
-form,webpage_domain.name,,hu-HU,Domain properties,Domain tulajdonságai,0,Domain tulajdonságai
-form,webpage_file.description,,hu-HU,File properties,Fájl tulajdonságai,0,Fájl tulajdonságai
-form,webpage_file.name,,hu-HU,File properties,Fájl tulajdonságai,0,Fájl tulajdonságai
-form,webpage_folder.description,,hu-HU,Website folder properties,Webes mappa tulajdonságai,0,Webes mappa tulajdonságai
-form,webpage_folder.name,,hu-HU,Website folder properties,Webes mappa tulajdonságai,0,Webes mappa tulajdonságai
-form,webpage_from_path.description,,hu-HU,Create webpage from path,Weboldal létrehozása útvonal alapján,0,Weboldal létrehozása útvonal alapján
-form,webpage_from_path.name,,hu-HU,Create webpage from path,Weboldal létrehozása útvonal alapján,0,Weboldal létrehozása útvonal alapján
-form,webpage_page.description,,hu-HU,Webpage properties,Weboldal tulajdonságai,0,Weboldal tulajdonságai
-form,webpage_page.name,,hu-HU,Webpage properties,Weboldal tulajdonságai,0,Weboldal tulajdonságai
-form,widget_connection_params.description,,hu-HU,Display settings for a content box,Tartalomdoboz megjelenítési beállításai,0,Tartalomdoboz megjelenítési beállításai
-form,widget_connection_params.name,,hu-HU,Content box display settings,Tartalomdoboz megjelenítési beállítások,0,Tartalomdoboz megjelenítési beállítások
-form,widget_connection_settings.description,,hu-HU,Configure width and row placement for the content box,A tartalomdoboz szélességének és sorelhelyezésének beállítása,0,A tartalomdoboz szélességének és sorelhelyezésének beállítása
-form,widget_connection_settings.name,,hu-HU,Content formatting,Tartalom formázás,0,Tartalom formázás
-form,widget_connection_settings.title,,hu-HU,Content formatting,Tartalom formázás,0,Tartalom formázás
-form,closer.title,,hu-HU,Closer page,Bezáró oldal,0,Bezáró oldal
-form,closer.close_window,,hu-HU,Close this window!,Zárd be ezt az ablakot!,0,Zárd be ezt az ablakot!
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,allow_source_match,text
+form,admin_menu_item.description,,hu-HU,"Admin menu item","Admin menü elem",0,0,"Admin menü elem"
+form,admin_menu_item.name,,hu-HU,"Admin menu item","Admin menü elem",0,0,"Admin menü elem"
+form,blog.description,,hu-HU,"Blog post",Blogbejegyzés,0,0,Blogbejegyzés
+form,blog.name,,hu-HU,"Blog post",Blogbejegyzés,0,0,Blogbejegyzés
+form,close_page.close_window,,hu-HU,"Close this window!","Zárd be ezt az ablakot!",0,0,"Zárd be ezt az ablakot!"
+form,close_page.title,,hu-HU,"Close page","Bezáró oldal",0,0,"Bezáró oldal"
+form,form_settings.description,,hu-HU,"Select which form to display","Válaszd ki, melyik űrlap jelenjen meg",0,0,"Válaszd ki, melyik űrlap jelenjen meg"
+form,form_settings.name,,hu-HU,"Form settings","Űrlap beállításai",0,0,"Űrlap beállításai"
+form,form_settings.title,,hu-HU,"Select form","Űrlap kiválasztása",0,0,"Űrlap kiválasztása"
+form,js_tree_settings.description,,hu-HU,"Select which tree to display","Válaszd ki, melyik fa jelenjen meg",0,0,"Válaszd ki, melyik fa jelenjen meg"
+form,js_tree_settings.name,,hu-HU,"Tree settings","Fa beállítások",0,0,"Fa beállítások"
+form,js_tree_settings.title,,hu-HU,"Select tree","Fa kiválasztása",0,0,"Fa kiválasztása"
+form,main_menu_item.description,,hu-HU,"Main menu item","Főmenü elem",0,0,"Főmenü elem"
+form,main_menu_item.name,,hu-HU,"Main menu item","Főmenü elem",0,0,"Főmenü elem"
+form,plain_html.description,,hu-HU,"HTML code (embed)","HTML kód (beágyazás)",0,0,"HTML kód (beágyazás)"
+form,plain_html.name,,hu-HU,"HTML code (embed)","HTML kód (beágyazás)",0,0,"HTML kód (beágyazás)"
+form,rich_text_select.description,,hu-HU,"Select text content","Szöveges tartalom kiválasztása",0,0,"Szöveges tartalom kiválasztása"
+form,rich_text_select.name,,hu-HU,"Select text content","Szöveges tartalom kiválasztása",0,0,"Szöveges tartalom kiválasztása"
+form,rich_text.description,,hu-HU,"Text content","Szöveges tartalom",0,0,"Szöveges tartalom"
+form,rich_text.name,,hu-HU,"Text content","Szöveges tartalom",0,0,"Szöveges tartalom"
+form,role.description,,hu-HU,Role,Szerep,0,0,Szerep
+form,role.name,,hu-HU,Role,Szerep,0,0,Szerep
+form,tag.description,,hu-HU,Tag,Címke,0,0,Címke
+form,tag.name,,hu-HU,Tag,Címke,0,0,Címke
+form,theme_selector.description,,hu-HU,"Select which theme renders each layout","Válaszd ki, hogy az egyes layoutokat melyik téma jelenítse meg",0,0,"Válaszd ki, hogy az egyes layoutokat melyik téma jelenítse meg"
+form,theme_selector.name,,hu-HU,"Theme selection","Témák kiválasztása",0,0,"Témák kiválasztása"
+form,theme_selector.title,,hu-HU,"Select themes for layouts","Témák kiválasztása a layout-okhoz",0,0,"Témák kiválasztása a layout-okhoz"
+form,ticket_priority.description,,hu-HU,"Ticket priority","Jegy prioritás",0,0,"Jegy prioritás"
+form,ticket_priority.name,,hu-HU,"Ticket priority","Jegy prioritás",0,0,"Jegy prioritás"
+form,ticket_state.description,,hu-HU,"Ticket status","Jegy állapot",0,0,"Jegy állapot"
+form,ticket_state.name,,hu-HU,"Ticket status","Jegy állapot",0,0,"Jegy állapot"
+form,user_login.description,,hu-HU,Login,Bejelentkezés,0,0,Bejelentkezés
+form,user_login.name,,hu-HU,Login,Bejelentkezés,0,0,Bejelentkezés
+form,user_signup.description,,hu-HU,"Sign up",Regisztráció,0,0,Regisztráció
+form,user_signup.name,,hu-HU,"Sign up",Regisztráció,0,0,Regisztráció
+form,user.description,,hu-HU,User,Felhasználó,0,0,Felhasználó
+form,user.name,,hu-HU,User,Felhasználó,0,0,Felhasználó
+form,usergroup.description,,hu-HU,"User group","Felhasználói csoport",0,0,"Felhasználói csoport"
+form,usergroup.name,,hu-HU,"User group","Felhasználói csoport",0,0,"Felhasználói csoport"
+form,validation.max_length,,hu-HU,"Maximum {max} characters","Maximum {max} karakter hosszúságú",0,0,"Maximum {max} karakter hosszúságú"
+form,validation.required,,hu-HU,Required,Kötelező,0,0,Kötelező
+form,webpage_domain.description,,hu-HU,"Domain properties","Domain tulajdonságai",0,0,"Domain tulajdonságai"
+form,webpage_domain.name,,hu-HU,"Domain properties","Domain tulajdonságai",0,0,"Domain tulajdonságai"
+form,webpage_file.description,,hu-HU,"File properties","Fájl tulajdonságai",0,0,"Fájl tulajdonságai"
+form,webpage_file.name,,hu-HU,"File properties","Fájl tulajdonságai",0,0,"Fájl tulajdonságai"
+form,webpage_folder.description,,hu-HU,"Website folder properties","Webes mappa tulajdonságai",0,0,"Webes mappa tulajdonságai"
+form,webpage_folder.name,,hu-HU,"Website folder properties","Webes mappa tulajdonságai",0,0,"Webes mappa tulajdonságai"
+form,webpage_from_path.description,,hu-HU,"Create webpage from path","Weboldal létrehozása útvonal alapján",0,0,"Weboldal létrehozása útvonal alapján"
+form,webpage_from_path.name,,hu-HU,"Create webpage from path","Weboldal létrehozása útvonal alapján",0,0,"Weboldal létrehozása útvonal alapján"
+form,webpage_page.description,,hu-HU,"Webpage properties","Weboldal tulajdonságai",0,0,"Weboldal tulajdonságai"
+form,webpage_page.name,,hu-HU,"Webpage properties","Weboldal tulajdonságai",0,0,"Weboldal tulajdonságai"
+form,widget_connection_params.description,,hu-HU,"Display settings for a content box","Tartalomdoboz megjelenítési beállításai",0,0,"Tartalomdoboz megjelenítési beállításai"
+form,widget_connection_params.name,,hu-HU,"Content box display settings","Tartalomdoboz megjelenítési beállítások",0,0,"Tartalomdoboz megjelenítési beállítások"
+form,widget_connection_settings.description,,hu-HU,"Configure width and row placement for the content box","A tartalomdoboz szélességének és sorelhelyezésének beállítása",0,0,"A tartalomdoboz szélességének és sorelhelyezésének beállítása"
+form,widget_connection_settings.name,,hu-HU,"Content formatting","Tartalom formázás",0,0,"Tartalom formázás"
+form,widget_connection_settings.title,,hu-HU,"Content formatting","Tartalom formázás",0,0,"Tartalom formázás"
+form,closer.title,,hu-HU,"Closer page","Bezáró oldal",0,0,"Bezáró oldal"
+form,closer.close_window,,hu-HU,"Close this window!","Zárd be ezt az ablakot!",0,0,"Zárd be ezt az ablakot!"

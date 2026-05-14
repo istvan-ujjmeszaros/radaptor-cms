@@ -1,59 +1,59 @@
-﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
-form,admin_menu_item.description,,en-US,Admin menu item,Admin menu item,0,Admin menu item
-form,admin_menu_item.name,,en-US,Admin menu item,Admin menu item,0,Admin menu item
-form,blog.description,,en-US,Blog post,Blog post,0,Blog post
-form,blog.name,,en-US,Blog post,Blog post,0,Blog post
-form,close_page.close_window,,en-US,Close this window!,Close this window!,0,Close this window!
-form,close_page.title,,en-US,Close page,Close page,0,Close page
-form,form_settings.description,,en-US,Select which form to display,Select which form to display,0,Select which form to display
-form,form_settings.name,,en-US,Form settings,Form settings,0,Form settings
-form,form_settings.title,,en-US,Select form,Select form,0,Select form
-form,js_tree_settings.description,,en-US,Select which tree to display,Select which tree to display,0,Select which tree to display
-form,js_tree_settings.name,,en-US,Tree settings,Tree settings,0,Tree settings
-form,js_tree_settings.title,,en-US,Select tree,Select tree,0,Select tree
-form,main_menu_item.description,,en-US,Main menu item,Main menu item,0,Main menu item
-form,main_menu_item.name,,en-US,Main menu item,Main menu item,0,Main menu item
-form,plain_html.description,,en-US,HTML code (embed),HTML code (embed),0,HTML code (embed)
-form,plain_html.name,,en-US,HTML code (embed),HTML code (embed),0,HTML code (embed)
-form,rich_text_select.description,,en-US,Select text content,Select text content,0,Select text content
-form,rich_text_select.name,,en-US,Select text content,Select text content,0,Select text content
-form,rich_text.description,,en-US,Text content,Text content,0,Text content
-form,rich_text.name,,en-US,Text content,Text content,0,Text content
-form,role.description,,en-US,Role,Role,0,Role
-form,role.name,,en-US,Role,Role,0,Role
-form,tag.description,,en-US,Tag,Tag,0,Tag
-form,tag.name,,en-US,Tag,Tag,0,Tag
-form,theme_selector.description,,en-US,Select which theme renders each layout,Select which theme renders each layout,0,Select which theme renders each layout
-form,theme_selector.name,,en-US,Theme selection,Theme selection,0,Theme selection
-form,theme_selector.title,,en-US,Select themes for layouts,Select themes for layouts,0,Select themes for layouts
-form,ticket_priority.description,,en-US,Ticket priority,Ticket priority,0,Ticket priority
-form,ticket_priority.name,,en-US,Ticket priority,Ticket priority,0,Ticket priority
-form,ticket_state.description,,en-US,Ticket status,Ticket status,0,Ticket status
-form,ticket_state.name,,en-US,Ticket status,Ticket status,0,Ticket status
-form,user_login.description,,en-US,Login,Login,0,Login
-form,user_login.name,,en-US,Login,Login,0,Login
-form,user_signup.description,,en-US,Sign up,Sign up,0,Sign up
-form,user_signup.name,,en-US,Sign up,Sign up,0,Sign up
-form,user.description,,en-US,User,User,0,User
-form,user.name,,en-US,User,User,0,User
-form,usergroup.description,,en-US,User group,User group,0,User group
-form,usergroup.name,,en-US,User group,User group,0,User group
-form,validation.max_length,,en-US,Maximum {max} characters,Maximum {max} characters,0,Maximum {max} characters
-form,validation.required,,en-US,Required,Required,0,Required
-form,webpage_domain.description,,en-US,Domain properties,Domain properties,0,Domain properties
-form,webpage_domain.name,,en-US,Domain properties,Domain properties,0,Domain properties
-form,webpage_file.description,,en-US,File properties,File properties,0,File properties
-form,webpage_file.name,,en-US,File properties,File properties,0,File properties
-form,webpage_folder.description,,en-US,Website folder properties,Website folder properties,0,Website folder properties
-form,webpage_folder.name,,en-US,Website folder properties,Website folder properties,0,Website folder properties
-form,webpage_from_path.description,,en-US,Create webpage from path,Create webpage from path,0,Create webpage from path
-form,webpage_from_path.name,,en-US,Create webpage from path,Create webpage from path,0,Create webpage from path
-form,webpage_page.description,,en-US,Webpage properties,Webpage properties,0,Webpage properties
-form,webpage_page.name,,en-US,Webpage properties,Webpage properties,0,Webpage properties
-form,widget_connection_params.description,,en-US,Display settings for a content box,Display settings for a content box,0,Display settings for a content box
-form,widget_connection_params.name,,en-US,Content box display settings,Content box display settings,0,Content box display settings
-form,widget_connection_settings.description,,en-US,Configure width and row placement for the content box,Configure width and row placement for the content box,0,Configure width and row placement for the content box
-form,widget_connection_settings.name,,en-US,Content formatting,Content formatting,0,Content formatting
-form,widget_connection_settings.title,,en-US,Content formatting,Content formatting,0,Content formatting
-form,closer.title,,en-US,Closer page,Closer page,0,Closer page
-form,closer.close_window,,en-US,Close this window!,Close this window!,0,Close this window!
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,allow_source_match,text
+form,admin_menu_item.description,,en-US,"Admin menu item","Admin menu item",0,0,"Admin menu item"
+form,admin_menu_item.name,,en-US,"Admin menu item","Admin menu item",0,0,"Admin menu item"
+form,blog.description,,en-US,"Blog post","Blog post",0,0,"Blog post"
+form,blog.name,,en-US,"Blog post","Blog post",0,0,"Blog post"
+form,close_page.close_window,,en-US,"Close this window!","Close this window!",0,0,"Close this window!"
+form,close_page.title,,en-US,"Close page","Close page",0,0,"Close page"
+form,form_settings.description,,en-US,"Select which form to display","Select which form to display",0,0,"Select which form to display"
+form,form_settings.name,,en-US,"Form settings","Form settings",0,0,"Form settings"
+form,form_settings.title,,en-US,"Select form","Select form",0,0,"Select form"
+form,js_tree_settings.description,,en-US,"Select which tree to display","Select which tree to display",0,0,"Select which tree to display"
+form,js_tree_settings.name,,en-US,"Tree settings","Tree settings",0,0,"Tree settings"
+form,js_tree_settings.title,,en-US,"Select tree","Select tree",0,0,"Select tree"
+form,main_menu_item.description,,en-US,"Main menu item","Main menu item",0,0,"Main menu item"
+form,main_menu_item.name,,en-US,"Main menu item","Main menu item",0,0,"Main menu item"
+form,plain_html.description,,en-US,"HTML code (embed)","HTML code (embed)",0,0,"HTML code (embed)"
+form,plain_html.name,,en-US,"HTML code (embed)","HTML code (embed)",0,0,"HTML code (embed)"
+form,rich_text_select.description,,en-US,"Select text content","Select text content",0,0,"Select text content"
+form,rich_text_select.name,,en-US,"Select text content","Select text content",0,0,"Select text content"
+form,rich_text.description,,en-US,"Text content","Text content",0,0,"Text content"
+form,rich_text.name,,en-US,"Text content","Text content",0,0,"Text content"
+form,role.description,,en-US,Role,Role,0,0,Role
+form,role.name,,en-US,Role,Role,0,0,Role
+form,tag.description,,en-US,Tag,Tag,0,0,Tag
+form,tag.name,,en-US,Tag,Tag,0,0,Tag
+form,theme_selector.description,,en-US,"Select which theme renders each layout","Select which theme renders each layout",0,0,"Select which theme renders each layout"
+form,theme_selector.name,,en-US,"Theme selection","Theme selection",0,0,"Theme selection"
+form,theme_selector.title,,en-US,"Select themes for layouts","Select themes for layouts",0,0,"Select themes for layouts"
+form,ticket_priority.description,,en-US,"Ticket priority","Ticket priority",0,0,"Ticket priority"
+form,ticket_priority.name,,en-US,"Ticket priority","Ticket priority",0,0,"Ticket priority"
+form,ticket_state.description,,en-US,"Ticket status","Ticket status",0,0,"Ticket status"
+form,ticket_state.name,,en-US,"Ticket status","Ticket status",0,0,"Ticket status"
+form,user_login.description,,en-US,Login,Login,0,0,Login
+form,user_login.name,,en-US,Login,Login,0,0,Login
+form,user_signup.description,,en-US,"Sign up","Sign up",0,0,"Sign up"
+form,user_signup.name,,en-US,"Sign up","Sign up",0,0,"Sign up"
+form,user.description,,en-US,User,User,0,0,User
+form,user.name,,en-US,User,User,0,0,User
+form,usergroup.description,,en-US,"User group","User group",0,0,"User group"
+form,usergroup.name,,en-US,"User group","User group",0,0,"User group"
+form,validation.max_length,,en-US,"Maximum {max} characters","Maximum {max} characters",0,0,"Maximum {max} characters"
+form,validation.required,,en-US,Required,Required,0,0,Required
+form,webpage_domain.description,,en-US,"Domain properties","Domain properties",0,0,"Domain properties"
+form,webpage_domain.name,,en-US,"Domain properties","Domain properties",0,0,"Domain properties"
+form,webpage_file.description,,en-US,"File properties","File properties",0,0,"File properties"
+form,webpage_file.name,,en-US,"File properties","File properties",0,0,"File properties"
+form,webpage_folder.description,,en-US,"Website folder properties","Website folder properties",0,0,"Website folder properties"
+form,webpage_folder.name,,en-US,"Website folder properties","Website folder properties",0,0,"Website folder properties"
+form,webpage_from_path.description,,en-US,"Create webpage from path","Create webpage from path",0,0,"Create webpage from path"
+form,webpage_from_path.name,,en-US,"Create webpage from path","Create webpage from path",0,0,"Create webpage from path"
+form,webpage_page.description,,en-US,"Webpage properties","Webpage properties",0,0,"Webpage properties"
+form,webpage_page.name,,en-US,"Webpage properties","Webpage properties",0,0,"Webpage properties"
+form,widget_connection_params.description,,en-US,"Display settings for a content box","Display settings for a content box",0,0,"Display settings for a content box"
+form,widget_connection_params.name,,en-US,"Content box display settings","Content box display settings",0,0,"Content box display settings"
+form,widget_connection_settings.description,,en-US,"Configure width and row placement for the content box","Configure width and row placement for the content box",0,0,"Configure width and row placement for the content box"
+form,widget_connection_settings.name,,en-US,"Content formatting","Content formatting",0,0,"Content formatting"
+form,widget_connection_settings.title,,en-US,"Content formatting","Content formatting",0,0,"Content formatting"
+form,closer.title,,en-US,"Closer page","Closer page",0,0,"Closer page"
+form,closer.close_window,,en-US,"Close this window!","Close this window!",0,0,"Close this window!"

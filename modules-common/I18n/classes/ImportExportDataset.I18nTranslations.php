@@ -144,6 +144,7 @@ class ImportExportDatasetI18nTranslations extends AbstractImportExportDataset
 
 		$expectedLocale = LocaleService::tryCanonicalize((string) ($options['expect_locale'] ?? '')) ?? trim((string) ($options['expect_locale'] ?? ''));
 		$dryRun = ($options['dry_run'] ?? '0') === '1';
+		$warnings = $this->_detectImportWarnings($csvContent, $format);
 		$normalizedCsv = $format === 'wide'
 			? I18nTranslationsWideCsv::toNormalizedCsv($csvContent)
 			: $csvContent;
@@ -156,6 +157,7 @@ class ImportExportDatasetI18nTranslations extends AbstractImportExportDataset
 		}
 
 		$result = CsvHelper::import($normalizedCsv, $map, $mode, $dryRun);
+		$result['warnings'] = $warnings;
 		$result['detected_locales'] = $scope['locales'];
 
 		if (count($scope['locales']) === 1) {
@@ -206,5 +208,72 @@ class ImportExportDatasetI18nTranslations extends AbstractImportExportDataset
 		}
 
 		return $this->_normalizeFormat($format);
+	}
+
+	/**
+	 * @return list<string>
+	 */
+	private function _detectImportWarnings(string $csvContent, string $format): array
+	{
+		$csvContent = ltrim($csvContent, "\xEF\xBB\xBF");
+		$handle = fopen('php://temp', 'r+');
+
+		if ($handle === false) {
+			return [];
+		}
+
+		fwrite($handle, $csvContent);
+		rewind($handle);
+		$headers = fgetcsv($handle, 0, ',', '"', '');
+		fclose($handle);
+
+		if ($headers === false) {
+			return [];
+		}
+
+		$headers = CsvHelper::normalizeHeaderRow(array_map('strval', $headers));
+
+		if ($format === 'normalized' && !in_array('allow_source_match', $headers, true)) {
+			return [t('import_export.warning.allow_source_match_missing')];
+		}
+
+		if ($format !== 'wide') {
+			return [];
+		}
+
+		$textLocales = [];
+		$allowSourceMatchLocales = [];
+
+		foreach ($headers as $header) {
+			if (str_starts_with($header, 'text:')) {
+				$locale = LocaleService::tryCanonicalize(substr($header, 5)) ?? trim(substr($header, 5));
+
+				if ($locale !== '') {
+					$textLocales[$locale] = true;
+				}
+
+				continue;
+			}
+
+			if (str_starts_with($header, 'allow_source_match:')) {
+				$locale = LocaleService::tryCanonicalize(substr($header, 19)) ?? trim(substr($header, 19));
+
+				if ($locale !== '') {
+					$allowSourceMatchLocales[$locale] = true;
+				}
+			}
+		}
+
+		foreach (array_keys($textLocales) as $locale) {
+			if (!isset($allowSourceMatchLocales[$locale])) {
+				return [t('import_export.warning.allow_source_match_missing')];
+			}
+		}
+
+		if ($textLocales !== [] && $allowSourceMatchLocales === []) {
+			return [t('import_export.warning.allow_source_match_missing')];
+		}
+
+		return [];
 	}
 }

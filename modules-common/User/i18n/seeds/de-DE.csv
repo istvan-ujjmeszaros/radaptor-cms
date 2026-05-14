@@ -1,130 +1,130 @@
-﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
-user,action.datasheet,,de-DE,Datasheet,Datenblatt,0,Datenblatt
-user,action.edit,,de-DE,Edit,Bearbeiten,0,Bearbeiten
-user,action.roles,,de-DE,"Custom roles","Benutzerdefinierte Rollen",0,"Benutzerdefinierte Rollen"
-user,action.usergroups,,de-DE,"Group memberships",Gruppenmitgliedschaften,0,Gruppenmitgliedschaften
-user,col.actions,,de-DE,Actions,Aktionen,0,Aktionen
-user,col.username,,de-DE,Username,Benutzername,0,Benutzername
-user,description.action.edit,,de-DE,"Edit user","Benutzer bearbeiten",0,"Benutzer bearbeiten"
-user,description.tab.active,,de-DE,Active,Aktiv,0,Aktiv
-user,description.tab.service,,de-DE,Service,Service,0,Service
-user,description.tab.shipping,,de-DE,"Awaiting shipment","Warte auf Versand",0,"Warte auf Versand"
-user,description.title,,de-DE,User,Benutzer,0,Benutzer
-user,error_missing_user_id,,de-DE,"User ID is missing","Benutzer-ID fehlt",0,"Benutzer-ID fehlt"
-user,error_no_selector_specified,,de-DE,"No user or user group specified","Kein Benutzer oder keine Benutzergruppe angegeben",0,"Kein Benutzer oder keine Benutzergruppe angegeben"
-user,error_not_found,,de-DE,"User not found","Benutzer nicht gefunden",0,"Benutzer nicht gefunden"
-user,error_not_found_with_id,,de-DE,"User not found: {id}","Benutzer nicht gefunden: {id}",0,"Benutzer nicht gefunden: {id}"
-user,error_parameter_mismatch,,de-DE,"Parameter mismatch","Parameter stimmen nicht überein",0,"Parameter stimmen nicht überein"
-user,error_save,,de-DE,"Error: Unable to save user","Fehler: Benutzer konnte nicht gespeichert werden",0,"Fehler: Benutzer konnte nicht gespeichert werden"
-user,field.locale.explanation,,de-DE,"Interface language for this user","Oberflächensprache für diesen Benutzer",0,"Oberflächensprache für diesen Benutzer"
-user,field.locale.label,,de-DE,Language,Sprache,0,Sprache
-user,field.password_confirm.explanation,,de-DE,"Re-enter the password","Passwort erneut eingeben",0,"Passwort erneut eingeben"
-user,field.password_confirm.label,,de-DE,"Confirm password","Passwort bestätigen",0,"Passwort bestätigen"
-user,field.password.explanation,,de-DE,"Enter the password","Passwort eingeben",0,"Passwort eingeben"
-user,field.password.label,,de-DE,Password,Passwort,0,Passwort
-user,field.timezone.explanation,,de-DE,"IANA timezone identifier (e.g. Europe/Budapest). Leave empty for UTC.","IANA-Zeitzonen-Bezeichner (z. B. Europe/Berlin). Leer lassen für UTC.",0,"IANA-Zeitzonen-Bezeichner (z. B. Europe/Berlin). Leer lassen für UTC."
-user,field.timezone.label,,de-DE,Timezone,Zeitzone,0,Zeitzone
-user,field.user_id.label,,de-DE,"User ID",Benutzer-ID,0,Benutzer-ID
-user,field.username.explanation,,de-DE,"Enter the desired username","Gewünschten Benutzernamen eingeben",0,"Gewünschten Benutzernamen eingeben"
-user,field.username.label,,de-DE,Username,Benutzername,0,Benutzername
-user,form.name,,de-DE,User,Benutzer,0,Benutzer
-user,form.title_create,,de-DE,"New user","Neuer Benutzer",0,"Neuer Benutzer"
-user,form.title_edit,,de-DE,"Edit user","Benutzer bearbeiten",0,"Benutzer bearbeiten"
-user,list.new,,de-DE,"New user","Neuer Benutzer",0,"Neuer Benutzer"
-user,list.title,,de-DE,Users,Benutzer,0,Benutzer
-user,login.button,,de-DE,Login,Anmelden,0,Anmelden
-user,login.error_invalid_credentials,,de-DE,"Wrong username or password","Falscher Benutzername oder falsches Passwort",0,"Falscher Benutzername oder falsches Passwort"
-user,login.title,,de-DE,Login,Anmelden,0,Anmelden
-user,logout.success,,de-DE,"You are logged out","Sie sind abgemeldet",0,"Sie sind abgemeldet"
-user,no_changes,,de-DE,"No changes made","Keine Änderungen vorgenommen",0,"Keine Änderungen vorgenommen"
-user,role_assignment.added,,de-DE,"Role assigned:<br>{role} -> {target}","Rolle zugewiesen:<br>{role} -> {target}",0,"Rolle zugewiesen:<br>{role} -> {target}"
-user,role_assignment.error_add,,de-DE,"Error: Unable to assign role:<br>{role} -> {target}","Fehler: Rolle konnte nicht zugewiesen werden:<br>{role} -> {target}",0,"Fehler: Rolle konnte nicht zugewiesen werden:<br>{role} -> {target}"
-user,role_assignment.error_add_generic,,de-DE,"Error: Unable to assign role.","Fehler: Rolle konnte nicht zugewiesen werden.",0,"Fehler: Rolle konnte nicht zugewiesen werden."
-user,role_assignment.error_remove,,de-DE,"Error: Unable to remove role assignment:<br>{role} -> {target}","Fehler: Rollenzuweisung konnte nicht entfernt werden:<br>{role} -> {target}",0,"Fehler: Rollenzuweisung konnte nicht entfernt werden:<br>{role} -> {target}"
-user,role_assignment.error_remove_generic,,de-DE,"Error: Unable to remove role assignment.","Fehler: Rollenzuweisung konnte nicht entfernt werden.",0,"Fehler: Rollenzuweisung konnte nicht entfernt werden."
-user,role_assignment.removed,,de-DE,"Role assignment removed:<br>{role} -> {target}","Rollenzuweisung entfernt:<br>{role} -> {target}",0,"Rollenzuweisung entfernt:<br>{role} -> {target}"
-user,role_selector.available_roles,,de-DE,"Available roles","Verfügbare Rollen",0,"Verfügbare Rollen"
-user,role_selector.help,,de-DE,"Check a parent role to grant all child roles automatically. Child roles will be highlighted in green to show they are inherited.","Übergeordnete Rolle auswählen, um alle untergeordneten Rollen automatisch zu vergeben. Untergeordnete Rollen werden grün hervorgehoben.",0,"Übergeordnete Rolle auswählen, um alle untergeordneten Rollen automatisch zu vergeben. Untergeordnete Rollen werden grün hervorgehoben."
-user,role_selector.title,,de-DE,"Role assignment",Rollenzuweisung,0,Rollenzuweisung
-user,role.all,,de-DE,"All roles","Alle Rollen",0,"Alle Rollen"
-user,role.delete_confirm,,de-DE,"Are you sure you want to delete this role and all its children?","Möchten Sie diese Rolle und alle untergeordneten Rollen wirklich löschen?",0,"Möchten Sie diese Rolle und alle untergeordneten Rollen wirklich löschen?"
-user,role.delete_error,,de-DE,"Error: Unable to delete role(s)!","Fehler: Rolle(n) konnte(n) nicht gelöscht werden!",0,"Fehler: Rolle(n) konnte(n) nicht gelöscht werden!"
-user,role.delete_failed,,de-DE,"Delete failed","Löschen fehlgeschlagen",0,"Löschen fehlgeschlagen"
-user,role.deleted,,de-DE,"Role deleted!<br><i>{title}</i>","Rolle gelöscht!<br><i>{title}</i>",0,"Rolle gelöscht!<br><i>{title}</i>"
-user,role.deleted_multiple,,de-DE,"Roles deleted!<br><i>{titles}</i><br><i>({count} total)</i>","Rollen gelöscht!<br><i>{titles}</i><br><i>({count} gesamt)</i>",0,"Rollen gelöscht!<br><i>{titles}</i><br><i>({count} gesamt)</i>"
-user,role.error_save,,de-DE,"Error: Unable to save role","Fehler: Rolle konnte nicht gespeichert werden",0,"Fehler: Rolle konnte nicht gespeichert werden"
-user,role.field.description,,de-DE,Description,Beschreibung,0,Beschreibung
-user,role.field.description.explanation,,de-DE,"Purpose of the role","Zweck der Rolle",0,"Zweck der Rolle"
-user,role.field.role,,de-DE,Role,Rolle,0,Rolle
-user,role.field.role.explanation,,de-DE,"System-level name. 32 characters maximum","Name auf Systemebene. Maximal 32 Zeichen",0,"Name auf Systemebene. Maximal 32 Zeichen"
-user,role.field.title,,de-DE,"Display name",Anzeigename,0,Anzeigename
-user,role.field.title.explanation,,de-DE,"Role display name. 255 characters maximum","Anzeigename der Rolle. Maximal 255 Zeichen",0,"Anzeigename der Rolle. Maximal 255 Zeichen"
-user,role.help_create,,de-DE,"Create a hierarchical structure of roles.","Erstellen Sie eine hierarchische Rollenstruktur.",0,"Erstellen Sie eine hierarchische Rollenstruktur."
-user,role.help_move,,de-DE,"Drag and drop to move roles under a different parent.","Rollen per Drag & Drop unter einen anderen übergeordneten Knoten verschieben.",0,"Rollen per Drag & Drop unter einen anderen übergeordneten Knoten verschieben."
-user,role.invalid_type,,de-DE,"Unknown role type: {type}","Unbekannter Rollentyp: {type}",0,"Unbekannter Rollentyp: {type}"
-user,role.move_error,,de-DE,"Error: Unable to move role!","Fehler: Rolle konnte nicht verschoben werden!",0,"Fehler: Rolle konnte nicht verschoben werden!"
-user,role.move_success,,de-DE,"Role moved!<br><i>({title})</i>","Rolle verschoben!<br><i>({title})</i>",0,"Rolle verschoben!<br><i>({title})</i>"
-user,role.new,,de-DE,"New role","Neue Rolle",0,"Neue Rolle"
-user,role.new_child,,de-DE,"New child role","Neue untergeordnete Rolle",0,"Neue untergeordnete Rolle"
-user,role.not_found,,de-DE,"Role not found: {id}","Rolle nicht gefunden: {id}",0,"Rolle nicht gefunden: {id}"
-user,role.saved,,de-DE,"Role saved","Rolle gespeichert",0,"Rolle gespeichert"
-user,role.title_create,,de-DE,"New role","Neue Rolle",0,"Neue Rolle"
-user,role.title_edit,,de-DE,"Edit role","Rolle bearbeiten",0,"Rolle bearbeiten"
-user,role.updated,,de-DE,"Role updated","Rolle aktualisiert",0,"Rolle aktualisiert"
-user,role.validation.role_invalid_chars,,de-DE,"Role name can only contain letters without accents and underscores","Rollenname kann nur Buchstaben ohne Akzente und Unterstriche enthalten",0,"Rollenname kann nur Buchstaben ohne Akzente und Unterstriche enthalten"
-user,role.validation.role_max_length,,de-DE,"Role name must be 32 characters or fewer","Rollenname darf maximal 32 Zeichen lang sein",0,"Rollenname darf maximal 32 Zeichen lang sein"
-user,role.validation.title_max_length,,de-DE,"Display name must be 255 characters or fewer","Anzeigename darf maximal 255 Zeichen lang sein",0,"Anzeigename darf maximal 255 Zeichen lang sein"
-user,saved,,de-DE,"User saved","Benutzer gespeichert",0,"Benutzer gespeichert"
-user,signup.button,,de-DE,"Sign up",Registrieren,0,Registrieren
-user,signup.error_password_min_length,,de-DE,"Password must be at least 6 characters long","Passwort muss mindestens 6 Zeichen lang sein",0,"Passwort muss mindestens 6 Zeichen lang sein"
-user,signup.error_username_required,,de-DE,"You must specify a username","Sie müssen einen Benutzernamen angeben",0,"Sie müssen einen Benutzernamen angeben"
-user,signup.error_username_taken,,de-DE,"Username already taken. Please choose another","Benutzername bereits vergeben. Bitte wählen Sie einen anderen",0,"Benutzername bereits vergeben. Bitte wählen Sie einen anderen"
-user,signup.title,,de-DE,Register,Registrieren,0,Registrieren
-user,updated,,de-DE,"User updated","Benutzer aktualisiert",0,"Benutzer aktualisiert"
-user,usergroup_assignment.added,,de-DE,"User assigned to group:<br>{group} -> {user}","Benutzer der Gruppe zugewiesen:<br>{group} -> {user}",0,"Benutzer der Gruppe zugewiesen:<br>{group} -> {user}"
-user,usergroup_assignment.error_add,,de-DE,"Error: Unable to assign user to group:<br>{group} -> {user}","Fehler: Benutzer konnte der Gruppe nicht zugewiesen werden:<br>{group} -> {user}",0,"Fehler: Benutzer konnte der Gruppe nicht zugewiesen werden:<br>{group} -> {user}"
-user,usergroup_assignment.error_add_generic,,de-DE,"Error: Unable to assign user to group.","Fehler: Benutzer konnte der Gruppe nicht zugewiesen werden.",0,"Fehler: Benutzer konnte der Gruppe nicht zugewiesen werden."
-user,usergroup_assignment.error_remove,,de-DE,"Error: Unable to remove user from group:<br>{group} -> {user}","Fehler: Benutzer konnte nicht aus der Gruppe entfernt werden:<br>{group} -> {user}",0,"Fehler: Benutzer konnte nicht aus der Gruppe entfernt werden:<br>{group} -> {user}"
-user,usergroup_assignment.error_remove_generic,,de-DE,"Error: Unable to remove user from group.","Fehler: Benutzer konnte nicht aus der Gruppe entfernt werden.",0,"Fehler: Benutzer konnte nicht aus der Gruppe entfernt werden."
-user,usergroup_assignment.removed,,de-DE,"User assignment removed:<br>{group} -> {user}","Benutzerzuweisung entfernt:<br>{group} -> {user}",0,"Benutzerzuweisung entfernt:<br>{group} -> {user}"
-user,usergroup_selector.available_usergroups,,de-DE,"Available usergroups","Verfügbare Benutzergruppen",0,"Verfügbare Benutzergruppen"
-user,usergroup_selector.help,,de-DE,"Check usergroups to assign the user to them. Uncheck to remove the user from a usergroup.","Benutzergruppen auswählen, um den Benutzer zuzuweisen. Auswahl aufheben, um ihn zu entfernen.",0,"Benutzergruppen auswählen, um den Benutzer zuzuweisen. Auswahl aufheben, um ihn zu entfernen."
-user,usergroup_selector.title,,de-DE,"Usergroup assignment",Benutzergruppenzuweisung,0,Benutzergruppenzuweisung
-user,usergroup.all,,de-DE,"User groups",Benutzergruppen,0,Benutzergruppen
-user,usergroup.delete_confirm,,de-DE,"Are you sure you want to delete this user group and all its children?","Möchten Sie diese Benutzergruppe und alle untergeordneten Gruppen wirklich löschen?",0,"Möchten Sie diese Benutzergruppe und alle untergeordneten Gruppen wirklich löschen?"
-user,usergroup.delete_error,,de-DE,"Error: Unable to delete user group(s)!","Fehler: Benutzergruppe(n) konnte(n) nicht gelöscht werden!",0,"Fehler: Benutzergruppe(n) konnte(n) nicht gelöscht werden!"
-user,usergroup.delete_failed,,de-DE,"Delete failed","Löschen fehlgeschlagen",0,"Löschen fehlgeschlagen"
-user,usergroup.deleted,,de-DE,"User group deleted!<br><i>{title}</i>","Benutzergruppe gelöscht!<br><i>{title}</i>",0,"Benutzergruppe gelöscht!<br><i>{title}</i>"
-user,usergroup.deleted_multiple,,de-DE,"User groups deleted!<br><i>{titles}</i><br><i>({count} total)</i>","Benutzergruppen gelöscht!<br><i>{titles}</i><br><i>({count} gesamt)</i>",0,"Benutzergruppen gelöscht!<br><i>{titles}</i><br><i>({count} gesamt)</i>"
-user,usergroup.error_save,,de-DE,"Error: Unable to save user group","Fehler: Benutzergruppe konnte nicht gespeichert werden",0,"Fehler: Benutzergruppe konnte nicht gespeichert werden"
-user,usergroup.field.description,,de-DE,Description,Beschreibung,0,Beschreibung
-user,usergroup.field.description.explanation,,de-DE,"Purpose of the user group","Zweck der Benutzergruppe",0,"Zweck der Benutzergruppe"
-user,usergroup.field.is_system_group,,de-DE,"System group",Systemgruppe,0,Systemgruppe
-user,usergroup.field.is_system_group.explanation,,de-DE,"Examples: Everyone, Registered users","Beispiele: Alle, Registrierte Benutzer",0,"Beispiele: Alle, Registrierte Benutzer"
-user,usergroup.field.title,,de-DE,"Display name",Anzeigename,0,Anzeigename
-user,usergroup.field.title.explanation,,de-DE,"User group name. 255 characters maximum","Benutzergruppenname. Maximal 255 Zeichen",0,"Benutzergruppenname. Maximal 255 Zeichen"
-user,usergroup.help_create,,de-DE,"Create a hierarchical structure of user groups.","Erstellen Sie eine hierarchische Benutzergruppenstruktur.",0,"Erstellen Sie eine hierarchische Benutzergruppenstruktur."
-user,usergroup.help_move,,de-DE,"Drag and drop to move groups under a different parent.","Gruppen per Drag & Drop unter einen anderen übergeordneten Knoten verschieben.",0,"Gruppen per Drag & Drop unter einen anderen übergeordneten Knoten verschieben."
-user,usergroup.move_error,,de-DE,"Error: Unable to move user group!","Fehler: Benutzergruppe konnte nicht verschoben werden!",0,"Fehler: Benutzergruppe konnte nicht verschoben werden!"
-user,usergroup.move_success,,de-DE,"User group moved!<br><i>({title})</i>","Benutzergruppe verschoben!<br><i>({title})</i>",0,"Benutzergruppe verschoben!<br><i>({title})</i>"
-user,usergroup.new,,de-DE,"New user group","Neue Benutzergruppe",0,"Neue Benutzergruppe"
-user,usergroup.new_child,,de-DE,"New child group","Neue untergeordnete Gruppe",0,"Neue untergeordnete Gruppe"
-user,usergroup.not_found,,de-DE,"User group not found: {id}","Benutzergruppe nicht gefunden: {id}",0,"Benutzergruppe nicht gefunden: {id}"
-user,usergroup.roles,,de-DE,Roles,Rollen,0,Rollen
-user,usergroup.saved,,de-DE,"User group saved","Benutzergruppe gespeichert",0,"Benutzergruppe gespeichert"
-user,usergroup.system_managed_help,,de-DE,"System-managed group. Use CLI commands to manage (radaptor usergroup:*).","Systemverwaltete Gruppe. Verwaltung über CLI-Befehle (radaptor usergroup:*).",0,"Systemverwaltete Gruppe. Verwaltung über CLI-Befehle (radaptor usergroup:*)."
-user,usergroup.title_create,,de-DE,"New user group","Neue Benutzergruppe",0,"Neue Benutzergruppe"
-user,usergroup.title_edit,,de-DE,"Edit user group","Benutzergruppe bearbeiten",0,"Benutzergruppe bearbeiten"
-user,usergroup.updated,,de-DE,"User group updated","Benutzergruppe aktualisiert",0,"Benutzergruppe aktualisiert"
-user,usergroup.validation.title_max_length,,de-DE,"Display name must be 255 characters or fewer","Anzeigename darf maximal 255 Zeichen lang sein",0,"Anzeigename darf maximal 255 Zeichen lang sein"
-user,validation.password_max_length,,de-DE,"Password must be 255 characters or fewer","Passwort darf maximal 255 Zeichen lang sein",0,"Passwort darf maximal 255 Zeichen lang sein"
-user,validation.password_mismatch,,de-DE,"Passwords do not match","Passwörter stimmen nicht überein",0,"Passwörter stimmen nicht überein"
-user,validation.password_required,,de-DE,"Password is required","Passwort ist erforderlich",0,"Passwort ist erforderlich"
-user,validation.timezone_invalid,,de-DE,"Invalid timezone. Use an IANA name (e.g. Europe/Budapest).","Ungültige Zeitzone. Verwenden Sie einen IANA-Namen (z. B. Europe/Berlin).",0,"Ungültige Zeitzone. Verwenden Sie einen IANA-Namen (z. B. Europe/Berlin)."
-user,validation.username_max_length,,de-DE,"Username must be 32 characters or fewer","Benutzername darf maximal 32 Zeichen lang sein",0,"Benutzername darf maximal 32 Zeichen lang sein"
-user,validation.username_taken,,de-DE,"Username is already taken","Benutzername ist bereits vergeben",0,"Benutzername ist bereits vergeben"
-user,locale.current_label,,de-DE,"Current language","Aktuelle Sprache",0,"Aktuelle Sprache"
-user,locale.invalid,,de-DE,"Selected language is not available","Die ausgewählte Sprache ist nicht verfügbar",0,"Die ausgewählte Sprache ist nicht verfügbar"
-user,locale.menu_label,,de-DE,Language,Sprache,0,Sprache
-user,locale.updated,,de-DE,"Language updated","Sprache aktualisiert",0,"Sprache aktualisiert"
-user,locale.home_missing,,de-DE,"No home page is configured for the selected language; staying on the current page.","Für die ausgewählte Sprache ist keine Startseite konfiguriert; die aktuelle Seite bleibt geöffnet.",0,"Für die ausgewählte Sprache ist keine Startseite konfiguriert; die aktuelle Seite bleibt geöffnet."
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,allow_source_match,text
+user,action.datasheet,,de-DE,Datasheet,Datenblatt,0,0,Datenblatt
+user,action.edit,,de-DE,Edit,Bearbeiten,0,0,Bearbeiten
+user,action.roles,,de-DE,"Custom roles","Benutzerdefinierte Rollen",0,0,"Benutzerdefinierte Rollen"
+user,action.usergroups,,de-DE,"Group memberships",Gruppenmitgliedschaften,0,0,Gruppenmitgliedschaften
+user,col.actions,,de-DE,Actions,Aktionen,0,0,Aktionen
+user,col.username,,de-DE,Username,Benutzername,0,0,Benutzername
+user,description.action.edit,,de-DE,"Edit user","Benutzer bearbeiten",0,0,"Benutzer bearbeiten"
+user,description.tab.active,,de-DE,Active,Aktiv,0,0,Aktiv
+user,description.tab.service,,de-DE,Service,Service,0,1,Service
+user,description.tab.shipping,,de-DE,"Awaiting shipment","Warte auf Versand",0,0,"Warte auf Versand"
+user,description.title,,de-DE,User,Benutzer,0,0,Benutzer
+user,error_missing_user_id,,de-DE,"User ID is missing","Benutzer-ID fehlt",0,0,"Benutzer-ID fehlt"
+user,error_no_selector_specified,,de-DE,"No user or user group specified","Kein Benutzer oder keine Benutzergruppe angegeben",0,0,"Kein Benutzer oder keine Benutzergruppe angegeben"
+user,error_not_found,,de-DE,"User not found","Benutzer nicht gefunden",0,0,"Benutzer nicht gefunden"
+user,error_not_found_with_id,,de-DE,"User not found: {id}","Benutzer nicht gefunden: {id}",0,0,"Benutzer nicht gefunden: {id}"
+user,error_parameter_mismatch,,de-DE,"Parameter mismatch","Parameter stimmen nicht überein",0,0,"Parameter stimmen nicht überein"
+user,error_save,,de-DE,"Error: Unable to save user","Fehler: Benutzer konnte nicht gespeichert werden",0,0,"Fehler: Benutzer konnte nicht gespeichert werden"
+user,field.locale.explanation,,de-DE,"Interface language for this user","Oberflächensprache für diesen Benutzer",0,0,"Oberflächensprache für diesen Benutzer"
+user,field.locale.label,,de-DE,Language,Sprache,0,0,Sprache
+user,field.password_confirm.explanation,,de-DE,"Re-enter the password","Passwort erneut eingeben",0,0,"Passwort erneut eingeben"
+user,field.password_confirm.label,,de-DE,"Confirm password","Passwort bestätigen",0,0,"Passwort bestätigen"
+user,field.password.explanation,,de-DE,"Enter the password","Passwort eingeben",0,0,"Passwort eingeben"
+user,field.password.label,,de-DE,Password,Passwort,0,0,Passwort
+user,field.timezone.explanation,,de-DE,"IANA timezone identifier (e.g. Europe/Budapest). Leave empty for UTC.","IANA-Zeitzonen-Bezeichner (z. B. Europe/Berlin). Leer lassen für UTC.",0,0,"IANA-Zeitzonen-Bezeichner (z. B. Europe/Berlin). Leer lassen für UTC."
+user,field.timezone.label,,de-DE,Timezone,Zeitzone,0,0,Zeitzone
+user,field.user_id.label,,de-DE,"User ID",Benutzer-ID,0,0,Benutzer-ID
+user,field.username.explanation,,de-DE,"Enter the desired username","Gewünschten Benutzernamen eingeben",0,0,"Gewünschten Benutzernamen eingeben"
+user,field.username.label,,de-DE,Username,Benutzername,0,0,Benutzername
+user,form.name,,de-DE,User,Benutzer,0,0,Benutzer
+user,form.title_create,,de-DE,"New user","Neuer Benutzer",0,0,"Neuer Benutzer"
+user,form.title_edit,,de-DE,"Edit user","Benutzer bearbeiten",0,0,"Benutzer bearbeiten"
+user,list.new,,de-DE,"New user","Neuer Benutzer",0,0,"Neuer Benutzer"
+user,list.title,,de-DE,Users,Benutzer,0,0,Benutzer
+user,login.button,,de-DE,Login,Anmelden,0,0,Anmelden
+user,login.error_invalid_credentials,,de-DE,"Wrong username or password","Falscher Benutzername oder falsches Passwort",0,0,"Falscher Benutzername oder falsches Passwort"
+user,login.title,,de-DE,Login,Anmelden,0,0,Anmelden
+user,logout.success,,de-DE,"You are logged out","Sie sind abgemeldet",0,0,"Sie sind abgemeldet"
+user,no_changes,,de-DE,"No changes made","Keine Änderungen vorgenommen",0,0,"Keine Änderungen vorgenommen"
+user,role_assignment.added,,de-DE,"Role assigned:<br>{role} -> {target}","Rolle zugewiesen:<br>{role} -> {target}",0,0,"Rolle zugewiesen:<br>{role} -> {target}"
+user,role_assignment.error_add,,de-DE,"Error: Unable to assign role:<br>{role} -> {target}","Fehler: Rolle konnte nicht zugewiesen werden:<br>{role} -> {target}",0,0,"Fehler: Rolle konnte nicht zugewiesen werden:<br>{role} -> {target}"
+user,role_assignment.error_add_generic,,de-DE,"Error: Unable to assign role.","Fehler: Rolle konnte nicht zugewiesen werden.",0,0,"Fehler: Rolle konnte nicht zugewiesen werden."
+user,role_assignment.error_remove,,de-DE,"Error: Unable to remove role assignment:<br>{role} -> {target}","Fehler: Rollenzuweisung konnte nicht entfernt werden:<br>{role} -> {target}",0,0,"Fehler: Rollenzuweisung konnte nicht entfernt werden:<br>{role} -> {target}"
+user,role_assignment.error_remove_generic,,de-DE,"Error: Unable to remove role assignment.","Fehler: Rollenzuweisung konnte nicht entfernt werden.",0,0,"Fehler: Rollenzuweisung konnte nicht entfernt werden."
+user,role_assignment.removed,,de-DE,"Role assignment removed:<br>{role} -> {target}","Rollenzuweisung entfernt:<br>{role} -> {target}",0,0,"Rollenzuweisung entfernt:<br>{role} -> {target}"
+user,role_selector.available_roles,,de-DE,"Available roles","Verfügbare Rollen",0,0,"Verfügbare Rollen"
+user,role_selector.help,,de-DE,"Check a parent role to grant all child roles automatically. Child roles will be highlighted in green to show they are inherited.","Übergeordnete Rolle auswählen, um alle untergeordneten Rollen automatisch zu vergeben. Untergeordnete Rollen werden grün hervorgehoben.",0,0,"Übergeordnete Rolle auswählen, um alle untergeordneten Rollen automatisch zu vergeben. Untergeordnete Rollen werden grün hervorgehoben."
+user,role_selector.title,,de-DE,"Role assignment",Rollenzuweisung,0,0,Rollenzuweisung
+user,role.all,,de-DE,"All roles","Alle Rollen",0,0,"Alle Rollen"
+user,role.delete_confirm,,de-DE,"Are you sure you want to delete this role and all its children?","Möchten Sie diese Rolle und alle untergeordneten Rollen wirklich löschen?",0,0,"Möchten Sie diese Rolle und alle untergeordneten Rollen wirklich löschen?"
+user,role.delete_error,,de-DE,"Error: Unable to delete role(s)!","Fehler: Rolle(n) konnte(n) nicht gelöscht werden!",0,0,"Fehler: Rolle(n) konnte(n) nicht gelöscht werden!"
+user,role.delete_failed,,de-DE,"Delete failed","Löschen fehlgeschlagen",0,0,"Löschen fehlgeschlagen"
+user,role.deleted,,de-DE,"Role deleted!<br><i>{title}</i>","Rolle gelöscht!<br><i>{title}</i>",0,0,"Rolle gelöscht!<br><i>{title}</i>"
+user,role.deleted_multiple,,de-DE,"Roles deleted!<br><i>{titles}</i><br><i>({count} total)</i>","Rollen gelöscht!<br><i>{titles}</i><br><i>({count} gesamt)</i>",0,0,"Rollen gelöscht!<br><i>{titles}</i><br><i>({count} gesamt)</i>"
+user,role.error_save,,de-DE,"Error: Unable to save role","Fehler: Rolle konnte nicht gespeichert werden",0,0,"Fehler: Rolle konnte nicht gespeichert werden"
+user,role.field.description,,de-DE,Description,Beschreibung,0,0,Beschreibung
+user,role.field.description.explanation,,de-DE,"Purpose of the role","Zweck der Rolle",0,0,"Zweck der Rolle"
+user,role.field.role,,de-DE,Role,Rolle,0,0,Rolle
+user,role.field.role.explanation,,de-DE,"System-level name. 32 characters maximum","Name auf Systemebene. Maximal 32 Zeichen",0,0,"Name auf Systemebene. Maximal 32 Zeichen"
+user,role.field.title,,de-DE,"Display name",Anzeigename,0,0,Anzeigename
+user,role.field.title.explanation,,de-DE,"Role display name. 255 characters maximum","Anzeigename der Rolle. Maximal 255 Zeichen",0,0,"Anzeigename der Rolle. Maximal 255 Zeichen"
+user,role.help_create,,de-DE,"Create a hierarchical structure of roles.","Erstellen Sie eine hierarchische Rollenstruktur.",0,0,"Erstellen Sie eine hierarchische Rollenstruktur."
+user,role.help_move,,de-DE,"Drag and drop to move roles under a different parent.","Rollen per Drag & Drop unter einen anderen übergeordneten Knoten verschieben.",0,0,"Rollen per Drag & Drop unter einen anderen übergeordneten Knoten verschieben."
+user,role.invalid_type,,de-DE,"Unknown role type: {type}","Unbekannter Rollentyp: {type}",0,0,"Unbekannter Rollentyp: {type}"
+user,role.move_error,,de-DE,"Error: Unable to move role!","Fehler: Rolle konnte nicht verschoben werden!",0,0,"Fehler: Rolle konnte nicht verschoben werden!"
+user,role.move_success,,de-DE,"Role moved!<br><i>({title})</i>","Rolle verschoben!<br><i>({title})</i>",0,0,"Rolle verschoben!<br><i>({title})</i>"
+user,role.new,,de-DE,"New role","Neue Rolle",0,0,"Neue Rolle"
+user,role.new_child,,de-DE,"New child role","Neue untergeordnete Rolle",0,0,"Neue untergeordnete Rolle"
+user,role.not_found,,de-DE,"Role not found: {id}","Rolle nicht gefunden: {id}",0,0,"Rolle nicht gefunden: {id}"
+user,role.saved,,de-DE,"Role saved","Rolle gespeichert",0,0,"Rolle gespeichert"
+user,role.title_create,,de-DE,"New role","Neue Rolle",0,0,"Neue Rolle"
+user,role.title_edit,,de-DE,"Edit role","Rolle bearbeiten",0,0,"Rolle bearbeiten"
+user,role.updated,,de-DE,"Role updated","Rolle aktualisiert",0,0,"Rolle aktualisiert"
+user,role.validation.role_invalid_chars,,de-DE,"Role name can only contain letters without accents and underscores","Rollenname kann nur Buchstaben ohne Akzente und Unterstriche enthalten",0,0,"Rollenname kann nur Buchstaben ohne Akzente und Unterstriche enthalten"
+user,role.validation.role_max_length,,de-DE,"Role name must be 32 characters or fewer","Rollenname darf maximal 32 Zeichen lang sein",0,0,"Rollenname darf maximal 32 Zeichen lang sein"
+user,role.validation.title_max_length,,de-DE,"Display name must be 255 characters or fewer","Anzeigename darf maximal 255 Zeichen lang sein",0,0,"Anzeigename darf maximal 255 Zeichen lang sein"
+user,saved,,de-DE,"User saved","Benutzer gespeichert",0,0,"Benutzer gespeichert"
+user,signup.button,,de-DE,"Sign up",Registrieren,0,0,Registrieren
+user,signup.error_password_min_length,,de-DE,"Password must be at least 6 characters long","Passwort muss mindestens 6 Zeichen lang sein",0,0,"Passwort muss mindestens 6 Zeichen lang sein"
+user,signup.error_username_required,,de-DE,"You must specify a username","Sie müssen einen Benutzernamen angeben",0,0,"Sie müssen einen Benutzernamen angeben"
+user,signup.error_username_taken,,de-DE,"Username already taken. Please choose another","Benutzername bereits vergeben. Bitte wählen Sie einen anderen",0,0,"Benutzername bereits vergeben. Bitte wählen Sie einen anderen"
+user,signup.title,,de-DE,Register,Registrieren,0,0,Registrieren
+user,updated,,de-DE,"User updated","Benutzer aktualisiert",0,0,"Benutzer aktualisiert"
+user,usergroup_assignment.added,,de-DE,"User assigned to group:<br>{group} -> {user}","Benutzer der Gruppe zugewiesen:<br>{group} -> {user}",0,0,"Benutzer der Gruppe zugewiesen:<br>{group} -> {user}"
+user,usergroup_assignment.error_add,,de-DE,"Error: Unable to assign user to group:<br>{group} -> {user}","Fehler: Benutzer konnte der Gruppe nicht zugewiesen werden:<br>{group} -> {user}",0,0,"Fehler: Benutzer konnte der Gruppe nicht zugewiesen werden:<br>{group} -> {user}"
+user,usergroup_assignment.error_add_generic,,de-DE,"Error: Unable to assign user to group.","Fehler: Benutzer konnte der Gruppe nicht zugewiesen werden.",0,0,"Fehler: Benutzer konnte der Gruppe nicht zugewiesen werden."
+user,usergroup_assignment.error_remove,,de-DE,"Error: Unable to remove user from group:<br>{group} -> {user}","Fehler: Benutzer konnte nicht aus der Gruppe entfernt werden:<br>{group} -> {user}",0,0,"Fehler: Benutzer konnte nicht aus der Gruppe entfernt werden:<br>{group} -> {user}"
+user,usergroup_assignment.error_remove_generic,,de-DE,"Error: Unable to remove user from group.","Fehler: Benutzer konnte nicht aus der Gruppe entfernt werden.",0,0,"Fehler: Benutzer konnte nicht aus der Gruppe entfernt werden."
+user,usergroup_assignment.removed,,de-DE,"User assignment removed:<br>{group} -> {user}","Benutzerzuweisung entfernt:<br>{group} -> {user}",0,0,"Benutzerzuweisung entfernt:<br>{group} -> {user}"
+user,usergroup_selector.available_usergroups,,de-DE,"Available usergroups","Verfügbare Benutzergruppen",0,0,"Verfügbare Benutzergruppen"
+user,usergroup_selector.help,,de-DE,"Check usergroups to assign the user to them. Uncheck to remove the user from a usergroup.","Benutzergruppen auswählen, um den Benutzer zuzuweisen. Auswahl aufheben, um ihn zu entfernen.",0,0,"Benutzergruppen auswählen, um den Benutzer zuzuweisen. Auswahl aufheben, um ihn zu entfernen."
+user,usergroup_selector.title,,de-DE,"Usergroup assignment",Benutzergruppenzuweisung,0,0,Benutzergruppenzuweisung
+user,usergroup.all,,de-DE,"User groups",Benutzergruppen,0,0,Benutzergruppen
+user,usergroup.delete_confirm,,de-DE,"Are you sure you want to delete this user group and all its children?","Möchten Sie diese Benutzergruppe und alle untergeordneten Gruppen wirklich löschen?",0,0,"Möchten Sie diese Benutzergruppe und alle untergeordneten Gruppen wirklich löschen?"
+user,usergroup.delete_error,,de-DE,"Error: Unable to delete user group(s)!","Fehler: Benutzergruppe(n) konnte(n) nicht gelöscht werden!",0,0,"Fehler: Benutzergruppe(n) konnte(n) nicht gelöscht werden!"
+user,usergroup.delete_failed,,de-DE,"Delete failed","Löschen fehlgeschlagen",0,0,"Löschen fehlgeschlagen"
+user,usergroup.deleted,,de-DE,"User group deleted!<br><i>{title}</i>","Benutzergruppe gelöscht!<br><i>{title}</i>",0,0,"Benutzergruppe gelöscht!<br><i>{title}</i>"
+user,usergroup.deleted_multiple,,de-DE,"User groups deleted!<br><i>{titles}</i><br><i>({count} total)</i>","Benutzergruppen gelöscht!<br><i>{titles}</i><br><i>({count} gesamt)</i>",0,0,"Benutzergruppen gelöscht!<br><i>{titles}</i><br><i>({count} gesamt)</i>"
+user,usergroup.error_save,,de-DE,"Error: Unable to save user group","Fehler: Benutzergruppe konnte nicht gespeichert werden",0,0,"Fehler: Benutzergruppe konnte nicht gespeichert werden"
+user,usergroup.field.description,,de-DE,Description,Beschreibung,0,0,Beschreibung
+user,usergroup.field.description.explanation,,de-DE,"Purpose of the user group","Zweck der Benutzergruppe",0,0,"Zweck der Benutzergruppe"
+user,usergroup.field.is_system_group,,de-DE,"System group",Systemgruppe,0,0,Systemgruppe
+user,usergroup.field.is_system_group.explanation,,de-DE,"Examples: Everyone, Registered users","Beispiele: Alle, Registrierte Benutzer",0,0,"Beispiele: Alle, Registrierte Benutzer"
+user,usergroup.field.title,,de-DE,"Display name",Anzeigename,0,0,Anzeigename
+user,usergroup.field.title.explanation,,de-DE,"User group name. 255 characters maximum","Benutzergruppenname. Maximal 255 Zeichen",0,0,"Benutzergruppenname. Maximal 255 Zeichen"
+user,usergroup.help_create,,de-DE,"Create a hierarchical structure of user groups.","Erstellen Sie eine hierarchische Benutzergruppenstruktur.",0,0,"Erstellen Sie eine hierarchische Benutzergruppenstruktur."
+user,usergroup.help_move,,de-DE,"Drag and drop to move groups under a different parent.","Gruppen per Drag & Drop unter einen anderen übergeordneten Knoten verschieben.",0,0,"Gruppen per Drag & Drop unter einen anderen übergeordneten Knoten verschieben."
+user,usergroup.move_error,,de-DE,"Error: Unable to move user group!","Fehler: Benutzergruppe konnte nicht verschoben werden!",0,0,"Fehler: Benutzergruppe konnte nicht verschoben werden!"
+user,usergroup.move_success,,de-DE,"User group moved!<br><i>({title})</i>","Benutzergruppe verschoben!<br><i>({title})</i>",0,0,"Benutzergruppe verschoben!<br><i>({title})</i>"
+user,usergroup.new,,de-DE,"New user group","Neue Benutzergruppe",0,0,"Neue Benutzergruppe"
+user,usergroup.new_child,,de-DE,"New child group","Neue untergeordnete Gruppe",0,0,"Neue untergeordnete Gruppe"
+user,usergroup.not_found,,de-DE,"User group not found: {id}","Benutzergruppe nicht gefunden: {id}",0,0,"Benutzergruppe nicht gefunden: {id}"
+user,usergroup.roles,,de-DE,Roles,Rollen,0,0,Rollen
+user,usergroup.saved,,de-DE,"User group saved","Benutzergruppe gespeichert",0,0,"Benutzergruppe gespeichert"
+user,usergroup.system_managed_help,,de-DE,"System-managed group. Use CLI commands to manage (radaptor usergroup:*).","Systemverwaltete Gruppe. Verwaltung über CLI-Befehle (radaptor usergroup:*).",0,0,"Systemverwaltete Gruppe. Verwaltung über CLI-Befehle (radaptor usergroup:*)."
+user,usergroup.title_create,,de-DE,"New user group","Neue Benutzergruppe",0,0,"Neue Benutzergruppe"
+user,usergroup.title_edit,,de-DE,"Edit user group","Benutzergruppe bearbeiten",0,0,"Benutzergruppe bearbeiten"
+user,usergroup.updated,,de-DE,"User group updated","Benutzergruppe aktualisiert",0,0,"Benutzergruppe aktualisiert"
+user,usergroup.validation.title_max_length,,de-DE,"Display name must be 255 characters or fewer","Anzeigename darf maximal 255 Zeichen lang sein",0,0,"Anzeigename darf maximal 255 Zeichen lang sein"
+user,validation.password_max_length,,de-DE,"Password must be 255 characters or fewer","Passwort darf maximal 255 Zeichen lang sein",0,0,"Passwort darf maximal 255 Zeichen lang sein"
+user,validation.password_mismatch,,de-DE,"Passwords do not match","Passwörter stimmen nicht überein",0,0,"Passwörter stimmen nicht überein"
+user,validation.password_required,,de-DE,"Password is required","Passwort ist erforderlich",0,0,"Passwort ist erforderlich"
+user,validation.timezone_invalid,,de-DE,"Invalid timezone. Use an IANA name (e.g. Europe/Budapest).","Ungültige Zeitzone. Verwenden Sie einen IANA-Namen (z. B. Europe/Berlin).",0,0,"Ungültige Zeitzone. Verwenden Sie einen IANA-Namen (z. B. Europe/Berlin)."
+user,validation.username_max_length,,de-DE,"Username must be 32 characters or fewer","Benutzername darf maximal 32 Zeichen lang sein",0,0,"Benutzername darf maximal 32 Zeichen lang sein"
+user,validation.username_taken,,de-DE,"Username is already taken","Benutzername ist bereits vergeben",0,0,"Benutzername ist bereits vergeben"
+user,locale.current_label,,de-DE,"Current language","Aktuelle Sprache",0,0,"Aktuelle Sprache"
+user,locale.invalid,,de-DE,"Selected language is not available","Die ausgewählte Sprache ist nicht verfügbar",0,0,"Die ausgewählte Sprache ist nicht verfügbar"
+user,locale.menu_label,,de-DE,Language,Sprache,0,0,Sprache
+user,locale.updated,,de-DE,"Language updated","Sprache aktualisiert",0,0,"Sprache aktualisiert"
+user,locale.home_missing,,de-DE,"No home page is configured for the selected language; staying on the current page.","Für die ausgewählte Sprache ist keine Startseite konfiguriert; die aktuelle Seite bleibt geöffnet.",0,0,"Für die ausgewählte Sprache ist keine Startseite konfiguriert; die aktuelle Seite bleibt geöffnet."

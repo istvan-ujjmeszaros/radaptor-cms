@@ -1,31 +1,31 @@
-domain,key,context,locale,source_text,expected_text,human_reviewed,text
-cli_runner,title,,de-DE,"CLI Command Runner",CLI-Befehlsausführung,0,CLI-Befehlsausführung
-cli_runner,subtitle,,de-DE,"Execute Radaptor CLI commands from the browser.","Radaptor-CLI-Befehle im Browser ausführen.",0,"Radaptor-CLI-Befehle im Browser ausführen."
-cli_runner,select_command,,de-DE,"Select a command from the list to get started.","Wählen Sie einen Befehl aus der Liste, um zu beginnen.",0,"Wählen Sie einen Befehl aus der Liste, um zu beginnen."
-cli_runner,action.run,,de-DE,Run,Ausführen,0,Ausführen
-cli_runner,action.confirm,,de-DE,"Confirm & Run","Bestätigen und ausführen",0,"Bestätigen und ausführen"
-cli_runner,action.clear,,de-DE,Clear,Leeren,0,Leeren
-cli_runner,action.copy,,de-DE,Copy,Kopieren,0,Kopieren
-cli_runner,action.copied,,de-DE,Copied,Kopiert,0,Kopiert
-cli_runner,confirm.title,,de-DE,"Confirm Command","Befehl bestätigen",0,"Befehl bestätigen"
-cli_runner,confirm.message,,de-DE,"This command will modify data or system state. Are you sure?","Dieser Befehl ändert Daten oder den Systemzustand. Sind Sie sicher?",0,"Dieser Befehl ändert Daten oder den Systemzustand. Sind Sie sicher?"
-cli_runner,output.title,,de-DE,Output,Ausgabe,0,Ausgabe
-cli_runner,output.empty,,de-DE,"No output","Keine Ausgabe",0,"Keine Ausgabe"
-cli_runner,output.running,,de-DE,"Running command...","Befehl wird ausgeführt...",0,"Befehl wird ausgeführt..."
-cli_runner,output.completed,,de-DE,"Completed in {duration}ms","Abgeschlossen in {duration}ms",0,"Abgeschlossen in {duration}ms"
-cli_runner,output.failed,,de-DE,"Command failed (exit code {code})","Befehl fehlgeschlagen (Exit-Code {code})",0,"Befehl fehlgeschlagen (Exit-Code {code})"
-cli_runner,output.timeout,,de-DE,"Command timed out","Zeitüberschreitung des Befehls",0,"Zeitüberschreitung des Befehls"
-cli_runner,category.build,,de-DE,Build,Build,0,Build
-cli_runner,category.db,,de-DE,Database,Datenbank,0,Datenbank
-cli_runner,category.emailqueue,,de-DE,"Email Queue",E-Mail-Warteschlange,0,E-Mail-Warteschlange
-cli_runner,category.form,,de-DE,Forms,Formulare,0,Formulare
-cli_runner,category.i18n,,de-DE,Translations,Übersetzungen,0,Übersetzungen
-cli_runner,category.migrate,,de-DE,Migrations,Migrationen,0,Migrationen
-cli_runner,category.plugin,,de-DE,Plugins,Plugins,0,Plugins
-cli_runner,category.role,,de-DE,Roles,Rollen,0,Rollen
-cli_runner,category.site,,de-DE,Site,Website,0,Website
-cli_runner,category.user,,de-DE,Users,Benutzer,0,Benutzer
-cli_runner,category.userconfig,,de-DE,"User Config",Benutzerkonfiguration,0,Benutzerkonfiguration
-cli_runner,category.usergroup,,de-DE,"User Groups",Benutzergruppen,0,Benutzergruppen
-cli_runner,category.webpage,,de-DE,Webpages,Webseiten,0,Webseiten
-cli_runner,category.widget,,de-DE,Widgets,Widgets,0,Widgets
+domain,key,context,locale,source_text,expected_text,human_reviewed,allow_source_match,text
+cli_runner,title,,de-DE,"CLI Command Runner",CLI-Befehlsausführung,0,0,CLI-Befehlsausführung
+cli_runner,subtitle,,de-DE,"Execute Radaptor CLI commands from the browser.","Radaptor-CLI-Befehle im Browser ausführen.",0,0,"Radaptor-CLI-Befehle im Browser ausführen."
+cli_runner,select_command,,de-DE,"Select a command from the list to get started.","Wählen Sie einen Befehl aus der Liste, um zu beginnen.",0,0,"Wählen Sie einen Befehl aus der Liste, um zu beginnen."
+cli_runner,action.run,,de-DE,Run,Ausführen,0,0,Ausführen
+cli_runner,action.confirm,,de-DE,"Confirm & Run","Bestätigen und ausführen",0,0,"Bestätigen und ausführen"
+cli_runner,action.clear,,de-DE,Clear,Leeren,0,0,Leeren
+cli_runner,action.copy,,de-DE,Copy,Kopieren,0,0,Kopieren
+cli_runner,action.copied,,de-DE,Copied,Kopiert,0,0,Kopiert
+cli_runner,confirm.title,,de-DE,"Confirm Command","Befehl bestätigen",0,0,"Befehl bestätigen"
+cli_runner,confirm.message,,de-DE,"This command will modify data or system state. Are you sure?","Dieser Befehl ändert Daten oder den Systemzustand. Sind Sie sicher?",0,0,"Dieser Befehl ändert Daten oder den Systemzustand. Sind Sie sicher?"
+cli_runner,output.title,,de-DE,Output,Ausgabe,0,0,Ausgabe
+cli_runner,output.empty,,de-DE,"No output","Keine Ausgabe",0,0,"Keine Ausgabe"
+cli_runner,output.running,,de-DE,"Running command...","Befehl wird ausgeführt...",0,0,"Befehl wird ausgeführt..."
+cli_runner,output.completed,,de-DE,"Completed in {duration}ms","Abgeschlossen in {duration}ms",0,0,"Abgeschlossen in {duration}ms"
+cli_runner,output.failed,,de-DE,"Command failed (exit code {code})","Befehl fehlgeschlagen (Exit-Code {code})",0,0,"Befehl fehlgeschlagen (Exit-Code {code})"
+cli_runner,output.timeout,,de-DE,"Command timed out","Zeitüberschreitung des Befehls",0,0,"Zeitüberschreitung des Befehls"
+cli_runner,category.build,,de-DE,Build,Build,0,1,Build
+cli_runner,category.db,,de-DE,Database,Datenbank,0,0,Datenbank
+cli_runner,category.emailqueue,,de-DE,"Email Queue",E-Mail-Warteschlange,0,0,E-Mail-Warteschlange
+cli_runner,category.form,,de-DE,Forms,Formulare,0,0,Formulare
+cli_runner,category.i18n,,de-DE,Translations,Übersetzungen,0,0,Übersetzungen
+cli_runner,category.migrate,,de-DE,Migrations,Migrationen,0,0,Migrationen
+cli_runner,category.plugin,,de-DE,Plugins,Plugins,0,1,Plugins
+cli_runner,category.role,,de-DE,Roles,Rollen,0,0,Rollen
+cli_runner,category.site,,de-DE,Site,Website,0,0,Website
+cli_runner,category.user,,de-DE,Users,Benutzer,0,0,Benutzer
+cli_runner,category.userconfig,,de-DE,"User Config",Benutzerkonfiguration,0,0,Benutzerkonfiguration
+cli_runner,category.usergroup,,de-DE,"User Groups",Benutzergruppen,0,0,Benutzergruppen
+cli_runner,category.webpage,,de-DE,Webpages,Webseiten,0,0,Webseiten
+cli_runner,category.widget,,de-DE,Widgets,Widgets,0,1,Widgets

@@ -1,31 +1,31 @@
-domain,key,context,locale,source_text,expected_text,human_reviewed,text
-cli_runner,title,,zh-Hans-CN,"CLI Command Runner","CLI 命令运行器",0,"CLI 命令运行器"
-cli_runner,subtitle,,zh-Hans-CN,"Execute Radaptor CLI commands from the browser.","从浏览器执行 Radaptor CLI 命令。",0,"从浏览器执行 Radaptor CLI 命令。"
-cli_runner,select_command,,zh-Hans-CN,"Select a command from the list to get started.",从列表中选择一个命令以开始。,0,从列表中选择一个命令以开始。
-cli_runner,action.run,,zh-Hans-CN,Run,运行,0,运行
-cli_runner,action.confirm,,zh-Hans-CN,"Confirm & Run",确认并运行,0,确认并运行
-cli_runner,action.clear,,zh-Hans-CN,Clear,清除,0,清除
-cli_runner,action.copy,,zh-Hans-CN,Copy,复制,0,复制
-cli_runner,action.copied,,zh-Hans-CN,Copied,已复制,0,已复制
-cli_runner,confirm.title,,zh-Hans-CN,"Confirm Command",确认命令,0,确认命令
-cli_runner,confirm.message,,zh-Hans-CN,"This command will modify data or system state. Are you sure?",此命令将修改数据或系统状态。确定吗？,0,此命令将修改数据或系统状态。确定吗？
-cli_runner,output.title,,zh-Hans-CN,Output,输出,0,输出
-cli_runner,output.empty,,zh-Hans-CN,"No output",无输出,0,无输出
-cli_runner,output.running,,zh-Hans-CN,"Running command...",正在运行命令...,0,正在运行命令...
-cli_runner,output.completed,,zh-Hans-CN,"Completed in {duration}ms","已在 {duration}ms 内完成",0,"已在 {duration}ms 内完成"
-cli_runner,output.failed,,zh-Hans-CN,"Command failed (exit code {code})","命令失败（退出代码 {code}）",0,"命令失败（退出代码 {code}）"
-cli_runner,output.timeout,,zh-Hans-CN,"Command timed out",命令超时,0,命令超时
-cli_runner,category.build,,zh-Hans-CN,Build,构建,0,构建
-cli_runner,category.db,,zh-Hans-CN,Database,数据库,0,数据库
-cli_runner,category.emailqueue,,zh-Hans-CN,"Email Queue",邮件队列,0,邮件队列
-cli_runner,category.form,,zh-Hans-CN,Forms,表单,0,表单
-cli_runner,category.i18n,,zh-Hans-CN,Translations,翻译,0,翻译
-cli_runner,category.migrate,,zh-Hans-CN,Migrations,迁移,0,迁移
-cli_runner,category.plugin,,zh-Hans-CN,Plugins,插件,0,插件
-cli_runner,category.role,,zh-Hans-CN,Roles,角色,0,角色
-cli_runner,category.site,,zh-Hans-CN,Site,站点,0,站点
-cli_runner,category.user,,zh-Hans-CN,Users,用户,0,用户
-cli_runner,category.userconfig,,zh-Hans-CN,"User Config",用户配置,0,用户配置
-cli_runner,category.usergroup,,zh-Hans-CN,"User Groups",用户组,0,用户组
-cli_runner,category.webpage,,zh-Hans-CN,Webpages,网页,0,网页
-cli_runner,category.widget,,zh-Hans-CN,Widgets,组件,0,组件
+domain,key,context,locale,source_text,expected_text,human_reviewed,allow_source_match,text
+cli_runner,title,,zh-Hans-CN,"CLI Command Runner","CLI 命令运行器",0,0,"CLI 命令运行器"
+cli_runner,subtitle,,zh-Hans-CN,"Execute Radaptor CLI commands from the browser.","从浏览器执行 Radaptor CLI 命令。",0,0,"从浏览器执行 Radaptor CLI 命令。"
+cli_runner,select_command,,zh-Hans-CN,"Select a command from the list to get started.",从列表中选择一个命令以开始。,0,0,从列表中选择一个命令以开始。
+cli_runner,action.run,,zh-Hans-CN,Run,运行,0,0,运行
+cli_runner,action.confirm,,zh-Hans-CN,"Confirm & Run",确认并运行,0,0,确认并运行
+cli_runner,action.clear,,zh-Hans-CN,Clear,清除,0,0,清除
+cli_runner,action.copy,,zh-Hans-CN,Copy,复制,0,0,复制
+cli_runner,action.copied,,zh-Hans-CN,Copied,已复制,0,0,已复制
+cli_runner,confirm.title,,zh-Hans-CN,"Confirm Command",确认命令,0,0,确认命令
+cli_runner,confirm.message,,zh-Hans-CN,"This command will modify data or system state. Are you sure?",此命令将修改数据或系统状态。确定吗？,0,0,此命令将修改数据或系统状态。确定吗？
+cli_runner,output.title,,zh-Hans-CN,Output,输出,0,0,输出
+cli_runner,output.empty,,zh-Hans-CN,"No output",无输出,0,0,无输出
+cli_runner,output.running,,zh-Hans-CN,"Running command...",正在运行命令...,0,0,正在运行命令...
+cli_runner,output.completed,,zh-Hans-CN,"Completed in {duration}ms","已在 {duration}ms 内完成",0,0,"已在 {duration}ms 内完成"
+cli_runner,output.failed,,zh-Hans-CN,"Command failed (exit code {code})","命令失败（退出代码 {code}）",0,0,"命令失败（退出代码 {code}）"
+cli_runner,output.timeout,,zh-Hans-CN,"Command timed out",命令超时,0,0,命令超时
+cli_runner,category.build,,zh-Hans-CN,Build,构建,0,0,构建
+cli_runner,category.db,,zh-Hans-CN,Database,数据库,0,0,数据库
+cli_runner,category.emailqueue,,zh-Hans-CN,"Email Queue",邮件队列,0,0,邮件队列
+cli_runner,category.form,,zh-Hans-CN,Forms,表单,0,0,表单
+cli_runner,category.i18n,,zh-Hans-CN,Translations,翻译,0,0,翻译
+cli_runner,category.migrate,,zh-Hans-CN,Migrations,迁移,0,0,迁移
+cli_runner,category.plugin,,zh-Hans-CN,Plugins,插件,0,0,插件
+cli_runner,category.role,,zh-Hans-CN,Roles,角色,0,0,角色
+cli_runner,category.site,,zh-Hans-CN,Site,站点,0,0,站点
+cli_runner,category.user,,zh-Hans-CN,Users,用户,0,0,用户
+cli_runner,category.userconfig,,zh-Hans-CN,"User Config",用户配置,0,0,用户配置
+cli_runner,category.usergroup,,zh-Hans-CN,"User Groups",用户组,0,0,用户组
+cli_runner,category.webpage,,zh-Hans-CN,Webpages,网页,0,0,网页
+cli_runner,category.widget,,zh-Hans-CN,Widgets,组件,0,0,组件

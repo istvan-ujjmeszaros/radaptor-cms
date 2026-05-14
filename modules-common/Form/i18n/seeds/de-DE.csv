@@ -1,59 +1,59 @@
-﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
-form,admin_menu_item.description,,de-DE,Admin menu item,Admin-Menüelement,0,Admin-Menüelement
-form,admin_menu_item.name,,de-DE,Admin menu item,Admin-Menüelement,0,Admin-Menüelement
-form,blog.description,,de-DE,Blog post,Blogbeitrag,0,Blogbeitrag
-form,blog.name,,de-DE,Blog post,Blogbeitrag,0,Blogbeitrag
-form,close_page.close_window,,de-DE,Close this window!,Dieses Fenster schließen!,0,Dieses Fenster schließen!
-form,close_page.title,,de-DE,Close page,Seite schließen,0,Seite schließen
-form,form_settings.description,,de-DE,Select which form to display,"Wählen Sie, welches Formular angezeigt werden soll",0,"Wählen Sie, welches Formular angezeigt werden soll"
-form,form_settings.name,,de-DE,Form settings,Formulareinstellungen,0,Formulareinstellungen
-form,form_settings.title,,de-DE,Select form,Formular auswählen,0,Formular auswählen
-form,js_tree_settings.description,,de-DE,Select which tree to display,"Wählen Sie, welche Baumstruktur angezeigt werden soll",0,"Wählen Sie, welche Baumstruktur angezeigt werden soll"
-form,js_tree_settings.name,,de-DE,Tree settings,Baumstruktureinstellungen,0,Baumstruktureinstellungen
-form,js_tree_settings.title,,de-DE,Select tree,Baumstruktur auswählen,0,Baumstruktur auswählen
-form,main_menu_item.description,,de-DE,Main menu item,Hauptmenüelement,0,Hauptmenüelement
-form,main_menu_item.name,,de-DE,Main menu item,Hauptmenüelement,0,Hauptmenüelement
-form,plain_html.description,,de-DE,HTML code (embed),HTML-Code (Einbettung),0,HTML-Code (Einbettung)
-form,plain_html.name,,de-DE,HTML code (embed),HTML-Code (Einbettung),0,HTML-Code (Einbettung)
-form,rich_text_select.description,,de-DE,Select text content,Textinhalt auswählen,0,Textinhalt auswählen
-form,rich_text_select.name,,de-DE,Select text content,Textinhalt auswählen,0,Textinhalt auswählen
-form,rich_text.description,,de-DE,Text content,Textinhalt,0,Textinhalt
-form,rich_text.name,,de-DE,Text content,Textinhalt,0,Textinhalt
-form,role.description,,de-DE,Role,Rolle,0,Rolle
-form,role.name,,de-DE,Role,Rolle,0,Rolle
-form,tag.description,,de-DE,Tag,Tag,0,Tag
-form,tag.name,,de-DE,Tag,Tag,0,Tag
-form,theme_selector.description,,de-DE,Select which theme renders each layout,"Wählen Sie, welches Design jedes Layout rendert",0,"Wählen Sie, welches Design jedes Layout rendert"
-form,theme_selector.name,,de-DE,Theme selection,Designauswahl,0,Designauswahl
-form,theme_selector.title,,de-DE,Select themes for layouts,Designs für Layouts auswählen,0,Designs für Layouts auswählen
-form,ticket_priority.description,,de-DE,Ticket priority,Ticket-Priorität,0,Ticket-Priorität
-form,ticket_priority.name,,de-DE,Ticket priority,Ticket-Priorität,0,Ticket-Priorität
-form,ticket_state.description,,de-DE,Ticket status,Ticket-Status,0,Ticket-Status
-form,ticket_state.name,,de-DE,Ticket status,Ticket-Status,0,Ticket-Status
-form,user_login.description,,de-DE,Login,Anmelden,0,Anmelden
-form,user_login.name,,de-DE,Login,Anmelden,0,Anmelden
-form,user_signup.description,,de-DE,Sign up,Registrieren,0,Registrieren
-form,user_signup.name,,de-DE,Sign up,Registrieren,0,Registrieren
-form,user.description,,de-DE,User,Benutzer,0,Benutzer
-form,user.name,,de-DE,User,Benutzer,0,Benutzer
-form,usergroup.description,,de-DE,User group,Benutzergruppe,0,Benutzergruppe
-form,usergroup.name,,de-DE,User group,Benutzergruppe,0,Benutzergruppe
-form,validation.max_length,,de-DE,Maximum {max} characters,Maximal {max} Zeichen,0,Maximal {max} Zeichen
-form,validation.required,,de-DE,Required,Pflichtfeld,0,Pflichtfeld
-form,webpage_domain.description,,de-DE,Domain properties,Domain-Eigenschaften,0,Domain-Eigenschaften
-form,webpage_domain.name,,de-DE,Domain properties,Domain-Eigenschaften,0,Domain-Eigenschaften
-form,webpage_file.description,,de-DE,File properties,Dateieigenschaften,0,Dateieigenschaften
-form,webpage_file.name,,de-DE,File properties,Dateieigenschaften,0,Dateieigenschaften
-form,webpage_folder.description,,de-DE,Website folder properties,Website-Ordner-Eigenschaften,0,Website-Ordner-Eigenschaften
-form,webpage_folder.name,,de-DE,Website folder properties,Website-Ordner-Eigenschaften,0,Website-Ordner-Eigenschaften
-form,webpage_from_path.description,,de-DE,Create webpage from path,Webseite aus Pfad erstellen,0,Webseite aus Pfad erstellen
-form,webpage_from_path.name,,de-DE,Create webpage from path,Webseite aus Pfad erstellen,0,Webseite aus Pfad erstellen
-form,webpage_page.description,,de-DE,Webpage properties,Webseiteneigenschaften,0,Webseiteneigenschaften
-form,webpage_page.name,,de-DE,Webpage properties,Webseiteneigenschaften,0,Webseiteneigenschaften
-form,widget_connection_params.description,,de-DE,Display settings for a content box,Anzeigeeinstellungen für einen Inhaltsbereich,0,Anzeigeeinstellungen für einen Inhaltsbereich
-form,widget_connection_params.name,,de-DE,Content box display settings,Inhaltsbereich-Anzeigeeinstellungen,0,Inhaltsbereich-Anzeigeeinstellungen
-form,widget_connection_settings.description,,de-DE,Configure width and row placement for the content box,Breite und Zeilenplatzierung für den Inhaltsbereich konfigurieren,0,Breite und Zeilenplatzierung für den Inhaltsbereich konfigurieren
-form,widget_connection_settings.name,,de-DE,Content formatting,Inhaltsformatierung,0,Inhaltsformatierung
-form,widget_connection_settings.title,,de-DE,Content formatting,Inhaltsformatierung,0,Inhaltsformatierung
-form,closer.title,,de-DE,Closer page,Schließseite,0,Schließseite
-form,closer.close_window,,de-DE,Close this window!,Schließen Sie dieses Fenster!,0,Schließen Sie dieses Fenster!
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,allow_source_match,text
+form,admin_menu_item.description,,de-DE,"Admin menu item",Admin-Menüelement,0,0,Admin-Menüelement
+form,admin_menu_item.name,,de-DE,"Admin menu item",Admin-Menüelement,0,0,Admin-Menüelement
+form,blog.description,,de-DE,"Blog post",Blogbeitrag,0,0,Blogbeitrag
+form,blog.name,,de-DE,"Blog post",Blogbeitrag,0,0,Blogbeitrag
+form,close_page.close_window,,de-DE,"Close this window!","Dieses Fenster schließen!",0,0,"Dieses Fenster schließen!"
+form,close_page.title,,de-DE,"Close page","Seite schließen",0,0,"Seite schließen"
+form,form_settings.description,,de-DE,"Select which form to display","Wählen Sie, welches Formular angezeigt werden soll",0,0,"Wählen Sie, welches Formular angezeigt werden soll"
+form,form_settings.name,,de-DE,"Form settings",Formulareinstellungen,0,0,Formulareinstellungen
+form,form_settings.title,,de-DE,"Select form","Formular auswählen",0,0,"Formular auswählen"
+form,js_tree_settings.description,,de-DE,"Select which tree to display","Wählen Sie, welche Baumstruktur angezeigt werden soll",0,0,"Wählen Sie, welche Baumstruktur angezeigt werden soll"
+form,js_tree_settings.name,,de-DE,"Tree settings",Baumstruktureinstellungen,0,0,Baumstruktureinstellungen
+form,js_tree_settings.title,,de-DE,"Select tree","Baumstruktur auswählen",0,0,"Baumstruktur auswählen"
+form,main_menu_item.description,,de-DE,"Main menu item",Hauptmenüelement,0,0,Hauptmenüelement
+form,main_menu_item.name,,de-DE,"Main menu item",Hauptmenüelement,0,0,Hauptmenüelement
+form,plain_html.description,,de-DE,"HTML code (embed)","HTML-Code (Einbettung)",0,0,"HTML-Code (Einbettung)"
+form,plain_html.name,,de-DE,"HTML code (embed)","HTML-Code (Einbettung)",0,0,"HTML-Code (Einbettung)"
+form,rich_text_select.description,,de-DE,"Select text content","Textinhalt auswählen",0,0,"Textinhalt auswählen"
+form,rich_text_select.name,,de-DE,"Select text content","Textinhalt auswählen",0,0,"Textinhalt auswählen"
+form,rich_text.description,,de-DE,"Text content",Textinhalt,0,0,Textinhalt
+form,rich_text.name,,de-DE,"Text content",Textinhalt,0,0,Textinhalt
+form,role.description,,de-DE,Role,Rolle,0,0,Rolle
+form,role.name,,de-DE,Role,Rolle,0,0,Rolle
+form,tag.description,,de-DE,Tag,Tag,0,1,Tag
+form,tag.name,,de-DE,Tag,Tag,0,1,Tag
+form,theme_selector.description,,de-DE,"Select which theme renders each layout","Wählen Sie, welches Design jedes Layout rendert",0,0,"Wählen Sie, welches Design jedes Layout rendert"
+form,theme_selector.name,,de-DE,"Theme selection",Designauswahl,0,0,Designauswahl
+form,theme_selector.title,,de-DE,"Select themes for layouts","Designs für Layouts auswählen",0,0,"Designs für Layouts auswählen"
+form,ticket_priority.description,,de-DE,"Ticket priority",Ticket-Priorität,0,0,Ticket-Priorität
+form,ticket_priority.name,,de-DE,"Ticket priority",Ticket-Priorität,0,0,Ticket-Priorität
+form,ticket_state.description,,de-DE,"Ticket status",Ticket-Status,0,0,Ticket-Status
+form,ticket_state.name,,de-DE,"Ticket status",Ticket-Status,0,0,Ticket-Status
+form,user_login.description,,de-DE,Login,Anmelden,0,0,Anmelden
+form,user_login.name,,de-DE,Login,Anmelden,0,0,Anmelden
+form,user_signup.description,,de-DE,"Sign up",Registrieren,0,0,Registrieren
+form,user_signup.name,,de-DE,"Sign up",Registrieren,0,0,Registrieren
+form,user.description,,de-DE,User,Benutzer,0,0,Benutzer
+form,user.name,,de-DE,User,Benutzer,0,0,Benutzer
+form,usergroup.description,,de-DE,"User group",Benutzergruppe,0,0,Benutzergruppe
+form,usergroup.name,,de-DE,"User group",Benutzergruppe,0,0,Benutzergruppe
+form,validation.max_length,,de-DE,"Maximum {max} characters","Maximal {max} Zeichen",0,0,"Maximal {max} Zeichen"
+form,validation.required,,de-DE,Required,Pflichtfeld,0,0,Pflichtfeld
+form,webpage_domain.description,,de-DE,"Domain properties",Domain-Eigenschaften,0,0,Domain-Eigenschaften
+form,webpage_domain.name,,de-DE,"Domain properties",Domain-Eigenschaften,0,0,Domain-Eigenschaften
+form,webpage_file.description,,de-DE,"File properties",Dateieigenschaften,0,0,Dateieigenschaften
+form,webpage_file.name,,de-DE,"File properties",Dateieigenschaften,0,0,Dateieigenschaften
+form,webpage_folder.description,,de-DE,"Website folder properties",Website-Ordner-Eigenschaften,0,0,Website-Ordner-Eigenschaften
+form,webpage_folder.name,,de-DE,"Website folder properties",Website-Ordner-Eigenschaften,0,0,Website-Ordner-Eigenschaften
+form,webpage_from_path.description,,de-DE,"Create webpage from path","Webseite aus Pfad erstellen",0,0,"Webseite aus Pfad erstellen"
+form,webpage_from_path.name,,de-DE,"Create webpage from path","Webseite aus Pfad erstellen",0,0,"Webseite aus Pfad erstellen"
+form,webpage_page.description,,de-DE,"Webpage properties",Webseiteneigenschaften,0,0,Webseiteneigenschaften
+form,webpage_page.name,,de-DE,"Webpage properties",Webseiteneigenschaften,0,0,Webseiteneigenschaften
+form,widget_connection_params.description,,de-DE,"Display settings for a content box","Anzeigeeinstellungen für einen Inhaltsbereich",0,0,"Anzeigeeinstellungen für einen Inhaltsbereich"
+form,widget_connection_params.name,,de-DE,"Content box display settings",Inhaltsbereich-Anzeigeeinstellungen,0,0,Inhaltsbereich-Anzeigeeinstellungen
+form,widget_connection_settings.description,,de-DE,"Configure width and row placement for the content box","Breite und Zeilenplatzierung für den Inhaltsbereich konfigurieren",0,0,"Breite und Zeilenplatzierung für den Inhaltsbereich konfigurieren"
+form,widget_connection_settings.name,,de-DE,"Content formatting",Inhaltsformatierung,0,0,Inhaltsformatierung
+form,widget_connection_settings.title,,de-DE,"Content formatting",Inhaltsformatierung,0,0,Inhaltsformatierung
+form,closer.title,,de-DE,"Closer page",Schließseite,0,0,Schließseite
+form,closer.close_window,,de-DE,"Close this window!","Schließen Sie dieses Fenster!",0,0,"Schließen Sie dieses Fenster!"

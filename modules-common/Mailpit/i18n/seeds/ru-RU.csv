@@ -1,52 +1,52 @@
-domain,key,context,locale,source_text,expected_text,human_reviewed,text
-mailpit,title,,ru-RU,Mailpit,Mailpit,0,Mailpit
-mailpit,subtitle,,ru-RU,"Captured development emails","Перехваченные письма разработки",0,"Перехваченные письма разработки"
-mailpit,inbox,,ru-RU,Inbox,Входящие,0,Входящие
-mailpit,search,,ru-RU,Search,Поиск,0,Поиск
-mailpit,refresh,,ru-RU,Refresh,Обновить,0,Обновить
-mailpit,back_to_inbox,,ru-RU,"Back to inbox","Назад во входящие",0,"Назад во входящие"
-mailpit,messages,,ru-RU,Messages,Сообщения,0,Сообщения
-mailpit,unread,,ru-RU,Unread,Непрочитанные,0,Непрочитанные
-mailpit,empty,,ru-RU,"No captured emails found.","Перехваченные письма не найдены.",0,"Перехваченные письма не найдены."
-mailpit,unavailable,,ru-RU,"Mailpit is unavailable","Mailpit недоступен",0,"Mailpit недоступен"
-mailpit,not_found,,ru-RU,"Mailpit view not found","Представление Mailpit не найдено",0,"Представление Mailpit не найдено"
-mailpit,access_denied,,ru-RU,"Mailpit catcher is only available in non-production for email admins and system developers.","Catcher Mailpit доступен вне production только администраторам email и системным разработчикам.",0,"Catcher Mailpit доступен вне production только администраторам email и системным разработчикам."
-mailpit,page_not_resolved,,ru-RU,"Mailpit catcher page could not be resolved.","Не удалось определить страницу catcher Mailpit.",0,"Не удалось определить страницу catcher Mailpit."
-mailpit,col.subject,,ru-RU,Subject,Тема,0,Тема
-mailpit,col.from,,ru-RU,From,От,0,От
-mailpit,col.to,,ru-RU,To,Кому,0,Кому
-mailpit,col.received,,ru-RU,Received,Получено,0,Получено
-mailpit,col.size,,ru-RU,Size,Размер,0,Размер
-mailpit,pagination.previous,,ru-RU,Previous,Назад,0,Назад
-mailpit,pagination.next,,ru-RU,Next,Далее,0,Далее
-mailpit,no_subject,,ru-RU,"(no subject)","(без темы)",0,"(без темы)"
-mailpit,delete,,ru-RU,Delete,Удалить,0,Удалить
-mailpit,meta.from,,ru-RU,From,От,0,От
-mailpit,meta.to,,ru-RU,To,Кому,0,Кому
-mailpit,meta.cc,,ru-RU,Cc,Cc,0,Cc
-mailpit,meta.bcc,,ru-RU,Bcc,Bcc,0,Bcc
-mailpit,meta.date,,ru-RU,Date,Дата,0,Дата
-mailpit,meta.size,,ru-RU,Size,Размер,0,Размер
-mailpit,html_empty,,ru-RU,"This message has no HTML body.","У этого сообщения нет HTML-тела.",0,"У этого сообщения нет HTML-тела."
-mailpit,html_preview_title,,ru-RU,"Mailpit HTML preview","HTML-предпросмотр Mailpit",0,"HTML-предпросмотр Mailpit"
-mailpit,check.supported,,ru-RU,Supported,Поддерживается,0,Поддерживается
-mailpit,check.partial,,ru-RU,Partial,Частично,0,Частично
-mailpit,check.unsupported,,ru-RU,Unsupported,"Не поддерживается",0,"Не поддерживается"
-mailpit,check.tests,,ru-RU,Tests,Тесты,0,Тесты
-mailpit,check.no_warnings,,ru-RU,"No HTML compatibility warnings.","Нет предупреждений совместимости HTML.",0,"Нет предупреждений совместимости HTML."
-mailpit,warning_fallback,,ru-RU,Warning,Предупреждение,0,Предупреждение
-mailpit,links.status,,ru-RU,Status,Статус,0,Статус
-mailpit,links.none,,ru-RU,"No links found.","Ссылки не найдены.",0,"Ссылки не найдены."
-mailpit,attachments,,ru-RU,Attachments,Вложения,0,Вложения
-mailpit,inline_attachments,,ru-RU,"Inline attachments","Встроенные вложения",0,"Встроенные вложения"
-mailpit,attachment_fallback,,ru-RU,attachment,вложение,0,вложение
-mailpit,tab_error,,ru-RU,"Mailpit tab content could not be loaded.","Не удалось загрузить содержимое вкладки Mailpit.",0,"Не удалось загрузить содержимое вкладки Mailpit."
-mailpit,tab.html,,ru-RU,HTML,HTML,0,HTML
-mailpit,tab.html_source,,ru-RU,"HTML Source","Исходник HTML",0,"Исходник HTML"
-mailpit,tab.text,,ru-RU,Text,Текст,0,Текст
-mailpit,tab.headers,,ru-RU,Headers,Заголовки,0,Заголовки
-mailpit,tab.raw,,ru-RU,Raw,Raw,0,Raw
-mailpit,tab.html_check,,ru-RU,"HTML Check","Проверка HTML",0,"Проверка HTML"
-mailpit,tab.link_check,,ru-RU,"Link Check","Проверка ссылок",0,"Проверка ссылок"
-widget,mailpit.name,,ru-RU,"Mailpit catcher","Catcher Mailpit",0,"Catcher Mailpit"
-widget,mailpit.description,,ru-RU,"Shows captured Mailpit emails inside the admin UI.","Показывает письма, перехваченные Mailpit, в административном интерфейсе.",0,"Показывает письма, перехваченные Mailpit, в административном интерфейсе."
+domain,key,context,locale,source_text,expected_text,human_reviewed,allow_source_match,text
+mailpit,title,,ru-RU,Mailpit,Mailpit,0,1,Mailpit
+mailpit,subtitle,,ru-RU,"Captured development emails","Перехваченные письма разработки",0,0,"Перехваченные письма разработки"
+mailpit,inbox,,ru-RU,Inbox,Входящие,0,0,Входящие
+mailpit,search,,ru-RU,Search,Поиск,0,0,Поиск
+mailpit,refresh,,ru-RU,Refresh,Обновить,0,0,Обновить
+mailpit,back_to_inbox,,ru-RU,"Back to inbox","Назад во входящие",0,0,"Назад во входящие"
+mailpit,messages,,ru-RU,Messages,Сообщения,0,0,Сообщения
+mailpit,unread,,ru-RU,Unread,Непрочитанные,0,0,Непрочитанные
+mailpit,empty,,ru-RU,"No captured emails found.","Перехваченные письма не найдены.",0,0,"Перехваченные письма не найдены."
+mailpit,unavailable,,ru-RU,"Mailpit is unavailable","Mailpit недоступен",0,0,"Mailpit недоступен"
+mailpit,not_found,,ru-RU,"Mailpit view not found","Представление Mailpit не найдено",0,0,"Представление Mailpit не найдено"
+mailpit,access_denied,,ru-RU,"Mailpit catcher is only available in non-production for email admins and system developers.","Catcher Mailpit доступен вне production только администраторам email и системным разработчикам.",0,0,"Catcher Mailpit доступен вне production только администраторам email и системным разработчикам."
+mailpit,page_not_resolved,,ru-RU,"Mailpit catcher page could not be resolved.","Не удалось определить страницу catcher Mailpit.",0,0,"Не удалось определить страницу catcher Mailpit."
+mailpit,col.subject,,ru-RU,Subject,Тема,0,0,Тема
+mailpit,col.from,,ru-RU,From,От,0,0,От
+mailpit,col.to,,ru-RU,To,Кому,0,0,Кому
+mailpit,col.received,,ru-RU,Received,Получено,0,0,Получено
+mailpit,col.size,,ru-RU,Size,Размер,0,0,Размер
+mailpit,pagination.previous,,ru-RU,Previous,Назад,0,0,Назад
+mailpit,pagination.next,,ru-RU,Next,Далее,0,0,Далее
+mailpit,no_subject,,ru-RU,"(no subject)","(без темы)",0,0,"(без темы)"
+mailpit,delete,,ru-RU,Delete,Удалить,0,0,Удалить
+mailpit,meta.from,,ru-RU,From,От,0,0,От
+mailpit,meta.to,,ru-RU,To,Кому,0,0,Кому
+mailpit,meta.cc,,ru-RU,Cc,Cc,0,1,Cc
+mailpit,meta.bcc,,ru-RU,Bcc,Bcc,0,1,Bcc
+mailpit,meta.date,,ru-RU,Date,Дата,0,0,Дата
+mailpit,meta.size,,ru-RU,Size,Размер,0,0,Размер
+mailpit,html_empty,,ru-RU,"This message has no HTML body.","У этого сообщения нет HTML-тела.",0,0,"У этого сообщения нет HTML-тела."
+mailpit,html_preview_title,,ru-RU,"Mailpit HTML preview","HTML-предпросмотр Mailpit",0,0,"HTML-предпросмотр Mailpit"
+mailpit,check.supported,,ru-RU,Supported,Поддерживается,0,0,Поддерживается
+mailpit,check.partial,,ru-RU,Partial,Частично,0,0,Частично
+mailpit,check.unsupported,,ru-RU,Unsupported,"Не поддерживается",0,0,"Не поддерживается"
+mailpit,check.tests,,ru-RU,Tests,Тесты,0,0,Тесты
+mailpit,check.no_warnings,,ru-RU,"No HTML compatibility warnings.","Нет предупреждений совместимости HTML.",0,0,"Нет предупреждений совместимости HTML."
+mailpit,warning_fallback,,ru-RU,Warning,Предупреждение,0,0,Предупреждение
+mailpit,links.status,,ru-RU,Status,Статус,0,0,Статус
+mailpit,links.none,,ru-RU,"No links found.","Ссылки не найдены.",0,0,"Ссылки не найдены."
+mailpit,attachments,,ru-RU,Attachments,Вложения,0,0,Вложения
+mailpit,inline_attachments,,ru-RU,"Inline attachments","Встроенные вложения",0,0,"Встроенные вложения"
+mailpit,attachment_fallback,,ru-RU,attachment,вложение,0,0,вложение
+mailpit,tab_error,,ru-RU,"Mailpit tab content could not be loaded.","Не удалось загрузить содержимое вкладки Mailpit.",0,0,"Не удалось загрузить содержимое вкладки Mailpit."
+mailpit,tab.html,,ru-RU,HTML,HTML,0,1,HTML
+mailpit,tab.html_source,,ru-RU,"HTML Source","Исходник HTML",0,0,"Исходник HTML"
+mailpit,tab.text,,ru-RU,Text,Текст,0,0,Текст
+mailpit,tab.headers,,ru-RU,Headers,Заголовки,0,0,Заголовки
+mailpit,tab.raw,,ru-RU,Raw,Raw,0,1,Raw
+mailpit,tab.html_check,,ru-RU,"HTML Check","Проверка HTML",0,0,"Проверка HTML"
+mailpit,tab.link_check,,ru-RU,"Link Check","Проверка ссылок",0,0,"Проверка ссылок"
+widget,mailpit.name,,ru-RU,"Mailpit catcher","Catcher Mailpit",0,0,"Catcher Mailpit"
+widget,mailpit.description,,ru-RU,"Shows captured Mailpit emails inside the admin UI.","Показывает письма, перехваченные Mailpit, в административном интерфейсе.",0,0,"Показывает письма, перехваченные Mailpit, в административном интерфейсе."

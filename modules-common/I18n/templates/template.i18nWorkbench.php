@@ -10,6 +10,8 @@
 	'admin.i18n.col.source',
 	'admin.i18n.col.translation',
 	'admin.i18n.col.reviewed',
+	'admin.i18n.col.allow_source_match',
+	'admin.i18n.allow_source_match.help',
 	'admin.i18n.coverage.title',
 	'admin.i18n.coverage.translated',
 	'admin.i18n.coverage.reviewed',
@@ -48,6 +50,7 @@ $selectedSearch = (string) ($this->props['selected_search'] ?? '');
 $coverageSummary = is_array($this->props['coverage_summary'] ?? null) ? $this->props['coverage_summary'] : [];
 $coverageLocales = is_array($coverageSummary['locales'] ?? null) ? $coverageSummary['locales'] : [];
 $reviewedLabel = t('admin.i18n.col.reviewed');
+$allowSourceMatchLabel = t('admin.i18n.col.allow_source_match');
 
 if ($reviewedLabel === 'admin.i18n.col.reviewed') {
 	$reviewedLabel = 'Reviewed';
@@ -330,7 +333,14 @@ body.i18n-tm-open {
     width: 5.5rem;
 }
 
-.i18n-reviewed-cell .form-check {
+.i18n-source-match-cell {
+    text-align: center;
+    vertical-align: middle;
+    width: 7rem;
+}
+
+.i18n-reviewed-cell .form-check,
+.i18n-source-match-cell .form-check {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -475,6 +485,7 @@ body.i18n-tm-open {
                             <th><?= e(t('admin.i18n.col.source')) ?></th>
                             <th><?= e(t('admin.i18n.col.translation')) ?></th>
                             <th><?= e($reviewedLabel) ?></th>
+                            <th><?= e($allowSourceMatchLabel) ?></th>
                             <th><?= e(t('common.actions')) ?></th>
                         </tr>
                     </thead>

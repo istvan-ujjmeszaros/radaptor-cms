@@ -49,8 +49,10 @@ class I18nWorkbench
 				m.`key`,
 				m.context,
 				m.source_text,
+				'" . I18nCsvSchema::SOURCE_LOCALE . "' AS source_locale,
 				COALESCE(t.text, tl.text, '') AS text,
 				CASE WHEN COALESCE(t.human_reviewed, tl.human_reviewed, 0) = 1 THEN 1 ELSE 0 END AS human_reviewed,
+				CASE WHEN COALESCE(t.allow_source_match, tl.allow_source_match, 0) = 1 THEN 1 ELSE 0 END AS allow_source_match,
 				CASE
 					WHEN t.`key` IS NULL AND tl.`key` IS NULL THEN 1
 					WHEN TRIM(COALESCE(t.text, tl.text, '')) = '' THEN 1
@@ -78,6 +80,7 @@ class I18nWorkbench
 		$rows = array_map(static function (array $row) use ($locale): array {
 			$row['locale'] = $locale;
 			$row['human_reviewed'] = (int) ($row['human_reviewed'] ?? 0);
+			$row['allow_source_match'] = (int) ($row['allow_source_match'] ?? 0);
 
 			return $row;
 		}, $rows);

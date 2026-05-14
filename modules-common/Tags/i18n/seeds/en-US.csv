@@ -1,14 +1,14 @@
-﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
-tags,field.context.label,,en-US,Context,Context,0,Context
-tags,field.description.label,,en-US,"Tag description","Tag description",0,"Tag description"
-tags,field.name.explanation,,en-US,"No spaces, short and concise. Do not create synonyms for existing tags.","No spaces, short and concise. Do not create synonyms for existing tags.",0,"No spaces, short and concise. Do not create synonyms for existing tags."
-tags,field.name.label,,en-US,"Tag name","Tag name",0,"Tag name"
-tags,field.type.explanation,,en-US,"Select the tag type","Select the tag type",0,"Select the tag type"
-tags,field.type.label,,en-US,Type,Type,0,Type
-tags,form.name,,en-US,Tag,Tag,0,Tag
-tags,form.title_create,,en-US,"New tag","New tag",0,"New tag"
-tags,form.title_edit,,en-US,"Edit tag","Edit tag",0,"Edit tag"
-tags,list.title,,en-US,Tags,Tags,0,Tags
-tags,saved,,en-US,"Tags saved","Tags saved",0,"Tags saved"
-tags,updated,,en-US,"Tag updated","Tag updated",0,"Tag updated"
-tags,validation.name_max_length,,en-US,"Tag name must not exceed 255 characters","Tag name must not exceed 255 characters",0,"Tag name must not exceed 255 characters"
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,allow_source_match,text
+tags,field.context.label,,en-US,Context,Context,0,0,Context
+tags,field.description.label,,en-US,"Tag description","Tag description",0,0,"Tag description"
+tags,field.name.explanation,,en-US,"No spaces, short and concise. Do not create synonyms for existing tags.","No spaces, short and concise. Do not create synonyms for existing tags.",0,0,"No spaces, short and concise. Do not create synonyms for existing tags."
+tags,field.name.label,,en-US,"Tag name","Tag name",0,0,"Tag name"
+tags,field.type.explanation,,en-US,"Select the tag type","Select the tag type",0,0,"Select the tag type"
+tags,field.type.label,,en-US,Type,Type,0,0,Type
+tags,form.name,,en-US,Tag,Tag,0,0,Tag
+tags,form.title_create,,en-US,"New tag","New tag",0,0,"New tag"
+tags,form.title_edit,,en-US,"Edit tag","Edit tag",0,0,"Edit tag"
+tags,list.title,,en-US,Tags,Tags,0,0,Tags
+tags,saved,,en-US,"Tags saved","Tags saved",0,0,"Tags saved"
+tags,updated,,en-US,"Tag updated","Tag updated",0,0,"Tag updated"
+tags,validation.name_max_length,,en-US,"Tag name must not exceed 255 characters","Tag name must not exceed 255 characters",0,0,"Tag name must not exceed 255 characters"

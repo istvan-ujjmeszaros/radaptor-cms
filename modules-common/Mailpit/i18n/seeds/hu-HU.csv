@@ -1,52 +1,52 @@
-domain,key,context,locale,source_text,expected_text,human_reviewed,text
-mailpit,title,,hu-HU,Mailpit,Mailpit,0,Mailpit
-mailpit,subtitle,,hu-HU,"Captured development emails","Elfogott fejlesztői emailek",0,"Elfogott fejlesztői emailek"
-mailpit,inbox,,hu-HU,Inbox,"Bejövő levelek",0,"Bejövő levelek"
-mailpit,search,,hu-HU,Search,Keresés,0,Keresés
-mailpit,refresh,,hu-HU,Refresh,Frissítés,0,Frissítés
-mailpit,back_to_inbox,,hu-HU,"Back to inbox","Vissza a bejövőkhöz",0,"Vissza a bejövőkhöz"
-mailpit,messages,,hu-HU,Messages,Üzenetek,0,Üzenetek
-mailpit,unread,,hu-HU,Unread,Olvasatlan,0,Olvasatlan
-mailpit,empty,,hu-HU,"No captured emails found.","Nem található elfogott email.",0,"Nem található elfogott email."
-mailpit,unavailable,,hu-HU,"Mailpit is unavailable","A Mailpit nem érhető el",0,"A Mailpit nem érhető el"
-mailpit,not_found,,hu-HU,"Mailpit view not found","A Mailpit nézet nem található",0,"A Mailpit nézet nem található"
-mailpit,access_denied,,hu-HU,"Mailpit catcher is only available in non-production for email admins and system developers.","A Mailpit catcher csak nem production környezetben érhető el email adminoknak és rendszerfejlesztőknek.",0,"A Mailpit catcher csak nem production környezetben érhető el email adminoknak és rendszerfejlesztőknek."
-mailpit,page_not_resolved,,hu-HU,"Mailpit catcher page could not be resolved.","A Mailpit catcher oldal nem oldható fel.",0,"A Mailpit catcher oldal nem oldható fel."
-mailpit,col.subject,,hu-HU,Subject,Tárgy,0,Tárgy
-mailpit,col.from,,hu-HU,From,Feladó,0,Feladó
-mailpit,col.to,,hu-HU,To,Címzett,0,Címzett
-mailpit,col.received,,hu-HU,Received,Beérkezett,0,Beérkezett
-mailpit,col.size,,hu-HU,Size,Méret,0,Méret
-mailpit,pagination.previous,,hu-HU,Previous,Előző,0,Előző
-mailpit,pagination.next,,hu-HU,Next,Következő,0,Következő
-mailpit,no_subject,,hu-HU,"(no subject)","(nincs tárgy)",0,"(nincs tárgy)"
-mailpit,delete,,hu-HU,Delete,Törlés,0,Törlés
-mailpit,meta.from,,hu-HU,From,Feladó,0,Feladó
-mailpit,meta.to,,hu-HU,To,Címzett,0,Címzett
-mailpit,meta.cc,,hu-HU,Cc,Cc,0,Cc
-mailpit,meta.bcc,,hu-HU,Bcc,Bcc,0,Bcc
-mailpit,meta.date,,hu-HU,Date,Dátum,0,Dátum
-mailpit,meta.size,,hu-HU,Size,Méret,0,Méret
-mailpit,html_empty,,hu-HU,"This message has no HTML body.","Ennek az üzenetnek nincs HTML törzse.",0,"Ennek az üzenetnek nincs HTML törzse."
-mailpit,html_preview_title,,hu-HU,"Mailpit HTML preview","Mailpit HTML előnézet",0,"Mailpit HTML előnézet"
-mailpit,check.supported,,hu-HU,Supported,Támogatott,0,Támogatott
-mailpit,check.partial,,hu-HU,Partial,Részleges,0,Részleges
-mailpit,check.unsupported,,hu-HU,Unsupported,"Nem támogatott",0,"Nem támogatott"
-mailpit,check.tests,,hu-HU,Tests,Tesztek,0,Tesztek
-mailpit,check.no_warnings,,hu-HU,"No HTML compatibility warnings.","Nincs HTML kompatibilitási figyelmeztetés.",0,"Nincs HTML kompatibilitási figyelmeztetés."
-mailpit,warning_fallback,,hu-HU,Warning,Figyelmeztetés,0,Figyelmeztetés
-mailpit,links.status,,hu-HU,Status,Állapot,0,Állapot
-mailpit,links.none,,hu-HU,"No links found.","Nem található link.",0,"Nem található link."
-mailpit,attachments,,hu-HU,Attachments,Mellékletek,0,Mellékletek
-mailpit,inline_attachments,,hu-HU,"Inline attachments","Inline mellékletek",0,"Inline mellékletek"
-mailpit,attachment_fallback,,hu-HU,attachment,melléklet,0,melléklet
-mailpit,tab_error,,hu-HU,"Mailpit tab content could not be loaded.","A Mailpit tab tartalma nem tölthető be.",0,"A Mailpit tab tartalma nem tölthető be."
-mailpit,tab.html,,hu-HU,HTML,HTML,0,HTML
-mailpit,tab.html_source,,hu-HU,"HTML Source","HTML forrás",0,"HTML forrás"
-mailpit,tab.text,,hu-HU,Text,Szöveg,0,Szöveg
-mailpit,tab.headers,,hu-HU,Headers,Fejlécek,0,Fejlécek
-mailpit,tab.raw,,hu-HU,Raw,Nyers,0,Nyers
-mailpit,tab.html_check,,hu-HU,"HTML Check","HTML ellenőrzés",0,"HTML ellenőrzés"
-mailpit,tab.link_check,,hu-HU,"Link Check","Link ellenőrzés",0,"Link ellenőrzés"
-widget,mailpit.name,,hu-HU,"Mailpit catcher","Mailpit catcher",0,"Mailpit catcher"
-widget,mailpit.description,,hu-HU,"Shows captured Mailpit emails inside the admin UI.","Az elfogott Mailpit emaileket mutatja az admin felületen.",0,"Az elfogott Mailpit emaileket mutatja az admin felületen."
+domain,key,context,locale,source_text,expected_text,human_reviewed,allow_source_match,text
+mailpit,title,,hu-HU,Mailpit,Mailpit,0,1,Mailpit
+mailpit,subtitle,,hu-HU,"Captured development emails","Elfogott fejlesztői emailek",0,0,"Elfogott fejlesztői emailek"
+mailpit,inbox,,hu-HU,Inbox,"Bejövő levelek",0,0,"Bejövő levelek"
+mailpit,search,,hu-HU,Search,Keresés,0,0,Keresés
+mailpit,refresh,,hu-HU,Refresh,Frissítés,0,0,Frissítés
+mailpit,back_to_inbox,,hu-HU,"Back to inbox","Vissza a bejövőkhöz",0,0,"Vissza a bejövőkhöz"
+mailpit,messages,,hu-HU,Messages,Üzenetek,0,0,Üzenetek
+mailpit,unread,,hu-HU,Unread,Olvasatlan,0,0,Olvasatlan
+mailpit,empty,,hu-HU,"No captured emails found.","Nem található elfogott email.",0,0,"Nem található elfogott email."
+mailpit,unavailable,,hu-HU,"Mailpit is unavailable","A Mailpit nem érhető el",0,0,"A Mailpit nem érhető el"
+mailpit,not_found,,hu-HU,"Mailpit view not found","A Mailpit nézet nem található",0,0,"A Mailpit nézet nem található"
+mailpit,access_denied,,hu-HU,"Mailpit catcher is only available in non-production for email admins and system developers.","A Mailpit catcher csak nem production környezetben érhető el email adminoknak és rendszerfejlesztőknek.",0,0,"A Mailpit catcher csak nem production környezetben érhető el email adminoknak és rendszerfejlesztőknek."
+mailpit,page_not_resolved,,hu-HU,"Mailpit catcher page could not be resolved.","A Mailpit catcher oldal nem oldható fel.",0,0,"A Mailpit catcher oldal nem oldható fel."
+mailpit,col.subject,,hu-HU,Subject,Tárgy,0,0,Tárgy
+mailpit,col.from,,hu-HU,From,Feladó,0,0,Feladó
+mailpit,col.to,,hu-HU,To,Címzett,0,0,Címzett
+mailpit,col.received,,hu-HU,Received,Beérkezett,0,0,Beérkezett
+mailpit,col.size,,hu-HU,Size,Méret,0,0,Méret
+mailpit,pagination.previous,,hu-HU,Previous,Előző,0,0,Előző
+mailpit,pagination.next,,hu-HU,Next,Következő,0,0,Következő
+mailpit,no_subject,,hu-HU,"(no subject)","(nincs tárgy)",0,0,"(nincs tárgy)"
+mailpit,delete,,hu-HU,Delete,Törlés,0,0,Törlés
+mailpit,meta.from,,hu-HU,From,Feladó,0,0,Feladó
+mailpit,meta.to,,hu-HU,To,Címzett,0,0,Címzett
+mailpit,meta.cc,,hu-HU,Cc,Cc,0,1,Cc
+mailpit,meta.bcc,,hu-HU,Bcc,Bcc,0,1,Bcc
+mailpit,meta.date,,hu-HU,Date,Dátum,0,0,Dátum
+mailpit,meta.size,,hu-HU,Size,Méret,0,0,Méret
+mailpit,html_empty,,hu-HU,"This message has no HTML body.","Ennek az üzenetnek nincs HTML törzse.",0,0,"Ennek az üzenetnek nincs HTML törzse."
+mailpit,html_preview_title,,hu-HU,"Mailpit HTML preview","Mailpit HTML előnézet",0,0,"Mailpit HTML előnézet"
+mailpit,check.supported,,hu-HU,Supported,Támogatott,0,0,Támogatott
+mailpit,check.partial,,hu-HU,Partial,Részleges,0,0,Részleges
+mailpit,check.unsupported,,hu-HU,Unsupported,"Nem támogatott",0,0,"Nem támogatott"
+mailpit,check.tests,,hu-HU,Tests,Tesztek,0,0,Tesztek
+mailpit,check.no_warnings,,hu-HU,"No HTML compatibility warnings.","Nincs HTML kompatibilitási figyelmeztetés.",0,0,"Nincs HTML kompatibilitási figyelmeztetés."
+mailpit,warning_fallback,,hu-HU,Warning,Figyelmeztetés,0,0,Figyelmeztetés
+mailpit,links.status,,hu-HU,Status,Állapot,0,0,Állapot
+mailpit,links.none,,hu-HU,"No links found.","Nem található link.",0,0,"Nem található link."
+mailpit,attachments,,hu-HU,Attachments,Mellékletek,0,0,Mellékletek
+mailpit,inline_attachments,,hu-HU,"Inline attachments","Inline mellékletek",0,0,"Inline mellékletek"
+mailpit,attachment_fallback,,hu-HU,attachment,melléklet,0,0,melléklet
+mailpit,tab_error,,hu-HU,"Mailpit tab content could not be loaded.","A Mailpit tab tartalma nem tölthető be.",0,0,"A Mailpit tab tartalma nem tölthető be."
+mailpit,tab.html,,hu-HU,HTML,HTML,0,1,HTML
+mailpit,tab.html_source,,hu-HU,"HTML Source","HTML forrás",0,0,"HTML forrás"
+mailpit,tab.text,,hu-HU,Text,Szöveg,0,0,Szöveg
+mailpit,tab.headers,,hu-HU,Headers,Fejlécek,0,0,Fejlécek
+mailpit,tab.raw,,hu-HU,Raw,Nyers,0,0,Nyers
+mailpit,tab.html_check,,hu-HU,"HTML Check","HTML ellenőrzés",0,0,"HTML ellenőrzés"
+mailpit,tab.link_check,,hu-HU,"Link Check","Link ellenőrzés",0,0,"Link ellenőrzés"
+widget,mailpit.name,,hu-HU,"Mailpit catcher","Mailpit catcher",0,1,"Mailpit catcher"
+widget,mailpit.description,,hu-HU,"Shows captured Mailpit emails inside the admin UI.","Az elfogott Mailpit emaileket mutatja az admin felületen.",0,0,"Az elfogott Mailpit emaileket mutatja az admin felületen."

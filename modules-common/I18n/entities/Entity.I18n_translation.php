@@ -8,6 +8,7 @@
  *     locale: string,
  *     text?: string,
  *     human_reviewed?: int|bool,
+ *     allow_source_match?: int|bool,
  *     source_hash_snapshot?: string,
  * }
  *
@@ -17,6 +18,7 @@
  * @property ?string $locale
  * @property ?string $text
  * @property int|bool|null $human_reviewed
+ * @property int|bool|null $allow_source_match
  * @property ?string $source_hash_snapshot
  *
  * @extends SQLEntity<ShapeEntityI18n_translation>

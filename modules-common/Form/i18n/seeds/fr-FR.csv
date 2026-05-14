@@ -1,59 +1,59 @@
-﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
-form,admin_menu_item.description,,fr-FR,Admin menu item,Élément du menu admin,0,Élément du menu admin
-form,admin_menu_item.name,,fr-FR,Admin menu item,Élément du menu admin,0,Élément du menu admin
-form,blog.description,,fr-FR,Blog post,Billet de blog,0,Billet de blog
-form,blog.name,,fr-FR,Blog post,Billet de blog,0,Billet de blog
-form,close_page.close_window,,fr-FR,Close this window!,Fermer cette fenêtre !,0,Fermer cette fenêtre !
-form,close_page.title,,fr-FR,Close page,Fermer la page,0,Fermer la page
-form,form_settings.description,,fr-FR,Select which form to display,Sélectionner quel formulaire afficher,0,Sélectionner quel formulaire afficher
-form,form_settings.name,,fr-FR,Form settings,Paramètres du formulaire,0,Paramètres du formulaire
-form,form_settings.title,,fr-FR,Select form,Sélectionner le formulaire,0,Sélectionner le formulaire
-form,js_tree_settings.description,,fr-FR,Select which tree to display,Sélectionner quel arbre afficher,0,Sélectionner quel arbre afficher
-form,js_tree_settings.name,,fr-FR,Tree settings,Paramètres de l'arbre,0,Paramètres de l'arbre
-form,js_tree_settings.title,,fr-FR,Select tree,Sélectionner l'arbre,0,Sélectionner l'arbre
-form,main_menu_item.description,,fr-FR,Main menu item,Élément du menu principal,0,Élément du menu principal
-form,main_menu_item.name,,fr-FR,Main menu item,Élément du menu principal,0,Élément du menu principal
-form,plain_html.description,,fr-FR,HTML code (embed),Code HTML (intégration),0,Code HTML (intégration)
-form,plain_html.name,,fr-FR,HTML code (embed),Code HTML (intégration),0,Code HTML (intégration)
-form,rich_text_select.description,,fr-FR,Select text content,Sélectionner le contenu textuel,0,Sélectionner le contenu textuel
-form,rich_text_select.name,,fr-FR,Select text content,Sélectionner le contenu textuel,0,Sélectionner le contenu textuel
-form,rich_text.description,,fr-FR,Text content,Contenu textuel,0,Contenu textuel
-form,rich_text.name,,fr-FR,Text content,Contenu textuel,0,Contenu textuel
-form,role.description,,fr-FR,Role,Rôle,0,Rôle
-form,role.name,,fr-FR,Role,Rôle,0,Rôle
-form,tag.description,,fr-FR,Tag,Étiquette,0,Étiquette
-form,tag.name,,fr-FR,Tag,Étiquette,0,Étiquette
-form,theme_selector.description,,fr-FR,Select which theme renders each layout,Sélectionner quel thème rend chaque mise en page,0,Sélectionner quel thème rend chaque mise en page
-form,theme_selector.name,,fr-FR,Theme selection,Sélection du thème,0,Sélection du thème
-form,theme_selector.title,,fr-FR,Select themes for layouts,Sélectionner les thèmes pour les mises en page,0,Sélectionner les thèmes pour les mises en page
-form,ticket_priority.description,,fr-FR,Ticket priority,Priorité du ticket,0,Priorité du ticket
-form,ticket_priority.name,,fr-FR,Ticket priority,Priorité du ticket,0,Priorité du ticket
-form,ticket_state.description,,fr-FR,Ticket status,Statut du ticket,0,Statut du ticket
-form,ticket_state.name,,fr-FR,Ticket status,Statut du ticket,0,Statut du ticket
-form,user_login.description,,fr-FR,Login,Connexion,0,Connexion
-form,user_login.name,,fr-FR,Login,Connexion,0,Connexion
-form,user_signup.description,,fr-FR,Sign up,S'inscrire,0,S'inscrire
-form,user_signup.name,,fr-FR,Sign up,S'inscrire,0,S'inscrire
-form,user.description,,fr-FR,User,Utilisateur,0,Utilisateur
-form,user.name,,fr-FR,User,Utilisateur,0,Utilisateur
-form,usergroup.description,,fr-FR,User group,Groupe d'utilisateurs,0,Groupe d'utilisateurs
-form,usergroup.name,,fr-FR,User group,Groupe d'utilisateurs,0,Groupe d'utilisateurs
-form,validation.max_length,,fr-FR,Maximum {max} characters,Maximum {max} caractères,0,Maximum {max} caractères
-form,validation.required,,fr-FR,Required,Obligatoire,0,Obligatoire
-form,webpage_domain.description,,fr-FR,Domain properties,Propriétés du domaine,0,Propriétés du domaine
-form,webpage_domain.name,,fr-FR,Domain properties,Propriétés du domaine,0,Propriétés du domaine
-form,webpage_file.description,,fr-FR,File properties,Propriétés du fichier,0,Propriétés du fichier
-form,webpage_file.name,,fr-FR,File properties,Propriétés du fichier,0,Propriétés du fichier
-form,webpage_folder.description,,fr-FR,Website folder properties,Propriétés du dossier de site web,0,Propriétés du dossier de site web
-form,webpage_folder.name,,fr-FR,Website folder properties,Propriétés du dossier de site web,0,Propriétés du dossier de site web
-form,webpage_from_path.description,,fr-FR,Create webpage from path,Créer une page web depuis le chemin,0,Créer une page web depuis le chemin
-form,webpage_from_path.name,,fr-FR,Create webpage from path,Créer une page web depuis le chemin,0,Créer une page web depuis le chemin
-form,webpage_page.description,,fr-FR,Webpage properties,Propriétés de la page web,0,Propriétés de la page web
-form,webpage_page.name,,fr-FR,Webpage properties,Propriétés de la page web,0,Propriétés de la page web
-form,widget_connection_params.description,,fr-FR,Display settings for a content box,Paramètres d'affichage d'un bloc de contenu,0,Paramètres d'affichage d'un bloc de contenu
-form,widget_connection_params.name,,fr-FR,Content box display settings,Paramètres d'affichage du bloc de contenu,0,Paramètres d'affichage du bloc de contenu
-form,widget_connection_settings.description,,fr-FR,Configure width and row placement for the content box,Configurer la largeur et le placement en ligne du bloc de contenu,0,Configurer la largeur et le placement en ligne du bloc de contenu
-form,widget_connection_settings.name,,fr-FR,Content formatting,Mise en forme du contenu,0,Mise en forme du contenu
-form,widget_connection_settings.title,,fr-FR,Content formatting,Mise en forme du contenu,0,Mise en forme du contenu
-form,closer.title,,fr-FR,Closer page,Page de fermeture,0,Page de fermeture
-form,closer.close_window,,fr-FR,Close this window!,Fermez cette fenêtre !,0,Fermez cette fenêtre !
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,allow_source_match,text
+form,admin_menu_item.description,,fr-FR,"Admin menu item","Élément du menu admin",0,0,"Élément du menu admin"
+form,admin_menu_item.name,,fr-FR,"Admin menu item","Élément du menu admin",0,0,"Élément du menu admin"
+form,blog.description,,fr-FR,"Blog post","Billet de blog",0,0,"Billet de blog"
+form,blog.name,,fr-FR,"Blog post","Billet de blog",0,0,"Billet de blog"
+form,close_page.close_window,,fr-FR,"Close this window!","Fermer cette fenêtre !",0,0,"Fermer cette fenêtre !"
+form,close_page.title,,fr-FR,"Close page","Fermer la page",0,0,"Fermer la page"
+form,form_settings.description,,fr-FR,"Select which form to display","Sélectionner quel formulaire afficher",0,0,"Sélectionner quel formulaire afficher"
+form,form_settings.name,,fr-FR,"Form settings","Paramètres du formulaire",0,0,"Paramètres du formulaire"
+form,form_settings.title,,fr-FR,"Select form","Sélectionner le formulaire",0,0,"Sélectionner le formulaire"
+form,js_tree_settings.description,,fr-FR,"Select which tree to display","Sélectionner quel arbre afficher",0,0,"Sélectionner quel arbre afficher"
+form,js_tree_settings.name,,fr-FR,"Tree settings","Paramètres de l'arbre",0,0,"Paramètres de l'arbre"
+form,js_tree_settings.title,,fr-FR,"Select tree","Sélectionner l'arbre",0,0,"Sélectionner l'arbre"
+form,main_menu_item.description,,fr-FR,"Main menu item","Élément du menu principal",0,0,"Élément du menu principal"
+form,main_menu_item.name,,fr-FR,"Main menu item","Élément du menu principal",0,0,"Élément du menu principal"
+form,plain_html.description,,fr-FR,"HTML code (embed)","Code HTML (intégration)",0,0,"Code HTML (intégration)"
+form,plain_html.name,,fr-FR,"HTML code (embed)","Code HTML (intégration)",0,0,"Code HTML (intégration)"
+form,rich_text_select.description,,fr-FR,"Select text content","Sélectionner le contenu textuel",0,0,"Sélectionner le contenu textuel"
+form,rich_text_select.name,,fr-FR,"Select text content","Sélectionner le contenu textuel",0,0,"Sélectionner le contenu textuel"
+form,rich_text.description,,fr-FR,"Text content","Contenu textuel",0,0,"Contenu textuel"
+form,rich_text.name,,fr-FR,"Text content","Contenu textuel",0,0,"Contenu textuel"
+form,role.description,,fr-FR,Role,Rôle,0,0,Rôle
+form,role.name,,fr-FR,Role,Rôle,0,0,Rôle
+form,tag.description,,fr-FR,Tag,Étiquette,0,0,Étiquette
+form,tag.name,,fr-FR,Tag,Étiquette,0,0,Étiquette
+form,theme_selector.description,,fr-FR,"Select which theme renders each layout","Sélectionner quel thème rend chaque mise en page",0,0,"Sélectionner quel thème rend chaque mise en page"
+form,theme_selector.name,,fr-FR,"Theme selection","Sélection du thème",0,0,"Sélection du thème"
+form,theme_selector.title,,fr-FR,"Select themes for layouts","Sélectionner les thèmes pour les mises en page",0,0,"Sélectionner les thèmes pour les mises en page"
+form,ticket_priority.description,,fr-FR,"Ticket priority","Priorité du ticket",0,0,"Priorité du ticket"
+form,ticket_priority.name,,fr-FR,"Ticket priority","Priorité du ticket",0,0,"Priorité du ticket"
+form,ticket_state.description,,fr-FR,"Ticket status","Statut du ticket",0,0,"Statut du ticket"
+form,ticket_state.name,,fr-FR,"Ticket status","Statut du ticket",0,0,"Statut du ticket"
+form,user_login.description,,fr-FR,Login,Connexion,0,0,Connexion
+form,user_login.name,,fr-FR,Login,Connexion,0,0,Connexion
+form,user_signup.description,,fr-FR,"Sign up",S'inscrire,0,0,S'inscrire
+form,user_signup.name,,fr-FR,"Sign up",S'inscrire,0,0,S'inscrire
+form,user.description,,fr-FR,User,Utilisateur,0,0,Utilisateur
+form,user.name,,fr-FR,User,Utilisateur,0,0,Utilisateur
+form,usergroup.description,,fr-FR,"User group","Groupe d'utilisateurs",0,0,"Groupe d'utilisateurs"
+form,usergroup.name,,fr-FR,"User group","Groupe d'utilisateurs",0,0,"Groupe d'utilisateurs"
+form,validation.max_length,,fr-FR,"Maximum {max} characters","Maximum {max} caractères",0,0,"Maximum {max} caractères"
+form,validation.required,,fr-FR,Required,Obligatoire,0,0,Obligatoire
+form,webpage_domain.description,,fr-FR,"Domain properties","Propriétés du domaine",0,0,"Propriétés du domaine"
+form,webpage_domain.name,,fr-FR,"Domain properties","Propriétés du domaine",0,0,"Propriétés du domaine"
+form,webpage_file.description,,fr-FR,"File properties","Propriétés du fichier",0,0,"Propriétés du fichier"
+form,webpage_file.name,,fr-FR,"File properties","Propriétés du fichier",0,0,"Propriétés du fichier"
+form,webpage_folder.description,,fr-FR,"Website folder properties","Propriétés du dossier de site web",0,0,"Propriétés du dossier de site web"
+form,webpage_folder.name,,fr-FR,"Website folder properties","Propriétés du dossier de site web",0,0,"Propriétés du dossier de site web"
+form,webpage_from_path.description,,fr-FR,"Create webpage from path","Créer une page web depuis le chemin",0,0,"Créer une page web depuis le chemin"
+form,webpage_from_path.name,,fr-FR,"Create webpage from path","Créer une page web depuis le chemin",0,0,"Créer une page web depuis le chemin"
+form,webpage_page.description,,fr-FR,"Webpage properties","Propriétés de la page web",0,0,"Propriétés de la page web"
+form,webpage_page.name,,fr-FR,"Webpage properties","Propriétés de la page web",0,0,"Propriétés de la page web"
+form,widget_connection_params.description,,fr-FR,"Display settings for a content box","Paramètres d'affichage d'un bloc de contenu",0,0,"Paramètres d'affichage d'un bloc de contenu"
+form,widget_connection_params.name,,fr-FR,"Content box display settings","Paramètres d'affichage du bloc de contenu",0,0,"Paramètres d'affichage du bloc de contenu"
+form,widget_connection_settings.description,,fr-FR,"Configure width and row placement for the content box","Configurer la largeur et le placement en ligne du bloc de contenu",0,0,"Configurer la largeur et le placement en ligne du bloc de contenu"
+form,widget_connection_settings.name,,fr-FR,"Content formatting","Mise en forme du contenu",0,0,"Mise en forme du contenu"
+form,widget_connection_settings.title,,fr-FR,"Content formatting","Mise en forme du contenu",0,0,"Mise en forme du contenu"
+form,closer.title,,fr-FR,"Closer page","Page de fermeture",0,0,"Page de fermeture"
+form,closer.close_window,,fr-FR,"Close this window!","Fermez cette fenêtre !",0,0,"Fermez cette fenêtre !"

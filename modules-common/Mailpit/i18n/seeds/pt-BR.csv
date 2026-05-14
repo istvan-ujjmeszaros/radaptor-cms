@@ -1,52 +1,52 @@
-domain,key,context,locale,source_text,expected_text,human_reviewed,text
-mailpit,title,,pt-BR,Mailpit,Mailpit,0,Mailpit
-mailpit,subtitle,,pt-BR,"Captured development emails","Emails de desenvolvimento capturados",0,"Emails de desenvolvimento capturados"
-mailpit,inbox,,pt-BR,Inbox,"Caixa de entrada",0,"Caixa de entrada"
-mailpit,search,,pt-BR,Search,Pesquisar,0,Pesquisar
-mailpit,refresh,,pt-BR,Refresh,Atualizar,0,Atualizar
-mailpit,back_to_inbox,,pt-BR,"Back to inbox","Voltar à caixa de entrada",0,"Voltar à caixa de entrada"
-mailpit,messages,,pt-BR,Messages,Mensagens,0,Mensagens
-mailpit,unread,,pt-BR,Unread,"Não lidas",0,"Não lidas"
-mailpit,empty,,pt-BR,"No captured emails found.","Nenhum email capturado encontrado.",0,"Nenhum email capturado encontrado."
-mailpit,unavailable,,pt-BR,"Mailpit is unavailable","Mailpit indisponível",0,"Mailpit indisponível"
-mailpit,not_found,,pt-BR,"Mailpit view not found","Visualização do Mailpit não encontrada",0,"Visualização do Mailpit não encontrada"
-mailpit,access_denied,,pt-BR,"Mailpit catcher is only available in non-production for email admins and system developers.","O catcher Mailpit só fica disponível fora de produção para admins de email e desenvolvedores do sistema.",0,"O catcher Mailpit só fica disponível fora de produção para admins de email e desenvolvedores do sistema."
-mailpit,page_not_resolved,,pt-BR,"Mailpit catcher page could not be resolved.","Não foi possível resolver a página do catcher Mailpit.",0,"Não foi possível resolver a página do catcher Mailpit."
-mailpit,col.subject,,pt-BR,Subject,Assunto,0,Assunto
-mailpit,col.from,,pt-BR,From,De,0,De
-mailpit,col.to,,pt-BR,To,Para,0,Para
-mailpit,col.received,,pt-BR,Received,Recebido,0,Recebido
-mailpit,col.size,,pt-BR,Size,Tamanho,0,Tamanho
-mailpit,pagination.previous,,pt-BR,Previous,Anterior,0,Anterior
-mailpit,pagination.next,,pt-BR,Next,Próxima,0,Próxima
-mailpit,no_subject,,pt-BR,"(no subject)","(sem assunto)",0,"(sem assunto)"
-mailpit,delete,,pt-BR,Delete,Excluir,0,Excluir
-mailpit,meta.from,,pt-BR,From,De,0,De
-mailpit,meta.to,,pt-BR,To,Para,0,Para
-mailpit,meta.cc,,pt-BR,Cc,Cc,0,Cc
-mailpit,meta.bcc,,pt-BR,Bcc,Bcc,0,Bcc
-mailpit,meta.date,,pt-BR,Date,Data,0,Data
-mailpit,meta.size,,pt-BR,Size,Tamanho,0,Tamanho
-mailpit,html_empty,,pt-BR,"This message has no HTML body.","Esta mensagem não tem corpo HTML.",0,"Esta mensagem não tem corpo HTML."
-mailpit,html_preview_title,,pt-BR,"Mailpit HTML preview","Prévia HTML do Mailpit",0,"Prévia HTML do Mailpit"
-mailpit,check.supported,,pt-BR,Supported,Suportado,0,Suportado
-mailpit,check.partial,,pt-BR,Partial,Parcial,0,Parcial
-mailpit,check.unsupported,,pt-BR,Unsupported,"Não suportado",0,"Não suportado"
-mailpit,check.tests,,pt-BR,Tests,Testes,0,Testes
-mailpit,check.no_warnings,,pt-BR,"No HTML compatibility warnings.","Nenhum aviso de compatibilidade HTML.",0,"Nenhum aviso de compatibilidade HTML."
-mailpit,warning_fallback,,pt-BR,Warning,Aviso,0,Aviso
-mailpit,links.status,,pt-BR,Status,Status,0,Status
-mailpit,links.none,,pt-BR,"No links found.","Nenhum link encontrado.",0,"Nenhum link encontrado."
-mailpit,attachments,,pt-BR,Attachments,Anexos,0,Anexos
-mailpit,inline_attachments,,pt-BR,"Inline attachments","Anexos inline",0,"Anexos inline"
-mailpit,attachment_fallback,,pt-BR,attachment,anexo,0,anexo
-mailpit,tab_error,,pt-BR,"Mailpit tab content could not be loaded.","Não foi possível carregar o conteúdo da aba Mailpit.",0,"Não foi possível carregar o conteúdo da aba Mailpit."
-mailpit,tab.html,,pt-BR,HTML,HTML,0,HTML
-mailpit,tab.html_source,,pt-BR,"HTML Source","Fonte HTML",0,"Fonte HTML"
-mailpit,tab.text,,pt-BR,Text,Texto,0,Texto
-mailpit,tab.headers,,pt-BR,Headers,Cabeçalhos,0,Cabeçalhos
-mailpit,tab.raw,,pt-BR,Raw,Raw,0,Raw
-mailpit,tab.html_check,,pt-BR,"HTML Check","Verificação HTML",0,"Verificação HTML"
-mailpit,tab.link_check,,pt-BR,"Link Check","Verificação de links",0,"Verificação de links"
-widget,mailpit.name,,pt-BR,"Mailpit catcher","Catcher Mailpit",0,"Catcher Mailpit"
-widget,mailpit.description,,pt-BR,"Shows captured Mailpit emails inside the admin UI.","Mostra emails capturados pelo Mailpit dentro da UI administrativa.",0,"Mostra emails capturados pelo Mailpit dentro da UI administrativa."
+domain,key,context,locale,source_text,expected_text,human_reviewed,allow_source_match,text
+mailpit,title,,pt-BR,Mailpit,Mailpit,0,1,Mailpit
+mailpit,subtitle,,pt-BR,"Captured development emails","Emails de desenvolvimento capturados",0,0,"Emails de desenvolvimento capturados"
+mailpit,inbox,,pt-BR,Inbox,"Caixa de entrada",0,0,"Caixa de entrada"
+mailpit,search,,pt-BR,Search,Pesquisar,0,0,Pesquisar
+mailpit,refresh,,pt-BR,Refresh,Atualizar,0,0,Atualizar
+mailpit,back_to_inbox,,pt-BR,"Back to inbox","Voltar à caixa de entrada",0,0,"Voltar à caixa de entrada"
+mailpit,messages,,pt-BR,Messages,Mensagens,0,0,Mensagens
+mailpit,unread,,pt-BR,Unread,"Não lidas",0,0,"Não lidas"
+mailpit,empty,,pt-BR,"No captured emails found.","Nenhum email capturado encontrado.",0,0,"Nenhum email capturado encontrado."
+mailpit,unavailable,,pt-BR,"Mailpit is unavailable","Mailpit indisponível",0,0,"Mailpit indisponível"
+mailpit,not_found,,pt-BR,"Mailpit view not found","Visualização do Mailpit não encontrada",0,0,"Visualização do Mailpit não encontrada"
+mailpit,access_denied,,pt-BR,"Mailpit catcher is only available in non-production for email admins and system developers.","O catcher Mailpit só fica disponível fora de produção para admins de email e desenvolvedores do sistema.",0,0,"O catcher Mailpit só fica disponível fora de produção para admins de email e desenvolvedores do sistema."
+mailpit,page_not_resolved,,pt-BR,"Mailpit catcher page could not be resolved.","Não foi possível resolver a página do catcher Mailpit.",0,0,"Não foi possível resolver a página do catcher Mailpit."
+mailpit,col.subject,,pt-BR,Subject,Assunto,0,0,Assunto
+mailpit,col.from,,pt-BR,From,De,0,0,De
+mailpit,col.to,,pt-BR,To,Para,0,0,Para
+mailpit,col.received,,pt-BR,Received,Recebido,0,0,Recebido
+mailpit,col.size,,pt-BR,Size,Tamanho,0,0,Tamanho
+mailpit,pagination.previous,,pt-BR,Previous,Anterior,0,0,Anterior
+mailpit,pagination.next,,pt-BR,Next,Próxima,0,0,Próxima
+mailpit,no_subject,,pt-BR,"(no subject)","(sem assunto)",0,0,"(sem assunto)"
+mailpit,delete,,pt-BR,Delete,Excluir,0,0,Excluir
+mailpit,meta.from,,pt-BR,From,De,0,0,De
+mailpit,meta.to,,pt-BR,To,Para,0,0,Para
+mailpit,meta.cc,,pt-BR,Cc,Cc,0,1,Cc
+mailpit,meta.bcc,,pt-BR,Bcc,Bcc,0,1,Bcc
+mailpit,meta.date,,pt-BR,Date,Data,0,0,Data
+mailpit,meta.size,,pt-BR,Size,Tamanho,0,0,Tamanho
+mailpit,html_empty,,pt-BR,"This message has no HTML body.","Esta mensagem não tem corpo HTML.",0,0,"Esta mensagem não tem corpo HTML."
+mailpit,html_preview_title,,pt-BR,"Mailpit HTML preview","Prévia HTML do Mailpit",0,0,"Prévia HTML do Mailpit"
+mailpit,check.supported,,pt-BR,Supported,Suportado,0,0,Suportado
+mailpit,check.partial,,pt-BR,Partial,Parcial,0,0,Parcial
+mailpit,check.unsupported,,pt-BR,Unsupported,"Não suportado",0,0,"Não suportado"
+mailpit,check.tests,,pt-BR,Tests,Testes,0,0,Testes
+mailpit,check.no_warnings,,pt-BR,"No HTML compatibility warnings.","Nenhum aviso de compatibilidade HTML.",0,0,"Nenhum aviso de compatibilidade HTML."
+mailpit,warning_fallback,,pt-BR,Warning,Aviso,0,0,Aviso
+mailpit,links.status,,pt-BR,Status,Status,0,1,Status
+mailpit,links.none,,pt-BR,"No links found.","Nenhum link encontrado.",0,0,"Nenhum link encontrado."
+mailpit,attachments,,pt-BR,Attachments,Anexos,0,0,Anexos
+mailpit,inline_attachments,,pt-BR,"Inline attachments","Anexos inline",0,0,"Anexos inline"
+mailpit,attachment_fallback,,pt-BR,attachment,anexo,0,0,anexo
+mailpit,tab_error,,pt-BR,"Mailpit tab content could not be loaded.","Não foi possível carregar o conteúdo da aba Mailpit.",0,0,"Não foi possível carregar o conteúdo da aba Mailpit."
+mailpit,tab.html,,pt-BR,HTML,HTML,0,1,HTML
+mailpit,tab.html_source,,pt-BR,"HTML Source","Fonte HTML",0,0,"Fonte HTML"
+mailpit,tab.text,,pt-BR,Text,Texto,0,0,Texto
+mailpit,tab.headers,,pt-BR,Headers,Cabeçalhos,0,0,Cabeçalhos
+mailpit,tab.raw,,pt-BR,Raw,Raw,0,1,Raw
+mailpit,tab.html_check,,pt-BR,"HTML Check","Verificação HTML",0,0,"Verificação HTML"
+mailpit,tab.link_check,,pt-BR,"Link Check","Verificação de links",0,0,"Verificação de links"
+widget,mailpit.name,,pt-BR,"Mailpit catcher","Catcher Mailpit",0,0,"Catcher Mailpit"
+widget,mailpit.description,,pt-BR,"Shows captured Mailpit emails inside the admin UI.","Mostra emails capturados pelo Mailpit dentro da UI administrativa.",0,0,"Mostra emails capturados pelo Mailpit dentro da UI administrativa."

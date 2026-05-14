@@ -7,9 +7,8 @@
 	beStrictAboutChangesToGlobalState="false"
 >
 	<testsuites>
-		<testsuite name="cms-smoke">
-			<directory suffix="Test.php">tests</directory>
-			<exclude>tests/integration</exclude>
+		<testsuite name="cms-integration">
+			<directory suffix="Test.php">tests/integration</directory>
 		</testsuite>
 	</testsuites>
 </phpunit>

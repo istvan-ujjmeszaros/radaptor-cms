@@ -80,6 +80,7 @@ admin,menu.custom_menu,,hu-HU,"Custom menu","Egyéni menü",0,"Egyéni menü"
 admin,menu.email_outbox,,hu-HU,"Email outbox","Email kimenő",0,"Email kimenő"
 admin,menu.home,,hu-HU,"Admin home","Admin kezdőoldal",0,"Admin kezdőoldal"
 admin,menu.import_export,,hu-HU,"Import / Export","Import / Export",0,"Import / Export"
+admin,menu.locales,,hu-HU,Locales,"Locale-ok",0,"Locale-ok"
 admin,menu.mcp_tokens,,hu-HU,"MCP tokens","MCP tokenek",0,"MCP tokenek"
 admin,menu.phpinfo,,hu-HU,PHPinfo,PHPinfo,0,PHPinfo
 admin,menu.resource_tree,,hu-HU,"Website structure","Weboldal szerkezet",0,"Weboldal szerkezet"

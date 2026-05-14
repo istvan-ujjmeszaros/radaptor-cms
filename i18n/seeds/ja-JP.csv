@@ -80,6 +80,7 @@ admin,menu.custom_menu,,ja-JP,"Custom menu",カスタムメニュー,0,カスタ
 admin,menu.email_outbox,,ja-JP,"Email outbox",メール送信箱,0,メール送信箱
 admin,menu.home,,ja-JP,"Admin home",管理ホーム,0,管理ホーム
 admin,menu.import_export,,ja-JP,"Import / Export","インポート / エクスポート",0,"インポート / エクスポート"
+admin,menu.locales,,ja-JP,Locales,Locales,0,Locales
 admin,menu.mcp_tokens,,ja-JP,"MCP tokens",MCPトークン,0,MCPトークン
 admin,menu.phpinfo,,ja-JP,PHPinfo,PHP情報,0,PHP情報
 admin,menu.resource_tree,,ja-JP,"Website structure",ウェブサイト構造,0,ウェブサイト構造

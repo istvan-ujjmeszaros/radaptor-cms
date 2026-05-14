@@ -80,6 +80,7 @@ admin,menu.custom_menu,,ru-RU,"Custom menu","Пользовательское м
 admin,menu.email_outbox,,ru-RU,"Email outbox","Исходящая почта",0,"Исходящая почта"
 admin,menu.home,,ru-RU,"Admin home","Главная администратора",0,"Главная администратора"
 admin,menu.import_export,,ru-RU,"Import / Export","Импорт / Экспорт",0,"Импорт / Экспорт"
+admin,menu.locales,,ru-RU,Locales,Locales,0,Locales
 admin,menu.mcp_tokens,,ru-RU,"MCP tokens","Токены MCP",0,"Токены MCP"
 admin,menu.phpinfo,,ru-RU,PHPinfo,PHPinfo,0,PHPinfo
 admin,menu.resource_tree,,ru-RU,"Website structure","Структура сайта",0,"Структура сайта"

@@ -80,6 +80,7 @@ admin,menu.custom_menu,,it-IT,"Custom menu","Menu personalizzato",0,"Menu person
 admin,menu.email_outbox,,it-IT,"Email outbox","Posta in uscita email",0,"Posta in uscita email"
 admin,menu.home,,it-IT,"Admin home","Home amministrazione",0,"Home amministrazione"
 admin,menu.import_export,,it-IT,"Import / Export","Importa / Esporta",0,"Importa / Esporta"
+admin,menu.locales,,it-IT,Locales,Locales,0,Locales
 admin,menu.mcp_tokens,,it-IT,"MCP tokens","Token MCP",0,"Token MCP"
 admin,menu.phpinfo,,it-IT,PHPinfo,PHPinfo,0,PHPinfo
 admin,menu.resource_tree,,it-IT,"Website structure","Struttura sito web",0,"Struttura sito web"

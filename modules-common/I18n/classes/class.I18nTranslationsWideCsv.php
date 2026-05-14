@@ -50,6 +50,7 @@ final class I18nTranslationsWideCsv
 			$sourceText = (string) ($row['source_text'] ?? '');
 			$locale = (string) ($row['locale'] ?? '');
 			$text = (string) ($row['text'] ?? '');
+			$allowSourceMatch = ((string) ($row['allow_source_match'] ?? '')) === '1' ? '1' : '0';
 			$locale = LocaleService::tryCanonicalize($locale) ?? $locale;
 
 			if ($locale === '') {
@@ -66,11 +67,13 @@ final class I18nTranslationsWideCsv
 					'context' => $context,
 					'source_text' => $sourceText,
 					'texts' => [],
+					'allow_source_matches' => [],
 				];
 			}
 
 			$grouped[$groupKey]['source_text'] = $sourceText;
 			$grouped[$groupKey]['texts'][$locale] = $text;
+			$grouped[$groupKey]['allow_source_matches'][$locale] = $allowSourceMatch;
 		}
 
 		$localeColumns = array_keys($locales);
@@ -80,6 +83,10 @@ final class I18nTranslationsWideCsv
 
 		foreach ($localeColumns as $locale) {
 			$headers[] = 'text:' . $locale;
+		}
+
+		foreach ($localeColumns as $locale) {
+			$headers[] = 'allow_source_match:' . $locale;
 		}
 
 		$buf = fopen('php://temp', 'r+');
@@ -98,6 +105,10 @@ final class I18nTranslationsWideCsv
 				$line[] = (string) ($row['texts'][$locale] ?? '');
 			}
 
+			foreach ($localeColumns as $locale) {
+				$line[] = (string) ($row['allow_source_matches'][$locale] ?? '0');
+			}
+
 			fputcsv($buf, $line, ',', '"', '');
 		}
 
@@ -110,7 +121,7 @@ final class I18nTranslationsWideCsv
 
 	/**
 	 * Convert a wide i18n CSV into the canonical normalized CSV shape:
-	 * domain,key,context,locale,source_text,expected_text,human_reviewed,text
+	 * domain,key,context,locale,source_text,expected_text,human_reviewed,allow_source_match,text
 	 *
 	 * Empty translation cells are skipped.
 	 *
@@ -144,6 +155,7 @@ final class I18nTranslationsWideCsv
 		}
 
 		$localeColumns = [];
+		$allowSourceMatchColumns = [];
 
 		foreach ($headers as $header) {
 			if (str_starts_with($header, 'text:')) {
@@ -165,6 +177,26 @@ final class I18nTranslationsWideCsv
 				continue;
 			}
 
+			if (str_starts_with($header, 'allow_source_match:')) {
+				$locale = LocaleService::tryCanonicalize(substr($header, 19)) ?? trim(substr($header, 19));
+
+				if ($locale === '') {
+					$errors[] = 'Wide CSV contains an empty allow_source_match locale column name';
+
+					continue;
+				}
+
+				if (!LocaleRegistry::isKnownLocale($locale)) {
+					$errors[] = "Wide CSV contains unsupported locale column: allow_source_match:{$locale}";
+
+					continue;
+				}
+
+				$allowSourceMatchColumns[$locale] = $header;
+
+				continue;
+			}
+
 			if (!in_array($header, $required, true)) {
 				$errors[] = "Unknown column: {$header}";
 			}
@@ -182,7 +214,7 @@ final class I18nTranslationsWideCsv
 
 		$buf = fopen('php://temp', 'r+');
 		fwrite($buf, self::_BOM);
-		fputcsv($buf, ['domain', 'key', 'context', 'locale', 'source_text', 'expected_text', 'human_reviewed', 'text'], ',', '"', '');
+		fputcsv($buf, I18nCsvSchema::NORMALIZED_HEADER, ',', '"', '');
 
 		$lineNumber = 1;
 
@@ -214,6 +246,7 @@ final class I18nTranslationsWideCsv
 					(string) ($row['source_text'] ?? ''),
 					'',
 					'',
+					(string) ($row[$allowSourceMatchColumns[$locale] ?? ''] ?? ''),
 					$text,
 				], ',', '"', '');
 			}

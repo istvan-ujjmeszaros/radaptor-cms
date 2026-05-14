@@ -1,682 +1,684 @@
-﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
-admin,email_outbox.col.created_at,,fr-FR,Created,Created,0,Created
-admin,email_outbox.col.id,,fr-FR,ID,ID,0,ID
-admin,email_outbox.col.last_error,,fr-FR,"Last error","Last error",0,"Last error"
-admin,email_outbox.col.recipients,,fr-FR,Recipients,Recipients,0,Recipients
-admin,email_outbox.col.sent_at,,fr-FR,Sent,Sent,0,Sent
-admin,email_outbox.col.status,,fr-FR,Status,Statut,0,Statut
-admin,email_outbox.col.subject,,fr-FR,Subject,Sujet,0,Sujet
-admin,email_outbox.description,,fr-FR,"Read-only transactional email delivery history.","Historique en lecture seule des envois d'emails transactionnels.",0,"Historique en lecture seule des envois d'emails transactionnels."
-admin,email_outbox.failures.title,,fr-FR,"Recent dead letters","Échecs récents non livrés",0,"Échecs récents non livrés"
-admin,email_outbox.filters.apply,,fr-FR,"Apply filters","Apply filters",0,"Apply filters"
-admin,email_outbox.filters.reset,,fr-FR,Reset,Reset,0,Reset
-admin,email_outbox.filters.search,,fr-FR,Search,Rechercher,0,Rechercher
-admin,email_outbox.filters.search_placeholder,,fr-FR,"Subject, message UID, or recipient email","Objet, UID du message ou email du destinataire",0,"Objet, UID du message ou email du destinataire"
-admin,email_outbox.filters.status,,fr-FR,Status,Statut,0,Statut
-admin,email_outbox.filters.title,,fr-FR,Filters,Filters,0,Filters
-admin,email_outbox.list.title,,fr-FR,"Recent outbox entries","Entrées récentes de la boîte d'envoi",0,"Entrées récentes de la boîte d'envoi"
-admin,email_outbox.none,,fr-FR,"No emails match the current filter.","Aucun email ne correspond au filtre actuel.",0,"Aucun email ne correspond au filtre actuel."
-admin,email_outbox.pagination.page,,fr-FR,Page,Page,0,Page
-admin,email_outbox.status.all,,fr-FR,"All statuses","All statuses",0,"All statuses"
-admin,email_outbox.status.failed,,fr-FR,Failed,Failed,0,Failed
-admin,email_outbox.status.partial_failed,,fr-FR,"Partial failed","Partial failed",0,"Partial failed"
-admin,email_outbox.status.processing,,fr-FR,Processing,Processing,0,Processing
-admin,email_outbox.status.queued,,fr-FR,Queued,Queued,0,Queued
-admin,email_outbox.status.sent,,fr-FR,Sent,Sent,0,Sent
-admin,email_outbox.summary.title,,fr-FR,"Queue summary","Queue summary",0,"Queue summary"
-admin,email_outbox.title,,fr-FR,"Email outbox","Boîte d’envoi email",0,"Boîte d’envoi email"
-admin,email_queue.dead_letter,,fr-FR,"Dead letter","Dead letter",0,"Dead letter"
-admin,email_queue.empty,,fr-FR,"No email jobs are waiting right now.","Aucune tâche email n'est en attente pour le moment.",0,"Aucune tâche email n'est en attente pour le moment."
-admin,email_queue.last_processed,,fr-FR,"Last processed","Last processed",0,"Last processed"
-admin,email_queue.last_seen,,fr-FR,"Last seen","Last seen",0,"Last seen"
-admin,email_queue.open_outbox,,fr-FR,"Open email outbox","Ouvrir la boîte d'envoi email",0,"Ouvrir la boîte d'envoi email"
-admin,email_queue.pending,,fr-FR,Pending,Pending,0,Pending
-admin,email_queue.retry_wait,,fr-FR,"Retry wait","Retry wait",0,"Retry wait"
-admin,email_queue.sent_last_24h,,fr-FR,"Sent in last 24h","Sent in last 24h",0,"Sent in last 24h"
-admin,email_queue.status.never_seen,,fr-FR,"Never seen","Never seen",0,"Never seen"
-admin,email_queue.status.running,,fr-FR,Running,Running,0,Running
-admin,email_queue.status.stale,,fr-FR,Stale,Obsolète,0,Obsolète
-admin,email_queue.status.unavailable,,fr-FR,Unavailable,Unavailable,0,Unavailable
-admin,email_queue.subtitle,,fr-FR,"Transactional delivery health at a glance.","État de livraison transactionnelle en un coup d'œil.",0,"État de livraison transactionnelle en un coup d'œil."
-admin,email_queue.title,,fr-FR,"Email queue","File d’attente email",0,"File d’attente email"
-admin,email_queue.worker,,fr-FR,Worker,Worker,0,Worker
-admin,i18n.col.domain,,fr-FR,Domain,Domaine,0,Domaine
-admin,i18n.col.key,,fr-FR,Key,Clé,0,Clé
-admin,i18n.col.reviewed,,fr-FR,Reviewed,Révisé,0,Révisé
-admin,i18n.col.source,,fr-FR,Source,Source,0,Source
-admin,i18n.col.status,,fr-FR,Status,Statut,0,Statut
-admin,i18n.col.translation,,fr-FR,Translation,Traduction,0,Traduction
-admin,i18n.coverage.missing,,fr-FR,Missing,Manquant,0,Manquant
-admin,i18n.coverage.reviewed,,fr-FR,Reviewed,Révisé,0,Révisé
-admin,i18n.coverage.stale,,fr-FR,Stale,Obsolète,0,Obsolète
-admin,i18n.coverage.title,,fr-FR,"Translation coverage","Couverture de traduction",0,"Couverture de traduction"
-admin,i18n.coverage.translated,,fr-FR,Translated,Traduit,0,Traduit
-admin,i18n.domain,,fr-FR,Domain,Domaine,0,Domaine
-admin,i18n.locale,,fr-FR,Locale,Langue,0,Langue
-admin,i18n.search_placeholder,,fr-FR,"Search source or translation","Rechercher dans la source ou la traduction",0,"Rechercher dans la source ou la traduction"
-admin,i18n.status,,fr-FR,Status,Statut,0,Statut
-admin,i18n.status.ai_generated,,fr-FR,AI-generated,"Généré par IA",0,"Généré par IA"
-admin,i18n.status.approved,,fr-FR,Approved,Approuvé,0,Approuvé
-admin,i18n.status.missing,,fr-FR,Missing,Manquant,0,Manquant
-admin,i18n.status.needs_review,,fr-FR,"Needs review","À réviser",0,"À réviser"
-admin,i18n.status.translated,,fr-FR,Translated,Traduit,0,Traduit
-admin,i18n.title,,fr-FR,"Translation workbench","Atelier de traduction",0,"Atelier de traduction"
-admin,i18n.tm.exact_match_only,,fr-FR,"Exact-match suggestions only","Suggestions de correspondances exactes uniquement",0,"Suggestions de correspondances exactes uniquement"
-admin,i18n.tm.exact_matches,,fr-FR,"Exact matches","Correspondances exactes",0,"Correspondances exactes"
-admin,i18n.tm.exact_then_similar,,fr-FR,"Exact matches load first. Similar matches load afterwards.","Les correspondances exactes se chargent en premier. Les correspondances similaires se chargent ensuite.",0,"Les correspondances exactes se chargent en premier. Les correspondances similaires se chargent ensuite."
-admin,i18n.tm.no_exact_matches,,fr-FR,"No exact matches","Aucune correspondance exacte",0,"Aucune correspondance exacte"
-admin,i18n.tm.no_similar_matches,,fr-FR,"No similar matches","Aucune correspondance similaire",0,"Aucune correspondance similaire"
-admin,i18n.tm.origin,,fr-FR,Origin,Origine,0,Origine
-admin,i18n.tm.review_placeholders,,fr-FR,"Review placeholders","Vérifier les espaces réservés",0,"Vérifier les espaces réservés"
-admin,i18n.tm.safe,,fr-FR,Safe,Sûr,0,Sûr
-admin,i18n.tm.similar_matches,,fr-FR,"Similar matches","Correspondances similaires",0,"Correspondances similaires"
-admin,i18n.tm.similarity,,fr-FR,Similarity,Similarité,0,Similarité
-admin,i18n.tm.source_example,,fr-FR,"Source example","Exemple de source",0,"Exemple de source"
-admin,i18n.tm.title,,fr-FR,"Translation memory suggestions","Suggestions de mémoire de traduction",0,"Suggestions de mémoire de traduction"
-admin,menu.admin_menu,,fr-FR,"Admin menu","Menu admin",0,"Menu admin"
-admin,menu.blog,,fr-FR,Blog,Blog,0,Blog
-admin,menu.cli_runner,,fr-FR,"CLI Runner","Exécuteur CLI",0,"Exécuteur CLI"
-admin,menu.custom_menu,,fr-FR,"Custom menu","Menu personnalisé",0,"Menu personnalisé"
-admin,menu.email_outbox,,fr-FR,"Email outbox","Boîte d’envoi email",0,"Boîte d’envoi email"
-admin,menu.home,,fr-FR,"Admin home","Accueil admin",0,"Accueil admin"
-admin,menu.import_export,,fr-FR,"Import / Export","Importation / Exportation",0,"Importation / Exportation"
-admin,menu.locales,,fr-FR,Locales,Locales,0,Locales
-admin,menu.mcp_tokens,,fr-FR,"MCP tokens","Jetons MCP",0,"Jetons MCP"
-admin,menu.phpinfo,,fr-FR,PHPinfo,"Informations PHP",0,"Informations PHP"
-admin,menu.resource_tree,,fr-FR,"Website structure","Structure du site web",0,"Structure du site web"
-admin,menu.roles,,fr-FR,Roles,Rôles,0,Rôles
-admin,menu.runtime_diagnostics,,fr-FR,"Runtime diagnostics","Diagnostics d’exécution",0,"Diagnostics d’exécution"
-admin,menu.section.administration,,fr-FR,Administration,Administration,0,Administration
-admin,menu.section.configuration,,fr-FR,Configuration,Configuration,0,Configuration
-admin,menu.section.content,,fr-FR,Content,Contenu,0,Contenu
-admin,menu.section.developer_tools,,fr-FR,"Developer tools","Outils développeur",0,"Outils développeur"
-admin,menu.template_engines,,fr-FR,"Template engines","Moteurs de modèles",0,"Moteurs de modèles"
-admin,menu.theme_selector,,fr-FR,"Theme selection","Sélection du thème",0,"Sélection du thème"
-admin,menu.translations,,fr-FR,Translations,Traductions,0,Traductions
-admin,menu.usergroups,,fr-FR,"User groups","Groupes d'utilisateurs",0,"Groupes d'utilisateurs"
-admin,menu.widget_preview,,fr-FR,"Widget preview","Aperçu du widget",0,"Aperçu du widget"
-cms,admin_dropdown.edit_mode,,fr-FR,"Edit mode","Mode édition",0,"Mode édition"
-cms,admin_dropdown.edit_mode_off,,fr-FR,off,désactivé,0,désactivé
-cms,admin_dropdown.edit_mode_on,,fr-FR,on,activé,0,activé
-cms,admin_dropdown.seo,,fr-FR,SEO,SEO,0,SEO
-cms,admin_dropdown.turn_edit_mode_off,,fr-FR,"Turn edit mode off","Désactiver le mode édition",0,"Désactiver le mode édition"
-cms,admin_dropdown.turn_edit_mode_on,,fr-FR,"Turn edit mode on","Activer le mode édition",0,"Activer le mode édition"
-cms,admin_menu.form.name,,fr-FR,"Admin menu administration","Administration du menu admin",0,"Administration du menu admin"
-cms,admin_menu.form.title_create,,fr-FR,"Create admin menu item","Créer un élément de menu admin",0,"Créer un élément de menu admin"
-cms,admin_menu.form.title_edit,,fr-FR,"Edit admin menu item","Modifier l'élément du menu admin",0,"Modifier l'élément du menu admin"
-cms,edit,,fr-FR,Edit,Modifier,0,Modifier
-cms,edit_mode.disabled,,fr-FR,"Edit mode disabled","Mode édition désactivé",0,"Mode édition désactivé"
-cms,edit_mode.enabled,,fr-FR,"Edit mode enabled","Mode édition activé",0,"Mode édition activé"
-cms,edit_mode.save_error,,fr-FR,"Error: Unable to save configuration","Erreur : Impossible d'enregistrer la configuration",0,"Erreur : Impossible d'enregistrer la configuration"
-cms,error.login_page_missing,,fr-FR,"Login page not found - create it manually","Page de connexion introuvable - créez-la manuellement",0,"Page de connexion introuvable - créez-la manuellement"
-cms,file.missing_ref_id,,fr-FR,"Missing file reference","Référence de fichier manquante",0,"Référence de fichier manquante"
-cms,file.upload_error,,fr-FR,"Error: File upload failed","Erreur : Échec du téléversement du fichier",0,"Erreur : Échec du téléversement du fichier"
-cms,file.uploaded,,fr-FR,"File uploaded","Fichier téléversé",0,"Fichier téléversé"
-cms,file_upload.destination_path,,fr-FR,"Destination path","Chemin de destination",0,"Chemin de destination"
-cms,file_upload.unknown_destination,,fr-FR,"Unknown destination path","Chemin de destination inconnu",0,"Chemin de destination inconnu"
-cms,form.field.form_id.explanation,,fr-FR,"Select from the predefined forms","Sélectionner parmi les formulaires prédéfinis",0,"Sélectionner parmi les formulaires prédéfinis"
-cms,form.field.form_id.label,,fr-FR,Form,Formulaire,0,Formulaire
-cms,form.missing_widget_id,,fr-FR,"Widget ID is missing","L'ID du widget est manquant",0,"L'ID du widget est manquant"
-cms,form.no_form_page_warning,,fr-FR,"Create at least one page with a blank form","Créer au moins une page avec un formulaire vide",0,"Créer au moins une page avec un formulaire vide"
-cms,form.no_id,,fr-FR,"No form ID given","Aucun ID de formulaire fourni",0,"Aucun ID de formulaire fourni"
-cms,form.settings_subtitle,,fr-FR,"Page: {page}","Page : {page}",0,"Page : {page}"
-cms,library.folder,,fr-FR,Folder,Dossier,0,Dossier
-cms,library.resource,,fr-FR,Resource,Ressource,0,Ressource
-cms,library.unknown,,fr-FR,"Unknown library","Bibliothèque inconnue",0,"Bibliothèque inconnue"
-cms,menu.delete_confirm,,fr-FR,"Are you sure you want to delete this menu item?","Êtes-vous sûr de vouloir supprimer cet élément de menu ?",0,"Êtes-vous sûr de vouloir supprimer cet élément de menu ?"
-cms,menu.delete_failed,,fr-FR,"Delete failed","Échec de la suppression",0,"Échec de la suppression"
-cms,menu.delete_forbidden,,fr-FR,"Menu item deletion is not allowed: {name}","La suppression de l'élément de menu n'est pas autorisée : {name}",0,"La suppression de l'élément de menu n'est pas autorisée : {name}"
-cms,menu.delete_unknown_error,,fr-FR,"Error: An unknown error occurred while deleting the menu item","Erreur : Une erreur inconnue s'est produite lors de la suppression de l'élément de menu",0,"Erreur : Une erreur inconnue s'est produite lors de la suppression de l'élément de menu"
-cms,menu.deleted,,fr-FR,"Menu item deleted: {name}","Élément de menu supprimé : {name}",0,"Élément de menu supprimé : {name}"
-cms,menu.external_link,,fr-FR,"External link","Lien externe",0,"Lien externe"
-cms,menu.field.node_name.label,,fr-FR,"Display text","Texte affiché",0,"Texte affiché"
-cms,menu.field.page.explanation,,fr-FR,"Select the page this menu item points to","Sélectionner la page vers laquelle pointe cet élément de menu",0,"Sélectionner la page vers laquelle pointe cet élément de menu"
-cms,menu.field.page.label,,fr-FR,Page,Page,0,Page
-cms,menu.field.type.external,,fr-FR,"Points to external page","Pointe vers une page externe",0,"Pointe vers une page externe"
-cms,menu.field.type.internal,,fr-FR,"Points to internal page","Pointe vers une page interne",0,"Pointe vers une page interne"
-cms,menu.field.type.label,,fr-FR,"Link type","Type de lien",0,"Type de lien"
-cms,menu.field.url.explanation,,fr-FR,"You can enter a custom URL (including mailto:// links)","Vous pouvez saisir une URL personnalisée (y compris les liens mailto://)",0,"Vous pouvez saisir une URL personnalisée (y compris les liens mailto://)"
-cms,menu.field.url.label,,fr-FR,"Custom URL","URL personnalisée",0,"URL personnalisée"
-cms,menu.form.name,,fr-FR,"Main menu item","Élément du menu principal",0,"Élément du menu principal"
-cms,menu.form.title_create,,fr-FR,"Create menu item","Créer un élément de menu",0,"Créer un élément de menu"
-cms,menu.form.title_edit,,fr-FR,"Edit menu item","Modifier l'élément de menu",0,"Modifier l'élément de menu"
-cms,menu.internal_link,,fr-FR,"Internal link","Lien interne",0,"Lien interne"
-cms,menu.move_error,,fr-FR,"Error: Unable to move menu item","Erreur : Impossible de déplacer l'élément de menu",0,"Erreur : Impossible de déplacer l'élément de menu"
-cms,menu.move_success,,fr-FR,"Menu item moved: {name}","Élément de menu déplacé : {name}",0,"Élément de menu déplacé : {name}"
-cms,menu.new_child,,fr-FR,"New submenu item","Nouvel élément de sous-menu",0,"Nouvel élément de sous-menu"
-cms,menu.new_item,,fr-FR,"New menu item","Nouvel élément de menu",0,"Nouvel élément de menu"
-cms,menu.no_link_configured,,fr-FR,"No link configured","Aucun lien configuré",0,"Aucun lien configuré"
-cms,menu.root,,fr-FR,"Main menu","Menu principal",0,"Menu principal"
-cms,menu.saved,,fr-FR,"Menu item saved","Élément de menu enregistré",0,"Élément de menu enregistré"
-cms,menu.selection_help,,fr-FR,"Select a menu item to edit it, or create a new one.","Sélectionnez un élément de menu pour le modifier, ou créez-en un nouveau.",0,"Sélectionnez un élément de menu pour le modifier, ou créez-en un nouveau."
-cms,menu.updated,,fr-FR,"Menu item updated","Élément de menu mis à jour",0,"Élément de menu mis à jour"
-cms,menu.validation.node_name_max_length,,fr-FR,"Display text must not exceed 255 characters","Le texte affiché ne doit pas dépasser 255 caractères",0,"Le texte affiché ne doit pas dépasser 255 caractères"
-cms,menu.validation.type_required,,fr-FR,"Choose whether the link points to an internal or external page","Choisissez si le lien pointe vers une page interne ou externe",0,"Choisissez si le lien pointe vers une page interne ou externe"
-cms,menu.validation.url_max_length,,fr-FR,"URL must not exceed 255 characters","L'URL ne doit pas dépasser 255 caractères",0,"L'URL ne doit pas dépasser 255 caractères"
-cms,menu.validation.url_required,,fr-FR,"Select a page or enter a URL","Sélectionnez une page ou saisissez une URL",0,"Sélectionnez une page ou saisissez une URL"
-cms,plainhtml.field.content.explanation,,fr-FR,"The HTML code you enter will appear on the website without modifications.","Le code HTML que vous saisissez apparaîtra sur le site web sans modifications.",0,"Le code HTML que vous saisissez apparaîtra sur le site web sans modifications."
-cms,plainhtml.field.content.label,,fr-FR,"HTML code","Code HTML",0,"Code HTML"
-cms,plainhtml.form.name,,fr-FR,"HTML code (embed)","Code HTML (intégration)",0,"Code HTML (intégration)"
-cms,plainhtml.form.title,,fr-FR,"Edit HTML content","Modifier le contenu HTML",0,"Modifier le contenu HTML"
-cms,plainhtml.not_set,,fr-FR,"Configure the content","Configurer le contenu",0,"Configurer le contenu"
-cms,resource.delete_error,,fr-FR,"Error: Unable to delete resource(s)","Erreur : Impossible de supprimer la/les ressource(s)",0,"Erreur : Impossible de supprimer la/les ressource(s)"
-cms,resource.delete_failed,,fr-FR,"Delete failed","Échec de la suppression",0,"Échec de la suppression"
-cms,resource.delete_partial_error,,fr-FR,"{count} error(s) occurred during deletion","{count} erreur(s) survenue(s) lors de la suppression",0,"{count} erreur(s) survenue(s) lors de la suppression"
-cms,resource.deleted,,fr-FR,"Resource deleted","Ressource supprimée",0,"Ressource supprimée"
-cms,resource.deleted_multiple,,fr-FR,"Resources deleted","Ressources supprimées",0,"Ressources supprimées"
-cms,resource.error.add_failed,,fr-FR,"Unable to add resource tree entry.","Impossible d’ajouter l’entrée de l’arborescence des ressources.",0,"Impossible d’ajouter l’entrée de l’arborescence des ressources."
-cms,resource.error.create_failed_for_path,,fr-FR,"Unable to create resource: {path}","Impossible de créer la ressource : {path}",0,"Impossible de créer la ressource : {path}"
-cms,resource.error.delete_denied,,fr-FR,"Delete denied for resource: {resource_id}","Suppression refusée pour la ressource : {resource_id}",0,"Suppression refusée pour la ressource : {resource_id}"
-cms,resource.error.delete_failed_for_id,,fr-FR,"Unable to delete resource: {resource_id}","Impossible de supprimer la ressource : {resource_id}",0,"Impossible de supprimer la ressource : {resource_id}"
-cms,resource.error.file_delete_failed_for_id,,fr-FR,"Unable to delete file for resource: {resource_id}","Impossible de supprimer le fichier de la ressource : {resource_id}",0,"Impossible de supprimer le fichier de la ressource : {resource_id}"
-cms,resource.error.import_file_failed,,fr-FR,"Unable to import file: {path}","Impossible d’importer le fichier : {path}",0,"Impossible d’importer le fichier : {path}"
-cms,resource.error.move_failed_for_id,,fr-FR,"Unable to move resource: {resource_id}","Impossible de déplacer la ressource : {resource_id}",0,"Impossible de déplacer la ressource : {resource_id}"
-cms,resource.error.not_found_by_id,,fr-FR,"Resource not found: {resource_id}","Ressource introuvable : {resource_id}",0,"Ressource introuvable : {resource_id}"
-cms,resource.error.path_exists_not_file,,fr-FR,"Resource path exists and is not a file: {path}","Le chemin de ressource existe et n’est pas un fichier : {path}",0,"Le chemin de ressource existe et n’est pas un fichier : {path}"
-cms,resource.error.protected_mutation,,fr-FR,"Protected system resource cannot be modified: {path}","La ressource système protégée ne peut pas être modifiée : {path}",0,"La ressource système protégée ne peut pas être modifiée : {path}"
-cms,resource.error.protected_path_mutation,,fr-FR,"Protected system resource path cannot be created or modified: {path}","Le chemin de ressource système protégé ne peut pas être créé ou modifié : {path}",0,"Le chemin de ressource système protégé ne peut pas être créé ou modifié : {path}"
-cms,resource.error.protected_subtree_mutation,,fr-FR,"A protected system resource in this subtree cannot be modified: {path}","Une ressource système protégée de ce sous-arbre ne peut pas être modifiée : {path}",0,"Une ressource système protégée de ce sous-arbre ne peut pas être modifiée : {path}"
-cms,resource.error.target_folder_not_found,,fr-FR,"Target folder not found after creation: {path}","Dossier cible introuvable après création : {path}",0,"Dossier cible introuvable après création : {path}"
-cms,resource.error.update_failed_for_path,,fr-FR,"Unable to update resource: {path}","Impossible de mettre à jour la ressource : {path}",0,"Impossible de mettre à jour la ressource : {path}"
-cms,resource.folder_count,,fr-FR,"{count} folder(s)","{count} dossier(s)",0,"{count} dossier(s)"
-cms,resource.move_error,,fr-FR,"Error: Unable to move resource","Erreur : Impossible de déplacer la ressource",0,"Erreur : Impossible de déplacer la ressource"
-cms,resource.move_failed,,fr-FR,"Move failed","Échec du déplacement",0,"Échec du déplacement"
-cms,resource.moved,,fr-FR,"Resource moved","Ressource déplacée",0,"Ressource déplacée"
-cms,resource.page_count,,fr-FR,"{count} page(s)","{count} page(s)",0,"{count} page(s)"
-cms,resource.renamed,,fr-FR,Renamed,Renommé,0,Renommé
-cms,resource.view_forbidden,,fr-FR,"403 - You do not have permission to view this content!","403 - Vous n'avez pas la permission d'afficher ce contenu !",0,"403 - Vous n'avez pas la permission d'afficher ce contenu !"
-cms,resource_acl.acl_not_found,,fr-FR,"ACL entry not found: {id}","Entrée ACL introuvable : {id}",0,"Entrée ACL introuvable : {id}"
-cms,resource_acl.assign,,fr-FR,Assign,Affecter,0,Affecter
-cms,resource_acl.deleted,,fr-FR,"Assignment removed.","Affectation supprimée.",0,"Affectation supprimée."
-cms,resource_acl.error_ambiguous_subject,,fr-FR,"The name {name} matches both a user and a user group. Select the correct type from the list.","Le nom {name} correspond à la fois à un utilisateur et à un groupe d'utilisateurs. Sélectionnez le type correct dans la liste.",0,"Le nom {name} correspond à la fois à un utilisateur et à un groupe d'utilisateurs. Sélectionnez le type correct dans la liste."
-cms,resource_acl.error_ambiguous_subject_short,,fr-FR,"Ambiguous assignment","Affectation ambiguë",0,"Affectation ambiguë"
-cms,resource_acl.error_delete,,fr-FR,"Error: Unable to remove assignment.","Erreur : Impossible de supprimer l'affectation.",0,"Erreur : Impossible de supprimer l'affectation."
-cms,resource_acl.error_missing_resource_id,,fr-FR,"Resource ID is missing","L'ID de la ressource est manquant",0,"L'ID de la ressource est manquant"
-cms,resource_acl.error_save,,fr-FR,"Error: Unable to save access settings.","Erreur : Impossible d'enregistrer les paramètres d'accès.",0,"Erreur : Impossible d'enregistrer les paramètres d'accès."
-cms,resource_acl.error_subject_not_found,,fr-FR,"No user or user group found with the name {name}","Aucun utilisateur ou groupe d'utilisateurs trouvé avec le nom {name}",0,"Aucun utilisateur ou groupe d'utilisateurs trouvé avec le nom {name}"
-cms,resource_acl.error_subject_not_found_short,,fr-FR,"No matching subject found","Aucun sujet correspondant trouvé",0,"Aucun sujet correspondant trouvé"
-cms,resource_acl.inherit_help,,fr-FR,"When inheritance is enabled, the parent folder's permissions also apply to this resource.","Lorsque l'héritage est activé, les permissions du dossier parent s'appliquent également à cette ressource.",0,"Lorsque l'héritage est activé, les permissions du dossier parent s'appliquent également à cette ressource."
-cms,resource_acl.inherit_label,,fr-FR,"Inherit permissions from parent folder","Hériter les permissions du dossier parent",0,"Hériter les permissions du dossier parent"
-cms,resource_acl.inherited_title,,fr-FR,"Inherited permissions","Permissions héritées",0,"Permissions héritées"
-cms,resource_acl.new_assignment,,fr-FR,"New assignment:","Nouvelle affectation :",0,"Nouvelle affectation :"
-cms,resource_acl.permission.create,,fr-FR,Create,Créer,0,Créer
-cms,resource_acl.permission.delete,,fr-FR,Delete,Supprimer,0,Supprimer
-cms,resource_acl.permission.edit,,fr-FR,Edit,Modifier,0,Modifier
-cms,resource_acl.permission.list,,fr-FR,List,Liste,0,Liste
-cms,resource_acl.permission.view,,fr-FR,View,Voir,0,Voir
-cms,resource_acl.resource_not_found,,fr-FR,"Resource not found: {id}","Ressource introuvable : {id}",0,"Ressource introuvable : {id}"
-cms,resource_acl.search_placeholder,,fr-FR,"Search for user or group...","Rechercher un utilisateur ou un groupe...",0,"Rechercher un utilisateur ou un groupe..."
-cms,resource_acl.specific_help,,fr-FR,"Specific permissions always apply, regardless of the inheritance setting.","Les permissions spécifiques s'appliquent toujours, quel que soit le paramètre d'héritage.",0,"Les permissions spécifiques s'appliquent toujours, quel que soit le paramètre d'héritage."
-cms,resource_acl.specific_title,,fr-FR,"Specific permissions","Permissions spécifiques",0,"Permissions spécifiques"
-cms,resource_acl.subject,,fr-FR,Subject,Sujet,0,Sujet
-cms,resource_acl.title,,fr-FR,Access,Accès,0,Accès
-cms,resource_acl.unknown_subject_type,,fr-FR,"Unknown ACL subject type: {type}","Type de sujet ACL inconnu : {type}",0,"Type de sujet ACL inconnu : {type}"
-cms,resource_acl.unknown_type,,fr-FR,"Unknown ACL list type: {type}","Type de liste ACL inconnu : {type}",0,"Type de liste ACL inconnu : {type}"
-cms,resource_acl.usergroup_assignment.added,,fr-FR,"User group assigned to resource:<br>{group} -> {target}","Groupe d'utilisateurs affecté à la ressource :<br>{group} -> {target}",0,"Groupe d'utilisateurs affecté à la ressource :<br>{group} -> {target}"
-cms,resource_acl.usergroup_assignment.error_add,,fr-FR,"Error: Unable to assign user group to resource:<br>{group} -> {target}","Erreur : Impossible d'affecter le groupe d'utilisateurs à la ressource :<br>{group} -> {target}",0,"Erreur : Impossible d'affecter le groupe d'utilisateurs à la ressource :<br>{group} -> {target}"
-cms,resource_acl.usergroup_assignment.error_add_generic,,fr-FR,"Error: Unable to assign user group to resource.","Erreur : Impossible d'affecter le groupe d'utilisateurs à la ressource.",0,"Erreur : Impossible d'affecter le groupe d'utilisateurs à la ressource."
-cms,resource_acl.usergroup_assignment.error_remove,,fr-FR,"Error: Unable to remove user group from resource:<br>{group} -> {target}","Erreur : Impossible de retirer le groupe d'utilisateurs de la ressource :<br>{group} -> {target}",0,"Erreur : Impossible de retirer le groupe d'utilisateurs de la ressource :<br>{group} -> {target}"
-cms,resource_acl.usergroup_assignment.error_remove_generic,,fr-FR,"Error: Unable to remove user group from resource.","Erreur : Impossible de retirer le groupe d'utilisateurs de la ressource.",0,"Erreur : Impossible de retirer le groupe d'utilisateurs de la ressource."
-cms,resource_acl.usergroup_assignment.removed,,fr-FR,"User group assignment removed:<br>{group} -> {target}","Affectation du groupe d'utilisateurs supprimée :<br>{group} -> {target}",0,"Affectation du groupe d'utilisateurs supprimée :<br>{group} -> {target}"
-cms,resource_browser.create_index_page,,fr-FR,"Create index page!","Créer la page d'index !",0,"Créer la page d'index !"
-cms,resource_browser.delete_file_confirm,,fr-FR,"Are you sure you want to delete this file?","Êtes-vous sûr de vouloir supprimer ce fichier ?",0,"Êtes-vous sûr de vouloir supprimer ce fichier ?"
-cms,resource_browser.delete_folder_confirm,,fr-FR,"Are you sure you want to delete this folder and all its contents?","Êtes-vous sûr de vouloir supprimer ce dossier et tout son contenu ?",0,"Êtes-vous sûr de vouloir supprimer ce dossier et tout son contenu ?"
-cms,resource_browser.delete_invalid_confirm,,fr-FR,"Are you sure you want to delete this invalid entry?","Êtes-vous sûr de vouloir supprimer cette entrée invalide ?",0,"Êtes-vous sûr de vouloir supprimer cette entrée invalide ?"
-cms,resource_browser.delete_webpage_confirm,,fr-FR,"Are you sure you want to delete this webpage?","Êtes-vous sûr de vouloir supprimer cette page web ?",0,"Êtes-vous sûr de vouloir supprimer cette page web ?"
-cms,resource_browser.help_create,,fr-FR,"Create folders and webpages within them.","Créer des dossiers et des pages web à l'intérieur.",0,"Créer des dossiers et des pages web à l'intérieur."
-cms,resource_browser.help_move,,fr-FR,"Drag and drop to move items between folders.","Glissez-déposez pour déplacer des éléments entre dossiers.",0,"Glissez-déposez pour déplacer des éléments entre dossiers."
-cms,resource_browser.insert,,fr-FR,Insert,Insérer,0,Insérer
-cms,resource_browser.invalid_entry,,fr-FR,"Invalid entry","Entrée invalide",0,"Entrée invalide"
-cms,resource_browser.new_domain,,fr-FR,"New domain","Nouveau domaine",0,"Nouveau domaine"
-cms,resource_browser.preview_index_page,,fr-FR,"Preview (index page)","Aperçu (page d'index)",0,"Aperçu (page d'index)"
-cms,resource_browser.root_not_found,,fr-FR,"Root node not found for the resource tree","Nœud racine introuvable pour l'arbre de ressources",0,"Nœud racine introuvable pour l'arbre de ressources"
-cms,resource_browser.select_tree_item,,fr-FR,"Select an item from the tree","Sélectionnez un élément dans l'arbre",0,"Sélectionnez un élément dans l'arbre"
-cms,resource_browser.site_structure,,fr-FR,"Site structure","Structure du site",0,"Structure du site"
-cms,richtext.assigned,,fr-FR,"Text content assigned","Contenu textuel affecté",0,"Contenu textuel affecté"
-cms,richtext.field.content.explanation,,fr-FR,"Format text freely, add images, and embed external content (e.g. YouTube). Use HTML view for embed codes.","Formatez librement le texte, ajoutez des images et intégrez du contenu externe (ex. YouTube). Utilisez la vue HTML pour les codes d'intégration.",0,"Formatez librement le texte, ajoutez des images et intégrez du contenu externe (ex. YouTube). Utilisez la vue HTML pour les codes d'intégration."
-cms,richtext.field.content.label,,fr-FR,Content,Contenu,0,Contenu
-cms,richtext.field.name.explanation,,fr-FR,"Visible in the admin area only. Use this to identify the content when selecting it for display on public pages. Must be unique.","Visible uniquement dans la zone admin. Utilisez ceci pour identifier le contenu lors de sa sélection pour l'affichage sur les pages publiques. Doit être unique.",0,"Visible uniquement dans la zone admin. Utilisez ceci pour identifier le contenu lors de sa sélection pour l'affichage sur les pages publiques. Doit être unique."
-cms,richtext.field.name.label,,fr-FR,"Name (identifier)","Nom (identifiant)",0,"Nom (identifiant)"
-cms,richtext.field.name.unique_error,,fr-FR,"An information content item with this name already exists","Un élément de contenu informatif avec ce nom existe déjà",0,"Un élément de contenu informatif avec ce nom existe déjà"
-cms,richtext.field.title.explanation,,fr-FR,"Appears as a title above the text. Leave empty for no title.","Apparaît comme titre au-dessus du texte. Laissez vide pour aucun titre.",0,"Apparaît comme titre au-dessus du texte. Laissez vide pour aucun titre."
-cms,richtext.field.title.label,,fr-FR,Heading,Titre,0,Titre
-cms,richtext.form.name,,fr-FR,"Text content","Contenu textuel",0,"Contenu textuel"
-cms,richtext.form.title_create,,fr-FR,"Create text content","Créer du contenu textuel",0,"Créer du contenu textuel"
-cms,richtext.form.title_edit,,fr-FR,"Edit text content","Modifier le contenu textuel",0,"Modifier le contenu textuel"
-cms,richtext.not_set,,fr-FR,"No content chosen","Aucun contenu choisi",0,"Aucun contenu choisi"
-cms,richtext.saved,,fr-FR,"Content saved","Contenu enregistré",0,"Contenu enregistré"
-cms,richtext.select.form.title,,fr-FR,"Select text content","Sélectionner le contenu textuel",0,"Sélectionner le contenu textuel"
-cms,richtext.updated,,fr-FR,"Content updated","Contenu mis à jour",0,"Contenu mis à jour"
-cms,richtext.widget.choose,,fr-FR,"Select text content","Sélectionner le contenu textuel",0,"Sélectionner le contenu textuel"
-cms,richtext.widget.create,,fr-FR,"Create text content","Créer du contenu textuel",0,"Créer du contenu textuel"
-cms,richtext.widget.description,,fr-FR,"Freely editable text with images","Texte librement modifiable avec des images",0,"Texte librement modifiable avec des images"
-cms,richtext.widget.edit,,fr-FR,"Edit text content","Modifier le contenu textuel",0,"Modifier le contenu textuel"
-cms,richtext.widget.name,,fr-FR,"Editable text","Texte modifiable",0,"Texte modifiable"
-cms,tree.field.type.explanation,,fr-FR,"Select from the predefined trees","Sélectionner parmi les arbres prédéfinis",0,"Sélectionner parmi les arbres prédéfinis"
-cms,tree.field.type.label,,fr-FR,Tree,Arbre,0,Arbre
-cms,tree.invalid_parent_id,,fr-FR,"Invalid parent ID","ID parent invalide",0,"ID parent invalide"
-cms,tree.missing_type,,fr-FR,"Missing tree type","Type d'arbre manquant",0,"Type d'arbre manquant"
-cms,tree.no_connection_id,,fr-FR,"No widget connection ID given","Aucun ID de connexion de widget fourni",0,"Aucun ID de connexion de widget fourni"
-cms,tree.select_menu_item,,fr-FR,"Select a menu item from the tree","Sélectionnez un élément de menu dans l'arbre",0,"Sélectionnez un élément de menu dans l'arbre"
-cms,tree.unknown_type,,fr-FR,"Unknown tree item type: {type}","Type d'élément d'arbre inconnu : {type}",0,"Type d'élément d'arbre inconnu : {type}"
-cms,webpage.create_for_params,,fr-FR,"Create a webpage for the following parameters: <br>{param_name}, {param_value}","Créer une page web pour les paramètres suivants : <br>{param_name}, {param_value}",0,"Créer une page web pour les paramètres suivants : <br>{param_name}, {param_value}"
-cms,webpage.create_for_widget,,fr-FR,"Create a webpage with the following content: <br><b>{widget}</b>","Créer une page web avec le contenu suivant : <br><b>{widget}</b>",0,"Créer une page web avec le contenu suivant : <br><b>{widget}</b>"
-cms,webpage.field.layout.explanation,,fr-FR,"The webpage layout structure determines where content elements can be placed on the page.","La structure de mise en page de la page web détermine où les éléments de contenu peuvent être placés sur la page.",0,"La structure de mise en page de la page web détermine où les éléments de contenu peuvent être placés sur la page."
-cms,webpage.field.layout.label,,fr-FR,"Page type","Type de page",0,"Type de page"
-cms,webpage_domain.field.resource_name.explanation,,fr-FR,"Set this domain name in the DOMAIN_CONTEXT configuration so this domain and its child pages become active.","Définissez ce nom de domaine dans la configuration DOMAIN_CONTEXT pour que ce domaine et ses pages enfants deviennent actifs.",0,"Définissez ce nom de domaine dans la configuration DOMAIN_CONTEXT pour que ce domaine et ses pages enfants deviennent actifs."
-cms,webpage_domain.field.resource_name.label,,fr-FR,"Domain name","Nom de domaine",0,"Nom de domaine"
-cms,webpage_domain.title_create,,fr-FR,"Add new domain","Ajouter un nouveau domaine",0,"Ajouter un nouveau domaine"
-cms,webpage_domain.title_edit,,fr-FR,"Edit domain","Modifier le domaine",0,"Modifier le domaine"
-cms,webpage_file.field.resource_name.explanation,,fr-FR,"This is the file name used in the URL. Avoid accented characters and spaces, and keep the correct file extension.","C'est le nom de fichier utilisé dans l'URL. Évitez les caractères accentués et les espaces, et conservez la bonne extension de fichier.",0,"C'est le nom de fichier utilisé dans l'URL. Évitez les caractères accentués et les espaces, et conservez la bonne extension de fichier."
-cms,webpage_file.field.resource_name.label,,fr-FR,"SEO-friendly URL name","Nom d'URL convivial pour le SEO",0,"Nom d'URL convivial pour le SEO"
-cms,webpage_file.field.text.explanation,,fr-FR,"For images this may appear as a longer description below the title.","Pour les images, cela peut apparaître comme une description plus longue sous le titre.",0,"Pour les images, cela peut apparaître comme une description plus longue sous le titre."
-cms,webpage_file.field.text.label,,fr-FR,Description,Description,0,Description
-cms,webpage_file.field.title.explanation,,fr-FR,"For images this may appear below the image.","Pour les images, cela peut apparaître sous l'image.",0,"Pour les images, cela peut apparaître sous l'image."
-cms,webpage_file.field.title.label,,fr-FR,Title,Titre,0,Titre
-cms,webpage_file.title_edit,,fr-FR,"Edit file name","Modifier le nom du fichier",0,"Modifier le nom du fichier"
-cms,webpage_folder.field.resource_name.explanation,,fr-FR,"This is the real folder name used in the URL. Changing it later may cause visitors from search engines to see a 404 page.","C'est le vrai nom de dossier utilisé dans l'URL. Le modifier ultérieurement peut amener les visiteurs des moteurs de recherche à voir une page 404.",0,"C'est le vrai nom de dossier utilisé dans l'URL. Le modifier ultérieurement peut amener les visiteurs des moteurs de recherche à voir une page 404."
-cms,webpage_folder.field.resource_name.label,,fr-FR,"SEO-friendly folder URL name","Nom d'URL de dossier convivial pour le SEO",0,"Nom d'URL de dossier convivial pour le SEO"
-cms,webpage_folder.title_create,,fr-FR,"Create new folder","Créer un nouveau dossier",0,"Créer un nouveau dossier"
-cms,webpage_folder.title_edit,,fr-FR,"Edit folder","Modifier le dossier",0,"Modifier le dossier"
-cms,webpage_from_path.subtitle,,fr-FR,"If you want to create this webpage, you can do it here. Before doing so, make sure the URL was not mistyped.","Si vous souhaitez créer cette page web, vous pouvez le faire ici. Avant cela, assurez-vous que l'URL n'a pas été mal saisie.",0,"Si vous souhaitez créer cette page web, vous pouvez le faire ici. Avant cela, assurez-vous que l'URL n'a pas été mal saisie."
-cms,webpage_from_path.title,,fr-FR,"The requested webpage was not found!","La page web demandée est introuvable !",0,"La page web demandée est introuvable !"
-cms,webpage_page.field.description.explanation,,fr-FR,"Description meta tag, usually shown under the URL in search results.","Balise meta description, généralement affichée sous l'URL dans les résultats de recherche.",0,"Balise meta description, généralement affichée sous l'URL dans les résultats de recherche."
-cms,webpage_page.field.description.label,,fr-FR,Description,Description,0,Description
-cms,webpage_page.field.keywords.explanation,,fr-FR,"Keywords meta tag with comma-separated values.","Balise meta mots-clés avec des valeurs séparées par des virgules.",0,"Balise meta mots-clés avec des valeurs séparées par des virgules."
-cms,webpage_page.field.keywords.label,,fr-FR,Keywords,Mots-clés,0,Mots-clés
-cms,webpage_page.field.resource_name.explanation,,fr-FR,"This is the real URL name of the page. Change it later only when necessary.","C'est le vrai nom d'URL de la page. Ne le modifiez que lorsque c'est nécessaire.",0,"C'est le vrai nom d'URL de la page. Ne le modifiez que lorsque c'est nécessaire."
-cms,webpage_page.field.resource_name.label,,fr-FR,"SEO-friendly URL name","Nom d'URL convivial pour le SEO",0,"Nom d'URL convivial pour le SEO"
-cms,webpage_page.field.title.explanation,,fr-FR,"HTML title meta tag shown in the browser window title.","Balise meta titre HTML affichée dans le titre de la fenêtre du navigateur.",0,"Balise meta titre HTML affichée dans le titre de la fenêtre du navigateur."
-cms,webpage_page.field.title.label,,fr-FR,Title,Titre,0,Titre
-cms,webpage_page.title_create,,fr-FR,"Create new webpage","Créer une nouvelle page web",0,"Créer une nouvelle page web"
-cms,webpage_page.title_edit,,fr-FR,"Edit webpage","Modifier la page web",0,"Modifier la page web"
-cms,widget.insert.button,,fr-FR,Insert,Insérer,0,Insérer
-cms,widget.insert.icon_title,,fr-FR,"Insert content","Insérer du contenu",0,"Insérer du contenu"
-cms,widget.insert.placeholder,,fr-FR,"-- Insert content --","-- Insérer du contenu --",0,"-- Insérer du contenu --"
-cms,widget.insert_from_clipboard,,fr-FR,"Insert clipboard content here","Insérer le contenu du presse-papiers ici",0,"Insérer le contenu du presse-papiers ici"
-cms,widget_connection.added,,fr-FR,"Content element placed on the webpage","Élément de contenu placé sur la page web",0,"Élément de contenu placé sur la page web"
-cms,widget_connection.copied_to_clipboard,,fr-FR,"Content copied to clipboard","Contenu copié dans le presse-papiers",0,"Contenu copié dans le presse-papiers"
-cms,widget_connection.duplicate_not_allowed,,fr-FR,"This content element is already on this block and multiple placement is not allowed.","Cet élément de contenu est déjà sur ce bloc et le placement multiple n'est pas autorisé.",0,"Cet élément de contenu est déjà sur ce bloc et le placement multiple n'est pas autorisé."
-cms,widget_connection.moved,,fr-FR,"Content element moved","Élément de contenu déplacé",0,"Élément de contenu déplacé"
-cms,widget_connection.remove_from_webpage,,fr-FR,"Remove from this webpage","Supprimer de cette page web",0,"Supprimer de cette page web"
-cms,widget_connection.removed,,fr-FR,"Content element removed from the webpage","Élément de contenu supprimé de la page web",0,"Élément de contenu supprimé de la page web"
-cms,widget_connection.select_widget_type,,fr-FR,"Choose the content type to insert","Choisissez le type de contenu à insérer",0,"Choisissez le type de contenu à insérer"
-cms,widget_connection_params.field.anchor.explanation,,fr-FR,"Anchor name that can be used in links to jump to this content on the page.","Nom d'ancre pouvant être utilisé dans des liens pour accéder directement à ce contenu sur la page.",0,"Nom d'ancre pouvant être utilisé dans des liens pour accéder directement à ce contenu sur la page."
-cms,widget_connection_params.field.anchor.label,,fr-FR,Anchor,Ancre,0,Ancre
-cms,widget_connection_params.field.float.clear,,fr-FR,"New row","Nouvelle ligne",0,"Nouvelle ligne"
-cms,widget_connection_params.field.float.explanation,,fr-FR,"Content box alignment. Floated elements can appear next to each other.","Alignement du bloc de contenu. Les éléments flottants peuvent apparaître côte à côte.",0,"Alignement du bloc de contenu. Les éléments flottants peuvent apparaître côte à côte."
-cms,widget_connection_params.field.float.label,,fr-FR,Alignment,Alignement,0,Alignement
-cms,widget_connection_params.field.float.left,,fr-FR,"Floated left","Flottant à gauche",0,"Flottant à gauche"
-cms,widget_connection_params.field.float.left_clear,,fr-FR,"Floated left in new row","Flottant à gauche en nouvelle ligne",0,"Flottant à gauche en nouvelle ligne"
-cms,widget_connection_params.field.float.none,,fr-FR,"No special alignment","Aucun alignement spécial",0,"Aucun alignement spécial"
-cms,widget_connection_params.field.float.right,,fr-FR,"Floated right","Flottant à droite",0,"Flottant à droite"
-cms,widget_connection_params.field.float.right_clear,,fr-FR,"Floated right in new row","Flottant à droite en nouvelle ligne",0,"Flottant à droite en nouvelle ligne"
-cms,widget_connection_params.field.height.explanation,,fr-FR,"Height in CSS format with unit (for example 100%, 200px, or auto).","Hauteur au format CSS avec unité (par exemple 100%, 200px ou auto).",0,"Hauteur au format CSS avec unité (par exemple 100%, 200px ou auto)."
-cms,widget_connection_params.field.height.label,,fr-FR,Height,Hauteur,0,Hauteur
-cms,widget_connection_params.field.margin_bottom.explanation,,fr-FR,"Bottom margin in CSS format with unit (for example 100% or 200px).","Marge inférieure au format CSS avec unité (par exemple 100% ou 200px).",0,"Marge inférieure au format CSS avec unité (par exemple 100% ou 200px)."
-cms,widget_connection_params.field.margin_bottom.label,,fr-FR,"Bottom margin","Marge inférieure",0,"Marge inférieure"
-cms,widget_connection_params.field.margin_left.explanation,,fr-FR,"Left margin in CSS format with unit (for example 100% or 200px).","Marge gauche au format CSS avec unité (par exemple 100% ou 200px).",0,"Marge gauche au format CSS avec unité (par exemple 100% ou 200px)."
-cms,widget_connection_params.field.margin_left.label,,fr-FR,"Left margin","Marge gauche",0,"Marge gauche"
-cms,widget_connection_params.field.margin_right.explanation,,fr-FR,"Right margin in CSS format with unit (for example 100% or 200px).","Marge droite au format CSS avec unité (par exemple 100% ou 200px).",0,"Marge droite au format CSS avec unité (par exemple 100% ou 200px)."
-cms,widget_connection_params.field.margin_right.label,,fr-FR,"Right margin","Marge droite",0,"Marge droite"
-cms,widget_connection_params.field.margin_top.explanation,,fr-FR,"Top margin in CSS format with unit (for example 100% or 200px).","Marge supérieure au format CSS avec unité (par exemple 100% ou 200px).",0,"Marge supérieure au format CSS avec unité (par exemple 100% ou 200px)."
-cms,widget_connection_params.field.margin_top.label,,fr-FR,"Top margin","Marge supérieure",0,"Marge supérieure"
-cms,widget_connection_params.field.width.explanation,,fr-FR,"Width in CSS format with unit (for example 100%, 200px, or auto).","Largeur au format CSS avec unité (par exemple 100%, 200px ou auto).",0,"Largeur au format CSS avec unité (par exemple 100%, 200px ou auto)."
-cms,widget_connection_params.field.width.label,,fr-FR,Width,Largeur,0,Largeur
-cms,widget_connection_params.missing_widget_id,,fr-FR,"Widget ID is missing","L'ID du widget est manquant",0,"L'ID du widget est manquant"
-cms,widget_connection_params.no_content_id,,fr-FR,"No content ID given","Aucun ID de contenu fourni",0,"Aucun ID de contenu fourni"
-cms,widget_connection_params.subtitle,,fr-FR,"Webpage: {page}","Page web : {page}",0,"Page web : {page}"
-cms,widget_connection_params.title,,fr-FR,"Edit display settings","Modifier les paramètres d'affichage",0,"Modifier les paramètres d'affichage"
-cms,widget_connection_settings.field.is_last.explanation,,fr-FR,"Check this if this is the last column in the row. This helps keep spacing correct and prevents overlapping or broken layout.","Cochez ceci si c'est la dernière colonne de la ligne. Cela permet de maintenir un espacement correct et d'éviter les chevauchements ou les mises en page cassées.",0,"Cochez ceci si c'est la dernière colonne de la ligne. Cela permet de maintenir un espacement correct et d'éviter les chevauchements ou les mises en page cassées."
-cms,widget_connection_settings.field.is_last.label,,fr-FR,"Last in row","Dernier de la ligne",0,"Dernier de la ligne"
-cms,widget_connection_settings.field.widget_width.label,,fr-FR,"Content width","Largeur du contenu",0,"Largeur du contenu"
-cms,widget_connection_settings.missing_widget_id,,fr-FR,"Widget ID is missing","L'ID du widget est manquant",0,"L'ID du widget est manquant"
-cms,widget_connection_settings.subtitle,,fr-FR,"Webpage: {page}","Page web : {page}",0,"Page web : {page}"
-cms,widget_group.begin_delete_error,,fr-FR,"Error: Unable to delete opening block","Erreur : Impossible de supprimer le bloc d'ouverture",0,"Erreur : Impossible de supprimer le bloc d'ouverture"
-cms,widget_group.both_delete_error,,fr-FR,"Error: Unable to delete opening or closing block","Erreur : Impossible de supprimer le bloc d'ouverture ou de fermeture",0,"Erreur : Impossible de supprimer le bloc d'ouverture ou de fermeture"
-cms,widget_group.end_delete_error,,fr-FR,"Error: Unable to delete closing block","Erreur : Impossible de supprimer le bloc de fermeture",0,"Erreur : Impossible de supprimer le bloc de fermeture"
-cms,widget_group.end_missing_delete_error,,fr-FR,"Closing block not found and opening block deletion failed","Bloc de fermeture introuvable et échec de la suppression du bloc d'ouverture",0,"Bloc de fermeture introuvable et échec de la suppression du bloc d'ouverture"
-cms,widget_group.end_missing_removed_beginning,,fr-FR,"Closing block not found, opening block removed successfully","Bloc de fermeture introuvable, bloc d'ouverture supprimé avec succès",0,"Bloc de fermeture introuvable, bloc d'ouverture supprimé avec succès"
-cms,widget_group.remove_block,,fr-FR,"Remove block","Supprimer le bloc",0,"Supprimer le bloc"
-cms,widget_group.removed,,fr-FR,"Block removed from webpage","Bloc supprimé de la page web",0,"Bloc supprimé de la page web"
-cms,widget_preview.description,,fr-FR,Description,Description,0,Description
-cms,widget_preview.implemented,,fr-FR,Implemented,Implémenté,0,Implémenté
-cms,widget_preview.info.current_theme,,fr-FR,"Current theme","Thème actuel",0,"Thème actuel"
-cms,widget_preview.info.fallback,,fr-FR,Fallback,"Solution de secours",0,"Solution de secours"
-cms,widget_preview.info.implemented,,fr-FR,Implemented,Implémenté,0,Implémenté
-cms,widget_preview.info.template,,fr-FR,Template,Modèle,0,Modèle
-cms,widget_preview.info.title,,fr-FR,"Widget preview","Aperçu du widget",0,"Aperçu du widget"
-cms,widget_preview.info.widget,,fr-FR,Widget,Widget,0,Widget
-cms,widget_preview.none,,fr-FR,"No mockable widgets found.","Aucun widget simulable trouvé.",0,"Aucun widget simulable trouvé."
-cms,widget_preview.not_implemented,,fr-FR,"Not implemented","Non implémenté",0,"Non implémenté"
-cms,widget_preview.not_mockable_prefix,,fr-FR,Widget,Widget,0,Widget
-cms,widget_preview.not_mockable_suffix,,fr-FR,"does not implement iMockable.","n'implémente pas iMockable.",0,"n'implémente pas iMockable."
-cms,widget_preview.not_registered,,fr-FR,"Widget not registered: {widget}","Widget non enregistré : {widget}",0,"Widget non enregistré : {widget}"
-cms,widget_preview.redirecting,,fr-FR,"Redirecting to the correct theme...","Redirection vers le thème correct...",0,"Redirection vers le thème correct..."
-cms,widget_preview.title,,fr-FR,"Available widgets for preview","Widgets disponibles pour l'aperçu",0,"Widgets disponibles pour l'aperçu"
-cms,widget_preview.widget,,fr-FR,Widget,Widget,0,Widget
-common,actions,,fr-FR,Actions,Actions,0,Actions
-common,all,,fr-FR,All,Tout,0,Tout
-common,back,,fr-FR,Back,Retour,0,Retour
-common,calendar,,fr-FR,Calendar,Calendrier,0,Calendrier
-common,cancel,,fr-FR,Cancel,Annuler,0,Annuler
-common,close,,fr-FR,Close,Fermer,0,Fermer
-common,choose_placeholder,,fr-FR,"-- Choose --","-- Choisir --",0,"-- Choisir --"
-common,delete,,fr-FR,Delete,Supprimer,0,Supprimer
-common,download,,fr-FR,Download,Télécharger,0,Télécharger
-common,edit,,fr-FR,Edit,Modifier,0,Modifier
-common,error,,fr-FR,Error,Erreur,0,Erreur
-common,error_save,,fr-FR,"Error: Unable to save","Erreur : Impossible d'enregistrer",0,"Erreur : Impossible d'enregistrer"
-common,id,,fr-FR,ID,ID,0,ID
-common,loading,,fr-FR,Loading...,Chargement...,0,Chargement...
-common,logout,,fr-FR,"Log out","Se déconnecter",0,"Se déconnecter"
-common,missing_required_url_params,,fr-FR,"Missing required URL parameters","Paramètres URL obligatoires manquants",0,"Paramètres URL obligatoires manquants"
-common,move_down,,fr-FR,"Move down","Déplacer vers le bas",0,"Déplacer vers le bas"
-common,move_up,,fr-FR,"Move up","Déplacer vers le haut",0,"Déplacer vers le haut"
-common,never,,fr-FR,Never,Jamais,0,Jamais
-common,no,,fr-FR,No,Non,0,Non
-common,no_changes,,fr-FR,"No changes made","Aucune modification effectuée",0,"Aucune modification effectuée"
-common,no_data,,fr-FR,"No data","Aucune donnée",0,"Aucune donnée"
-common,no_description,,fr-FR,"No description","Aucune description",0,"Aucune description"
-common,not_set,,fr-FR,"[not set]","[non défini]",0,"[non défini]"
-common,open,,fr-FR,Open,Ouvert,0,Ouvert
-common,operations,,fr-FR,Operations,Opérations,0,Opérations
-common,preview,,fr-FR,Preview,Aperçu,0,Aperçu
-common,read_more,,fr-FR,"Read more","Lire la suite",0,"Lire la suite"
-common,renamed,,fr-FR,Renamed,Renommé,0,Renommé
-common,save,,fr-FR,Save,Enregistrer,0,Enregistrer
-common,saved,,fr-FR,"Record saved","Enregistrement sauvegardé",0,"Enregistrement sauvegardé"
-common,saved_short,,fr-FR,Saved,Enregistré,0,Enregistré
-common,search,,fr-FR,Search,Rechercher,0,Rechercher
-common,unknown,,fr-FR,Unknown,Inconnu,0,Inconnu
-common,upload,,fr-FR,Upload,Téléverser,0,Téléverser
-common,user,,fr-FR,User,Utilisateur,0,Utilisateur
-common,width,,fr-FR,Width,Largeur,0,Largeur
-common,yes,,fr-FR,Yes,Oui,0,Oui
-datatable,column_visibility,,fr-FR,"Visible columns","Colonnes visibles",0,"Colonnes visibles"
-datatable,displayed_columns,,fr-FR,"Displayed columns","Colonnes affichées",0,"Colonnes affichées"
-datatable,empty_table,,fr-FR,"No data","Aucune donnée",0,"Aucune donnée"
-datatable,first,,fr-FR,First,Premier,0,Premier
-datatable,info_compact,,fr-FR,"_START_ - _END_ / _TOTAL_ items","_START_ - _END_ / _TOTAL_ éléments",0,"_START_ - _END_ / _TOTAL_ éléments"
-datatable,info_empty,,fr-FR,"No results","Aucun résultat",0,"Aucun résultat"
-datatable,info_filtered_compact,,fr-FR,"(filtered from _MAX_ items)","(filtré de _MAX_ éléments)",0,"(filtré de _MAX_ éléments)"
-datatable,info_filtered_html,,fr-FR,"<br><i>filtered from _MAX_ rows</i>","<br><i>filtré de _MAX_ lignes</i>",0,"<br><i>filtré de _MAX_ lignes</i>"
-datatable,info_full,,fr-FR,"_TOTAL_ displayable items (showing: _START_ - _END_)","_TOTAL_ éléments affichables (affichage : _START_ - _END_)",0,"_TOTAL_ éléments affichables (affichage : _START_ - _END_)"
-datatable,last,,fr-FR,Last,Dernier,0,Dernier
-datatable,length_menu,,fr-FR,"_MENU_ items/page","_MENU_ éléments/page",0,"_MENU_ éléments/page"
-datatable,loading_records,,fr-FR,Loading...,Chargement...,0,Chargement...
-datatable,next,,fr-FR,Next,Suivant,0,Suivant
-datatable,previous,,fr-FR,Previous,Précédent,0,Précédent
-datatable,processing,,fr-FR,Processing...,"Traitement en cours...",0,"Traitement en cours..."
-datatable,search,,fr-FR,Search,Rechercher,0,Rechercher
-datatable,zero_records,,fr-FR,"No displayable items","Aucun élément affichable",0,"Aucun élément affichable"
-layout,admin_default.description,,fr-FR,"Single-column admin layout","Mise en page admin à une colonne",0,"Mise en page admin à une colonne"
-layout,admin_default.name,,fr-FR,"Admin 1-column","Admin 1 colonne",0,"Admin 1 colonne"
-layout,admin_empty.description,,fr-FR,"Empty admin layout","Mise en page admin vide",0,"Mise en page admin vide"
-layout,admin_empty.name,,fr-FR,"Empty admin","Admin vide",0,"Admin vide"
-layout,admin_login.description,,fr-FR,"Admin login layout","Mise en page de connexion admin",0,"Mise en page de connexion admin"
-layout,admin_login.name,,fr-FR,"Admin login","Connexion admin",0,"Connexion admin"
-layout,admin_menu.description,,fr-FR,"Displays the admin menu","Affiche le menu admin",0,"Affiche le menu admin"
-layout,admin_menu.name,,fr-FR,"Admin menu","Menu admin",0,"Menu admin"
-layout,admin_nomenu.description,,fr-FR,"Admin layout without menu","Mise en page admin sans menu",0,"Mise en page admin sans menu"
-layout,admin_nomenu.name,,fr-FR,"Admin without menu","Admin sans menu",0,"Admin sans menu"
-layout,header_right.description,,fr-FR,"Displays the quick access menu","Affiche le menu d'accès rapide",0,"Affiche le menu d'accès rapide"
-layout,header_right.name,,fr-FR,"Quick menu","Menu rapide",0,"Menu rapide"
-layout,main_menu.description,,fr-FR,"Displays the main menu","Affiche le menu principal",0,"Affiche le menu principal"
-layout,main_menu.name,,fr-FR,"Main menu","Menu principal",0,"Menu principal"
-layout,public_2row.description,,fr-FR,"Two-column public layout","Mise en page publique à deux colonnes",0,"Mise en page publique à deux colonnes"
-layout,public_2row.hero.balanced_life,,fr-FR,"Want to live a more balanced life?","Vous voulez vivre une vie plus équilibrée ?",0,"Vous voulez vivre une vie plus équilibrée ?"
-layout,public_2row.hero.better_quality_of_life,,fr-FR,"Want a better quality of life?","Vous voulez une meilleure qualité de vie ?",0,"Vous voulez une meilleure qualité de vie ?"
-layout,public_2row.hero.conflict_management,,fr-FR,"Want to handle conflicts better?","Vous voulez mieux gérer les conflits ?",0,"Vous voulez mieux gérer les conflits ?"
-layout,public_2row.hero.equal_partner,,fr-FR,"Want to be treated as an equal partner?","Vous voulez être traité comme un partenaire égal ?",0,"Vous voulez être traité comme un partenaire égal ?"
-layout,public_2row.hero.self_discovery,,fr-FR,"Want to understand yourself better?","Vous voulez mieux vous comprendre ?",0,"Vous voulez mieux vous comprendre ?"
-layout,public_2row.hero.solution,,fr-FR,"The solution: TeamSolution!","La solution : TeamSolution !",0,"La solution : TeamSolution !"
-layout,public_2row.hero.success_and_happiness,,fr-FR,"Want to be successful and happy?","Vous voulez réussir et être heureux ?",0,"Vous voulez réussir et être heureux ?"
-layout,public_2row.name,,fr-FR,2-column,"2 colonnes",0,"2 colonnes"
-layout,public_default.description,,fr-FR,"Single-column public layout","Mise en page publique à une colonne",0,"Mise en page publique à une colonne"
-layout,public_default.name,,fr-FR,1-column,"1 colonne",0,"1 colonne"
-layout,public_empty.description,,fr-FR,"Empty layout for simple responses","Mise en page vide pour réponses simples",0,"Mise en page vide pour réponses simples"
-layout,public_empty.name,,fr-FR,Empty,Vide,0,Vide
-layout,public_login.description,,fr-FR,"Login layout","Mise en page de connexion",0,"Mise en page de connexion"
-layout,public_login.name,,fr-FR,Login,Connexion,0,Connexion
-layout,public_preview.description,,fr-FR,"Preview layout","Mise en page d'aperçu",0,"Mise en page d'aperçu"
-layout,public_preview.name,,fr-FR,Preview,Aperçu,0,Aperçu
-layout,top_menu_admin.description,,fr-FR,"Displays the admin top menu","Affiche le menu supérieur admin",0,"Affiche le menu supérieur admin"
-layout,top_menu_admin.name,,fr-FR,"Admin top menu","Menu supérieur admin",0,"Menu supérieur admin"
-layout,unknown.description,,fr-FR,"Layout not configured","Mise en page non configurée",0,"Mise en page non configurée"
-layout,unknown.name,,fr-FR,"Unknown layout","Mise en page inconnue",0,"Mise en page inconnue"
-layout,widget_previewer.description,,fr-FR,"Minimal layout for widget previews","Mise en page minimale pour les aperçus de widgets",0,"Mise en page minimale pour les aperçus de widgets"
-layout,widget_previewer.name,,fr-FR,"Widget previewer","Prévisualiseur de widget",0,"Prévisualiseur de widget"
-mcp,tokens.col.actions,,fr-FR,Actions,Actions,0,Actions
-mcp,tokens.col.created,,fr-FR,Created,Created,0,Created
-mcp,tokens.col.expires,,fr-FR,Expires,Expires,0,Expires
-mcp,tokens.col.last_used,,fr-FR,"Last used","Last used",0,"Last used"
-mcp,tokens.col.name,,fr-FR,Name,Name,0,Name
-mcp,tokens.col.prefix,,fr-FR,Prefix,Prefix,0,Prefix
-mcp,tokens.col.status,,fr-FR,Status,Statut,0,Statut
-mcp,tokens.create,,fr-FR,"Create token","Create token",0,"Create token"
-mcp,tokens.create_title,,fr-FR,"Create token","Create token",0,"Create token"
-mcp,tokens.created_help,,fr-FR,"Copy this user-bound token now. It will not be shown again.","Copiez maintenant ce token lié à l'utilisateur. Il ne sera plus affiché.",0,"Copiez maintenant ce token lié à l'utilisateur. Il ne sera plus affiché."
-mcp,tokens.created_title,,fr-FR,"Token created","Token created",0,"Token created"
-mcp,tokens.description,,fr-FR,"Create and revoke MCP access tokens tied to your user account.","Créer et révoquer des tokens d'accès MCP liés à votre compte utilisateur.",0,"Créer et révoquer des tokens d'accès MCP liés à votre compte utilisateur."
-mcp,tokens.empty,,fr-FR,"No MCP tokens yet.","Aucun token MCP pour le moment.",0,"Aucun token MCP pour le moment."
-mcp,tokens.endpoint,,fr-FR,"MCP endpoint","MCP endpoint",0,"MCP endpoint"
-mcp,tokens.existing_title,,fr-FR,"Existing tokens","Existing tokens",0,"Existing tokens"
-mcp,tokens.expiry,,fr-FR,Expiry,Expiry,0,Expiry
-mcp,tokens.expiry_30,,fr-FR,"30 days","30 days",0,"30 days"
-mcp,tokens.expiry_365,,fr-FR,"1 year","1 year",0,"1 year"
-mcp,tokens.expiry_90,,fr-FR,"90 days","90 days",0,"90 days"
-mcp,tokens.expiry_never,,fr-FR,"No expiry","No expiry",0,"No expiry"
-mcp,tokens.name,,fr-FR,Name,Name,0,Name
-mcp,tokens.name_placeholder,,fr-FR,"Claude Desktop - local","Claude Desktop - local",0,"Claude Desktop - local"
-mcp,tokens.never,,fr-FR,Never,Jamais,0,Jamais
-mcp,tokens.revoke,,fr-FR,Revoke,Revoke,0,Revoke
-mcp,tokens.revoke_confirm,,fr-FR,"Revoke this MCP token?","Révoquer ce token MCP ?",0,"Révoquer ce token MCP ?"
-mcp,tokens.security_note,,fr-FR,"MCP clients using one of these tokens run as your Radaptor user and have the same permissions you have. Keep tokens secret and revoke any token you no longer use.","Les clients MCP utilisant l'un de ces tokens s'exécutent avec votre utilisateur Radaptor et disposent des mêmes permissions que vous. Gardez les tokens secrets et révoquez ceux que vous n'utilisez plus.",0,"Les clients MCP utilisant l'un de ces tokens s'exécutent avec votre utilisateur Radaptor et disposent des mêmes permissions que vous. Gardez les tokens secrets et révoquez ceux que vous n'utilisez plus."
-mcp,tokens.status.active,,fr-FR,Active,Active,0,Active
-mcp,tokens.status.expired,,fr-FR,Expired,Expired,0,Expired
-mcp,tokens.status.revoked,,fr-FR,Revoked,Revoked,0,Revoked
-mcp,tokens.title,,fr-FR,"MCP tokens","Jetons MCP",0,"Jetons MCP"
-record_action,datasheet,,fr-FR,Datasheet,"Fiche de données",0,"Fiche de données"
-record_action,versions,,fr-FR,Versions,Versions,0,Versions
-record_meta,created_by,,fr-FR,"Created by","Créé par",0,"Créé par"
-record_meta,last_modified,,fr-FR,"Last modified","Dernière modification",0,"Dernière modification"
-resource,new_folder,,fr-FR,"New folder","Nouveau dossier",0,"Nouveau dossier"
-resource,new_webpage,,fr-FR,"New webpage","Nouvelle page web",0,"Nouvelle page web"
-resource,properties,,fr-FR,Properties,Propriétés,0,Propriétés
-resource,security,,fr-FR,Security,Sécurité,0,Sécurité
-resource,upload_file,,fr-FR,"Upload file...","Téléverser un fichier...",0,"Téléverser un fichier..."
-response_error,access_denied,,fr-FR,"Access denied","Accès refusé",0,"Accès refusé"
-response_error,access_restricted,,fr-FR,"Access restricted","Accès restreint",0,"Accès restreint"
-response_error,forbidden.message,,fr-FR,"You do not have permission to access this resource.","Vous n'avez pas la permission d'accéder à cette ressource.",0,"Vous n'avez pas la permission d'accéder à cette ressource."
-response_error,forbidden.title,,fr-FR,Forbidden,Interdit,0,Interdit
-response_error,internal.contact_support,,fr-FR,"If the problem persists, please contact our support team.","Si le problème persiste, veuillez contacter notre équipe de support.",0,"Si le problème persiste, veuillez contacter notre équipe de support."
-response_error,internal.go_back_previous_page,,fr-FR,"Go back to the previous page using your browser's back button","Retournez à la page précédente en utilisant le bouton retour de votre navigateur",0,"Retournez à la page précédente en utilisant le bouton retour de votre navigateur"
-response_error,internal.intro,,fr-FR,"We apologize for the inconvenience. Our team has been notified and we are working to fix this issue.","Nous nous excusons pour la gêne occasionnée. Notre équipe a été informée et travaille à résoudre ce problème.",0,"Nous nous excusons pour la gêne occasionnée. Notre équipe a été informée et travaille à résoudre ce problème."
-response_error,internal.reference_label,,fr-FR,Reference,Référence,0,Référence
-response_error,internal.refresh_page,,fr-FR,"Refresh this page","Actualiser cette page",0,"Actualiser cette page"
-response_error,internal.title,,fr-FR,"Oops! Something went wrong on our end.","Oups ! Une erreur s'est produite de notre côté.",0,"Oups ! Une erreur s'est produite de notre côté."
-response_error,internal.try_actions,,fr-FR,"You can try to:","Vous pouvez essayer de :",0,"Vous pouvez essayer de :"
-response_error,internal.try_again_in_a_few_minutes,,fr-FR,"Try again in a few minutes","Réessayez dans quelques minutes",0,"Réessayez dans quelques minutes"
-runtime_diagnostics,card.database,,fr-FR,Database,Database,0,Database
-runtime_diagnostics,card.email,,fr-FR,"Email safety","Email safety",0,"Email safety"
-runtime_diagnostics,card.environment,,fr-FR,Environment,Environment,0,Environment
-runtime_diagnostics,card.mcp,,fr-FR,MCP,MCP,0,MCP
-runtime_diagnostics,card.packages,,fr-FR,Packages,Packages,0,Packages
-runtime_diagnostics,card.redis,,fr-FR,Redis,Redis,0,Redis
-runtime_diagnostics,card.warnings,,fr-FR,Warnings,Warnings,0,Warnings
-runtime_diagnostics,no,,fr-FR,no,no,0,no
-runtime_diagnostics,none,,fr-FR,None,None,0,None
-runtime_diagnostics,safe_to_test,,fr-FR,"Safe to test","Safe to test",0,"Safe to test"
-runtime_diagnostics,subtitle,,fr-FR,"Effective runtime state with secrets redacted.","État d'exécution effectif avec les secrets masqués.",0,"État d'exécution effectif avec les secrets masqués."
-runtime_diagnostics,title,,fr-FR,"Runtime diagnostics","Diagnostics d’exécution",0,"Diagnostics d’exécution"
-runtime_diagnostics,yes,,fr-FR,yes,yes,0,yes
-selection,delete_invalid_entry_confirm,,fr-FR,"Are you sure you want to delete this invalid entry?","Êtes-vous sûr de vouloir supprimer cette entrée invalide ?",0,"Êtes-vous sûr de vouloir supprimer cette entrée invalide ?"
-selection,delete_selected,,fr-FR,"Delete selected","Supprimer la sélection",0,"Supprimer la sélection"
-selection,delete_selected_confirm,,fr-FR,"Are you sure you want to delete all selected items?","Êtes-vous sûr de vouloir supprimer tous les éléments sélectionnés ?",0,"Êtes-vous sûr de vouloir supprimer tous les éléments sélectionnés ?"
-selection,group,,fr-FR,"Group selection","Sélection de groupe",0,"Sélection de groupe"
-selection,invalid_entry,,fr-FR,"Invalid entry","Entrée invalide",0,"Entrée invalide"
-selection,multiple,,fr-FR,"Multiple selection","Sélection multiple",0,"Sélection multiple"
-selection,selected_items,,fr-FR,"Selected items","Éléments sélectionnés",0,"Éléments sélectionnés"
-social,disqus.comments_link,,fr-FR,"Disqus comments","Commentaires Disqus",0,"Commentaires Disqus"
-social,disqus.enable_javascript,,fr-FR,"JavaScript must be enabled to display","JavaScript doit être activé pour l'affichage",0,"JavaScript doit être activé pour l'affichage"
-social,disqus.powered_by,,fr-FR,"comments powered by","commentaires fournis par",0,"commentaires fournis par"
-system_message,default_header,,fr-FR,"System message","Message système",0,"Message système"
-theme,error.description,,fr-FR,"Fallback error theme","Thème d'erreur de secours",0,"Thème d'erreur de secours"
-theme,error.name,,fr-FR,Error,Erreur,0,Erreur
-theme,radaptor_portal_admin.description,,fr-FR,"Bootstrap 5 admin theme with portal neon/glass styling","Thème admin Bootstrap 5 avec style néon/verre du portail",0,"Thème admin Bootstrap 5 avec style néon/verre du portail"
-theme,radaptor_portal_admin.name,,fr-FR,RadaptorPortalAdmin,RadaptorPortalAdmin,0,RadaptorPortalAdmin
-theme,so_admin.description,,fr-FR,"SO-like admin theme","Thème admin de style SO",0,"Thème admin de style SO"
-theme,so_admin.name,,fr-FR,SO-Admin,SO-Admin,0,SO-Admin
-widget,admin_menu.description,,fr-FR,"Manage the admin menu tree","Gérer l'arbre du menu admin",0,"Gérer l'arbre du menu admin"
-widget,admin_menu.name,,fr-FR,"Admin menu administration","Administration du menu admin",0,"Administration du menu admin"
-widget,blog.description,,fr-FR,Blog,Blog,0,Blog
-widget,blog.name,,fr-FR,Blog,Blog,0,Blog
-widget,blog_list.description,,fr-FR,"Blog list","Liste du blog",0,"Liste du blog"
-widget,blog_list.name,,fr-FR,"Blog list","Liste du blog",0,"Liste du blog"
-widget,cli_runner.description,,fr-FR,"Run CLI commands from the admin panel.","Exécuter des commandes CLI depuis le panneau d’administration.",0,"Exécuter des commandes CLI depuis le panneau d’administration."
-widget,cli_runner.name,,fr-FR,"CLI Runner","Exécuteur CLI",0,"Exécuteur CLI"
-widget,file_upload.description,,fr-FR,"File upload","Téléversement de fichier",0,"Téléversement de fichier"
-widget,file_upload.name,,fr-FR,"File upload","Téléversement de fichier",0,"Téléversement de fichier"
-widget,form.description,,fr-FR,"Displays a configured form","Affiche un formulaire configuré",0,"Affiche un formulaire configuré"
-widget,form.name,,fr-FR,Form,Formulaire,0,Formulaire
-widget,group_beginning.description,,fr-FR,"Separately managed content unit that can contain jointly styled elements.","Unité de contenu gérée séparément pouvant contenir des éléments avec un style commun.",0,"Unité de contenu gérée séparément pouvant contenir des éléments avec un style commun."
-widget,group_beginning.name,,fr-FR,"Content block","Bloc de contenu",0,"Bloc de contenu"
-widget,group_end.description,,fr-FR,"End of a separately managed content unit.","Fin d'une unité de contenu gérée séparément.",0,"Fin d'une unité de contenu gérée séparément."
-widget,group_end.name,,fr-FR,"End of content block","Fin du bloc de contenu",0,"Fin du bloc de contenu"
-widget,import_export.description,,fr-FR,"Central CSV import and export tools","Outils centraux d'importation et d'exportation CSV",0,"Outils centraux d'importation et d'exportation CSV"
-widget,import_export.name,,fr-FR,"Import / Export","Importation / Exportation",0,"Importation / Exportation"
-widget,js_tree.description,,fr-FR,"Displays and manages a hierarchical tree of admin resources","Affiche et gère un arbre hiérarchique de ressources admin",0,"Affiche et gère un arbre hiérarchique de ressources admin"
-widget,js_tree.name,,fr-FR,"Tree browser","Navigateur d'arbre",0,"Navigateur d'arbre"
-widget,js_tree.settings,,fr-FR,"Tree settings","Paramètres de l'arbre",0,"Paramètres de l'arbre"
-widget,main_menu.description,,fr-FR,"Manage the main menu tree","Gérer l'arbre du menu principal",0,"Gérer l'arbre du menu principal"
-widget,main_menu.name,,fr-FR,"Main menu administration","Administration du menu principal",0,"Administration du menu principal"
-widget,phpinfo_frame.description,,fr-FR,"Show PHP runtime information inside the admin layout.","Affiche les informations d’exécution PHP dans la mise en page d’administration.",0,"Affiche les informations d’exécution PHP dans la mise en page d’administration."
-widget,phpinfo_frame.name,,fr-FR,"PHPinfo frame","Cadre PHPinfo",0,"Cadre PHPinfo"
-widget,phpinfo_frame.open_raw,,fr-FR,"Open raw","Ouvrir la vue brute",0,"Ouvrir la vue brute"
-widget,phpinfo_frame.title,,fr-FR,PHPinfo,PHPinfo,0,PHPinfo
-widget,plain_html.description,,fr-FR,"HTML code (embed)","Code HTML (intégration)",0,"Code HTML (intégration)"
-widget,plain_html.name,,fr-FR,"HTML code (embed)","Code HTML (intégration)",0,"Code HTML (intégration)"
-widget,resource_acl_selector.description,,fr-FR,"Configure resource access permissions","Configurer les permissions d'accès aux ressources",0,"Configurer les permissions d'accès aux ressources"
-widget,resource_acl_selector.name,,fr-FR,"Resource access settings","Paramètres d'accès aux ressources",0,"Paramètres d'accès aux ressources"
-widget,resource_tree.description,,fr-FR,"Manage webpages, web folders, and uploaded files here.","Gérez ici les pages web, les dossiers web et les fichiers téléversés.",0,"Gérez ici les pages web, les dossiers web et les fichiers téléversés."
-widget,resource_tree.name,,fr-FR,"Webpage structure","Structure de la page web",0,"Structure de la page web"
-widget,rich_text.description,,fr-FR,"Freely editable text with images","Texte librement modifiable avec des images",0,"Texte librement modifiable avec des images"
-widget,rich_text.name,,fr-FR,"Editable text","Texte modifiable",0,"Texte modifiable"
-widget,role_list.description,,fr-FR,"Displays the role tree","Affiche l'arbre des rôles",0,"Affiche l'arbre des rôles"
-widget,role_list.name,,fr-FR,"Role list","Liste des rôles",0,"Liste des rôles"
-widget,role_selector.description,,fr-FR,"Role selector","Sélecteur de rôle",0,"Sélecteur de rôle"
-widget,role_selector.name,,fr-FR,"Role selector","Sélecteur de rôle",0,"Sélecteur de rôle"
-widget,tag_list.description,,fr-FR,"Tag list","Liste des étiquettes",0,"Liste des étiquettes"
-widget,tag_list.name,,fr-FR,"Tag list","Liste des étiquettes",0,"Liste des étiquettes"
-widget,template_engine_demo_blade.description,,fr-FR,"Demonstrates rendering a Blade template inside Radaptor.","Démontre le rendu d’un modèle Blade dans Radaptor.",0,"Démontre le rendu d’un modèle Blade dans Radaptor."
-widget,template_engine_demo_blade.name,,fr-FR,"Blade template engine demo","Démo du moteur de modèles Blade",0,"Démo du moteur de modèles Blade"
-widget,template_engine_demo_php.description,,fr-FR,"Demonstrates rendering a native PHP template inside Radaptor.","Démontre le rendu d’un modèle PHP natif dans Radaptor.",0,"Démontre le rendu d’un modèle PHP natif dans Radaptor."
-widget,template_engine_demo_php.name,,fr-FR,"PHP template engine demo","Démo du moteur de modèles PHP",0,"Démo du moteur de modèles PHP"
-widget,template_engine_demo_twig.description,,fr-FR,"Demonstrates rendering a Twig template inside Radaptor.","Démontre le rendu d’un modèle Twig dans Radaptor.",0,"Démontre le rendu d’un modèle Twig dans Radaptor."
-widget,template_engine_demo_twig.name,,fr-FR,"Twig template engine demo","Démo du moteur de modèles Twig",0,"Démo du moteur de modèles Twig"
-widget,user_description.description,,fr-FR,"Displays the details of a user","Affiche les détails d'un utilisateur",0,"Affiche les détails d'un utilisateur"
-widget,user_description.name,,fr-FR,"User details","Détails de l'utilisateur",0,"Détails de l'utilisateur"
-widget,user_list.description,,fr-FR,"User list","Liste des utilisateurs",0,"Liste des utilisateurs"
-widget,user_list.name,,fr-FR,"User list","Liste des utilisateurs",0,"Liste des utilisateurs"
-widget,usergroup_list.description,,fr-FR,"Displays the user group tree","Affiche l'arbre des groupes d'utilisateurs",0,"Affiche l'arbre des groupes d'utilisateurs"
-widget,usergroup_list.name,,fr-FR,"User group list","Liste des groupes d'utilisateurs",0,"Liste des groupes d'utilisateurs"
-widget,usergroup_selector.description,,fr-FR,"Select user groups for a user","Sélectionner les groupes d'utilisateurs pour un utilisateur",0,"Sélectionner les groupes d'utilisateurs pour un utilisateur"
-widget,usergroup_selector.name,,fr-FR,"User group selector","Sélecteur de groupe d'utilisateurs",0,"Sélecteur de groupe d'utilisateurs"
-widget,widget_error.description,,fr-FR,"Invalid widget","Widget invalide",0,"Widget invalide"
-widget,widget_error.invalid_type,,fr-FR,"Non-existent content type: {type}","Type de contenu inexistant : {type}",0,"Type de contenu inexistant : {type}"
-widget,widget_error.name,,fr-FR,"Invalid widget","Widget invalide",0,"Widget invalide"
-widget,widget_preview.description,,fr-FR,"Preview any widget with mock data. URL params: widget (required), theme (optional)","Prévisualisez n'importe quel widget avec des données simulées. Paramètres URL : widget (obligatoire), theme (facultatif)",0,"Prévisualisez n'importe quel widget avec des données simulées. Paramètres URL : widget (obligatoire), theme (facultatif)"
-widget,widget_preview.name,,fr-FR,"Widget preview","Aperçu du widget",0,"Aperçu du widget"
-workbench,tm_apply,,fr-FR,Apply,Appliquer,0,Appliquer
-workbench,tm_no_results,,fr-FR,"No suggestions","Aucune suggestion",0,"Aucune suggestion"
-workbench,tm_uses,,fr-FR,uses,utilise,0,utilise
-admin,menu.mailpit,,fr-FR,Mailpit,Mailpit,0,Mailpit
-admin,email_outbox.recipients_delivery_counts,,fr-FR,"({sent} sent / {failed} failed)","({sent} envoyés / {failed} échoués)",0,"({sent} envoyés / {failed} échoués)"
-admin,email_outbox.col.job,,fr-FR,Job,Tâche,0,Tâche
-admin,email_outbox.col.dead_lettered,,fr-FR,"Dead lettered","Mis en dead letter",0,"Mis en dead letter"
-admin,email_outbox.pagination.previous,,fr-FR,Previous,Précédent,0,Précédent
-admin,email_outbox.pagination.next,,fr-FR,Next,Suivant,0,Suivant
-runtime_diagnostics,card.package_roots,,fr-FR,"Package roots","Racines des paquets",0,"Racines des paquets"
-runtime_diagnostics,field.environment,,fr-FR,Environment,Environnement,0,Environnement
-runtime_diagnostics,field.application,,fr-FR,Application,Application,0,Application
-runtime_diagnostics,field.domain_context,,fr-FR,"Domain context","Contexte de domaine",0,"Contexte de domaine"
-runtime_diagnostics,field.runtime,,fr-FR,Runtime,Runtime,0,Runtime
-runtime_diagnostics,field.smtp_host,,fr-FR,"SMTP host","Hôte SMTP",0,"Hôte SMTP"
-runtime_diagnostics,field.smtp_port,,fr-FR,"SMTP port","Port SMTP",0,"Port SMTP"
-runtime_diagnostics,field.using_catcher,,fr-FR,"Using catcher","Catcher utilisé",0,"Catcher utilisé"
-runtime_diagnostics,field.catcher_host,,fr-FR,"Catcher host","Hôte du catcher",0,"Hôte du catcher"
-runtime_diagnostics,field.catcher_smtp_port,,fr-FR,"Catcher SMTP port","Port SMTP du catcher",0,"Port SMTP du catcher"
-runtime_diagnostics,field.mailpit_ui_url,,fr-FR,"Mailpit UI URL","URL UI Mailpit",0,"URL UI Mailpit"
-runtime_diagnostics,field.driver,,fr-FR,Driver,Pilote,0,Pilote
-runtime_diagnostics,field.host,,fr-FR,Host,Hôte,0,Hôte
-runtime_diagnostics,field.port,,fr-FR,Port,Port,0,Port
-runtime_diagnostics,field.database,,fr-FR,Database,"Base de données",0,"Base de données"
-runtime_diagnostics,field.username,,fr-FR,Username,"Nom d’utilisateur",0,"Nom d’utilisateur"
-runtime_diagnostics,field.password,,fr-FR,Password,"Mot de passe",0,"Mot de passe"
-runtime_diagnostics,field.dsn,,fr-FR,DSN,DSN,0,DSN
-runtime_diagnostics,field.session,,fr-FR,Session,Session,0,Session
-runtime_diagnostics,field.cache,,fr-FR,Cache,Cache,0,Cache
-runtime_diagnostics,field.test,,fr-FR,Test,Test,0,Test
-runtime_diagnostics,field.public_url,,fr-FR,"Public URL","URL publique",0,"URL publique"
-runtime_diagnostics,field.allowed_origins,,fr-FR,"Allowed origins","Origines autorisées",0,"Origines autorisées"
-runtime_diagnostics,field.enabled_hint,,fr-FR,"Enabled hint","Indice d’activation",0,"Indice d’activation"
-runtime_diagnostics,field.mode,,fr-FR,Mode,Mode,0,Mode
-runtime_diagnostics,field.local_manifest,,fr-FR,"Local manifest","Manifeste local",0,"Manifeste local"
-runtime_diagnostics,field.local_lock,,fr-FR,"Local lock","Lock local",0,"Lock local"
-runtime_diagnostics,field.workspace_dev_mode,,fr-FR,"Workspace dev mode","Mode dev du workspace",0,"Mode dev du workspace"
-runtime_diagnostics,field.local_overrides_disabled,,fr-FR,"Local overrides disabled","Overrides locaux désactivés",0,"Overrides locaux désactivés"
-runtime_diagnostics,col.package,,fr-FR,Package,Paquet,0,Paquet
-runtime_diagnostics,col.source,,fr-FR,Source,Source,0,Source
-runtime_diagnostics,col.version,,fr-FR,Version,Version,0,Version
-runtime_diagnostics,col.active_path,,fr-FR,"Active path","Chemin actif",0,"Chemin actif"
-cms,template.missing,,fr-FR,"Missing template:","Template manquant :",0,"Template manquant :"
-cms,widget_preview.server_html_preview,,fr-FR,"Server HTML preview","Aperçu HTML serveur",0,"Aperçu HTML serveur"
-cms,widget_preview.subtree_json,,fr-FR,"Widget subtree JSON","JSON du sous-arbre du widget",0,"JSON du sous-arbre du widget"
-cms,widget_preview.subtree_json_description,,fr-FR,"Extracted from the same SDUI JSON document available through Open JSON.","Extrait du même document JSON SDUI disponible via Ouvrir JSON.",0,"Extrait du même document JSON SDUI disponible via Ouvrir JSON."
-cms,widget_preview.open_json,,fr-FR,"Open JSON","Ouvrir JSON",0,"Ouvrir JSON"
-cms,widget_preview.loading_json_preview,,fr-FR,"Loading JSON preview...","Chargement de l’aperçu JSON...",0,"Chargement de l’aperçu JSON..."
-cms,widget_preview.sdui_subtree_help,,fr-FR,"Showing the widget subtree extracted from the full SDUI JSON document.","Affiche le sous-arbre du widget extrait du document JSON SDUI complet.",0,"Affiche le sous-arbre du widget extrait du document JSON SDUI complet."
-cms,widget_preview.template_scope_note,,fr-FR,"This support check only looks at the resolved preview HTML template of the widget root node.","Cette vérification ne regarde que le template HTML d’aperçu résolu du nœud racine du widget.",0,"Cette vérification ne regarde que le template HTML d’aperçu résolu du nœud racine du widget."
-social,disqus.brand,,fr-FR,Disqus,Disqus,0,Disqus
-layout,public_2row.brand,,fr-FR,TeamSolution,TeamSolution,0,TeamSolution
-theme,template_engine_demo.col.name,,fr-FR,Name,Nom,0,Nom
-theme,template_engine_demo.col.email,,fr-FR,Email,Email,0,Email
-theme,template_engine_demo.col.role,,fr-FR,Role,Rôle,0,Rôle
-theme,template_engine_demo.engine_title,,fr-FR,"{engine} Template Engine","Moteur de template {engine}",0,"Moteur de template {engine}"
-theme,template_engine_demo.source_title,,fr-FR,"Template Source","Source du template",0,"Source du template"
-theme,template_engine_demo.rendered_output_title,,fr-FR,"Rendered Output","Sortie rendue",0,"Sortie rendue"
-layout,admin_empty.sign_in_to_continue,,fr-FR,"Sign in to continue.","Connectez-vous pour continuer.",0,"Connectez-vous pour continuer."
-cms,resource.field.locale.label,,fr-FR,"Content locale","Locale du contenu",0,"Locale du contenu"
-cms,resource.field.locale.explanation,,fr-FR,"Select a fixed locale for this resource, or leave it dynamic/inherited.","Sélectionnez une locale fixe pour cette ressource ou laissez-la dynamique/héritée.",0,"Sélectionnez une locale fixe pour cette ressource ou laissez-la dynamique/héritée."
-cms,resource.field.locale.dynamic,,fr-FR,"Dynamic / inherit","Dynamique / héritée",0,"Dynamique / héritée"
-cms,richtext.field.locale.label,,fr-FR,"Content locale","Locale du contenu",0,"Locale du contenu"
-cms,richtext.field.locale.explanation,,fr-FR,"The locale this text content belongs to.","La locale à laquelle appartient ce contenu texte.",0,"La locale à laquelle appartient ce contenu texte."
-cms,richtext.locale_mismatch,,fr-FR,"The selected text content does not match the page locale.","Le contenu texte sélectionné ne correspond pas à la locale de la page.",0,"Le contenu texte sélectionné ne correspond pas à la locale de la page."
-widget,locale_admin.name,,fr-FR,"Locale administration","Locale administration",0,"Locale administration"
-widget,locale_admin.description,,fr-FR,"Manage enabled application locales.","Manage enabled application locales.",0,"Manage enabled application locales."
-locale_admin,title,,fr-FR,Locales,Locales,0,Locales
-locale_admin,subtitle,,fr-FR,"Enable or disable locales offered for new admin content. Existing content is not deleted.","Enable or disable locales offered for new admin content. Existing content is not deleted.",0,"Enable or disable locales offered for new admin content. Existing content is not deleted."
-locale_admin,add_title,,fr-FR,"Add locale","Add locale",0,"Add locale"
-locale_admin,field.locale,,fr-FR,Locale,Locale,0,Locale
-locale_admin,placeholder.locale,,fr-FR,en-US,en-US,0,en-US
-locale_admin,action.add_enabled,,fr-FR,"Add enabled","Add enabled",0,"Add enabled"
-locale_admin,action.enable,,fr-FR,Enable,Enable,0,Enable
-locale_admin,action.disable,,fr-FR,Disable,Disable,0,Disable
-locale_admin,col.locale,,fr-FR,Locale,Locale,0,Locale
-locale_admin,col.label,,fr-FR,Label,Label,0,Label
-locale_admin,col.native_label,,fr-FR,"Native label","Native label",0,"Native label"
-locale_admin,col.status,,fr-FR,Status,Status,0,Status
-locale_admin,col.home,,fr-FR,"Home resources","Home resources",0,"Home resources"
-locale_admin,col.usage,,fr-FR,Usage,Usage,0,Usage
-locale_admin,col.actions,,fr-FR,Actions,Actions,0,Actions
-locale_admin,status.enabled,,fr-FR,Enabled,Enabled,0,Enabled
-locale_admin,status.disabled,,fr-FR,Disabled,Disabled,0,Disabled
-locale_admin,status.default,,fr-FR,Default,Default,0,Default
-locale_admin,home_count,,fr-FR,"{count} home target(s)","{count} home target(s)",0,"{count} home target(s)"
-locale_admin,usage.none,,fr-FR,"No usage","No usage",0,"No usage"
-locale_admin,message.enabled,,fr-FR,"Locale {locale} enabled.","Locale {locale} enabled.",0,"Locale {locale} enabled."
-locale_admin,message.disabled,,fr-FR,"Locale {locale} disabled.","Locale {locale} disabled.",0,"Locale {locale} disabled."
-locale_admin,message.error,,fr-FR,"Locale {locale} could not be updated.","Locale {locale} could not be updated.",0,"Locale {locale} could not be updated."
-locale_admin,message.invalid_locale,,fr-FR,"Invalid locale.","Invalid locale.",0,"Invalid locale."
-locale_admin,message.service_unavailable,,fr-FR,"Locale administration is unavailable until the locale infrastructure is installed.","L'administration des locales n'est pas disponible tant que l'infrastructure des locales n'est pas installée.",0,"L'administration des locales n'est pas disponible tant que l'infrastructure des locales n'est pas installée."
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,allow_source_match,text
+admin,email_outbox.col.created_at,,fr-FR,Created,Created,0,1,Created
+admin,email_outbox.col.id,,fr-FR,ID,ID,0,1,ID
+admin,email_outbox.col.last_error,,fr-FR,"Last error","Last error",0,1,"Last error"
+admin,email_outbox.col.recipients,,fr-FR,Recipients,Recipients,0,1,Recipients
+admin,email_outbox.col.sent_at,,fr-FR,Sent,Sent,0,1,Sent
+admin,email_outbox.col.status,,fr-FR,Status,Statut,0,0,Statut
+admin,email_outbox.col.subject,,fr-FR,Subject,Sujet,0,0,Sujet
+admin,email_outbox.description,,fr-FR,"Read-only transactional email delivery history.","Historique en lecture seule des envois d'emails transactionnels.",0,0,"Historique en lecture seule des envois d'emails transactionnels."
+admin,email_outbox.failures.title,,fr-FR,"Recent dead letters","Échecs récents non livrés",0,0,"Échecs récents non livrés"
+admin,email_outbox.filters.apply,,fr-FR,"Apply filters","Apply filters",0,1,"Apply filters"
+admin,email_outbox.filters.reset,,fr-FR,Reset,Reset,0,1,Reset
+admin,email_outbox.filters.search,,fr-FR,Search,Rechercher,0,0,Rechercher
+admin,email_outbox.filters.search_placeholder,,fr-FR,"Subject, message UID, or recipient email","Objet, UID du message ou email du destinataire",0,0,"Objet, UID du message ou email du destinataire"
+admin,email_outbox.filters.status,,fr-FR,Status,Statut,0,0,Statut
+admin,email_outbox.filters.title,,fr-FR,Filters,Filters,0,1,Filters
+admin,email_outbox.list.title,,fr-FR,"Recent outbox entries","Entrées récentes de la boîte d'envoi",0,0,"Entrées récentes de la boîte d'envoi"
+admin,email_outbox.none,,fr-FR,"No emails match the current filter.","Aucun email ne correspond au filtre actuel.",0,0,"Aucun email ne correspond au filtre actuel."
+admin,email_outbox.pagination.page,,fr-FR,Page,Page,0,1,Page
+admin,email_outbox.status.all,,fr-FR,"All statuses","All statuses",0,1,"All statuses"
+admin,email_outbox.status.failed,,fr-FR,Failed,Failed,0,1,Failed
+admin,email_outbox.status.partial_failed,,fr-FR,"Partial failed","Partial failed",0,1,"Partial failed"
+admin,email_outbox.status.processing,,fr-FR,Processing,Processing,0,1,Processing
+admin,email_outbox.status.queued,,fr-FR,Queued,Queued,0,1,Queued
+admin,email_outbox.status.sent,,fr-FR,Sent,Sent,0,1,Sent
+admin,email_outbox.summary.title,,fr-FR,"Queue summary","Queue summary",0,1,"Queue summary"
+admin,email_outbox.title,,fr-FR,"Email outbox","Boîte d’envoi email",0,0,"Boîte d’envoi email"
+admin,email_queue.dead_letter,,fr-FR,"Dead letter","Dead letter",0,1,"Dead letter"
+admin,email_queue.empty,,fr-FR,"No email jobs are waiting right now.","Aucune tâche email n'est en attente pour le moment.",0,0,"Aucune tâche email n'est en attente pour le moment."
+admin,email_queue.last_processed,,fr-FR,"Last processed","Last processed",0,1,"Last processed"
+admin,email_queue.last_seen,,fr-FR,"Last seen","Last seen",0,1,"Last seen"
+admin,email_queue.open_outbox,,fr-FR,"Open email outbox","Ouvrir la boîte d'envoi email",0,0,"Ouvrir la boîte d'envoi email"
+admin,email_queue.pending,,fr-FR,Pending,Pending,0,1,Pending
+admin,email_queue.retry_wait,,fr-FR,"Retry wait","Retry wait",0,1,"Retry wait"
+admin,email_queue.sent_last_24h,,fr-FR,"Sent in last 24h","Sent in last 24h",0,1,"Sent in last 24h"
+admin,email_queue.status.never_seen,,fr-FR,"Never seen","Never seen",0,1,"Never seen"
+admin,email_queue.status.running,,fr-FR,Running,Running,0,1,Running
+admin,email_queue.status.stale,,fr-FR,Stale,Obsolète,0,0,Obsolète
+admin,email_queue.status.unavailable,,fr-FR,Unavailable,Unavailable,0,1,Unavailable
+admin,email_queue.subtitle,,fr-FR,"Transactional delivery health at a glance.","État de livraison transactionnelle en un coup d'œil.",0,0,"État de livraison transactionnelle en un coup d'œil."
+admin,email_queue.title,,fr-FR,"Email queue","File d’attente email",0,0,"File d’attente email"
+admin,email_queue.worker,,fr-FR,Worker,Worker,0,1,Worker
+admin,i18n.col.domain,,fr-FR,Domain,Domaine,0,0,Domaine
+admin,i18n.col.key,,fr-FR,Key,Clé,0,0,Clé
+admin,i18n.col.reviewed,,fr-FR,Reviewed,Révisé,0,0,Révisé
+admin,i18n.col.source,,fr-FR,Source,Source,0,1,Source
+admin,i18n.col.status,,fr-FR,Status,Statut,0,0,Statut
+admin,i18n.col.translation,,fr-FR,Translation,Traduction,0,0,Traduction
+admin,i18n.coverage.missing,,fr-FR,Missing,Manquant,0,0,Manquant
+admin,i18n.coverage.reviewed,,fr-FR,Reviewed,Révisé,0,0,Révisé
+admin,i18n.coverage.stale,,fr-FR,Stale,Obsolète,0,0,Obsolète
+admin,i18n.coverage.title,,fr-FR,"Translation coverage","Couverture de traduction",0,0,"Couverture de traduction"
+admin,i18n.coverage.translated,,fr-FR,Translated,Traduit,0,0,Traduit
+admin,i18n.domain,,fr-FR,Domain,Domaine,0,0,Domaine
+admin,i18n.locale,,fr-FR,Locale,Langue,0,0,Langue
+admin,i18n.search_placeholder,,fr-FR,"Search source or translation","Rechercher dans la source ou la traduction",0,0,"Rechercher dans la source ou la traduction"
+admin,i18n.status,,fr-FR,Status,Statut,0,0,Statut
+admin,i18n.status.ai_generated,,fr-FR,AI-generated,"Généré par IA",0,0,"Généré par IA"
+admin,i18n.status.approved,,fr-FR,Approved,Approuvé,0,0,Approuvé
+admin,i18n.status.missing,,fr-FR,Missing,Manquant,0,0,Manquant
+admin,i18n.status.needs_review,,fr-FR,"Needs review","À réviser",0,0,"À réviser"
+admin,i18n.status.translated,,fr-FR,Translated,Traduit,0,0,Traduit
+admin,i18n.title,,fr-FR,"Translation workbench","Atelier de traduction",0,0,"Atelier de traduction"
+admin,i18n.tm.exact_match_only,,fr-FR,"Exact-match suggestions only","Suggestions de correspondances exactes uniquement",0,0,"Suggestions de correspondances exactes uniquement"
+admin,i18n.tm.exact_matches,,fr-FR,"Exact matches","Correspondances exactes",0,0,"Correspondances exactes"
+admin,i18n.tm.exact_then_similar,,fr-FR,"Exact matches load first. Similar matches load afterwards.","Les correspondances exactes se chargent en premier. Les correspondances similaires se chargent ensuite.",0,0,"Les correspondances exactes se chargent en premier. Les correspondances similaires se chargent ensuite."
+admin,i18n.tm.no_exact_matches,,fr-FR,"No exact matches","Aucune correspondance exacte",0,0,"Aucune correspondance exacte"
+admin,i18n.tm.no_similar_matches,,fr-FR,"No similar matches","Aucune correspondance similaire",0,0,"Aucune correspondance similaire"
+admin,i18n.tm.origin,,fr-FR,Origin,Origine,0,0,Origine
+admin,i18n.tm.review_placeholders,,fr-FR,"Review placeholders","Vérifier les espaces réservés",0,0,"Vérifier les espaces réservés"
+admin,i18n.tm.safe,,fr-FR,Safe,Sûr,0,0,Sûr
+admin,i18n.tm.similar_matches,,fr-FR,"Similar matches","Correspondances similaires",0,0,"Correspondances similaires"
+admin,i18n.tm.similarity,,fr-FR,Similarity,Similarité,0,0,Similarité
+admin,i18n.tm.source_example,,fr-FR,"Source example","Exemple de source",0,0,"Exemple de source"
+admin,i18n.tm.title,,fr-FR,"Translation memory suggestions","Suggestions de mémoire de traduction",0,0,"Suggestions de mémoire de traduction"
+admin,menu.admin_menu,,fr-FR,"Admin menu","Menu admin",0,0,"Menu admin"
+admin,menu.blog,,fr-FR,Blog,Blog,0,1,Blog
+admin,menu.cli_runner,,fr-FR,"CLI Runner","Exécuteur CLI",0,0,"Exécuteur CLI"
+admin,menu.custom_menu,,fr-FR,"Custom menu","Menu personnalisé",0,0,"Menu personnalisé"
+admin,menu.email_outbox,,fr-FR,"Email outbox","Boîte d’envoi email",0,0,"Boîte d’envoi email"
+admin,menu.home,,fr-FR,"Admin home","Accueil admin",0,0,"Accueil admin"
+admin,menu.import_export,,fr-FR,"Import / Export","Importation / Exportation",0,0,"Importation / Exportation"
+admin,menu.locales,,fr-FR,Locales,Locales,0,1,Locales
+admin,menu.mcp_tokens,,fr-FR,"MCP tokens","Jetons MCP",0,0,"Jetons MCP"
+admin,menu.phpinfo,,fr-FR,PHPinfo,"Informations PHP",0,0,"Informations PHP"
+admin,menu.resource_tree,,fr-FR,"Website structure","Structure du site web",0,0,"Structure du site web"
+admin,menu.roles,,fr-FR,Roles,Rôles,0,0,Rôles
+admin,menu.runtime_diagnostics,,fr-FR,"Runtime diagnostics","Diagnostics d’exécution",0,0,"Diagnostics d’exécution"
+admin,menu.section.administration,,fr-FR,Administration,Administration,0,1,Administration
+admin,menu.section.configuration,,fr-FR,Configuration,Configuration,0,1,Configuration
+admin,menu.section.content,,fr-FR,Content,Contenu,0,0,Contenu
+admin,menu.section.developer_tools,,fr-FR,"Developer tools","Outils développeur",0,0,"Outils développeur"
+admin,menu.template_engines,,fr-FR,"Template engines","Moteurs de modèles",0,0,"Moteurs de modèles"
+admin,menu.theme_selector,,fr-FR,"Theme selection","Sélection du thème",0,0,"Sélection du thème"
+admin,menu.translations,,fr-FR,Translations,Traductions,0,0,Traductions
+admin,menu.usergroups,,fr-FR,"User groups","Groupes d'utilisateurs",0,0,"Groupes d'utilisateurs"
+admin,menu.widget_preview,,fr-FR,"Widget preview","Aperçu du widget",0,0,"Aperçu du widget"
+cms,admin_dropdown.edit_mode,,fr-FR,"Edit mode","Mode édition",0,0,"Mode édition"
+cms,admin_dropdown.edit_mode_off,,fr-FR,off,désactivé,0,0,désactivé
+cms,admin_dropdown.edit_mode_on,,fr-FR,on,activé,0,0,activé
+cms,admin_dropdown.seo,,fr-FR,SEO,SEO,0,1,SEO
+cms,admin_dropdown.turn_edit_mode_off,,fr-FR,"Turn edit mode off","Désactiver le mode édition",0,0,"Désactiver le mode édition"
+cms,admin_dropdown.turn_edit_mode_on,,fr-FR,"Turn edit mode on","Activer le mode édition",0,0,"Activer le mode édition"
+cms,admin_menu.form.name,,fr-FR,"Admin menu administration","Administration du menu admin",0,0,"Administration du menu admin"
+cms,admin_menu.form.title_create,,fr-FR,"Create admin menu item","Créer un élément de menu admin",0,0,"Créer un élément de menu admin"
+cms,admin_menu.form.title_edit,,fr-FR,"Edit admin menu item","Modifier l'élément du menu admin",0,0,"Modifier l'élément du menu admin"
+cms,edit,,fr-FR,Edit,Modifier,0,0,Modifier
+cms,edit_mode.disabled,,fr-FR,"Edit mode disabled","Mode édition désactivé",0,0,"Mode édition désactivé"
+cms,edit_mode.enabled,,fr-FR,"Edit mode enabled","Mode édition activé",0,0,"Mode édition activé"
+cms,edit_mode.save_error,,fr-FR,"Error: Unable to save configuration","Erreur : Impossible d'enregistrer la configuration",0,0,"Erreur : Impossible d'enregistrer la configuration"
+cms,error.login_page_missing,,fr-FR,"Login page not found - create it manually","Page de connexion introuvable - créez-la manuellement",0,0,"Page de connexion introuvable - créez-la manuellement"
+cms,file.missing_ref_id,,fr-FR,"Missing file reference","Référence de fichier manquante",0,0,"Référence de fichier manquante"
+cms,file.upload_error,,fr-FR,"Error: File upload failed","Erreur : Échec du téléversement du fichier",0,0,"Erreur : Échec du téléversement du fichier"
+cms,file.uploaded,,fr-FR,"File uploaded","Fichier téléversé",0,0,"Fichier téléversé"
+cms,file_upload.destination_path,,fr-FR,"Destination path","Chemin de destination",0,0,"Chemin de destination"
+cms,file_upload.unknown_destination,,fr-FR,"Unknown destination path","Chemin de destination inconnu",0,0,"Chemin de destination inconnu"
+cms,form.field.form_id.explanation,,fr-FR,"Select from the predefined forms","Sélectionner parmi les formulaires prédéfinis",0,0,"Sélectionner parmi les formulaires prédéfinis"
+cms,form.field.form_id.label,,fr-FR,Form,Formulaire,0,0,Formulaire
+cms,form.missing_widget_id,,fr-FR,"Widget ID is missing","L'ID du widget est manquant",0,0,"L'ID du widget est manquant"
+cms,form.no_form_page_warning,,fr-FR,"Create at least one page with a blank form","Créer au moins une page avec un formulaire vide",0,0,"Créer au moins une page avec un formulaire vide"
+cms,form.no_id,,fr-FR,"No form ID given","Aucun ID de formulaire fourni",0,0,"Aucun ID de formulaire fourni"
+cms,form.settings_subtitle,,fr-FR,"Page: {page}","Page : {page}",0,0,"Page : {page}"
+cms,library.folder,,fr-FR,Folder,Dossier,0,0,Dossier
+cms,library.resource,,fr-FR,Resource,Ressource,0,0,Ressource
+cms,library.unknown,,fr-FR,"Unknown library","Bibliothèque inconnue",0,0,"Bibliothèque inconnue"
+cms,menu.delete_confirm,,fr-FR,"Are you sure you want to delete this menu item?","Êtes-vous sûr de vouloir supprimer cet élément de menu ?",0,0,"Êtes-vous sûr de vouloir supprimer cet élément de menu ?"
+cms,menu.delete_failed,,fr-FR,"Delete failed","Échec de la suppression",0,0,"Échec de la suppression"
+cms,menu.delete_forbidden,,fr-FR,"Menu item deletion is not allowed: {name}","La suppression de l'élément de menu n'est pas autorisée : {name}",0,0,"La suppression de l'élément de menu n'est pas autorisée : {name}"
+cms,menu.delete_unknown_error,,fr-FR,"Error: An unknown error occurred while deleting the menu item","Erreur : Une erreur inconnue s'est produite lors de la suppression de l'élément de menu",0,0,"Erreur : Une erreur inconnue s'est produite lors de la suppression de l'élément de menu"
+cms,menu.deleted,,fr-FR,"Menu item deleted: {name}","Élément de menu supprimé : {name}",0,0,"Élément de menu supprimé : {name}"
+cms,menu.external_link,,fr-FR,"External link","Lien externe",0,0,"Lien externe"
+cms,menu.field.node_name.label,,fr-FR,"Display text","Texte affiché",0,0,"Texte affiché"
+cms,menu.field.page.explanation,,fr-FR,"Select the page this menu item points to","Sélectionner la page vers laquelle pointe cet élément de menu",0,0,"Sélectionner la page vers laquelle pointe cet élément de menu"
+cms,menu.field.page.label,,fr-FR,Page,Page,0,1,Page
+cms,menu.field.type.external,,fr-FR,"Points to external page","Pointe vers une page externe",0,0,"Pointe vers une page externe"
+cms,menu.field.type.internal,,fr-FR,"Points to internal page","Pointe vers une page interne",0,0,"Pointe vers une page interne"
+cms,menu.field.type.label,,fr-FR,"Link type","Type de lien",0,0,"Type de lien"
+cms,menu.field.url.explanation,,fr-FR,"You can enter a custom URL (including mailto:// links)","Vous pouvez saisir une URL personnalisée (y compris les liens mailto://)",0,0,"Vous pouvez saisir une URL personnalisée (y compris les liens mailto://)"
+cms,menu.field.url.label,,fr-FR,"Custom URL","URL personnalisée",0,0,"URL personnalisée"
+cms,menu.form.name,,fr-FR,"Main menu item","Élément du menu principal",0,0,"Élément du menu principal"
+cms,menu.form.title_create,,fr-FR,"Create menu item","Créer un élément de menu",0,0,"Créer un élément de menu"
+cms,menu.form.title_edit,,fr-FR,"Edit menu item","Modifier l'élément de menu",0,0,"Modifier l'élément de menu"
+cms,menu.internal_link,,fr-FR,"Internal link","Lien interne",0,0,"Lien interne"
+cms,menu.move_error,,fr-FR,"Error: Unable to move menu item","Erreur : Impossible de déplacer l'élément de menu",0,0,"Erreur : Impossible de déplacer l'élément de menu"
+cms,menu.move_success,,fr-FR,"Menu item moved: {name}","Élément de menu déplacé : {name}",0,0,"Élément de menu déplacé : {name}"
+cms,menu.new_child,,fr-FR,"New submenu item","Nouvel élément de sous-menu",0,0,"Nouvel élément de sous-menu"
+cms,menu.new_item,,fr-FR,"New menu item","Nouvel élément de menu",0,0,"Nouvel élément de menu"
+cms,menu.no_link_configured,,fr-FR,"No link configured","Aucun lien configuré",0,0,"Aucun lien configuré"
+cms,menu.root,,fr-FR,"Main menu","Menu principal",0,0,"Menu principal"
+cms,menu.saved,,fr-FR,"Menu item saved","Élément de menu enregistré",0,0,"Élément de menu enregistré"
+cms,menu.selection_help,,fr-FR,"Select a menu item to edit it, or create a new one.","Sélectionnez un élément de menu pour le modifier, ou créez-en un nouveau.",0,0,"Sélectionnez un élément de menu pour le modifier, ou créez-en un nouveau."
+cms,menu.updated,,fr-FR,"Menu item updated","Élément de menu mis à jour",0,0,"Élément de menu mis à jour"
+cms,menu.validation.node_name_max_length,,fr-FR,"Display text must not exceed 255 characters","Le texte affiché ne doit pas dépasser 255 caractères",0,0,"Le texte affiché ne doit pas dépasser 255 caractères"
+cms,menu.validation.type_required,,fr-FR,"Choose whether the link points to an internal or external page","Choisissez si le lien pointe vers une page interne ou externe",0,0,"Choisissez si le lien pointe vers une page interne ou externe"
+cms,menu.validation.url_max_length,,fr-FR,"URL must not exceed 255 characters","L'URL ne doit pas dépasser 255 caractères",0,0,"L'URL ne doit pas dépasser 255 caractères"
+cms,menu.validation.url_required,,fr-FR,"Select a page or enter a URL","Sélectionnez une page ou saisissez une URL",0,0,"Sélectionnez une page ou saisissez une URL"
+cms,plainhtml.field.content.explanation,,fr-FR,"The HTML code you enter will appear on the website without modifications.","Le code HTML que vous saisissez apparaîtra sur le site web sans modifications.",0,0,"Le code HTML que vous saisissez apparaîtra sur le site web sans modifications."
+cms,plainhtml.field.content.label,,fr-FR,"HTML code","Code HTML",0,0,"Code HTML"
+cms,plainhtml.form.name,,fr-FR,"HTML code (embed)","Code HTML (intégration)",0,0,"Code HTML (intégration)"
+cms,plainhtml.form.title,,fr-FR,"Edit HTML content","Modifier le contenu HTML",0,0,"Modifier le contenu HTML"
+cms,plainhtml.not_set,,fr-FR,"Configure the content","Configurer le contenu",0,0,"Configurer le contenu"
+cms,resource.delete_error,,fr-FR,"Error: Unable to delete resource(s)","Erreur : Impossible de supprimer la/les ressource(s)",0,0,"Erreur : Impossible de supprimer la/les ressource(s)"
+cms,resource.delete_failed,,fr-FR,"Delete failed","Échec de la suppression",0,0,"Échec de la suppression"
+cms,resource.delete_partial_error,,fr-FR,"{count} error(s) occurred during deletion","{count} erreur(s) survenue(s) lors de la suppression",0,0,"{count} erreur(s) survenue(s) lors de la suppression"
+cms,resource.deleted,,fr-FR,"Resource deleted","Ressource supprimée",0,0,"Ressource supprimée"
+cms,resource.deleted_multiple,,fr-FR,"Resources deleted","Ressources supprimées",0,0,"Ressources supprimées"
+cms,resource.error.add_failed,,fr-FR,"Unable to add resource tree entry.","Impossible d’ajouter l’entrée de l’arborescence des ressources.",0,0,"Impossible d’ajouter l’entrée de l’arborescence des ressources."
+cms,resource.error.create_failed_for_path,,fr-FR,"Unable to create resource: {path}","Impossible de créer la ressource : {path}",0,0,"Impossible de créer la ressource : {path}"
+cms,resource.error.delete_denied,,fr-FR,"Delete denied for resource: {resource_id}","Suppression refusée pour la ressource : {resource_id}",0,0,"Suppression refusée pour la ressource : {resource_id}"
+cms,resource.error.delete_failed_for_id,,fr-FR,"Unable to delete resource: {resource_id}","Impossible de supprimer la ressource : {resource_id}",0,0,"Impossible de supprimer la ressource : {resource_id}"
+cms,resource.error.file_delete_failed_for_id,,fr-FR,"Unable to delete file for resource: {resource_id}","Impossible de supprimer le fichier de la ressource : {resource_id}",0,0,"Impossible de supprimer le fichier de la ressource : {resource_id}"
+cms,resource.error.import_file_failed,,fr-FR,"Unable to import file: {path}","Impossible d’importer le fichier : {path}",0,0,"Impossible d’importer le fichier : {path}"
+cms,resource.error.move_failed_for_id,,fr-FR,"Unable to move resource: {resource_id}","Impossible de déplacer la ressource : {resource_id}",0,0,"Impossible de déplacer la ressource : {resource_id}"
+cms,resource.error.not_found_by_id,,fr-FR,"Resource not found: {resource_id}","Ressource introuvable : {resource_id}",0,0,"Ressource introuvable : {resource_id}"
+cms,resource.error.path_exists_not_file,,fr-FR,"Resource path exists and is not a file: {path}","Le chemin de ressource existe et n’est pas un fichier : {path}",0,0,"Le chemin de ressource existe et n’est pas un fichier : {path}"
+cms,resource.error.protected_mutation,,fr-FR,"Protected system resource cannot be modified: {path}","La ressource système protégée ne peut pas être modifiée : {path}",0,0,"La ressource système protégée ne peut pas être modifiée : {path}"
+cms,resource.error.protected_path_mutation,,fr-FR,"Protected system resource path cannot be created or modified: {path}","Le chemin de ressource système protégé ne peut pas être créé ou modifié : {path}",0,0,"Le chemin de ressource système protégé ne peut pas être créé ou modifié : {path}"
+cms,resource.error.protected_subtree_mutation,,fr-FR,"A protected system resource in this subtree cannot be modified: {path}","Une ressource système protégée de ce sous-arbre ne peut pas être modifiée : {path}",0,0,"Une ressource système protégée de ce sous-arbre ne peut pas être modifiée : {path}"
+cms,resource.error.target_folder_not_found,,fr-FR,"Target folder not found after creation: {path}","Dossier cible introuvable après création : {path}",0,0,"Dossier cible introuvable après création : {path}"
+cms,resource.error.update_failed_for_path,,fr-FR,"Unable to update resource: {path}","Impossible de mettre à jour la ressource : {path}",0,0,"Impossible de mettre à jour la ressource : {path}"
+cms,resource.folder_count,,fr-FR,"{count} folder(s)","{count} dossier(s)",0,0,"{count} dossier(s)"
+cms,resource.move_error,,fr-FR,"Error: Unable to move resource","Erreur : Impossible de déplacer la ressource",0,0,"Erreur : Impossible de déplacer la ressource"
+cms,resource.move_failed,,fr-FR,"Move failed","Échec du déplacement",0,0,"Échec du déplacement"
+cms,resource.moved,,fr-FR,"Resource moved","Ressource déplacée",0,0,"Ressource déplacée"
+cms,resource.page_count,,fr-FR,"{count} page(s)","{count} page(s)",0,1,"{count} page(s)"
+cms,resource.renamed,,fr-FR,Renamed,Renommé,0,0,Renommé
+cms,resource.view_forbidden,,fr-FR,"403 - You do not have permission to view this content!","403 - Vous n'avez pas la permission d'afficher ce contenu !",0,0,"403 - Vous n'avez pas la permission d'afficher ce contenu !"
+cms,resource_acl.acl_not_found,,fr-FR,"ACL entry not found: {id}","Entrée ACL introuvable : {id}",0,0,"Entrée ACL introuvable : {id}"
+cms,resource_acl.assign,,fr-FR,Assign,Affecter,0,0,Affecter
+cms,resource_acl.deleted,,fr-FR,"Assignment removed.","Affectation supprimée.",0,0,"Affectation supprimée."
+cms,resource_acl.error_ambiguous_subject,,fr-FR,"The name {name} matches both a user and a user group. Select the correct type from the list.","Le nom {name} correspond à la fois à un utilisateur et à un groupe d'utilisateurs. Sélectionnez le type correct dans la liste.",0,0,"Le nom {name} correspond à la fois à un utilisateur et à un groupe d'utilisateurs. Sélectionnez le type correct dans la liste."
+cms,resource_acl.error_ambiguous_subject_short,,fr-FR,"Ambiguous assignment","Affectation ambiguë",0,0,"Affectation ambiguë"
+cms,resource_acl.error_delete,,fr-FR,"Error: Unable to remove assignment.","Erreur : Impossible de supprimer l'affectation.",0,0,"Erreur : Impossible de supprimer l'affectation."
+cms,resource_acl.error_missing_resource_id,,fr-FR,"Resource ID is missing","L'ID de la ressource est manquant",0,0,"L'ID de la ressource est manquant"
+cms,resource_acl.error_save,,fr-FR,"Error: Unable to save access settings.","Erreur : Impossible d'enregistrer les paramètres d'accès.",0,0,"Erreur : Impossible d'enregistrer les paramètres d'accès."
+cms,resource_acl.error_subject_not_found,,fr-FR,"No user or user group found with the name {name}","Aucun utilisateur ou groupe d'utilisateurs trouvé avec le nom {name}",0,0,"Aucun utilisateur ou groupe d'utilisateurs trouvé avec le nom {name}"
+cms,resource_acl.error_subject_not_found_short,,fr-FR,"No matching subject found","Aucun sujet correspondant trouvé",0,0,"Aucun sujet correspondant trouvé"
+cms,resource_acl.inherit_help,,fr-FR,"When inheritance is enabled, the parent folder's permissions also apply to this resource.","Lorsque l'héritage est activé, les permissions du dossier parent s'appliquent également à cette ressource.",0,0,"Lorsque l'héritage est activé, les permissions du dossier parent s'appliquent également à cette ressource."
+cms,resource_acl.inherit_label,,fr-FR,"Inherit permissions from parent folder","Hériter les permissions du dossier parent",0,0,"Hériter les permissions du dossier parent"
+cms,resource_acl.inherited_title,,fr-FR,"Inherited permissions","Permissions héritées",0,0,"Permissions héritées"
+cms,resource_acl.new_assignment,,fr-FR,"New assignment:","Nouvelle affectation :",0,0,"Nouvelle affectation :"
+cms,resource_acl.permission.create,,fr-FR,Create,Créer,0,0,Créer
+cms,resource_acl.permission.delete,,fr-FR,Delete,Supprimer,0,0,Supprimer
+cms,resource_acl.permission.edit,,fr-FR,Edit,Modifier,0,0,Modifier
+cms,resource_acl.permission.list,,fr-FR,List,Liste,0,0,Liste
+cms,resource_acl.permission.view,,fr-FR,View,Voir,0,0,Voir
+cms,resource_acl.resource_not_found,,fr-FR,"Resource not found: {id}","Ressource introuvable : {id}",0,0,"Ressource introuvable : {id}"
+cms,resource_acl.search_placeholder,,fr-FR,"Search for user or group...","Rechercher un utilisateur ou un groupe...",0,0,"Rechercher un utilisateur ou un groupe..."
+cms,resource_acl.specific_help,,fr-FR,"Specific permissions always apply, regardless of the inheritance setting.","Les permissions spécifiques s'appliquent toujours, quel que soit le paramètre d'héritage.",0,0,"Les permissions spécifiques s'appliquent toujours, quel que soit le paramètre d'héritage."
+cms,resource_acl.specific_title,,fr-FR,"Specific permissions","Permissions spécifiques",0,0,"Permissions spécifiques"
+cms,resource_acl.subject,,fr-FR,Subject,Sujet,0,0,Sujet
+cms,resource_acl.title,,fr-FR,Access,Accès,0,0,Accès
+cms,resource_acl.unknown_subject_type,,fr-FR,"Unknown ACL subject type: {type}","Type de sujet ACL inconnu : {type}",0,0,"Type de sujet ACL inconnu : {type}"
+cms,resource_acl.unknown_type,,fr-FR,"Unknown ACL list type: {type}","Type de liste ACL inconnu : {type}",0,0,"Type de liste ACL inconnu : {type}"
+cms,resource_acl.usergroup_assignment.added,,fr-FR,"User group assigned to resource:<br>{group} -> {target}","Groupe d'utilisateurs affecté à la ressource :<br>{group} -> {target}",0,0,"Groupe d'utilisateurs affecté à la ressource :<br>{group} -> {target}"
+cms,resource_acl.usergroup_assignment.error_add,,fr-FR,"Error: Unable to assign user group to resource:<br>{group} -> {target}","Erreur : Impossible d'affecter le groupe d'utilisateurs à la ressource :<br>{group} -> {target}",0,0,"Erreur : Impossible d'affecter le groupe d'utilisateurs à la ressource :<br>{group} -> {target}"
+cms,resource_acl.usergroup_assignment.error_add_generic,,fr-FR,"Error: Unable to assign user group to resource.","Erreur : Impossible d'affecter le groupe d'utilisateurs à la ressource.",0,0,"Erreur : Impossible d'affecter le groupe d'utilisateurs à la ressource."
+cms,resource_acl.usergroup_assignment.error_remove,,fr-FR,"Error: Unable to remove user group from resource:<br>{group} -> {target}","Erreur : Impossible de retirer le groupe d'utilisateurs de la ressource :<br>{group} -> {target}",0,0,"Erreur : Impossible de retirer le groupe d'utilisateurs de la ressource :<br>{group} -> {target}"
+cms,resource_acl.usergroup_assignment.error_remove_generic,,fr-FR,"Error: Unable to remove user group from resource.","Erreur : Impossible de retirer le groupe d'utilisateurs de la ressource.",0,0,"Erreur : Impossible de retirer le groupe d'utilisateurs de la ressource."
+cms,resource_acl.usergroup_assignment.removed,,fr-FR,"User group assignment removed:<br>{group} -> {target}","Affectation du groupe d'utilisateurs supprimée :<br>{group} -> {target}",0,0,"Affectation du groupe d'utilisateurs supprimée :<br>{group} -> {target}"
+cms,resource_browser.create_index_page,,fr-FR,"Create index page!","Créer la page d'index !",0,0,"Créer la page d'index !"
+cms,resource_browser.delete_file_confirm,,fr-FR,"Are you sure you want to delete this file?","Êtes-vous sûr de vouloir supprimer ce fichier ?",0,0,"Êtes-vous sûr de vouloir supprimer ce fichier ?"
+cms,resource_browser.delete_folder_confirm,,fr-FR,"Are you sure you want to delete this folder and all its contents?","Êtes-vous sûr de vouloir supprimer ce dossier et tout son contenu ?",0,0,"Êtes-vous sûr de vouloir supprimer ce dossier et tout son contenu ?"
+cms,resource_browser.delete_invalid_confirm,,fr-FR,"Are you sure you want to delete this invalid entry?","Êtes-vous sûr de vouloir supprimer cette entrée invalide ?",0,0,"Êtes-vous sûr de vouloir supprimer cette entrée invalide ?"
+cms,resource_browser.delete_webpage_confirm,,fr-FR,"Are you sure you want to delete this webpage?","Êtes-vous sûr de vouloir supprimer cette page web ?",0,0,"Êtes-vous sûr de vouloir supprimer cette page web ?"
+cms,resource_browser.help_create,,fr-FR,"Create folders and webpages within them.","Créer des dossiers et des pages web à l'intérieur.",0,0,"Créer des dossiers et des pages web à l'intérieur."
+cms,resource_browser.help_move,,fr-FR,"Drag and drop to move items between folders.","Glissez-déposez pour déplacer des éléments entre dossiers.",0,0,"Glissez-déposez pour déplacer des éléments entre dossiers."
+cms,resource_browser.insert,,fr-FR,Insert,Insérer,0,0,Insérer
+cms,resource_browser.invalid_entry,,fr-FR,"Invalid entry","Entrée invalide",0,0,"Entrée invalide"
+cms,resource_browser.new_domain,,fr-FR,"New domain","Nouveau domaine",0,0,"Nouveau domaine"
+cms,resource_browser.preview_index_page,,fr-FR,"Preview (index page)","Aperçu (page d'index)",0,0,"Aperçu (page d'index)"
+cms,resource_browser.root_not_found,,fr-FR,"Root node not found for the resource tree","Nœud racine introuvable pour l'arbre de ressources",0,0,"Nœud racine introuvable pour l'arbre de ressources"
+cms,resource_browser.select_tree_item,,fr-FR,"Select an item from the tree","Sélectionnez un élément dans l'arbre",0,0,"Sélectionnez un élément dans l'arbre"
+cms,resource_browser.site_structure,,fr-FR,"Site structure","Structure du site",0,0,"Structure du site"
+cms,richtext.assigned,,fr-FR,"Text content assigned","Contenu textuel affecté",0,0,"Contenu textuel affecté"
+cms,richtext.field.content.explanation,,fr-FR,"Format text freely, add images, and embed external content (e.g. YouTube). Use HTML view for embed codes.","Formatez librement le texte, ajoutez des images et intégrez du contenu externe (ex. YouTube). Utilisez la vue HTML pour les codes d'intégration.",0,0,"Formatez librement le texte, ajoutez des images et intégrez du contenu externe (ex. YouTube). Utilisez la vue HTML pour les codes d'intégration."
+cms,richtext.field.content.label,,fr-FR,Content,Contenu,0,0,Contenu
+cms,richtext.field.name.explanation,,fr-FR,"Visible in the admin area only. Use this to identify the content when selecting it for display on public pages. Must be unique.","Visible uniquement dans la zone admin. Utilisez ceci pour identifier le contenu lors de sa sélection pour l'affichage sur les pages publiques. Doit être unique.",0,0,"Visible uniquement dans la zone admin. Utilisez ceci pour identifier le contenu lors de sa sélection pour l'affichage sur les pages publiques. Doit être unique."
+cms,richtext.field.name.label,,fr-FR,"Name (identifier)","Nom (identifiant)",0,0,"Nom (identifiant)"
+cms,richtext.field.name.unique_error,,fr-FR,"An information content item with this name already exists","Un élément de contenu informatif avec ce nom existe déjà",0,0,"Un élément de contenu informatif avec ce nom existe déjà"
+cms,richtext.field.title.explanation,,fr-FR,"Appears as a title above the text. Leave empty for no title.","Apparaît comme titre au-dessus du texte. Laissez vide pour aucun titre.",0,0,"Apparaît comme titre au-dessus du texte. Laissez vide pour aucun titre."
+cms,richtext.field.title.label,,fr-FR,Heading,Titre,0,0,Titre
+cms,richtext.form.name,,fr-FR,"Text content","Contenu textuel",0,0,"Contenu textuel"
+cms,richtext.form.title_create,,fr-FR,"Create text content","Créer du contenu textuel",0,0,"Créer du contenu textuel"
+cms,richtext.form.title_edit,,fr-FR,"Edit text content","Modifier le contenu textuel",0,0,"Modifier le contenu textuel"
+cms,richtext.not_set,,fr-FR,"No content chosen","Aucun contenu choisi",0,0,"Aucun contenu choisi"
+cms,richtext.saved,,fr-FR,"Content saved","Contenu enregistré",0,0,"Contenu enregistré"
+cms,richtext.select.form.title,,fr-FR,"Select text content","Sélectionner le contenu textuel",0,0,"Sélectionner le contenu textuel"
+cms,richtext.updated,,fr-FR,"Content updated","Contenu mis à jour",0,0,"Contenu mis à jour"
+cms,richtext.widget.choose,,fr-FR,"Select text content","Sélectionner le contenu textuel",0,0,"Sélectionner le contenu textuel"
+cms,richtext.widget.create,,fr-FR,"Create text content","Créer du contenu textuel",0,0,"Créer du contenu textuel"
+cms,richtext.widget.description,,fr-FR,"Freely editable text with images","Texte librement modifiable avec des images",0,0,"Texte librement modifiable avec des images"
+cms,richtext.widget.edit,,fr-FR,"Edit text content","Modifier le contenu textuel",0,0,"Modifier le contenu textuel"
+cms,richtext.widget.name,,fr-FR,"Editable text","Texte modifiable",0,0,"Texte modifiable"
+cms,tree.field.type.explanation,,fr-FR,"Select from the predefined trees","Sélectionner parmi les arbres prédéfinis",0,0,"Sélectionner parmi les arbres prédéfinis"
+cms,tree.field.type.label,,fr-FR,Tree,Arbre,0,0,Arbre
+cms,tree.invalid_parent_id,,fr-FR,"Invalid parent ID","ID parent invalide",0,0,"ID parent invalide"
+cms,tree.missing_type,,fr-FR,"Missing tree type","Type d'arbre manquant",0,0,"Type d'arbre manquant"
+cms,tree.no_connection_id,,fr-FR,"No widget connection ID given","Aucun ID de connexion de widget fourni",0,0,"Aucun ID de connexion de widget fourni"
+cms,tree.select_menu_item,,fr-FR,"Select a menu item from the tree","Sélectionnez un élément de menu dans l'arbre",0,0,"Sélectionnez un élément de menu dans l'arbre"
+cms,tree.unknown_type,,fr-FR,"Unknown tree item type: {type}","Type d'élément d'arbre inconnu : {type}",0,0,"Type d'élément d'arbre inconnu : {type}"
+cms,webpage.create_for_params,,fr-FR,"Create a webpage for the following parameters: <br>{param_name}, {param_value}","Créer une page web pour les paramètres suivants : <br>{param_name}, {param_value}",0,0,"Créer une page web pour les paramètres suivants : <br>{param_name}, {param_value}"
+cms,webpage.create_for_widget,,fr-FR,"Create a webpage with the following content: <br><b>{widget}</b>","Créer une page web avec le contenu suivant : <br><b>{widget}</b>",0,0,"Créer une page web avec le contenu suivant : <br><b>{widget}</b>"
+cms,webpage.field.layout.explanation,,fr-FR,"The webpage layout structure determines where content elements can be placed on the page.","La structure de mise en page de la page web détermine où les éléments de contenu peuvent être placés sur la page.",0,0,"La structure de mise en page de la page web détermine où les éléments de contenu peuvent être placés sur la page."
+cms,webpage.field.layout.label,,fr-FR,"Page type","Type de page",0,0,"Type de page"
+cms,webpage_domain.field.resource_name.explanation,,fr-FR,"Set this domain name in the DOMAIN_CONTEXT configuration so this domain and its child pages become active.","Définissez ce nom de domaine dans la configuration DOMAIN_CONTEXT pour que ce domaine et ses pages enfants deviennent actifs.",0,0,"Définissez ce nom de domaine dans la configuration DOMAIN_CONTEXT pour que ce domaine et ses pages enfants deviennent actifs."
+cms,webpage_domain.field.resource_name.label,,fr-FR,"Domain name","Nom de domaine",0,0,"Nom de domaine"
+cms,webpage_domain.title_create,,fr-FR,"Add new domain","Ajouter un nouveau domaine",0,0,"Ajouter un nouveau domaine"
+cms,webpage_domain.title_edit,,fr-FR,"Edit domain","Modifier le domaine",0,0,"Modifier le domaine"
+cms,webpage_file.field.resource_name.explanation,,fr-FR,"This is the file name used in the URL. Avoid accented characters and spaces, and keep the correct file extension.","C'est le nom de fichier utilisé dans l'URL. Évitez les caractères accentués et les espaces, et conservez la bonne extension de fichier.",0,0,"C'est le nom de fichier utilisé dans l'URL. Évitez les caractères accentués et les espaces, et conservez la bonne extension de fichier."
+cms,webpage_file.field.resource_name.label,,fr-FR,"SEO-friendly URL name","Nom d'URL convivial pour le SEO",0,0,"Nom d'URL convivial pour le SEO"
+cms,webpage_file.field.text.explanation,,fr-FR,"For images this may appear as a longer description below the title.","Pour les images, cela peut apparaître comme une description plus longue sous le titre.",0,0,"Pour les images, cela peut apparaître comme une description plus longue sous le titre."
+cms,webpage_file.field.text.label,,fr-FR,Description,Description,0,1,Description
+cms,webpage_file.field.title.explanation,,fr-FR,"For images this may appear below the image.","Pour les images, cela peut apparaître sous l'image.",0,0,"Pour les images, cela peut apparaître sous l'image."
+cms,webpage_file.field.title.label,,fr-FR,Title,Titre,0,0,Titre
+cms,webpage_file.title_edit,,fr-FR,"Edit file name","Modifier le nom du fichier",0,0,"Modifier le nom du fichier"
+cms,webpage_folder.field.resource_name.explanation,,fr-FR,"This is the real folder name used in the URL. Changing it later may cause visitors from search engines to see a 404 page.","C'est le vrai nom de dossier utilisé dans l'URL. Le modifier ultérieurement peut amener les visiteurs des moteurs de recherche à voir une page 404.",0,0,"C'est le vrai nom de dossier utilisé dans l'URL. Le modifier ultérieurement peut amener les visiteurs des moteurs de recherche à voir une page 404."
+cms,webpage_folder.field.resource_name.label,,fr-FR,"SEO-friendly folder URL name","Nom d'URL de dossier convivial pour le SEO",0,0,"Nom d'URL de dossier convivial pour le SEO"
+cms,webpage_folder.title_create,,fr-FR,"Create new folder","Créer un nouveau dossier",0,0,"Créer un nouveau dossier"
+cms,webpage_folder.title_edit,,fr-FR,"Edit folder","Modifier le dossier",0,0,"Modifier le dossier"
+cms,webpage_from_path.subtitle,,fr-FR,"If you want to create this webpage, you can do it here. Before doing so, make sure the URL was not mistyped.","Si vous souhaitez créer cette page web, vous pouvez le faire ici. Avant cela, assurez-vous que l'URL n'a pas été mal saisie.",0,0,"Si vous souhaitez créer cette page web, vous pouvez le faire ici. Avant cela, assurez-vous que l'URL n'a pas été mal saisie."
+cms,webpage_from_path.title,,fr-FR,"The requested webpage was not found!","La page web demandée est introuvable !",0,0,"La page web demandée est introuvable !"
+cms,webpage_page.field.description.explanation,,fr-FR,"Description meta tag, usually shown under the URL in search results.","Balise meta description, généralement affichée sous l'URL dans les résultats de recherche.",0,0,"Balise meta description, généralement affichée sous l'URL dans les résultats de recherche."
+cms,webpage_page.field.description.label,,fr-FR,Description,Description,0,1,Description
+cms,webpage_page.field.keywords.explanation,,fr-FR,"Keywords meta tag with comma-separated values.","Balise meta mots-clés avec des valeurs séparées par des virgules.",0,0,"Balise meta mots-clés avec des valeurs séparées par des virgules."
+cms,webpage_page.field.keywords.label,,fr-FR,Keywords,Mots-clés,0,0,Mots-clés
+cms,webpage_page.field.resource_name.explanation,,fr-FR,"This is the real URL name of the page. Change it later only when necessary.","C'est le vrai nom d'URL de la page. Ne le modifiez que lorsque c'est nécessaire.",0,0,"C'est le vrai nom d'URL de la page. Ne le modifiez que lorsque c'est nécessaire."
+cms,webpage_page.field.resource_name.label,,fr-FR,"SEO-friendly URL name","Nom d'URL convivial pour le SEO",0,0,"Nom d'URL convivial pour le SEO"
+cms,webpage_page.field.title.explanation,,fr-FR,"HTML title meta tag shown in the browser window title.","Balise meta titre HTML affichée dans le titre de la fenêtre du navigateur.",0,0,"Balise meta titre HTML affichée dans le titre de la fenêtre du navigateur."
+cms,webpage_page.field.title.label,,fr-FR,Title,Titre,0,0,Titre
+cms,webpage_page.title_create,,fr-FR,"Create new webpage","Créer une nouvelle page web",0,0,"Créer une nouvelle page web"
+cms,webpage_page.title_edit,,fr-FR,"Edit webpage","Modifier la page web",0,0,"Modifier la page web"
+cms,widget.insert.button,,fr-FR,Insert,Insérer,0,0,Insérer
+cms,widget.insert.icon_title,,fr-FR,"Insert content","Insérer du contenu",0,0,"Insérer du contenu"
+cms,widget.insert.placeholder,,fr-FR,"-- Insert content --","-- Insérer du contenu --",0,0,"-- Insérer du contenu --"
+cms,widget.insert_from_clipboard,,fr-FR,"Insert clipboard content here","Insérer le contenu du presse-papiers ici",0,0,"Insérer le contenu du presse-papiers ici"
+cms,widget_connection.added,,fr-FR,"Content element placed on the webpage","Élément de contenu placé sur la page web",0,0,"Élément de contenu placé sur la page web"
+cms,widget_connection.copied_to_clipboard,,fr-FR,"Content copied to clipboard","Contenu copié dans le presse-papiers",0,0,"Contenu copié dans le presse-papiers"
+cms,widget_connection.duplicate_not_allowed,,fr-FR,"This content element is already on this block and multiple placement is not allowed.","Cet élément de contenu est déjà sur ce bloc et le placement multiple n'est pas autorisé.",0,0,"Cet élément de contenu est déjà sur ce bloc et le placement multiple n'est pas autorisé."
+cms,widget_connection.moved,,fr-FR,"Content element moved","Élément de contenu déplacé",0,0,"Élément de contenu déplacé"
+cms,widget_connection.remove_from_webpage,,fr-FR,"Remove from this webpage","Supprimer de cette page web",0,0,"Supprimer de cette page web"
+cms,widget_connection.removed,,fr-FR,"Content element removed from the webpage","Élément de contenu supprimé de la page web",0,0,"Élément de contenu supprimé de la page web"
+cms,widget_connection.select_widget_type,,fr-FR,"Choose the content type to insert","Choisissez le type de contenu à insérer",0,0,"Choisissez le type de contenu à insérer"
+cms,widget_connection_params.field.anchor.explanation,,fr-FR,"Anchor name that can be used in links to jump to this content on the page.","Nom d'ancre pouvant être utilisé dans des liens pour accéder directement à ce contenu sur la page.",0,0,"Nom d'ancre pouvant être utilisé dans des liens pour accéder directement à ce contenu sur la page."
+cms,widget_connection_params.field.anchor.label,,fr-FR,Anchor,Ancre,0,0,Ancre
+cms,widget_connection_params.field.float.clear,,fr-FR,"New row","Nouvelle ligne",0,0,"Nouvelle ligne"
+cms,widget_connection_params.field.float.explanation,,fr-FR,"Content box alignment. Floated elements can appear next to each other.","Alignement du bloc de contenu. Les éléments flottants peuvent apparaître côte à côte.",0,0,"Alignement du bloc de contenu. Les éléments flottants peuvent apparaître côte à côte."
+cms,widget_connection_params.field.float.label,,fr-FR,Alignment,Alignement,0,0,Alignement
+cms,widget_connection_params.field.float.left,,fr-FR,"Floated left","Flottant à gauche",0,0,"Flottant à gauche"
+cms,widget_connection_params.field.float.left_clear,,fr-FR,"Floated left in new row","Flottant à gauche en nouvelle ligne",0,0,"Flottant à gauche en nouvelle ligne"
+cms,widget_connection_params.field.float.none,,fr-FR,"No special alignment","Aucun alignement spécial",0,0,"Aucun alignement spécial"
+cms,widget_connection_params.field.float.right,,fr-FR,"Floated right","Flottant à droite",0,0,"Flottant à droite"
+cms,widget_connection_params.field.float.right_clear,,fr-FR,"Floated right in new row","Flottant à droite en nouvelle ligne",0,0,"Flottant à droite en nouvelle ligne"
+cms,widget_connection_params.field.height.explanation,,fr-FR,"Height in CSS format with unit (for example 100%, 200px, or auto).","Hauteur au format CSS avec unité (par exemple 100%, 200px ou auto).",0,0,"Hauteur au format CSS avec unité (par exemple 100%, 200px ou auto)."
+cms,widget_connection_params.field.height.label,,fr-FR,Height,Hauteur,0,0,Hauteur
+cms,widget_connection_params.field.margin_bottom.explanation,,fr-FR,"Bottom margin in CSS format with unit (for example 100% or 200px).","Marge inférieure au format CSS avec unité (par exemple 100% ou 200px).",0,0,"Marge inférieure au format CSS avec unité (par exemple 100% ou 200px)."
+cms,widget_connection_params.field.margin_bottom.label,,fr-FR,"Bottom margin","Marge inférieure",0,0,"Marge inférieure"
+cms,widget_connection_params.field.margin_left.explanation,,fr-FR,"Left margin in CSS format with unit (for example 100% or 200px).","Marge gauche au format CSS avec unité (par exemple 100% ou 200px).",0,0,"Marge gauche au format CSS avec unité (par exemple 100% ou 200px)."
+cms,widget_connection_params.field.margin_left.label,,fr-FR,"Left margin","Marge gauche",0,0,"Marge gauche"
+cms,widget_connection_params.field.margin_right.explanation,,fr-FR,"Right margin in CSS format with unit (for example 100% or 200px).","Marge droite au format CSS avec unité (par exemple 100% ou 200px).",0,0,"Marge droite au format CSS avec unité (par exemple 100% ou 200px)."
+cms,widget_connection_params.field.margin_right.label,,fr-FR,"Right margin","Marge droite",0,0,"Marge droite"
+cms,widget_connection_params.field.margin_top.explanation,,fr-FR,"Top margin in CSS format with unit (for example 100% or 200px).","Marge supérieure au format CSS avec unité (par exemple 100% ou 200px).",0,0,"Marge supérieure au format CSS avec unité (par exemple 100% ou 200px)."
+cms,widget_connection_params.field.margin_top.label,,fr-FR,"Top margin","Marge supérieure",0,0,"Marge supérieure"
+cms,widget_connection_params.field.width.explanation,,fr-FR,"Width in CSS format with unit (for example 100%, 200px, or auto).","Largeur au format CSS avec unité (par exemple 100%, 200px ou auto).",0,0,"Largeur au format CSS avec unité (par exemple 100%, 200px ou auto)."
+cms,widget_connection_params.field.width.label,,fr-FR,Width,Largeur,0,0,Largeur
+cms,widget_connection_params.missing_widget_id,,fr-FR,"Widget ID is missing","L'ID du widget est manquant",0,0,"L'ID du widget est manquant"
+cms,widget_connection_params.no_content_id,,fr-FR,"No content ID given","Aucun ID de contenu fourni",0,0,"Aucun ID de contenu fourni"
+cms,widget_connection_params.subtitle,,fr-FR,"Webpage: {page}","Page web : {page}",0,0,"Page web : {page}"
+cms,widget_connection_params.title,,fr-FR,"Edit display settings","Modifier les paramètres d'affichage",0,0,"Modifier les paramètres d'affichage"
+cms,widget_connection_settings.field.is_last.explanation,,fr-FR,"Check this if this is the last column in the row. This helps keep spacing correct and prevents overlapping or broken layout.","Cochez ceci si c'est la dernière colonne de la ligne. Cela permet de maintenir un espacement correct et d'éviter les chevauchements ou les mises en page cassées.",0,0,"Cochez ceci si c'est la dernière colonne de la ligne. Cela permet de maintenir un espacement correct et d'éviter les chevauchements ou les mises en page cassées."
+cms,widget_connection_settings.field.is_last.label,,fr-FR,"Last in row","Dernier de la ligne",0,0,"Dernier de la ligne"
+cms,widget_connection_settings.field.widget_width.label,,fr-FR,"Content width","Largeur du contenu",0,0,"Largeur du contenu"
+cms,widget_connection_settings.missing_widget_id,,fr-FR,"Widget ID is missing","L'ID du widget est manquant",0,0,"L'ID du widget est manquant"
+cms,widget_connection_settings.subtitle,,fr-FR,"Webpage: {page}","Page web : {page}",0,0,"Page web : {page}"
+cms,widget_group.begin_delete_error,,fr-FR,"Error: Unable to delete opening block","Erreur : Impossible de supprimer le bloc d'ouverture",0,0,"Erreur : Impossible de supprimer le bloc d'ouverture"
+cms,widget_group.both_delete_error,,fr-FR,"Error: Unable to delete opening or closing block","Erreur : Impossible de supprimer le bloc d'ouverture ou de fermeture",0,0,"Erreur : Impossible de supprimer le bloc d'ouverture ou de fermeture"
+cms,widget_group.end_delete_error,,fr-FR,"Error: Unable to delete closing block","Erreur : Impossible de supprimer le bloc de fermeture",0,0,"Erreur : Impossible de supprimer le bloc de fermeture"
+cms,widget_group.end_missing_delete_error,,fr-FR,"Closing block not found and opening block deletion failed","Bloc de fermeture introuvable et échec de la suppression du bloc d'ouverture",0,0,"Bloc de fermeture introuvable et échec de la suppression du bloc d'ouverture"
+cms,widget_group.end_missing_removed_beginning,,fr-FR,"Closing block not found, opening block removed successfully","Bloc de fermeture introuvable, bloc d'ouverture supprimé avec succès",0,0,"Bloc de fermeture introuvable, bloc d'ouverture supprimé avec succès"
+cms,widget_group.remove_block,,fr-FR,"Remove block","Supprimer le bloc",0,0,"Supprimer le bloc"
+cms,widget_group.removed,,fr-FR,"Block removed from webpage","Bloc supprimé de la page web",0,0,"Bloc supprimé de la page web"
+cms,widget_preview.description,,fr-FR,Description,Description,0,1,Description
+cms,widget_preview.implemented,,fr-FR,Implemented,Implémenté,0,0,Implémenté
+cms,widget_preview.info.current_theme,,fr-FR,"Current theme","Thème actuel",0,0,"Thème actuel"
+cms,widget_preview.info.fallback,,fr-FR,Fallback,"Solution de secours",0,0,"Solution de secours"
+cms,widget_preview.info.implemented,,fr-FR,Implemented,Implémenté,0,0,Implémenté
+cms,widget_preview.info.template,,fr-FR,Template,Modèle,0,0,Modèle
+cms,widget_preview.info.title,,fr-FR,"Widget preview","Aperçu du widget",0,0,"Aperçu du widget"
+cms,widget_preview.info.widget,,fr-FR,Widget,Widget,0,1,Widget
+cms,widget_preview.none,,fr-FR,"No mockable widgets found.","Aucun widget simulable trouvé.",0,0,"Aucun widget simulable trouvé."
+cms,widget_preview.not_implemented,,fr-FR,"Not implemented","Non implémenté",0,0,"Non implémenté"
+cms,widget_preview.not_mockable_prefix,,fr-FR,Widget,Widget,0,1,Widget
+cms,widget_preview.not_mockable_suffix,,fr-FR,"does not implement iMockable.","n'implémente pas iMockable.",0,0,"n'implémente pas iMockable."
+cms,widget_preview.not_registered,,fr-FR,"Widget not registered: {widget}","Widget non enregistré : {widget}",0,0,"Widget non enregistré : {widget}"
+cms,widget_preview.redirecting,,fr-FR,"Redirecting to the correct theme...","Redirection vers le thème correct...",0,0,"Redirection vers le thème correct..."
+cms,widget_preview.title,,fr-FR,"Available widgets for preview","Widgets disponibles pour l'aperçu",0,0,"Widgets disponibles pour l'aperçu"
+cms,widget_preview.widget,,fr-FR,Widget,Widget,0,1,Widget
+common,actions,,fr-FR,Actions,Actions,0,1,Actions
+common,all,,fr-FR,All,Tout,0,0,Tout
+common,back,,fr-FR,Back,Retour,0,0,Retour
+common,calendar,,fr-FR,Calendar,Calendrier,0,0,Calendrier
+common,cancel,,fr-FR,Cancel,Annuler,0,0,Annuler
+common,close,,fr-FR,Close,Fermer,0,0,Fermer
+common,choose_placeholder,,fr-FR,"-- Choose --","-- Choisir --",0,0,"-- Choisir --"
+common,delete,,fr-FR,Delete,Supprimer,0,0,Supprimer
+common,download,,fr-FR,Download,Télécharger,0,0,Télécharger
+common,edit,,fr-FR,Edit,Modifier,0,0,Modifier
+common,error,,fr-FR,Error,Erreur,0,0,Erreur
+common,error_save,,fr-FR,"Error: Unable to save","Erreur : Impossible d'enregistrer",0,0,"Erreur : Impossible d'enregistrer"
+common,id,,fr-FR,ID,ID,0,1,ID
+common,loading,,fr-FR,Loading...,Chargement...,0,0,Chargement...
+common,logout,,fr-FR,"Log out","Se déconnecter",0,0,"Se déconnecter"
+common,missing_required_url_params,,fr-FR,"Missing required URL parameters","Paramètres URL obligatoires manquants",0,0,"Paramètres URL obligatoires manquants"
+common,move_down,,fr-FR,"Move down","Déplacer vers le bas",0,0,"Déplacer vers le bas"
+common,move_up,,fr-FR,"Move up","Déplacer vers le haut",0,0,"Déplacer vers le haut"
+common,never,,fr-FR,Never,Jamais,0,0,Jamais
+common,no,,fr-FR,No,Non,0,0,Non
+common,no_changes,,fr-FR,"No changes made","Aucune modification effectuée",0,0,"Aucune modification effectuée"
+common,no_data,,fr-FR,"No data","Aucune donnée",0,0,"Aucune donnée"
+common,no_description,,fr-FR,"No description","Aucune description",0,0,"Aucune description"
+common,not_set,,fr-FR,"[not set]","[non défini]",0,0,"[non défini]"
+common,open,,fr-FR,Open,Ouvert,0,0,Ouvert
+common,operations,,fr-FR,Operations,Opérations,0,0,Opérations
+common,preview,,fr-FR,Preview,Aperçu,0,0,Aperçu
+common,read_more,,fr-FR,"Read more","Lire la suite",0,0,"Lire la suite"
+common,renamed,,fr-FR,Renamed,Renommé,0,0,Renommé
+common,save,,fr-FR,Save,Enregistrer,0,0,Enregistrer
+common,saved,,fr-FR,"Record saved","Enregistrement sauvegardé",0,0,"Enregistrement sauvegardé"
+common,saved_short,,fr-FR,Saved,Enregistré,0,0,Enregistré
+common,search,,fr-FR,Search,Rechercher,0,0,Rechercher
+common,unknown,,fr-FR,Unknown,Inconnu,0,0,Inconnu
+common,upload,,fr-FR,Upload,Téléverser,0,0,Téléverser
+common,user,,fr-FR,User,Utilisateur,0,0,Utilisateur
+common,width,,fr-FR,Width,Largeur,0,0,Largeur
+common,yes,,fr-FR,Yes,Oui,0,0,Oui
+datatable,column_visibility,,fr-FR,"Visible columns","Colonnes visibles",0,0,"Colonnes visibles"
+datatable,displayed_columns,,fr-FR,"Displayed columns","Colonnes affichées",0,0,"Colonnes affichées"
+datatable,empty_table,,fr-FR,"No data","Aucune donnée",0,0,"Aucune donnée"
+datatable,first,,fr-FR,First,Premier,0,0,Premier
+datatable,info_compact,,fr-FR,"_START_ - _END_ / _TOTAL_ items","_START_ - _END_ / _TOTAL_ éléments",0,0,"_START_ - _END_ / _TOTAL_ éléments"
+datatable,info_empty,,fr-FR,"No results","Aucun résultat",0,0,"Aucun résultat"
+datatable,info_filtered_compact,,fr-FR,"(filtered from _MAX_ items)","(filtré de _MAX_ éléments)",0,0,"(filtré de _MAX_ éléments)"
+datatable,info_filtered_html,,fr-FR,"<br><i>filtered from _MAX_ rows</i>","<br><i>filtré de _MAX_ lignes</i>",0,0,"<br><i>filtré de _MAX_ lignes</i>"
+datatable,info_full,,fr-FR,"_TOTAL_ displayable items (showing: _START_ - _END_)","_TOTAL_ éléments affichables (affichage : _START_ - _END_)",0,0,"_TOTAL_ éléments affichables (affichage : _START_ - _END_)"
+datatable,last,,fr-FR,Last,Dernier,0,0,Dernier
+datatable,length_menu,,fr-FR,"_MENU_ items/page","_MENU_ éléments/page",0,0,"_MENU_ éléments/page"
+datatable,loading_records,,fr-FR,Loading...,Chargement...,0,0,Chargement...
+datatable,next,,fr-FR,Next,Suivant,0,0,Suivant
+datatable,previous,,fr-FR,Previous,Précédent,0,0,Précédent
+datatable,processing,,fr-FR,Processing...,"Traitement en cours...",0,0,"Traitement en cours..."
+datatable,search,,fr-FR,Search,Rechercher,0,0,Rechercher
+datatable,zero_records,,fr-FR,"No displayable items","Aucun élément affichable",0,0,"Aucun élément affichable"
+layout,admin_default.description,,fr-FR,"Single-column admin layout","Mise en page admin à une colonne",0,0,"Mise en page admin à une colonne"
+layout,admin_default.name,,fr-FR,"Admin 1-column","Admin 1 colonne",0,0,"Admin 1 colonne"
+layout,admin_empty.description,,fr-FR,"Empty admin layout","Mise en page admin vide",0,0,"Mise en page admin vide"
+layout,admin_empty.name,,fr-FR,"Empty admin","Admin vide",0,0,"Admin vide"
+layout,admin_login.description,,fr-FR,"Admin login layout","Mise en page de connexion admin",0,0,"Mise en page de connexion admin"
+layout,admin_login.name,,fr-FR,"Admin login","Connexion admin",0,0,"Connexion admin"
+layout,admin_menu.description,,fr-FR,"Displays the admin menu","Affiche le menu admin",0,0,"Affiche le menu admin"
+layout,admin_menu.name,,fr-FR,"Admin menu","Menu admin",0,0,"Menu admin"
+layout,admin_nomenu.description,,fr-FR,"Admin layout without menu","Mise en page admin sans menu",0,0,"Mise en page admin sans menu"
+layout,admin_nomenu.name,,fr-FR,"Admin without menu","Admin sans menu",0,0,"Admin sans menu"
+layout,header_right.description,,fr-FR,"Displays the quick access menu","Affiche le menu d'accès rapide",0,0,"Affiche le menu d'accès rapide"
+layout,header_right.name,,fr-FR,"Quick menu","Menu rapide",0,0,"Menu rapide"
+layout,main_menu.description,,fr-FR,"Displays the main menu","Affiche le menu principal",0,0,"Affiche le menu principal"
+layout,main_menu.name,,fr-FR,"Main menu","Menu principal",0,0,"Menu principal"
+layout,public_2row.description,,fr-FR,"Two-column public layout","Mise en page publique à deux colonnes",0,0,"Mise en page publique à deux colonnes"
+layout,public_2row.hero.balanced_life,,fr-FR,"Want to live a more balanced life?","Vous voulez vivre une vie plus équilibrée ?",0,0,"Vous voulez vivre une vie plus équilibrée ?"
+layout,public_2row.hero.better_quality_of_life,,fr-FR,"Want a better quality of life?","Vous voulez une meilleure qualité de vie ?",0,0,"Vous voulez une meilleure qualité de vie ?"
+layout,public_2row.hero.conflict_management,,fr-FR,"Want to handle conflicts better?","Vous voulez mieux gérer les conflits ?",0,0,"Vous voulez mieux gérer les conflits ?"
+layout,public_2row.hero.equal_partner,,fr-FR,"Want to be treated as an equal partner?","Vous voulez être traité comme un partenaire égal ?",0,0,"Vous voulez être traité comme un partenaire égal ?"
+layout,public_2row.hero.self_discovery,,fr-FR,"Want to understand yourself better?","Vous voulez mieux vous comprendre ?",0,0,"Vous voulez mieux vous comprendre ?"
+layout,public_2row.hero.solution,,fr-FR,"The solution: TeamSolution!","La solution : TeamSolution !",0,0,"La solution : TeamSolution !"
+layout,public_2row.hero.success_and_happiness,,fr-FR,"Want to be successful and happy?","Vous voulez réussir et être heureux ?",0,0,"Vous voulez réussir et être heureux ?"
+layout,public_2row.name,,fr-FR,2-column,"2 colonnes",0,0,"2 colonnes"
+layout,public_default.description,,fr-FR,"Single-column public layout","Mise en page publique à une colonne",0,0,"Mise en page publique à une colonne"
+layout,public_default.name,,fr-FR,1-column,"1 colonne",0,0,"1 colonne"
+layout,public_empty.description,,fr-FR,"Empty layout for simple responses","Mise en page vide pour réponses simples",0,0,"Mise en page vide pour réponses simples"
+layout,public_empty.name,,fr-FR,Empty,Vide,0,0,Vide
+layout,public_login.description,,fr-FR,"Login layout","Mise en page de connexion",0,0,"Mise en page de connexion"
+layout,public_login.name,,fr-FR,Login,Connexion,0,0,Connexion
+layout,public_preview.description,,fr-FR,"Preview layout","Mise en page d'aperçu",0,0,"Mise en page d'aperçu"
+layout,public_preview.name,,fr-FR,Preview,Aperçu,0,0,Aperçu
+layout,top_menu_admin.description,,fr-FR,"Displays the admin top menu","Affiche le menu supérieur admin",0,0,"Affiche le menu supérieur admin"
+layout,top_menu_admin.name,,fr-FR,"Admin top menu","Menu supérieur admin",0,0,"Menu supérieur admin"
+layout,unknown.description,,fr-FR,"Layout not configured","Mise en page non configurée",0,0,"Mise en page non configurée"
+layout,unknown.name,,fr-FR,"Unknown layout","Mise en page inconnue",0,0,"Mise en page inconnue"
+layout,widget_previewer.description,,fr-FR,"Minimal layout for widget previews","Mise en page minimale pour les aperçus de widgets",0,0,"Mise en page minimale pour les aperçus de widgets"
+layout,widget_previewer.name,,fr-FR,"Widget previewer","Prévisualiseur de widget",0,0,"Prévisualiseur de widget"
+mcp,tokens.col.actions,,fr-FR,Actions,Actions,0,1,Actions
+mcp,tokens.col.created,,fr-FR,Created,Created,0,1,Created
+mcp,tokens.col.expires,,fr-FR,Expires,Expires,0,1,Expires
+mcp,tokens.col.last_used,,fr-FR,"Last used","Last used",0,1,"Last used"
+mcp,tokens.col.name,,fr-FR,Name,Name,0,1,Name
+mcp,tokens.col.prefix,,fr-FR,Prefix,Prefix,0,1,Prefix
+mcp,tokens.col.status,,fr-FR,Status,Statut,0,0,Statut
+mcp,tokens.create,,fr-FR,"Create token","Create token",0,1,"Create token"
+mcp,tokens.create_title,,fr-FR,"Create token","Create token",0,1,"Create token"
+mcp,tokens.created_help,,fr-FR,"Copy this user-bound token now. It will not be shown again.","Copiez maintenant ce token lié à l'utilisateur. Il ne sera plus affiché.",0,0,"Copiez maintenant ce token lié à l'utilisateur. Il ne sera plus affiché."
+mcp,tokens.created_title,,fr-FR,"Token created","Token created",0,1,"Token created"
+mcp,tokens.description,,fr-FR,"Create and revoke MCP access tokens tied to your user account.","Créer et révoquer des tokens d'accès MCP liés à votre compte utilisateur.",0,0,"Créer et révoquer des tokens d'accès MCP liés à votre compte utilisateur."
+mcp,tokens.empty,,fr-FR,"No MCP tokens yet.","Aucun token MCP pour le moment.",0,0,"Aucun token MCP pour le moment."
+mcp,tokens.endpoint,,fr-FR,"MCP endpoint","MCP endpoint",0,1,"MCP endpoint"
+mcp,tokens.existing_title,,fr-FR,"Existing tokens","Existing tokens",0,1,"Existing tokens"
+mcp,tokens.expiry,,fr-FR,Expiry,Expiry,0,1,Expiry
+mcp,tokens.expiry_30,,fr-FR,"30 days","30 days",0,1,"30 days"
+mcp,tokens.expiry_365,,fr-FR,"1 year","1 year",0,1,"1 year"
+mcp,tokens.expiry_90,,fr-FR,"90 days","90 days",0,1,"90 days"
+mcp,tokens.expiry_never,,fr-FR,"No expiry","No expiry",0,1,"No expiry"
+mcp,tokens.name,,fr-FR,Name,Name,0,1,Name
+mcp,tokens.name_placeholder,,fr-FR,"Claude Desktop - local","Claude Desktop - local",0,1,"Claude Desktop - local"
+mcp,tokens.never,,fr-FR,Never,Jamais,0,0,Jamais
+mcp,tokens.revoke,,fr-FR,Revoke,Revoke,0,1,Revoke
+mcp,tokens.revoke_confirm,,fr-FR,"Revoke this MCP token?","Révoquer ce token MCP ?",0,0,"Révoquer ce token MCP ?"
+mcp,tokens.security_note,,fr-FR,"MCP clients using one of these tokens run as your Radaptor user and have the same permissions you have. Keep tokens secret and revoke any token you no longer use.","Les clients MCP utilisant l'un de ces tokens s'exécutent avec votre utilisateur Radaptor et disposent des mêmes permissions que vous. Gardez les tokens secrets et révoquez ceux que vous n'utilisez plus.",0,0,"Les clients MCP utilisant l'un de ces tokens s'exécutent avec votre utilisateur Radaptor et disposent des mêmes permissions que vous. Gardez les tokens secrets et révoquez ceux que vous n'utilisez plus."
+mcp,tokens.status.active,,fr-FR,Active,Active,0,1,Active
+mcp,tokens.status.expired,,fr-FR,Expired,Expired,0,1,Expired
+mcp,tokens.status.revoked,,fr-FR,Revoked,Revoked,0,1,Revoked
+mcp,tokens.title,,fr-FR,"MCP tokens","Jetons MCP",0,0,"Jetons MCP"
+record_action,datasheet,,fr-FR,Datasheet,"Fiche de données",0,0,"Fiche de données"
+record_action,versions,,fr-FR,Versions,Versions,0,1,Versions
+record_meta,created_by,,fr-FR,"Created by","Créé par",0,0,"Créé par"
+record_meta,last_modified,,fr-FR,"Last modified","Dernière modification",0,0,"Dernière modification"
+resource,new_folder,,fr-FR,"New folder","Nouveau dossier",0,0,"Nouveau dossier"
+resource,new_webpage,,fr-FR,"New webpage","Nouvelle page web",0,0,"Nouvelle page web"
+resource,properties,,fr-FR,Properties,Propriétés,0,0,Propriétés
+resource,security,,fr-FR,Security,Sécurité,0,0,Sécurité
+resource,upload_file,,fr-FR,"Upload file...","Téléverser un fichier...",0,0,"Téléverser un fichier..."
+response_error,access_denied,,fr-FR,"Access denied","Accès refusé",0,0,"Accès refusé"
+response_error,access_restricted,,fr-FR,"Access restricted","Accès restreint",0,0,"Accès restreint"
+response_error,forbidden.message,,fr-FR,"You do not have permission to access this resource.","Vous n'avez pas la permission d'accéder à cette ressource.",0,0,"Vous n'avez pas la permission d'accéder à cette ressource."
+response_error,forbidden.title,,fr-FR,Forbidden,Interdit,0,0,Interdit
+response_error,internal.contact_support,,fr-FR,"If the problem persists, please contact our support team.","Si le problème persiste, veuillez contacter notre équipe de support.",0,0,"Si le problème persiste, veuillez contacter notre équipe de support."
+response_error,internal.go_back_previous_page,,fr-FR,"Go back to the previous page using your browser's back button","Retournez à la page précédente en utilisant le bouton retour de votre navigateur",0,0,"Retournez à la page précédente en utilisant le bouton retour de votre navigateur"
+response_error,internal.intro,,fr-FR,"We apologize for the inconvenience. Our team has been notified and we are working to fix this issue.","Nous nous excusons pour la gêne occasionnée. Notre équipe a été informée et travaille à résoudre ce problème.",0,0,"Nous nous excusons pour la gêne occasionnée. Notre équipe a été informée et travaille à résoudre ce problème."
+response_error,internal.reference_label,,fr-FR,Reference,Référence,0,0,Référence
+response_error,internal.refresh_page,,fr-FR,"Refresh this page","Actualiser cette page",0,0,"Actualiser cette page"
+response_error,internal.title,,fr-FR,"Oops! Something went wrong on our end.","Oups ! Une erreur s'est produite de notre côté.",0,0,"Oups ! Une erreur s'est produite de notre côté."
+response_error,internal.try_actions,,fr-FR,"You can try to:","Vous pouvez essayer de :",0,0,"Vous pouvez essayer de :"
+response_error,internal.try_again_in_a_few_minutes,,fr-FR,"Try again in a few minutes","Réessayez dans quelques minutes",0,0,"Réessayez dans quelques minutes"
+runtime_diagnostics,card.database,,fr-FR,Database,Database,0,1,Database
+runtime_diagnostics,card.email,,fr-FR,"Email safety","Email safety",0,1,"Email safety"
+runtime_diagnostics,card.environment,,fr-FR,Environment,Environment,0,1,Environment
+runtime_diagnostics,card.mcp,,fr-FR,MCP,MCP,0,1,MCP
+runtime_diagnostics,card.packages,,fr-FR,Packages,Packages,0,1,Packages
+runtime_diagnostics,card.redis,,fr-FR,Redis,Redis,0,1,Redis
+runtime_diagnostics,card.warnings,,fr-FR,Warnings,Warnings,0,1,Warnings
+runtime_diagnostics,no,,fr-FR,no,no,0,1,no
+runtime_diagnostics,none,,fr-FR,None,None,0,1,None
+runtime_diagnostics,safe_to_test,,fr-FR,"Safe to test","Safe to test",0,1,"Safe to test"
+runtime_diagnostics,subtitle,,fr-FR,"Effective runtime state with secrets redacted.","État d'exécution effectif avec les secrets masqués.",0,0,"État d'exécution effectif avec les secrets masqués."
+runtime_diagnostics,title,,fr-FR,"Runtime diagnostics","Diagnostics d’exécution",0,0,"Diagnostics d’exécution"
+runtime_diagnostics,yes,,fr-FR,yes,yes,0,1,yes
+selection,delete_invalid_entry_confirm,,fr-FR,"Are you sure you want to delete this invalid entry?","Êtes-vous sûr de vouloir supprimer cette entrée invalide ?",0,0,"Êtes-vous sûr de vouloir supprimer cette entrée invalide ?"
+selection,delete_selected,,fr-FR,"Delete selected","Supprimer la sélection",0,0,"Supprimer la sélection"
+selection,delete_selected_confirm,,fr-FR,"Are you sure you want to delete all selected items?","Êtes-vous sûr de vouloir supprimer tous les éléments sélectionnés ?",0,0,"Êtes-vous sûr de vouloir supprimer tous les éléments sélectionnés ?"
+selection,group,,fr-FR,"Group selection","Sélection de groupe",0,0,"Sélection de groupe"
+selection,invalid_entry,,fr-FR,"Invalid entry","Entrée invalide",0,0,"Entrée invalide"
+selection,multiple,,fr-FR,"Multiple selection","Sélection multiple",0,0,"Sélection multiple"
+selection,selected_items,,fr-FR,"Selected items","Éléments sélectionnés",0,0,"Éléments sélectionnés"
+social,disqus.comments_link,,fr-FR,"Disqus comments","Commentaires Disqus",0,0,"Commentaires Disqus"
+social,disqus.enable_javascript,,fr-FR,"JavaScript must be enabled to display","JavaScript doit être activé pour l'affichage",0,0,"JavaScript doit être activé pour l'affichage"
+social,disqus.powered_by,,fr-FR,"comments powered by","commentaires fournis par",0,0,"commentaires fournis par"
+system_message,default_header,,fr-FR,"System message","Message système",0,0,"Message système"
+theme,error.description,,fr-FR,"Fallback error theme","Thème d'erreur de secours",0,0,"Thème d'erreur de secours"
+theme,error.name,,fr-FR,Error,Erreur,0,0,Erreur
+theme,radaptor_portal_admin.description,,fr-FR,"Bootstrap 5 admin theme with portal neon/glass styling","Thème admin Bootstrap 5 avec style néon/verre du portail",0,0,"Thème admin Bootstrap 5 avec style néon/verre du portail"
+theme,radaptor_portal_admin.name,,fr-FR,RadaptorPortalAdmin,RadaptorPortalAdmin,0,1,RadaptorPortalAdmin
+theme,so_admin.description,,fr-FR,"SO-like admin theme","Thème admin de style SO",0,0,"Thème admin de style SO"
+theme,so_admin.name,,fr-FR,SO-Admin,SO-Admin,0,1,SO-Admin
+widget,admin_menu.description,,fr-FR,"Manage the admin menu tree","Gérer l'arbre du menu admin",0,0,"Gérer l'arbre du menu admin"
+widget,admin_menu.name,,fr-FR,"Admin menu administration","Administration du menu admin",0,0,"Administration du menu admin"
+widget,blog.description,,fr-FR,Blog,Blog,0,1,Blog
+widget,blog.name,,fr-FR,Blog,Blog,0,1,Blog
+widget,blog_list.description,,fr-FR,"Blog list","Liste du blog",0,0,"Liste du blog"
+widget,blog_list.name,,fr-FR,"Blog list","Liste du blog",0,0,"Liste du blog"
+widget,cli_runner.description,,fr-FR,"Run CLI commands from the admin panel.","Exécuter des commandes CLI depuis le panneau d’administration.",0,0,"Exécuter des commandes CLI depuis le panneau d’administration."
+widget,cli_runner.name,,fr-FR,"CLI Runner","Exécuteur CLI",0,0,"Exécuteur CLI"
+widget,file_upload.description,,fr-FR,"File upload","Téléversement de fichier",0,0,"Téléversement de fichier"
+widget,file_upload.name,,fr-FR,"File upload","Téléversement de fichier",0,0,"Téléversement de fichier"
+widget,form.description,,fr-FR,"Displays a configured form","Affiche un formulaire configuré",0,0,"Affiche un formulaire configuré"
+widget,form.name,,fr-FR,Form,Formulaire,0,0,Formulaire
+widget,group_beginning.description,,fr-FR,"Separately managed content unit that can contain jointly styled elements.","Unité de contenu gérée séparément pouvant contenir des éléments avec un style commun.",0,0,"Unité de contenu gérée séparément pouvant contenir des éléments avec un style commun."
+widget,group_beginning.name,,fr-FR,"Content block","Bloc de contenu",0,0,"Bloc de contenu"
+widget,group_end.description,,fr-FR,"End of a separately managed content unit.","Fin d'une unité de contenu gérée séparément.",0,0,"Fin d'une unité de contenu gérée séparément."
+widget,group_end.name,,fr-FR,"End of content block","Fin du bloc de contenu",0,0,"Fin du bloc de contenu"
+widget,import_export.description,,fr-FR,"Central CSV import and export tools","Outils centraux d'importation et d'exportation CSV",0,0,"Outils centraux d'importation et d'exportation CSV"
+widget,import_export.name,,fr-FR,"Import / Export","Importation / Exportation",0,0,"Importation / Exportation"
+widget,js_tree.description,,fr-FR,"Displays and manages a hierarchical tree of admin resources","Affiche et gère un arbre hiérarchique de ressources admin",0,0,"Affiche et gère un arbre hiérarchique de ressources admin"
+widget,js_tree.name,,fr-FR,"Tree browser","Navigateur d'arbre",0,0,"Navigateur d'arbre"
+widget,js_tree.settings,,fr-FR,"Tree settings","Paramètres de l'arbre",0,0,"Paramètres de l'arbre"
+widget,main_menu.description,,fr-FR,"Manage the main menu tree","Gérer l'arbre du menu principal",0,0,"Gérer l'arbre du menu principal"
+widget,main_menu.name,,fr-FR,"Main menu administration","Administration du menu principal",0,0,"Administration du menu principal"
+widget,phpinfo_frame.description,,fr-FR,"Show PHP runtime information inside the admin layout.","Affiche les informations d’exécution PHP dans la mise en page d’administration.",0,0,"Affiche les informations d’exécution PHP dans la mise en page d’administration."
+widget,phpinfo_frame.name,,fr-FR,"PHPinfo frame","Cadre PHPinfo",0,0,"Cadre PHPinfo"
+widget,phpinfo_frame.open_raw,,fr-FR,"Open raw","Ouvrir la vue brute",0,0,"Ouvrir la vue brute"
+widget,phpinfo_frame.title,,fr-FR,PHPinfo,PHPinfo,0,1,PHPinfo
+widget,plain_html.description,,fr-FR,"HTML code (embed)","Code HTML (intégration)",0,0,"Code HTML (intégration)"
+widget,plain_html.name,,fr-FR,"HTML code (embed)","Code HTML (intégration)",0,0,"Code HTML (intégration)"
+widget,resource_acl_selector.description,,fr-FR,"Configure resource access permissions","Configurer les permissions d'accès aux ressources",0,0,"Configurer les permissions d'accès aux ressources"
+widget,resource_acl_selector.name,,fr-FR,"Resource access settings","Paramètres d'accès aux ressources",0,0,"Paramètres d'accès aux ressources"
+widget,resource_tree.description,,fr-FR,"Manage webpages, web folders, and uploaded files here.","Gérez ici les pages web, les dossiers web et les fichiers téléversés.",0,0,"Gérez ici les pages web, les dossiers web et les fichiers téléversés."
+widget,resource_tree.name,,fr-FR,"Webpage structure","Structure de la page web",0,0,"Structure de la page web"
+widget,rich_text.description,,fr-FR,"Freely editable text with images","Texte librement modifiable avec des images",0,0,"Texte librement modifiable avec des images"
+widget,rich_text.name,,fr-FR,"Editable text","Texte modifiable",0,0,"Texte modifiable"
+widget,role_list.description,,fr-FR,"Displays the role tree","Affiche l'arbre des rôles",0,0,"Affiche l'arbre des rôles"
+widget,role_list.name,,fr-FR,"Role list","Liste des rôles",0,0,"Liste des rôles"
+widget,role_selector.description,,fr-FR,"Role selector","Sélecteur de rôle",0,0,"Sélecteur de rôle"
+widget,role_selector.name,,fr-FR,"Role selector","Sélecteur de rôle",0,0,"Sélecteur de rôle"
+widget,tag_list.description,,fr-FR,"Tag list","Liste des étiquettes",0,0,"Liste des étiquettes"
+widget,tag_list.name,,fr-FR,"Tag list","Liste des étiquettes",0,0,"Liste des étiquettes"
+widget,template_engine_demo_blade.description,,fr-FR,"Demonstrates rendering a Blade template inside Radaptor.","Démontre le rendu d’un modèle Blade dans Radaptor.",0,0,"Démontre le rendu d’un modèle Blade dans Radaptor."
+widget,template_engine_demo_blade.name,,fr-FR,"Blade template engine demo","Démo du moteur de modèles Blade",0,0,"Démo du moteur de modèles Blade"
+widget,template_engine_demo_php.description,,fr-FR,"Demonstrates rendering a native PHP template inside Radaptor.","Démontre le rendu d’un modèle PHP natif dans Radaptor.",0,0,"Démontre le rendu d’un modèle PHP natif dans Radaptor."
+widget,template_engine_demo_php.name,,fr-FR,"PHP template engine demo","Démo du moteur de modèles PHP",0,0,"Démo du moteur de modèles PHP"
+widget,template_engine_demo_twig.description,,fr-FR,"Demonstrates rendering a Twig template inside Radaptor.","Démontre le rendu d’un modèle Twig dans Radaptor.",0,0,"Démontre le rendu d’un modèle Twig dans Radaptor."
+widget,template_engine_demo_twig.name,,fr-FR,"Twig template engine demo","Démo du moteur de modèles Twig",0,0,"Démo du moteur de modèles Twig"
+widget,user_description.description,,fr-FR,"Displays the details of a user","Affiche les détails d'un utilisateur",0,0,"Affiche les détails d'un utilisateur"
+widget,user_description.name,,fr-FR,"User details","Détails de l'utilisateur",0,0,"Détails de l'utilisateur"
+widget,user_list.description,,fr-FR,"User list","Liste des utilisateurs",0,0,"Liste des utilisateurs"
+widget,user_list.name,,fr-FR,"User list","Liste des utilisateurs",0,0,"Liste des utilisateurs"
+widget,usergroup_list.description,,fr-FR,"Displays the user group tree","Affiche l'arbre des groupes d'utilisateurs",0,0,"Affiche l'arbre des groupes d'utilisateurs"
+widget,usergroup_list.name,,fr-FR,"User group list","Liste des groupes d'utilisateurs",0,0,"Liste des groupes d'utilisateurs"
+widget,usergroup_selector.description,,fr-FR,"Select user groups for a user","Sélectionner les groupes d'utilisateurs pour un utilisateur",0,0,"Sélectionner les groupes d'utilisateurs pour un utilisateur"
+widget,usergroup_selector.name,,fr-FR,"User group selector","Sélecteur de groupe d'utilisateurs",0,0,"Sélecteur de groupe d'utilisateurs"
+widget,widget_error.description,,fr-FR,"Invalid widget","Widget invalide",0,0,"Widget invalide"
+widget,widget_error.invalid_type,,fr-FR,"Non-existent content type: {type}","Type de contenu inexistant : {type}",0,0,"Type de contenu inexistant : {type}"
+widget,widget_error.name,,fr-FR,"Invalid widget","Widget invalide",0,0,"Widget invalide"
+widget,widget_preview.description,,fr-FR,"Preview any widget with mock data. URL params: widget (required), theme (optional)","Prévisualisez n'importe quel widget avec des données simulées. Paramètres URL : widget (obligatoire), theme (facultatif)",0,0,"Prévisualisez n'importe quel widget avec des données simulées. Paramètres URL : widget (obligatoire), theme (facultatif)"
+widget,widget_preview.name,,fr-FR,"Widget preview","Aperçu du widget",0,0,"Aperçu du widget"
+workbench,tm_apply,,fr-FR,Apply,Appliquer,0,0,Appliquer
+workbench,tm_no_results,,fr-FR,"No suggestions","Aucune suggestion",0,0,"Aucune suggestion"
+workbench,tm_uses,,fr-FR,uses,utilise,0,0,utilise
+admin,menu.mailpit,,fr-FR,Mailpit,Mailpit,0,1,Mailpit
+admin,email_outbox.recipients_delivery_counts,,fr-FR,"({sent} sent / {failed} failed)","({sent} envoyés / {failed} échoués)",0,0,"({sent} envoyés / {failed} échoués)"
+admin,email_outbox.col.job,,fr-FR,Job,Tâche,0,0,Tâche
+admin,email_outbox.col.dead_lettered,,fr-FR,"Dead lettered","Mis en dead letter",0,0,"Mis en dead letter"
+admin,email_outbox.pagination.previous,,fr-FR,Previous,Précédent,0,0,Précédent
+admin,email_outbox.pagination.next,,fr-FR,Next,Suivant,0,0,Suivant
+runtime_diagnostics,card.package_roots,,fr-FR,"Package roots","Racines des paquets",0,0,"Racines des paquets"
+runtime_diagnostics,field.environment,,fr-FR,Environment,Environnement,0,0,Environnement
+runtime_diagnostics,field.application,,fr-FR,Application,Application,0,1,Application
+runtime_diagnostics,field.domain_context,,fr-FR,"Domain context","Contexte de domaine",0,0,"Contexte de domaine"
+runtime_diagnostics,field.runtime,,fr-FR,Runtime,Runtime,0,1,Runtime
+runtime_diagnostics,field.smtp_host,,fr-FR,"SMTP host","Hôte SMTP",0,0,"Hôte SMTP"
+runtime_diagnostics,field.smtp_port,,fr-FR,"SMTP port","Port SMTP",0,0,"Port SMTP"
+runtime_diagnostics,field.using_catcher,,fr-FR,"Using catcher","Catcher utilisé",0,0,"Catcher utilisé"
+runtime_diagnostics,field.catcher_host,,fr-FR,"Catcher host","Hôte du catcher",0,0,"Hôte du catcher"
+runtime_diagnostics,field.catcher_smtp_port,,fr-FR,"Catcher SMTP port","Port SMTP du catcher",0,0,"Port SMTP du catcher"
+runtime_diagnostics,field.mailpit_ui_url,,fr-FR,"Mailpit UI URL","URL UI Mailpit",0,0,"URL UI Mailpit"
+runtime_diagnostics,field.driver,,fr-FR,Driver,Pilote,0,0,Pilote
+runtime_diagnostics,field.host,,fr-FR,Host,Hôte,0,0,Hôte
+runtime_diagnostics,field.port,,fr-FR,Port,Port,0,1,Port
+runtime_diagnostics,field.database,,fr-FR,Database,"Base de données",0,0,"Base de données"
+runtime_diagnostics,field.username,,fr-FR,Username,"Nom d’utilisateur",0,0,"Nom d’utilisateur"
+runtime_diagnostics,field.password,,fr-FR,Password,"Mot de passe",0,0,"Mot de passe"
+runtime_diagnostics,field.dsn,,fr-FR,DSN,DSN,0,1,DSN
+runtime_diagnostics,field.session,,fr-FR,Session,Session,0,1,Session
+runtime_diagnostics,field.cache,,fr-FR,Cache,Cache,0,1,Cache
+runtime_diagnostics,field.test,,fr-FR,Test,Test,0,1,Test
+runtime_diagnostics,field.public_url,,fr-FR,"Public URL","URL publique",0,0,"URL publique"
+runtime_diagnostics,field.allowed_origins,,fr-FR,"Allowed origins","Origines autorisées",0,0,"Origines autorisées"
+runtime_diagnostics,field.enabled_hint,,fr-FR,"Enabled hint","Indice d’activation",0,0,"Indice d’activation"
+runtime_diagnostics,field.mode,,fr-FR,Mode,Mode,0,1,Mode
+runtime_diagnostics,field.local_manifest,,fr-FR,"Local manifest","Manifeste local",0,0,"Manifeste local"
+runtime_diagnostics,field.local_lock,,fr-FR,"Local lock","Lock local",0,0,"Lock local"
+runtime_diagnostics,field.workspace_dev_mode,,fr-FR,"Workspace dev mode","Mode dev du workspace",0,0,"Mode dev du workspace"
+runtime_diagnostics,field.local_overrides_disabled,,fr-FR,"Local overrides disabled","Overrides locaux désactivés",0,0,"Overrides locaux désactivés"
+runtime_diagnostics,col.package,,fr-FR,Package,Paquet,0,0,Paquet
+runtime_diagnostics,col.source,,fr-FR,Source,Source,0,1,Source
+runtime_diagnostics,col.version,,fr-FR,Version,Version,0,1,Version
+runtime_diagnostics,col.active_path,,fr-FR,"Active path","Chemin actif",0,0,"Chemin actif"
+cms,template.missing,,fr-FR,"Missing template:","Template manquant :",0,0,"Template manquant :"
+cms,widget_preview.server_html_preview,,fr-FR,"Server HTML preview","Aperçu HTML serveur",0,0,"Aperçu HTML serveur"
+cms,widget_preview.subtree_json,,fr-FR,"Widget subtree JSON","JSON du sous-arbre du widget",0,0,"JSON du sous-arbre du widget"
+cms,widget_preview.subtree_json_description,,fr-FR,"Extracted from the same SDUI JSON document available through Open JSON.","Extrait du même document JSON SDUI disponible via Ouvrir JSON.",0,0,"Extrait du même document JSON SDUI disponible via Ouvrir JSON."
+cms,widget_preview.open_json,,fr-FR,"Open JSON","Ouvrir JSON",0,0,"Ouvrir JSON"
+cms,widget_preview.loading_json_preview,,fr-FR,"Loading JSON preview...","Chargement de l’aperçu JSON...",0,0,"Chargement de l’aperçu JSON..."
+cms,widget_preview.sdui_subtree_help,,fr-FR,"Showing the widget subtree extracted from the full SDUI JSON document.","Affiche le sous-arbre du widget extrait du document JSON SDUI complet.",0,0,"Affiche le sous-arbre du widget extrait du document JSON SDUI complet."
+cms,widget_preview.template_scope_note,,fr-FR,"This support check only looks at the resolved preview HTML template of the widget root node.","Cette vérification ne regarde que le template HTML d’aperçu résolu du nœud racine du widget.",0,0,"Cette vérification ne regarde que le template HTML d’aperçu résolu du nœud racine du widget."
+social,disqus.brand,,fr-FR,Disqus,Disqus,0,1,Disqus
+layout,public_2row.brand,,fr-FR,TeamSolution,TeamSolution,0,1,TeamSolution
+theme,template_engine_demo.col.name,,fr-FR,Name,Nom,0,0,Nom
+theme,template_engine_demo.col.email,,fr-FR,Email,Email,0,1,Email
+theme,template_engine_demo.col.role,,fr-FR,Role,Rôle,0,0,Rôle
+theme,template_engine_demo.engine_title,,fr-FR,"{engine} Template Engine","Moteur de template {engine}",0,0,"Moteur de template {engine}"
+theme,template_engine_demo.source_title,,fr-FR,"Template Source","Source du template",0,0,"Source du template"
+theme,template_engine_demo.rendered_output_title,,fr-FR,"Rendered Output","Sortie rendue",0,0,"Sortie rendue"
+layout,admin_empty.sign_in_to_continue,,fr-FR,"Sign in to continue.","Connectez-vous pour continuer.",0,0,"Connectez-vous pour continuer."
+cms,resource.field.locale.label,,fr-FR,"Content locale","Locale du contenu",0,0,"Locale du contenu"
+cms,resource.field.locale.explanation,,fr-FR,"Select a fixed locale for this resource, or leave it dynamic/inherited.","Sélectionnez une locale fixe pour cette ressource ou laissez-la dynamique/héritée.",0,0,"Sélectionnez une locale fixe pour cette ressource ou laissez-la dynamique/héritée."
+cms,resource.field.locale.dynamic,,fr-FR,"Dynamic / inherit","Dynamique / héritée",0,0,"Dynamique / héritée"
+cms,richtext.field.locale.label,,fr-FR,"Content locale","Locale du contenu",0,0,"Locale du contenu"
+cms,richtext.field.locale.explanation,,fr-FR,"The locale this text content belongs to.","La locale à laquelle appartient ce contenu texte.",0,0,"La locale à laquelle appartient ce contenu texte."
+cms,richtext.locale_mismatch,,fr-FR,"The selected text content does not match the page locale.","Le contenu texte sélectionné ne correspond pas à la locale de la page.",0,0,"Le contenu texte sélectionné ne correspond pas à la locale de la page."
+widget,locale_admin.name,,fr-FR,"Locale administration","Locale administration",0,1,"Locale administration"
+widget,locale_admin.description,,fr-FR,"Manage enabled application locales.","Manage enabled application locales.",0,1,"Manage enabled application locales."
+locale_admin,title,,fr-FR,Locales,Locales,0,1,Locales
+locale_admin,subtitle,,fr-FR,"Enable or disable locales offered for new admin content. Existing content is not deleted.","Enable or disable locales offered for new admin content. Existing content is not deleted.",0,1,"Enable or disable locales offered for new admin content. Existing content is not deleted."
+locale_admin,add_title,,fr-FR,"Add locale","Add locale",0,1,"Add locale"
+locale_admin,field.locale,,fr-FR,Locale,Locale,0,1,Locale
+locale_admin,placeholder.locale,,fr-FR,en-US,en-US,0,1,en-US
+locale_admin,action.add_enabled,,fr-FR,"Add enabled","Add enabled",0,1,"Add enabled"
+locale_admin,action.enable,,fr-FR,Enable,Enable,0,1,Enable
+locale_admin,action.disable,,fr-FR,Disable,Disable,0,1,Disable
+locale_admin,col.locale,,fr-FR,Locale,Locale,0,1,Locale
+locale_admin,col.label,,fr-FR,Label,Label,0,1,Label
+locale_admin,col.native_label,,fr-FR,"Native label","Native label",0,1,"Native label"
+locale_admin,col.status,,fr-FR,Status,Status,0,1,Status
+locale_admin,col.home,,fr-FR,"Home resources","Home resources",0,1,"Home resources"
+locale_admin,col.usage,,fr-FR,Usage,Usage,0,1,Usage
+locale_admin,col.actions,,fr-FR,Actions,Actions,0,1,Actions
+locale_admin,status.enabled,,fr-FR,Enabled,Enabled,0,1,Enabled
+locale_admin,status.disabled,,fr-FR,Disabled,Disabled,0,1,Disabled
+locale_admin,status.default,,fr-FR,Default,Default,0,1,Default
+locale_admin,home_count,,fr-FR,"{count} home target(s)","{count} home target(s)",0,1,"{count} home target(s)"
+locale_admin,usage.none,,fr-FR,"No usage","No usage",0,1,"No usage"
+locale_admin,message.enabled,,fr-FR,"Locale {locale} enabled.","Locale {locale} enabled.",0,1,"Locale {locale} enabled."
+locale_admin,message.disabled,,fr-FR,"Locale {locale} disabled.","Locale {locale} disabled.",0,1,"Locale {locale} disabled."
+locale_admin,message.error,,fr-FR,"Locale {locale} could not be updated.","Locale {locale} could not be updated.",0,1,"Locale {locale} could not be updated."
+locale_admin,message.invalid_locale,,fr-FR,"Invalid locale.","Invalid locale.",0,1,"Invalid locale."
+locale_admin,message.service_unavailable,,fr-FR,"Locale administration is unavailable until the locale infrastructure is installed.","L'administration des locales n'est pas disponible tant que l'infrastructure des locales n'est pas installée.",0,0,"L'administration des locales n'est pas disponible tant que l'infrastructure des locales n'est pas installée."
+admin,i18n.col.allow_source_match,,fr-FR,"Source match","Source match",0,1,"Source match"
+admin,i18n.allow_source_match.help,,fr-FR,"Allow only when the translation intentionally matches the source text.","Allow only when the translation intentionally matches the source text.",0,1,"Allow only when the translation intentionally matches the source text."

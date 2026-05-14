@@ -10,7 +10,8 @@ final class I18nTranslationService
 	 * @return array{
 	 *   action: 'inserted'|'updated'|'skipped',
 	 *   natural_key: string,
-	 *   reason?: string
+	 *   reason?: string,
+	 *   allow_source_match?: bool
 	 * }
 	 */
 	public static function saveTranslation(
@@ -21,7 +22,8 @@ final class I18nTranslationService
 		string $text,
 		?bool $humanReviewed,
 		bool $dryRun = false,
-		?string $sourceTextOverride = null
+		?string $sourceTextOverride = null,
+		?bool $allowSourceMatch = null
 	): array {
 		$domain = trim($domain);
 		$key = trim($key);
@@ -48,12 +50,21 @@ final class I18nTranslationService
 		$sourceHash = $message['source_hash'];
 		$existingText = $existing !== null ? (string) $existing->text : '';
 		$existingHumanReviewed = $existing !== null && self::_normalizeHumanReviewed($existing->human_reviewed ?? 0);
+		$existingAllowSourceMatch = $existing !== null && self::_normalizeAllowSourceMatch($existing->allow_source_match ?? 0);
 		$existingSourceHash = $existing !== null ? (string) $existing->source_hash_snapshot : '';
 		$targetHumanReviewed = self::_resolveImportedHumanReviewed($existing, $humanReviewed);
+		$targetAllowSourceMatch = self::_resolveImportedAllowSourceMatch(
+			$existing,
+			$allowSourceMatch,
+			$locale,
+			$message['source_text'],
+			$text
+		);
 
 		if ($existing !== null) {
 			$unchanged = $existingText === $text
 				&& $existingHumanReviewed === $targetHumanReviewed
+				&& $existingAllowSourceMatch === $targetAllowSourceMatch
 				&& $existingSourceHash === $sourceHash;
 
 			if ($unchanged) {
@@ -61,6 +72,7 @@ final class I18nTranslationService
 					'action' => 'skipped',
 					'natural_key' => $naturalKey,
 					'reason' => 'unchanged',
+					'allow_source_match' => $targetAllowSourceMatch,
 				];
 			}
 		}
@@ -69,6 +81,7 @@ final class I18nTranslationService
 			return [
 				'action' => $existing === null ? 'inserted' : 'updated',
 				'natural_key' => $naturalKey,
+				'allow_source_match' => $targetAllowSourceMatch,
 			];
 		}
 
@@ -88,6 +101,7 @@ final class I18nTranslationService
 					'locale' => $locale,
 					'text' => $text,
 					'human_reviewed' => $targetHumanReviewed ? 1 : 0,
+					'allow_source_match' => $targetAllowSourceMatch ? 1 : 0,
 					'source_hash_snapshot' => $sourceHash,
 				]);
 			} else {
@@ -98,6 +112,7 @@ final class I18nTranslationService
 					'locale' => $locale,
 					'text' => $text,
 					'human_reviewed' => $targetHumanReviewed ? 1 : 0,
+					'allow_source_match' => $targetAllowSourceMatch ? 1 : 0,
 					'source_hash_snapshot' => $sourceHash,
 				])->save();
 			}
@@ -118,6 +133,7 @@ final class I18nTranslationService
 		return [
 			'action' => $existing === null ? 'inserted' : 'updated',
 			'natural_key' => $naturalKey,
+			'allow_source_match' => $targetAllowSourceMatch,
 		];
 	}
 
@@ -210,7 +226,8 @@ final class I18nTranslationService
 	 * @return array{
 	 *   action: 'inserted'|'updated'|'skipped',
 	 *   natural_key: string,
-	 *   reason?: string
+	 *   reason?: string,
+	 *   allow_source_match?: bool
 	 * }
 	 */
 	public static function applyImportRow(array $row, CsvImportMode $mode, bool $dryRun = false): array
@@ -223,6 +240,7 @@ final class I18nTranslationService
 		$text    = (string) ($row['text'] ?? '');
 		$expectedText = (string) ($row['expected_text'] ?? '');
 		$requestedHumanReviewed = self::_normalizeImportedHumanReviewed($row['human_reviewed'] ?? '');
+		$requestedAllowSourceMatch = self::_normalizeImportedAllowSourceMatch($row['allow_source_match'] ?? '');
 		$naturalKey = self::_buildNaturalKey($domain, $key, $context, $locale);
 
 		$existing = EntityI18n_translation::findById([
@@ -272,7 +290,8 @@ final class I18nTranslationService
 			$text,
 			$requestedHumanReviewed,
 			$dryRun,
-			(string) ($row['source_text'] ?? '')
+			(string) ($row['source_text'] ?? ''),
+			$requestedAllowSourceMatch
 		);
 	}
 
@@ -376,6 +395,16 @@ final class I18nTranslationService
 		return self::_normalizeHumanReviewed($value);
 	}
 
+	private static function _normalizeAllowSourceMatch(mixed $value): bool
+	{
+		return I18nCsvSchema::normalizeBoolean($value);
+	}
+
+	private static function _normalizeImportedAllowSourceMatch(mixed $value): ?bool
+	{
+		return I18nCsvSchema::normalizeImportedBoolean($value);
+	}
+
 	private static function _resolveImportedHumanReviewed(?EntityI18n_translation $existing, ?bool $requestedHumanReviewed): bool
 	{
 		$existingHumanReviewed = $existing !== null && self::_normalizeHumanReviewed($existing->human_reviewed ?? 0);
@@ -391,5 +420,18 @@ final class I18nTranslationService
 		}
 
 		return $requestedHumanReviewed;
+	}
+
+	private static function _resolveImportedAllowSourceMatch(
+		?EntityI18n_translation $existing,
+		?bool $requestedAllowSourceMatch,
+		string $locale,
+		string $sourceText,
+		string $text
+	): bool {
+		$existingAllowSourceMatch = $existing !== null && self::_normalizeAllowSourceMatch($existing->allow_source_match ?? 0);
+		$targetAllowSourceMatch = $requestedAllowSourceMatch ?? $existingAllowSourceMatch;
+
+		return $targetAllowSourceMatch && I18nCsvSchema::isEligibleSourceMatch($locale, $sourceText, $text);
 	}
 }

@@ -1,66 +1,67 @@
-﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
-import_export,action.export_csv,,pl-PL,"Export CSV","Eksport CSV",0,"Eksport CSV"
-import_export,action.preview_import,,pl-PL,"Preview import","Podgląd importu",0,"Podgląd importu"
-import_export,action.run_import,,pl-PL,"Run import","Uruchom import",0,"Uruchom import"
-import_export,dataset.i18n_translations.description,,pl-PL,"Export and import translation rows as CSV.","Eksportuj i importuj wiersze tłumaczeń jako CSV.",0,"Eksportuj i importuj wiersze tłumaczeń jako CSV."
-import_export,dataset.i18n_translations.name,,pl-PL,"I18n translations","Tłumaczenia i18n",0,"Tłumaczenia i18n"
-import_export,error.dataset_not_found,,pl-PL,"Import/export dataset not found.","Nie znaleziono zbioru danych importu/eksportu.",0,"Nie znaleziono zbioru danych importu/eksportu."
-import_export,error.file_read,,pl-PL,"Unable to read the uploaded CSV file.","Nie można odczytać przesłanego pliku CSV.",0,"Nie można odczytać przesłanego pliku CSV."
-import_export,error.file_required,,pl-PL,"Please select a CSV file to import.","Wybierz plik CSV do importu.",0,"Wybierz plik CSV do importu."
-import_export,error.invalid_format,,pl-PL,"Invalid format","Nieprawidłowy format",0,"Nieprawidłowy format"
-import_export,error.invalid_mode,,pl-PL,"Invalid import mode.","Nieprawidłowy tryb importu.",0,"Nieprawidłowy tryb importu."
-import_export,error.locale_required,,pl-PL,"Locale is required for export.","Locale jest wymagane do eksportu.",0,"Locale jest wymagane do eksportu."
-import_export,error.wide_no_locale_columns,,pl-PL,"Wide CSV must contain at least one text:<locale> column.","Szeroki CSV musi zawierać co najmniej jedną kolumnę text:<locale>.",0,"Szeroki CSV musi zawierać co najmniej jedną kolumnę text:<locale>."
-import_export,export.title,,pl-PL,"Export CSV","Eksport CSV",0,"Eksport CSV"
-import_export,field.dataset.label,,pl-PL,Dataset,"Zbiór danych",0,"Zbiór danych"
-import_export,field.expect_locale.any,,pl-PL,"Any locale in file","Dowolne locale w pliku",0,"Dowolne locale w pliku"
-import_export,field.expect_locale.help,,pl-PL,"Optional for insert_new and upsert. Sync should normally set this explicitly and always uses a single-locale scope, even when importing wide CSV.","Opcjonalne dla insert_new i upsert. Sync powinien zwykle ustawiać to jawnie i zawsze używa zakresu jednego locale, nawet przy imporcie szerokiego CSV.",0,"Opcjonalne dla insert_new i upsert. Sync powinien zwykle ustawiać to jawnie i zawsze używa zakresu jednego locale, nawet przy imporcie szerokiego CSV."
-import_export,field.expect_locale.label,,pl-PL,"Expected locale","Oczekiwane locale",0,"Oczekiwane locale"
-import_export,field.file.help,,pl-PL,"Upload a CSV file exported from the same dataset.","Prześlij plik CSV wyeksportowany z tego samego zbioru danych.",0,"Prześlij plik CSV wyeksportowany z tego samego zbioru danych."
-import_export,field.file.label,,pl-PL,"CSV file","Plik CSV",0,"Plik CSV"
-import_export,field.format.help,,pl-PL,"Normalized keeps one row per locale. Wide groups locales into text:<locale> columns.","Format znormalizowany zachowuje jeden wiersz na locale. Format szeroki grupuje locale w kolumnach text:<locale>.",0,"Format znormalizowany zachowuje jeden wiersz na locale. Format szeroki grupuje locale w kolumnach text:<locale>."
-import_export,field.format.label,,pl-PL,Format,Format,0,Format
-import_export,field.locale.all,,pl-PL,"All locales","Wszystkie locale",0,"Wszystkie locale"
-import_export,field.locale.help,,pl-PL,"Leave empty to export all locales, or choose one locale for a smaller file. Wide format puts locale values into text:<locale> columns.","Pozostaw puste, aby wyeksportować wszystkie locale, albo wybierz jedno locale dla mniejszego pliku. Format szeroki umieszcza wartości locale w kolumnach text:<locale>.",0,"Pozostaw puste, aby wyeksportować wszystkie locale, albo wybierz jedno locale dla mniejszego pliku. Format szeroki umieszcza wartości locale w kolumnach text:<locale>."
-import_export,field.locale.label,,pl-PL,Locale,Locale,0,Locale
-import_export,field.mode.help,,pl-PL,"Sync is destructive: it deletes rows missing from the imported locale slice and only supports single-locale files.","Sync jest destrukcyjny: usuwa wiersze brakujące w importowanym wycinku locale i obsługuje tylko pliki z jednym locale.",0,"Sync jest destrukcyjny: usuwa wiersze brakujące w importowanym wycinku locale i obsługuje tylko pliki z jednym locale."
-import_export,field.mode.label,,pl-PL,"Import mode","Tryb importu",0,"Tryb importu"
-import_export,format.auto,,pl-PL,Auto-detect,"Wykryj automatycznie",0,"Wykryj automatycznie"
-import_export,format.normalized,,pl-PL,Normalized,Znormalizowany,0,Znormalizowany
-import_export,format.wide,,pl-PL,Wide,Szeroki,0,Szeroki
-import_export,import.title,,pl-PL,"Import CSV","Import CSV",0,"Import CSV"
-import_export,mode.insert_new,,pl-PL,"Insert new only","Wstaw tylko nowe",0,"Wstaw tylko nowe"
-import_export,mode.sync,,pl-PL,"Sync locale slice","Synchronizuj wycinek locale",0,"Synchronizuj wycinek locale"
-import_export,mode.upsert,,pl-PL,"Upsert existing","Upsert istniejących",0,"Upsert istniejących"
-import_export,result.deleted,,pl-PL,Deleted,Usunięto,0,Usunięto
-import_export,result.detected_locale,,pl-PL,"Detected locale","Wykryte locale",0,"Wykryte locale"
-import_export,result.detected_locales,,pl-PL,"Detected locales","Wykryte locale",0,"Wykryte locale"
-import_export,result.dry_run_summary,,pl-PL,"Dry-run summary for {dataset}.","Podsumowanie dry-run dla {dataset}.",0,"Podsumowanie dry-run dla {dataset}."
-import_export,result.error_summary,,pl-PL,"Import finished with errors for {dataset}.","Import zakończył się z błędami dla {dataset}.",0,"Import zakończył się z błędami dla {dataset}."
-import_export,result.format,,pl-PL,Format,Format,0,Format
-import_export,result.imported,,pl-PL,Imported,Zaimportowano,0,Zaimportowano
-import_export,result.inserted,,pl-PL,Inserted,Wstawiono,0,Wstawiono
-import_export,result.mode,,pl-PL,Mode,Tryb,0,Tryb
-import_export,result.processed,,pl-PL,Processed,Przetworzono,0,Przetworzono
-import_export,result.skipped,,pl-PL,Skipped,Pominięto,0,Pominięto
-import_export,result.success_summary,,pl-PL,"Import completed successfully for {dataset}.","Import zakończył się pomyślnie dla {dataset}.",0,"Import zakończył się pomyślnie dla {dataset}."
-import_export,result.updated,,pl-PL,Updated,Zaktualizowano,0,Zaktualizowano
-import_export,workbench.description,,pl-PL,"Export data to CSV or import CSV files into registered datasets.","Eksportuj dane do CSV lub importuj pliki CSV do zarejestrowanych zbiorów danych.",0,"Eksportuj dane do CSV lub importuj pliki CSV do zarejestrowanych zbiorów danych."
-import_export,workbench.no_datasets,,pl-PL,"No import/export datasets are available.","Brak dostępnych zbiorów danych importu/eksportu.",0,"Brak dostępnych zbiorów danych importu/eksportu."
-import_export,workbench.title,,pl-PL,"Import / Export","Import / Eksport",0,"Import / Eksport"
-import_export,error.upload_backup_required,,pl-PL,"Confirm the uploaded files backup before exporting the site snapshot.","Potwierdź kopię zapasową przesłanych plików przed eksportem migawki witryny.",0,"Potwierdź kopię zapasową przesłanych plików przed eksportem migawki witryny."
-import_export,dataset.site_snapshot.name,,pl-PL,"Site snapshot","Migawka witryny",0,"Migawka witryny"
-import_export,dataset.site_snapshot.description,,pl-PL,"Export or restore database-backed site content and identity data as a JSON disaster-recovery snapshot.","Eksportuj lub przywracaj treść witryny i dane tożsamości z bazy danych jako migawkę JSON do odzyskiwania awaryjnego.",0,"Eksportuj lub przywracaj treść witryny i dane tożsamości z bazy danych jako migawkę JSON do odzyskiwania awaryjnego."
-import_export,field.uploads_backed_up.label,,pl-PL,"Uploaded files backed up","Przesłane pliki zarchiwizowane",0,"Przesłane pliki zarchiwizowane"
-import_export,field.uploads_backed_up.help,,pl-PL,"Confirm that the upload directory has been copied separately before downloading the JSON snapshot.","Potwierdź, że katalog uploadów został skopiowany osobno przed pobraniem migawki JSON.",0,"Potwierdź, że katalog uploadów został skopiowany osobno przed pobraniem migawki JSON."
-import_export,field.site_snapshot_file.label,,pl-PL,"Site snapshot JSON","JSON migawki witryny",0,"JSON migawki witryny"
-import_export,field.site_snapshot_file.help,,pl-PL,"Upload a JSON snapshot exported from the same Radaptor schema. Copy the upload directory before applying the import.","Prześlij migawkę JSON wyeksportowaną z tego samego schematu Radaptor. Skopiuj katalog uploadów przed zastosowaniem importu.",0,"Prześlij migawkę JSON wyeksportowaną z tego samego schematu Radaptor. Skopiuj katalog uploadów przed zastosowaniem importu."
-import_export,field.replace_confirmed.label,,pl-PL,"Replace current site data","Zastąp bieżące dane witryny",0,"Zastąp bieżące dane witryny"
-import_export,field.replace_confirmed.help,,pl-PL,"Required for the real import. The restore replaces the snapshot-managed database tables.","Wymagane dla rzeczywistego importu. Przywracanie zastępuje tabele bazy danych zarządzane przez migawkę.",0,"Wymagane dla rzeczywistego importu. Przywracanie zastępuje tabele bazy danych zarządzane przez migawkę."
-import_export,site_snapshot.export.title,,pl-PL,"Export JSON snapshot","Eksportuj migawkę JSON",0,"Eksportuj migawkę JSON"
-import_export,site_snapshot.import.title,,pl-PL,"Import JSON snapshot","Importuj migawkę JSON",0,"Importuj migawkę JSON"
-import_export,site_snapshot.action.export,,pl-PL,"Export JSON","Eksportuj JSON",0,"Eksportuj JSON"
-import_export,confirm.site_snapshot_replace,,pl-PL,"This import will replace the current site database content with the uploaded snapshot. Continue?","Ten import zastąpi bieżącą zawartość bazy danych witryny przesłaną migawką. Kontynuować?",0,"Ten import zastąpi bieżącą zawartość bazy danych witryny przesłaną migawką. Kontynuować?"
-import_export,field.allow_environment_mismatch.label,,pl-PL,"Allow environment mismatch","Zezwól na niezgodność środowiska",0,"Zezwól na niezgodność środowiska"
-import_export,field.allow_environment_mismatch.help,,pl-PL,"Required only when importing a snapshot into a different environment. Leave disabled for normal restores.","Wymagane tylko podczas importowania migawki do innego środowiska. Pozostaw wyłączone przy normalnym przywracaniu.",0,"Wymagane tylko podczas importowania migawki do innego środowiska. Pozostaw wyłączone przy normalnym przywracaniu."
-import_export,error.source_cutover_required,,pl-PL,"Source site cutover lock was not active before site migration export.","Blokada przełączenia witryny źródłowej nie była aktywna przed eksportem migracji witryny.",0,"Blokada przełączenia witryny źródłowej nie była aktywna przed eksportem migracji witryny."
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,allow_source_match,text
+import_export,action.export_csv,,pl-PL,"Export CSV","Eksport CSV",0,0,"Eksport CSV"
+import_export,action.preview_import,,pl-PL,"Preview import","Podgląd importu",0,0,"Podgląd importu"
+import_export,action.run_import,,pl-PL,"Run import","Uruchom import",0,0,"Uruchom import"
+import_export,dataset.i18n_translations.description,,pl-PL,"Export and import translation rows as CSV.","Eksportuj i importuj wiersze tłumaczeń jako CSV.",0,0,"Eksportuj i importuj wiersze tłumaczeń jako CSV."
+import_export,dataset.i18n_translations.name,,pl-PL,"I18n translations","Tłumaczenia i18n",0,0,"Tłumaczenia i18n"
+import_export,error.dataset_not_found,,pl-PL,"Import/export dataset not found.","Nie znaleziono zbioru danych importu/eksportu.",0,0,"Nie znaleziono zbioru danych importu/eksportu."
+import_export,error.file_read,,pl-PL,"Unable to read the uploaded CSV file.","Nie można odczytać przesłanego pliku CSV.",0,0,"Nie można odczytać przesłanego pliku CSV."
+import_export,error.file_required,,pl-PL,"Please select a CSV file to import.","Wybierz plik CSV do importu.",0,0,"Wybierz plik CSV do importu."
+import_export,error.invalid_format,,pl-PL,"Invalid format","Nieprawidłowy format",0,0,"Nieprawidłowy format"
+import_export,error.invalid_mode,,pl-PL,"Invalid import mode.","Nieprawidłowy tryb importu.",0,0,"Nieprawidłowy tryb importu."
+import_export,error.locale_required,,pl-PL,"Locale is required for export.","Locale jest wymagane do eksportu.",0,0,"Locale jest wymagane do eksportu."
+import_export,error.wide_no_locale_columns,,pl-PL,"Wide CSV must contain at least one text:<locale> column.","Szeroki CSV musi zawierać co najmniej jedną kolumnę text:<locale>.",0,0,"Szeroki CSV musi zawierać co najmniej jedną kolumnę text:<locale>."
+import_export,export.title,,pl-PL,"Export CSV","Eksport CSV",0,0,"Eksport CSV"
+import_export,field.dataset.label,,pl-PL,Dataset,"Zbiór danych",0,0,"Zbiór danych"
+import_export,field.expect_locale.any,,pl-PL,"Any locale in file","Dowolne locale w pliku",0,0,"Dowolne locale w pliku"
+import_export,field.expect_locale.help,,pl-PL,"Optional for insert_new and upsert. Sync should normally set this explicitly and always uses a single-locale scope, even when importing wide CSV.","Opcjonalne dla insert_new i upsert. Sync powinien zwykle ustawiać to jawnie i zawsze używa zakresu jednego locale, nawet przy imporcie szerokiego CSV.",0,0,"Opcjonalne dla insert_new i upsert. Sync powinien zwykle ustawiać to jawnie i zawsze używa zakresu jednego locale, nawet przy imporcie szerokiego CSV."
+import_export,field.expect_locale.label,,pl-PL,"Expected locale","Oczekiwane locale",0,0,"Oczekiwane locale"
+import_export,field.file.help,,pl-PL,"Upload a CSV file exported from the same dataset.","Prześlij plik CSV wyeksportowany z tego samego zbioru danych.",0,0,"Prześlij plik CSV wyeksportowany z tego samego zbioru danych."
+import_export,field.file.label,,pl-PL,"CSV file","Plik CSV",0,0,"Plik CSV"
+import_export,field.format.help,,pl-PL,"Normalized keeps one row per locale. Wide groups locales into text:<locale> columns.","Format znormalizowany zachowuje jeden wiersz na locale. Format szeroki grupuje locale w kolumnach text:<locale>.",0,0,"Format znormalizowany zachowuje jeden wiersz na locale. Format szeroki grupuje locale w kolumnach text:<locale>."
+import_export,field.format.label,,pl-PL,Format,Format,0,1,Format
+import_export,field.locale.all,,pl-PL,"All locales","Wszystkie locale",0,0,"Wszystkie locale"
+import_export,field.locale.help,,pl-PL,"Leave empty to export all locales, or choose one locale for a smaller file. Wide format puts locale values into text:<locale> columns.","Pozostaw puste, aby wyeksportować wszystkie locale, albo wybierz jedno locale dla mniejszego pliku. Format szeroki umieszcza wartości locale w kolumnach text:<locale>.",0,0,"Pozostaw puste, aby wyeksportować wszystkie locale, albo wybierz jedno locale dla mniejszego pliku. Format szeroki umieszcza wartości locale w kolumnach text:<locale>."
+import_export,field.locale.label,,pl-PL,Locale,Locale,0,1,Locale
+import_export,field.mode.help,,pl-PL,"Sync is destructive: it deletes rows missing from the imported locale slice and only supports single-locale files.","Sync jest destrukcyjny: usuwa wiersze brakujące w importowanym wycinku locale i obsługuje tylko pliki z jednym locale.",0,0,"Sync jest destrukcyjny: usuwa wiersze brakujące w importowanym wycinku locale i obsługuje tylko pliki z jednym locale."
+import_export,field.mode.label,,pl-PL,"Import mode","Tryb importu",0,0,"Tryb importu"
+import_export,format.auto,,pl-PL,Auto-detect,"Wykryj automatycznie",0,0,"Wykryj automatycznie"
+import_export,format.normalized,,pl-PL,Normalized,Znormalizowany,0,0,Znormalizowany
+import_export,format.wide,,pl-PL,Wide,Szeroki,0,0,Szeroki
+import_export,import.title,,pl-PL,"Import CSV","Import CSV",0,1,"Import CSV"
+import_export,mode.insert_new,,pl-PL,"Insert new only","Wstaw tylko nowe",0,0,"Wstaw tylko nowe"
+import_export,mode.sync,,pl-PL,"Sync locale slice","Synchronizuj wycinek locale",0,0,"Synchronizuj wycinek locale"
+import_export,mode.upsert,,pl-PL,"Upsert existing","Upsert istniejących",0,0,"Upsert istniejących"
+import_export,result.deleted,,pl-PL,Deleted,Usunięto,0,0,Usunięto
+import_export,result.detected_locale,,pl-PL,"Detected locale","Wykryte locale",0,0,"Wykryte locale"
+import_export,result.detected_locales,,pl-PL,"Detected locales","Wykryte locale",0,0,"Wykryte locale"
+import_export,result.dry_run_summary,,pl-PL,"Dry-run summary for {dataset}.","Podsumowanie dry-run dla {dataset}.",0,0,"Podsumowanie dry-run dla {dataset}."
+import_export,result.error_summary,,pl-PL,"Import finished with errors for {dataset}.","Import zakończył się z błędami dla {dataset}.",0,0,"Import zakończył się z błędami dla {dataset}."
+import_export,result.format,,pl-PL,Format,Format,0,1,Format
+import_export,result.imported,,pl-PL,Imported,Zaimportowano,0,0,Zaimportowano
+import_export,result.inserted,,pl-PL,Inserted,Wstawiono,0,0,Wstawiono
+import_export,result.mode,,pl-PL,Mode,Tryb,0,0,Tryb
+import_export,result.processed,,pl-PL,Processed,Przetworzono,0,0,Przetworzono
+import_export,result.skipped,,pl-PL,Skipped,Pominięto,0,0,Pominięto
+import_export,result.success_summary,,pl-PL,"Import completed successfully for {dataset}.","Import zakończył się pomyślnie dla {dataset}.",0,0,"Import zakończył się pomyślnie dla {dataset}."
+import_export,result.updated,,pl-PL,Updated,Zaktualizowano,0,0,Zaktualizowano
+import_export,workbench.description,,pl-PL,"Export data to CSV or import CSV files into registered datasets.","Eksportuj dane do CSV lub importuj pliki CSV do zarejestrowanych zbiorów danych.",0,0,"Eksportuj dane do CSV lub importuj pliki CSV do zarejestrowanych zbiorów danych."
+import_export,workbench.no_datasets,,pl-PL,"No import/export datasets are available.","Brak dostępnych zbiorów danych importu/eksportu.",0,0,"Brak dostępnych zbiorów danych importu/eksportu."
+import_export,workbench.title,,pl-PL,"Import / Export","Import / Eksport",0,0,"Import / Eksport"
+import_export,error.upload_backup_required,,pl-PL,"Confirm the uploaded files backup before exporting the site snapshot.","Potwierdź kopię zapasową przesłanych plików przed eksportem migawki witryny.",0,0,"Potwierdź kopię zapasową przesłanych plików przed eksportem migawki witryny."
+import_export,dataset.site_snapshot.name,,pl-PL,"Site snapshot","Migawka witryny",0,0,"Migawka witryny"
+import_export,dataset.site_snapshot.description,,pl-PL,"Export or restore database-backed site content and identity data as a JSON disaster-recovery snapshot.","Eksportuj lub przywracaj treść witryny i dane tożsamości z bazy danych jako migawkę JSON do odzyskiwania awaryjnego.",0,0,"Eksportuj lub przywracaj treść witryny i dane tożsamości z bazy danych jako migawkę JSON do odzyskiwania awaryjnego."
+import_export,field.uploads_backed_up.label,,pl-PL,"Uploaded files backed up","Przesłane pliki zarchiwizowane",0,0,"Przesłane pliki zarchiwizowane"
+import_export,field.uploads_backed_up.help,,pl-PL,"Confirm that the upload directory has been copied separately before downloading the JSON snapshot.","Potwierdź, że katalog uploadów został skopiowany osobno przed pobraniem migawki JSON.",0,0,"Potwierdź, że katalog uploadów został skopiowany osobno przed pobraniem migawki JSON."
+import_export,field.site_snapshot_file.label,,pl-PL,"Site snapshot JSON","JSON migawki witryny",0,0,"JSON migawki witryny"
+import_export,field.site_snapshot_file.help,,pl-PL,"Upload a JSON snapshot exported from the same Radaptor schema. Copy the upload directory before applying the import.","Prześlij migawkę JSON wyeksportowaną z tego samego schematu Radaptor. Skopiuj katalog uploadów przed zastosowaniem importu.",0,0,"Prześlij migawkę JSON wyeksportowaną z tego samego schematu Radaptor. Skopiuj katalog uploadów przed zastosowaniem importu."
+import_export,field.replace_confirmed.label,,pl-PL,"Replace current site data","Zastąp bieżące dane witryny",0,0,"Zastąp bieżące dane witryny"
+import_export,field.replace_confirmed.help,,pl-PL,"Required for the real import. The restore replaces the snapshot-managed database tables.","Wymagane dla rzeczywistego importu. Przywracanie zastępuje tabele bazy danych zarządzane przez migawkę.",0,0,"Wymagane dla rzeczywistego importu. Przywracanie zastępuje tabele bazy danych zarządzane przez migawkę."
+import_export,site_snapshot.export.title,,pl-PL,"Export JSON snapshot","Eksportuj migawkę JSON",0,0,"Eksportuj migawkę JSON"
+import_export,site_snapshot.import.title,,pl-PL,"Import JSON snapshot","Importuj migawkę JSON",0,0,"Importuj migawkę JSON"
+import_export,site_snapshot.action.export,,pl-PL,"Export JSON","Eksportuj JSON",0,0,"Eksportuj JSON"
+import_export,confirm.site_snapshot_replace,,pl-PL,"This import will replace the current site database content with the uploaded snapshot. Continue?","Ten import zastąpi bieżącą zawartość bazy danych witryny przesłaną migawką. Kontynuować?",0,0,"Ten import zastąpi bieżącą zawartość bazy danych witryny przesłaną migawką. Kontynuować?"
+import_export,field.allow_environment_mismatch.label,,pl-PL,"Allow environment mismatch","Zezwól na niezgodność środowiska",0,0,"Zezwól na niezgodność środowiska"
+import_export,field.allow_environment_mismatch.help,,pl-PL,"Required only when importing a snapshot into a different environment. Leave disabled for normal restores.","Wymagane tylko podczas importowania migawki do innego środowiska. Pozostaw wyłączone przy normalnym przywracaniu.",0,0,"Wymagane tylko podczas importowania migawki do innego środowiska. Pozostaw wyłączone przy normalnym przywracaniu."
+import_export,error.source_cutover_required,,pl-PL,"Source site cutover lock was not active before site migration export.","Blokada przełączenia witryny źródłowej nie była aktywna przed eksportem migracji witryny.",0,0,"Blokada przełączenia witryny źródłowej nie była aktywna przed eksportem migracji witryny."
+import_export,warning.allow_source_match_missing,,pl-PL,"CSV is missing allow_source_match; existing eligible source-match flags may be preserved, but non-matching rows are normalized to 0.","CSV is missing allow_source_match; existing eligible source-match flags may be preserved, but non-matching rows are normalized to 0.",0,1,"CSV is missing allow_source_match; existing eligible source-match flags may be preserved, but non-matching rows are normalized to 0."

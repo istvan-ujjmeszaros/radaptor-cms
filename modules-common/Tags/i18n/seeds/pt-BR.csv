@@ -1,14 +1,14 @@
-﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
-tags,field.context.label,,pt-BR,Context,Contexto,0,Contexto
-tags,field.description.label,,pt-BR,"Tag description","Descrição da etiqueta",0,"Descrição da etiqueta"
-tags,field.name.explanation,,pt-BR,"No spaces, short and concise. Do not create synonyms for existing tags.","Sem espaços, curto e conciso. Não crie sinônimos para etiquetas existentes.",0,"Sem espaços, curto e conciso. Não crie sinônimos para etiquetas existentes."
-tags,field.name.label,,pt-BR,"Tag name","Nome da etiqueta",0,"Nome da etiqueta"
-tags,field.type.explanation,,pt-BR,"Select the tag type","Selecionar o tipo de etiqueta",0,"Selecionar o tipo de etiqueta"
-tags,field.type.label,,pt-BR,Type,Tipo,0,Tipo
-tags,form.name,,pt-BR,Tag,Etiqueta,0,Etiqueta
-tags,form.title_create,,pt-BR,"New tag","Nova etiqueta",0,"Nova etiqueta"
-tags,form.title_edit,,pt-BR,"Edit tag","Editar etiqueta",0,"Editar etiqueta"
-tags,list.title,,pt-BR,Tags,Etiquetas,0,Etiquetas
-tags,saved,,pt-BR,"Tags saved","Etiquetas salvas",0,"Etiquetas salvas"
-tags,updated,,pt-BR,"Tag updated","Etiqueta atualizada",0,"Etiqueta atualizada"
-tags,validation.name_max_length,,pt-BR,"Tag name must not exceed 255 characters","O nome da etiqueta não deve ultrapassar 255 caracteres",0,"O nome da etiqueta não deve ultrapassar 255 caracteres"
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,allow_source_match,text
+tags,field.context.label,,pt-BR,Context,Contexto,0,0,Contexto
+tags,field.description.label,,pt-BR,"Tag description","Descrição da etiqueta",0,0,"Descrição da etiqueta"
+tags,field.name.explanation,,pt-BR,"No spaces, short and concise. Do not create synonyms for existing tags.","Sem espaços, curto e conciso. Não crie sinônimos para etiquetas existentes.",0,0,"Sem espaços, curto e conciso. Não crie sinônimos para etiquetas existentes."
+tags,field.name.label,,pt-BR,"Tag name","Nome da etiqueta",0,0,"Nome da etiqueta"
+tags,field.type.explanation,,pt-BR,"Select the tag type","Selecionar o tipo de etiqueta",0,0,"Selecionar o tipo de etiqueta"
+tags,field.type.label,,pt-BR,Type,Tipo,0,0,Tipo
+tags,form.name,,pt-BR,Tag,Etiqueta,0,0,Etiqueta
+tags,form.title_create,,pt-BR,"New tag","Nova etiqueta",0,0,"Nova etiqueta"
+tags,form.title_edit,,pt-BR,"Edit tag","Editar etiqueta",0,0,"Editar etiqueta"
+tags,list.title,,pt-BR,Tags,Etiquetas,0,0,Etiquetas
+tags,saved,,pt-BR,"Tags saved","Etiquetas salvas",0,0,"Etiquetas salvas"
+tags,updated,,pt-BR,"Tag updated","Etiqueta atualizada",0,0,"Etiqueta atualizada"
+tags,validation.name_max_length,,pt-BR,"Tag name must not exceed 255 characters","O nome da etiqueta não deve ultrapassar 255 caracteres",0,0,"O nome da etiqueta não deve ultrapassar 255 caracteres"

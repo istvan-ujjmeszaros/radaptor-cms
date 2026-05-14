@@ -26,6 +26,7 @@ class EventI18nAjaxSave extends AbstractEvent implements iBrowserEventDocumentab
 					BrowserEventDocumentationHelper::param('locale', 'body', 'string', true, 'Target locale code.'),
 					BrowserEventDocumentationHelper::param('text', 'body', 'string', true, 'New translation text; empty string deletes the translation.'),
 					BrowserEventDocumentationHelper::param('human_reviewed', 'body', 'string', false, 'Truth-y flag to mark the translation as human reviewed.'),
+					BrowserEventDocumentationHelper::param('allow_source_match', 'body', 'string', false, 'Truth-y flag to allow an intentional source-text match.'),
 				],
 			],
 			'response' => [
@@ -55,6 +56,8 @@ class EventI18nAjaxSave extends AbstractEvent implements iBrowserEventDocumentab
 		$text    = Request::_POST('text', '');
 		$humanReviewedRaw = trim((string) Request::_POST('human_reviewed', '0'));
 		$humanReviewed = in_array($humanReviewedRaw, ['1', 'true', 'on', 'yes'], true);
+		$allowSourceMatchRaw = trim((string) Request::_POST('allow_source_match', '0'));
+		$allowSourceMatch = in_array($allowSourceMatchRaw, ['1', 'true', 'on', 'yes'], true);
 		$trimmedText = trim($text);
 
 		if ($domain === '' || $key === '' || $locale === '') {
@@ -68,7 +71,17 @@ class EventI18nAjaxSave extends AbstractEvent implements iBrowserEventDocumentab
 		if ($trimmedText === '') {
 			$result = I18nTranslationService::deleteTranslation($domain, $key, $context, $locale);
 		} else {
-			$result = I18nTranslationService::saveTranslation($domain, $key, $context, $locale, $text, $humanReviewed);
+			$result = I18nTranslationService::saveTranslation(
+				$domain,
+				$key,
+				$context,
+				$locale,
+				$text,
+				$humanReviewed,
+				false,
+				null,
+				$allowSourceMatch
+			);
 		}
 
 		header('Content-Type: application/json');
@@ -77,6 +90,7 @@ class EventI18nAjaxSave extends AbstractEvent implements iBrowserEventDocumentab
 			'action' => $result['action'],
 			'text' => $trimmedText === '' ? '' : $text,
 			'human_reviewed' => $trimmedText === '' ? false : $humanReviewed,
+			'allow_source_match' => $trimmedText === '' ? false : (bool) ($result['allow_source_match'] ?? false),
 			'is_missing' => $trimmedText === '',
 		]);
 	}

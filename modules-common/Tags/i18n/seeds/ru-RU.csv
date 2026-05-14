@@ -1,14 +1,14 @@
-﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
-tags,field.context.label,,ru-RU,Context,Контекст,0,Контекст
-tags,field.description.label,,ru-RU,"Tag description","Описание тега",0,"Описание тега"
-tags,field.name.explanation,,ru-RU,"No spaces, short and concise. Do not create synonyms for existing tags.","Без пробелов, коротко и лаконично. Не создавайте синонимы для существующих тегов.",0,"Без пробелов, коротко и лаконично. Не создавайте синонимы для существующих тегов."
-tags,field.name.label,,ru-RU,"Tag name","Название тега",0,"Название тега"
-tags,field.type.explanation,,ru-RU,"Select the tag type","Выберите тип тега",0,"Выберите тип тега"
-tags,field.type.label,,ru-RU,Type,Тип,0,Тип
-tags,form.name,,ru-RU,Tag,Тег,0,Тег
-tags,form.title_create,,ru-RU,"New tag","Новый тег",0,"Новый тег"
-tags,form.title_edit,,ru-RU,"Edit tag","Редактировать тег",0,"Редактировать тег"
-tags,list.title,,ru-RU,Tags,Теги,0,Теги
-tags,saved,,ru-RU,"Tags saved","Теги сохранены",0,"Теги сохранены"
-tags,updated,,ru-RU,"Tag updated","Тег обновлён",0,"Тег обновлён"
-tags,validation.name_max_length,,ru-RU,"Tag name must not exceed 255 characters","Название тега не должно превышать 255 символов",0,"Название тега не должно превышать 255 символов"
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,allow_source_match,text
+tags,field.context.label,,ru-RU,Context,Контекст,0,0,Контекст
+tags,field.description.label,,ru-RU,"Tag description","Описание тега",0,0,"Описание тега"
+tags,field.name.explanation,,ru-RU,"No spaces, short and concise. Do not create synonyms for existing tags.","Без пробелов, коротко и лаконично. Не создавайте синонимы для существующих тегов.",0,0,"Без пробелов, коротко и лаконично. Не создавайте синонимы для существующих тегов."
+tags,field.name.label,,ru-RU,"Tag name","Название тега",0,0,"Название тега"
+tags,field.type.explanation,,ru-RU,"Select the tag type","Выберите тип тега",0,0,"Выберите тип тега"
+tags,field.type.label,,ru-RU,Type,Тип,0,0,Тип
+tags,form.name,,ru-RU,Tag,Тег,0,0,Тег
+tags,form.title_create,,ru-RU,"New tag","Новый тег",0,0,"Новый тег"
+tags,form.title_edit,,ru-RU,"Edit tag","Редактировать тег",0,0,"Редактировать тег"
+tags,list.title,,ru-RU,Tags,Теги,0,0,Теги
+tags,saved,,ru-RU,"Tags saved","Теги сохранены",0,0,"Теги сохранены"
+tags,updated,,ru-RU,"Tag updated","Тег обновлён",0,0,"Тег обновлён"
+tags,validation.name_max_length,,ru-RU,"Tag name must not exceed 255 characters","Название тега не должно превышать 255 символов",0,0,"Название тега не должно превышать 255 символов"

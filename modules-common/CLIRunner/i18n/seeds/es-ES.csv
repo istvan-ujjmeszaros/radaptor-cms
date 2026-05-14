@@ -1,31 +1,31 @@
-domain,key,context,locale,source_text,expected_text,human_reviewed,text
-cli_runner,title,,es-ES,"CLI Command Runner","Ejecutor de comandos CLI",0,"Ejecutor de comandos CLI"
-cli_runner,subtitle,,es-ES,"Execute Radaptor CLI commands from the browser.","Ejecute comandos CLI de Radaptor desde el navegador.",0,"Ejecute comandos CLI de Radaptor desde el navegador."
-cli_runner,select_command,,es-ES,"Select a command from the list to get started.","Seleccione un comando de la lista para empezar.",0,"Seleccione un comando de la lista para empezar."
-cli_runner,action.run,,es-ES,Run,Ejecutar,0,Ejecutar
-cli_runner,action.confirm,,es-ES,"Confirm & Run","Confirmar y ejecutar",0,"Confirmar y ejecutar"
-cli_runner,action.clear,,es-ES,Clear,Limpiar,0,Limpiar
-cli_runner,action.copy,,es-ES,Copy,Copiar,0,Copiar
-cli_runner,action.copied,,es-ES,Copied,Copiado,0,Copiado
-cli_runner,confirm.title,,es-ES,"Confirm Command","Confirmar comando",0,"Confirmar comando"
-cli_runner,confirm.message,,es-ES,"This command will modify data or system state. Are you sure?","Este comando modificará datos o el estado del sistema. ¿Está seguro?",0,"Este comando modificará datos o el estado del sistema. ¿Está seguro?"
-cli_runner,output.title,,es-ES,Output,Salida,0,Salida
-cli_runner,output.empty,,es-ES,"No output","Sin salida",0,"Sin salida"
-cli_runner,output.running,,es-ES,"Running command...","Ejecutando comando...",0,"Ejecutando comando..."
-cli_runner,output.completed,,es-ES,"Completed in {duration}ms","Completado en {duration}ms",0,"Completado en {duration}ms"
-cli_runner,output.failed,,es-ES,"Command failed (exit code {code})","El comando falló (código de salida {code})",0,"El comando falló (código de salida {code})"
-cli_runner,output.timeout,,es-ES,"Command timed out","El comando agotó el tiempo",0,"El comando agotó el tiempo"
-cli_runner,category.build,,es-ES,Build,Compilación,0,Compilación
-cli_runner,category.db,,es-ES,Database,"Base de datos",0,"Base de datos"
-cli_runner,category.emailqueue,,es-ES,"Email Queue","Cola de correo",0,"Cola de correo"
-cli_runner,category.form,,es-ES,Forms,Formularios,0,Formularios
-cli_runner,category.i18n,,es-ES,Translations,Traducciones,0,Traducciones
-cli_runner,category.migrate,,es-ES,Migrations,Migraciones,0,Migraciones
-cli_runner,category.plugin,,es-ES,Plugins,Plugins,0,Plugins
-cli_runner,category.role,,es-ES,Roles,Roles,0,Roles
-cli_runner,category.site,,es-ES,Site,Sitio,0,Sitio
-cli_runner,category.user,,es-ES,Users,Usuarios,0,Usuarios
-cli_runner,category.userconfig,,es-ES,"User Config","Configuración de usuario",0,"Configuración de usuario"
-cli_runner,category.usergroup,,es-ES,"User Groups","Grupos de usuarios",0,"Grupos de usuarios"
-cli_runner,category.webpage,,es-ES,Webpages,"Páginas web",0,"Páginas web"
-cli_runner,category.widget,,es-ES,Widgets,Widgets,0,Widgets
+domain,key,context,locale,source_text,expected_text,human_reviewed,allow_source_match,text
+cli_runner,title,,es-ES,"CLI Command Runner","Ejecutor de comandos CLI",0,0,"Ejecutor de comandos CLI"
+cli_runner,subtitle,,es-ES,"Execute Radaptor CLI commands from the browser.","Ejecute comandos CLI de Radaptor desde el navegador.",0,0,"Ejecute comandos CLI de Radaptor desde el navegador."
+cli_runner,select_command,,es-ES,"Select a command from the list to get started.","Seleccione un comando de la lista para empezar.",0,0,"Seleccione un comando de la lista para empezar."
+cli_runner,action.run,,es-ES,Run,Ejecutar,0,0,Ejecutar
+cli_runner,action.confirm,,es-ES,"Confirm & Run","Confirmar y ejecutar",0,0,"Confirmar y ejecutar"
+cli_runner,action.clear,,es-ES,Clear,Limpiar,0,0,Limpiar
+cli_runner,action.copy,,es-ES,Copy,Copiar,0,0,Copiar
+cli_runner,action.copied,,es-ES,Copied,Copiado,0,0,Copiado
+cli_runner,confirm.title,,es-ES,"Confirm Command","Confirmar comando",0,0,"Confirmar comando"
+cli_runner,confirm.message,,es-ES,"This command will modify data or system state. Are you sure?","Este comando modificará datos o el estado del sistema. ¿Está seguro?",0,0,"Este comando modificará datos o el estado del sistema. ¿Está seguro?"
+cli_runner,output.title,,es-ES,Output,Salida,0,0,Salida
+cli_runner,output.empty,,es-ES,"No output","Sin salida",0,0,"Sin salida"
+cli_runner,output.running,,es-ES,"Running command...","Ejecutando comando...",0,0,"Ejecutando comando..."
+cli_runner,output.completed,,es-ES,"Completed in {duration}ms","Completado en {duration}ms",0,0,"Completado en {duration}ms"
+cli_runner,output.failed,,es-ES,"Command failed (exit code {code})","El comando falló (código de salida {code})",0,0,"El comando falló (código de salida {code})"
+cli_runner,output.timeout,,es-ES,"Command timed out","El comando agotó el tiempo",0,0,"El comando agotó el tiempo"
+cli_runner,category.build,,es-ES,Build,Compilación,0,0,Compilación
+cli_runner,category.db,,es-ES,Database,"Base de datos",0,0,"Base de datos"
+cli_runner,category.emailqueue,,es-ES,"Email Queue","Cola de correo",0,0,"Cola de correo"
+cli_runner,category.form,,es-ES,Forms,Formularios,0,0,Formularios
+cli_runner,category.i18n,,es-ES,Translations,Traducciones,0,0,Traducciones
+cli_runner,category.migrate,,es-ES,Migrations,Migraciones,0,0,Migraciones
+cli_runner,category.plugin,,es-ES,Plugins,Plugins,0,1,Plugins
+cli_runner,category.role,,es-ES,Roles,Roles,0,1,Roles
+cli_runner,category.site,,es-ES,Site,Sitio,0,0,Sitio
+cli_runner,category.user,,es-ES,Users,Usuarios,0,0,Usuarios
+cli_runner,category.userconfig,,es-ES,"User Config","Configuración de usuario",0,0,"Configuración de usuario"
+cli_runner,category.usergroup,,es-ES,"User Groups","Grupos de usuarios",0,0,"Grupos de usuarios"
+cli_runner,category.webpage,,es-ES,Webpages,"Páginas web",0,0,"Páginas web"
+cli_runner,category.widget,,es-ES,Widgets,Widgets,0,1,Widgets

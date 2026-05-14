@@ -1,31 +1,31 @@
-domain,key,context,locale,source_text,expected_text,human_reviewed,text
-cli_runner,title,,ru-RU,"CLI Command Runner","Запуск CLI-команд",0,"Запуск CLI-команд"
-cli_runner,subtitle,,ru-RU,"Execute Radaptor CLI commands from the browser.","Выполняйте CLI-команды Radaptor из браузера.",0,"Выполняйте CLI-команды Radaptor из браузера."
-cli_runner,select_command,,ru-RU,"Select a command from the list to get started.","Выберите команду из списка, чтобы начать.",0,"Выберите команду из списка, чтобы начать."
-cli_runner,action.run,,ru-RU,Run,Запустить,0,Запустить
-cli_runner,action.confirm,,ru-RU,"Confirm & Run","Подтвердить и запустить",0,"Подтвердить и запустить"
-cli_runner,action.clear,,ru-RU,Clear,Очистить,0,Очистить
-cli_runner,action.copy,,ru-RU,Copy,Копировать,0,Копировать
-cli_runner,action.copied,,ru-RU,Copied,Скопировано,0,Скопировано
-cli_runner,confirm.title,,ru-RU,"Confirm Command","Подтвердить команду",0,"Подтвердить команду"
-cli_runner,confirm.message,,ru-RU,"This command will modify data or system state. Are you sure?","Эта команда изменит данные или состояние системы. Вы уверены?",0,"Эта команда изменит данные или состояние системы. Вы уверены?"
-cli_runner,output.title,,ru-RU,Output,Вывод,0,Вывод
-cli_runner,output.empty,,ru-RU,"No output","Нет вывода",0,"Нет вывода"
-cli_runner,output.running,,ru-RU,"Running command...","Команда выполняется...",0,"Команда выполняется..."
-cli_runner,output.completed,,ru-RU,"Completed in {duration}ms","Завершено за {duration}мс",0,"Завершено за {duration}мс"
-cli_runner,output.failed,,ru-RU,"Command failed (exit code {code})","Команда завершилась ошибкой (код выхода {code})",0,"Команда завершилась ошибкой (код выхода {code})"
-cli_runner,output.timeout,,ru-RU,"Command timed out","Время ожидания команды истекло",0,"Время ожидания команды истекло"
-cli_runner,category.build,,ru-RU,Build,Сборка,0,Сборка
-cli_runner,category.db,,ru-RU,Database,"База данных",0,"База данных"
-cli_runner,category.emailqueue,,ru-RU,"Email Queue","Очередь email",0,"Очередь email"
-cli_runner,category.form,,ru-RU,Forms,Формы,0,Формы
-cli_runner,category.i18n,,ru-RU,Translations,Переводы,0,Переводы
-cli_runner,category.migrate,,ru-RU,Migrations,Миграции,0,Миграции
-cli_runner,category.plugin,,ru-RU,Plugins,Плагины,0,Плагины
-cli_runner,category.role,,ru-RU,Roles,Роли,0,Роли
-cli_runner,category.site,,ru-RU,Site,Сайт,0,Сайт
-cli_runner,category.user,,ru-RU,Users,Пользователи,0,Пользователи
-cli_runner,category.userconfig,,ru-RU,"User Config","Настройки пользователя",0,"Настройки пользователя"
-cli_runner,category.usergroup,,ru-RU,"User Groups","Группы пользователей",0,"Группы пользователей"
-cli_runner,category.webpage,,ru-RU,Webpages,Веб-страницы,0,Веб-страницы
-cli_runner,category.widget,,ru-RU,Widgets,Виджеты,0,Виджеты
+domain,key,context,locale,source_text,expected_text,human_reviewed,allow_source_match,text
+cli_runner,title,,ru-RU,"CLI Command Runner","Запуск CLI-команд",0,0,"Запуск CLI-команд"
+cli_runner,subtitle,,ru-RU,"Execute Radaptor CLI commands from the browser.","Выполняйте CLI-команды Radaptor из браузера.",0,0,"Выполняйте CLI-команды Radaptor из браузера."
+cli_runner,select_command,,ru-RU,"Select a command from the list to get started.","Выберите команду из списка, чтобы начать.",0,0,"Выберите команду из списка, чтобы начать."
+cli_runner,action.run,,ru-RU,Run,Запустить,0,0,Запустить
+cli_runner,action.confirm,,ru-RU,"Confirm & Run","Подтвердить и запустить",0,0,"Подтвердить и запустить"
+cli_runner,action.clear,,ru-RU,Clear,Очистить,0,0,Очистить
+cli_runner,action.copy,,ru-RU,Copy,Копировать,0,0,Копировать
+cli_runner,action.copied,,ru-RU,Copied,Скопировано,0,0,Скопировано
+cli_runner,confirm.title,,ru-RU,"Confirm Command","Подтвердить команду",0,0,"Подтвердить команду"
+cli_runner,confirm.message,,ru-RU,"This command will modify data or system state. Are you sure?","Эта команда изменит данные или состояние системы. Вы уверены?",0,0,"Эта команда изменит данные или состояние системы. Вы уверены?"
+cli_runner,output.title,,ru-RU,Output,Вывод,0,0,Вывод
+cli_runner,output.empty,,ru-RU,"No output","Нет вывода",0,0,"Нет вывода"
+cli_runner,output.running,,ru-RU,"Running command...","Команда выполняется...",0,0,"Команда выполняется..."
+cli_runner,output.completed,,ru-RU,"Completed in {duration}ms","Завершено за {duration}мс",0,0,"Завершено за {duration}мс"
+cli_runner,output.failed,,ru-RU,"Command failed (exit code {code})","Команда завершилась ошибкой (код выхода {code})",0,0,"Команда завершилась ошибкой (код выхода {code})"
+cli_runner,output.timeout,,ru-RU,"Command timed out","Время ожидания команды истекло",0,0,"Время ожидания команды истекло"
+cli_runner,category.build,,ru-RU,Build,Сборка,0,0,Сборка
+cli_runner,category.db,,ru-RU,Database,"База данных",0,0,"База данных"
+cli_runner,category.emailqueue,,ru-RU,"Email Queue","Очередь email",0,0,"Очередь email"
+cli_runner,category.form,,ru-RU,Forms,Формы,0,0,Формы
+cli_runner,category.i18n,,ru-RU,Translations,Переводы,0,0,Переводы
+cli_runner,category.migrate,,ru-RU,Migrations,Миграции,0,0,Миграции
+cli_runner,category.plugin,,ru-RU,Plugins,Плагины,0,0,Плагины
+cli_runner,category.role,,ru-RU,Roles,Роли,0,0,Роли
+cli_runner,category.site,,ru-RU,Site,Сайт,0,0,Сайт
+cli_runner,category.user,,ru-RU,Users,Пользователи,0,0,Пользователи
+cli_runner,category.userconfig,,ru-RU,"User Config","Настройки пользователя",0,0,"Настройки пользователя"
+cli_runner,category.usergroup,,ru-RU,"User Groups","Группы пользователей",0,0,"Группы пользователей"
+cli_runner,category.webpage,,ru-RU,Webpages,Веб-страницы,0,0,Веб-страницы
+cli_runner,category.widget,,ru-RU,Widgets,Виджеты,0,0,Виджеты

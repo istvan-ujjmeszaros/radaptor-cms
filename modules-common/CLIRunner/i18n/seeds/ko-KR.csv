@@ -1,31 +1,31 @@
-domain,key,context,locale,source_text,expected_text,human_reviewed,text
-cli_runner,title,,ko-KR,"CLI Command Runner","CLI 명령 실행기",0,"CLI 명령 실행기"
-cli_runner,subtitle,,ko-KR,"Execute Radaptor CLI commands from the browser.","브라우저에서 Radaptor CLI 명령을 실행합니다.",0,"브라우저에서 Radaptor CLI 명령을 실행합니다."
-cli_runner,select_command,,ko-KR,"Select a command from the list to get started.","시작하려면 목록에서 명령을 선택하세요.",0,"시작하려면 목록에서 명령을 선택하세요."
-cli_runner,action.run,,ko-KR,Run,실행,0,실행
-cli_runner,action.confirm,,ko-KR,"Confirm & Run","확인 후 실행",0,"확인 후 실행"
-cli_runner,action.clear,,ko-KR,Clear,지우기,0,지우기
-cli_runner,action.copy,,ko-KR,Copy,복사,0,복사
-cli_runner,action.copied,,ko-KR,Copied,복사됨,0,복사됨
-cli_runner,confirm.title,,ko-KR,"Confirm Command","명령 확인",0,"명령 확인"
-cli_runner,confirm.message,,ko-KR,"This command will modify data or system state. Are you sure?","이 명령은 데이터 또는 시스템 상태를 변경합니다. 계속하시겠습니까?",0,"이 명령은 데이터 또는 시스템 상태를 변경합니다. 계속하시겠습니까?"
-cli_runner,output.title,,ko-KR,Output,출력,0,출력
-cli_runner,output.empty,,ko-KR,"No output","출력 없음",0,"출력 없음"
-cli_runner,output.running,,ko-KR,"Running command...","명령 실행 중...",0,"명령 실행 중..."
-cli_runner,output.completed,,ko-KR,"Completed in {duration}ms","{duration}ms 만에 완료",0,"{duration}ms 만에 완료"
-cli_runner,output.failed,,ko-KR,"Command failed (exit code {code})","명령 실패 (종료 코드 {code})",0,"명령 실패 (종료 코드 {code})"
-cli_runner,output.timeout,,ko-KR,"Command timed out","명령 시간 초과",0,"명령 시간 초과"
-cli_runner,category.build,,ko-KR,Build,빌드,0,빌드
-cli_runner,category.db,,ko-KR,Database,데이터베이스,0,데이터베이스
-cli_runner,category.emailqueue,,ko-KR,"Email Queue","이메일 큐",0,"이메일 큐"
-cli_runner,category.form,,ko-KR,Forms,폼,0,폼
-cli_runner,category.i18n,,ko-KR,Translations,번역,0,번역
-cli_runner,category.migrate,,ko-KR,Migrations,마이그레이션,0,마이그레이션
-cli_runner,category.plugin,,ko-KR,Plugins,플러그인,0,플러그인
-cli_runner,category.role,,ko-KR,Roles,역할,0,역할
-cli_runner,category.site,,ko-KR,Site,사이트,0,사이트
-cli_runner,category.user,,ko-KR,Users,사용자,0,사용자
-cli_runner,category.userconfig,,ko-KR,"User Config","사용자 설정",0,"사용자 설정"
-cli_runner,category.usergroup,,ko-KR,"User Groups","사용자 그룹",0,"사용자 그룹"
-cli_runner,category.webpage,,ko-KR,Webpages,웹페이지,0,웹페이지
-cli_runner,category.widget,,ko-KR,Widgets,위젯,0,위젯
+domain,key,context,locale,source_text,expected_text,human_reviewed,allow_source_match,text
+cli_runner,title,,ko-KR,"CLI Command Runner","CLI 명령 실행기",0,0,"CLI 명령 실행기"
+cli_runner,subtitle,,ko-KR,"Execute Radaptor CLI commands from the browser.","브라우저에서 Radaptor CLI 명령을 실행합니다.",0,0,"브라우저에서 Radaptor CLI 명령을 실행합니다."
+cli_runner,select_command,,ko-KR,"Select a command from the list to get started.","시작하려면 목록에서 명령을 선택하세요.",0,0,"시작하려면 목록에서 명령을 선택하세요."
+cli_runner,action.run,,ko-KR,Run,실행,0,0,실행
+cli_runner,action.confirm,,ko-KR,"Confirm & Run","확인 후 실행",0,0,"확인 후 실행"
+cli_runner,action.clear,,ko-KR,Clear,지우기,0,0,지우기
+cli_runner,action.copy,,ko-KR,Copy,복사,0,0,복사
+cli_runner,action.copied,,ko-KR,Copied,복사됨,0,0,복사됨
+cli_runner,confirm.title,,ko-KR,"Confirm Command","명령 확인",0,0,"명령 확인"
+cli_runner,confirm.message,,ko-KR,"This command will modify data or system state. Are you sure?","이 명령은 데이터 또는 시스템 상태를 변경합니다. 계속하시겠습니까?",0,0,"이 명령은 데이터 또는 시스템 상태를 변경합니다. 계속하시겠습니까?"
+cli_runner,output.title,,ko-KR,Output,출력,0,0,출력
+cli_runner,output.empty,,ko-KR,"No output","출력 없음",0,0,"출력 없음"
+cli_runner,output.running,,ko-KR,"Running command...","명령 실행 중...",0,0,"명령 실행 중..."
+cli_runner,output.completed,,ko-KR,"Completed in {duration}ms","{duration}ms 만에 완료",0,0,"{duration}ms 만에 완료"
+cli_runner,output.failed,,ko-KR,"Command failed (exit code {code})","명령 실패 (종료 코드 {code})",0,0,"명령 실패 (종료 코드 {code})"
+cli_runner,output.timeout,,ko-KR,"Command timed out","명령 시간 초과",0,0,"명령 시간 초과"
+cli_runner,category.build,,ko-KR,Build,빌드,0,0,빌드
+cli_runner,category.db,,ko-KR,Database,데이터베이스,0,0,데이터베이스
+cli_runner,category.emailqueue,,ko-KR,"Email Queue","이메일 큐",0,0,"이메일 큐"
+cli_runner,category.form,,ko-KR,Forms,폼,0,0,폼
+cli_runner,category.i18n,,ko-KR,Translations,번역,0,0,번역
+cli_runner,category.migrate,,ko-KR,Migrations,마이그레이션,0,0,마이그레이션
+cli_runner,category.plugin,,ko-KR,Plugins,플러그인,0,0,플러그인
+cli_runner,category.role,,ko-KR,Roles,역할,0,0,역할
+cli_runner,category.site,,ko-KR,Site,사이트,0,0,사이트
+cli_runner,category.user,,ko-KR,Users,사용자,0,0,사용자
+cli_runner,category.userconfig,,ko-KR,"User Config","사용자 설정",0,0,"사용자 설정"
+cli_runner,category.usergroup,,ko-KR,"User Groups","사용자 그룹",0,0,"사용자 그룹"
+cli_runner,category.webpage,,ko-KR,Webpages,웹페이지,0,0,웹페이지
+cli_runner,category.widget,,ko-KR,Widgets,위젯,0,0,위젯

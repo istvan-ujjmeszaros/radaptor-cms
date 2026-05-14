@@ -1,66 +1,67 @@
-﻿domain,key,context,locale,source_text,expected_text,human_reviewed,text
-import_export,action.export_csv,,ru-RU,"Export CSV","Экспорт CSV",0,"Экспорт CSV"
-import_export,action.preview_import,,ru-RU,"Preview import","Предпросмотр импорта",0,"Предпросмотр импорта"
-import_export,action.run_import,,ru-RU,"Run import","Запустить импорт",0,"Запустить импорт"
-import_export,dataset.i18n_translations.description,,ru-RU,"Export and import translation rows as CSV.","Экспорт и импорт строк перевода в формате CSV.",0,"Экспорт и импорт строк перевода в формате CSV."
-import_export,dataset.i18n_translations.name,,ru-RU,"I18n translations","Переводы i18n",0,"Переводы i18n"
-import_export,error.dataset_not_found,,ru-RU,"Import/export dataset not found.","Набор данных для импорта/экспорта не найден.",0,"Набор данных для импорта/экспорта не найден."
-import_export,error.file_read,,ru-RU,"Unable to read the uploaded CSV file.","Не удалось прочитать загруженный CSV-файл.",0,"Не удалось прочитать загруженный CSV-файл."
-import_export,error.file_required,,ru-RU,"Please select a CSV file to import.","Выберите CSV-файл для импорта.",0,"Выберите CSV-файл для импорта."
-import_export,error.invalid_format,,ru-RU,"Invalid format","Недопустимый формат",0,"Недопустимый формат"
-import_export,error.invalid_mode,,ru-RU,"Invalid import mode.","Недопустимый режим импорта.",0,"Недопустимый режим импорта."
-import_export,error.locale_required,,ru-RU,"Locale is required for export.","Для экспорта требуется локаль.",0,"Для экспорта требуется локаль."
-import_export,error.wide_no_locale_columns,,ru-RU,"Wide CSV must contain at least one text:<locale> column.","Wide CSV должен содержать хотя бы один столбец text:<locale>.",0,"Wide CSV должен содержать хотя бы один столбец text:<locale>."
-import_export,export.title,,ru-RU,"Export CSV","Экспорт CSV",0,"Экспорт CSV"
-import_export,field.dataset.label,,ru-RU,Dataset,"Набор данных",0,"Набор данных"
-import_export,field.expect_locale.any,,ru-RU,"Any locale in file","Любая локаль в файле",0,"Любая локаль в файле"
-import_export,field.expect_locale.help,,ru-RU,"Optional for insert_new and upsert. Sync should normally set this explicitly and always uses a single-locale scope, even when importing wide CSV.","Необязательно для insert_new и upsert. Для sync это обычно следует указывать явно; sync всегда использует область одной локали, даже при импорте широкого CSV.",0,"Необязательно для insert_new и upsert. Для sync это обычно следует указывать явно; sync всегда использует область одной локали, даже при импорте широкого CSV."
-import_export,field.expect_locale.label,,ru-RU,"Expected locale","Ожидаемая локаль",0,"Ожидаемая локаль"
-import_export,field.file.help,,ru-RU,"Upload a CSV file exported from the same dataset.","Загрузите CSV-файл, экспортированный из того же набора данных.",0,"Загрузите CSV-файл, экспортированный из того же набора данных."
-import_export,field.file.label,,ru-RU,"CSV file",CSV-файл,0,CSV-файл
-import_export,field.format.help,,ru-RU,"Normalized keeps one row per locale. Wide groups locales into text:<locale> columns.","Normalized сохраняет одну строку на локаль. Wide группирует локали в столбцы text:<locale>.",0,"Normalized сохраняет одну строку на локаль. Wide группирует локали в столбцы text:<locale>."
-import_export,field.format.label,,ru-RU,Format,Формат,0,Формат
-import_export,field.locale.all,,ru-RU,"All locales","Все локали",0,"Все локали"
-import_export,field.locale.help,,ru-RU,"Leave empty to export all locales, or choose one locale for a smaller file. Wide format puts locale values into text:<locale> columns.","Оставьте пустым, чтобы экспортировать все локали, или выберите одну локаль для меньшего файла. Формат wide помещает значения локалей в столбцы text:<locale>.",0,"Оставьте пустым, чтобы экспортировать все локали, или выберите одну локаль для меньшего файла. Формат wide помещает значения локалей в столбцы text:<locale>."
-import_export,field.locale.label,,ru-RU,Locale,Локаль,0,Локаль
-import_export,field.mode.help,,ru-RU,"Sync is destructive: it deletes rows missing from the imported locale slice and only supports single-locale files.","Sync является разрушительным: он удаляет строки, отсутствующие в импортируемом срезе локали, и поддерживает только файлы с одной локалью.",0,"Sync является разрушительным: он удаляет строки, отсутствующие в импортируемом срезе локали, и поддерживает только файлы с одной локалью."
-import_export,field.mode.label,,ru-RU,"Import mode","Режим импорта",0,"Режим импорта"
-import_export,format.auto,,ru-RU,Auto-detect,Автоопределение,0,Автоопределение
-import_export,format.normalized,,ru-RU,Normalized,Normalized,0,Normalized
-import_export,format.wide,,ru-RU,Wide,Wide,0,Wide
-import_export,import.title,,ru-RU,"Import CSV","Импорт CSV",0,"Импорт CSV"
-import_export,mode.insert_new,,ru-RU,"Insert new only","Только вставка новых",0,"Только вставка новых"
-import_export,mode.sync,,ru-RU,"Sync locale slice","Синхронизировать срез локали",0,"Синхронизировать срез локали"
-import_export,mode.upsert,,ru-RU,"Upsert existing","Обновить или вставить существующие",0,"Обновить или вставить существующие"
-import_export,result.deleted,,ru-RU,Deleted,Удалено,0,Удалено
-import_export,result.detected_locale,,ru-RU,"Detected locale","Обнаруженная локаль",0,"Обнаруженная локаль"
-import_export,result.detected_locales,,ru-RU,"Detected locales","Обнаруженные локали",0,"Обнаруженные локали"
-import_export,result.dry_run_summary,,ru-RU,"Dry-run summary for {dataset}.","Сводка пробного запуска для {dataset}.",0,"Сводка пробного запуска для {dataset}."
-import_export,result.error_summary,,ru-RU,"Import finished with errors for {dataset}.","Импорт для {dataset} завершён с ошибками.",0,"Импорт для {dataset} завершён с ошибками."
-import_export,result.format,,ru-RU,Format,Формат,0,Формат
-import_export,result.imported,,ru-RU,Imported,Импортировано,0,Импортировано
-import_export,result.inserted,,ru-RU,Inserted,Вставлено,0,Вставлено
-import_export,result.mode,,ru-RU,Mode,Режим,0,Режим
-import_export,result.processed,,ru-RU,Processed,Обработано,0,Обработано
-import_export,result.skipped,,ru-RU,Skipped,Пропущено,0,Пропущено
-import_export,result.success_summary,,ru-RU,"Import completed successfully for {dataset}.","Импорт для {dataset} успешно завершён.",0,"Импорт для {dataset} успешно завершён."
-import_export,result.updated,,ru-RU,Updated,Обновлено,0,Обновлено
-import_export,workbench.description,,ru-RU,"Export data to CSV or import CSV files into registered datasets.","Экспортируйте данные в CSV или импортируйте CSV-файлы в зарегистрированные наборы данных.",0,"Экспортируйте данные в CSV или импортируйте CSV-файлы в зарегистрированные наборы данных."
-import_export,workbench.no_datasets,,ru-RU,"No import/export datasets are available.","Нет доступных наборов данных для импорта/экспорта.",0,"Нет доступных наборов данных для импорта/экспорта."
-import_export,workbench.title,,ru-RU,"Import / Export","Импорт / Экспорт",0,"Импорт / Экспорт"
-import_export,error.upload_backup_required,,ru-RU,"Confirm the uploaded files backup before exporting the site snapshot.","Подтвердите резервную копию загруженных файлов перед экспортом снимка сайта.",0,"Подтвердите резервную копию загруженных файлов перед экспортом снимка сайта."
-import_export,dataset.site_snapshot.name,,ru-RU,"Site snapshot","Снимок сайта",0,"Снимок сайта"
-import_export,dataset.site_snapshot.description,,ru-RU,"Export or restore database-backed site content and identity data as a JSON disaster-recovery snapshot.","Экспортируйте или восстанавливайте содержимое сайта и идентификационные данные из базы как JSON-снимок для аварийного восстановления.",0,"Экспортируйте или восстанавливайте содержимое сайта и идентификационные данные из базы как JSON-снимок для аварийного восстановления."
-import_export,field.uploads_backed_up.label,,ru-RU,"Uploaded files backed up","Загруженные файлы сохранены",0,"Загруженные файлы сохранены"
-import_export,field.uploads_backed_up.help,,ru-RU,"Confirm that the upload directory has been copied separately before downloading the JSON snapshot.","Подтвердите, что каталог загрузок был отдельно скопирован перед скачиванием JSON-снимка.",0,"Подтвердите, что каталог загрузок был отдельно скопирован перед скачиванием JSON-снимка."
-import_export,field.site_snapshot_file.label,,ru-RU,"Site snapshot JSON","JSON снимка сайта",0,"JSON снимка сайта"
-import_export,field.site_snapshot_file.help,,ru-RU,"Upload a JSON snapshot exported from the same Radaptor schema. Copy the upload directory before applying the import.","Загрузите JSON-снимок, экспортированный из той же схемы Radaptor. Скопируйте каталог загрузок перед применением импорта.",0,"Загрузите JSON-снимок, экспортированный из той же схемы Radaptor. Скопируйте каталог загрузок перед применением импорта."
-import_export,field.replace_confirmed.label,,ru-RU,"Replace current site data","Заменить текущие данные сайта",0,"Заменить текущие данные сайта"
-import_export,field.replace_confirmed.help,,ru-RU,"Required for the real import. The restore replaces the snapshot-managed database tables.","Требуется для настоящего импорта. Восстановление заменяет таблицы базы данных, управляемые снимком.",0,"Требуется для настоящего импорта. Восстановление заменяет таблицы базы данных, управляемые снимком."
-import_export,site_snapshot.export.title,,ru-RU,"Export JSON snapshot","Экспорт JSON-снимка",0,"Экспорт JSON-снимка"
-import_export,site_snapshot.import.title,,ru-RU,"Import JSON snapshot","Импорт JSON-снимка",0,"Импорт JSON-снимка"
-import_export,site_snapshot.action.export,,ru-RU,"Export JSON","Экспорт JSON",0,"Экспорт JSON"
-import_export,confirm.site_snapshot_replace,,ru-RU,"This import will replace the current site database content with the uploaded snapshot. Continue?","Этот импорт заменит текущее содержимое базы данных сайта загруженным снимком. Продолжить?",0,"Этот импорт заменит текущее содержимое базы данных сайта загруженным снимком. Продолжить?"
-import_export,field.allow_environment_mismatch.label,,ru-RU,"Allow environment mismatch","Разрешить несовпадение окружения",0,"Разрешить несовпадение окружения"
-import_export,field.allow_environment_mismatch.help,,ru-RU,"Required only when importing a snapshot into a different environment. Leave disabled for normal restores.","Требуется только при импорте снимка в другое окружение. Для обычного восстановления оставьте выключенным.",0,"Требуется только при импорте снимка в другое окружение. Для обычного восстановления оставьте выключенным."
-import_export,error.source_cutover_required,,ru-RU,"Source site cutover lock was not active before site migration export.","Блокировка переключения исходного сайта не была активна перед экспортом миграции сайта.",0,"Блокировка переключения исходного сайта не была активна перед экспортом миграции сайта."
+﻿domain,key,context,locale,source_text,expected_text,human_reviewed,allow_source_match,text
+import_export,action.export_csv,,ru-RU,"Export CSV","Экспорт CSV",0,0,"Экспорт CSV"
+import_export,action.preview_import,,ru-RU,"Preview import","Предпросмотр импорта",0,0,"Предпросмотр импорта"
+import_export,action.run_import,,ru-RU,"Run import","Запустить импорт",0,0,"Запустить импорт"
+import_export,dataset.i18n_translations.description,,ru-RU,"Export and import translation rows as CSV.","Экспорт и импорт строк перевода в формате CSV.",0,0,"Экспорт и импорт строк перевода в формате CSV."
+import_export,dataset.i18n_translations.name,,ru-RU,"I18n translations","Переводы i18n",0,0,"Переводы i18n"
+import_export,error.dataset_not_found,,ru-RU,"Import/export dataset not found.","Набор данных для импорта/экспорта не найден.",0,0,"Набор данных для импорта/экспорта не найден."
+import_export,error.file_read,,ru-RU,"Unable to read the uploaded CSV file.","Не удалось прочитать загруженный CSV-файл.",0,0,"Не удалось прочитать загруженный CSV-файл."
+import_export,error.file_required,,ru-RU,"Please select a CSV file to import.","Выберите CSV-файл для импорта.",0,0,"Выберите CSV-файл для импорта."
+import_export,error.invalid_format,,ru-RU,"Invalid format","Недопустимый формат",0,0,"Недопустимый формат"
+import_export,error.invalid_mode,,ru-RU,"Invalid import mode.","Недопустимый режим импорта.",0,0,"Недопустимый режим импорта."
+import_export,error.locale_required,,ru-RU,"Locale is required for export.","Для экспорта требуется локаль.",0,0,"Для экспорта требуется локаль."
+import_export,error.wide_no_locale_columns,,ru-RU,"Wide CSV must contain at least one text:<locale> column.","Wide CSV должен содержать хотя бы один столбец text:<locale>.",0,0,"Wide CSV должен содержать хотя бы один столбец text:<locale>."
+import_export,export.title,,ru-RU,"Export CSV","Экспорт CSV",0,0,"Экспорт CSV"
+import_export,field.dataset.label,,ru-RU,Dataset,"Набор данных",0,0,"Набор данных"
+import_export,field.expect_locale.any,,ru-RU,"Any locale in file","Любая локаль в файле",0,0,"Любая локаль в файле"
+import_export,field.expect_locale.help,,ru-RU,"Optional for insert_new and upsert. Sync should normally set this explicitly and always uses a single-locale scope, even when importing wide CSV.","Необязательно для insert_new и upsert. Для sync это обычно следует указывать явно; sync всегда использует область одной локали, даже при импорте широкого CSV.",0,0,"Необязательно для insert_new и upsert. Для sync это обычно следует указывать явно; sync всегда использует область одной локали, даже при импорте широкого CSV."
+import_export,field.expect_locale.label,,ru-RU,"Expected locale","Ожидаемая локаль",0,0,"Ожидаемая локаль"
+import_export,field.file.help,,ru-RU,"Upload a CSV file exported from the same dataset.","Загрузите CSV-файл, экспортированный из того же набора данных.",0,0,"Загрузите CSV-файл, экспортированный из того же набора данных."
+import_export,field.file.label,,ru-RU,"CSV file",CSV-файл,0,0,CSV-файл
+import_export,field.format.help,,ru-RU,"Normalized keeps one row per locale. Wide groups locales into text:<locale> columns.","Normalized сохраняет одну строку на локаль. Wide группирует локали в столбцы text:<locale>.",0,0,"Normalized сохраняет одну строку на локаль. Wide группирует локали в столбцы text:<locale>."
+import_export,field.format.label,,ru-RU,Format,Формат,0,0,Формат
+import_export,field.locale.all,,ru-RU,"All locales","Все локали",0,0,"Все локали"
+import_export,field.locale.help,,ru-RU,"Leave empty to export all locales, or choose one locale for a smaller file. Wide format puts locale values into text:<locale> columns.","Оставьте пустым, чтобы экспортировать все локали, или выберите одну локаль для меньшего файла. Формат wide помещает значения локалей в столбцы text:<locale>.",0,0,"Оставьте пустым, чтобы экспортировать все локали, или выберите одну локаль для меньшего файла. Формат wide помещает значения локалей в столбцы text:<locale>."
+import_export,field.locale.label,,ru-RU,Locale,Локаль,0,0,Локаль
+import_export,field.mode.help,,ru-RU,"Sync is destructive: it deletes rows missing from the imported locale slice and only supports single-locale files.","Sync является разрушительным: он удаляет строки, отсутствующие в импортируемом срезе локали, и поддерживает только файлы с одной локалью.",0,0,"Sync является разрушительным: он удаляет строки, отсутствующие в импортируемом срезе локали, и поддерживает только файлы с одной локалью."
+import_export,field.mode.label,,ru-RU,"Import mode","Режим импорта",0,0,"Режим импорта"
+import_export,format.auto,,ru-RU,Auto-detect,Автоопределение,0,0,Автоопределение
+import_export,format.normalized,,ru-RU,Normalized,Normalized,0,1,Normalized
+import_export,format.wide,,ru-RU,Wide,Wide,0,1,Wide
+import_export,import.title,,ru-RU,"Import CSV","Импорт CSV",0,0,"Импорт CSV"
+import_export,mode.insert_new,,ru-RU,"Insert new only","Только вставка новых",0,0,"Только вставка новых"
+import_export,mode.sync,,ru-RU,"Sync locale slice","Синхронизировать срез локали",0,0,"Синхронизировать срез локали"
+import_export,mode.upsert,,ru-RU,"Upsert existing","Обновить или вставить существующие",0,0,"Обновить или вставить существующие"
+import_export,result.deleted,,ru-RU,Deleted,Удалено,0,0,Удалено
+import_export,result.detected_locale,,ru-RU,"Detected locale","Обнаруженная локаль",0,0,"Обнаруженная локаль"
+import_export,result.detected_locales,,ru-RU,"Detected locales","Обнаруженные локали",0,0,"Обнаруженные локали"
+import_export,result.dry_run_summary,,ru-RU,"Dry-run summary for {dataset}.","Сводка пробного запуска для {dataset}.",0,0,"Сводка пробного запуска для {dataset}."
+import_export,result.error_summary,,ru-RU,"Import finished with errors for {dataset}.","Импорт для {dataset} завершён с ошибками.",0,0,"Импорт для {dataset} завершён с ошибками."
+import_export,result.format,,ru-RU,Format,Формат,0,0,Формат
+import_export,result.imported,,ru-RU,Imported,Импортировано,0,0,Импортировано
+import_export,result.inserted,,ru-RU,Inserted,Вставлено,0,0,Вставлено
+import_export,result.mode,,ru-RU,Mode,Режим,0,0,Режим
+import_export,result.processed,,ru-RU,Processed,Обработано,0,0,Обработано
+import_export,result.skipped,,ru-RU,Skipped,Пропущено,0,0,Пропущено
+import_export,result.success_summary,,ru-RU,"Import completed successfully for {dataset}.","Импорт для {dataset} успешно завершён.",0,0,"Импорт для {dataset} успешно завершён."
+import_export,result.updated,,ru-RU,Updated,Обновлено,0,0,Обновлено
+import_export,workbench.description,,ru-RU,"Export data to CSV or import CSV files into registered datasets.","Экспортируйте данные в CSV или импортируйте CSV-файлы в зарегистрированные наборы данных.",0,0,"Экспортируйте данные в CSV или импортируйте CSV-файлы в зарегистрированные наборы данных."
+import_export,workbench.no_datasets,,ru-RU,"No import/export datasets are available.","Нет доступных наборов данных для импорта/экспорта.",0,0,"Нет доступных наборов данных для импорта/экспорта."
+import_export,workbench.title,,ru-RU,"Import / Export","Импорт / Экспорт",0,0,"Импорт / Экспорт"
+import_export,error.upload_backup_required,,ru-RU,"Confirm the uploaded files backup before exporting the site snapshot.","Подтвердите резервную копию загруженных файлов перед экспортом снимка сайта.",0,0,"Подтвердите резервную копию загруженных файлов перед экспортом снимка сайта."
+import_export,dataset.site_snapshot.name,,ru-RU,"Site snapshot","Снимок сайта",0,0,"Снимок сайта"
+import_export,dataset.site_snapshot.description,,ru-RU,"Export or restore database-backed site content and identity data as a JSON disaster-recovery snapshot.","Экспортируйте или восстанавливайте содержимое сайта и идентификационные данные из базы как JSON-снимок для аварийного восстановления.",0,0,"Экспортируйте или восстанавливайте содержимое сайта и идентификационные данные из базы как JSON-снимок для аварийного восстановления."
+import_export,field.uploads_backed_up.label,,ru-RU,"Uploaded files backed up","Загруженные файлы сохранены",0,0,"Загруженные файлы сохранены"
+import_export,field.uploads_backed_up.help,,ru-RU,"Confirm that the upload directory has been copied separately before downloading the JSON snapshot.","Подтвердите, что каталог загрузок был отдельно скопирован перед скачиванием JSON-снимка.",0,0,"Подтвердите, что каталог загрузок был отдельно скопирован перед скачиванием JSON-снимка."
+import_export,field.site_snapshot_file.label,,ru-RU,"Site snapshot JSON","JSON снимка сайта",0,0,"JSON снимка сайта"
+import_export,field.site_snapshot_file.help,,ru-RU,"Upload a JSON snapshot exported from the same Radaptor schema. Copy the upload directory before applying the import.","Загрузите JSON-снимок, экспортированный из той же схемы Radaptor. Скопируйте каталог загрузок перед применением импорта.",0,0,"Загрузите JSON-снимок, экспортированный из той же схемы Radaptor. Скопируйте каталог загрузок перед применением импорта."
+import_export,field.replace_confirmed.label,,ru-RU,"Replace current site data","Заменить текущие данные сайта",0,0,"Заменить текущие данные сайта"
+import_export,field.replace_confirmed.help,,ru-RU,"Required for the real import. The restore replaces the snapshot-managed database tables.","Требуется для настоящего импорта. Восстановление заменяет таблицы базы данных, управляемые снимком.",0,0,"Требуется для настоящего импорта. Восстановление заменяет таблицы базы данных, управляемые снимком."
+import_export,site_snapshot.export.title,,ru-RU,"Export JSON snapshot","Экспорт JSON-снимка",0,0,"Экспорт JSON-снимка"
+import_export,site_snapshot.import.title,,ru-RU,"Import JSON snapshot","Импорт JSON-снимка",0,0,"Импорт JSON-снимка"
+import_export,site_snapshot.action.export,,ru-RU,"Export JSON","Экспорт JSON",0,0,"Экспорт JSON"
+import_export,confirm.site_snapshot_replace,,ru-RU,"This import will replace the current site database content with the uploaded snapshot. Continue?","Этот импорт заменит текущее содержимое базы данных сайта загруженным снимком. Продолжить?",0,0,"Этот импорт заменит текущее содержимое базы данных сайта загруженным снимком. Продолжить?"
+import_export,field.allow_environment_mismatch.label,,ru-RU,"Allow environment mismatch","Разрешить несовпадение окружения",0,0,"Разрешить несовпадение окружения"
+import_export,field.allow_environment_mismatch.help,,ru-RU,"Required only when importing a snapshot into a different environment. Leave disabled for normal restores.","Требуется только при импорте снимка в другое окружение. Для обычного восстановления оставьте выключенным.",0,0,"Требуется только при импорте снимка в другое окружение. Для обычного восстановления оставьте выключенным."
+import_export,error.source_cutover_required,,ru-RU,"Source site cutover lock was not active before site migration export.","Блокировка переключения исходного сайта не была активна перед экспортом миграции сайта.",0,0,"Блокировка переключения исходного сайта не была активна перед экспортом миграции сайта."
+import_export,warning.allow_source_match_missing,,ru-RU,"CSV is missing allow_source_match; existing eligible source-match flags may be preserved, but non-matching rows are normalized to 0.","CSV is missing allow_source_match; existing eligible source-match flags may be preserved, but non-matching rows are normalized to 0.",0,1,"CSV is missing allow_source_match; existing eligible source-match flags may be preserved, but non-matching rows are normalized to 0."

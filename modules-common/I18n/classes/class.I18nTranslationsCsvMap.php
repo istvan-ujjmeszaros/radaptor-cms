@@ -38,6 +38,10 @@ declare(strict_types=1);
  *                             0 keeps reviewed rows reviewed and only affects
  *                               currently unreviewed rows,
  *                             empty preserves the current DB flag
+ *   allow_source_match optional — when present:
+ *                             1 marks an intentional source-text match,
+ *                             0 clears the flag,
+ *                             empty preserves the current DB flag when still eligible
  *   text          required  — translated string
  */
 class I18nTranslationsCsvMap implements iCsvMap
@@ -62,6 +66,7 @@ class I18nTranslationsCsvMap implements iCsvMap
 			'source_text' => ['required' => false, 'default' => ''],
 			'expected_text' => ['required' => false, 'default' => ''],
 			'human_reviewed' => ['required' => false, 'default' => ''],
+			'allow_source_match' => ['required' => false, 'default' => ''],
 			'text'        => ['required' => true],
 		];
 	}
@@ -129,6 +134,7 @@ class I18nTranslationsCsvMap implements iCsvMap
 			"SELECT m.domain, m.`key`, m.context, t.locale,
 				m.source_text, t.text AS expected_text,
 				CASE WHEN t.human_reviewed = 1 THEN '1' ELSE '0' END AS human_reviewed,
+				CASE WHEN t.allow_source_match = 1 THEN '1' ELSE '0' END AS allow_source_match,
 				t.text
 			FROM i18n_messages m
 			JOIN i18n_translations t

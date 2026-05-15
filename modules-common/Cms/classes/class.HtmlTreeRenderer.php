@@ -31,6 +31,7 @@ declare(strict_types=1);
 class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 {
 	private const string CONTEXT_WIDGET_CONNECTION = 'widget_connection';
+	private const string CONTEXT_DEBUG_OWNER_WIDGET_CONNECTION_ID = '__radaptor_debug_owner_widget_connection_id';
 
 	// ── Asset state ──────────────────────────────────────────────────────────
 
@@ -57,6 +58,8 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 
 	/** @var array<string, list<array<mixed>>> */
 	private array $_debugCallers = [];
+
+	private ?HtmlRenderDebugCollector $_debugCollector = null;
 
 	// ─────────────────────────────────────────────────────────────────────────
 
@@ -115,6 +118,15 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 	public function isEditable(): bool
 	{
 		return $this->is_editable;
+	}
+
+	public function recordTemplateDebug(string $templateName, string $templatePath, float $durationMs): void
+	{
+		if (!$this->isRadaptorDebugEnabled()) {
+			return;
+		}
+
+		$this->getDebugCollector()->recordTemplateDebug($templateName, $templatePath, $durationMs);
 	}
 
 	// ── iHtmlAssetRegistry: registration ─────────────────────────────────────
@@ -523,6 +535,8 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 		$props = $node['props'];
 		$meta = $node['meta'] ?? [];
 		$node_render_context = $render_context;
+		$debug_enabled = $this->isRadaptorDebugEnabled();
+		$debug_node_id = null;
 
 		if (isset($meta['render_flags']) && is_array($meta['render_flags'])) {
 			$node_render_context = array_replace($node_render_context, $meta['render_flags']);
@@ -532,6 +546,33 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 			$node_render_context[self::CONTEXT_WIDGET_CONNECTION] = $this->hydrateWidgetConnection($meta['widget_connection']);
 		}
 
+		if ($debug_enabled) {
+			$owner_widget_connection_id = $this->resolveDebugOwnerWidgetConnectionId($meta, $render_context);
+			$node_render_context[self::CONTEXT_DEBUG_OWNER_WIDGET_CONNECTION_ID] = $owner_widget_connection_id;
+			$debug_node_id = $this->getDebugCollector()->pushFrame($node, $owner_widget_connection_id);
+		}
+
+		$result = '';
+
+		try {
+			$result = $this->renderNode($node, $props, $meta, $node_render_context, $debug_node_id);
+
+			return $result;
+		} finally {
+			if ($debug_enabled && $debug_node_id !== null) {
+				$this->getDebugCollector()->popFrame($debug_node_id, $result);
+			}
+		}
+	}
+
+	/**
+	 * @param RenderTreeNode $node
+	 * @param array<string, mixed> $props
+	 * @param array<string, mixed> $meta
+	 * @param array<string, mixed> $node_render_context
+	 */
+	private function renderNode(array $node, array $props, array $meta, array $node_render_context, ?string $debug_node_id): string
+	{
 		$content_html = [];
 
 		foreach ($node['contents'] as $content_name => $items) {
@@ -543,7 +584,7 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 		}
 
 		if ($node['component'] === '_contentContainer') {
-			return $this->wrapStableContainer($content_html['content'] ?? '', $meta);
+			return $this->wrapStableContainer($content_html['content'] ?? '', $meta, $debug_node_id);
 		}
 
 		$template_name = HtmlComponentTemplateResolver::resolveTemplateName($node);
@@ -565,7 +606,31 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 			$html = $this->appendPageChrome($html, $content_html['page_chrome']);
 		}
 
-		return $this->wrapStableContainer($html, $meta);
+		return $this->wrapStableContainer($html, $meta, $debug_node_id);
+	}
+
+	/**
+	 * @return array<string, mixed>
+	 */
+	public function getBootstrap(): array
+	{
+		$collectorBootstrap = $this->_debugCollector?->toBootstrap() ?? [
+			'roots' => [],
+			'nodes' => [],
+			'messages' => [],
+		];
+
+		return [
+			'version' => 1,
+			'sessionId' => $this->debugSessionId(),
+			'requestId' => $this->debugRequestId(),
+			'renderer' => 'html',
+			'features' => $this->debugFeatures(),
+			'roots' => $collectorBootstrap['roots'],
+			'nodes' => $collectorBootstrap['nodes'],
+			'messages' => $collectorBootstrap['messages'],
+			'endpoints' => new stdClass(),
+		];
 	}
 
 	// ── Private helpers ───────────────────────────────────────────────────────
@@ -586,7 +651,7 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 	/**
 	 * @param array<string, mixed> $meta
 	 */
-	private function wrapStableContainer(string $html, array $meta): string
+	private function wrapStableContainer(string $html, array $meta, ?string $debug_node_id = null): string
 	{
 		$container_id = trim((string)($meta['stable_container_id'] ?? ''));
 
@@ -600,6 +665,10 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 
 		if (!empty($meta['hx_swap_oob'])) {
 			$attributes['hx-swap-oob'] = (string)($meta['hx_swap_oob'] === true ? 'outerHTML' : $meta['hx_swap_oob']);
+		}
+
+		if ($this->isRadaptorDebugEnabled() && $debug_node_id !== null) {
+			$attributes += $this->getDebugCollector()->stableContainerAttributes($debug_node_id, $container_id, $meta);
 		}
 
 		$attribute_html = '';
@@ -690,6 +759,73 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 	private function _getStimulusAssetsBase(string $theme_slug): string
 	{
 		return CmsThemeAssetHelper::getStimulusAssetsBase($theme_slug);
+	}
+
+	private function isRadaptorDebugEnabled(): bool
+	{
+		return class_exists(DebugSession::class) && DebugSession::isEnabled();
+	}
+
+	private function getDebugCollector(): HtmlRenderDebugCollector
+	{
+		$this->_debugCollector ??= new HtmlRenderDebugCollector();
+
+		return $this->_debugCollector;
+	}
+
+	/**
+	 * @param array<string, mixed> $meta
+	 * @param array<string, mixed> $render_context
+	 */
+	private function resolveDebugOwnerWidgetConnectionId(array $meta, array $render_context): ?string
+	{
+		$connection_id = $this->readWidgetConnectionId($meta['widget_connection'] ?? null);
+
+		if ($connection_id !== null) {
+			return 'wc:' . $connection_id;
+		}
+
+		$owner = $render_context[self::CONTEXT_DEBUG_OWNER_WIDGET_CONNECTION_ID] ?? null;
+
+		return is_string($owner) && $owner !== '' ? $owner : null;
+	}
+
+	private function readWidgetConnectionId(mixed $widget_connection): ?int
+	{
+		if (is_array($widget_connection) && isset($widget_connection['connection_id']) && is_numeric($widget_connection['connection_id'])) {
+			return (int)$widget_connection['connection_id'];
+		}
+
+		if ($widget_connection instanceof WidgetConnection) {
+			return $widget_connection->getConnectionId();
+		}
+
+		return null;
+	}
+
+	private function debugSessionId(): string
+	{
+		return class_exists(DebugSession::class) ? DebugSession::sessionId() : '';
+	}
+
+	private function debugRequestId(): string
+	{
+		return class_exists(DebugSession::class) ? DebugSession::requestId() : '';
+	}
+
+	/**
+	 * @return list<string>
+	 */
+	private function debugFeatures(): array
+	{
+		if (!class_exists(DebugSession::class)) {
+			return ['tree', 'dommap', 'messages', 'timings'];
+		}
+
+		$features = DebugSession::features();
+		$features = array_values(array_map('strval', is_array($features) ? $features : []));
+
+		return $features !== [] ? $features : ['tree', 'dommap', 'messages', 'timings'];
 	}
 
 	/**

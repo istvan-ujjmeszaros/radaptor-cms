@@ -281,10 +281,17 @@ class Template extends TemplateDebug
 		$rendererClass = static::lookupTemplateRenderer($this->_template_name);
 
 		// Render the template using the appropriate renderer
+		$templatePath = PackagePathHelper::resolveStoragePath($this->_templatePath);
+		$startedAt = microtime(true);
 		$renderedContent = $rendererClass::render(
-			PackagePathHelper::resolveStoragePath($this->_templatePath),
+			$templatePath,
 			$this->props,
 			$this
+		);
+		$this->_renderer?->recordTemplateDebug(
+			$this->_template_name,
+			$templatePath,
+			(microtime(true) - $startedAt) * 1000
 		);
 
 		$this->_content = $this->addDebugInfo($this, $renderedContent, $this->_widget_connection?->getWidgetName() ?? '');

@@ -21,7 +21,6 @@ cli_runner,category.emailqueue,,pt-BR,"Email Queue","Fila de e-mail",0,0,"Fila d
 cli_runner,category.form,,pt-BR,Forms,Formulários,0,0,Formulários
 cli_runner,category.i18n,,pt-BR,Translations,Traduções,0,0,Traduções
 cli_runner,category.migrate,,pt-BR,Migrations,Migrações,0,0,Migrações
-cli_runner,category.plugin,,pt-BR,Plugins,Plugins,0,1,Plugins
 cli_runner,category.role,,pt-BR,Roles,Papéis,0,0,Papéis
 cli_runner,category.site,,pt-BR,Site,Site,0,1,Site
 cli_runner,category.user,,pt-BR,Users,Usuários,0,0,Usuários

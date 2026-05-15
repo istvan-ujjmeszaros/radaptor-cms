@@ -24,9 +24,9 @@ class EventTagsTagDescription extends AbstractEvent
 
 	public static function renderTagDescription(string $tag_context, string $tag_name): void
 	{
-		if ($tag_context === '' || !PluginRegistry::hasTagContext($tag_context)) {
+		if ($tag_context === '' || !PackageTagContextRegistry::has($tag_context)) {
 			http_response_code(400);
-			echo '<i>Unknown tag context</i>';
+			echo '<i>' . htmlspecialchars(t('tags.validation.unknown_context'), ENT_QUOTES | ENT_SUBSTITUTE) . '</i>';
 
 			return;
 		}

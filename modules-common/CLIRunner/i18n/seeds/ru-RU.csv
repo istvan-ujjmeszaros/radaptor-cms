@@ -21,7 +21,6 @@ cli_runner,category.emailqueue,,ru-RU,"Email Queue","Очередь email",0,0,"
 cli_runner,category.form,,ru-RU,Forms,Формы,0,0,Формы
 cli_runner,category.i18n,,ru-RU,Translations,Переводы,0,0,Переводы
 cli_runner,category.migrate,,ru-RU,Migrations,Миграции,0,0,Миграции
-cli_runner,category.plugin,,ru-RU,Plugins,Плагины,0,0,Плагины
 cli_runner,category.role,,ru-RU,Roles,Роли,0,0,Роли
 cli_runner,category.site,,ru-RU,Site,Сайт,0,0,Сайт
 cli_runner,category.user,,ru-RU,Users,Пользователи,0,0,Пользователи

@@ -21,7 +21,6 @@ cli_runner,category.emailqueue,,pl-PL,"Email Queue","Kolejka e-mail",0,0,"Kolejk
 cli_runner,category.form,,pl-PL,Forms,Formularze,0,0,Formularze
 cli_runner,category.i18n,,pl-PL,Translations,Tłumaczenia,0,0,Tłumaczenia
 cli_runner,category.migrate,,pl-PL,Migrations,Migracje,0,0,Migracje
-cli_runner,category.plugin,,pl-PL,Plugins,Pluginy,0,0,Pluginy
 cli_runner,category.role,,pl-PL,Roles,Role,0,0,Role
 cli_runner,category.site,,pl-PL,Site,Witryna,0,0,Witryna
 cli_runner,category.user,,pl-PL,Users,Użytkownicy,0,0,Użytkownicy

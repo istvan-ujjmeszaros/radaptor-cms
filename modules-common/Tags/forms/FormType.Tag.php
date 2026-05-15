@@ -91,11 +91,11 @@ class FormTypeTag extends FormCustomValidatorTag
 
 			$contextOptions = [];
 
-			foreach (PackageTagContextRegistry::getAll() as $contextKey => $contextData) {
+			foreach (PluginRegistry::getAllTagContexts() as $contextKey => $pluginId) {
 				$contextOptions[] = [
 					'inputtype' => 'option',
 					'value' => $contextKey,
-					'label' => $contextData['label'] ?? $contextKey,
+					'label' => $contextKey,
 				];
 			}
 

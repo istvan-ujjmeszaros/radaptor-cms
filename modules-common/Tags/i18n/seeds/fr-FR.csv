@@ -1,17 +1,14 @@
 ﻿domain,key,context,locale,source_text,expected_text,human_reviewed,allow_source_match,text
 tags,field.context.label,,fr-FR,Context,Contexte,0,0,Contexte
-tags,field.description.label,,fr-FR,Tag description,Description de l'étiquette,0,0,Description de l'étiquette
+tags,field.description.label,,fr-FR,"Tag description","Description de l'étiquette",0,0,"Description de l'étiquette"
 tags,field.name.explanation,,fr-FR,"No spaces, short and concise. Do not create synonyms for existing tags.","Sans espaces, court et concis. Ne créez pas de synonymes pour les étiquettes existantes.",0,0,"Sans espaces, court et concis. Ne créez pas de synonymes pour les étiquettes existantes."
-tags,field.name.label,,fr-FR,Tag name,Nom de l'étiquette,0,0,Nom de l'étiquette
-tags,field.type.explanation,,fr-FR,Select the tag type,Sélectionner le type d'étiquette,0,0,Sélectionner le type d'étiquette
+tags,field.name.label,,fr-FR,"Tag name","Nom de l'étiquette",0,0,"Nom de l'étiquette"
+tags,field.type.explanation,,fr-FR,"Select the tag type","Sélectionner le type d'étiquette",0,0,"Sélectionner le type d'étiquette"
 tags,field.type.label,,fr-FR,Type,Type,0,1,Type
 tags,form.name,,fr-FR,Tag,Étiquette,0,0,Étiquette
-tags,form.title_create,,fr-FR,New tag,Nouvelle étiquette,0,0,Nouvelle étiquette
-tags,form.title_edit,,fr-FR,Edit tag,Modifier l'étiquette,0,0,Modifier l'étiquette
+tags,form.title_create,,fr-FR,"New tag","Nouvelle étiquette",0,0,"Nouvelle étiquette"
+tags,form.title_edit,,fr-FR,"Edit tag","Modifier l'étiquette",0,0,"Modifier l'étiquette"
 tags,list.title,,fr-FR,Tags,Étiquettes,0,0,Étiquettes
-tags,saved,,fr-FR,Tags saved,Étiquettes enregistrées,0,0,Étiquettes enregistrées
-tags,updated,,fr-FR,Tag updated,Étiquette mise à jour,0,0,Étiquette mise à jour
-tags,validation.context_required,,fr-FR,Tag context is required,Le contexte de l'étiquette est obligatoire,0,0,Le contexte de l'étiquette est obligatoire
-tags,validation.name_unique,,fr-FR,This tag already exists,Cette étiquette existe déjà,0,0,Cette étiquette existe déjà
-tags,validation.unknown_context,,fr-FR,Unknown tag context,Contexte d'étiquette inconnu,0,0,Contexte d'étiquette inconnu
-tags,validation.name_max_length,,fr-FR,Tag name must not exceed 255 characters,Le nom de l'étiquette ne doit pas dépasser 255 caractères,0,0,Le nom de l'étiquette ne doit pas dépasser 255 caractères
+tags,saved,,fr-FR,"Tags saved","Étiquettes enregistrées",0,0,"Étiquettes enregistrées"
+tags,updated,,fr-FR,"Tag updated","Étiquette mise à jour",0,0,"Étiquette mise à jour"
+tags,validation.name_max_length,,fr-FR,"Tag name must not exceed 255 characters","Le nom de l'étiquette ne doit pas dépasser 255 caractères",0,0,"Le nom de l'étiquette ne doit pas dépasser 255 caractères"

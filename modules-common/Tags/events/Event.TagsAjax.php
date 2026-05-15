@@ -21,13 +21,13 @@ class EventTagsAjax extends AbstractEvent
 		$context = trim((string) $tag_context);
 
 		if ($context === '') {
-			ApiResponse::renderError('INVALID_CONTEXT', t('tags.validation.context_required'), 400);
+			ApiResponse::renderError('INVALID_CONTEXT', 'Context is required.', 400);
 
 			return;
 		}
 
-		if (!PackageTagContextRegistry::has($context)) {
-			ApiResponse::renderError('UNKNOWN_CONTEXT', t('tags.validation.unknown_context'), 400);
+		if (!PluginRegistry::hasTagContext($context)) {
+			ApiResponse::renderError('UNKNOWN_CONTEXT', 'Unknown tag context.', 400);
 
 			return;
 		}

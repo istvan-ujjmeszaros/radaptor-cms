@@ -1,17 +1,14 @@
 ﻿domain,key,context,locale,source_text,expected_text,human_reviewed,allow_source_match,text
 tags,field.context.label,,zh-Hans-CN,Context,上下文,0,0,上下文
-tags,field.description.label,,zh-Hans-CN,Tag description,标签描述,0,0,标签描述
+tags,field.description.label,,zh-Hans-CN,"Tag description",标签描述,0,0,标签描述
 tags,field.name.explanation,,zh-Hans-CN,"No spaces, short and concise. Do not create synonyms for existing tags.",不含空格，简短精炼。不要为现有标签创建同义词。,0,0,不含空格，简短精炼。不要为现有标签创建同义词。
-tags,field.name.label,,zh-Hans-CN,Tag name,标签名称,0,0,标签名称
-tags,field.type.explanation,,zh-Hans-CN,Select the tag type,选择标签类型,0,0,选择标签类型
+tags,field.name.label,,zh-Hans-CN,"Tag name",标签名称,0,0,标签名称
+tags,field.type.explanation,,zh-Hans-CN,"Select the tag type",选择标签类型,0,0,选择标签类型
 tags,field.type.label,,zh-Hans-CN,Type,类型,0,0,类型
 tags,form.name,,zh-Hans-CN,Tag,标签,0,0,标签
-tags,form.title_create,,zh-Hans-CN,New tag,新标签,0,0,新标签
-tags,form.title_edit,,zh-Hans-CN,Edit tag,编辑标签,0,0,编辑标签
+tags,form.title_create,,zh-Hans-CN,"New tag",新标签,0,0,新标签
+tags,form.title_edit,,zh-Hans-CN,"Edit tag",编辑标签,0,0,编辑标签
 tags,list.title,,zh-Hans-CN,Tags,标签,0,0,标签
-tags,saved,,zh-Hans-CN,Tags saved,标签已保存,0,0,标签已保存
-tags,updated,,zh-Hans-CN,Tag updated,标签已更新,0,0,标签已更新
-tags,validation.context_required,,zh-Hans-CN,Tag context is required,标签上下文为必填项,0,0,标签上下文为必填项
-tags,validation.name_unique,,zh-Hans-CN,This tag already exists,此标签已存在,0,0,此标签已存在
-tags,validation.unknown_context,,zh-Hans-CN,Unknown tag context,未知标签上下文,0,0,未知标签上下文
-tags,validation.name_max_length,,zh-Hans-CN,Tag name must not exceed 255 characters,标签名称不得超过 255 个字符,0,0,标签名称不得超过 255 个字符
+tags,saved,,zh-Hans-CN,"Tags saved",标签已保存,0,0,标签已保存
+tags,updated,,zh-Hans-CN,"Tag updated",标签已更新,0,0,标签已更新
+tags,validation.name_max_length,,zh-Hans-CN,"Tag name must not exceed 255 characters","标签名称不得超过 255 个字符",0,0,"标签名称不得超过 255 个字符"

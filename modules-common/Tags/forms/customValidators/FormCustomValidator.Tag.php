@@ -24,8 +24,8 @@ abstract class FormCustomValidatorTag extends AbstractForm
 			return;
 		}
 
-		if (!PackageTagContextRegistry::has($context)) {
-			$context_input->addError(t('tags.validation.unknown_context'));
+		if (!PluginRegistry::hasTagContext($context)) {
+			$context_input->addError('Unknown tag context');
 		}
 	}
 
@@ -40,7 +40,7 @@ abstract class FormCustomValidatorTag extends AbstractForm
 		if ($this->getInput('context')) {
 			$context = trim((string) $this->getInput('context')->getValue());
 
-			if (!PackageTagContextRegistry::has($context)) {
+			if (!PluginRegistry::hasTagContext($context)) {
 				return;
 			}
 
@@ -52,7 +52,7 @@ abstract class FormCustomValidatorTag extends AbstractForm
 
 		if ($tag_id > 0) {
 			if ($this->getMode() == self::_MODE_CREATE || ($this->getMode() == self::_MODE_UPDATE && $this->getItemId() != $tag_id)) {
-				$this->getInput('name')->addError(t('tags.validation.name_unique'));
+				$this->getInput('name')->addError('This tag already exists');
 			}
 		}
 	}

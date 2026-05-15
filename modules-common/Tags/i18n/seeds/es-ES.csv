@@ -1,17 +1,14 @@
 ﻿domain,key,context,locale,source_text,expected_text,human_reviewed,allow_source_match,text
 tags,field.context.label,,es-ES,Context,Contexto,0,0,Contexto
-tags,field.description.label,,es-ES,Tag description,Descripción de la etiqueta,0,0,Descripción de la etiqueta
+tags,field.description.label,,es-ES,"Tag description","Descripción de la etiqueta",0,0,"Descripción de la etiqueta"
 tags,field.name.explanation,,es-ES,"No spaces, short and concise. Do not create synonyms for existing tags.","Sin espacios, corto y conciso. No cree sinónimos para etiquetas existentes.",0,0,"Sin espacios, corto y conciso. No cree sinónimos para etiquetas existentes."
-tags,field.name.label,,es-ES,Tag name,Nombre de la etiqueta,0,0,Nombre de la etiqueta
-tags,field.type.explanation,,es-ES,Select the tag type,Seleccionar el tipo de etiqueta,0,0,Seleccionar el tipo de etiqueta
+tags,field.name.label,,es-ES,"Tag name","Nombre de la etiqueta",0,0,"Nombre de la etiqueta"
+tags,field.type.explanation,,es-ES,"Select the tag type","Seleccionar el tipo de etiqueta",0,0,"Seleccionar el tipo de etiqueta"
 tags,field.type.label,,es-ES,Type,Tipo,0,0,Tipo
 tags,form.name,,es-ES,Tag,Etiqueta,0,0,Etiqueta
-tags,form.title_create,,es-ES,New tag,Nueva etiqueta,0,0,Nueva etiqueta
-tags,form.title_edit,,es-ES,Edit tag,Editar etiqueta,0,0,Editar etiqueta
+tags,form.title_create,,es-ES,"New tag","Nueva etiqueta",0,0,"Nueva etiqueta"
+tags,form.title_edit,,es-ES,"Edit tag","Editar etiqueta",0,0,"Editar etiqueta"
 tags,list.title,,es-ES,Tags,Etiquetas,0,0,Etiquetas
-tags,saved,,es-ES,Tags saved,Etiquetas guardadas,0,0,Etiquetas guardadas
-tags,updated,,es-ES,Tag updated,Etiqueta actualizada,0,0,Etiqueta actualizada
-tags,validation.context_required,,es-ES,Tag context is required,Se requiere el contexto de la etiqueta,0,0,Se requiere el contexto de la etiqueta
-tags,validation.name_unique,,es-ES,This tag already exists,Esta etiqueta ya existe,0,0,Esta etiqueta ya existe
-tags,validation.unknown_context,,es-ES,Unknown tag context,Contexto de etiqueta desconocido,0,0,Contexto de etiqueta desconocido
-tags,validation.name_max_length,,es-ES,Tag name must not exceed 255 characters,El nombre de la etiqueta no debe superar los 255 caracteres,0,0,El nombre de la etiqueta no debe superar los 255 caracteres
+tags,saved,,es-ES,"Tags saved","Etiquetas guardadas",0,0,"Etiquetas guardadas"
+tags,updated,,es-ES,"Tag updated","Etiqueta actualizada",0,0,"Etiqueta actualizada"
+tags,validation.name_max_length,,es-ES,"Tag name must not exceed 255 characters","El nombre de la etiqueta no debe superar los 255 caracteres",0,0,"El nombre de la etiqueta no debe superar los 255 caracteres"

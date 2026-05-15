@@ -21,6 +21,7 @@ cli_runner,category.emailqueue,,it-IT,"Email Queue","Coda email",0,0,"Coda email
 cli_runner,category.form,,it-IT,Forms,Moduli,0,0,Moduli
 cli_runner,category.i18n,,it-IT,Translations,Traduzioni,0,0,Traduzioni
 cli_runner,category.migrate,,it-IT,Migrations,Migrazioni,0,0,Migrazioni
+cli_runner,category.plugin,,it-IT,Plugins,Plugin,0,0,Plugin
 cli_runner,category.role,,it-IT,Roles,Ruoli,0,0,Ruoli
 cli_runner,category.site,,it-IT,Site,Sito,0,0,Sito
 cli_runner,category.user,,it-IT,Users,Utenti,0,0,Utenti

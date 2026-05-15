@@ -73,6 +73,7 @@ class HtmlRenderDebugCollector
 			'slotName' => $this->resolveSlotName($node, $meta, $stableContainerId),
 			'seq' => $this->normalizeNullableInt($this->readWidgetConnectionValue($meta, 'seq')),
 			'domMode' => $stableContainerId !== null ? 'stable-container' : 'none',
+			'domAnchorCount' => $stableContainerId !== null ? 1 : 0,
 			'stableContainerId' => $stableContainerId,
 			'propsPreview' => $this->previewValue($props),
 			'source' => $source,
@@ -82,6 +83,7 @@ class HtmlRenderDebugCollector
 				'selfMs' => 0.0,
 			],
 			'messages' => [],
+			'renderTemplates' => [],
 		];
 
 		$this->_frameStack[] = $nodeId;
@@ -125,7 +127,40 @@ class HtmlRenderDebugCollector
 		}
 
 		$this->_nodes[$nodeId]['domMode'] = 'stable-container';
+		$this->_nodes[$nodeId]['domAnchorCount'] = 1;
 		$this->_nodes[$nodeId]['stableContainerId'] = $stableContainerId;
+
+		return $this->debugAttributes($nodeId, $meta);
+	}
+
+	/**
+	 * @param array<string, mixed> $meta
+	 * @return array<string, string>
+	 */
+	public function rootElementAttributes(string $nodeId, array $meta): array
+	{
+		return $this->debugAttributes($nodeId, $meta);
+	}
+
+	public function markRootElementsStamped(string $nodeId, int $stampedElementCount): void
+	{
+		if (!isset($this->_nodes[$nodeId]) || $stampedElementCount <= 0) {
+			return;
+		}
+
+		$this->_nodes[$nodeId]['domMode'] = 'root-elements';
+		$this->_nodes[$nodeId]['domAnchorCount'] = $stampedElementCount;
+	}
+
+	/**
+	 * @param array<string, mixed> $meta
+	 * @return array<string, string>
+	 */
+	private function debugAttributes(string $nodeId, array $meta): array
+	{
+		if (!isset($this->_nodes[$nodeId])) {
+			return [];
+		}
 
 		$attributes = [
 			'data-radaptor-node' => $nodeId,
@@ -158,8 +193,16 @@ class HtmlRenderDebugCollector
 			return;
 		}
 
+		$durationMs = $this->roundMs($durationMs);
+
 		$this->_nodes[$nodeId]['templateName'] = $templateName;
 		$this->_nodes[$nodeId]['source']['templatePath'] = $templatePath;
+		$this->_nodes[$nodeId]['source']['primaryTemplate'] = $templatePath;
+		$this->_nodes[$nodeId]['renderTemplates'][] = [
+			'name' => $templateName,
+			'path' => $templatePath,
+			'durationMs' => $durationMs,
+		];
 		$this->_nodes[$nodeId]['timings']['templateMs'] = $this->roundMs(
 			(float)$this->_nodes[$nodeId]['timings']['templateMs'] + $durationMs
 		);
@@ -292,7 +335,7 @@ class HtmlRenderDebugCollector
 
 	/**
 	 * @param array<string, mixed> $meta
-	 * @return array{templatePath: null, class: string|null, file: string|null, line: int|null}
+	 * @return array{templatePath: null, primaryTemplate: null, class: string|null, file: string|null, line: int|null}
 	 */
 	private function resolveSource(array $meta): array
 	{
@@ -313,6 +356,7 @@ class HtmlRenderDebugCollector
 
 		return [
 			'templatePath' => null,
+			'primaryTemplate' => null,
 			'class' => $className,
 			'file' => $file,
 			'line' => $line,

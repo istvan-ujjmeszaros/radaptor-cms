@@ -656,6 +656,10 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 		$container_id = trim((string)($meta['stable_container_id'] ?? ''));
 
 		if ($container_id === '') {
+			if ($this->isRadaptorDebugEnabled() && $debug_node_id !== null) {
+				return $this->stampDebugRootElements($html, $meta, $debug_node_id);
+			}
+
 			return $html;
 		}
 
@@ -678,6 +682,21 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 		}
 
 		return '<div' . $attribute_html . '>' . $html . '</div>';
+	}
+
+	/**
+	 * @param array<string, mixed> $meta
+	 */
+	private function stampDebugRootElements(string $html, array $meta, string $debug_node_id): string
+	{
+		$attributes = $this->getDebugCollector()->rootElementAttributes($debug_node_id, $meta);
+		$result = HtmlDebugDomStamper::stampRootElements($html, $attributes);
+
+		if ($result['stampedElementCount'] > 0) {
+			$this->getDebugCollector()->markRootElementsStamped($debug_node_id, $result['stampedElementCount']);
+		}
+
+		return $result['html'];
 	}
 
 	/**

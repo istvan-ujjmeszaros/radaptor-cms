@@ -117,7 +117,7 @@ Release key:
 
 Normal flow: package PR, `@codex review`, clean repo checks, squash merge, fast-forward local
 `main`, `package:release core:cms`, commit the `.registry-package.json` version bump, then publish
-the generated artifact through `radaptor_plugin_registry`.
+the generated artifact through `radaptor_package_registry`.
 
 Site snapshot export/import lives in this package. CLI entrypoints are exposed by the framework,
 while the CMS service owns snapshot validation, destructive import replacement, upload-manifest

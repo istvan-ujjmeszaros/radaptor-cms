@@ -21,7 +21,6 @@ cli_runner,category.emailqueue,,es-ES,"Email Queue","Cola de correo",0,0,"Cola d
 cli_runner,category.form,,es-ES,Forms,Formularios,0,0,Formularios
 cli_runner,category.i18n,,es-ES,Translations,Traducciones,0,0,Traducciones
 cli_runner,category.migrate,,es-ES,Migrations,Migraciones,0,0,Migraciones
-cli_runner,category.plugin,,es-ES,Plugins,Plugins,0,1,Plugins
 cli_runner,category.role,,es-ES,Roles,Roles,0,1,Roles
 cli_runner,category.site,,es-ES,Site,Sitio,0,0,Sitio
 cli_runner,category.user,,es-ES,Users,Usuarios,0,0,Usuarios

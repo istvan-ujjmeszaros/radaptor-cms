@@ -1,14 +1,17 @@
 ﻿domain,key,context,locale,source_text,expected_text,human_reviewed,allow_source_match,text
 tags,field.context.label,,de-DE,Context,Kontext,0,0,Kontext
-tags,field.description.label,,de-DE,"Tag description",Tag-Beschreibung,0,0,Tag-Beschreibung
+tags,field.description.label,,de-DE,Tag description,Tag-Beschreibung,0,0,Tag-Beschreibung
 tags,field.name.explanation,,de-DE,"No spaces, short and concise. Do not create synonyms for existing tags.","Keine Leerzeichen, kurz und prägnant. Keine Synonyme für bestehende Tags erstellen.",0,0,"Keine Leerzeichen, kurz und prägnant. Keine Synonyme für bestehende Tags erstellen."
-tags,field.name.label,,de-DE,"Tag name",Tag-Name,0,0,Tag-Name
-tags,field.type.explanation,,de-DE,"Select the tag type","Tag-Typ auswählen",0,0,"Tag-Typ auswählen"
+tags,field.name.label,,de-DE,Tag name,Tag-Name,0,0,Tag-Name
+tags,field.type.explanation,,de-DE,Select the tag type,Tag-Typ auswählen,0,0,Tag-Typ auswählen
 tags,field.type.label,,de-DE,Type,Typ,0,0,Typ
 tags,form.name,,de-DE,Tag,Tag,0,1,Tag
-tags,form.title_create,,de-DE,"New tag","Neues Tag",0,0,"Neues Tag"
-tags,form.title_edit,,de-DE,"Edit tag","Tag bearbeiten",0,0,"Tag bearbeiten"
+tags,form.title_create,,de-DE,New tag,Neues Tag,0,0,Neues Tag
+tags,form.title_edit,,de-DE,Edit tag,Tag bearbeiten,0,0,Tag bearbeiten
 tags,list.title,,de-DE,Tags,Tags,0,1,Tags
-tags,saved,,de-DE,"Tags saved","Tags gespeichert",0,0,"Tags gespeichert"
-tags,updated,,de-DE,"Tag updated","Tag aktualisiert",0,0,"Tag aktualisiert"
-tags,validation.name_max_length,,de-DE,"Tag name must not exceed 255 characters","Tag-Name darf 255 Zeichen nicht überschreiten",0,0,"Tag-Name darf 255 Zeichen nicht überschreiten"
+tags,saved,,de-DE,Tags saved,Tags gespeichert,0,0,Tags gespeichert
+tags,updated,,de-DE,Tag updated,Tag aktualisiert,0,0,Tag aktualisiert
+tags,validation.context_required,,de-DE,Tag context is required,Tag-Kontext ist erforderlich,0,0,Tag-Kontext ist erforderlich
+tags,validation.name_unique,,de-DE,This tag already exists,Dieses Tag existiert bereits,0,0,Dieses Tag existiert bereits
+tags,validation.unknown_context,,de-DE,Unknown tag context,Unbekannter Tag-Kontext,0,0,Unbekannter Tag-Kontext
+tags,validation.name_max_length,,de-DE,Tag name must not exceed 255 characters,Tag-Name darf 255 Zeichen nicht überschreiten,0,0,Tag-Name darf 255 Zeichen nicht überschreiten

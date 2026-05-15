@@ -21,7 +21,6 @@ cli_runner,category.emailqueue,,de-DE,"Email Queue",E-Mail-Warteschlange,0,0,E-M
 cli_runner,category.form,,de-DE,Forms,Formulare,0,0,Formulare
 cli_runner,category.i18n,,de-DE,Translations,Übersetzungen,0,0,Übersetzungen
 cli_runner,category.migrate,,de-DE,Migrations,Migrationen,0,0,Migrationen
-cli_runner,category.plugin,,de-DE,Plugins,Plugins,0,1,Plugins
 cli_runner,category.role,,de-DE,Roles,Rollen,0,0,Rollen
 cli_runner,category.site,,de-DE,Site,Website,0,0,Website
 cli_runner,category.user,,de-DE,Users,Benutzer,0,0,Benutzer

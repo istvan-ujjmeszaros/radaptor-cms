@@ -11,7 +11,6 @@ $category_labels = [
 	'form' => t('cli_runner.category.form'),
 	'i18n' => t('cli_runner.category.i18n'),
 	'migrate' => t('cli_runner.category.migrate'),
-	'plugin' => t('cli_runner.category.plugin'),
 	'role' => t('cli_runner.category.role'),
 	'site' => t('cli_runner.category.site'),
 	'user' => t('cli_runner.category.user'),

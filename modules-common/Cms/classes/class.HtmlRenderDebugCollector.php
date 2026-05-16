@@ -39,9 +39,6 @@ class HtmlRenderDebugCollector
 	/** @var array<string, float> */
 	private array $_childTotalMs = [];
 
-	/** @var list<array<string, mixed>> */
-	private array $_messages = [];
-
 	/**
 	 * @param array<string, mixed> $node
 	 */
@@ -82,7 +79,6 @@ class HtmlRenderDebugCollector
 				'templateMs' => 0.0,
 				'selfMs' => 0.0,
 			],
-			'messages' => [],
 			'renderTemplates' => [],
 		];
 
@@ -93,7 +89,7 @@ class HtmlRenderDebugCollector
 		return $nodeId;
 	}
 
-	public function popFrame(string $nodeId, string $renderedHtml): void
+	public function popFrame(string $nodeId): void
 	{
 		$startedAt = $this->_frameStartedAt[$nodeId] ?? microtime(true);
 		$totalMs = $this->roundMs((microtime(true) - $startedAt) * 1000);
@@ -208,27 +204,14 @@ class HtmlRenderDebugCollector
 		);
 	}
 
-	public function recordMessage(DebugMessage $message): void
-	{
-		$normalized = $this->normalizeMessage($message);
-		$nodeId = is_string($normalized['nodeId'] ?? null) ? $normalized['nodeId'] : $this->currentNodeId();
-		$normalized['nodeId'] = $nodeId;
-		$this->_messages[] = $normalized;
-
-		if ($nodeId !== null && isset($this->_nodes[$nodeId])) {
-			$this->_nodes[$nodeId]['messages'][] = $normalized;
-		}
-	}
-
 	/**
-	 * @return array{roots: list<string>, nodes: array<string, array<string, mixed>>, messages: list<array<string, mixed>>}
+	 * @return array{roots: list<string>, nodes: array<string, array<string, mixed>>}
 	 */
 	public function toBootstrap(): array
 	{
 		return [
 			'roots' => $this->_roots,
 			'nodes' => $this->_nodes,
-			'messages' => $this->_messages,
 		];
 	}
 
@@ -467,47 +450,5 @@ class HtmlRenderDebugCollector
 			$this->_frameStack,
 			static fn (string $stackNodeId): bool => $stackNodeId !== $nodeId
 		));
-	}
-
-	/**
-	 * @return array<string, mixed>
-	 */
-	private function normalizeMessage(DebugMessage $message): array
-	{
-		if (method_exists($message, 'toArray')) {
-			$payload = $message->toArray();
-
-			if (is_array($payload)) {
-				return $payload;
-			}
-		}
-
-		if ($message instanceof JsonSerializable) {
-			$payload = $message->jsonSerialize();
-
-			if (is_array($payload)) {
-				return $payload;
-			}
-		}
-
-		$payload = [];
-
-		foreach (['code', 'level', 'kind', 'context', 'time', 'nodeId', 'requestId'] as $property) {
-			foreach ([$property, 'get' . ucfirst($property)] as $method) {
-				if (method_exists($message, $method)) {
-					$payload[$property] = $message->{$method}();
-
-					continue 2;
-				}
-			}
-
-			$publicProperties = get_object_vars($message);
-
-			if (array_key_exists($property, $publicProperties)) {
-				$payload[$property] = $publicProperties[$property];
-			}
-		}
-
-		return $payload;
 	}
 }

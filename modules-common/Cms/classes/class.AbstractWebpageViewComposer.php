@@ -123,12 +123,12 @@ abstract class AbstractWebpageViewComposer extends AbstractWebpageViewBase
 	private static function radaptorDebugFeatures(): array
 	{
 		if (!class_exists(DebugSession::class)) {
-			return ['tree', 'dommap', 'messages', 'timings'];
+			return ['tree', 'dommap', 'timings'];
 		}
 
 		$features = DebugSession::features();
 		$features = array_values(array_map('strval', is_array($features) ? $features : []));
 
-		return $features !== [] ? $features : ['tree', 'dommap', 'messages', 'timings'];
+		return $features !== [] ? $features : ['tree', 'dommap', 'timings'];
 	}
 }

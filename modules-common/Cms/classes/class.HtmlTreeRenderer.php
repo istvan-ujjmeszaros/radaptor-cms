@@ -560,7 +560,7 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 			return $result;
 		} finally {
 			if ($debug_enabled && $debug_node_id !== null) {
-				$this->getDebugCollector()->popFrame($debug_node_id, $result);
+				$this->getDebugCollector()->popFrame($debug_node_id);
 			}
 		}
 	}
@@ -617,7 +617,6 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 		$collectorBootstrap = $this->_debugCollector?->toBootstrap() ?? [
 			'roots' => [],
 			'nodes' => [],
-			'messages' => [],
 		];
 
 		return [
@@ -628,7 +627,6 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 			'features' => $this->debugFeatures(),
 			'roots' => $collectorBootstrap['roots'],
 			'nodes' => $collectorBootstrap['nodes'],
-			'messages' => $collectorBootstrap['messages'],
 			'endpoints' => new stdClass(),
 		];
 	}
@@ -838,13 +836,13 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 	private function debugFeatures(): array
 	{
 		if (!class_exists(DebugSession::class)) {
-			return ['tree', 'dommap', 'messages', 'timings'];
+			return ['tree', 'dommap', 'timings'];
 		}
 
 		$features = DebugSession::features();
 		$features = array_values(array_map('strval', is_array($features) ? $features : []));
 
-		return $features !== [] ? $features : ['tree', 'dommap', 'messages', 'timings'];
+		return $features !== [] ? $features : ['tree', 'dommap', 'timings'];
 	}
 
 	/**

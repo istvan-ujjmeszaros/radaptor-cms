@@ -45,14 +45,23 @@ class FormTypeUserLogin extends AbstractForm
 	public function commit(): void
 	{
 		User::loginUser($this->savedata['username'], $this->savedata['password']);
+	}
+
+	public function getRedirectTargetForResult(FormResult $result, FormSubmitContext $context): string
+	{
+		if ($result->isCancel()) {
+			return parent::getRedirectTargetForResult($result, $context);
+		}
 
 		if (Request::_GET('loginreferer', false) !== false) {
-			Url::redirect(Url::sanitizeRefererUrl((string) Request::_GET('loginreferer')));
-		} elseif ($this->isCanonicalLoginResourceRequest()) {
-			Url::redirect(Url::getCurrentHost());
-		} else {
-			Url::redirect(Url::getCurrentUrl());
+			return Url::sanitizeRefererUrl((string) Request::_GET('loginreferer'));
 		}
+
+		if ($this->isCanonicalLoginResourceRequest($context)) {
+			return Url::getCurrentHost();
+		}
+
+		return $context->returnTarget !== '' ? $context->returnTarget : Url::getCurrentHost();
 	}
 
 	public function setMetadata(): void
@@ -92,12 +101,16 @@ class FormTypeUserLogin extends AbstractForm
 		}
 	}
 
-	private function isCanonicalLoginResourceRequest(): bool
+	private function isCanonicalLoginResourceRequest(?FormSubmitContext $context = null): bool
 	{
 		$page_id = ResourceTypeWebpage::getWebpageIdByFormType(FormList::USERLOGIN);
 
 		if (!is_int($page_id) || $page_id <= 0) {
 			return false;
+		}
+
+		if ($context !== null && $context->hostPageId !== null) {
+			return $context->hostPageId === $page_id;
 		}
 
 		$login_url = Url::getSeoUrl($page_id);

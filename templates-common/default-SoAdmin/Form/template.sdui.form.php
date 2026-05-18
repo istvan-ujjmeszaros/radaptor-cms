@@ -4,6 +4,16 @@ $this->registerLibrary('STIMULUS_LOADER');
 $this->registerLibrary('TIPPY');
 
 $form_id = (string)($this->props['form_id'] ?? '');
+$form_descriptor_id = (string)($this->props['form_descriptor_id'] ?? '');
+
+if ($form_descriptor_id === '') {
+	$form_descriptor_id = (string)($this->props['form_name'] ?? '');
+}
+
+if ($form_descriptor_id === '') {
+	$form_descriptor_id = $form_id;
+}
+
 $action = (string)($this->props['action'] ?? '');
 $method = (string)($this->props['method'] ?? 'post');
 $form_class = trim((string)($this->props['form_class'] ?? ''));
@@ -18,6 +28,7 @@ $focusable = (bool)($this->props['focusable'] ?? true);
 $html_attributes = is_array($this->props['html_attributes'] ?? null) ? $this->props['html_attributes'] : [
 	'data-controller' => 'form-timezone',
 ];
+$submit_context = is_array($this->props['submit_context'] ?? null) ? $this->props['submit_context'] : [];
 
 $html_attributes_string = '';
 
@@ -51,8 +62,14 @@ foreach ($html_attributes as $attribute_name => $attribute_value) {
 		<h2><?= e($sub_title) ?></h2>
 	<?php endif; ?>
 
-	<input type="hidden" name="form_id" value="<?= e($form_id) ?>">
-	<?= $this->fetchContent('hidden_fields') ?>
+		<input type="hidden" name="form_id" value="<?= e($form_descriptor_id) ?>">
+		<?php foreach ($submit_context as $context_name => $context_value): ?>
+			<?php if ((string)$context_name === 'form_id') {
+				continue;
+			} ?>
+			<input type="hidden" name="<?= e((string)$context_name) ?>" value="<?= e((string)$context_value) ?>">
+		<?php endforeach; ?>
+		<?= $this->fetchContent('hidden_fields') ?>
 	<?= $this->fetchContent('rows') ?>
 
 	<div style="text-align:center;" class="button-container buttons">

@@ -9,7 +9,7 @@ $current_value = (string)($this->props['value'] ?? '');
 <?php foreach ($values as $label => $value): ?>
 	<?php $radio_id = (string)$this->props['id'] . '_' . ++$i; ?>
 	<div>
-		<input type="radio" name="<?= e((string)$this->props['name']) ?>" id="<?= e($radio_id) ?>" value="<?= e((string)$value) ?>"<?= (string)$value === $current_value ? ' checked' : '' ?>>
+			<input type="radio" name="<?= e((string)$this->props['name']) ?>" data-field-key="<?= e((string)($this->props['data_field_key'] ?? $this->props['name'] ?? '')) ?>" id="<?= e($radio_id) ?>" value="<?= e((string)$value) ?>"<?= (string)$value === $current_value ? ' checked' : '' ?>>
 		<label for="<?= e($radio_id) ?>"><?= e((string)$label) ?></label>
 	</div>
 <?php endforeach; ?>

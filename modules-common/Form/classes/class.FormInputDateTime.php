@@ -12,8 +12,7 @@ class FormInputDateTime extends FormInput
 			return $value;
 		}
 
-		// Convert only on form submission; leave init/display values untouched.
-		if (!array_key_exists($this->id, Request::getPOST())) {
+		if (!$this->wasSubmitted()) {
 			return $value;
 		}
 

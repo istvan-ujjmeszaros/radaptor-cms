@@ -4,6 +4,7 @@ abstract class FormInput implements iFormInput, Stringable
 {
 	protected mixed $_value = null;
 	public ?string $id = null;
+	public ?string $key = null;
 	public bool $save = true;
 	public ?string $label = null;
 	public ?string $explanation = null;
@@ -18,6 +19,7 @@ abstract class FormInput implements iFormInput, Stringable
 	/** @var iFormValidator[] $validators */
 	private array $_validators = [];
 	protected array $_errors = [];
+	protected bool $_submitted = false;
 
 	protected ?AbstractForm $_parent = null;
 
@@ -69,11 +71,7 @@ abstract class FormInput implements iFormInput, Stringable
 
 		$this->_parent = $parent;
 
-		if (isset($_POST[$this->id])) {
-			$this->_value = $_POST[$this->id];
-		} elseif (count($_POST) > 0) {   // ez remélhetőleg csak checkbox-nál fordul elő
-			$this->_value = null;
-		} elseif (isset($this->_parent->initvalues[$this->fieldname])) {
+		if (isset($this->_parent->initvalues[$this->fieldname])) {
 			$this->_value = $this->_parent->initvalues[$this->fieldname];
 		}
 
@@ -83,6 +81,64 @@ abstract class FormInput implements iFormInput, Stringable
 		}
 
 		$parent->addInput($this);
+	}
+
+	public function getKey(): string
+	{
+		return $this->key !== null && $this->key !== '' ? $this->key : $this->fieldname;
+	}
+
+	public function getPayloadName(): string
+	{
+		return $this->getKey();
+	}
+
+	public function wasSubmitted(): bool
+	{
+		return $this->_submitted;
+	}
+
+	/**
+	 * @param array<string, mixed> $payload
+	 * @param array<string, mixed> $files
+	 */
+	public function bindSubmittedValue(array $payload, array $files = []): void
+	{
+		$key = $this->getKey();
+		$this->_submitted = false;
+
+		if (array_key_exists($key, $payload)) {
+			$this->_value = $payload[$key];
+			$this->_submitted = true;
+
+			return;
+		}
+
+		if ($this->id !== null && array_key_exists($this->id, $payload)) {
+			$this->_value = $payload[$this->id];
+			$this->_submitted = true;
+
+			return;
+		}
+
+		if (array_key_exists($key, $files)) {
+			$this->_value = $files[$key];
+			$this->_submitted = true;
+
+			return;
+		}
+
+		if ($this->id !== null && array_key_exists($this->id, $files)) {
+			$this->_value = $files[$this->id];
+			$this->_submitted = true;
+
+			return;
+		}
+
+		if ($payload !== [] || $files !== []) {
+			$this->_value = null;
+			$this->_submitted = true;
+		}
 	}
 
 	public function getValue(): mixed
@@ -202,8 +258,10 @@ abstract class FormInput implements iFormInput, Stringable
 		$props = [
 			'input_type' => $this->getInputtype(),
 			'fieldname' => $this->fieldname,
+			'field_key' => $this->getKey(),
+			'data_field_key' => $this->getKey(),
 			'id' => (string)$this->id,
-			'name' => (string)$this->id,
+			'name' => $this->getPayloadName(),
 			'row_id' => 'row_' . (string)$this->id,
 			'label' => $this->label ?? '',
 			'value' => $this->getValue(),
@@ -253,6 +311,9 @@ abstract class FormInput implements iFormInput, Stringable
 			FormInputText::INPUTTYPE => [
 				'autocomplete_url' => $this instanceof FormInputText ? ($this->autocomplete_url ?? '') : '',
 				'connected_autocomplete_fieldname' => $this instanceof FormInputText ? ($this->connected_autocomplete_fieldname ?? '') : '',
+				'connected_autocomplete_field_key' => ($this instanceof FormInputText && !empty($this->connected_autocomplete_fieldname))
+					? ($this->_parent?->getInputKey($this->connected_autocomplete_fieldname) ?? '')
+					: '',
 				'connected_autocomplete_input_id' => ($this instanceof FormInputText && !empty($this->connected_autocomplete_fieldname))
 					? ($this->_parent?->getInputId($this->connected_autocomplete_fieldname) ?? '')
 					: '',

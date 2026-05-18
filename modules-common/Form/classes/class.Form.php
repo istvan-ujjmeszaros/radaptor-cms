@@ -2,11 +2,14 @@
 
 class Form
 {
-	public static function factory(string $form_type, string $form_id, iTreeBuildContext $tree_build_context): AbstractForm
+	/**
+	 * @param array<string, mixed> $render_context
+	 */
+	public static function factory(string $form_type, string $form_id, iTreeBuildContext $tree_build_context, ?string $referer = null, array $render_context = []): AbstractForm
 	{
-		$class = 'FormType' . ucwords($form_type);
+		$class = FormClassResolver::requireClassName($form_type);
 
-		$form = new $class($form_type, $form_id, $tree_build_context);
+		$form = new $class($form_type, $form_id, $tree_build_context, $referer, $render_context);
 
 		if ($form instanceof AbstractForm) {
 			return $form;

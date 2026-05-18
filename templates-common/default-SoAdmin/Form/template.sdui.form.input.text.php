@@ -2,7 +2,7 @@
 <?php $readonly = (bool)($this->props['readonly'] ?? false); ?>
 <label for="<?= e((string)$this->props['id']) ?>"<?= (string)($this->props['label_style_attr'] ?? '') ?>><?= e((string)($this->props['label'] ?? '')) ?></label>
 <?= $this->fetchContent('helper') ?>
-<input id="<?= e((string)$this->props['id']) ?>"<?= (string)($this->props['input_style_attr'] ?? '') ?> type="text" name="<?= e((string)$this->props['name']) ?>" value="<?= e((string)($this->props['value'] ?? '')) ?>"<?= $readonly ? ' readonly="readonly" tabindex="-1"' : '' ?>>
+<input id="<?= e((string)$this->props['id']) ?>"<?= (string)($this->props['input_style_attr'] ?? '') ?> type="text" name="<?= e((string)$this->props['name']) ?>" data-field-key="<?= e((string)($this->props['data_field_key'] ?? $this->props['name'] ?? '')) ?>" value="<?= e((string)($this->props['value'] ?? '')) ?>"<?= $readonly ? ' readonly="readonly" tabindex="-1"' : '' ?>>
 <?php if ((string)($this->props['autocomplete_url'] ?? '') !== ''): ?>
 	<script>
 		<?php if ((string)($this->props['connected_autocomplete_fieldname'] ?? '') !== ''): ?>
@@ -18,8 +18,8 @@
 			})
 			<?php if ((string)($this->props['connected_autocomplete_fieldname'] ?? '') !== ''): ?>
 			.bind("keyup", function (event) {
-				if (event.keyCode !== $.ui.keyCode.ENTER)
-					$("#<?= e((string)($this->props['connected_autocomplete_input_id'] ?? '')) ?>").val('_' + this.value + '_')
+					if (event.keyCode !== $.ui.keyCode.ENTER)
+						$('[data-field-key="<?= e((string)($this->props['connected_autocomplete_field_key'] ?? '')) ?>"]').val('_' + this.value + '_')
 			})
 			<?php endif; ?>
 			.autocomplete({
@@ -37,7 +37,7 @@
 				select: function (event, ui) {
 					$("#<?= e((string)$this->props['id']) ?>").val(stripTags(ui.item.label));
 					<?php if ((string)($this->props['connected_autocomplete_fieldname'] ?? '') !== ''): ?>
-					$("#<?= e((string)($this->props['connected_autocomplete_input_id'] ?? '')) ?>").val(ui.item.value);
+						$('[data-field-key="<?= e((string)($this->props['connected_autocomplete_field_key'] ?? '')) ?>"]').val(ui.item.value);
 					<?php endif; ?>
 					return false;
 				}

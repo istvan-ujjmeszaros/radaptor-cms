@@ -46,7 +46,14 @@ class WidgetForm extends AbstractWidget implements iMockable
 			]);
 		}
 
-		$formClassName = 'FormType' . ucwords($form_type);
+		$formClassName = FormClassResolver::resolveClassName((string)$form_type);
+
+		if ($formClassName === null) {
+			return $this->buildStatusTree([
+				'severity' => 'warning',
+				'message' => t('cms.form.no_id'),
+			]);
+		}
 
 		// Check required URL params before instantiating the form
 		$missing = Request::getMissingParams($formClassName::getRequiredUrlParams());
@@ -60,8 +67,15 @@ class WidgetForm extends AbstractWidget implements iMockable
 		}
 
 		$form_id = md5($form_type . '_' . $connection->connection_id);
+		$render_context = [
+			'host_page_id' => $tree_build_context->getPageId(),
+			'widget_connection_id' => $connection->connection_id,
+			'return_target' => Request::_GET('referer', false)
+				? Url::sanitizeRefererUrl((string)Request::_GET('referer'))
+				: Url::getCurrentUrlForReferer(),
+		];
 
-		$form = Form::factory($form_type, $form_id, $tree_build_context);
+		$form = Form::factory($form_type, $form_id, $tree_build_context, null, $render_context);
 
 		if ($form->hasRole()) {
 			return $form->buildTree();
@@ -102,38 +116,56 @@ class WidgetForm extends AbstractWidget implements iMockable
 				'field_refs' => [
 					'title' => [
 						'id' => 'preview_form_widget_title',
+						'key' => 'title',
+						'name' => 'title',
 						'row_id' => 'row_preview_form_widget_title',
 					],
 					'password' => [
 						'id' => 'preview_form_widget_password',
+						'key' => 'password',
+						'name' => 'password',
 						'row_id' => 'row_preview_form_widget_title',
 					],
 					'type' => [
 						'id' => 'preview_form_widget_type',
+						'key' => 'type',
+						'name' => 'type',
 						'row_id' => 'row_preview_form_widget_classification',
 					],
 					'date' => [
 						'id' => 'preview_form_widget_date',
+						'key' => 'target_date',
+						'name' => 'target_date',
 						'row_id' => 'row_preview_form_widget_classification',
 					],
 					'datetime' => [
 						'id' => 'preview_form_widget_datetime',
+						'key' => 'review_at',
+						'name' => 'review_at',
 						'row_id' => 'row_preview_form_widget_schedule',
 					],
 					'featured' => [
 						'id' => 'preview_form_widget_featured',
+						'key' => 'featured',
+						'name' => 'featured',
 						'row_id' => 'row_preview_form_widget_schedule',
 					],
 					'visibility' => [
 						'id' => 'preview_form_widget_visibility',
+						'key' => 'visibility',
+						'name' => 'visibility',
 						'row_id' => 'row_preview_form_widget_visibility',
 					],
 					'delivery' => [
 						'id' => 'preview_form_widget_delivery',
+						'key' => 'delivery_mode',
+						'name' => 'delivery_mode',
 						'row_id' => 'row_preview_form_widget_visibility',
 					],
 					'notes' => [
 						'id' => 'preview_form_widget_notes',
+						'key' => 'notes',
+						'name' => 'notes',
 						'row_id' => 'row_preview_form_widget_notes',
 					],
 				],
@@ -298,6 +330,8 @@ class WidgetForm extends AbstractWidget implements iMockable
 	 */
 	private function buildPreviewInputTree(string $component, array $props, string $info_string = ''): array
 	{
+		$props['field_key'] ??= $props['name'] ?? '';
+		$props['data_field_key'] ??= $props['field_key'];
 		$contents = [];
 
 		if ($component !== 'form.input.hidden') {

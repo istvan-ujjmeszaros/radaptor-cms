@@ -7,9 +7,9 @@ $current_values = is_array($this->props['value'] ?? null) ? $this->props['value'
 <?= $this->fetchContent('helper') ?>
 <?php $i = 0; ?>
 <?php foreach ($values as $key => $label): ?>
-	<?php $checkbox_id = (string)$this->props['id'] . '_' . ++$i; ?>
-	<div>
-		<input type="checkbox" class="checkbox" name="<?= e((string)$this->props['name']) ?>[<?= e((string)$key) ?>]" id="<?= e($checkbox_id) ?>" value="1"<?= !empty($current_values[$key]) ? ' checked' : '' ?>>
+		<?php $checkbox_id = (string)$this->props['id'] . '_' . ++$i; ?>
+		<div>
+			<input type="checkbox" class="checkbox" name="<?= e((string)$this->props['name']) ?>[<?= e((string)$key) ?>]" data-field-key="<?= e((string)($this->props['data_field_key'] ?? $this->props['name'] ?? '')) ?>" id="<?= e($checkbox_id) ?>" value="1"<?= !empty($current_values[$key]) ? ' checked' : '' ?>>
 		<label class="innerLabel" for="<?= e($checkbox_id) ?>"><?= e((string)$label) ?></label>
 	</div>
 <?php endforeach; ?>

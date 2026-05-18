@@ -745,7 +745,9 @@ class ResourceTreeHandler extends ResourceAcl
 		$renderer->registerLibrary('WIDGETTYPE_FORM');
 
 		// Build the form tree using $view as iTreeBuildContext
-		$form = Form::factory('WebpageFromPath', 'wpfp', $view);
+		$form = Form::factory('WebpageFromPath', 'wpfp', $view, null, [
+			'return_target' => Url::getCurrentUrlForReferer(),
+		]);
 		$fragment = $renderer->render($form->buildTree());
 
 		// Emit after render so any form-registered assets are included

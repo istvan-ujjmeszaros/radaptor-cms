@@ -55,8 +55,15 @@ class FormTypeUserSignup extends AbstractForm
 
 		User::addUser($savedata);
 		User::loginUser($savedata['username'], $this->savedata['password']);
+	}
 
-		Url::redirect("/");
+	public function getRedirectTargetForResult(FormResult $result, FormSubmitContext $context): string
+	{
+		if ($result->isCancel()) {
+			return parent::getRedirectTargetForResult($result, $context);
+		}
+
+		return '/';
 	}
 
 	public function setMetadata(): void

@@ -2,7 +2,7 @@
 <?php $this->registerLibrary('CODEMIRROR'); ?>
 <label for="<?= e((string)$this->props['id']) ?>"<?= (string)($this->props['label_style_attr'] ?? '') ?>><?= e((string)($this->props['label'] ?? '')) ?></label>
 <?= $this->fetchContent('helper') ?>
-<textarea id="<?= e((string)$this->props['id']) ?>"<?= (string)($this->props['input_style_attr'] ?? '') ?> name="<?= e((string)$this->props['name']) ?>"><?= e((string)($this->props['value'] ?? '')) ?></textarea>
+<textarea id="<?= e((string)$this->props['id']) ?>"<?= (string)($this->props['input_style_attr'] ?? '') ?> name="<?= e((string)$this->props['name']) ?>" data-field-key="<?= e((string)($this->props['data_field_key'] ?? $this->props['name'] ?? '')) ?>"><?= e((string)($this->props['value'] ?? '')) ?></textarea>
 <script type="text/javascript">
 	var editor = CodeMirror.fromTextArea(document.getElementById("<?= e((string)$this->props['id']) ?>"), {
 		mode: "application/x-httpd-php",

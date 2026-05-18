@@ -7,7 +7,7 @@ $placeholder_label = (string)($this->props['placeholder_label'] ?? '');
 ?>
 <label for="<?= e((string)$this->props['id']) ?>"<?= (string)($this->props['label_style_attr'] ?? '') ?>><?= e((string)($this->props['label'] ?? '')) ?></label>
 <?= $this->fetchContent('helper') ?>
-<select id="<?= e((string)$this->props['id']) ?>"<?= (string)($this->props['input_style_attr'] ?? '') ?> name="<?= e((string)$this->props['name']) ?>">
+<select id="<?= e((string)$this->props['id']) ?>"<?= (string)($this->props['input_style_attr'] ?? '') ?> name="<?= e((string)$this->props['name']) ?>" data-field-key="<?= e((string)($this->props['data_field_key'] ?? $this->props['name'] ?? '')) ?>">
 	<?php if ($required): ?>
 		<option value=""><?= e($placeholder_label) ?></option>
 	<?php endif; ?>

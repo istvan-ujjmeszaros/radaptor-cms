@@ -10,6 +10,7 @@ abstract class AbstractForm implements iForm, iListable
 	public array $savedata = [];
 	public array $initvalues = [];
 	protected string $_form_id;
+	protected string $_form_instance_id;
 	protected string $_mode;
 	private int $_inputCounter = 0;
 
@@ -20,6 +21,7 @@ abstract class AbstractForm implements iForm, iListable
 	protected FormMetadata $_meta;
 
 	private string $referer;
+	private array $_render_context = [];
 
 	/**
 	 * URL parameters required for this form to function.
@@ -48,15 +50,23 @@ abstract class AbstractForm implements iForm, iListable
 
 	protected ?iWebpageComposer $_webpage_composer;
 
-	public function __construct(protected string $_form_type, string $form_id, protected iTreeBuildContext $_tree_build_context, ?string $referer = null)
+	/**
+	 * @param array<string, mixed> $render_context
+	 */
+	public function __construct(protected string $_form_type, string $form_id, protected iTreeBuildContext $_tree_build_context, ?string $referer = null, array $render_context = [])
 	{
+		$this->_form_instance_id = $form_id;
 		$this->_form_id = 'f' . $form_id;
+		$this->_form_inputs = [];
+		$this->_render_context = $render_context;
 		$this->_meta = new FormMetadata();
 		$this->_webpage_composer = $this->_tree_build_context instanceof iWebpageComposer ? $this->_tree_build_context : null;
 
-		if (Request::_GET('item_id')) {
+		$item_id = $render_context['item_id'] ?? Request::_GET('item_id');
+
+		if ($item_id) {
 			$this->_mode = self::_MODE_UPDATE;
-			$this->_item_id = Request::_GET('item_id');
+			$this->_item_id = (int)$item_id;
 		} else {
 			$this->_mode = self::_MODE_CREATE;
 			$this->_item_id = null;
@@ -71,12 +81,12 @@ abstract class AbstractForm implements iForm, iListable
 		} else {
 			$this->referer = Url::sanitizeRefererUrl((string) Kernel::getReferer());
 
-			if ($this->_meta->enableAutoReferer && !self::isHtmxRequest() && (Kernel::getReferer() != '') && !Url::CurrentEqualsToReferer()) {
+			if ($this->_meta->enableAutoReferer && !Request::isHtmxRequest() && (Kernel::getReferer() != '') && !Url::CurrentEqualsToReferer()) {
 				Url::redirect(Url::modifyCurrentUrl(['referer' => Url::sanitizeRefererUrl((string) Kernel::getReferer())]));
 			}
 		}
 
-		if ($this->_mode == self::_MODE_UPDATE && !isset($_POST[$this->_form_id])) {
+		if ($this->_mode == self::_MODE_UPDATE) {
 			$this->setInitValues();
 		}
 
@@ -86,14 +96,7 @@ abstract class AbstractForm implements iForm, iListable
 			Kernel::abort('makeInputs() must return array of FormInput elements! (' . $this->_form_type . ')');
 		}
 
-		$this->_processForm();
-	}
-
-	private static function isHtmxRequest(): bool
-	{
-		$server = RequestContextHolder::current()->SERVER ?: $_SERVER;
-
-		return strtolower(trim((string)($server['HTTP_HX_REQUEST'] ?? $server['http_hx_request'] ?? ''))) === 'true';
+		$this->applySubmittedRenderState();
 	}
 
 	public function getTreeBuildContext(): iTreeBuildContext
@@ -123,6 +126,16 @@ abstract class AbstractForm implements iForm, iListable
 	public function getFormId(): string
 	{
 		return $this->_form_id;
+	}
+
+	public function getFormInstanceId(): string
+	{
+		return $this->_form_instance_id;
+	}
+
+	public function getReferer(): string
+	{
+		return $this->referer;
 	}
 
 	public function getMode(): string
@@ -161,6 +174,17 @@ abstract class AbstractForm implements iForm, iListable
 		return $this->_form_inputs[$fieldname] ?? null;
 	}
 
+	public function getInputByKey(string $key): ?FormInput
+	{
+		foreach ($this->_form_inputs as $input) {
+			if ($input->getKey() === $key) {
+				return $input;
+			}
+		}
+
+		return null;
+	}
+
 	public function isModified(string $fieldname): bool
 	{
 		return
@@ -188,64 +212,93 @@ abstract class AbstractForm implements iForm, iListable
 		}
 	}
 
-	private function _cancelForm(): never
+	/**
+	 * @param array<string, mixed>|null $payload
+	 * @param array<string, mixed> $files
+	 */
+	public function process(?array $payload = null, array $files = []): FormResult
 	{
-		$this->_destroyForm();
+		$payload ??= Request::getPOST();
+		$submit_button = (string)($payload['submit_button'] ?? '');
 
-		exit;
-	}
+		if (!$this->hasRole()) {
+			return FormResult::denied(new ApiError('FORM_DENIED', t('response_error.access_denied')));
+		}
 
-	private function _saveForm(): void
-	{
+		$this->bind($payload, $files);
+
+		if ($submit_button === self::_SUBMIT_VALUE_CANCEL) {
+			return FormResult::cancel();
+		}
+
+		if ($submit_button !== self::_SUBMIT_VALUE_SAVE) {
+			return FormResult::invalid([
+				'submit_button' => [t('common.error_save')],
+			]);
+		}
+
 		$this->_validateData();
 
-		if ($this->isValid()) {
-			$this->_processSavedata();
-
-			$this->commit();
-
-			$this->_destroyForm();
+		if (!$this->isValid()) {
+			return FormResult::invalid($this->getErrorsByField());
 		}
 
-		$this->_setErrorMessages();
+		$this->_processSavedata();
+		$this->commit();
+
+		return FormResult::success($this->savedata);
 	}
 
-	private function _processForm(): void
+	/**
+	 * @param array<string, mixed> $payload
+	 * @param array<string, mixed> $files
+	 */
+	public function bind(array $payload, array $files = []): void
 	{
-		//var_dump($_POST);
-		//exit;
-		if (!isset($_POST['submit_button'])) {
-			return;
-		}
-
-		if ($_POST['submit_button'] == self::_SUBMIT_VALUE_CANCEL) {
-			$this->_cancelForm();
-		} elseif ($_POST['submit_button'] == self::_SUBMIT_VALUE_SAVE) {
-			$this->_saveForm();
-		} // IE workaround
-		elseif (mb_strpos((string) $_POST['submit_button'], '<!--' . self::_SUBMIT_VALUE_CANCEL . '-->') !== false) {
-			$this->_cancelForm();
-		} elseif (mb_strpos((string) $_POST['submit_button'], '<!--' . self::_SUBMIT_VALUE_SAVE . '-->') !== false) {
-			$this->_saveForm();
+		foreach ($this->_form_inputs as $input) {
+			$input->bindSubmittedValue($payload, $files);
 		}
 	}
 
-	private function _setErrorMessages(): void
+	/**
+	 * @return array<string, list<string>>
+	 */
+	public function getErrorsByField(): array
 	{
-		if (!$this->_meta->useErrorWindow) {
-			return;
-		}
+		$errors = [];
 
 		foreach ($this->_form_inputs as $input) {
-			foreach ($input->getErrors() as $error) {
-				SystemMessages::_error($error, $this->_meta->errorHeader);
+			$field_errors = $input->getErrors();
+
+			if ($field_errors !== []) {
+				$errors[$input->getKey()] = $field_errors;
 			}
 		}
+
+		return $errors;
 	}
 
-	private function _destroyForm(): void
+	private function applySubmittedRenderState(): void
 	{
-		Url::redirect($this->referer);
+		$state = FormSubmissionStateStore::get($this);
+
+		if ($state === null) {
+			return;
+		}
+
+		$this->bind($state['payload'], $state['files']);
+
+		foreach ($state['result']->errors() as $key => $field_errors) {
+			$input = $this->getInputByKey((string)$key);
+
+			if ($input === null) {
+				continue;
+			}
+
+			foreach ($field_errors as $field_error) {
+				$input->addError($field_error);
+			}
+		}
 	}
 
 	protected function _validateData(): void
@@ -296,6 +349,7 @@ abstract class AbstractForm implements iForm, iListable
 			$rows[] = $this->buildRowTree((string)$current_row_id, $current_row_items);
 		}
 
+		$submit_context = FormSubmitContext::fromForm($this, $this->_render_context);
 		$contents = [
 			'hidden_fields' => $hidden_fields,
 			'rows' => $rows,
@@ -306,9 +360,11 @@ abstract class AbstractForm implements iForm, iListable
 			'component' => 'form',
 			'props' => [
 				'form_id' => $this->getFormId(),
+				'form_instance_id' => $this->getFormInstanceId(),
+				'form_descriptor_id' => $this->getFormType(),
 				'form_name' => $this->getFormType(),
 				'mode' => $this->getMode(),
-				'action' => '',
+				'action' => Url::getUrl('form.submit'),
 				'method' => 'post',
 				'form_class' => $this->getMeta()->template,
 				'title' => $this->getMeta()->title,
@@ -319,6 +375,7 @@ abstract class AbstractForm implements iForm, iListable
 				'button_cancel' => $this->normalizeButton($this->getMeta()->formButtonCancel),
 				'post_javascript_file' => $this->getMeta()->postJavascriptFile,
 				'field_refs' => $this->buildFieldRefs(),
+				'submit_context' => $submit_context->toHiddenFields(),
 			],
 			'contents' => $contents,
 			'slots' => $contents,
@@ -361,7 +418,8 @@ abstract class AbstractForm implements iForm, iListable
 		foreach ($this->_form_inputs as $fieldname => $input) {
 			$field_refs[$fieldname] = [
 				'id' => (string)$input->id,
-				'name' => (string)$input->id,
+				'key' => $input->getKey(),
+				'name' => $input->getPayloadName(),
 				'row_id' => 'row_' . (string)$input->id,
 			];
 		}
@@ -394,6 +452,15 @@ abstract class AbstractForm implements iForm, iListable
 		return $this->_form_inputs[$field]->id;
 	}
 
+	public function getInputKey(string $field): string
+	{
+		if (!isset($this->_form_inputs[$field])) {
+			Kernel::abort(__FILE__ . ', line ' . __LINE__ . ":Field <i>{$field}</i> doesnt exists in form: <i>{$this->getFormType()}</i>");
+		}
+
+		return $this->_form_inputs[$field]->getKey();
+	}
+
 	public function getRowId(string $field): string
 	{
 		if (!isset($this->_form_inputs[$field])) {
@@ -411,6 +478,11 @@ abstract class AbstractForm implements iForm, iListable
 		if (!empty($this->_meta->labelWidth)) {
 			echo ' style="width:' . $this->_meta->labelWidth . '"';
 		}
+	}
+
+	public function getRedirectTargetForResult(FormResult $result, FormSubmitContext $context): string
+	{
+		return $context->returnTarget !== '' ? $context->returnTarget : Url::getCurrentHost();
 	}
 
 	public function getSavedataHtml(): string

@@ -6,7 +6,13 @@ parameters:
 	paths:
 		- modules-common/Cms/classes/class.CmsPathHelper.php
 		- modules-common/Cms/classes/class.CmsResourceSpecService.php
+		- modules-common/Cms/classes/class.AbstractWebpageViewComposer.php
+		- modules-common/Cms/classes/class.HtmlDebugDomStamper.php
+		- modules-common/Cms/classes/class.HtmlRenderDebugCollector.php
+		- modules-common/Cms/classes/class.HtmlTreeRenderer.php
 		- modules-common/Cms/classes/class.ImageManipulator.php
+		- modules-common/Cms/classes/class.Template.php
+		- modules-common/Cms/interfaces/interface.iHtmlTemplateRuntime.php
 		- modules-common/Cms/events/Event.ResourceView.php
 		- modules-common/ImportExport/events/Event.ImportExportImport.php
 		- modules-common/Comment/entities/Entity.Comment.php

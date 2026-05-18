@@ -14,4 +14,5 @@ interface iHtmlTemplateRuntime extends iHtmlAssetRegistry
 	 */
 	public function getPagedata(string $key);
 	public function isEditable(): bool;
+	public function recordTemplateDebug(string $templateName, string $templatePath, float $durationMs): void;
 }

@@ -19,8 +19,8 @@ class EventFormSubmit extends AbstractEvent implements iBrowserEventDocumentable
 			'request' => [
 				'method' => 'POST',
 				'params' => [
-					'form_id' => 'Class-backed form descriptor id.',
-					'form_instance_id' => 'Stable placement id for this rendered form instance.',
+					BrowserEventDocumentationHelper::param('form_id', 'post', 'string', true, 'Class-backed form descriptor id.'),
+					BrowserEventDocumentationHelper::param('form_instance_id', 'post', 'string', true, 'Stable placement id for this rendered form instance.'),
 				],
 			],
 			'response' => [

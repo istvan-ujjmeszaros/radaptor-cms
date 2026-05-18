@@ -152,6 +152,30 @@ final class FormRefactorPhase2IntegrationTest extends TestCase
 		$this->assertSame(FormTypePhase2Probe::class, FormClassResolver::resolveClassName('Phase2Probe'));
 	}
 
+	public function testSubmitContextEncodingSubstitutesInvalidUtf8InsteadOfThrowing(): void
+	{
+		$context = new FormSubmitContext(
+			formId: 'Phase2Probe',
+			formInstanceId: 'phase2_probe',
+			itemId: null,
+			returnTarget: '/phase-2-return',
+			hostPageId: null,
+			widgetConnectionId: null,
+			buildId: FormSubmitContext::currentBuildId(),
+			extraParams: [
+				'bad' => "\xB1",
+			],
+		);
+
+		$hidden = $context->toHiddenFields();
+		$this->assertNotSame('', $hidden[FormSubmitContext::FIELD_CONTEXT_PARAMS]);
+
+		$round_trip = FormSubmitContext::fromPost($hidden);
+		$this->assertInstanceOf(FormSubmitContext::class, $round_trip);
+		$this->assertArrayHasKey('bad', $round_trip->extraParams);
+		$this->assertIsString($round_trip->extraParams['bad']);
+	}
+
 	public function testNonHtmlEmitterReturnsStructuredInvalidResponse(): void
 	{
 		$form = $this->probeForm();

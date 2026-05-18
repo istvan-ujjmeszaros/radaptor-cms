@@ -4,7 +4,16 @@ $this->registerLibrary('STIMULUS_LOADER');
 $this->registerLibrary('TIPPY');
 
 $form_id = (string)($this->props['form_id'] ?? '');
-$form_descriptor_id = (string)($this->props['form_descriptor_id'] ?? $this->props['form_name'] ?? '');
+$form_descriptor_id = (string)($this->props['form_descriptor_id'] ?? '');
+
+if ($form_descriptor_id === '') {
+	$form_descriptor_id = (string)($this->props['form_name'] ?? '');
+}
+
+if ($form_descriptor_id === '') {
+	$form_descriptor_id = $form_id;
+}
+
 $action = (string)($this->props['action'] ?? '');
 $method = (string)($this->props['method'] ?? 'post');
 $form_class = trim((string)($this->props['form_class'] ?? ''));

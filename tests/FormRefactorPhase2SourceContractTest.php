@@ -30,8 +30,11 @@ final class FormRefactorPhase2SourceContractTest extends TestCase
 		$this->assertStringContainsString('$context->isCurrentBuild()', $source);
 		$this->assertStringContainsString('$context->canAccessHostContext()', $source);
 		$this->assertStringContainsString('FormClassResolver::resolveClassName', $source);
+		$this->assertStringContainsString("BrowserEventDocumentationHelper::param('form_id'", $source);
+		$this->assertStringContainsString("BrowserEventDocumentationHelper::param('form_instance_id'", $source);
 		$this->assertStringContainsString('(new FormResponseEmitter())->emit', $source);
 		$this->assertStringContainsString('Request::wantsNonHtmlResponse()', $source);
+		$this->assertStringNotContainsString("'form_id' => 'Class-backed form descriptor id.'", $source);
 	}
 
 	public function testStableFieldKeysArePartOfTheTreeAndBindingContract(): void
@@ -47,6 +50,17 @@ final class FormRefactorPhase2SourceContractTest extends TestCase
 		$this->assertStringContainsString("'data_field_key' => \$this->getKey()", $input_source);
 		$this->assertStringContainsString("'key' => \$input->getKey()", $form_source);
 		$this->assertStringContainsString('data-field-key', $template_source);
+	}
+
+	public function testTemplateSubmitAndAutocompleteCompatibilityContracts(): void
+	{
+		$form_template_source = $this->source('templates-common/default-SoAdmin/Form/template.sdui.form.php');
+		$text_template_source = $this->source('templates-common/default-SoAdmin/Form/template.sdui.form.input.text.php');
+
+		$this->assertStringContainsString('$form_descriptor_id = $form_id;', $form_template_source);
+		$this->assertStringContainsString('document.getElementById(connectedAutocompleteInputId)', $text_template_source);
+		$this->assertStringContainsString('$(source).closest("form").find("[data-field-key]")', $text_template_source);
+		$this->assertStringNotContainsString('$(' . "'[data-field-key=", $text_template_source);
 	}
 
 	public function testClassBasedResolverReplacesHardcodedFormTypeLookupInRuntimePath(): void

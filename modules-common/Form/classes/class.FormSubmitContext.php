@@ -193,7 +193,13 @@ final class FormSubmitContext
 			return '';
 		}
 
-		return base64_encode(json_encode($params, JSON_THROW_ON_ERROR));
+		try {
+			$json = json_encode($params, JSON_THROW_ON_ERROR | JSON_INVALID_UTF8_SUBSTITUTE);
+		} catch (JsonException) {
+			return '';
+		}
+
+		return is_string($json) ? base64_encode($json) : '';
 	}
 
 	/**

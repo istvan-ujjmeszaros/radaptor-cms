@@ -37,7 +37,7 @@ final class FormResponseEmitter
 
 		http_response_code($result->isDenied() ? 403 : 422);
 
-		if ($context->hostPageId !== null) {
+		if ($context->hostPageId !== null && !$result->isDenied()) {
 			FormSubmissionStateStore::prime($context, $result, $payload, $files);
 
 			if ($this->renderHostPage($context)) {

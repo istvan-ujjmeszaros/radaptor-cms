@@ -349,7 +349,9 @@ abstract class AbstractForm implements iForm, iListable
 			$rows[] = $this->buildRowTree((string)$current_row_id, $current_row_items);
 		}
 
+		RequestContextHolder::disablePersistentCacheWrite();
 		$submit_context = FormSubmitContext::fromForm($this, $this->_render_context);
+		$hidden_fields[] = $this->buildCsrfTokenTree($submit_context);
 		$contents = [
 			'hidden_fields' => $hidden_fields,
 			'rows' => $rows,
@@ -384,6 +386,37 @@ abstract class AbstractForm implements iForm, iListable
 					'wrapper_template' => $this->getMeta()->template,
 				],
 			],
+		];
+	}
+
+	/**
+	 * @return array<string, mixed>
+	 */
+	private function buildCsrfTokenTree(FormSubmitContext $submit_context): array
+	{
+		return [
+			'type' => 'sub',
+			'component' => 'form.input.hidden',
+			'props' => [
+				'input_type' => FormInputHidden::INPUTTYPE,
+				'fieldname' => FormSubmitContext::FIELD_CSRF_TOKEN,
+				'field_key' => FormSubmitContext::FIELD_CSRF_TOKEN,
+				'data_field_key' => FormSubmitContext::FIELD_CSRF_TOKEN,
+				'id' => $this->getFormId() . '_csrf_token',
+				'name' => FormSubmitContext::FIELD_CSRF_TOKEN,
+				'value' => $submit_context->issueCsrfToken(),
+				'readonly' => false,
+				'save' => false,
+				'first_in_row' => true,
+				'last_in_row' => true,
+				'errors' => [],
+				'error_string' => '',
+				'info_string' => '',
+				'validators' => [],
+			],
+			'contents' => [],
+			'slots' => [],
+			'meta' => [],
 		];
 	}
 

@@ -21,6 +21,7 @@ class EventFormSubmit extends AbstractEvent implements iBrowserEventDocumentable
 				'params' => [
 					BrowserEventDocumentationHelper::param('form_id', 'post', 'string', true, 'Class-backed form descriptor id.'),
 					BrowserEventDocumentationHelper::param('form_instance_id', 'post', 'string', true, 'Stable placement id for this rendered form instance.'),
+					BrowserEventDocumentationHelper::param('csrf_token', 'post', 'string', true, 'Session-bound form CSRF token.'),
 				],
 			],
 			'response' => [
@@ -51,7 +52,7 @@ class EventFormSubmit extends AbstractEvent implements iBrowserEventDocumentable
 		}
 
 		if (!$context->isCurrentBuild()) {
-			$this->emitContextError(new ApiError('FORM_BUILD_MISMATCH', t('common.error_save')), 409);
+			$this->emitContextError(new ApiError('FORM_BUILD_MISMATCH', t('response_error.internal.refresh_page')), 409);
 
 			return;
 		}
@@ -94,6 +95,18 @@ class EventFormSubmit extends AbstractEvent implements iBrowserEventDocumentable
 		);
 
 		$files = $_FILES ?? [];
+		$csrf_error = $context->validateCsrfToken($post);
+
+		if ($csrf_error !== null) {
+			if (Request::wantsNonHtmlResponse()) {
+				SystemMessages::flushAllMessages();
+			}
+
+			(new FormResponseEmitter())->emit($form, FormResult::denied($csrf_error), $context, $post, $files);
+
+			return;
+		}
+
 		$result = $form->process($post, $files);
 
 		if (Request::wantsNonHtmlResponse()) {

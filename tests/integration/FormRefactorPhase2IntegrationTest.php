@@ -33,6 +33,7 @@ final class FormRefactorPhase2IntegrationTest extends TestCase
 
 		$this->ensureProbeFormClass();
 		$this->setRequestContext();
+		Request::saveSessionData([FormSubmitContext::SESSION_KEY_CSRF_TOKENS], []);
 		FormSubmissionStateStore::clear();
 		FormTypePhase2Probe::resetProbe();
 	}
@@ -41,6 +42,7 @@ final class FormRefactorPhase2IntegrationTest extends TestCase
 	{
 		if (class_exists('RequestContextHolder', autoload: false)) {
 			FormSubmissionStateStore::clear();
+			Request::saveSessionData([FormSubmitContext::SESSION_KEY_CSRF_TOKENS], []);
 			$this->impersonate(null);
 			$this->setRequestContext();
 		}
@@ -109,10 +111,16 @@ final class FormRefactorPhase2IntegrationTest extends TestCase
 		$this->assertSame('Phase2Probe', $tree['props']['submit_context'][FormSubmitContext::FIELD_FORM_ID]);
 		$this->assertSame('phase2_probe', $tree['props']['submit_context'][FormSubmitContext::FIELD_FORM_INSTANCE_ID]);
 		$this->assertNotSame('', $tree['props']['submit_context'][FormSubmitContext::FIELD_BUILD_ID]);
+		$this->assertArrayNotHasKey(FormSubmitContext::FIELD_CSRF_TOKEN, $tree['props']['submit_context']);
 
 		$hidden = $tree['slots']['hidden_fields'][0]['props'];
 		$this->assertSame('author_id', $hidden['name']);
 		$this->assertSame('author_id', $hidden['data_field_key']);
+		$csrf = $tree['slots']['hidden_fields'][1]['props'];
+		$this->assertSame(FormSubmitContext::FIELD_CSRF_TOKEN, $csrf['name']);
+		$this->assertSame(FormSubmitContext::FIELD_CSRF_TOKEN, $csrf['data_field_key']);
+		$this->assertNotSame('', $csrf['value']);
+		$this->assertFalse($csrf['save']);
 
 		$authorLabel = $tree['slots']['rows'][3]['slots']['content'][0]['props'];
 		$this->assertSame('author_label', $authorLabel['name']);
@@ -174,6 +182,21 @@ final class FormRefactorPhase2IntegrationTest extends TestCase
 		$this->assertInstanceOf(FormSubmitContext::class, $round_trip);
 		$this->assertArrayHasKey('bad', $round_trip->extraParams);
 		$this->assertIsString($round_trip->extraParams['bad']);
+	}
+
+	public function testCsrfTokenIsReusableWithinTtlAndScopedPerDescriptor(): void
+	{
+		$first = $this->submitContext('Phase2Probe', 'phase3_first');
+		$second = $this->submitContext('Phase2Probe', 'phase3_second');
+		$other = $this->submitContext('Phase2OtherProbe', 'phase3_other');
+
+		$token = $first->issueCsrfToken();
+
+		$this->assertSame($token, $second->issueCsrfToken());
+		$this->assertNotSame($token, $other->issueCsrfToken());
+		$this->assertNull($first->validateCsrfToken([
+			FormSubmitContext::FIELD_CSRF_TOKEN => $token,
+		]));
 	}
 
 	public function testNonHtmlEmitterReturnsStructuredInvalidResponse(): void
@@ -251,6 +274,74 @@ final class FormRefactorPhase2IntegrationTest extends TestCase
 		$this->assertSame('present', Request::_GET('phase_required'));
 		$this->assertSame('7', Request::_GET('item_id'));
 		$this->assertSame('/phase-2-return', Request::_GET('referer'));
+	}
+
+	public function testSubmitEndpointRejectsMissingCsrfTokenBeforeBindingOrProcessing(): void
+	{
+		$context = $this->submitContext(
+			formId: 'Phase2Probe',
+			formInstanceId: 'phase3_missing_csrf',
+		);
+
+		$response = $this->runSubmitEvent($context, [
+			'submit_button' => AbstractForm::_SUBMIT_VALUE_SAVE,
+			'title_key' => 'Should not bind',
+		], includeCsrfToken: false);
+
+		$this->assertSame(403, $response['http_code']);
+		$this->assertFalse($response['body']['ok']);
+		$this->assertSame('FORM_CSRF_INVALID', $response['body']['error']['code']);
+		$this->assertSame('missing', $response['body']['error']['details']['reason']);
+		$this->assertSame('denied', $response['body']['meta']['form']['outcome']);
+		$this->assertFalse(FormTypePhase2Probe::$committed);
+		$this->assertNull(FormTypePhase2Probe::$lastTitleValue);
+	}
+
+	public function testSubmitEndpointRejectsInvalidCsrfTokenBeforeBindingOrProcessing(): void
+	{
+		$context = $this->submitContext(
+			formId: 'Phase2Probe',
+			formInstanceId: 'phase3_invalid_csrf',
+		);
+		$context->issueCsrfToken();
+
+		$response = $this->runSubmitEvent($context, [
+			FormSubmitContext::FIELD_CSRF_TOKEN => 'not-the-session-token',
+			'submit_button' => AbstractForm::_SUBMIT_VALUE_SAVE,
+			'title_key' => 'Should not bind',
+		]);
+
+		$this->assertSame(403, $response['http_code']);
+		$this->assertFalse($response['body']['ok']);
+		$this->assertSame('FORM_CSRF_INVALID', $response['body']['error']['code']);
+		$this->assertSame('invalid', $response['body']['error']['details']['reason']);
+		$this->assertFalse(FormTypePhase2Probe::$committed);
+		$this->assertNull(FormTypePhase2Probe::$lastTitleValue);
+	}
+
+	public function testSubmitEndpointRejectsExpiredCsrfTokenBeforeBindingOrProcessing(): void
+	{
+		$context = $this->submitContext(
+			formId: 'Phase2Probe',
+			formInstanceId: 'phase3_expired_csrf',
+		);
+		$token = $context->issueCsrfToken();
+		$bag = Request::_SESSION(FormSubmitContext::SESSION_KEY_CSRF_TOKENS, []);
+		$bag[$context->formId]['expires_at'] = time() - 1;
+		Request::saveSessionData([FormSubmitContext::SESSION_KEY_CSRF_TOKENS], $bag);
+
+		$response = $this->runSubmitEvent($context, [
+			FormSubmitContext::FIELD_CSRF_TOKEN => $token,
+			'submit_button' => AbstractForm::_SUBMIT_VALUE_SAVE,
+			'title_key' => 'Should not bind',
+		]);
+
+		$this->assertSame(403, $response['http_code']);
+		$this->assertFalse($response['body']['ok']);
+		$this->assertSame('FORM_CSRF_INVALID', $response['body']['error']['code']);
+		$this->assertSame('expired', $response['body']['error']['details']['reason']);
+		$this->assertFalse(FormTypePhase2Probe::$committed);
+		$this->assertNull(FormTypePhase2Probe::$lastTitleValue);
 	}
 
 	public function testSubmitEndpointDeniesInvalidWidgetHostContextBeforeFormFactory(): void
@@ -362,6 +453,7 @@ final class FormRefactorPhase2IntegrationTest extends TestCase
 			widgetConnectionId: $connection_id,
 		);
 		$post = array_merge($context->toHiddenFields(), [
+			FormSubmitContext::FIELD_CSRF_TOKEN => $context->issueCsrfToken(),
 			'submit_button' => AbstractForm::_SUBMIT_VALUE_SAVE,
 			'username' => 'admin_developer',
 			'password' => 'wrong-password',
@@ -419,9 +511,13 @@ final class FormRefactorPhase2IntegrationTest extends TestCase
 	 * @param array<string, mixed> $payload
 	 * @return array{http_code: int|null, body: array<string, mixed>|null, output: string}
 	 */
-	private function runSubmitEvent(FormSubmitContext $context, array $payload, ?string $username = null): array
+	private function runSubmitEvent(FormSubmitContext $context, array $payload, ?string $username = null, bool $includeCsrfToken = true): array
 	{
 		$post = array_merge($context->toHiddenFields(), $payload);
+
+		if ($includeCsrfToken && !array_key_exists(FormSubmitContext::FIELD_CSRF_TOKEN, $post)) {
+			$post[FormSubmitContext::FIELD_CSRF_TOKEN] = $context->issueCsrfToken();
+		}
 
 		$this->setRequestContext(
 			post: $post,

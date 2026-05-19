@@ -12,6 +12,10 @@ final class FormSubmitContext
 	public const string FIELD_WIDGET_CONNECTION_ID = 'widget_connection_id';
 	public const string FIELD_BUILD_ID = 'form_build_id';
 	public const string FIELD_CONTEXT_PARAMS = 'form_context_params';
+	public const string FIELD_CSRF_TOKEN = 'csrf_token';
+	public const string SESSION_KEY_CSRF_TOKENS = 'formCsrfTokens';
+	public const int CSRF_TOKEN_TTL_SECONDS = 7200;
+	public const int CSRF_TOKEN_BAG_LIMIT = 64;
 
 	/**
 	 * @param array<string, mixed> $extraParams
@@ -108,6 +112,19 @@ final class FormSubmitContext
 		];
 	}
 
+	public function issueCsrfToken(): string
+	{
+		return self::issueCsrfTokenForForm($this->formId);
+	}
+
+	/**
+	 * @param array<string, mixed> $post
+	 */
+	public function validateCsrfToken(array $post): ?ApiError
+	{
+		return self::validateCsrfTokenForForm($this->formId, $post[self::FIELD_CSRF_TOKEN] ?? null);
+	}
+
 	/**
 	 * @return array<string, mixed>
 	 */
@@ -184,6 +201,71 @@ final class FormSubmitContext
 		return substr(sha1(implode('|', $parts)), 0, 16);
 	}
 
+	public static function issueCsrfTokenForForm(string $formId): string
+	{
+		$form_id = trim($formId);
+		$now = time();
+		$bag = self::normalizeCsrfTokenBag(Request::_SESSION(self::SESSION_KEY_CSRF_TOKENS, []), $now);
+		$entry = $bag[$form_id] ?? null;
+
+		if (is_array($entry) && ($entry['token'] ?? '') !== '' && (int)($entry['expires_at'] ?? 0) > $now) {
+			$entry['last_seen_at'] = $now;
+			$bag[$form_id] = $entry;
+			Request::saveSessionData([self::SESSION_KEY_CSRF_TOKENS], $bag);
+
+			return (string)$entry['token'];
+		}
+
+		$bag[$form_id] = [
+			'token' => bin2hex(random_bytes(32)),
+			'expires_at' => $now + self::CSRF_TOKEN_TTL_SECONDS,
+			'last_seen_at' => $now,
+		];
+		$bag = self::limitCsrfTokenBag($bag);
+		Request::saveSessionData([self::SESSION_KEY_CSRF_TOKENS], $bag);
+
+		return (string)$bag[$form_id]['token'];
+	}
+
+	public static function validateCsrfTokenForForm(string $formId, mixed $submittedToken): ?ApiError
+	{
+		$form_id = trim($formId);
+		$submitted_token = is_scalar($submittedToken) ? trim((string)$submittedToken) : '';
+
+		if ($submitted_token === '') {
+			return self::csrfError('missing');
+		}
+
+		$now = time();
+		$bag = self::normalizeCsrfTokenBag(Request::_SESSION(self::SESSION_KEY_CSRF_TOKENS, []), $now, false);
+		$entry = $bag[$form_id] ?? null;
+
+		if (!is_array($entry) || ($entry['token'] ?? '') === '') {
+			Request::saveSessionData([self::SESSION_KEY_CSRF_TOKENS], $bag);
+
+			return self::csrfError('stale');
+		}
+
+		if ((int)($entry['expires_at'] ?? 0) <= $now) {
+			unset($bag[$form_id]);
+			Request::saveSessionData([self::SESSION_KEY_CSRF_TOKENS], $bag);
+
+			return self::csrfError('expired');
+		}
+
+		if (!hash_equals((string)$entry['token'], $submitted_token)) {
+			Request::saveSessionData([self::SESSION_KEY_CSRF_TOKENS], $bag);
+
+			return self::csrfError('invalid');
+		}
+
+		$entry['last_seen_at'] = $now;
+		$bag[$form_id] = $entry;
+		Request::saveSessionData([self::SESSION_KEY_CSRF_TOKENS], $bag);
+
+		return null;
+	}
+
 	/**
 	 * @param array<string, mixed> $params
 	 */
@@ -224,6 +306,68 @@ final class FormSubmitContext
 		}
 
 		return is_array($params) ? $params : [];
+	}
+
+	private static function csrfError(string $reason): ApiError
+	{
+		return new ApiError(
+			'FORM_CSRF_INVALID',
+			t('response_error.internal.refresh_page'),
+			details: ['reason' => $reason],
+		);
+	}
+
+	/**
+	 * @param mixed $bag
+	 * @return array<string, array{token: string, expires_at: int, last_seen_at: int}>
+	 */
+	private static function normalizeCsrfTokenBag(mixed $bag, int $now, bool $dropExpired = true): array
+	{
+		if (!is_array($bag)) {
+			return [];
+		}
+
+		$normalized = [];
+
+		foreach ($bag as $form_id => $entry) {
+			if (!is_string($form_id) || !is_array($entry)) {
+				continue;
+			}
+
+			$token = is_scalar($entry['token'] ?? null) ? (string)$entry['token'] : '';
+			$expires_at = (int)($entry['expires_at'] ?? 0);
+
+			if ($token === '' || ($dropExpired && $expires_at <= $now)) {
+				continue;
+			}
+
+			$normalized[$form_id] = [
+				'token' => $token,
+				'expires_at' => $expires_at,
+				'last_seen_at' => (int)($entry['last_seen_at'] ?? $expires_at),
+			];
+		}
+
+		return self::limitCsrfTokenBag($normalized);
+	}
+
+	/**
+	 * @param array<string, array{token: string, expires_at: int, last_seen_at: int}> $bag
+	 * @return array<string, array{token: string, expires_at: int, last_seen_at: int}>
+	 */
+	private static function limitCsrfTokenBag(array $bag): array
+	{
+		if (count($bag) <= self::CSRF_TOKEN_BAG_LIMIT) {
+			return $bag;
+		}
+
+		uasort(
+			$bag,
+			static fn (array $a, array $b): int => ((int)$a['last_seen_at'] <=> (int)$b['last_seen_at'])
+				?: ((int)$a['expires_at'] <=> (int)$b['expires_at'])
+		);
+
+		return array_slice($bag, -self::CSRF_TOKEN_BAG_LIMIT, null, true);
 	}
 
 	private static function positiveIntOrNull(mixed $value): ?int

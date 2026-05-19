@@ -4,6 +4,10 @@ parameters:
 		- /app/bootstrap/bootstrap.testing.php
 		- ../framework/classes/phpstan/class.NonHtmlResponseHeaderDetectionRule.php
 	paths:
+		- modules-common/Form/classes/class.AbstractForm.php
+		- modules-common/Form/classes/class.FormDescriptorAdapter.php
+		- modules-common/Form/classes/class.FormDescriptorValidator.php
+		- modules-common/Form/classes/class.FormDescriptorValidatorRegistry.php
 		- modules-common/Cms/classes/class.CmsPathHelper.php
 		- modules-common/Cms/classes/class.CmsResourceSpecService.php
 		- modules-common/Cms/classes/class.AbstractWebpageViewComposer.php

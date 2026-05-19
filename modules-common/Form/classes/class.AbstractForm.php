@@ -38,6 +38,14 @@ abstract class AbstractForm implements iForm, iListable
 	{
 	}
 
+	/**
+	 * @return array<string, mixed>|null
+	 */
+	public function getDescriptor(): ?array
+	{
+		return null;
+	}
+
 	public function addInput(FormInput $input): void
 	{
 		$this->_form_inputs[$input->fieldname] = $input;
@@ -90,10 +98,16 @@ abstract class AbstractForm implements iForm, iListable
 			$this->setInitValues();
 		}
 
-		$this->makeInputs();
+		$descriptor = $this->getDescriptor();
+
+		if (is_array($descriptor)) {
+			FormDescriptorAdapter::buildInputs($this, $descriptor);
+		} else {
+			$this->makeInputs();
+		}
 
 		if (!current($this->_form_inputs) instanceof FormInput) {
-			Kernel::abort('makeInputs() must return array of FormInput elements! (' . $this->_form_type . ')');
+			Kernel::abort('Form descriptor or makeInputs() must produce FormInput elements! (' . $this->_form_type . ')');
 		}
 
 		$this->applySubmittedRenderState();

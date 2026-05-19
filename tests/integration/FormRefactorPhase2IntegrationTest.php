@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\WithoutErrorHandler;
 
 final class FormRefactorPhase2IntegrationTest extends TestCase
 {
@@ -58,6 +59,7 @@ final class FormRefactorPhase2IntegrationTest extends TestCase
 		$this->_transaction_started = false;
 	}
 
+	#[WithoutErrorHandler]
 	public function testConstructorDoesNotProcessPostedPayload(): void
 	{
 		$this->setRequestContext(post: [

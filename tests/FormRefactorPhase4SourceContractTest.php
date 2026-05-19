@@ -49,6 +49,27 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 
 		$this->assertFalse(FormDescriptorValidatorRegistry::isValid('required', ''));
 		$this->assertTrue(FormDescriptorValidatorRegistry::isValid('required', 'value'));
+		$this->assertFalse(FormDescriptorValidatorRegistry::isValid('required', [
+			'error' => UPLOAD_ERR_NO_FILE,
+			'name' => '',
+			'type' => '',
+			'tmp_name' => '',
+			'size' => 0,
+		]));
+		$this->assertFalse(FormDescriptorValidatorRegistry::isValid('required', [
+			'error' => UPLOAD_ERR_PARTIAL,
+			'name' => 'document.pdf',
+			'type' => 'application/pdf',
+			'tmp_name' => '/tmp/php-upload',
+			'size' => 512,
+		]));
+		$this->assertTrue(FormDescriptorValidatorRegistry::isValid('required', [
+			'error' => UPLOAD_ERR_OK,
+			'name' => 'document.pdf',
+			'type' => 'application/pdf',
+			'tmp_name' => '/tmp/php-upload',
+			'size' => 1024,
+		]));
 		$this->assertTrue(FormDescriptorValidatorRegistry::isValid('email', 'person@example.test'));
 		$this->assertFalse(FormDescriptorValidatorRegistry::isValid('email', 'not-email'));
 		$this->assertTrue(FormDescriptorValidatorRegistry::isValid('url', 'https://example.test/path'));

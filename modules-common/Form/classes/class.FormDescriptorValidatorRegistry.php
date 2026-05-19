@@ -113,6 +113,10 @@ final class FormDescriptorValidatorRegistry
 		}
 
 		if (is_array($value)) {
+			if (self::isFileUploadPayload($value)) {
+				return self::isBlankFileUpload($value);
+			}
+
 			return count(array_filter($value, static fn (mixed $item): bool => !self::isBlank($item))) === 0;
 		}
 
@@ -122,6 +126,64 @@ final class FormDescriptorValidatorRegistry
 	private static function isFilled(mixed $value): bool
 	{
 		return !self::isBlank($value);
+	}
+
+	/**
+	 * @param array<string, mixed> $value
+	 */
+	private static function isFileUploadPayload(array $value): bool
+	{
+		return array_key_exists('error', $value)
+			&& (
+				array_key_exists('name', $value)
+				|| array_key_exists('type', $value)
+				|| array_key_exists('tmp_name', $value)
+				|| array_key_exists('size', $value)
+			);
+	}
+
+	/**
+	 * @param array<string, mixed> $value
+	 */
+	private static function isBlankFileUpload(array $value): bool
+	{
+		$error = $value['error'];
+
+		if (is_array($error)) {
+			foreach ($error as $index => $item_error) {
+				if (!self::isBlankSingleFileUpload($value, $index, $item_error)) {
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		return self::isBlankSingleFileUpload($value, null, $error);
+	}
+
+	/**
+	 * @param array<string, mixed> $value
+	 */
+	private static function isBlankSingleFileUpload(array $value, int|string|null $index, mixed $error): bool
+	{
+		if ((int)$error !== UPLOAD_ERR_OK) {
+			return true;
+		}
+
+		$name = self::indexedUploadValue($value['name'] ?? null, $index);
+		$tmp_name = self::indexedUploadValue($value['tmp_name'] ?? null, $index);
+
+		return self::isBlank($name) && self::isBlank($tmp_name);
+	}
+
+	private static function indexedUploadValue(mixed $value, int|string|null $index): mixed
+	{
+		if ($index === null || !is_array($value)) {
+			return $value;
+		}
+
+		return $value[$index] ?? null;
 	}
 
 	/**

@@ -57,7 +57,7 @@ class FormTypeUserLogin extends AbstractForm
 			return Url::sanitizeRefererUrl((string) Request::_GET('loginreferer'));
 		}
 
-		if ($this->isCanonicalLoginResourceRequest($context)) {
+		if ($this->isCanonicalLoginReturnTarget($context)) {
 			return Url::getCurrentHost();
 		}
 
@@ -101,16 +101,12 @@ class FormTypeUserLogin extends AbstractForm
 		}
 	}
 
-	private function isCanonicalLoginResourceRequest(?FormSubmitContext $context = null): bool
+	private function isCanonicalLoginReturnTarget(FormSubmitContext $context): bool
 	{
 		$page_id = ResourceTypeWebpage::getWebpageIdByFormType(FormList::USERLOGIN);
 
 		if (!is_int($page_id) || $page_id <= 0) {
 			return false;
-		}
-
-		if ($context !== null && $context->hostPageId !== null) {
-			return $context->hostPageId === $page_id;
 		}
 
 		$login_url = Url::getSeoUrl($page_id);
@@ -119,7 +115,8 @@ class FormTypeUserLogin extends AbstractForm
 			return false;
 		}
 
-		$current_path = parse_url(Url::getCurrentUrl(), PHP_URL_PATH);
+		$return_url = $context->returnTarget !== '' ? $context->returnTarget : Url::getCurrentUrl();
+		$current_path = parse_url($return_url, PHP_URL_PATH);
 		$login_path = parse_url($login_url, PHP_URL_PATH);
 
 		if (!is_string($current_path) || !is_string($login_path) || $current_path === '' || $login_path === '') {

@@ -376,6 +376,94 @@ final class FormRefactorPhase2IntegrationTest extends TestCase
 		$this->assertArrayHasKey('username', $response['body']['meta']['form']['errors']);
 	}
 
+	public function testAclFallbackLoginRedirectsBackToRequestedProtectedUrl(): void
+	{
+		$login_page_id = ResourceTypeWebpage::getWebpageIdByFormType(FormList::USERLOGIN);
+
+		if (!is_int($login_page_id) || $login_page_id <= 0) {
+			self::markTestSkipped('Missing login page for ACL fallback login redirect coverage.');
+		}
+
+		$requested_url = 'http://localhost/admin/index.html';
+		$context = new FormSubmitContext(
+			formId: FormList::USERLOGIN,
+			formInstanceId: 'acl_fallback_login',
+			itemId: null,
+			returnTarget: $requested_url,
+			hostPageId: $login_page_id,
+			widgetConnectionId: null,
+			buildId: FormSubmitContext::currentBuildId(),
+		);
+
+		$this->setRequestContext(server: [
+			'HTTP_HOST' => 'localhost',
+			'REQUEST_URI' => '/admin/index.html',
+			'REQUEST_METHOD' => 'GET',
+		]);
+
+		$form = Form::factory(
+			FormList::USERLOGIN,
+			'acl_fallback_login',
+			FormSubmitTreeBuildContext::fromSubmitContext($context),
+			$context->returnTarget,
+			[
+				'host_page_id' => $context->hostPageId,
+				'return_target' => $context->returnTarget,
+			],
+		);
+
+		$this->assertSame(
+			$requested_url,
+			$form->getRedirectTargetForResult(FormResult::success([]), $context),
+		);
+	}
+
+	public function testCanonicalLoginPageStillRedirectsToRootAfterLogin(): void
+	{
+		$login_page_id = ResourceTypeWebpage::getWebpageIdByFormType(FormList::USERLOGIN);
+
+		if (!is_int($login_page_id) || $login_page_id <= 0) {
+			self::markTestSkipped('Missing login page for canonical login redirect coverage.');
+		}
+
+		$this->setRequestContext(server: [
+			'HTTP_HOST' => 'localhost',
+			'REQUEST_URI' => '/login.html',
+			'REQUEST_METHOD' => 'GET',
+		]);
+
+		$login_url = Url::getSeoUrl($login_page_id);
+
+		if (!is_string($login_url) || trim($login_url) === '') {
+			self::markTestSkipped('Missing login page URL for canonical login redirect coverage.');
+		}
+
+		$context = new FormSubmitContext(
+			formId: FormList::USERLOGIN,
+			formInstanceId: 'canonical_login',
+			itemId: null,
+			returnTarget: $login_url,
+			hostPageId: $login_page_id,
+			widgetConnectionId: null,
+			buildId: FormSubmitContext::currentBuildId(),
+		);
+		$form = Form::factory(
+			FormList::USERLOGIN,
+			'canonical_login',
+			FormSubmitTreeBuildContext::fromSubmitContext($context),
+			$context->returnTarget,
+			[
+				'host_page_id' => $context->hostPageId,
+				'return_target' => $context->returnTarget,
+			],
+		);
+
+		$this->assertSame(
+			Url::getCurrentHost(),
+			$form->getRedirectTargetForResult(FormResult::success([]), $context),
+		);
+	}
+
 	public function testUserGoldenFormValidatesThroughSubmitEndpointWithoutWebpageComposer(): void
 	{
 		$this->impersonateAndRequireRole('admin_developer', RoleList::ROLE_USERS_ADMIN);

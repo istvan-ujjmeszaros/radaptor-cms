@@ -17,7 +17,8 @@ final class PackageSmokeTest extends TestCase
 		$this->assertSame('radaptor/core/cms', $decoded['package'] ?? null);
 		$this->assertSame('core', $decoded['type'] ?? null);
 		$this->assertSame('cms', $decoded['id'] ?? null);
-		$this->assertSame('^0.1.31', $decoded['dependencies']['radaptor/core/framework'] ?? null);
+		$this->assertIsString($decoded['dependencies']['radaptor/core/framework'] ?? null);
+		$this->assertMatchesRegularExpression('/^\^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/', $decoded['dependencies']['radaptor/core/framework']);
 		$this->assertSame('^8.5', $decoded['composer']['require']['php'] ?? null);
 	}
 

@@ -57,6 +57,28 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 			'size' => 0,
 		]));
 		$this->assertFalse(FormDescriptorValidatorRegistry::isValid('required', [
+			'error' => [
+				UPLOAD_ERR_NO_FILE,
+				UPLOAD_ERR_NO_FILE,
+			],
+			'name' => [
+				'',
+				'',
+			],
+			'type' => [
+				'',
+				'',
+			],
+			'tmp_name' => [
+				'',
+				'',
+			],
+			'size' => [
+				0,
+				0,
+			],
+		]));
+		$this->assertFalse(FormDescriptorValidatorRegistry::isValid('required', [
 			'error' => UPLOAD_ERR_PARTIAL,
 			'name' => 'document.pdf',
 			'type' => 'application/pdf',
@@ -70,6 +92,28 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 			'tmp_name' => '/tmp/php-upload',
 			'size' => 1024,
 		]));
+		$this->assertTrue(FormDescriptorValidatorRegistry::isValid('required', [
+			'error' => [
+				UPLOAD_ERR_OK,
+				UPLOAD_ERR_NO_FILE,
+			],
+			'name' => [
+				'document.pdf',
+				'',
+			],
+			'type' => [
+				'application/pdf',
+				'',
+			],
+			'tmp_name' => [
+				'/tmp/php-upload-one',
+				'',
+			],
+			'size' => [
+				1024,
+				0,
+			],
+		]));
 		$this->assertTrue(FormDescriptorValidatorRegistry::isValid('email', 'person@example.test'));
 		$this->assertFalse(FormDescriptorValidatorRegistry::isValid('email', 'not-email'));
 		$this->assertTrue(FormDescriptorValidatorRegistry::isValid('url', 'https://example.test/path'));
@@ -81,6 +125,7 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$this->assertTrue(FormDescriptorValidatorRegistry::isValid('regex', 'abc-123', ['pattern' => '/^[a-z]+-[0-9]+$/']));
 		$this->assertFalse(FormDescriptorValidatorRegistry::isValid('enum', 'archived', ['values' => ['draft', 'published']]));
 		$this->assertTrue(FormDescriptorValidatorRegistry::isValid('enum', 'draft', ['values' => ['draft' => 'Draft']]));
+		$this->assertTrue(FormDescriptorValidatorRegistry::isValid('enum', '1', ['values' => ['No', 'Yes']]));
 		$this->assertTrue(FormDescriptorValidatorRegistry::isValid('enum', 'published', ['values' => [['value' => 'published', 'label' => 'Published']]]));
 		$this->assertTrue(FormDescriptorValidatorRegistry::isValid('date', '2026-05-19'));
 		$this->assertFalse(FormDescriptorValidatorRegistry::isValid('date', '2026-02-31'));
@@ -89,14 +134,110 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 			'name' => 'document.pdf',
 			'type' => 'application/pdf',
 		], ['extensions' => ['pdf']]));
+		$this->assertTrue(FormDescriptorValidatorRegistry::isValid('file_type', [
+			'path' => '/tmp/radaptor-rebuilt-upload',
+			'original_name' => 'chunked-document.pdf',
+			'mime' => 'application/pdf',
+			'size' => 1024,
+		], ['extensions' => ['pdf']]));
+		$this->assertTrue(FormDescriptorValidatorRegistry::isValid('file_type', [
+			'error' => [
+				UPLOAD_ERR_OK,
+				UPLOAD_ERR_OK,
+			],
+			'name' => [
+				'document.pdf',
+				'notes.txt',
+			],
+			'type' => [
+				'application/pdf',
+				'text/plain',
+			],
+			'tmp_name' => [
+				'/tmp/php-upload-one',
+				'/tmp/php-upload-two',
+			],
+			'size' => [
+				1024,
+				512,
+			],
+		], ['extensions' => ['pdf', 'txt']]));
 		$this->assertFalse(FormDescriptorValidatorRegistry::isValid('file_type', [
 			'error' => UPLOAD_ERR_PARTIAL,
 			'name' => 'document.pdf',
 			'type' => 'application/pdf',
 		], ['extensions' => ['pdf']]));
+		$this->assertFalse(FormDescriptorValidatorRegistry::isValid('file_type', [
+			'error' => [
+				UPLOAD_ERR_OK,
+				UPLOAD_ERR_PARTIAL,
+			],
+			'name' => [
+				'document.pdf',
+				'notes.txt',
+			],
+			'type' => [
+				'application/pdf',
+				'text/plain',
+			],
+			'tmp_name' => [
+				'/tmp/php-upload-one',
+				'/tmp/php-upload-two',
+			],
+			'size' => [
+				1024,
+				512,
+			],
+		], ['extensions' => ['pdf', 'txt']]));
 		$this->assertTrue(FormDescriptorValidatorRegistry::isValid('file_size', [
 			'error' => UPLOAD_ERR_OK,
 			'size' => 1024,
+		], ['max_bytes' => 2048]));
+		$this->assertTrue(FormDescriptorValidatorRegistry::isValid('file_size', [
+			'path' => '/tmp/radaptor-rebuilt-upload',
+			'original_name' => 'chunked-document.pdf',
+			'size' => 1024,
+		], ['max_bytes' => 2048]));
+		$this->assertFalse(FormDescriptorValidatorRegistry::isValid('file_size', [
+			'path' => '/tmp/radaptor-rebuilt-upload',
+			'original_name' => 'chunked-document.pdf',
+			'size' => 4096,
+		], ['max_bytes' => 2048]));
+		$this->assertTrue(FormDescriptorValidatorRegistry::isValid('file_size', [
+			'error' => [
+				UPLOAD_ERR_OK,
+				UPLOAD_ERR_OK,
+			],
+			'name' => [
+				'document.pdf',
+				'notes.txt',
+			],
+			'tmp_name' => [
+				'/tmp/php-upload-one',
+				'/tmp/php-upload-two',
+			],
+			'size' => [
+				1024,
+				512,
+			],
+		], ['max_bytes' => 2048]));
+		$this->assertFalse(FormDescriptorValidatorRegistry::isValid('file_size', [
+			'error' => [
+				UPLOAD_ERR_OK,
+				UPLOAD_ERR_OK,
+			],
+			'name' => [
+				'document.pdf',
+				'notes.txt',
+			],
+			'tmp_name' => [
+				'/tmp/php-upload-one',
+				'/tmp/php-upload-two',
+			],
+			'size' => [
+				1024,
+				4096,
+			],
 		], ['max_bytes' => 2048]));
 		$this->assertFalse(FormDescriptorValidatorRegistry::isValid('file_size', [
 			'error' => UPLOAD_ERR_INI_SIZE,

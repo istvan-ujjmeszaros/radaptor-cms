@@ -228,7 +228,7 @@ final class FormDescriptorValidatorRegistry
 		}
 
 		foreach ($values as $key => $allowed) {
-			if (!is_int($key) && (string)$key === (string)$value) {
+			if ((string)$key === (string)$value) {
 				return true;
 			}
 
@@ -262,22 +262,67 @@ final class FormDescriptorValidatorRegistry
 			return false;
 		}
 
-		$file = self::normalizeFileValue($value);
+		$files = self::normalizeFileValues($value);
 
-		if ($file === null) {
+		if ($files === []) {
 			return true;
 		}
 
 		$mime_types = is_array($options['mime_types'] ?? null) ? $options['mime_types'] : ($options['types'] ?? []);
 		$extensions = is_array($options['extensions'] ?? null) ? $options['extensions'] : [];
-		$mime_type = strtolower((string)($file['type'] ?? ''));
-		$extension = strtolower(pathinfo((string)($file['name'] ?? ''), PATHINFO_EXTENSION));
 
-		if (is_array($mime_types)) {
-			foreach ($mime_types as $allowed) {
-				if ($mime_type !== '' && strtolower((string)$allowed) === $mime_type) {
-					return true;
-				}
+		foreach ($files as $file) {
+			if (!self::isAllowedFileType($file, is_array($mime_types) ? $mime_types : [], $extensions)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * @param array<string, mixed> $options
+	 */
+	private static function hasAllowedFileSize(mixed $value, array $options): bool
+	{
+		if (self::hasFileUploadError($value)) {
+			return false;
+		}
+
+		$files = self::normalizeFileValues($value);
+
+		if ($files === []) {
+			return true;
+		}
+
+		$max_bytes = (int)($options['max_bytes'] ?? $options['max'] ?? 0);
+
+		if ($max_bytes <= 0) {
+			return false;
+		}
+
+		foreach ($files as $file) {
+			if ((int)($file['size'] ?? 0) > $max_bytes) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * @param list<mixed> $mime_types
+	 * @param list<mixed> $extensions
+	 */
+	private static function isAllowedFileType(array $file, array $mime_types, array $extensions): bool
+	{
+		$mime_type = strtolower((string)($file['type'] ?? $file['mime'] ?? ''));
+		$file_name = (string)($file['name'] ?? $file['original_name'] ?? '');
+		$extension = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+
+		foreach ($mime_types as $allowed) {
+			if ($mime_type !== '' && strtolower((string)$allowed) === $mime_type) {
+				return true;
 			}
 		}
 
@@ -291,46 +336,73 @@ final class FormDescriptorValidatorRegistry
 	}
 
 	/**
-	 * @param array<string, mixed> $options
+	 * @return list<array<string, mixed>>
 	 */
-	private static function hasAllowedFileSize(mixed $value, array $options): bool
-	{
-		if (self::hasFileUploadError($value)) {
-			return false;
-		}
-
-		$file = self::normalizeFileValue($value);
-
-		if ($file === null) {
-			return true;
-		}
-
-		$max_bytes = (int)($options['max_bytes'] ?? $options['max'] ?? 0);
-
-		return $max_bytes > 0 && (int)($file['size'] ?? 0) <= $max_bytes;
-	}
-
-	/**
-	 * @return array<string, mixed>|null
-	 */
-	private static function normalizeFileValue(mixed $value): ?array
+	private static function normalizeFileValues(mixed $value): array
 	{
 		if (!is_array($value)) {
-			return null;
+			return [];
+		}
+
+		if (is_array($value['error'] ?? null)) {
+			$files = [];
+
+			foreach ($value['error'] as $index => $error) {
+				if ((int)$error !== UPLOAD_ERR_OK) {
+					continue;
+				}
+
+				$files[] = [
+					'name' => self::indexedUploadValue($value['name'] ?? null, $index),
+					'type' => self::indexedUploadValue($value['type'] ?? null, $index),
+					'tmp_name' => self::indexedUploadValue($value['tmp_name'] ?? null, $index),
+					'size' => self::indexedUploadValue($value['size'] ?? null, $index),
+					'error' => $error,
+				];
+			}
+
+			return $files;
 		}
 
 		$error = (int)($value['error'] ?? UPLOAD_ERR_OK);
 
-		if ($error === UPLOAD_ERR_NO_FILE) {
-			return null;
+		if ($error !== UPLOAD_ERR_OK) {
+			return [];
 		}
 
-		return $error === UPLOAD_ERR_OK ? $value : null;
+		return [self::normalizeSingleFileValue($value)];
+	}
+
+	/**
+	 * @param array<string, mixed> $value
+	 * @return array<string, mixed>
+	 */
+	private static function normalizeSingleFileValue(array $value): array
+	{
+		$path = (string)($value['tmp_name'] ?? $value['path'] ?? '');
+
+		return [
+			'name' => $value['name'] ?? $value['original_name'] ?? '',
+			'type' => $value['type'] ?? $value['mime'] ?? '',
+			'tmp_name' => $path,
+			'size' => $value['size'] ?? (is_file($path) ? filesize($path) : null),
+			'error' => $value['error'] ?? UPLOAD_ERR_OK,
+		];
 	}
 
 	private static function hasFileUploadError(mixed $value): bool
 	{
 		if (!is_array($value) || !array_key_exists('error', $value)) {
+			return false;
+		}
+
+		if (is_array($value['error'])) {
+			foreach ($value['error'] as $error) {
+				if (!in_array((int)$error, [UPLOAD_ERR_OK, UPLOAD_ERR_NO_FILE], true)) {
+					return true;
+				}
+			}
+
 			return false;
 		}
 

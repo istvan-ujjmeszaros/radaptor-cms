@@ -311,9 +311,11 @@ final class FormCaptureDefinitionRepository
 			$descriptor = FormCaptureDescriptorSchemaValidator::normalizeDescriptor($entry['descriptor']);
 			$field_keys = FormCaptureDescriptorSchemaValidator::validateDescriptor($descriptor);
 			$security = FormCaptureDescriptorSchemaValidator::normalizeSecurity((string)$definition['security_json'], $field_keys);
+			$descriptor_hash = FormCaptureCompiledDescriptorCache::hashData($descriptor);
 
 			if (
-				!hash_equals((string)($entry['normalized_descriptor_hash'] ?? ''), FormCaptureCompiledDescriptorCache::hashData($descriptor))
+				!hash_equals((string)($entry['normalized_descriptor_hash'] ?? ''), $descriptor_hash)
+				|| !hash_equals((string)$version['descriptor_hash'], $descriptor_hash)
 				|| !hash_equals((string)($entry['security_hash'] ?? ''), FormCaptureCompiledDescriptorCache::hashData($security))
 			) {
 				return null;

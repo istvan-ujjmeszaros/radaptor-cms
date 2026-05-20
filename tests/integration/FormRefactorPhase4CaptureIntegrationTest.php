@@ -257,6 +257,7 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertNull(EntityFormDefinition::findBySlug($definition_slug));
 		$this->assertSame('success', $dry_run['status'] ?? null);
 		$this->assertTrue($dry_run['dry_run'] ?? false);
+		$this->assertSame('validated', $dry_run['definitions'][0]['status'] ?? null);
 		$this->assertSame(1, $dry_run['summary']['would_publish'] ?? null);
 		$this->assertSame(0, $dry_run['summary']['published'] ?? null);
 
@@ -366,6 +367,18 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 			$this->assertInstanceOf(FormDefinitionResolution::class, $resolved);
 			$this->assertSame($published->versionId(), $resolved->versionId());
 		}
+
+		$tampered = $cache->write($published->definition(), $published->version(), $published->descriptor(), $published->security());
+		$tampered_entry = $tampered['entry'];
+		$tampered_entry['descriptor']['title']['text'] = 'Tampered cache title';
+		$tampered_entry['normalized_descriptor_hash'] = FormCaptureCompiledDescriptorCache::hashData($tampered_entry['descriptor']);
+		file_put_contents($path, "<?php\n\nreturn " . var_export($tampered_entry, true) . ";\n");
+
+		$resolved = FormDefinitionResolver::resolve($definition_slug);
+
+		$this->assertInstanceOf(FormDefinitionResolution::class, $resolved);
+		$this->assertSame($published->versionId(), $resolved->versionId());
+		$this->assertSame($published->descriptor()['title']['text'] ?? null, $resolved->descriptor()['title']['text'] ?? null);
 	}
 
 	public function testCaptureWidgetUnavailableDefinitionRendersFallbackStatus(): void

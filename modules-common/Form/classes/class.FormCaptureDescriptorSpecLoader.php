@@ -281,12 +281,12 @@ final class FormCaptureDescriptorSpecLoader
 			$spec['source'],
 		);
 
-		return $preview + [
+		return [
 			'definition_slug' => $spec['definition_slug'],
 			'origin' => $spec['origin'],
 			'source' => $spec['source'],
 			'status' => 'validated',
-		];
+		] + $preview;
 	}
 
 	/**

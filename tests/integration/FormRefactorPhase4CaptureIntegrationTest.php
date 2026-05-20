@@ -381,6 +381,65 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame($published->descriptor()['title']['text'] ?? null, $resolved->descriptor()['title']['text'] ?? null);
 	}
 
+	public function testRuntimeResolutionStillSucceedsWhenCacheRewriteFails(): void
+	{
+		if (!class_exists('FormCaptureCompiledDescriptorCache')) {
+			self::markTestSkipped('Phase 4f compiled descriptor cache is not implemented yet.');
+		}
+
+		$definition_slug = 'capture-phase4f-cache-write-failure';
+		$published = (new FormCaptureDefinitionRepository())->upsertPublishedDefinition($definition_slug, $this->descriptor(), $this->defaultSecurity());
+		$cache = new FormCaptureCompiledDescriptorCache();
+		$write = $cache->write($published->definition(), $published->version(), $published->descriptor(), $published->security());
+		$path = (string)($write['path'] ?? '');
+		$this->assertFileExists($path);
+		@unlink($path);
+		$this->assertTrue(mkdir($path));
+
+		try {
+			$resolved = FormDefinitionResolver::resolve($definition_slug);
+		} finally {
+			@rmdir($path);
+		}
+
+		$this->assertInstanceOf(FormDefinitionResolution::class, $resolved);
+		$this->assertSame($published->versionId(), $resolved->versionId());
+	}
+
+	public function testLegacyRawDescriptorHashCanStillValidateCompiledCache(): void
+	{
+		if (!class_exists('FormCaptureCompiledDescriptorCache')) {
+			self::markTestSkipped('Phase 4f compiled descriptor cache is not implemented yet.');
+		}
+
+		$definition_slug = 'capture-phase4f-legacy-raw-hash';
+		$raw_descriptor = $this->descriptor();
+		$normalized_descriptor = FormCaptureDescriptorSchemaValidator::normalizeDescriptor($raw_descriptor);
+		$raw_descriptor_json = FormCaptureCompiledDescriptorCache::encodeJson($raw_descriptor);
+		$raw_descriptor_hash = hash('sha256', $raw_descriptor_json);
+		$normalized_descriptor_hash = FormCaptureCompiledDescriptorCache::hashData($normalized_descriptor);
+		$this->assertNotSame($raw_descriptor_hash, $normalized_descriptor_hash);
+
+		$published = (new FormCaptureDefinitionRepository())->upsertPublishedDefinition($definition_slug, $raw_descriptor, $this->defaultSecurity());
+		EntityFormDefinitionVersion::updateById($published->versionId(), [
+			'descriptor_json' => $raw_descriptor_json,
+			'descriptor_hash' => $raw_descriptor_hash,
+		]);
+		$version = EntityFormDefinitionVersion::findFirst(['version_id' => $published->versionId()]);
+		$this->assertNotNull($version);
+
+		$cache = new FormCaptureCompiledDescriptorCache();
+		$cache->write($published->definition(), $version->dto(), $normalized_descriptor, $published->security());
+		$resolved = FormDefinitionResolver::resolve($definition_slug);
+		$cached = $cache->read($published->definition(), $version->dto());
+
+		$this->assertInstanceOf(FormDefinitionResolution::class, $resolved);
+		$this->assertSame($published->versionId(), $resolved->versionId());
+		$this->assertIsArray($cached);
+		$this->assertSame($raw_descriptor_hash, $cached['descriptor_hash'] ?? null);
+		$this->assertSame($normalized_descriptor_hash, $cached['normalized_descriptor_hash'] ?? null);
+	}
+
 	public function testCaptureWidgetUnavailableDefinitionRendersFallbackStatus(): void
 	{
 		if (!class_exists('WidgetCaptureForm')) {

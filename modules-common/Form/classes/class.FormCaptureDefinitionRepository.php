@@ -208,9 +208,14 @@ final class FormCaptureDefinitionRepository
 			$field_keys = FormCaptureDescriptorSchemaValidator::validateDescriptor($descriptor);
 			$security = FormCaptureDescriptorSchemaValidator::normalizeSecurity((string)$definition['security_json'], $field_keys);
 			FormCaptureDescriptorSchemaValidator::validateForDefinition($definition_slug, $descriptor, $security);
-			(new FormCaptureCompiledDescriptorCache())->write($definition, $version, $descriptor, $security);
 		} catch (Throwable $exception) {
 			throw FormCaptureRuntimeException::invalidDescriptor($definition_slug, $exception);
+		}
+
+		try {
+			(new FormCaptureCompiledDescriptorCache())->write($definition, $version, $descriptor, $security);
+		} catch (Throwable $exception) {
+			error_log('[form-capture-cache] failed to write compiled descriptor cache: ' . $exception->getMessage());
 		}
 
 		return FormDefinitionResolution::capture(
@@ -315,7 +320,7 @@ final class FormCaptureDefinitionRepository
 
 			if (
 				!hash_equals((string)($entry['normalized_descriptor_hash'] ?? ''), $descriptor_hash)
-				|| !hash_equals((string)$version['descriptor_hash'], $descriptor_hash)
+				|| !$this->descriptorHashMatchesPublishedVersion($definition, $version, $descriptor_hash)
 				|| !hash_equals((string)($entry['security_hash'] ?? ''), FormCaptureCompiledDescriptorCache::hashData($security))
 			) {
 				return null;
@@ -333,6 +338,31 @@ final class FormCaptureDefinitionRepository
 			$descriptor,
 			$security,
 		);
+	}
+
+	/**
+	 * @param array<string, mixed> $definition
+	 * @param array<string, mixed> $version
+	 */
+	private function descriptorHashMatchesPublishedVersion(array $definition, array $version, string $normalized_descriptor_hash): bool
+	{
+		$version_descriptor_hash = (string)$version['descriptor_hash'];
+
+		if (hash_equals($version_descriptor_hash, $normalized_descriptor_hash)) {
+			return true;
+		}
+
+		$descriptor_json = $this->fetchPublishedDescriptorJson((int)$definition['definition_id'], (int)$version['version_id']);
+
+		if ($descriptor_json === null || !hash_equals($version_descriptor_hash, hash('sha256', $descriptor_json))) {
+			return false;
+		}
+
+		$stored_descriptor = FormCaptureDescriptorSchemaValidator::normalizeDescriptor(
+			self::decodeJsonObject($descriptor_json, 'descriptor_json'),
+		);
+
+		return hash_equals($normalized_descriptor_hash, FormCaptureCompiledDescriptorCache::hashData($stored_descriptor));
 	}
 
 	/**

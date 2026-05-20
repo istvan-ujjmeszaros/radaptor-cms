@@ -7,8 +7,14 @@ class Form
 	 */
 	public static function factory(string $form_type, string $form_id, iTreeBuildContext $tree_build_context, ?string $referer = null, array $render_context = []): AbstractForm
 	{
-		$class = FormClassResolver::requireClassName($form_type);
+		$resolution = $render_context['form_definition_resolution'] ?? null;
 
+		if (!$resolution instanceof FormDefinitionResolution) {
+			$resolution = FormDefinitionResolver::requireResolution($form_type);
+		}
+
+		$class = $resolution->className();
+		$render_context['form_definition_resolution'] = $resolution;
 		$form = new $class($form_type, $form_id, $tree_build_context, $referer, $render_context);
 
 		if ($form instanceof AbstractForm) {

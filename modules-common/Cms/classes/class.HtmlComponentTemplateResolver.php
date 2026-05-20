@@ -18,6 +18,7 @@ class HtmlComponentTemplateResolver
 			'form' => self::resolveFormTemplate($props),
 			'form.row' => 'sdui.form.row',
 			'form.helper' => 'sdui.form.helper',
+			'form.honeypot' => 'sdui.form.honeypot',
 			'form.input.text' => 'sdui.form.input.text',
 			'form.input.password' => 'sdui.form.input.password',
 			'form.input.hidden' => 'sdui.form.input.hidden',

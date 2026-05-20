@@ -29,7 +29,7 @@ final class FormRefactorPhase2SourceContractTest extends TestCase
 		$this->assertStringContainsString('FormSubmitContext::fromPost($post)', $source);
 		$this->assertStringContainsString('$context->isCurrentBuild()', $source);
 		$this->assertStringContainsString('$context->canAccessHostContext()', $source);
-		$this->assertStringContainsString('FormClassResolver::resolveClassName', $source);
+		$this->assertStringContainsString('FormDefinitionResolver::resolve($context->formId)', $source);
 		$this->assertStringContainsString("BrowserEventDocumentationHelper::param('form_id'", $source);
 		$this->assertStringContainsString("BrowserEventDocumentationHelper::param('form_instance_id'", $source);
 		$this->assertStringContainsString('(new FormResponseEmitter())->emit', $source);
@@ -68,7 +68,7 @@ final class FormRefactorPhase2SourceContractTest extends TestCase
 		$form_source = $this->source('modules-common/Form/classes/class.Form.php');
 		$widget_source = $this->source('modules-common/Form/widgets/Widget.Form.php');
 
-		$this->assertStringContainsString('FormClassResolver::requireClassName($form_type)', $form_source);
+		$this->assertStringContainsString('FormDefinitionResolver::requireResolution($form_type)', $form_source);
 		$this->assertStringContainsString('FormClassResolver::resolveClassName', $widget_source);
 		$this->assertStringNotContainsString("'FormType' . ucwords", $form_source);
 		$this->assertStringNotContainsString("'FormType' . ucwords", $widget_source);

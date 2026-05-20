@@ -19,7 +19,7 @@ class EventFormSubmit extends AbstractEvent implements iBrowserEventDocumentable
 			'request' => [
 				'method' => 'POST',
 				'params' => [
-					BrowserEventDocumentationHelper::param('form_id', 'post', 'string', true, 'Class-backed form descriptor id.'),
+					BrowserEventDocumentationHelper::param('form_id', 'post', 'string', true, 'Class-backed system form id or published capture definition_slug.'),
 					BrowserEventDocumentationHelper::param('form_instance_id', 'post', 'string', true, 'Stable placement id for this rendered form instance.'),
 					BrowserEventDocumentationHelper::param('csrf_token', 'post', 'string', true, 'Session-bound form CSRF token.'),
 				],
@@ -57,17 +57,28 @@ class EventFormSubmit extends AbstractEvent implements iBrowserEventDocumentable
 			return;
 		}
 
-		$class_name = FormClassResolver::resolveClassName($context->formId);
+		try {
+			$resolution = FormDefinitionResolver::resolve($context->formId);
+		} catch (FormCaptureRuntimeException $exception) {
+			$this->emitContextError(new ApiError($exception->apiCode(), t($exception->messageKey())), $exception->httpStatus());
 
-		if ($class_name === null) {
-			$this->emitContextError(new ApiError('FORM_NOT_FOUND', t('common.error_save')), 404);
+			return;
+		}
+
+		if ($resolution === null) {
+			$message_key = FormCaptureDescriptorSchemaValidator::isCaptureSlug($context->formId)
+				? 'form.capture.error_unavailable'
+				: 'common.error_save';
+			$this->emitContextError(new ApiError('FORM_NOT_FOUND', t($message_key)), 404);
 
 			return;
 		}
 
 		$this->applyRuntimeGet($context);
 
-		$missing = Request::getMissingParams($class_name::getRequiredUrlParams());
+		$missing = $resolution->isSystem()
+			? Request::getMissingParams($resolution->className()::getRequiredUrlParams())
+			: [];
 
 		if ($missing !== []) {
 			$this->emitContextError(new ApiError('FORM_CONTEXT_MISSING_REQUIRED_PARAMS', t('common.error_save'), details: ['missing' => $missing]), 400);
@@ -81,18 +92,25 @@ class EventFormSubmit extends AbstractEvent implements iBrowserEventDocumentable
 			return;
 		}
 
-		$form = Form::factory(
-			$context->formId,
-			$context->formInstanceId,
-			FormSubmitTreeBuildContext::fromSubmitContext($context),
-			$context->returnTarget,
-			[
-				'item_id' => $context->itemId,
-				'host_page_id' => $context->hostPageId,
-				'widget_connection_id' => $context->widgetConnectionId,
-				'return_target' => $context->returnTarget,
-			]
-		);
+		try {
+			$form = Form::factory(
+				$context->formId,
+				$context->formInstanceId,
+				FormSubmitTreeBuildContext::fromSubmitContext($context),
+				$context->returnTarget,
+				[
+					'item_id' => $context->itemId,
+					'host_page_id' => $context->hostPageId,
+					'widget_connection_id' => $context->widgetConnectionId,
+					'return_target' => $context->returnTarget,
+					'form_definition_resolution' => $resolution,
+				]
+			);
+		} catch (FormCaptureRuntimeException $exception) {
+			$this->emitContextError(new ApiError($exception->apiCode(), t($exception->messageKey())), $exception->httpStatus());
+
+			return;
+		}
 
 		$files = $_FILES ?? [];
 		$csrf_error = $context->validateCsrfToken($post);
@@ -107,7 +125,13 @@ class EventFormSubmit extends AbstractEvent implements iBrowserEventDocumentable
 			return;
 		}
 
-		$result = $form->process($post, $files);
+		try {
+			$result = $form->process($post, $files);
+		} catch (FormCaptureRuntimeException $exception) {
+			$this->emitContextError(new ApiError($exception->apiCode(), t($exception->messageKey())), $exception->httpStatus());
+
+			return;
+		}
 
 		if (Request::wantsNonHtmlResponse()) {
 			SystemMessages::flushAllMessages();

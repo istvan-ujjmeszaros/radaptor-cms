@@ -245,6 +245,48 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		], ['max_bytes' => 2048]));
 	}
 
+	public function testPhase4fPublisherExposesDryRunAndApplyContracts(): void
+	{
+		$source = $this->source('modules-common/Form/classes/class.FormCaptureDescriptorSpecLoader.php');
+
+		$this->assertStringContainsString('final class FormCaptureDescriptorSpecLoader', $source);
+		$this->assertStringContainsString('public static function previewPublish(', $source);
+		$this->assertStringContainsString('public static function applyPublish(', $source);
+		$this->assertStringContainsString('public static function previewSync(', $source);
+		$this->assertStringContainsString('public static function applySync(', $source);
+		$this->assertStringContainsString('FormCaptureDescriptorSchemaValidator::validateForDefinition', $source);
+		$this->assertStringContainsString('FormCaptureDefinitionRepository', $source);
+		$this->assertStringContainsString("'dry_run' => true", $source);
+		$this->assertStringContainsString("'dry_run' => false", $source);
+	}
+
+	public function testPhase4fRuntimeCacheContractGuardsPublishedDescriptorIntegrity(): void
+	{
+		$cache_source = $this->source('modules-common/Form/classes/class.FormCaptureCompiledDescriptorCache.php');
+		$repository_source = $this->source('modules-common/Form/classes/class.FormCaptureDefinitionRepository.php');
+
+		$this->assertStringContainsString('final class FormCaptureCompiledDescriptorCache', $cache_source);
+		$this->assertStringContainsString('public function write(', $cache_source);
+		$this->assertStringContainsString('public function read(', $cache_source);
+		$this->assertStringContainsString('public function deleteStaleForSlug(', $cache_source);
+		$this->assertStringContainsString('descriptor_hash', $cache_source);
+		$this->assertStringContainsString('normalized_descriptor_hash', $cache_source);
+		$this->assertStringContainsString('FormCaptureCompiledDescriptorCache', $repository_source);
+		$this->assertStringContainsString('hash_equals', $repository_source);
+		$this->assertStringContainsString('descriptor_hash', $repository_source);
+	}
+
+	public function testPhase4fCaptureWidgetKeepsUnavailableDefinitionsAsRenderableFallback(): void
+	{
+		$source = $this->source('modules-common/Form/widgets/Widget.CaptureForm.php');
+
+		$this->assertStringContainsString('FormDefinitionResolver::resolve($definition_slug)', $source);
+		$this->assertStringContainsString('catch (FormCaptureRuntimeException)', $source);
+		$this->assertStringContainsString("t('form.capture.error_unavailable')", $source);
+		$this->assertStringContainsString('$resolution === null || !$resolution->isCapture()', $source);
+		$this->assertStringNotContainsString('Kernel::abort', $source);
+	}
+
 	private function source(string $relativePath): string
 	{
 		$path = dirname(__DIR__) . '/' . $relativePath;

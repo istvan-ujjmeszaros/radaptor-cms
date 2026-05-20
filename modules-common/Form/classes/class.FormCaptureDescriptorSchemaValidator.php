@@ -128,6 +128,44 @@ final class FormCaptureDescriptorSchemaValidator
 	}
 
 	/**
+	 * @param array<string, mixed> $descriptor
+	 * @return array<string, mixed>
+	 */
+	public static function normalizeDescriptor(array $descriptor): array
+	{
+		self::validateDescriptor($descriptor);
+
+		$normalized = $descriptor;
+		$normalized['kind'] = 'capture';
+		$normalized_fields = [];
+
+		foreach ($descriptor['fields'] as $field) {
+			if (!is_array($field)) {
+				continue;
+			}
+
+			$normalized_field = $field;
+			$normalized_field['type'] = trim((string)($field['type'] ?? 'text'));
+			$normalized_field['name'] = trim((string)($field['name'] ?? ''));
+			$normalized_field['key'] = trim((string)($field['key'] ?? $normalized_field['name']));
+
+			if (array_key_exists('normalizers', $normalized_field) && is_array($normalized_field['normalizers'])) {
+				$normalized_field['normalizers'] = array_values(array_map(
+					static fn (mixed $normalizer): string => self::normalizeNormalizerName((string)$normalizer),
+					$normalized_field['normalizers'],
+				));
+			}
+
+			$normalized_fields[] = $normalized_field;
+		}
+
+		$normalized['fields'] = $normalized_fields;
+		self::validateDescriptor($normalized);
+
+		return $normalized;
+	}
+
+	/**
 	 * @param array<string, mixed>|string|null $security
 	 * @param list<string> $field_keys
 	 * @return array{honeypot: array{enabled: true, field_name: string}, rate_limit: array{accepted: int, window_seconds: int}}

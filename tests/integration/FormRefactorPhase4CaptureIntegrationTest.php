@@ -85,6 +85,17 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		FormCaptureDescriptorSchemaValidator::validateForDefinition('UserLogin', $this->descriptor());
 	}
 
+	public function testCaptureSchemaRejectsDefinitionSlugLongerThanDatabaseLimit(): void
+	{
+		$max_length_slug = FormCaptureDescriptorSchemaValidator::CAPTURE_PREFIX . str_repeat('a', FormCaptureDescriptorSchemaValidator::MAX_DEFINITION_SLUG_LENGTH - strlen(FormCaptureDescriptorSchemaValidator::CAPTURE_PREFIX));
+		FormCaptureDescriptorSchemaValidator::validateForDefinition($max_length_slug, $this->descriptor());
+
+		$this->expectException(InvalidArgumentException::class);
+		$this->expectExceptionMessage('128 characters or shorter');
+
+		FormCaptureDescriptorSchemaValidator::validateForDefinition($max_length_slug . 'a', $this->descriptor());
+	}
+
 	public function testCaptureSchemaRejectsAdminCodeFeatures(): void
 	{
 		$descriptor = $this->descriptor();

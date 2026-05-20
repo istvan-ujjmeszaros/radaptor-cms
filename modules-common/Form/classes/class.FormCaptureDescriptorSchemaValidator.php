@@ -5,6 +5,7 @@ declare(strict_types=1);
 final class FormCaptureDescriptorSchemaValidator
 {
 	public const string CAPTURE_PREFIX = 'capture-';
+	public const int MAX_DEFINITION_SLUG_LENGTH = 128;
 	public const string DEFAULT_HONEYPOT_FIELD = 'company_website';
 	public const int DEFAULT_RATE_LIMIT_ACCEPTED = 5;
 	public const int DEFAULT_RATE_LIMIT_WINDOW_SECONDS = 600;
@@ -54,6 +55,10 @@ final class FormCaptureDescriptorSchemaValidator
 	{
 		if (!preg_match('/^capture-[a-z0-9]+(?:-[a-z0-9]+)*$/D', $definition_slug)) {
 			throw new InvalidArgumentException("Capture form definition_slug must use the capture- kebab-case namespace.");
+		}
+
+		if (strlen($definition_slug) > self::MAX_DEFINITION_SLUG_LENGTH) {
+			throw new InvalidArgumentException('Capture form definition_slug must be 128 characters or shorter.');
 		}
 
 		if (FormClassResolver::resolveClassName($definition_slug) !== null) {

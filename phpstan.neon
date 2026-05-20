@@ -8,6 +8,12 @@ parameters:
 		- modules-common/Form/classes/class.FormDescriptorAdapter.php
 		- modules-common/Form/classes/class.FormDescriptorValidator.php
 		- modules-common/Form/classes/class.FormDescriptorValidatorRegistry.php
+		- modules-common/Form/classes/class.FormCaptureCompiledDescriptorCache.php
+		- modules-common/Form/classes/class.FormCaptureDefinitionRepository.php
+		- modules-common/Form/classes/class.FormCaptureDescriptorSchemaValidator.php
+		- modules-common/Form/classes/class.FormCaptureDescriptorSpecLoader.php
+		- modules-common/CLI/events/CLICommand.FormPublish.php
+		- modules-common/CLI/events/CLICommand.FormSync.php
 		- modules-common/Cms/classes/class.CmsPathHelper.php
 		- modules-common/Cms/classes/class.CmsResourceSpecService.php
 		- modules-common/Cms/classes/class.AbstractWebpageViewComposer.php

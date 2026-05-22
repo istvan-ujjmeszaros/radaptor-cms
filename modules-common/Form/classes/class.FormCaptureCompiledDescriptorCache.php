@@ -20,9 +20,7 @@ final class FormCaptureCompiledDescriptorCache
 		$path = $this->path($definition_slug, $version_number);
 		$directory = dirname($path);
 
-		if (!is_dir($directory) && !mkdir($directory, 0o775, true) && !is_dir($directory)) {
-			throw new RuntimeException("Unable to create form descriptor cache directory: {$directory}");
-		}
+		$this->ensureDirectory($directory);
 
 		$entry = [
 			'definition_slug' => $definition_slug,
@@ -41,15 +39,17 @@ final class FormCaptureCompiledDescriptorCache
 		$temp_path = $path . '.tmp.' . getmypid() . '.' . bin2hex(random_bytes(6));
 
 		try {
-			if (file_put_contents($temp_path, $contents, LOCK_EX) === false) {
+			if (@file_put_contents($temp_path, $contents, LOCK_EX) === false) {
 				throw new RuntimeException("Unable to write temporary form descriptor cache file: {$temp_path}");
 			}
 
-			@chmod($temp_path, 0o664);
+			$this->applyFilesystemMode($temp_path, false);
 
-			if (!rename($temp_path, $path)) {
+			if (!@rename($temp_path, $path)) {
 				throw new RuntimeException("Unable to move form descriptor cache file into place: {$path}");
 			}
+
+			$this->applyFilesystemMode($path, false);
 		} finally {
 			if (is_file($temp_path)) {
 				@unlink($temp_path);
@@ -148,5 +148,42 @@ final class FormCaptureCompiledDescriptorCache
 		$version = $glob ? '*' : (string)$version_number;
 
 		return $root . self::CACHE_ROOT . '/' . $definition_slug . '.v' . $version . '.php';
+	}
+
+	private function ensureDirectory(string $directory): void
+	{
+		if (!is_dir($directory) && !@mkdir($directory, $this->directoryMode(), true) && !is_dir($directory)) {
+			throw new RuntimeException("Unable to create form descriptor cache directory: {$directory}");
+		}
+
+		$this->applyFilesystemMode($directory, true);
+	}
+
+	private function applyFilesystemMode(string $path, bool $directory): void
+	{
+		if (class_exists('Config')) {
+			$owner = Config::LINUX_FILE_OWNER->value();
+			$group = Config::LINUX_FILE_GROUP->value();
+
+			if (is_string($owner) && $owner !== '') {
+				@chown($path, $owner);
+			}
+
+			if (is_string($group) && $group !== '') {
+				@chgrp($path, $group);
+			}
+		}
+
+		@chmod($path, $directory ? $this->directoryMode() : $this->fileMode());
+	}
+
+	private function directoryMode(): int
+	{
+		return class_exists('Config') ? (int)Config::LINUX_FILE_MODE_DIRECTORY->value() : 0o775;
+	}
+
+	private function fileMode(): int
+	{
+		return class_exists('Config') ? (int)Config::LINUX_FILE_MODE->value() : 0o664;
 	}
 }

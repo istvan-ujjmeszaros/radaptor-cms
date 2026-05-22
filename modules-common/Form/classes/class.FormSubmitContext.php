@@ -12,6 +12,7 @@ final class FormSubmitContext
 	public const string FIELD_WIDGET_CONNECTION_ID = 'widget_connection_id';
 	public const string FIELD_BUILD_ID = 'form_build_id';
 	public const string FIELD_CONTEXT_PARAMS = 'form_context_params';
+	public const string FIELD_FORM_DEFINITION_VERSION_ID = 'form_definition_version_id';
 	public const string FIELD_CSRF_TOKEN = 'csrf_token';
 	public const string SESSION_KEY_CSRF_TOKENS = 'formCsrfTokens';
 	public const int CSRF_TOKEN_TTL_SECONDS = 7200;
@@ -28,6 +29,7 @@ final class FormSubmitContext
 		public readonly ?int $hostPageId,
 		public readonly ?int $widgetConnectionId,
 		public readonly string $buildId,
+		public readonly ?int $formDefinitionVersionId = null,
 		public readonly array $extraParams = [],
 	) {
 	}
@@ -49,12 +51,19 @@ final class FormSubmitContext
 			$get[self::FIELD_WIDGET_CONNECTION_ID],
 			$get[self::FIELD_BUILD_ID],
 			$get[self::FIELD_CONTEXT_PARAMS],
+			$get[self::FIELD_FORM_DEFINITION_VERSION_ID],
 		);
 
 		$item_id = $form->getItemId();
 		$host_page_id = self::positiveIntOrNull($renderContext['host_page_id'] ?? $form->getTreeBuildContext()->getPageId());
 		$widget_connection_id = self::positiveIntOrNull($renderContext['widget_connection_id'] ?? null);
 		$return_target = Url::sanitizeRefererUrl((string)($renderContext['return_target'] ?? $form->getReferer()));
+		$form_definition_version_id = self::positiveIntOrNull($renderContext[self::FIELD_FORM_DEFINITION_VERSION_ID] ?? null);
+		$resolution = $renderContext['form_definition_resolution'] ?? null;
+
+		if ($form_definition_version_id === null && $resolution instanceof FormDefinitionResolution && $resolution->isCapture()) {
+			$form_definition_version_id = $resolution->versionId();
+		}
 
 		return new self(
 			formId: $form->getFormType(),
@@ -64,6 +73,7 @@ final class FormSubmitContext
 			hostPageId: $host_page_id,
 			widgetConnectionId: $widget_connection_id,
 			buildId: self::currentBuildId(),
+			formDefinitionVersionId: $form_definition_version_id,
 			extraParams: $get,
 		);
 	}
@@ -91,6 +101,7 @@ final class FormSubmitContext
 			hostPageId: self::positiveIntOrNull($post[self::FIELD_HOST_PAGE_ID] ?? null),
 			widgetConnectionId: self::positiveIntOrNull($post[self::FIELD_WIDGET_CONNECTION_ID] ?? null),
 			buildId: trim((string)($post[self::FIELD_BUILD_ID] ?? '')),
+			formDefinitionVersionId: self::positiveIntOrNull($post[self::FIELD_FORM_DEFINITION_VERSION_ID] ?? null),
 			extraParams: $extra_params,
 		);
 	}
@@ -109,6 +120,7 @@ final class FormSubmitContext
 			self::FIELD_WIDGET_CONNECTION_ID => $this->widgetConnectionId ?? '',
 			self::FIELD_BUILD_ID => $this->buildId,
 			self::FIELD_CONTEXT_PARAMS => self::encodeContextParams($this->extraParams),
+			self::FIELD_FORM_DEFINITION_VERSION_ID => $this->formDefinitionVersionId ?? '',
 		];
 	}
 

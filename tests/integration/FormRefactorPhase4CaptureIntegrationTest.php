@@ -25,6 +25,12 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 			EntityFormDefinition::class,
 			EntityFormDefinitionVersion::class,
 			EntityFormSubmission::class,
+			FormCaptureAuthoringService::class,
+			EventFormSubmit::class,
+			EventFormBuilderCreate::class,
+			EventFormBuilderPreviewRender::class,
+			EventFormBuilderSaveDraft::class,
+			EventFormBuilderPublish::class,
 		] as $class_name) {
 			if (!class_exists($class_name)) {
 				self::markTestSkipped('The Radaptor consumer app runtime with capture-form MVP classes is required.');
@@ -75,6 +81,7 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertTrue($resolution->isCapture());
 		$this->assertSame('capture-phase4-render', $tree['props']['form_descriptor_id']);
 		$this->assertSame('Contact probe', $tree['props']['title']);
+		$this->assertSame($resolution->versionId(), $tree['props']['submit_context'][FormSubmitContext::FIELD_FORM_DEFINITION_VERSION_ID]);
 		$this->assertSame('form.honeypot', $tree['slots']['hidden_fields'][1]['component'] ?? null);
 		$this->assertSame('company_website', $tree['slots']['hidden_fields'][1]['props']['name'] ?? null);
 	}
@@ -96,6 +103,21 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		FormCaptureDescriptorSchemaValidator::validateForDefinition($max_length_slug . 'a', $this->descriptor());
 	}
 
+	public function testBuilderSlugInputNormalizesToCaptureNamespace(): void
+	{
+		$this->assertSame('capture-asd', FormCaptureDescriptorSchemaValidator::normalizeDefinitionSlugInput('asd'));
+		$this->assertSame('capture-asddsadsa', FormCaptureDescriptorSchemaValidator::normalizeDefinitionSlugInput('asddsadsa'));
+		$this->assertSame('capture-asddsadsa-asddsa', FormCaptureDescriptorSchemaValidator::normalizeDefinitionSlugInput('asddsadsa-asddsa'));
+		$this->assertSame('capture-asddsadsa-asddsa-asd', FormCaptureDescriptorSchemaValidator::normalizeDefinitionSlugInput('asddsadsa-asddsa-asd'));
+		$this->assertSame('capture-asd-test', FormCaptureDescriptorSchemaValidator::normalizeDefinitionSlugInput(' Asd Test '));
+		$this->assertSame('capture-asd-test', FormCaptureDescriptorSchemaValidator::normalizeDefinitionSlugInput('asd_test'));
+
+		$service = new FormCaptureAuthoringService();
+		$created = $service->createDefinition('plain-builder-slug', 'Plain builder slug');
+
+		$this->assertSame('capture-plain-builder-slug', $created['definition']['definition_slug'] ?? null);
+	}
+
 	public function testCaptureSchemaRejectsAdminCodeFeatures(): void
 	{
 		$descriptor = $this->descriptor();
@@ -103,6 +125,15 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 
 		$this->expectException(InvalidArgumentException::class);
 		FormCaptureDescriptorSchemaValidator::validateForDefinition('capture-phase4-invalid-feature', $descriptor);
+	}
+
+	public function testCaptureSchemaRejectsVersionedSubmitHiddenFieldAsPayloadKey(): void
+	{
+		$descriptor = $this->descriptor();
+		$descriptor['fields'][0]['key'] = FormSubmitContext::FIELD_FORM_DEFINITION_VERSION_ID;
+
+		$this->expectException(InvalidArgumentException::class);
+		FormCaptureDescriptorSchemaValidator::validateForDefinition('capture-phase4-version-key-collision', $descriptor);
 	}
 
 	public function testValidSubmitStoresPayloadByStableFieldKeys(): void
@@ -134,6 +165,53 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertNotSame(hash('sha256', '203.0.113.44'), $row['ip_hash']);
 		$this->assertSame($this->expectedClientFingerprintHash('Radaptor capture test', 'capture_form.user_agent'), $row['user_agent_hash']);
 		$this->assertNotSame(hash('sha256', 'Radaptor capture test'), $row['user_agent_hash']);
+	}
+
+	public function testVersionedSubmitUsesRenderedCaptureVersionAfterLaterPublish(): void
+	{
+		$definition_slug = 'capture-phase4j-versioned-submit';
+		$repository = new FormCaptureDefinitionRepository();
+		$first = $repository->upsertPublishedDefinition($definition_slug, $this->descriptor(), $this->defaultSecurity(), 'db');
+		$context = $this->submitContextForResolution($first, 'phase4j_versioned_submit');
+		$changed = $repository->upsertPublishedDefinition($definition_slug, $this->changedDescriptor(), $this->defaultSecurity(), 'db');
+
+		$this->assertNotSame($first->versionId(), $changed->versionId());
+
+		$response = $this->runSubmitEvent($context, $this->validPayload());
+
+		$this->assertSame(200, $response['http_code']);
+		$this->assertTrue($response['body']['ok']);
+		$this->assertSame(1, DbHelper::count('form_submissions', ['definition_id' => $first->definitionId()]));
+
+		$row = DbHelper::selectOne('form_submissions', ['definition_id' => $first->definitionId()]);
+		$this->assertIsArray($row);
+		$this->assertSame($first->versionId(), (int)$row['version_id']);
+	}
+
+	public function testMissingVersionedSubmitFallsBackToCurrentPublishedCaptureVersion(): void
+	{
+		$definition_slug = 'capture-phase4j-versioned-submit-fallback';
+		$repository = new FormCaptureDefinitionRepository();
+		$first = $repository->upsertPublishedDefinition($definition_slug, $this->descriptor(), $this->defaultSecurity(), 'db');
+		$changed = $repository->upsertPublishedDefinition($definition_slug, $this->changedDescriptor(), $this->defaultSecurity(), 'db');
+		$context = new FormSubmitContext(
+			formId: $definition_slug,
+			formInstanceId: 'phase4j_missing_version',
+			itemId: null,
+			returnTarget: '/capture-return',
+			hostPageId: null,
+			widgetConnectionId: null,
+			buildId: FormSubmitContext::currentBuildId(),
+		);
+
+		$this->assertNotSame($first->versionId(), $changed->versionId());
+
+		$response = $this->runSubmitEvent($context, $this->validPayload());
+
+		$this->assertSame(200, $response['http_code']);
+		$row = DbHelper::selectOne('form_submissions', ['definition_id' => $changed->definitionId()]);
+		$this->assertIsArray($row);
+		$this->assertSame($changed->versionId(), (int)$row['version_id']);
 	}
 
 	public function testMissingAppSecretFailsAsControlledCaptureRuntimeError(): void
@@ -463,6 +541,169 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame(t('form.capture.error_unavailable'), $tree['props']['message'] ?? null);
 	}
 
+	public function testBuilderAuthoringCreatesSavesOneActiveDraftAndPublishes(): void
+	{
+		$definition_slug = 'capture-phase4j-builder-lifecycle';
+		$service = new FormCaptureAuthoringService();
+		$created = $service->createDefinition($definition_slug, 'Builder lifecycle');
+		$saved = $service->saveDraft($definition_slug, $this->descriptorWithTitle('Builder draft'), (string)$created['base_server_hash']);
+		$draft_version_id = (int)($saved['active_draft']['version_id'] ?? 0);
+
+		$this->assertSame('created', $created['action'] ?? null);
+		$this->assertSame('saved_draft', $saved['action'] ?? null);
+		$this->assertGreaterThan(0, $draft_version_id);
+		$this->assertSame(1, DbHelper::count('form_definition_versions', [
+			'definition_id' => (int)($saved['definition']['definition_id'] ?? 0),
+			'status' => 'draft',
+		]));
+		$this->assertSame(1, DbHelper::count('form_definition_versions', [
+			'definition_id' => (int)($saved['definition']['definition_id'] ?? 0),
+			'status' => 'abandoned',
+		]));
+
+		$published = $service->publishDraft($definition_slug, $draft_version_id);
+		$resolved = FormDefinitionResolver::resolve($definition_slug);
+
+		$this->assertSame('published', $published['action'] ?? null);
+		$this->assertSame($draft_version_id, (int)($published['published_version_id'] ?? 0));
+		$this->assertNull($published['active_draft'] ?? null);
+		$this->assertInstanceOf(FormDefinitionResolution::class, $resolved);
+		$this->assertSame($draft_version_id, $resolved->versionId());
+		$this->assertSame(0, DbHelper::count('form_definition_versions', [
+			'definition_id' => (int)($published['definition']['definition_id'] ?? 0),
+			'status' => 'draft',
+		]));
+	}
+
+	public function testBuilderAuthoringRejectsAbandonedDraftPublishByExplicitVersion(): void
+	{
+		$definition_slug = 'capture-phase4j-builder-stale-draft';
+		$service = new FormCaptureAuthoringService();
+		$created = $service->createDefinition($definition_slug, 'Builder stale draft');
+		$first = $service->saveDraft($definition_slug, $this->descriptorWithTitle('First draft'), (string)$created['base_server_hash']);
+		$first_draft_id = (int)($first['active_draft']['version_id'] ?? 0);
+		$second = $service->saveDraft($definition_slug, $this->descriptorWithTitle('Second draft'), (string)$first['base_server_hash']);
+		$second_draft_id = (int)($second['active_draft']['version_id'] ?? 0);
+
+		try {
+			$service->publishDraft($definition_slug, $first_draft_id);
+			$this->fail('Explicit publish must reject abandoned draft versions.');
+		} catch (InvalidArgumentException $exception) {
+			$this->assertSame('Only the active draft version can be published.', $exception->getMessage());
+		}
+
+		$definition = EntityFormDefinition::findBySlug($definition_slug);
+		$first_version = EntityFormDefinitionVersion::findFirst(['version_id' => $first_draft_id]);
+		$second_version = EntityFormDefinitionVersion::findFirst(['version_id' => $second_draft_id]);
+
+		$this->assertInstanceOf(EntityFormDefinition::class, $definition);
+		$this->assertNull($definition->published_version_id);
+		$this->assertSame('abandoned', (string)$first_version?->status);
+		$this->assertSame('draft', (string)$second_version?->status);
+	}
+
+	public function testBuilderAuthoringRejectsShippedDefinitionsAndReportsBaseHashConflict(): void
+	{
+		$service = new FormCaptureAuthoringService();
+		$shipped_slug = 'capture-phase4j-builder-shipped';
+		(new FormCaptureDefinitionRepository())->upsertPublishedDefinition($shipped_slug, $this->descriptor(), $this->defaultSecurity(), 'shipped');
+
+		try {
+			$service->saveDraft($shipped_slug, $this->descriptorWithTitle('Shipped edit'), '');
+			$this->fail('Shipped capture definitions must stay read-only in the builder.');
+		} catch (InvalidArgumentException $exception) {
+			$this->assertStringContainsString('read-only', $exception->getMessage());
+		}
+
+		$conflict_slug = 'capture-phase4j-builder-conflict';
+		$created = $service->createDefinition($conflict_slug, 'Builder conflict');
+		$first = $service->saveDraft($conflict_slug, $this->descriptorWithTitle('Server draft'), (string)$created['base_server_hash']);
+		$conflict = $service->saveDraft($conflict_slug, $this->descriptorWithTitle('Stale local draft'), (string)$created['base_server_hash']);
+		$overwrite = $service->saveDraft($conflict_slug, $this->descriptorWithTitle('Overwrite local draft'), (string)$created['base_server_hash'], true);
+
+		$this->assertSame('saved_draft', $first['action'] ?? null);
+		$this->assertSame('conflict', $conflict['status'] ?? null);
+		$this->assertSame((int)($first['active_draft']['version_id'] ?? 0), (int)($conflict['server']['active_draft']['version_id'] ?? 0));
+		$this->assertSame('saved_draft', $overwrite['action'] ?? null);
+	}
+
+	public function testBuilderCreateEventRejectsMissingCsrfBeforeMutation(): void
+	{
+		$definition_slug = 'capture-phase4j-builder-csrf';
+		$response = $this->runBuilderEvent(new EventFormBuilderCreate(), [
+			'definition_slug' => $definition_slug,
+			'title' => 'Builder CSRF',
+		], includeCsrfToken: false);
+
+		$this->assertSame(403, $response['http_code']);
+		$this->assertFalse($response['body']['ok']);
+		$this->assertNull(EntityFormDefinition::findBySlug($definition_slug));
+	}
+
+	public function testBuilderPublishEventPublishesActiveDraftWithExplicitVersion(): void
+	{
+		$definition_slug = 'capture-phase4j-builder-event-publish';
+		$created = (new FormCaptureAuthoringService())->createDefinition($definition_slug, 'Builder event publish');
+		$draft_version_id = (int)($created['active_draft']['version_id'] ?? 0);
+		$response = $this->runBuilderEvent(new EventFormBuilderPublish(), [
+			'definition_slug' => $definition_slug,
+			'version_id' => (string)$draft_version_id,
+		]);
+		$definition = EntityFormDefinition::findBySlug($definition_slug);
+
+		$this->assertSame(200, $response['http_code']);
+		$this->assertTrue($response['body']['ok']);
+		$this->assertSame('published', $response['body']['data']['action'] ?? null);
+		$this->assertSame($draft_version_id, (int)($response['body']['data']['published_version_id'] ?? 0));
+		$this->assertInstanceOf(EntityFormDefinition::class, $definition);
+		$this->assertSame($draft_version_id, (int)$definition->published_version_id);
+	}
+
+	public function testBuilderPublishEventRejectsAbandonedExplicitVersion(): void
+	{
+		$definition_slug = 'capture-phase4j-builder-event-stale';
+		$service = new FormCaptureAuthoringService();
+		$created = $service->createDefinition($definition_slug, 'Builder event stale');
+		$first = $service->saveDraft($definition_slug, $this->descriptorWithTitle('First event draft'), (string)$created['base_server_hash']);
+		$first_draft_id = (int)($first['active_draft']['version_id'] ?? 0);
+		$second = $service->saveDraft($definition_slug, $this->descriptorWithTitle('Second event draft'), (string)$first['base_server_hash']);
+		$second_draft_id = (int)($second['active_draft']['version_id'] ?? 0);
+		$response = $this->runBuilderEvent(new EventFormBuilderPublish(), [
+			'definition_slug' => $definition_slug,
+			'version_id' => (string)$first_draft_id,
+		]);
+		$definition = EntityFormDefinition::findBySlug($definition_slug);
+		$second_version = EntityFormDefinitionVersion::findFirst(['version_id' => $second_draft_id]);
+
+		$this->assertSame(422, $response['http_code']);
+		$this->assertFalse($response['body']['ok']);
+		$this->assertInstanceOf(EntityFormDefinition::class, $definition);
+		$this->assertNull($definition->published_version_id);
+		$this->assertSame('draft', (string)$second_version?->status);
+	}
+
+	public function testBuilderEventsRequireContentAdminAuthorization(): void
+	{
+		$events = [
+			new EventFormBuilderCreate(),
+			new EventFormBuilderPreviewRender(),
+			new EventFormBuilderSaveDraft(),
+			new EventFormBuilderPublish(),
+		];
+
+		$this->impersonate(null);
+
+		foreach ($events as $event) {
+			$this->assertFalse($event->authorize(PolicyContext::fromEvent($event))->allow);
+		}
+
+		$this->impersonateAndRequireRole('admin_developer', RoleList::ROLE_CONTENT_ADMIN);
+
+		foreach ($events as $event) {
+			$this->assertTrue($event->authorize(PolicyContext::fromEvent($event))->allow);
+		}
+	}
+
 	private function upsertCapture(string $definition_slug, array $security = []): FormDefinitionResolution
 	{
 		return (new FormCaptureDefinitionRepository())->upsertPublishedDefinition(
@@ -576,6 +817,17 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 	/**
 	 * @return array<string, mixed>
 	 */
+	private function descriptorWithTitle(string $title): array
+	{
+		$descriptor = $this->descriptor();
+		$descriptor['title']['text'] = $title;
+
+		return $descriptor;
+	}
+
+	/**
+	 * @return array<string, mixed>
+	 */
 	private function defaultSecurity(): array
 	{
 		return [
@@ -652,6 +904,92 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		return hash_hmac('sha256', $context . "\n" . $value, 'form-refactor-phase-4-capture-test-secret');
 	}
 
+	private function submitContextForResolution(FormDefinitionResolution $resolution, string $form_instance_id): FormSubmitContext
+	{
+		return new FormSubmitContext(
+			formId: $resolution->definitionSlug(),
+			formInstanceId: $form_instance_id,
+			itemId: null,
+			returnTarget: '/capture-return',
+			hostPageId: null,
+			widgetConnectionId: null,
+			buildId: FormSubmitContext::currentBuildId(),
+			formDefinitionVersionId: $resolution->versionId(),
+		);
+	}
+
+	/**
+	 * @param array<string, mixed> $payload
+	 * @return array{http_code: int|null, body: array<string, mixed>|null, output: string}
+	 */
+	private function runSubmitEvent(FormSubmitContext $context, array $payload, bool $includeCsrfToken = true): array
+	{
+		$post = array_merge($context->toHiddenFields(), $payload);
+
+		if ($includeCsrfToken && !array_key_exists(FormSubmitContext::FIELD_CSRF_TOKEN, $post)) {
+			$post[FormSubmitContext::FIELD_CSRF_TOKEN] = $context->issueCsrfToken();
+		}
+
+		$this->setRequestContext(
+			post: $post,
+			server: [
+				'HTTP_HOST' => 'localhost',
+				'REQUEST_URI' => '/?context=form&event=submit',
+				'REQUEST_METHOD' => 'POST',
+				'HTTP_ACCEPT' => 'application/json',
+				'REMOTE_ADDR' => '203.0.113.44',
+				'HTTP_USER_AGENT' => 'Radaptor capture test',
+			],
+		);
+
+		$ctx = RequestContextHolder::current();
+		$ctx->apiResponseCaptureEnabled = true;
+
+		ob_start();
+		(new EventFormSubmit())->run();
+		$output = (string)ob_get_clean();
+
+		return [
+			'http_code' => $ctx->capturedApiResponseHttpCode,
+			'body' => $ctx->capturedApiResponse,
+			'output' => $output,
+		];
+	}
+
+	/**
+	 * @param array<string, mixed> $post
+	 * @return array{http_code: int|null, body: array<string, mixed>|null, output: string}
+	 */
+	private function runBuilderEvent(AbstractEvent $event, array $post, bool $includeCsrfToken = true): array
+	{
+		if ($includeCsrfToken && !array_key_exists(FormSubmitContext::FIELD_CSRF_TOKEN, $post)) {
+			$post[FormSubmitContext::FIELD_CSRF_TOKEN] = FormSubmitContext::issueCsrfTokenForForm(FormBuilderEventHelper::CSRF_FORM_ID);
+		}
+
+		$this->setRequestContext(
+			post: $post,
+			server: [
+				'HTTP_HOST' => 'localhost',
+				'REQUEST_URI' => '/?context=form_builder&event=create',
+				'REQUEST_METHOD' => 'POST',
+				'HTTP_ACCEPT' => 'application/json',
+			],
+		);
+
+		$ctx = RequestContextHolder::current();
+		$ctx->apiResponseCaptureEnabled = true;
+
+		ob_start();
+		$event->run();
+		$output = (string)ob_get_clean();
+
+		return [
+			'http_code' => $ctx->capturedApiResponseHttpCode,
+			'body' => $ctx->capturedApiResponse,
+			'output' => $output,
+		];
+	}
+
 	private function restoreAppSecret(): void
 	{
 		if ($this->_previous_app_secret === false || $this->_previous_app_secret === null) {
@@ -663,14 +1001,17 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->_previous_app_secret = null;
 	}
 
-	private function setRequestContext(): void
+	/**
+	 * @param array<string, mixed> $get
+	 * @param array<string, mixed> $post
+	 * @param array<string, mixed> $server
+	 */
+	private function setRequestContext(array $get = [], array $post = [], array $server = []): void
 	{
-		$get = [];
-		$post = [];
-		$server = [
+		$server += [
 			'HTTP_HOST' => 'localhost',
 			'REQUEST_URI' => '/capture-phase-4',
-			'REQUEST_METHOD' => 'GET',
+			'REQUEST_METHOD' => $post === [] ? 'GET' : 'POST',
 			'REMOTE_ADDR' => '203.0.113.44',
 			'HTTP_USER_AGENT' => 'Radaptor capture test',
 		];
@@ -679,6 +1020,40 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$_POST = $post;
 		$_SERVER = $server;
 		RequestContextHolder::initializeRequest(get: $get, post: $post, server: $server);
+	}
+
+	private function impersonateAndRequireRole(string $username, string $role): void
+	{
+		$this->impersonate($username);
+
+		if (!Roles::hasRole($role)) {
+			self::markTestSkipped("User '{$username}' does not have required role '{$role}'.");
+		}
+	}
+
+	private function impersonate(?string $username): void
+	{
+		$ctx = RequestContextHolder::current();
+
+		if ($username === null) {
+			$ctx->currentUser = null;
+			$ctx->userSessionInitialized = true;
+			Cache::flush(Roles::class);
+			Cache::flush(User::class);
+
+			return;
+		}
+
+		$user = EntityUser::findFirst(['username' => $username]);
+
+		if ($user === null) {
+			self::markTestSkipped("Missing test user: {$username}");
+		}
+
+		$ctx->currentUser = $user->data();
+		$ctx->userSessionInitialized = true;
+		Cache::flush(Roles::class);
+		Cache::flush(User::class);
 	}
 
 	private static function bootstrapConsumerRuntime(): void

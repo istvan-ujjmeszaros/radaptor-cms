@@ -132,7 +132,15 @@ final class FormDescriptorAdapter
 			}
 		}
 
-		if ($input instanceof FormInputCheckboxgroup || $input instanceof FormInputRadiogroup || $input instanceof FormInputLinkGroup) {
+		if ($input instanceof FormInputCheckboxgroup) {
+			$input->values = self::resolveCheckboxGroupValues($field['values'] ?? $field['options'] ?? []);
+		}
+
+		if ($input instanceof FormInputRadiogroup) {
+			$input->values = self::resolveRadioGroupValues($field['values'] ?? $field['options'] ?? []);
+		}
+
+		if ($input instanceof FormInputLinkGroup) {
 			$input->values = self::resolveValues($field['values'] ?? $field['options'] ?? []);
 		}
 
@@ -236,6 +244,79 @@ final class FormDescriptorAdapter
 			}
 
 			$resolved[$key] = self::resolveText($value);
+		}
+
+		return $resolved;
+	}
+
+	/**
+	 * @return array<string, string>
+	 */
+	private static function resolveCheckboxGroupValues(mixed $values): array
+	{
+		$resolved = [];
+
+		foreach (self::resolveChoiceOptions($values) as $option) {
+			$resolved[$option['value']] = $option['label'];
+		}
+
+		return $resolved;
+	}
+
+	/**
+	 * Legacy radiogroup templates expect label => value.
+	 *
+	 * @return array<string, string>
+	 */
+	private static function resolveRadioGroupValues(mixed $values): array
+	{
+		$resolved = [];
+
+		foreach (self::resolveChoiceOptions($values) as $option) {
+			$resolved[$option['label']] = $option['value'];
+		}
+
+		return $resolved;
+	}
+
+	/**
+	 * @return list<array{value: string, label: string}>
+	 */
+	private static function resolveChoiceOptions(mixed $values): array
+	{
+		if (!is_array($values)) {
+			return [];
+		}
+
+		$resolved = [];
+
+		foreach ($values as $key => $value) {
+			if (is_array($value)) {
+				if (
+					(array_key_exists('text', $value) || array_key_exists('key', $value))
+					&& !array_key_exists('value', $value)
+					&& !array_key_exists('label', $value)
+					&& !array_key_exists('inputtype', $value)
+				) {
+					$option_value = is_string($key) ? $key : self::resolveText($value);
+					$option_label = self::resolveText($value);
+				} else {
+					$option_value = (string)($value['value'] ?? (is_string($key) ? $key : ''));
+					$option_label = self::resolveText($value['label'] ?? $option_value);
+				}
+			} else {
+				$option_value = is_string($key) ? $key : self::resolveText($value);
+				$option_label = self::resolveText($value);
+			}
+
+			if ($option_value === '') {
+				continue;
+			}
+
+			$resolved[] = [
+				'value' => $option_value,
+				'label' => $option_label,
+			];
 		}
 
 		return $resolved;

@@ -71,6 +71,9 @@ final class FormRefactorPhase4IntegrationTest extends TestCase
 		$this->assertSame('Descriptor default', $form->getInput('title')?->getValue());
 		$this->assertInstanceOf(FormInputSelect::class, $form->getInput('status'));
 		$this->assertInstanceOf(FormInputCheckboxgroup::class, $form->getInput('choices'));
+		$this->assertSame(['alpha' => 'Alpha', 'beta' => 'Beta'], $form->getInput('choices')?->values);
+		$this->assertInstanceOf(FormInputRadiogroup::class, $form->getInput('delivery'));
+		$this->assertSame(['Synchronous' => 'sync', 'Asynchronous' => 'async'], $form->getInput('delivery')?->values);
 		$this->assertInstanceOf(FormInputHidden::class, $form->getInput('tracking_token'));
 
 		$this->assertSame('form', $tree['component']);
@@ -328,8 +331,24 @@ final class FormRefactorPhase4IntegrationTest extends TestCase
 								'name' => 'choices',
 								'label' => ['text' => 'Choices'],
 								'values' => [
-									'alpha' => ['text' => 'Alpha'],
-									'beta' => ['text' => 'Beta'],
+									['inputtype' => 'option', 'value' => 'alpha', 'label' => ['text' => 'Alpha']],
+									['inputtype' => 'option', 'value' => 'beta', 'label' => ['text' => 'Beta']],
+								],
+								'validators' => [
+									[
+										'type' => 'enum',
+										'values' => ['alpha', 'beta'],
+										'message' => ['text' => 'Unsupported choice.'],
+									],
+								],
+							],
+							[
+								'type' => 'radiogroup',
+								'name' => 'delivery',
+								'label' => ['text' => 'Delivery'],
+								'values' => [
+									['inputtype' => 'option', 'value' => 'sync', 'label' => ['text' => 'Synchronous']],
+									['inputtype' => 'option', 'value' => 'async', 'label' => ['text' => 'Asynchronous']],
 								],
 							],
 							[

@@ -161,7 +161,7 @@ final class FormCaptureDefinitionRepository
 		}
 	}
 
-	public function findPublishedResolution(string $definition_slug): ?FormDefinitionResolution
+	public function findPublishedResolution(string $definition_slug, ?int $version_id = null): ?FormDefinitionResolution
 	{
 		if (!FormCaptureDescriptorSchemaValidator::isCaptureSlug($definition_slug)) {
 			return null;
@@ -177,7 +177,7 @@ final class FormCaptureDefinitionRepository
 			return null;
 		}
 
-		$metadata = $this->fetchPublishedMetadata($definition_slug);
+		$metadata = $this->fetchPublishedMetadata($definition_slug, $version_id);
 
 		if ($metadata === null) {
 			return null;
@@ -230,8 +230,16 @@ final class FormCaptureDefinitionRepository
 	/**
 	 * @return array{definition: array<string, mixed>, version: array<string, mixed>}|null
 	 */
-	private function fetchPublishedMetadata(string $definition_slug): ?array
+	private function fetchPublishedMetadata(string $definition_slug, ?int $version_id = null): ?array
 	{
+		$version_join = $version_id !== null
+			? "ON v.version_id = ?
+				AND v.definition_id = d.definition_id
+				AND v.status = 'published'"
+			: "ON v.version_id = d.published_version_id
+				AND v.definition_id = d.definition_id
+				AND v.status = 'published'";
+		$params = $version_id !== null ? [$version_id, $definition_slug] : [$definition_slug];
 		$row = DbHelper::selectOneFromQuery(
 			"SELECT
 				d.definition_id,
@@ -249,14 +257,12 @@ final class FormCaptureDefinitionRepository
 				v.published_at
 			FROM form_definitions d
 			INNER JOIN form_definition_versions v
-				ON v.version_id = d.published_version_id
-				AND v.definition_id = d.definition_id
-				AND v.status = 'published'
+				{$version_join}
 			WHERE d.definition_slug = ?
 			  AND d.kind = 'capture'
 			  AND d.status = 'published'
 			LIMIT 1",
-			[$definition_slug],
+			$params,
 		);
 
 		if (!is_array($row)) {

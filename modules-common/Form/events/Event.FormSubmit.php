@@ -21,6 +21,7 @@ class EventFormSubmit extends AbstractEvent implements iBrowserEventDocumentable
 				'params' => [
 					BrowserEventDocumentationHelper::param('form_id', 'post', 'string', true, 'Class-backed system form id or published capture definition_slug.'),
 					BrowserEventDocumentationHelper::param('form_instance_id', 'post', 'string', true, 'Stable placement id for this rendered form instance.'),
+					BrowserEventDocumentationHelper::param('form_definition_version_id', 'post', 'int', false, 'Exact capture definition version rendered with the form.'),
 					BrowserEventDocumentationHelper::param('csrf_token', 'post', 'string', true, 'Session-bound form CSRF token.'),
 				],
 			],
@@ -58,7 +59,7 @@ class EventFormSubmit extends AbstractEvent implements iBrowserEventDocumentable
 		}
 
 		try {
-			$resolution = FormDefinitionResolver::resolve($context->formId);
+			$resolution = FormDefinitionResolver::resolve($context->formId, $context->formDefinitionVersionId);
 		} catch (FormCaptureRuntimeException $exception) {
 			$this->emitContextError(new ApiError($exception->apiCode(), t($exception->messageKey())), $exception->httpStatus());
 

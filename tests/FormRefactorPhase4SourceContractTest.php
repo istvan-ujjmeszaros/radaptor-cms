@@ -340,12 +340,20 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 	public function testPhase4jBuilderWidgetAndPhpstanCoverageIncludesTouchedRuntimeFiles(): void
 	{
 		$widget_source = $this->source('modules-common/Form/widgets/Widget.CaptureFormBuilder.php');
+		$list_widget_source = $this->source('modules-common/Form/widgets/Widget.CaptureFormList.php');
 		$template_source = $this->source('modules-common/Form/templates/template.captureFormBuilder.php');
+		$list_template_source = $this->source('modules-common/Form/templates/template.captureFormList.php');
+		$layout_source = $this->source('layouts/layout.admin_editor.php');
 		$phpstan_source = $this->source('phpstan.neon');
 
 		$this->assertStringContainsString("library('__ADMIN_FORM_BUILDER')", $template_source);
+		$this->assertStringContainsString("library('__ADMIN_FORM_BUILDER')", $list_template_source);
 		$this->assertStringContainsString('FormSubmitContext::issueCsrfTokenForForm(FormBuilderEventHelper::CSRF_FORM_ID)', $widget_source);
+		$this->assertStringContainsString('FormSubmitContext::issueCsrfTokenForForm(FormBuilderEventHelper::CSRF_FORM_ID)', $list_widget_source);
 		$this->assertStringContainsString('form.builder.error_create', $widget_source);
+		$this->assertStringContainsString("'/admin/forms/edit/'", $widget_source);
+		$this->assertStringContainsString("'/admin/forms/'", $list_widget_source);
+		$this->assertStringContainsString('resolveBackUrl', $layout_source);
 
 		foreach ([
 			'modules-common/Form/classes/class.FormSubmitContext.php',
@@ -354,6 +362,7 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 			'modules-common/Form/classes/class.FormResponseEmitter.php',
 			'modules-common/Form/events/Event.FormSubmit.php',
 			'modules-common/Form/widgets/Widget.CaptureFormBuilder.php',
+			'modules-common/Form/widgets/Widget.CaptureFormList.php',
 		] as $path) {
 			$this->assertStringContainsString($path, $phpstan_source);
 		}

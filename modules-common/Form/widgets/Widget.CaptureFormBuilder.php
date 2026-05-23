@@ -24,9 +24,9 @@ final class WidgetCaptureFormBuilder extends AbstractWidget
 	public static function getDefaultPathForCreation(): array
 	{
 		return [
-			'path' => '/admin/forms/',
+			'path' => '/admin/forms/edit/',
 			'resource_name' => 'index.html',
-			'layout' => 'admin_default',
+			'layout' => LayoutTypeAdminEditor::ID,
 		];
 	}
 
@@ -41,6 +41,7 @@ final class WidgetCaptureFormBuilder extends AbstractWidget
 
 		return $this->createComponentTree('captureFormBuilder', [
 			'state' => $state,
+			'initial_panel' => (string)Request::_GET('panel', 'properties'),
 			'initial_preview' => $preview,
 			'initial_preview_html' => $preview['html'] ?? '',
 			'csrf_token' => FormSubmitContext::issueCsrfTokenForForm(FormBuilderEventHelper::CSRF_FORM_ID),
@@ -73,6 +74,12 @@ final class WidgetCaptureFormBuilder extends AbstractWidget
 			'form.builder.palette',
 			'form.builder.preview',
 			'form.builder.properties',
+			'form.builder.panel.properties',
+			'form.builder.panel.usage',
+			'form.builder.usage.empty',
+			'form.builder.usage.page',
+			'form.builder.usage.slot',
+			'form.builder.usage.connection',
 			'form.builder.no_selection',
 			'form.builder.label.definition',
 			'form.builder.label.title',

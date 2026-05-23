@@ -61,6 +61,8 @@ form,capture.honeypot.label,,hu-HU,"Leave this field empty","Hagyd üresen ezt a
 form,capture.submit,,hu-HU,Send,Küldés,0,0,Küldés
 widget,capture_form_builder.description,,hu-HU,"Admin builder for DB-backed capture forms.","Admin szerkesztő DB-alapú capture űrlapokhoz.",0,0,"Admin szerkesztő DB-alapú capture űrlapokhoz."
 widget,capture_form_builder.name,,hu-HU,"Form builder","Űrlap szerkesztő",0,0,"Űrlap szerkesztő"
+widget,capture_form_list.description,,hu-HU,"Admin list for DB-backed and shipped capture forms.","Admin lista DB-alapú és shipped capture űrlapokhoz.",0,0,"Admin lista DB-alapú és shipped capture űrlapokhoz."
+widget,capture_form_list.name,,hu-HU,"Form list","Űrlap lista",0,0,"Űrlap lista"
 form,builder.title,,hu-HU,"Form builder","Űrlap szerkesztő",0,0,"Űrlap szerkesztő"
 form,builder.new_slug,,hu-HU,"New slug","Új slug",0,0,"Új slug"
 form,builder.new_title,,hu-HU,"New title","Új cím",0,0,"Új cím"
@@ -118,3 +120,33 @@ form,builder.field.datetime,,hu-HU,"Date and time","Dátum és idő",0,0,"Dátum
 form,builder.drop_target.fields,,hu-HU,"Form fields","Űrlapmezők",0,0,"Űrlapmezők"
 form,builder.option.default_one,,hu-HU,"Option one","Első opció",0,0,"Első opció"
 form,builder.option.default_two,,hu-HU,"Option two","Második opció",0,0,"Második opció"
+form,builder.panel.properties,,hu-HU,Properties,Tulajdonságok,0,0,Tulajdonságok
+form,builder.panel.usage,,hu-HU,"Used on pages","Oldalakon használva",0,0,"Oldalakon használva"
+form,builder.usage.empty,,hu-HU,"This form is not placed on any page.","Ez az űrlap nincs kirakva oldalra.",0,0,"Ez az űrlap nincs kirakva oldalra."
+form,builder.usage.page,,hu-HU,Page,Oldal,0,0,Oldal
+form,builder.usage.slot,,hu-HU,Slot,Slot,0,0,Slot
+form,builder.usage.connection,,hu-HU,Connection,Kapcsolat,0,0,Kapcsolat
+form,list.title,,hu-HU,"Capture forms","Capture űrlapok",0,0,"Capture űrlapok"
+form,list.subtitle,,hu-HU,"Create, edit, and inspect capture forms.","Capture űrlapok létrehozása, szerkesztése és ellenőrzése.",0,0,"Capture űrlapok létrehozása, szerkesztése és ellenőrzése."
+form,list.tab.custom,,hu-HU,"Custom forms","Egyedi űrlapok",0,0,"Egyedi űrlapok"
+form,list.tab.system,,hu-HU,"System forms","System űrlapok",0,0,"System űrlapok"
+form,list.new_slug,,hu-HU,"New slug","Új slug",0,0,"Új slug"
+form,list.new_title,,hu-HU,"New title","Új cím",0,0,"Új cím"
+form,list.create,,hu-HU,"Create form","Űrlap létrehozása",0,0,"Űrlap létrehozása"
+form,list.empty_custom,,hu-HU,"No custom capture forms yet.","Még nincs egyedi capture űrlap.",0,0,"Még nincs egyedi capture űrlap."
+form,list.empty_system,,hu-HU,"No system capture forms are published.","Nincs publikált system capture űrlap.",0,0,"Nincs publikált system capture űrlap."
+form,list.col.slug,,hu-HU,Slug,Slug,0,0,Slug
+form,list.col.source,,hu-HU,Source,Forrás,0,0,Forrás
+form,list.col.status,,hu-HU,Status,Státusz,0,0,Státusz
+form,list.col.version,,hu-HU,Version,Verzió,0,0,Verzió
+form,list.col.usage,,hu-HU,Usage,Használat,0,0,Használat
+form,list.col.actions,,hu-HU,Actions,Műveletek,0,0,Műveletek
+form,list.action.edit,,hu-HU,Edit,Szerkesztés,0,0,Szerkesztés
+form,list.action.view,,hu-HU,View,Megtekintés,0,0,Megtekintés
+form,list.status.draft,,hu-HU,Draft,Piszkozat,0,0,Piszkozat
+form,list.status.published,,hu-HU,Published,Publikált,0,0,Publikált
+form,list.status.unknown,,hu-HU,Unknown,Ismeretlen,0,0,Ismeretlen
+form,list.version.none,,hu-HU,None,Nincs,0,0,Nincs
+form,list.version.published,,hu-HU,"v{version}","v{version}",0,0,"v{version}"
+form,list.version.draft,,hu-HU,"draft v{version}","piszkozat v{version}",0,0,"piszkozat v{version}"
+form,list.usage.none,,hu-HU,None,Nincs,0,0,Nincs

@@ -30,6 +30,28 @@ final class FormCaptureAuthoringService
 	}
 
 	/**
+	 * @return array<string, mixed>
+	 */
+	public function buildListState(string $source_filter = 'custom'): array
+	{
+		$source_filter = in_array($source_filter, ['custom', 'system'], true) ? $source_filter : 'custom';
+		$definitions = $this->listDefinitions();
+		$filtered_source = $source_filter === 'system' ? self::SOURCE_SHIPPED : self::SOURCE_DB;
+		$filtered = array_values(array_filter(
+			$definitions,
+			static fn (array $definition): bool => (string)($definition['source'] ?? '') === $filtered_source,
+		));
+
+		return [
+			'definitions' => $filtered,
+			'all_count' => count($definitions),
+			'custom_count' => count(array_filter($definitions, static fn (array $definition): bool => (string)($definition['source'] ?? '') === self::SOURCE_DB)),
+			'system_count' => count(array_filter($definitions, static fn (array $definition): bool => (string)($definition['source'] ?? '') === self::SOURCE_SHIPPED)),
+			'source_filter' => $source_filter,
+		];
+	}
+
+	/**
 	 * @return list<array<string, mixed>>
 	 */
 	public function listDefinitions(): array
@@ -37,6 +59,8 @@ final class FormCaptureAuthoringService
 		if (!$this->tablesInstalled()) {
 			return [];
 		}
+
+		$usage_counts = $this->usageCountsByDefinition();
 
 		$rows = DbHelper::selectManyFromQuery(
 			"SELECT
@@ -68,7 +92,67 @@ final class FormCaptureAuthoringService
 			'published_version_number' => $row['published_version_number'] === null ? null : (int)$row['published_version_number'],
 			'draft_version_number' => $row['draft_version_number'] === null ? null : (int)$row['draft_version_number'],
 			'read_only' => (string)$row['source'] !== self::SOURCE_DB,
+			'usage_count' => $usage_counts[(string)$row['definition_slug']] ?? 0,
 		], $rows);
+	}
+
+	/**
+	 * @return list<array{page_id: int, path: string, slot: string, seq: int, connection_id: int}>
+	 */
+	public function usageForDefinition(string $definition_slug): array
+	{
+		$definition_slug = trim($definition_slug);
+
+		if ($definition_slug === '' || !$this->tableExists('widget_connections') || !$this->tableExists('attributes')) {
+			return [];
+		}
+
+		$rows = DbHelper::selectManyFromQuery(
+			"SELECT
+				wc.page_id,
+				wc.slot_name,
+				wc.seq,
+				wc.connection_id
+			FROM widget_connections wc
+			INNER JOIN attributes a
+				ON a.resource_name = ?
+			   AND a.resource_id = wc.connection_id
+			   AND a.param_name = 'definition_slug'
+			   AND a.param_value = ?
+			WHERE wc.widget_name = ?
+			ORDER BY wc.page_id, wc.slot_name, wc.seq",
+			[
+				ResourceNames::WIDGET_CONNECTION,
+				$definition_slug,
+				$this->captureFormWidgetName(),
+			],
+		);
+
+		$usage = [];
+
+		foreach ($rows as $row) {
+			$page_id = (int)($row['page_id'] ?? 0);
+
+			if ($page_id <= 0 || !ResourceAcl::canAccessResource($page_id, ResourceAcl::_ACL_VIEW)) {
+				continue;
+			}
+
+			$path = Url::getSeoUrl($page_id, false) ?? ResourceTreeHandler::getPathFromId($page_id);
+
+			if ($path === '') {
+				continue;
+			}
+
+			$usage[] = [
+				'page_id' => $page_id,
+				'path' => $path,
+				'slot' => (string)($row['slot_name'] ?? ''),
+				'seq' => (int)($row['seq'] ?? 0),
+				'connection_id' => (int)($row['connection_id'] ?? 0),
+			];
+		}
+
+		return $usage;
 	}
 
 	/**
@@ -97,6 +181,7 @@ final class FormCaptureAuthoringService
 			'security' => $security,
 			'active_draft' => $active_draft instanceof EntityFormDefinitionVersion ? $active_draft->dto() : null,
 			'published_version' => $published instanceof EntityFormDefinitionVersion ? $published->dto() : null,
+			'usage' => $this->usageForDefinition($definition_slug),
 			'base_server_hash' => $selected_version instanceof EntityFormDefinitionVersion ? (string)$selected_version->descriptor_hash : '',
 			'read_only' => (string)$definition->source !== self::SOURCE_DB,
 			'status' => $active_draft instanceof EntityFormDefinitionVersion ? self::STATUS_DRAFT : (string)$definition->status,
@@ -587,5 +672,53 @@ final class FormCaptureAuthoringService
 		$stmt->execute([$table]);
 
 		return (bool)$stmt->fetchColumn();
+	}
+
+	/**
+	 * @return array<string, int>
+	 */
+	private function usageCountsByDefinition(): array
+	{
+		if (!$this->tableExists('widget_connections') || !$this->tableExists('attributes')) {
+			return [];
+		}
+
+		$rows = DbHelper::selectManyFromQuery(
+			"SELECT
+				a.param_value AS definition_slug,
+				wc.page_id
+			FROM widget_connections wc
+			INNER JOIN attributes a
+				ON a.resource_name = ?
+			   AND a.resource_id = wc.connection_id
+			   AND a.param_name = 'definition_slug'
+			WHERE wc.widget_name = ?",
+			[
+				ResourceNames::WIDGET_CONNECTION,
+				$this->captureFormWidgetName(),
+			],
+		);
+
+		$counts = [];
+
+		foreach ($rows as $row) {
+			$definition_slug = (string)($row['definition_slug'] ?? '');
+			$page_id = (int)($row['page_id'] ?? 0);
+
+			if ($definition_slug === '' || $page_id <= 0 || !ResourceAcl::canAccessResource($page_id, ResourceAcl::_ACL_VIEW)) {
+				continue;
+			}
+
+			$counts[$definition_slug] = ($counts[$definition_slug] ?? 0) + 1;
+		}
+
+		return $counts;
+	}
+
+	private function captureFormWidgetName(): string
+	{
+		$constant = WidgetList::class . '::CAPTUREFORM';
+
+		return defined($constant) ? (string)constant($constant) : 'CaptureForm';
 	}
 }

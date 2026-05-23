@@ -71,6 +71,8 @@ widget,capture_form.description,,en-US,"Render a public DB-backed capture form w
 widget,capture_form.name,,en-US,"Capture form","Capture form",0,0,"Capture form"
 widget,capture_form_builder.description,,en-US,"Admin builder for DB-backed capture forms.","Admin builder for DB-backed capture forms.",0,0,"Admin builder for DB-backed capture forms."
 widget,capture_form_builder.name,,en-US,"Form builder","Form builder",0,0,"Form builder"
+widget,capture_form_list.description,,en-US,"Admin list for DB-backed and shipped capture forms.","Admin list for DB-backed and shipped capture forms.",0,0,"Admin list for DB-backed and shipped capture forms."
+widget,capture_form_list.name,,en-US,"Form list","Form list",0,0,"Form list"
 form,builder.title,,en-US,"Form builder","Form builder",0,0,"Form builder"
 form,builder.new_slug,,en-US,"New slug","New slug",0,0,"New slug"
 form,builder.new_title,,en-US,"New title","New title",0,0,"New title"
@@ -128,3 +130,33 @@ form,builder.field.datetime,,en-US,"Date and time","Date and time",0,0,"Date and
 form,builder.drop_target.fields,,en-US,"Form fields","Form fields",0,0,"Form fields"
 form,builder.option.default_one,,en-US,"Option one","Option one",0,0,"Option one"
 form,builder.option.default_two,,en-US,"Option two","Option two",0,0,"Option two"
+form,builder.panel.properties,,en-US,Properties,Properties,0,0,Properties
+form,builder.panel.usage,,en-US,"Used on pages","Used on pages",0,0,"Used on pages"
+form,builder.usage.empty,,en-US,"This form is not placed on any page.","This form is not placed on any page.",0,0,"This form is not placed on any page."
+form,builder.usage.page,,en-US,Page,Page,0,0,Page
+form,builder.usage.slot,,en-US,Slot,Slot,0,0,Slot
+form,builder.usage.connection,,en-US,Connection,Connection,0,0,Connection
+form,list.title,,en-US,"Capture forms","Capture forms",0,0,"Capture forms"
+form,list.subtitle,,en-US,"Create, edit, and inspect capture forms.","Create, edit, and inspect capture forms.",0,0,"Create, edit, and inspect capture forms."
+form,list.tab.custom,,en-US,"Custom forms","Custom forms",0,0,"Custom forms"
+form,list.tab.system,,en-US,"System forms","System forms",0,0,"System forms"
+form,list.new_slug,,en-US,"New slug","New slug",0,0,"New slug"
+form,list.new_title,,en-US,"New title","New title",0,0,"New title"
+form,list.create,,en-US,"Create form","Create form",0,0,"Create form"
+form,list.empty_custom,,en-US,"No custom capture forms yet.","No custom capture forms yet.",0,0,"No custom capture forms yet."
+form,list.empty_system,,en-US,"No system capture forms are published.","No system capture forms are published.",0,0,"No system capture forms are published."
+form,list.col.slug,,en-US,Slug,Slug,0,0,Slug
+form,list.col.source,,en-US,Source,Source,0,0,Source
+form,list.col.status,,en-US,Status,Status,0,0,Status
+form,list.col.version,,en-US,Version,Version,0,0,Version
+form,list.col.usage,,en-US,Usage,Usage,0,0,Usage
+form,list.col.actions,,en-US,Actions,Actions,0,0,Actions
+form,list.action.edit,,en-US,Edit,Edit,0,0,Edit
+form,list.action.view,,en-US,View,View,0,0,View
+form,list.status.draft,,en-US,Draft,Draft,0,0,Draft
+form,list.status.published,,en-US,Published,Published,0,0,Published
+form,list.status.unknown,,en-US,Unknown,Unknown,0,0,Unknown
+form,list.version.none,,en-US,None,None,0,0,None
+form,list.version.published,,en-US,"v{version}","v{version}",0,0,"v{version}"
+form,list.version.draft,,en-US,"draft v{version}","draft v{version}",0,0,"draft v{version}"
+form,list.usage.none,,en-US,None,None,0,0,None

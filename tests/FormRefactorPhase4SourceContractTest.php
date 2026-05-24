@@ -306,6 +306,7 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$this->assertStringContainsString('form_definition_resolution', $context_source);
 		$this->assertStringContainsString('formDefinitionVersionId: self::positiveIntOrNull', $context_source);
 		$this->assertStringContainsString('validateRenderState(array $post)', $context_source);
+		$this->assertStringContainsString('hasRenderStateForCurrentContext()', $context_source);
 		$this->assertStringContainsString('$render_state_error = $context->validateRenderState($post);', $event_source);
 		$this->assertStringContainsString('FormDefinitionResolver::resolve($context->formId, $context->formDefinitionVersionId)', $event_source);
 		$this->assertLessThan(

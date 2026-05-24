@@ -147,6 +147,10 @@ final class FormSubmitContext
 	public function validateRenderState(array $post): ?ApiError
 	{
 		if ($this->formDefinitionVersionId === null) {
+			if (FormCaptureDescriptorSchemaValidator::isCaptureSlug($this->formId) && $this->hasRenderStateForCurrentContext()) {
+				return self::renderStateError('missing');
+			}
+
 			return null;
 		}
 
@@ -527,10 +531,35 @@ final class FormSubmitContext
 	 */
 	private function matchesRenderStateEntry(array $entry): bool
 	{
+		return $this->matchesRenderStateContext($entry)
+			&& (int)($entry['form_definition_version_id'] ?? 0) === $this->formDefinitionVersionId;
+	}
+
+	private function hasRenderStateForCurrentContext(): bool
+	{
+		$bag = self::normalizeRenderStateBag(Request::_SESSION(self::SESSION_KEY_RENDER_STATES, []), time());
+
+		foreach ($bag as $entry) {
+			if ($this->matchesRenderStateContext($entry)) {
+				Request::saveSessionData([self::SESSION_KEY_RENDER_STATES], $bag);
+
+				return true;
+			}
+		}
+
+		Request::saveSessionData([self::SESSION_KEY_RENDER_STATES], $bag);
+
+		return false;
+	}
+
+	/**
+	 * @param array<string, mixed> $entry
+	 */
+	private function matchesRenderStateContext(array $entry): bool
+	{
 		return hash_equals((string)($entry['form_id'] ?? ''), $this->formId)
 			&& hash_equals((string)($entry['form_instance_id'] ?? ''), $this->formInstanceId)
 			&& hash_equals((string)($entry['build_id'] ?? ''), $this->buildId)
-			&& (int)($entry['form_definition_version_id'] ?? 0) === $this->formDefinitionVersionId
 			&& (self::positiveIntOrNull($entry['item_id'] ?? null) === $this->itemId)
 			&& (self::positiveIntOrNull($entry['host_page_id'] ?? null) === $this->hostPageId)
 			&& (self::positiveIntOrNull($entry['widget_connection_id'] ?? null) === $this->widgetConnectionId);

@@ -538,9 +538,10 @@ final class FormSubmitContext
 	private function hasRenderStateForCurrentContext(): bool
 	{
 		$bag = self::normalizeRenderStateBag(Request::_SESSION(self::SESSION_KEY_RENDER_STATES, []), time());
+		$require_build_id = $this->buildId !== '';
 
 		foreach ($bag as $entry) {
-			if ($this->matchesRenderStateContext($entry)) {
+			if ($this->matchesRenderStateContext($entry, $require_build_id)) {
 				Request::saveSessionData([self::SESSION_KEY_RENDER_STATES], $bag);
 
 				return true;
@@ -555,11 +556,11 @@ final class FormSubmitContext
 	/**
 	 * @param array<string, mixed> $entry
 	 */
-	private function matchesRenderStateContext(array $entry): bool
+	private function matchesRenderStateContext(array $entry, bool $requireBuildId = true): bool
 	{
-		return hash_equals((string)($entry['form_id'] ?? ''), $this->formId)
+		return (!$requireBuildId || hash_equals((string)($entry['build_id'] ?? ''), $this->buildId))
+			&& hash_equals((string)($entry['form_id'] ?? ''), $this->formId)
 			&& hash_equals((string)($entry['form_instance_id'] ?? ''), $this->formInstanceId)
-			&& hash_equals((string)($entry['build_id'] ?? ''), $this->buildId)
 			&& (self::positiveIntOrNull($entry['item_id'] ?? null) === $this->itemId)
 			&& (self::positiveIntOrNull($entry['host_page_id'] ?? null) === $this->hostPageId)
 			&& (self::positiveIntOrNull($entry['widget_connection_id'] ?? null) === $this->widgetConnectionId);

@@ -254,6 +254,27 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame(0, DbHelper::count('form_submissions', ['definition_id' => $resolution->definitionId()]));
 	}
 
+	public function testVersionedSubmitRejectsDroppedCaptureVersionBindingWithBlankBuildId(): void
+	{
+		$resolution = $this->upsertCapture('capture-phase4j-versioned-submit-dropped-build');
+		$context = $this->submitContextForResolution($resolution, 'phase4j_dropped_build_state');
+		$post = array_merge($context->toHiddenFields(), $this->validPayload());
+		unset(
+			$post[FormSubmitContext::FIELD_FORM_DEFINITION_VERSION_ID],
+			$post[FormSubmitContext::FIELD_FORM_RENDER_STATE_ID],
+		);
+		$post[FormSubmitContext::FIELD_BUILD_ID] = '';
+		$post[FormSubmitContext::FIELD_CSRF_TOKEN] = $context->issueCsrfToken();
+
+		$response = $this->runSubmitPost($post);
+
+		$this->assertSame(409, $response['http_code']);
+		$this->assertFalse($response['body']['ok']);
+		$this->assertSame('FORM_RENDER_STATE_INVALID', $response['body']['error']['code']);
+		$this->assertSame('missing', $response['body']['error']['details']['reason']);
+		$this->assertSame(0, DbHelper::count('form_submissions', ['definition_id' => $resolution->definitionId()]));
+	}
+
 	public function testMissingVersionedSubmitFallsBackToCurrentPublishedCaptureVersion(): void
 	{
 		$definition_slug = 'capture-phase4j-versioned-submit-fallback';

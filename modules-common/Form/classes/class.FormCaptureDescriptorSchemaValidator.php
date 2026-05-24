@@ -37,6 +37,7 @@ final class FormCaptureDescriptorSchemaValidator
 		FormSubmitContext::FIELD_BUILD_ID,
 		FormSubmitContext::FIELD_CONTEXT_PARAMS,
 		FormSubmitContext::FIELD_FORM_DEFINITION_VERSION_ID,
+		FormSubmitContext::FIELD_FORM_RENDER_STATE_ID,
 		FormSubmitContext::FIELD_CSRF_TOKEN,
 		'submit_button',
 	];

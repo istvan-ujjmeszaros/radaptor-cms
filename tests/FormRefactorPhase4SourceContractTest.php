@@ -301,15 +301,24 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$validator_source = $this->source('modules-common/Form/classes/class.FormCaptureDescriptorSchemaValidator.php');
 
 		$this->assertStringContainsString('FIELD_FORM_DEFINITION_VERSION_ID', $context_source);
+		$this->assertStringContainsString('FIELD_FORM_RENDER_STATE_ID', $context_source);
+		$this->assertStringContainsString('SESSION_KEY_RENDER_STATES', $context_source);
 		$this->assertStringContainsString('form_definition_resolution', $context_source);
 		$this->assertStringContainsString('formDefinitionVersionId: self::positiveIntOrNull', $context_source);
+		$this->assertStringContainsString('validateRenderState(array $post)', $context_source);
+		$this->assertStringContainsString('$render_state_error = $context->validateRenderState($post);', $event_source);
 		$this->assertStringContainsString('FormDefinitionResolver::resolve($context->formId, $context->formDefinitionVersionId)', $event_source);
+		$this->assertLessThan(
+			strpos($event_source, 'FormDefinitionResolver::resolve($context->formId, $context->formDefinitionVersionId)'),
+			strpos($event_source, '$render_state_error = $context->validateRenderState($post);')
+		);
 		$this->assertStringContainsString('resolve(string $form_id, ?int $form_definition_version_id = null)', $resolver_source);
 		$this->assertStringContainsString('findPublishedResolution($form_id, $form_definition_version_id)', $resolver_source);
 		$this->assertStringContainsString('findPublishedResolution(string $definition_slug, ?int $version_id = null)', $repository_source);
 		$this->assertStringContainsString("v.version_id = ?", $repository_source);
 		$this->assertStringContainsString("v.status = 'published'", $repository_source);
 		$this->assertStringContainsString('FormSubmitContext::FIELD_FORM_DEFINITION_VERSION_ID', $validator_source);
+		$this->assertStringContainsString('FormSubmitContext::FIELD_FORM_RENDER_STATE_ID', $validator_source);
 	}
 
 	public function testPhase4jBuilderAuthoringContractsAreCsrfGuardedAuditedAndDraftOnly(): void

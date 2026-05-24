@@ -22,6 +22,7 @@ class EventFormSubmit extends AbstractEvent implements iBrowserEventDocumentable
 					BrowserEventDocumentationHelper::param('form_id', 'post', 'string', true, 'Class-backed system form id or published capture definition_slug.'),
 					BrowserEventDocumentationHelper::param('form_instance_id', 'post', 'string', true, 'Stable placement id for this rendered form instance.'),
 					BrowserEventDocumentationHelper::param('form_definition_version_id', 'post', 'int', false, 'Exact capture definition version rendered with the form.'),
+					BrowserEventDocumentationHelper::param('form_render_state_id', 'post', 'string', false, 'Server-issued render state binding for versioned capture submits.'),
 					BrowserEventDocumentationHelper::param('csrf_token', 'post', 'string', true, 'Session-bound form CSRF token.'),
 				],
 			],
@@ -54,6 +55,14 @@ class EventFormSubmit extends AbstractEvent implements iBrowserEventDocumentable
 
 		if (!$context->isCurrentBuild()) {
 			$this->emitContextError(new ApiError('FORM_BUILD_MISMATCH', t('response_error.internal.refresh_page')), 409);
+
+			return;
+		}
+
+		$render_state_error = $context->validateRenderState($post);
+
+		if ($render_state_error !== null) {
+			$this->emitContextError($render_state_error, 409);
 
 			return;
 		}

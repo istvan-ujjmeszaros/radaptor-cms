@@ -82,6 +82,7 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame('capture-phase4-render', $tree['props']['form_descriptor_id']);
 		$this->assertSame('Contact probe', $tree['props']['title']);
 		$this->assertSame($resolution->versionId(), $tree['props']['submit_context'][FormSubmitContext::FIELD_FORM_DEFINITION_VERSION_ID]);
+		$this->assertNotSame('', $tree['props']['submit_context'][FormSubmitContext::FIELD_FORM_RENDER_STATE_ID] ?? '');
 		$this->assertSame('form.honeypot', $tree['slots']['hidden_fields'][1]['component'] ?? null);
 		$this->assertSame('company_website', $tree['slots']['hidden_fields'][1]['props']['name'] ?? null);
 	}
@@ -127,13 +128,19 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		FormCaptureDescriptorSchemaValidator::validateForDefinition('capture-phase4-invalid-feature', $descriptor);
 	}
 
-	public function testCaptureSchemaRejectsVersionedSubmitHiddenFieldAsPayloadKey(): void
+	public function testCaptureSchemaRejectsVersionedSubmitHiddenFieldsAsPayloadKeys(): void
 	{
-		$descriptor = $this->descriptor();
-		$descriptor['fields'][0]['key'] = FormSubmitContext::FIELD_FORM_DEFINITION_VERSION_ID;
+		foreach ([FormSubmitContext::FIELD_FORM_DEFINITION_VERSION_ID, FormSubmitContext::FIELD_FORM_RENDER_STATE_ID] as $reserved_key) {
+			$descriptor = $this->descriptor();
+			$descriptor['fields'][0]['key'] = $reserved_key;
 
-		$this->expectException(InvalidArgumentException::class);
-		FormCaptureDescriptorSchemaValidator::validateForDefinition('capture-phase4-version-key-collision', $descriptor);
+			try {
+				FormCaptureDescriptorSchemaValidator::validateForDefinition('capture-phase4-version-key-collision', $descriptor);
+				$this->fail("Reserved capture payload key must be rejected: {$reserved_key}");
+			} catch (InvalidArgumentException) {
+				$this->addToAssertionCount(1);
+			}
+		}
 	}
 
 	public function testValidSubmitStoresPayloadByStableFieldKeys(): void
@@ -173,11 +180,13 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$repository = new FormCaptureDefinitionRepository();
 		$first = $repository->upsertPublishedDefinition($definition_slug, $this->descriptor(), $this->defaultSecurity(), 'db');
 		$context = $this->submitContextForResolution($first, 'phase4j_versioned_submit');
+		$post = array_merge($context->toHiddenFields(), $this->validPayload());
+		$post[FormSubmitContext::FIELD_CSRF_TOKEN] = $context->issueCsrfToken();
 		$changed = $repository->upsertPublishedDefinition($definition_slug, $this->changedDescriptor(), $this->defaultSecurity(), 'db');
 
 		$this->assertNotSame($first->versionId(), $changed->versionId());
 
-		$response = $this->runSubmitEvent($context, $this->validPayload());
+		$response = $this->runSubmitPost($post);
 
 		$this->assertSame(200, $response['http_code']);
 		$this->assertTrue($response['body']['ok']);
@@ -186,6 +195,43 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$row = DbHelper::selectOne('form_submissions', ['definition_id' => $first->definitionId()]);
 		$this->assertIsArray($row);
 		$this->assertSame($first->versionId(), (int)$row['version_id']);
+	}
+
+	public function testVersionedSubmitRejectsTamperedCaptureVersionId(): void
+	{
+		$definition_slug = 'capture-phase4j-versioned-submit-tamper';
+		$repository = new FormCaptureDefinitionRepository();
+		$first = $repository->upsertPublishedDefinition($definition_slug, $this->descriptor(), $this->defaultSecurity(), 'db');
+		$context = $this->submitContextForResolution($first, 'phase4j_versioned_submit_tamper');
+		$post = array_merge($context->toHiddenFields(), $this->validPayload());
+		$post[FormSubmitContext::FIELD_CSRF_TOKEN] = $context->issueCsrfToken();
+		$changed = $repository->upsertPublishedDefinition($definition_slug, $this->changedDescriptor(), $this->defaultSecurity(), 'db');
+		$post[FormSubmitContext::FIELD_FORM_DEFINITION_VERSION_ID] = (string)$changed->versionId();
+
+		$response = $this->runSubmitPost($post);
+
+		$this->assertSame(409, $response['http_code']);
+		$this->assertFalse($response['body']['ok']);
+		$this->assertSame('FORM_RENDER_STATE_INVALID', $response['body']['error']['code']);
+		$this->assertSame('mismatch', $response['body']['error']['details']['reason']);
+		$this->assertSame(0, DbHelper::count('form_submissions', ['definition_id' => $first->definitionId()]));
+	}
+
+	public function testVersionedSubmitRejectsMissingRenderStateForExplicitVersion(): void
+	{
+		$resolution = $this->upsertCapture('capture-phase4j-versioned-submit-missing-state');
+		$context = $this->submitContextForResolution($resolution, 'phase4j_missing_render_state');
+		$post = array_merge($context->toHiddenFields(), $this->validPayload());
+		unset($post[FormSubmitContext::FIELD_FORM_RENDER_STATE_ID]);
+		$post[FormSubmitContext::FIELD_CSRF_TOKEN] = $context->issueCsrfToken();
+
+		$response = $this->runSubmitPost($post);
+
+		$this->assertSame(409, $response['http_code']);
+		$this->assertFalse($response['body']['ok']);
+		$this->assertSame('FORM_RENDER_STATE_INVALID', $response['body']['error']['code']);
+		$this->assertSame('missing', $response['body']['error']['details']['reason']);
+		$this->assertSame(0, DbHelper::count('form_submissions', ['definition_id' => $resolution->definitionId()]));
 	}
 
 	public function testMissingVersionedSubmitFallsBackToCurrentPublishedCaptureVersion(): void
@@ -930,6 +976,15 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 			$post[FormSubmitContext::FIELD_CSRF_TOKEN] = $context->issueCsrfToken();
 		}
 
+		return $this->runSubmitPost($post);
+	}
+
+	/**
+	 * @param array<string, mixed> $post
+	 * @return array{http_code: int|null, body: array<string, mixed>|null, output: string}
+	 */
+	private function runSubmitPost(array $post): array
+	{
 		$this->setRequestContext(
 			post: $post,
 			server: [

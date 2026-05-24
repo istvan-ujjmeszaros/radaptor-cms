@@ -13,8 +13,10 @@ final class FormSubmitContext
 	public const string FIELD_BUILD_ID = 'form_build_id';
 	public const string FIELD_CONTEXT_PARAMS = 'form_context_params';
 	public const string FIELD_FORM_DEFINITION_VERSION_ID = 'form_definition_version_id';
+	public const string FIELD_FORM_RENDER_STATE_ID = 'form_render_state_id';
 	public const string FIELD_CSRF_TOKEN = 'csrf_token';
 	public const string SESSION_KEY_CSRF_TOKENS = 'formCsrfTokens';
+	public const string SESSION_KEY_RENDER_STATES = 'formRenderStates';
 	public const int CSRF_TOKEN_TTL_SECONDS = 7200;
 	public const int CSRF_TOKEN_BAG_LIMIT = 64;
 
@@ -52,6 +54,7 @@ final class FormSubmitContext
 			$get[self::FIELD_BUILD_ID],
 			$get[self::FIELD_CONTEXT_PARAMS],
 			$get[self::FIELD_FORM_DEFINITION_VERSION_ID],
+			$get[self::FIELD_FORM_RENDER_STATE_ID],
 		);
 
 		$item_id = $form->getItemId();
@@ -121,6 +124,7 @@ final class FormSubmitContext
 			self::FIELD_BUILD_ID => $this->buildId,
 			self::FIELD_CONTEXT_PARAMS => self::encodeContextParams($this->extraParams),
 			self::FIELD_FORM_DEFINITION_VERSION_ID => $this->formDefinitionVersionId ?? '',
+			self::FIELD_FORM_RENDER_STATE_ID => $this->formDefinitionVersionId !== null ? $this->issueRenderStateId() : '',
 		];
 	}
 
@@ -135,6 +139,53 @@ final class FormSubmitContext
 	public function validateCsrfToken(array $post): ?ApiError
 	{
 		return self::validateCsrfTokenForForm($this->formId, $post[self::FIELD_CSRF_TOKEN] ?? null);
+	}
+
+	/**
+	 * @param array<string, mixed> $post
+	 */
+	public function validateRenderState(array $post): ?ApiError
+	{
+		if ($this->formDefinitionVersionId === null) {
+			return null;
+		}
+
+		$render_state_id = is_scalar($post[self::FIELD_FORM_RENDER_STATE_ID] ?? null)
+			? trim((string)$post[self::FIELD_FORM_RENDER_STATE_ID])
+			: '';
+
+		if ($render_state_id === '') {
+			return self::renderStateError('missing');
+		}
+
+		$now = time();
+		$bag = self::normalizeRenderStateBag(Request::_SESSION(self::SESSION_KEY_RENDER_STATES, []), $now, false);
+		$entry = $bag[$render_state_id] ?? null;
+
+		if (!is_array($entry)) {
+			Request::saveSessionData([self::SESSION_KEY_RENDER_STATES], $bag);
+
+			return self::renderStateError('stale');
+		}
+
+		if ((int)($entry['expires_at'] ?? 0) <= $now) {
+			unset($bag[$render_state_id]);
+			Request::saveSessionData([self::SESSION_KEY_RENDER_STATES], $bag);
+
+			return self::renderStateError('expired');
+		}
+
+		if (!$this->matchesRenderStateEntry($entry)) {
+			Request::saveSessionData([self::SESSION_KEY_RENDER_STATES], $bag);
+
+			return self::renderStateError('mismatch');
+		}
+
+		$entry['last_seen_at'] = $now;
+		$bag[$render_state_id] = $entry;
+		Request::saveSessionData([self::SESSION_KEY_RENDER_STATES], self::limitTimedSessionBag($bag));
+
+		return null;
 	}
 
 	/**
@@ -239,6 +290,28 @@ final class FormSubmitContext
 		return (string)$bag[$form_id]['token'];
 	}
 
+	private function issueRenderStateId(): string
+	{
+		$now = time();
+		$bag = self::normalizeRenderStateBag(Request::_SESSION(self::SESSION_KEY_RENDER_STATES, []), $now);
+		$render_state_id = bin2hex(random_bytes(16));
+
+		$bag[$render_state_id] = [
+			'form_id' => $this->formId,
+			'form_instance_id' => $this->formInstanceId,
+			'item_id' => $this->itemId,
+			'host_page_id' => $this->hostPageId,
+			'widget_connection_id' => $this->widgetConnectionId,
+			'build_id' => $this->buildId,
+			'form_definition_version_id' => $this->formDefinitionVersionId,
+			'expires_at' => $now + self::CSRF_TOKEN_TTL_SECONDS,
+			'last_seen_at' => $now,
+		];
+		Request::saveSessionData([self::SESSION_KEY_RENDER_STATES], self::limitTimedSessionBag($bag));
+
+		return $render_state_id;
+	}
+
 	public static function validateCsrfTokenForForm(string $formId, mixed $submittedToken): ?ApiError
 	{
 		$form_id = trim($formId);
@@ -329,6 +402,15 @@ final class FormSubmitContext
 		);
 	}
 
+	private static function renderStateError(string $reason): ApiError
+	{
+		return new ApiError(
+			'FORM_RENDER_STATE_INVALID',
+			t('response_error.internal.refresh_page'),
+			details: ['reason' => $reason],
+		);
+	}
+
 	/**
 	 * @param mixed $bag
 	 * @return array<string, array{token: string, expires_at: int, last_seen_at: int}>
@@ -364,6 +446,45 @@ final class FormSubmitContext
 	}
 
 	/**
+	 * @param mixed $bag
+	 * @return array<string, array<string, mixed>>
+	 */
+	private static function normalizeRenderStateBag(mixed $bag, int $now, bool $dropExpired = true): array
+	{
+		if (!is_array($bag)) {
+			return [];
+		}
+
+		$normalized = [];
+
+		foreach ($bag as $render_state_id => $entry) {
+			if (!is_string($render_state_id) || !is_array($entry)) {
+				continue;
+			}
+
+			$expires_at = (int)($entry['expires_at'] ?? 0);
+
+			if ($expires_at <= 0 || ($dropExpired && $expires_at <= $now)) {
+				continue;
+			}
+
+			$normalized[$render_state_id] = [
+				'form_id' => is_scalar($entry['form_id'] ?? null) ? (string)$entry['form_id'] : '',
+				'form_instance_id' => is_scalar($entry['form_instance_id'] ?? null) ? (string)$entry['form_instance_id'] : '',
+				'item_id' => self::positiveIntOrNull($entry['item_id'] ?? null),
+				'host_page_id' => self::positiveIntOrNull($entry['host_page_id'] ?? null),
+				'widget_connection_id' => self::positiveIntOrNull($entry['widget_connection_id'] ?? null),
+				'build_id' => is_scalar($entry['build_id'] ?? null) ? (string)$entry['build_id'] : '',
+				'form_definition_version_id' => self::positiveIntOrNull($entry['form_definition_version_id'] ?? null),
+				'expires_at' => $expires_at,
+				'last_seen_at' => (int)($entry['last_seen_at'] ?? $expires_at),
+			];
+		}
+
+		return self::limitTimedSessionBag($normalized);
+	}
+
+	/**
 	 * @param array<string, array{token: string, expires_at: int, last_seen_at: int}> $bag
 	 * @return array<string, array{token: string, expires_at: int, last_seen_at: int}>
 	 */
@@ -380,6 +501,39 @@ final class FormSubmitContext
 		);
 
 		return array_slice($bag, -self::CSRF_TOKEN_BAG_LIMIT, null, true);
+	}
+
+	/**
+	 * @param array<string, array<string, mixed>> $bag
+	 * @return array<string, array<string, mixed>>
+	 */
+	private static function limitTimedSessionBag(array $bag): array
+	{
+		if (count($bag) <= self::CSRF_TOKEN_BAG_LIMIT) {
+			return $bag;
+		}
+
+		uasort(
+			$bag,
+			static fn (array $a, array $b): int => ((int)($a['last_seen_at'] ?? 0) <=> (int)($b['last_seen_at'] ?? 0))
+				?: ((int)($a['expires_at'] ?? 0) <=> (int)($b['expires_at'] ?? 0))
+		);
+
+		return array_slice($bag, -self::CSRF_TOKEN_BAG_LIMIT, null, true);
+	}
+
+	/**
+	 * @param array<string, mixed> $entry
+	 */
+	private function matchesRenderStateEntry(array $entry): bool
+	{
+		return hash_equals((string)($entry['form_id'] ?? ''), $this->formId)
+			&& hash_equals((string)($entry['form_instance_id'] ?? ''), $this->formInstanceId)
+			&& hash_equals((string)($entry['build_id'] ?? ''), $this->buildId)
+			&& (int)($entry['form_definition_version_id'] ?? 0) === $this->formDefinitionVersionId
+			&& (self::positiveIntOrNull($entry['item_id'] ?? null) === $this->itemId)
+			&& (self::positiveIntOrNull($entry['host_page_id'] ?? null) === $this->hostPageId)
+			&& (self::positiveIntOrNull($entry['widget_connection_id'] ?? null) === $this->widgetConnectionId);
 	}
 
 	private static function positiveIntOrNull(mixed $value): ?int

@@ -9,6 +9,9 @@
 ## Supported Runtime
 
 - Run checks from a Radaptor consumer app container, not with host PHP or host Composer.
+- Before implementation, commits, hooks, CLI work, browser smoke, Playwright, or package-dev verification, start every Docker Compose stack that is relevant to the repos/worktrees you will touch.
+- If a clean proof/tmp consumer app worktree, PR-sync clone, portal app, or other app repo is part of the task, bring up that worktree's own compose project before relying on its hooks or tests. Docker Compose labels include the worktree path, so a running `php` container from another app checkout does not satisfy that worktree's hooks.
+- Do not bypass Git hooks only because the expected Docker Compose project is not running. Start the relevant stack first; if a hook still cannot run, state the reason and the equivalent checks that were run before committing.
 - In the `_RADAPTOR` workspace, use:
   `./bin/docker-compose-packages-dev.sh radaptor-app-skeleton exec -T php bash -lc 'cd /workspace/packages-dev/core/cms && /app/php-cs-fixer.sh --config=.php-cs-fixer.php'`
 - For PHPStan, use the documented workspace command from the root `AGENTS.md`.

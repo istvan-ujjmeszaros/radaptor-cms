@@ -319,9 +319,13 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$save_source = $this->source('modules-common/Form/events/Event.FormBuilderSaveDraft.php');
 		$publish_source = $this->source('modules-common/Form/events/Event.FormBuilderPublish.php');
 		$preview_source = $this->source('modules-common/Form/events/Event.FormBuilderPreviewRender.php');
+		$fragment_source = $this->source('modules-common/Form/events/Event.FormBuilderEditorFragment.php');
+
+		foreach ([$create_source, $save_source, $publish_source, $preview_source, $fragment_source] as $event_source) {
+			$this->assertStringContainsString('FormBuilderEventHelper::authorizeContentAdmin', $event_source);
+		}
 
 		foreach ([$create_source, $save_source, $publish_source, $preview_source] as $event_source) {
-			$this->assertStringContainsString('FormBuilderEventHelper::authorizeContentAdmin', $event_source);
 			$this->assertStringContainsString('FormBuilderEventHelper::validateCsrfFromPost', $event_source);
 		}
 
@@ -330,6 +334,8 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$this->assertStringContainsString("CmsMutationAuditService::recordLeaf('form_builder.save_draft.conflict'", $save_source);
 		$this->assertStringContainsString("CmsMutationAuditService::withContext(\n\t\t\t\t'form_builder.publish'", $publish_source);
 		$this->assertStringNotContainsString('CmsMutationAuditService::withContext', $preview_source);
+		$this->assertStringNotContainsString('FormBuilderEventHelper::validateCsrfFromPost', $fragment_source);
+		$this->assertStringNotContainsString('CmsMutationAuditService::withContext', $fragment_source);
 		$this->assertStringContainsString("'status' => self::STATUS_DRAFT", $authoring_source);
 		$this->assertStringContainsString('Only the active draft version can be published.', $authoring_source);
 		$this->assertStringContainsString('Shipped capture form definitions are read-only in the builder.', $authoring_source);
@@ -339,21 +345,22 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 
 	public function testPhase4jBuilderWidgetAndPhpstanCoverageIncludesTouchedRuntimeFiles(): void
 	{
+		$authoring_source = $this->source('modules-common/Form/classes/class.FormCaptureAuthoringService.php');
 		$widget_source = $this->source('modules-common/Form/widgets/Widget.CaptureFormBuilder.php');
 		$list_widget_source = $this->source('modules-common/Form/widgets/Widget.CaptureFormList.php');
 		$template_source = $this->source('modules-common/Form/templates/template.captureFormBuilder.php');
 		$list_template_source = $this->source('modules-common/Form/templates/template.captureFormList.php');
-		$layout_source = $this->source('layouts/layout.admin_editor.php');
 		$phpstan_source = $this->source('phpstan.neon');
 
 		$this->assertStringContainsString("library('__ADMIN_FORM_BUILDER')", $template_source);
 		$this->assertStringContainsString("library('__ADMIN_FORM_BUILDER')", $list_template_source);
-		$this->assertStringContainsString('FormSubmitContext::issueCsrfTokenForForm(FormBuilderEventHelper::CSRF_FORM_ID)', $widget_source);
+		$this->assertStringContainsString('FormSubmitContext::issueCsrfTokenForForm(FormBuilderEventHelper::CSRF_FORM_ID)', $authoring_source);
 		$this->assertStringContainsString('FormSubmitContext::issueCsrfTokenForForm(FormBuilderEventHelper::CSRF_FORM_ID)', $list_widget_source);
 		$this->assertStringContainsString('form.builder.error_create', $widget_source);
-		$this->assertStringContainsString("'/admin/forms/edit/'", $widget_source);
+		$this->assertStringContainsString("Url::getUrl('form_builder.editor_fragment')", $list_widget_source);
+		$this->assertStringContainsString('data-form-list-editor-fragment-url-value', $list_template_source);
+		$this->assertStringNotContainsString('return_to', $list_template_source);
 		$this->assertStringContainsString("'/admin/forms/'", $list_widget_source);
-		$this->assertStringContainsString('resolveBackUrl', $layout_source);
 
 		foreach ([
 			'modules-common/Form/classes/class.FormSubmitContext.php',
@@ -361,6 +368,7 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 			'modules-common/Form/classes/class.FormDefinitionResolution.php',
 			'modules-common/Form/classes/class.FormResponseEmitter.php',
 			'modules-common/Form/events/Event.FormSubmit.php',
+			'modules-common/Form/events/Event.FormBuilderEditorFragment.php',
 			'modules-common/Form/widgets/Widget.CaptureFormBuilder.php',
 			'modules-common/Form/widgets/Widget.CaptureFormList.php',
 		] as $path) {

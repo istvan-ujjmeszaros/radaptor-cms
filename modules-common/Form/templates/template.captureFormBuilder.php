@@ -43,58 +43,58 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 	data-form-builder-publish-url-value="<?= e((string)($urls['publish'] ?? '')) ?>"
 	data-form-builder-csrf-token-value="<?= e((string)($this->props['csrf_token'] ?? '')) ?>"
 >
-	<header class="form-builder__header">
+	<header class="form-builder__header card shadow-sm">
 		<div class="form-builder__title-row">
-			<h1 class="form-builder__title"><?= e($this->strings['form.builder.title']) ?></h1>
-			<span class="form-builder__status" data-form-builder-target="status"><?= e($this->strings[$readOnly ? 'form.builder.status.read_only' : 'form.builder.status.clean']) ?></span>
+			<h1 class="form-builder__title h5 mb-0"><?= e($this->strings['form.builder.title']) ?></h1>
+			<span class="form-builder__status badge text-bg-light" data-form-builder-target="status"><?= e($this->strings[$readOnly ? 'form.builder.status.read_only' : 'form.builder.status.clean']) ?></span>
 		</div>
 	</header>
 
-	<div class="form-builder__toolbar">
-		<button type="button" data-action="form-builder#undo" data-form-builder-target="undoButton">
+	<div class="form-builder__toolbar card shadow-sm">
+		<button type="button" class="btn btn-outline-secondary btn-sm" data-action="form-builder#undo" data-form-builder-target="undoButton">
 			<i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i>
 			<?= e($this->strings['form.builder.action.undo']) ?>
 		</button>
-		<button type="button" data-action="form-builder#redo" data-form-builder-target="redoButton">
+		<button type="button" class="btn btn-outline-secondary btn-sm" data-action="form-builder#redo" data-form-builder-target="redoButton">
 			<i class="bi bi-arrow-clockwise" aria-hidden="true"></i>
 			<?= e($this->strings['form.builder.action.redo']) ?>
 		</button>
-		<button type="button" data-action="form-builder#moveSelectedUp" data-form-builder-target="moveUpButton">
+		<button type="button" class="btn btn-outline-secondary btn-sm" data-action="form-builder#moveSelectedUp" data-form-builder-target="moveUpButton">
 			<i class="bi bi-arrow-up" aria-hidden="true"></i>
 			<?= e($this->strings['form.builder.action.move_up']) ?>
 		</button>
-		<button type="button" data-action="form-builder#moveSelectedDown" data-form-builder-target="moveDownButton">
+		<button type="button" class="btn btn-outline-secondary btn-sm" data-action="form-builder#moveSelectedDown" data-form-builder-target="moveDownButton">
 			<i class="bi bi-arrow-down" aria-hidden="true"></i>
 			<?= e($this->strings['form.builder.action.move_down']) ?>
 		</button>
-		<button type="button" data-action="form-builder#deleteSelected" data-form-builder-target="deleteButton">
+		<button type="button" class="btn btn-outline-danger btn-sm" data-action="form-builder#deleteSelected" data-form-builder-target="deleteButton">
 			<i class="bi bi-trash" aria-hidden="true"></i>
 			<?= e($this->strings['form.builder.action.delete']) ?>
 		</button>
 		<span class="form-builder__toolbar-spacer"></span>
-		<button type="button" data-action="form-builder#saveDraft" data-form-builder-target="saveButton">
+		<button type="button" class="btn btn-outline-primary btn-sm" data-action="form-builder#saveDraft" data-form-builder-target="saveButton">
 			<i class="bi bi-save" aria-hidden="true"></i>
 			<?= e($this->strings['form.builder.action.save_draft']) ?>
 		</button>
-		<button type="button" data-action="form-builder#publish" data-form-builder-target="publishButton">
+		<button type="button" class="btn btn-primary btn-sm" data-action="form-builder#publish" data-form-builder-target="publishButton">
 			<i class="bi bi-upload" aria-hidden="true"></i>
 			<?= e($this->strings['form.builder.action.publish']) ?>
 		</button>
 	</div>
 
-	<div class="form-builder__conflict" data-form-builder-target="conflictActions" hidden>
+	<div class="form-builder__conflict alert alert-warning" data-form-builder-target="conflictActions" hidden>
 		<span><?= e($this->strings['form.builder.warning.reload_or_overwrite']) ?></span>
-		<button type="button" data-action="form-builder#reloadServer">
+		<button type="button" class="btn btn-outline-secondary btn-sm" data-action="form-builder#reloadServer">
 			<?= e($this->strings['form.builder.action.reload_server']) ?>
 		</button>
-		<button type="button" data-action="form-builder#overwriteLocal">
+		<button type="button" class="btn btn-warning btn-sm" data-action="form-builder#overwriteLocal">
 			<?= e($this->strings['form.builder.action.overwrite_local']) ?>
 		</button>
 	</div>
 
 	<div class="form-builder__grid">
-		<aside class="form-builder__palette" aria-label="<?= e($this->strings['form.builder.palette']) ?>">
-			<h2><?= e($this->strings['form.builder.palette']) ?></h2>
+		<aside class="form-builder__palette card shadow-sm" aria-label="<?= e($this->strings['form.builder.palette']) ?>">
+			<h2 class="h6"><?= e($this->strings['form.builder.palette']) ?></h2>
 			<div class="form-builder__palette-items">
 				<?php foreach ($palette as $item): ?>
 					<?php
@@ -102,13 +102,13 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 						continue;
 					}
 					?>
-					<button
-						type="button"
-						draggable="<?= $readOnly ? 'false' : 'true' ?>"
-						class="form-builder__palette-item"
-						data-form-builder-palette-type-param="<?= e((string)($item['type'] ?? '')) ?>"
-						data-action="pointerdown->form-builder#preparePaletteDrag dragstart->form-builder#dragPaletteItem dragend->form-builder#endPaletteDrag click->form-builder#addPaletteItem"
-						<?= $readOnly ? 'disabled' : '' ?>
+						<button
+							type="button"
+							draggable="<?= $readOnly ? 'false' : 'true' ?>"
+							class="btn btn-outline-secondary form-builder__palette-item"
+							data-form-builder-palette-type-param="<?= e((string)($item['type'] ?? '')) ?>"
+							data-action="pointerdown->form-builder#preparePaletteDrag dragstart->form-builder#dragPaletteItem dragend->form-builder#endPaletteDrag click->form-builder#addPaletteItem"
+							<?= $readOnly ? 'disabled' : '' ?>
 					>
 						<i class="bi bi-<?= e((string)($item['icon'] ?? 'type')) ?>" aria-hidden="true"></i>
 						<span><?= e((string)($item['label'] ?? '')) ?></span>
@@ -117,8 +117,8 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 			</div>
 		</aside>
 
-		<main class="form-builder__preview-panel">
-			<h2><?= e($this->strings['form.builder.preview']) ?></h2>
+		<main class="form-builder__preview-panel card shadow-sm">
+			<h2 class="h6"><?= e($this->strings['form.builder.preview']) ?></h2>
 			<div class="form-builder__preview-wrap">
 				<iframe
 					class="form-builder__preview"
@@ -134,13 +134,13 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 			</div>
 		</main>
 
-		<aside class="form-builder__properties">
-			<h2><?= e($this->strings['form.builder.properties']) ?></h2>
-			<div class="form-builder__panel-tabs" role="tablist">
-				<button type="button" data-form-builder-target="propertiesTabButton" data-action="form-builder#showPropertiesPanel">
+		<aside class="form-builder__properties card shadow-sm">
+			<h2 class="h6"><?= e($this->strings['form.builder.properties']) ?></h2>
+			<div class="btn-group form-builder__panel-tabs" role="tablist">
+				<button type="button" class="btn btn-outline-secondary btn-sm" data-form-builder-target="propertiesTabButton" data-action="form-builder#showPropertiesPanel">
 					<?= e($this->strings['form.builder.panel.properties']) ?>
 				</button>
-				<button type="button" data-form-builder-target="usageTabButton" data-action="form-builder#showUsagePanel">
+				<button type="button" class="btn btn-outline-secondary btn-sm" data-form-builder-target="usageTabButton" data-action="form-builder#showUsagePanel">
 					<?= e($this->strings['form.builder.panel.usage']) ?> (<?= count($usage) ?>)
 				</button>
 			</div>
@@ -149,39 +149,39 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 					<?= e($this->strings['form.builder.no_selection']) ?>
 				</div>
 				<div data-form-builder-target="propertiesPanel">
-					<label>
+					<label class="form-label w-100">
 						<span><?= e($this->strings['form.builder.label.title']) ?></span>
-						<input type="text" data-form-builder-target="formTitleInput" data-action="input->form-builder#updateFormText">
+						<input type="text" class="form-control form-control-sm" data-form-builder-target="formTitleInput" data-action="input->form-builder#updateFormText">
 					</label>
-					<label>
+					<label class="form-label w-100">
 						<span><?= e($this->strings['form.builder.label.description']) ?></span>
-						<textarea rows="2" data-form-builder-target="formDescriptionInput" data-action="input->form-builder#updateFormText"></textarea>
+						<textarea rows="2" class="form-control form-control-sm" data-form-builder-target="formDescriptionInput" data-action="input->form-builder#updateFormText"></textarea>
 					</label>
-					<label>
+					<label class="form-label w-100">
 						<span><?= e($this->strings['form.builder.label.submit_label']) ?></span>
-						<input type="text" data-form-builder-target="submitLabelInput" data-action="input->form-builder#updateFormText">
+						<input type="text" class="form-control form-control-sm" data-form-builder-target="submitLabelInput" data-action="input->form-builder#updateFormText">
 					</label>
 					<div data-form-builder-target="fieldProperties" hidden>
 						<hr>
-						<label>
+						<label class="form-label w-100">
 							<span><?= e($this->strings['form.builder.label.field_label']) ?></span>
-							<input type="text" data-form-builder-target="fieldLabelInput" data-action="input->form-builder#updateSelectedField">
+							<input type="text" class="form-control form-control-sm" data-form-builder-target="fieldLabelInput" data-action="input->form-builder#updateSelectedField">
 						</label>
-						<label>
+						<label class="form-label w-100">
 							<span><?= e($this->strings['form.builder.label.field_name']) ?></span>
-							<input type="text" data-form-builder-target="fieldNameInput" data-action="input->form-builder#updateSelectedField">
+							<input type="text" class="form-control form-control-sm" data-form-builder-target="fieldNameInput" data-action="input->form-builder#updateSelectedField">
 						</label>
-						<label>
+						<label class="form-label w-100">
 							<span><?= e($this->strings['form.builder.label.field_key']) ?></span>
-							<input type="text" data-form-builder-target="fieldKeyInput" data-action="change->form-builder#confirmAndUpdateFieldKey">
+							<input type="text" class="form-control form-control-sm" data-form-builder-target="fieldKeyInput" data-action="change->form-builder#confirmAndUpdateFieldKey">
 						</label>
-						<label class="form-builder__checkbox">
-							<input type="checkbox" data-form-builder-target="fieldRequiredInput" data-action="change->form-builder#updateSelectedField">
+						<label class="form-check form-builder__checkbox">
+							<input type="checkbox" class="form-check-input" data-form-builder-target="fieldRequiredInput" data-action="change->form-builder#updateSelectedField">
 							<span><?= e($this->strings['form.builder.label.required']) ?></span>
 						</label>
-						<label data-form-builder-target="fieldOptionsGroup">
+						<label class="form-label w-100" data-form-builder-target="fieldOptionsGroup">
 							<span><?= e($this->strings['form.builder.label.options']) ?></span>
-							<textarea rows="5" data-form-builder-target="fieldOptionsInput" data-action="input->form-builder#updateSelectedField"></textarea>
+							<textarea rows="5" class="form-control form-control-sm" data-form-builder-target="fieldOptionsInput" data-action="input->form-builder#updateSelectedField"></textarea>
 						</label>
 					</div>
 				</div>

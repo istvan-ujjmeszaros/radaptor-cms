@@ -415,9 +415,6 @@ layout,admin_default.description,,hu-HU,"Single-column admin layout","Egyszerű,
 layout,admin_default.name,,hu-HU,"Admin 1-column","Adminisztráció 1 hasábos",0,0,"Adminisztráció 1 hasábos"
 layout,admin_empty.description,,hu-HU,"Empty admin layout","Üres admin layout",0,0,"Üres admin layout"
 layout,admin_empty.name,,hu-HU,"Empty admin","Adminisztráció üres",0,0,"Adminisztráció üres"
-layout,admin_editor.description,,hu-HU,"Admin editor layout without the navigation sidebar","Admin szerkesztő layout oldalsó navigáció nélkül",0,0,"Admin szerkesztő layout oldalsó navigáció nélkül"
-layout,admin_editor.name,,hu-HU,"Admin editor","Admin szerkesztő",0,0,"Admin szerkesztő"
-layout,admin_editor.back,,hu-HU,Back,Vissza,0,0,Vissza
 layout,admin_login.description,,hu-HU,"Admin login layout","Admin bejelentkezési layout",0,0,"Admin bejelentkezési layout"
 layout,admin_login.name,,hu-HU,"Admin login","Admin bejelentkezés",0,0,"Admin bejelentkezés"
 layout,admin_menu.description,,hu-HU,"Displays the admin menu","Megjeleníti az admin menüt",0,0,"Megjeleníti az admin menüt"

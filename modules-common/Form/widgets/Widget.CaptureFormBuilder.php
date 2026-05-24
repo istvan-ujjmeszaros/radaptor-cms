@@ -18,40 +18,26 @@ final class WidgetCaptureFormBuilder extends AbstractWidget
 
 	public static function getListVisibility(): bool
 	{
-		return Roles::hasRole(RoleList::ROLE_CONTENT_ADMIN);
+		return false;
 	}
 
 	public static function getDefaultPathForCreation(): array
 	{
 		return [
-			'path' => '/admin/forms/edit/',
+			'path' => '/admin/forms/',
 			'resource_name' => 'index.html',
-			'layout' => LayoutTypeAdminEditor::ID,
+			'layout' => LayoutTypeAdminDefault::ID,
 		];
 	}
 
 	protected function buildAuthorizedTree(iTreeBuildContext $tree_build_context, WidgetConnection $connection, array $build_context = []): array
 	{
 		$service = new FormCaptureAuthoringService();
-		$state = $service->buildBuilderState((string)Request::_GET('definition_slug', ''));
-		$preview = $service->renderPreview(
-			(string)($state['selected']['definition']['definition_slug'] ?? 'capture-preview'),
-			$state['selected']['descriptor'],
-		);
 
-		return $this->createComponentTree('captureFormBuilder', [
-			'state' => $state,
-			'initial_panel' => (string)Request::_GET('panel', 'properties'),
-			'initial_preview' => $preview,
-			'initial_preview_html' => $preview['html'] ?? '',
-			'csrf_token' => FormSubmitContext::issueCsrfTokenForForm(FormBuilderEventHelper::CSRF_FORM_ID),
-			'urls' => [
-				'create' => Url::getUrl('form_builder.create'),
-				'preview_render' => Url::getUrl('form_builder.preview_render'),
-				'save_draft' => Url::getUrl('form_builder.save_draft'),
-				'publish' => Url::getUrl('form_builder.publish'),
-			],
-		], strings: self::buildStrings());
+		return $service->buildBuilderTree(
+			(string)Request::_GET('definition_slug', ''),
+			(string)Request::_GET('panel', 'properties'),
+		);
 	}
 
 	public function canAccess(iTreeBuildContext $tree_build_context, WidgetConnection $connection): bool
@@ -62,7 +48,7 @@ final class WidgetCaptureFormBuilder extends AbstractWidget
 	/**
 	 * @return array<string, string>
 	 */
-	private static function buildStrings(): array
+	public static function buildStrings(): array
 	{
 		$keys = [
 			'form.builder.title',

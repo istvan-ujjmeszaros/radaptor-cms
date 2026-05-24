@@ -143,6 +143,10 @@ form,list.col.usage,,hu-HU,Usage,Használat,0,0,Használat
 form,list.col.actions,,hu-HU,Actions,Műveletek,0,0,Műveletek
 form,list.action.edit,,hu-HU,Edit,Szerkesztés,0,0,Szerkesztés
 form,list.action.view,,hu-HU,View,Megtekintés,0,0,Megtekintés
+form,list.editor_title,,hu-HU,"Form builder","Űrlap szerkesztő",0,0,"Űrlap szerkesztő"
+form,list.editor_loading,,hu-HU,"Loading editor...","Szerkesztő betöltése...",0,0,"Szerkesztő betöltése..."
+form,list.editor_load_failed,,hu-HU,"Could not load the form editor.","Az űrlap szerkesztő nem tölthető be.",0,0,"Az űrlap szerkesztő nem tölthető be."
+form,list.close,,hu-HU,Close,Bezárás,0,0,Bezárás
 form,list.status.draft,,hu-HU,Draft,Piszkozat,0,0,Piszkozat
 form,list.status.published,,hu-HU,Published,Publikált,0,0,Publikált
 form,list.status.unknown,,hu-HU,Unknown,Ismeretlen,0,0,Ismeretlen
@@ -150,3 +154,4 @@ form,list.version.none,,hu-HU,None,Nincs,0,0,Nincs
 form,list.version.published,,hu-HU,"v{version}","v{version}",0,0,"v{version}"
 form,list.version.draft,,hu-HU,"draft v{version}","piszkozat v{version}",0,0,"piszkozat v{version}"
 form,list.usage.none,,hu-HU,None,Nincs,0,0,Nincs
+form,builder.warning.discard_unsaved,,hu-HU,"Discard unsaved form changes?","Eldobod a nem mentett űrlapmódosításokat?",0,0,"Eldobod a nem mentett űrlapmódosításokat?"

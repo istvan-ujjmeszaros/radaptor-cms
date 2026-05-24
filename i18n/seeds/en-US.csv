@@ -415,9 +415,6 @@ layout,admin_default.description,,en-US,"Single-column admin layout","Single-col
 layout,admin_default.name,,en-US,"Admin 1-column","Admin 1-column",0,0,"Admin 1-column"
 layout,admin_empty.description,,en-US,"Empty admin layout","Empty admin layout",0,0,"Empty admin layout"
 layout,admin_empty.name,,en-US,"Empty admin","Empty admin",0,0,"Empty admin"
-layout,admin_editor.description,,en-US,"Admin editor layout without the navigation sidebar","Admin editor layout without the navigation sidebar",0,0,"Admin editor layout without the navigation sidebar"
-layout,admin_editor.name,,en-US,"Admin editor","Admin editor",0,0,"Admin editor"
-layout,admin_editor.back,,en-US,Back,Back,0,0,Back
 layout,admin_login.description,,en-US,"Admin login layout","Admin login layout",0,0,"Admin login layout"
 layout,admin_login.name,,en-US,"Admin login","Admin login",0,0,"Admin login"
 layout,admin_menu.description,,en-US,"Displays the admin menu","Displays the admin menu",0,0,"Displays the admin menu"

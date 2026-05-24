@@ -32,6 +32,46 @@ final class FormCaptureAuthoringService
 	/**
 	 * @return array<string, mixed>
 	 */
+	public function buildBuilderTree(?string $definition_slug = null, string $panel = 'properties'): array
+	{
+		$state = $this->buildBuilderState($definition_slug);
+		$selected = is_array($state['selected'] ?? null) ? $state['selected'] : [];
+		$descriptor = is_array($selected['descriptor'] ?? null) ? $selected['descriptor'] : [];
+		$preview = $this->renderPreview(
+			(string)($selected['definition']['definition_slug'] ?? 'capture-preview'),
+			$descriptor,
+		);
+
+		return SduiNode::create(
+			component: 'captureFormBuilder',
+			props: [
+				'state' => $state,
+				'initial_panel' => $panel === 'usage' ? 'usage' : 'properties',
+				'initial_preview' => $preview,
+				'initial_preview_html' => $preview['html'] ?? '',
+				'csrf_token' => FormSubmitContext::issueCsrfTokenForForm(FormBuilderEventHelper::CSRF_FORM_ID),
+				'urls' => [
+					'create' => Url::getUrl('form_builder.create'),
+					'preview_render' => Url::getUrl('form_builder.preview_render'),
+					'save_draft' => Url::getUrl('form_builder.save_draft'),
+					'publish' => Url::getUrl('form_builder.publish'),
+				],
+			],
+			type: SduiNode::TYPE_WIDGET,
+			strings: WidgetCaptureFormBuilder::buildStrings(),
+		);
+	}
+
+	public function renderBuilderFragment(?string $definition_slug = null, string $panel = 'properties'): string
+	{
+		$renderer = new HtmlTreeRenderer(theme: $this->currentAdminTheme(), lang_id: Kernel::getLocale(), is_editable: false);
+
+		return $renderer->render($this->buildBuilderTree($definition_slug, $panel));
+	}
+
+	/**
+	 * @return array<string, mixed>
+	 */
 	public function buildListState(string $source_filter = 'custom'): array
 	{
 		$source_filter = in_array($source_filter, ['custom', 'system'], true) ? $source_filter : 'custom';

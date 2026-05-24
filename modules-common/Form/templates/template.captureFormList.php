@@ -6,17 +6,19 @@ $state = is_array($this->props['state'] ?? null) ? $this->props['state'] : [];
 $definitions = is_array($state['definitions'] ?? null) ? $state['definitions'] : [];
 $sourceFilter = (string)($state['source_filter'] ?? 'custom');
 $urls = is_array($this->props['urls'] ?? null) ? $this->props['urls'] : [];
-$editorUrl = (string)($urls['editor'] ?? '/admin/forms/edit/');
-$currentUrl = (string)($urls['current'] ?? '/admin/forms/');
+$editorFragmentUrl = (string)($urls['editor_fragment'] ?? '');
 $jsonFlags = JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT;
 $stringsJson = json_encode($this->strings, $jsonFlags);
-$buildEditorUrl = static function (string $definitionSlug) use ($editorUrl, $currentUrl): string {
+$buildEditorUrl = static function (string $definitionSlug) use ($sourceFilter): string {
 	$params = [
-		'definition_slug' => $definitionSlug,
-		'return_to' => $currentUrl,
+		'edit' => $definitionSlug,
 	];
 
-	return $editorUrl . '?' . http_build_query($params, '', '&');
+	if ($sourceFilter === 'system') {
+		$params['source'] = 'system';
+	}
+
+	return '/admin/forms/?' . http_build_query($params, '', '&');
 };
 $tabUrl = static fn (string $source): string => '/admin/forms/?source=' . rawurlencode($source);
 ?>
@@ -24,8 +26,7 @@ $tabUrl = static fn (string $source): string => '/admin/forms/?source=' . rawurl
 	class="form-list"
 	data-controller="form-list"
 	data-form-list-create-url-value="<?= e((string)($urls['create'] ?? '')) ?>"
-	data-form-list-editor-url-value="<?= e($editorUrl) ?>"
-	data-form-list-return-url-value="<?= e($currentUrl) ?>"
+	data-form-list-editor-fragment-url-value="<?= e($editorFragmentUrl) ?>"
 	data-form-list-csrf-token-value="<?= e((string)($this->props['csrf_token'] ?? '')) ?>"
 	data-form-list-strings-value="<?= e($stringsJson ?: '{}') ?>"
 >
@@ -44,6 +45,7 @@ $tabUrl = static fn (string $source): string => '/admin/forms/?source=' . rawurl
 					<span><?= e($this->strings['form.list.new_slug']) ?></span>
 					<input
 						type="text"
+						class="form-control form-control-sm"
 						name="definition_slug"
 						value=""
 						required
@@ -55,7 +57,7 @@ $tabUrl = static fn (string $source): string => '/admin/forms/?source=' . rawurl
 				</label>
 				<label>
 					<span><?= e($this->strings['form.list.new_title']) ?></span>
-					<input type="text" name="title" value="">
+					<input type="text" class="form-control form-control-sm" name="title" value="">
 				</label>
 				<button type="submit" class="btn btn-primary btn-sm">
 					<i class="bi bi-plus-lg" aria-hidden="true"></i>
@@ -121,7 +123,12 @@ $tabUrl = static fn (string $source): string => '/admin/forms/?source=' . rawurl
 									<?php endif; ?>
 								</td>
 								<td class="text-end">
-									<a class="btn btn-outline-secondary btn-sm" href="<?= e($buildEditorUrl($slug)) ?>">
+									<a
+										class="btn btn-outline-secondary btn-sm"
+										href="<?= e($buildEditorUrl($slug)) ?>"
+										data-action="click->form-list#openEditor"
+										data-form-list-slug-param="<?= e($slug) ?>"
+									>
 										<i class="bi bi-<?= $readOnly ? 'eye' : 'pencil-square' ?>" aria-hidden="true"></i>
 										<?= e($this->strings[$readOnly ? 'form.list.action.view' : 'form.list.action.edit']) ?>
 									</a>
@@ -129,9 +136,35 @@ $tabUrl = static fn (string $source): string => '/admin/forms/?source=' . rawurl
 							</tr>
 						<?php endforeach; ?>
 						</tbody>
-					</table>
-				</div>
-			<?php endif; ?>
+						</table>
+					</div>
+				<?php endif; ?>
+			</div>
 		</div>
-	</div>
-</section>
+
+		<div
+			class="modal fade form-list__editor-modal"
+			tabindex="-1"
+			aria-hidden="true"
+			data-form-list-target="modal"
+		>
+			<div class="modal-dialog modal-fullscreen">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h2 class="modal-title h5"><?= e($this->strings['form.list.editor_title']) ?></h2>
+						<button
+							type="button"
+							class="btn-close"
+							aria-label="<?= e($this->strings['form.list.close']) ?>"
+							data-action="form-list#requestCloseEditor"
+						></button>
+					</div>
+					<div class="modal-body p-0" data-form-list-target="editorHost">
+						<div class="form-list__editor-loading">
+							<?= e($this->strings['form.list.editor_loading']) ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>

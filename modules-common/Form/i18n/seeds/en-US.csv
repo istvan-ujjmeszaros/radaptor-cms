@@ -153,6 +153,10 @@ form,list.col.usage,,en-US,Usage,Usage,0,0,Usage
 form,list.col.actions,,en-US,Actions,Actions,0,0,Actions
 form,list.action.edit,,en-US,Edit,Edit,0,0,Edit
 form,list.action.view,,en-US,View,View,0,0,View
+form,list.editor_title,,en-US,"Form builder","Form builder",0,0,"Form builder"
+form,list.editor_loading,,en-US,"Loading editor...","Loading editor...",0,0,"Loading editor..."
+form,list.editor_load_failed,,en-US,"Could not load the form editor.","Could not load the form editor.",0,0,"Could not load the form editor."
+form,list.close,,en-US,Close,Close,0,0,Close
 form,list.status.draft,,en-US,Draft,Draft,0,0,Draft
 form,list.status.published,,en-US,Published,Published,0,0,Published
 form,list.status.unknown,,en-US,Unknown,Unknown,0,0,Unknown
@@ -160,3 +164,4 @@ form,list.version.none,,en-US,None,None,0,0,None
 form,list.version.published,,en-US,"v{version}","v{version}",0,0,"v{version}"
 form,list.version.draft,,en-US,"draft v{version}","draft v{version}",0,0,"draft v{version}"
 form,list.usage.none,,en-US,None,None,0,0,None
+form,builder.warning.discard_unsaved,,en-US,"Discard unsaved form changes?","Discard unsaved form changes?",0,0,"Discard unsaved form changes?"

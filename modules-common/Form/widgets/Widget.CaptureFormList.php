@@ -40,8 +40,7 @@ final class WidgetCaptureFormList extends AbstractWidget
 			'csrf_token' => FormSubmitContext::issueCsrfTokenForForm(FormBuilderEventHelper::CSRF_FORM_ID),
 			'urls' => [
 				'create' => Url::getUrl('form_builder.create'),
-				'editor' => '/admin/forms/edit/',
-				'current' => Url::getCurrentUrlForReferer(),
+				'editor_fragment' => Url::getUrl('form_builder.editor_fragment'),
 			],
 		], strings: self::buildStrings());
 	}
@@ -74,6 +73,10 @@ final class WidgetCaptureFormList extends AbstractWidget
 			'form.list.col.actions',
 			'form.list.action.edit',
 			'form.list.action.view',
+			'form.list.editor_title',
+			'form.list.editor_loading',
+			'form.list.editor_load_failed',
+			'form.list.close',
 			'form.list.status.draft',
 			'form.list.status.published',
 			'form.list.status.unknown',
@@ -87,6 +90,7 @@ final class WidgetCaptureFormList extends AbstractWidget
 			'form.builder.error_slug_format',
 			'form.builder.error_slug_duplicate',
 			'form.builder.error_request',
+			'form.builder.warning.discard_unsaved',
 		];
 		$strings = [];
 

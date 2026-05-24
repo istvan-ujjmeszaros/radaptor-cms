@@ -4,7 +4,6 @@ parameters:
 		- /app/bootstrap/bootstrap.testing.php
 		- ../framework/classes/phpstan/class.NonHtmlResponseHeaderDetectionRule.php
 	paths:
-		- layouts/layout.admin_editor.php
 		- modules-common/Form/classes/class.AbstractForm.php
 		- modules-common/Form/classes/class.CaptureForm.php
 		- modules-common/Form/classes/class.FormDescriptorAdapter.php
@@ -28,6 +27,7 @@ parameters:
 		- modules-common/Cms/interfaces/interface.iEditorPaletteItemProvider.php
 		- modules-common/Form/events/Event.FormSubmit.php
 		- modules-common/Form/events/Event.FormBuilderCreate.php
+		- modules-common/Form/events/Event.FormBuilderEditorFragment.php
 		- modules-common/Form/events/Event.FormBuilderPreviewRender.php
 		- modules-common/Form/events/Event.FormBuilderPublish.php
 		- modules-common/Form/events/Event.FormBuilderSaveDraft.php

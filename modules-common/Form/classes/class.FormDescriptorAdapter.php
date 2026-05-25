@@ -272,8 +272,24 @@ final class FormDescriptorAdapter
 	{
 		$resolved = [];
 
-		foreach (self::resolveChoiceOptions($values) as $option) {
-			$resolved[$option['label']] = $option['value'];
+		if (!is_array($values)) {
+			return $resolved;
+		}
+
+		foreach ($values as $key => $value) {
+			if (is_string($key) && !is_array($value)) {
+				$option_value = self::resolveText($value);
+
+				if ($option_value !== '') {
+					$resolved[$key] = $option_value;
+				}
+
+				continue;
+			}
+
+			foreach (self::resolveChoiceOptions([$key => $value]) as $option) {
+				$resolved[$option['label']] = $option['value'];
+			}
 		}
 
 		return $resolved;

@@ -74,6 +74,8 @@ final class FormRefactorPhase4IntegrationTest extends TestCase
 		$this->assertSame(['alpha' => 'Alpha', 'beta' => 'Beta'], $form->getInput('choices')?->values);
 		$this->assertInstanceOf(FormInputRadiogroup::class, $form->getInput('delivery'));
 		$this->assertSame(['Synchronous' => 'sync', 'Asynchronous' => 'async'], $form->getInput('delivery')?->values);
+		$this->assertInstanceOf(FormInputRadiogroup::class, $form->getInput('legacy_delivery'));
+		$this->assertSame(['Synchronous' => 'sync', 'Asynchronous' => 'async'], $form->getInput('legacy_delivery')?->values);
 		$this->assertInstanceOf(FormInputHidden::class, $form->getInput('tracking_token'));
 
 		$this->assertSame('form', $tree['component']);
@@ -349,6 +351,15 @@ final class FormRefactorPhase4IntegrationTest extends TestCase
 								'values' => [
 									['inputtype' => 'option', 'value' => 'sync', 'label' => ['text' => 'Synchronous']],
 									['inputtype' => 'option', 'value' => 'async', 'label' => ['text' => 'Asynchronous']],
+								],
+							],
+							[
+								'type' => 'radiogroup',
+								'name' => 'legacy_delivery',
+								'label' => ['text' => 'Legacy delivery'],
+								'values' => [
+									'Synchronous' => 'sync',
+									'Asynchronous' => 'async',
 								],
 							],
 							[

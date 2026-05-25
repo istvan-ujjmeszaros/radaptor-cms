@@ -50,7 +50,7 @@ final class I18nTranslationServiceSourceMatchTest extends TestCase
 	public function testImportWarningDetectsLegacyNormalizedHeader(): void
 	{
 		$this->assertSame(
-			['import_export.warning.allow_source_match_missing'],
+			[$this->warningAllowSourceMatchMissing()],
 			$this->detectImportWarnings(
 				"domain,key,context,locale,source_text,expected_text,human_reviewed,text\n"
 				. "admin,menu.locales,,hu-HU,Locales,Locales,0,Locales\n",
@@ -74,7 +74,7 @@ final class I18nTranslationServiceSourceMatchTest extends TestCase
 	public function testImportWarningDetectsLegacyWideHeader(): void
 	{
 		$this->assertSame(
-			['import_export.warning.allow_source_match_missing'],
+			[$this->warningAllowSourceMatchMissing()],
 			$this->detectImportWarnings(
 				"domain,key,context,source_text,text:hu-HU\n"
 				. "admin,menu.locales,,Locales,Locales\n",
@@ -104,5 +104,10 @@ final class I18nTranslationServiceSourceMatchTest extends TestCase
 		$method = new ReflectionMethod($dataset, '_detectImportWarnings');
 
 		return $method->invoke($dataset, $csvContent, $format);
+	}
+
+	private function warningAllowSourceMatchMissing(): string
+	{
+		return t('import_export.warning.allow_source_match_missing');
 	}
 }

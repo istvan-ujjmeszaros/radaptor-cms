@@ -115,6 +115,7 @@ form,builder.error_csrf,,en-US,"Builder session expired. Reload the page.","Buil
 form,builder.error_create,,en-US,"Could not create the form.","Could not create the form.",0,0,"Could not create the form."
 form,builder.error_slug_format,,en-US,"Use letters, numbers, spaces, underscores, or hyphens. The capture- prefix is added automatically.","Use letters, numbers, spaces, underscores, or hyphens. The capture- prefix is added automatically.",0,0,"Use letters, numbers, spaces, underscores, or hyphens. The capture- prefix is added automatically."
 form,builder.error_slug_duplicate,,en-US,"A capture form with this slug already exists.","A capture form with this slug already exists.",0,0,"A capture form with this slug already exists."
+form,builder.error_duplicate_field_key,,en-US,"This payload key or field name is already used.","This payload key or field name is already used.",0,0,"This payload key or field name is already used."
 form,builder.error_request,,en-US,"The request failed.","The request failed.",0,0,"The request failed."
 form,builder.error_preview,,en-US,"Could not render the preview.","Could not render the preview.",0,0,"Could not render the preview."
 form,builder.error_save,,en-US,"Could not save the draft.","Could not save the draft.",0,0,"Could not save the draft."

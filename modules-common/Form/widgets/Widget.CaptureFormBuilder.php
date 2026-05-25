@@ -98,6 +98,7 @@ final class WidgetCaptureFormBuilder extends AbstractWidget
 			'form.builder.error_create',
 			'form.builder.error_slug_format',
 			'form.builder.error_slug_duplicate',
+			'form.builder.error_duplicate_field_key',
 			'form.builder.error_request',
 			'form.builder.error_preview',
 			'form.builder.error_save',

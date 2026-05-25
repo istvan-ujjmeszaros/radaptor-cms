@@ -105,6 +105,7 @@ form,builder.error_csrf,,hu-HU,"Builder session expired. Reload the page.","A sz
 form,builder.error_create,,hu-HU,"Could not create the form.","Az űrlap nem hozható létre.",0,0,"Az űrlap nem hozható létre."
 form,builder.error_slug_format,,hu-HU,"Use letters, numbers, spaces, underscores, or hyphens. The capture- prefix is added automatically.","Betűk, számok, szóközök, aláhúzások és kötőjelek használhatók. A capture- prefix automatikusan hozzáadódik.",0,0,"Betűk, számok, szóközök, aláhúzások és kötőjelek használhatók. A capture- prefix automatikusan hozzáadódik."
 form,builder.error_slug_duplicate,,hu-HU,"A capture form with this slug already exists.","Már létezik capture űrlap ezzel a sluggal.",0,0,"Már létezik capture űrlap ezzel a sluggal."
+form,builder.error_duplicate_field_key,,hu-HU,"This payload key or field name is already used.","Ez a payload kulcs vagy mezőnév már használatban van.",0,0,"Ez a payload kulcs vagy mezőnév már használatban van."
 form,builder.error_request,,hu-HU,"The request failed.","A kérés sikertelen.",0,0,"A kérés sikertelen."
 form,builder.error_preview,,hu-HU,"Could not render the preview.","Az előnézet nem renderelhető.",0,0,"Az előnézet nem renderelhető."
 form,builder.error_save,,hu-HU,"Could not save the draft.","A piszkozat nem menthető.",0,0,"A piszkozat nem menthető."

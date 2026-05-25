@@ -147,7 +147,7 @@ final class FormSubmitContext
 	public function validateRenderState(array $post): ?ApiError
 	{
 		if ($this->formDefinitionVersionId === null) {
-			if (FormCaptureDescriptorSchemaValidator::isCaptureSlug($this->formId) && $this->hasRenderStateForCurrentContext()) {
+			if (FormCaptureDescriptorSchemaValidator::isCaptureSlug($this->formId) && $this->hasRenderStateForSubmittedForm()) {
 				return self::renderStateError('missing');
 			}
 
@@ -535,13 +535,20 @@ final class FormSubmitContext
 			&& (int)($entry['form_definition_version_id'] ?? 0) === $this->formDefinitionVersionId;
 	}
 
-	private function hasRenderStateForCurrentContext(): bool
+	private function hasRenderStateForSubmittedForm(): bool
 	{
 		$bag = self::normalizeRenderStateBag(Request::_SESSION(self::SESSION_KEY_RENDER_STATES, []), time());
-		$require_build_id = $this->buildId !== '';
 
 		foreach ($bag as $entry) {
-			if ($this->matchesRenderStateContext($entry, $require_build_id)) {
+			if (!hash_equals((string)($entry['form_id'] ?? ''), $this->formId)) {
+				continue;
+			}
+
+			if ($this->buildId !== '' && !hash_equals((string)($entry['build_id'] ?? ''), $this->buildId)) {
+				continue;
+			}
+
+			if (self::positiveIntOrNull($entry['form_definition_version_id'] ?? null) !== null) {
 				Request::saveSessionData([self::SESSION_KEY_RENDER_STATES], $bag);
 
 				return true;

@@ -69,3 +69,100 @@ form,capture.validation.enum,,en-US,"Choose one of the available options.","Choo
 form,capture.validation.min_length,,en-US,"Minimum {min} characters","Minimum {min} characters",0,0,"Minimum {min} characters"
 widget,capture_form.description,,en-US,"Render a public DB-backed capture form with secure submission defaults.","Render a public DB-backed capture form with secure submission defaults.",0,0,"Render a public DB-backed capture form with secure submission defaults."
 widget,capture_form.name,,en-US,"Capture form","Capture form",0,0,"Capture form"
+widget,capture_form_builder.description,,en-US,"Admin builder for DB-backed capture forms.","Admin builder for DB-backed capture forms.",0,0,"Admin builder for DB-backed capture forms."
+widget,capture_form_builder.name,,en-US,"Form builder","Form builder",0,0,"Form builder"
+widget,capture_form_list.description,,en-US,"Admin list for DB-backed and shipped capture forms.","Admin list for DB-backed and shipped capture forms.",0,0,"Admin list for DB-backed and shipped capture forms."
+widget,capture_form_list.name,,en-US,"Form list","Form list",0,0,"Form list"
+form,builder.title,,en-US,"Form builder","Form builder",0,0,"Form builder"
+form,builder.new_slug,,en-US,"New slug","New slug",0,0,"New slug"
+form,builder.new_title,,en-US,"New title","New title",0,0,"New title"
+form,builder.placeholder.slug,,en-US,contact-us,contact-us,0,0,contact-us
+form,builder.help.slug,,en-US,"Use letters, numbers, spaces, underscores, or hyphens. The capture- prefix is added automatically.","Use letters, numbers, spaces, underscores, or hyphens. The capture- prefix is added automatically.",0,0,"Use letters, numbers, spaces, underscores, or hyphens. The capture- prefix is added automatically."
+form,builder.create,,en-US,Create,Create,0,0,Create
+form,builder.palette,,en-US,Fields,Fields,0,0,Fields
+form,builder.preview,,en-US,Preview,Preview,0,0,Preview
+form,builder.properties,,en-US,Properties,Properties,0,0,Properties
+form,builder.no_selection,,en-US,"No field selected","No field selected",0,0,"No field selected"
+form,builder.label.definition,,en-US,Definition,Definition,0,0,Definition
+form,builder.label.title,,en-US,Title,Title,0,0,Title
+form,builder.label.description,,en-US,Description,Description,0,0,Description
+form,builder.label.submit_label,,en-US,"Submit label","Submit label",0,0,"Submit label"
+form,builder.label.field_label,,en-US,"Field label","Field label",0,0,"Field label"
+form,builder.label.field_name,,en-US,"Field name","Field name",0,0,"Field name"
+form,builder.label.field_key,,en-US,"Payload key","Payload key",0,0,"Payload key"
+form,builder.label.required,,en-US,Required,Required,0,0,Required
+form,builder.label.options,,en-US,Options,Options,0,0,Options
+form,builder.action.undo,,en-US,Undo,Undo,0,0,Undo
+form,builder.action.redo,,en-US,Redo,Redo,0,0,Redo
+form,builder.action.move_up,,en-US,"Move up","Move up",0,0,"Move up"
+form,builder.action.move_down,,en-US,"Move down","Move down",0,0,"Move down"
+form,builder.action.delete,,en-US,Delete,Delete,0,0,Delete
+form,builder.action.save_draft,,en-US,"Save draft","Save draft",0,0,"Save draft"
+form,builder.action.publish,,en-US,Publish,Publish,0,0,Publish
+form,builder.status.clean,,en-US,Saved,Saved,0,0,Saved
+form,builder.status.dirty,,en-US,"Unsaved changes","Unsaved changes",0,0,"Unsaved changes"
+form,builder.status.saving,,en-US,Saving,Saving,0,0,Saving
+form,builder.status.saved,,en-US,"Draft saved","Draft saved",0,0,"Draft saved"
+form,builder.status.published,,en-US,Published,Published,0,0,Published
+form,builder.status.conflict,,en-US,"Server conflict","Server conflict",0,0,"Server conflict"
+form,builder.status.read_only,,en-US,"Read-only shipped form","Read-only shipped form",0,0,"Read-only shipped form"
+form,builder.warning.key_change,,en-US,"Changing this key changes future submission payloads. Existing submissions keep the old key, so exports may contain both keys.","Changing this key changes future submission payloads. Existing submissions keep the old key, so exports may contain both keys.",0,0,"Changing this key changes future submission payloads. Existing submissions keep the old key, so exports may contain both keys."
+form,builder.warning.local_storage,,en-US,"Local undo history is unavailable.","Local undo history is unavailable.",0,0,"Local undo history is unavailable."
+form,builder.warning.reload_or_overwrite,,en-US,"This draft changed elsewhere.","This draft changed elsewhere.",0,0,"This draft changed elsewhere."
+form,builder.action.reload_server,,en-US,"Reload server state","Reload server state",0,0,"Reload server state"
+form,builder.action.overwrite_local,,en-US,"Overwrite with local draft","Overwrite with local draft",0,0,"Overwrite with local draft"
+form,builder.error_csrf,,en-US,"Builder session expired. Reload the page.","Builder session expired. Reload the page.",0,0,"Builder session expired. Reload the page."
+form,builder.error_create,,en-US,"Could not create the form.","Could not create the form.",0,0,"Could not create the form."
+form,builder.error_slug_format,,en-US,"Use letters, numbers, spaces, underscores, or hyphens. The capture- prefix is added automatically.","Use letters, numbers, spaces, underscores, or hyphens. The capture- prefix is added automatically.",0,0,"Use letters, numbers, spaces, underscores, or hyphens. The capture- prefix is added automatically."
+form,builder.error_slug_duplicate,,en-US,"A capture form with this slug already exists.","A capture form with this slug already exists.",0,0,"A capture form with this slug already exists."
+form,builder.error_duplicate_field_key,,en-US,"This payload key or field name is already used.","This payload key or field name is already used.",0,0,"This payload key or field name is already used."
+form,builder.error_request,,en-US,"The request failed.","The request failed.",0,0,"The request failed."
+form,builder.error_preview,,en-US,"Could not render the preview.","Could not render the preview.",0,0,"Could not render the preview."
+form,builder.error_save,,en-US,"Could not save the draft.","Could not save the draft.",0,0,"Could not save the draft."
+form,builder.error_publish,,en-US,"Could not publish the form.","Could not publish the form.",0,0,"Could not publish the form."
+form,builder.field.text,,en-US,Text,Text,0,0,Text
+form,builder.field.textarea,,en-US,Textarea,Textarea,0,0,Textarea
+form,builder.field.select,,en-US,Select,Select,0,0,Select
+form,builder.field.radiogroup,,en-US,"Radio group","Radio group",0,0,"Radio group"
+form,builder.field.checkbox,,en-US,Checkbox,Checkbox,0,0,Checkbox
+form,builder.field.checkboxgroup,,en-US,"Checkbox group","Checkbox group",0,0,"Checkbox group"
+form,builder.field.date,,en-US,Date,Date,0,0,Date
+form,builder.field.datetime,,en-US,"Date and time","Date and time",0,0,"Date and time"
+form,builder.drop_target.fields,,en-US,"Form fields","Form fields",0,0,"Form fields"
+form,builder.option.default_one,,en-US,"Option one","Option one",0,0,"Option one"
+form,builder.option.default_two,,en-US,"Option two","Option two",0,0,"Option two"
+form,builder.panel.properties,,en-US,Properties,Properties,0,0,Properties
+form,builder.panel.usage,,en-US,"Used on pages","Used on pages",0,0,"Used on pages"
+form,builder.usage.empty,,en-US,"This form is not placed on any page.","This form is not placed on any page.",0,0,"This form is not placed on any page."
+form,builder.usage.page,,en-US,Page,Page,0,0,Page
+form,builder.usage.slot,,en-US,Slot,Slot,0,0,Slot
+form,builder.usage.connection,,en-US,Connection,Connection,0,0,Connection
+form,list.title,,en-US,"Capture forms","Capture forms",0,0,"Capture forms"
+form,list.subtitle,,en-US,"Create, edit, and inspect capture forms.","Create, edit, and inspect capture forms.",0,0,"Create, edit, and inspect capture forms."
+form,list.tab.custom,,en-US,"Custom forms","Custom forms",0,0,"Custom forms"
+form,list.tab.system,,en-US,"System forms","System forms",0,0,"System forms"
+form,list.new_slug,,en-US,"New slug","New slug",0,0,"New slug"
+form,list.new_title,,en-US,"New title","New title",0,0,"New title"
+form,list.create,,en-US,"Create form","Create form",0,0,"Create form"
+form,list.empty_custom,,en-US,"No custom capture forms yet.","No custom capture forms yet.",0,0,"No custom capture forms yet."
+form,list.empty_system,,en-US,"No system capture forms are published.","No system capture forms are published.",0,0,"No system capture forms are published."
+form,list.col.slug,,en-US,Slug,Slug,0,0,Slug
+form,list.col.source,,en-US,Source,Source,0,0,Source
+form,list.col.status,,en-US,Status,Status,0,0,Status
+form,list.col.version,,en-US,Version,Version,0,0,Version
+form,list.col.usage,,en-US,Usage,Usage,0,0,Usage
+form,list.col.actions,,en-US,Actions,Actions,0,0,Actions
+form,list.action.edit,,en-US,Edit,Edit,0,0,Edit
+form,list.action.view,,en-US,View,View,0,0,View
+form,list.editor_title,,en-US,"Form builder","Form builder",0,0,"Form builder"
+form,list.editor_loading,,en-US,"Loading editor...","Loading editor...",0,0,"Loading editor..."
+form,list.editor_load_failed,,en-US,"Could not load the form editor.","Could not load the form editor.",0,0,"Could not load the form editor."
+form,list.close,,en-US,Close,Close,0,0,Close
+form,list.status.draft,,en-US,Draft,Draft,0,0,Draft
+form,list.status.published,,en-US,Published,Published,0,0,Published
+form,list.status.unknown,,en-US,Unknown,Unknown,0,0,Unknown
+form,list.version.none,,en-US,None,None,0,0,None
+form,list.version.published,,en-US,"v{version}","v{version}",0,0,"v{version}"
+form,list.version.draft,,en-US,"draft v{version}","draft v{version}",0,0,"draft v{version}"
+form,list.usage.none,,en-US,None,None,0,0,None
+form,builder.warning.discard_unsaved,,en-US,"Discard unsaved form changes?","Discard unsaved form changes?",0,0,"Discard unsaved form changes?"

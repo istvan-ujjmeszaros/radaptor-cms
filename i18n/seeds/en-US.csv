@@ -84,6 +84,7 @@ admin,menu.locales,,en-US,Locales,Locales,0,0,Locales
 admin,menu.mcp_tokens,,en-US,"MCP tokens","MCP tokens",0,0,"MCP tokens"
 admin,menu.phpinfo,,en-US,PHPinfo,PHPinfo,0,0,PHPinfo
 admin,menu.resource_tree,,en-US,"Website structure","Website structure",0,0,"Website structure"
+admin,menu.forms,,en-US,Forms,Forms,0,0,Forms
 admin,menu.roles,,en-US,Roles,Roles,0,0,Roles
 admin,menu.runtime_diagnostics,,en-US,"Runtime diagnostics","Runtime diagnostics",0,0,"Runtime diagnostics"
 admin,menu.section.administration,,en-US,Administration,Administration,0,0,Administration

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 final class FormDefinitionResolver
 {
-	public static function resolve(string $form_id): ?FormDefinitionResolution
+	public static function resolve(string $form_id, ?int $form_definition_version_id = null): ?FormDefinitionResolution
 	{
 		$form_id = trim($form_id);
 
@@ -13,7 +13,7 @@ final class FormDefinitionResolver
 		}
 
 		if (FormCaptureDescriptorSchemaValidator::isCaptureSlug($form_id)) {
-			return (new FormCaptureDefinitionRepository())->findPublishedResolution($form_id);
+			return (new FormCaptureDefinitionRepository())->findPublishedResolution($form_id, $form_definition_version_id);
 		}
 
 		$class_name = FormClassResolver::resolveClassName($form_id);

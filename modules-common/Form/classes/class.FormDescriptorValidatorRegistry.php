@@ -227,6 +227,34 @@ final class FormDescriptorValidatorRegistry
 			return false;
 		}
 
+		if (is_array($value)) {
+			foreach ($value as $key => $item) {
+				if (self::isBlank($item)) {
+					continue;
+				}
+
+				$candidate = array_is_list($value) ? $item : $key;
+
+				if (!self::enumContains($candidate, $values)) {
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		return self::enumContains($value, $values);
+	}
+
+	/**
+	 * @param array<mixed> $values
+	 */
+	private static function enumContains(mixed $value, array $values): bool
+	{
+		if (!is_scalar($value)) {
+			return false;
+		}
+
 		foreach ($values as $key => $allowed) {
 			if ((string)$key === (string)$value) {
 				return true;

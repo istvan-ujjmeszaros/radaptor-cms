@@ -1,0 +1,60 @@
+<?php
+
+declare(strict_types=1);
+
+final class FormBuilderEventHelper
+{
+	public const string CSRF_FORM_ID = 'form_builder';
+
+	public static function authorizeContentAdmin(PolicyContext $policyContext): PolicyDecision
+	{
+		return $policyContext->principal->hasRole(RoleList::ROLE_CONTENT_ADMIN)
+			? PolicyDecision::allow('role: content_admin')
+			: PolicyDecision::deny('role required: content_admin');
+	}
+
+	public static function validateCsrfFromPost(): ?ApiError
+	{
+		return FormSubmitContext::validateCsrfTokenForForm(self::CSRF_FORM_ID, Request::_POST(FormSubmitContext::FIELD_CSRF_TOKEN, null));
+	}
+
+	/**
+	 * @return array<string, mixed>
+	 */
+	public static function descriptorFromPost(): array
+	{
+		$descriptor_json = (string)Request::_POST('descriptor_json', '');
+
+		try {
+			$descriptor = json_decode($descriptor_json, true, 512, JSON_THROW_ON_ERROR);
+		} catch (JsonException $exception) {
+			throw new InvalidArgumentException('Descriptor JSON is invalid.', 0, $exception);
+		}
+
+		if (!is_array($descriptor)) {
+			throw new InvalidArgumentException('Descriptor JSON must decode to an object.');
+		}
+
+		return $descriptor;
+	}
+
+	public static function boolPost(string $key): bool
+	{
+		$value = strtolower(trim((string)Request::_POST($key, '')));
+
+		return in_array($value, ['1', 'true', 'yes', 'on'], true);
+	}
+
+	public static function renderCsrfError(ApiError $error): void
+	{
+		ApiResponse::renderErrorObj(
+			new ApiError($error->code, t('form.builder.error_csrf')),
+			403,
+		);
+	}
+
+	public static function renderFailure(string $code, string $message_key, int $http_code = 400): void
+	{
+		ApiResponse::renderErrorObj(new ApiError($code, t($message_key)), $http_code);
+	}
+}

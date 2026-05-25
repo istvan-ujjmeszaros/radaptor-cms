@@ -36,6 +36,8 @@ final class FormCaptureDescriptorSchemaValidator
 		FormSubmitContext::FIELD_WIDGET_CONNECTION_ID,
 		FormSubmitContext::FIELD_BUILD_ID,
 		FormSubmitContext::FIELD_CONTEXT_PARAMS,
+		FormSubmitContext::FIELD_FORM_DEFINITION_VERSION_ID,
+		FormSubmitContext::FIELD_FORM_RENDER_STATE_ID,
 		FormSubmitContext::FIELD_CSRF_TOKEN,
 		'submit_button',
 	];
@@ -64,6 +66,23 @@ final class FormCaptureDescriptorSchemaValidator
 		if (FormClassResolver::resolveClassName($definition_slug) !== null) {
 			throw new InvalidArgumentException("Capture form definition_slug collides with a system FormType.");
 		}
+	}
+
+	public static function normalizeDefinitionSlugInput(string $definition_slug): string
+	{
+		$normalized = strtolower(trim($definition_slug));
+		$normalized = (string)preg_replace('/[^a-z0-9]+/', '-', $normalized);
+		$normalized = trim($normalized, '-');
+
+		if ($normalized === '' || $normalized === rtrim(self::CAPTURE_PREFIX, '-')) {
+			return '';
+		}
+
+		if (!str_starts_with($normalized, self::CAPTURE_PREFIX)) {
+			$normalized = self::CAPTURE_PREFIX . $normalized;
+		}
+
+		return $normalized;
 	}
 
 	public static function isCaptureSlug(string $form_id): bool

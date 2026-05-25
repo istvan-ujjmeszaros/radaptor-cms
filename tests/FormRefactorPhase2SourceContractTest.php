@@ -29,7 +29,7 @@ final class FormRefactorPhase2SourceContractTest extends TestCase
 		$this->assertStringContainsString('FormSubmitContext::fromPost($post)', $source);
 		$this->assertStringContainsString('$context->isCurrentBuild()', $source);
 		$this->assertStringContainsString('$context->canAccessHostContext()', $source);
-		$this->assertStringContainsString('FormDefinitionResolver::resolve($context->formId)', $source);
+		$this->assertStringContainsString('FormDefinitionResolver::resolve($context->formId', $source);
 		$this->assertStringContainsString("BrowserEventDocumentationHelper::param('form_id'", $source);
 		$this->assertStringContainsString("BrowserEventDocumentationHelper::param('form_instance_id'", $source);
 		$this->assertStringContainsString('(new FormResponseEmitter())->emit', $source);

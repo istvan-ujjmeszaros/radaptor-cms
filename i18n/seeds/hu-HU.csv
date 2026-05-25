@@ -84,6 +84,7 @@ admin,menu.locales,,hu-HU,Locales,Locale-ok,0,0,Locale-ok
 admin,menu.mcp_tokens,,hu-HU,"MCP tokens","MCP tokenek",0,0,"MCP tokenek"
 admin,menu.phpinfo,,hu-HU,PHPinfo,PHPinfo,0,1,PHPinfo
 admin,menu.resource_tree,,hu-HU,"Website structure","Weboldal szerkezet",0,0,"Weboldal szerkezet"
+admin,menu.forms,,hu-HU,Forms,Űrlapok,0,0,Űrlapok
 admin,menu.roles,,hu-HU,Roles,Szerepek,0,0,Szerepek
 admin,menu.runtime_diagnostics,,hu-HU,"Runtime diagnostics","Futásidejű diagnosztika",0,0,"Futásidejű diagnosztika"
 admin,menu.section.administration,,hu-HU,Administration,Adminisztráció,0,0,Adminisztráció

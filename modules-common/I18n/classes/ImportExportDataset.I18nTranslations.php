@@ -234,7 +234,7 @@ class ImportExportDatasetI18nTranslations extends AbstractImportExportDataset
 		$headers = CsvHelper::normalizeHeaderRow(array_map('strval', $headers));
 
 		if ($format === 'normalized' && !in_array('allow_source_match', $headers, true)) {
-			return [t('import_export.warning.allow_source_match_missing')];
+			return [$this->_warningAllowSourceMatchMissing()];
 		}
 
 		if ($format !== 'wide') {
@@ -266,14 +266,19 @@ class ImportExportDatasetI18nTranslations extends AbstractImportExportDataset
 
 		foreach (array_keys($textLocales) as $locale) {
 			if (!isset($allowSourceMatchLocales[$locale])) {
-				return [t('import_export.warning.allow_source_match_missing')];
+				return [$this->_warningAllowSourceMatchMissing()];
 			}
 		}
 
 		if ($textLocales !== [] && $allowSourceMatchLocales === []) {
-			return [t('import_export.warning.allow_source_match_missing')];
+			return [$this->_warningAllowSourceMatchMissing()];
 		}
 
 		return [];
+	}
+
+	protected function _warningAllowSourceMatchMissing(): string
+	{
+		return t('import_export.warning.allow_source_match_missing');
 	}
 }

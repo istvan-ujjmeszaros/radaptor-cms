@@ -83,8 +83,10 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame('Contact probe', $tree['props']['title']);
 		$this->assertSame($resolution->versionId(), $tree['props']['submit_context'][FormSubmitContext::FIELD_FORM_DEFINITION_VERSION_ID]);
 		$this->assertNotSame('', $tree['props']['submit_context'][FormSubmitContext::FIELD_FORM_RENDER_STATE_ID] ?? '');
-		$this->assertSame('form.honeypot', $tree['slots']['hidden_fields'][1]['component'] ?? null);
-		$this->assertSame('company_website', $tree['slots']['hidden_fields'][1]['props']['name'] ?? null);
+		$this->assertArrayHasKey('contents', $tree);
+		$this->assertSame($tree['contents'], $tree['slots']);
+		$this->assertSame('form.honeypot', $tree['contents']['hidden_fields'][1]['component'] ?? null);
+		$this->assertSame('company_website', $tree['contents']['hidden_fields'][1]['props']['name'] ?? null);
 	}
 
 	public function testCaptureSchemaRejectsSystemCollisionAndUnsupportedFeatures(): void

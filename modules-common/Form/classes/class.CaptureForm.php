@@ -165,10 +165,14 @@ final class CaptureForm extends AbstractForm
 	{
 		$tree = parent::buildTree();
 		$honeypot = $this->buildHoneypotTree();
-		$tree['contents']['hidden_fields'][] = $honeypot;
-		$tree['slots']['hidden_fields'][] = $honeypot;
 
-		return $tree;
+		if (!isset($tree['contents']['hidden_fields']) || !is_array($tree['contents']['hidden_fields'])) {
+			$tree['contents']['hidden_fields'] = [];
+		}
+
+		$tree['contents']['hidden_fields'][] = $honeypot;
+
+		return SduiNode::normalize($tree);
 	}
 
 	/**
@@ -193,18 +197,14 @@ final class CaptureForm extends AbstractForm
 	{
 		$field_name = (string)($this->_resolution->security()['honeypot']['field_name'] ?? FormCaptureDescriptorSchemaValidator::DEFAULT_HONEYPOT_FIELD);
 
-		return [
-			'type' => 'sub',
-			'component' => 'form.honeypot',
-			'props' => [
+		return SduiNode::create(
+			'form.honeypot',
+			[
 				'id' => $this->getFormId() . '_honeypot',
 				'name' => $field_name,
 				'label' => t('form.capture.honeypot.label'),
 			],
-			'contents' => [],
-			'slots' => [],
-			'meta' => [],
-		];
+		);
 	}
 
 	/**

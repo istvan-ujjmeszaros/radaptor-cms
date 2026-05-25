@@ -52,6 +52,21 @@ final class FormRefactorPhase2SourceContractTest extends TestCase
 		$this->assertStringContainsString('data-field-key', $template_source);
 	}
 
+	public function testFormRenderTreeBuildersUseContentsAsPrimaryTreeKey(): void
+	{
+		$form_source = $this->source('modules-common/Form/classes/class.AbstractForm.php');
+		$capture_form_source = $this->source('modules-common/Form/classes/class.CaptureForm.php');
+		$sdui_node_source = $this->source('modules-common/Cms/classes/class.SduiNode.php');
+
+		$this->assertStringContainsString('SduiNode::create(', $form_source);
+		$this->assertStringNotContainsString("'slots' =>", $form_source);
+		$this->assertStringContainsString("\$tree['contents']['hidden_fields'][] = \$honeypot;", $capture_form_source);
+		$this->assertStringContainsString('return SduiNode::normalize($tree);', $capture_form_source);
+		$this->assertStringNotContainsString("\$tree['slots']", $capture_form_source);
+		$this->assertStringContainsString("'slots'     => \$contents", $sdui_node_source);
+		$this->assertStringContainsString("is_array(\$node['contents'] ?? null) ? \$node['contents']", $sdui_node_source);
+	}
+
 	public function testTemplateSubmitAndAutocompleteCompatibilityContracts(): void
 	{
 		$form_template_source = $this->source('templates-common/default-SoAdmin/Form/template.sdui.form.php');

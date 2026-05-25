@@ -4,13 +4,6 @@ declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 
-if (!function_exists('t')) {
-	function t(string $key): string
-	{
-		return $key;
-	}
-}
-
 require_once dirname(__DIR__) . '/../framework/classes/class.LocaleService.php';
 require_once dirname(__DIR__) . '/../framework/classes/class.LocaleRegistry.php';
 require_once dirname(__DIR__) . '/../framework/classes/class.I18nCsvSchema.php';
@@ -100,14 +93,22 @@ final class I18nTranslationServiceSourceMatchTest extends TestCase
 	 */
 	private function detectImportWarnings(string $csvContent, string $format): array
 	{
-		$dataset = new ImportExportDatasetI18nTranslations();
-		$method = new ReflectionMethod($dataset, '_detectImportWarnings');
+		$dataset = new I18nTranslationServiceSourceMatchTestDataset();
+		$method = new ReflectionMethod(ImportExportDatasetI18nTranslations::class, '_detectImportWarnings');
 
 		return $method->invoke($dataset, $csvContent, $format);
 	}
 
 	private function warningAllowSourceMatchMissing(): string
 	{
-		return t('import_export.warning.allow_source_match_missing');
+		return 'import_export.warning.allow_source_match_missing';
+	}
+}
+
+final class I18nTranslationServiceSourceMatchTestDataset extends ImportExportDatasetI18nTranslations
+{
+	protected function _warningAllowSourceMatchMissing(): string
+	{
+		return 'import_export.warning.allow_source_match_missing';
 	}
 }

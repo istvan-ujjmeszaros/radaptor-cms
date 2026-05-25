@@ -10,6 +10,7 @@ declare(strict_types=1);
  *     status?: string,
  *     descriptor_json: string,
  *     descriptor_hash: string,
+ *     created_at?: string|null,
  *     published_at?: string|null,
  * }
  *
@@ -19,6 +20,7 @@ declare(strict_types=1);
  * @property ?string $status
  * @property ?string $descriptor_json
  * @property ?string $descriptor_hash
+ * @property ?string $created_at
  * @property ?string $published_at
  *
  * @extends SQLEntity<ShapeEntityFormDefinitionVersion>

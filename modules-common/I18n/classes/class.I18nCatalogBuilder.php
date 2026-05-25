@@ -63,6 +63,8 @@ class I18nCatalogBuilder
 			}
 		}
 
+		$catalog = self::_sortCatalogForExport($catalog);
+
 		$hash = md5(serialize($catalog));
 		$path = $outputDir . $locale . '.php';
 
@@ -76,6 +78,17 @@ class I18nCatalogBuilder
 			VALUES (?, ?, ?)
 			ON DUPLICATE KEY UPDATE catalog_hash = VALUES(catalog_hash), built_at = VALUES(built_at)"
 		)->execute([$locale, $hash, date('Y-m-d H:i:s')]);
+	}
+
+	/**
+	 * @param array<string, string> $catalog
+	 * @return array<string, string>
+	 */
+	private static function _sortCatalogForExport(array $catalog): array
+	{
+		ksort($catalog, SORT_STRING);
+
+		return $catalog;
 	}
 
 	/**

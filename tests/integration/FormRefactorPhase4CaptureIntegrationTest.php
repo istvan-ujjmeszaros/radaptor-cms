@@ -343,6 +343,24 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		}
 	}
 
+	public function testPlaceholderAppSecretFailsAsControlledCaptureRuntimeError(): void
+	{
+		$resolution = $this->upsertCapture('capture-phase4-placeholder-secret');
+		putenv('APP_SECRET=change-me-to-a-random-secret');
+
+		try {
+			$this->captureForm($resolution)->process($this->validPayload());
+			$this->fail('Capture submission with placeholder APP_SECRET should fail as a controlled runtime exception.');
+		} catch (FormCaptureRuntimeException $exception) {
+			$this->assertSame('FORM_CAPTURE_SECRET_MISSING', $exception->apiCode());
+			$this->assertSame('form.capture.error_unavailable', $exception->messageKey());
+			$this->assertSame(500, $exception->httpStatus());
+			$this->assertSame(0, DbHelper::count('form_submissions', ['definition_id' => $resolution->definitionId()]));
+		} finally {
+			putenv('APP_SECRET=form-refactor-phase-4-capture-test-secret');
+		}
+	}
+
 	public function testInvalidHoneypotAndRateLimitRejectWithoutStorage(): void
 	{
 		$resolution = $this->upsertCapture('capture-phase4-security', [

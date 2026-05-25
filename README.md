@@ -19,6 +19,11 @@ The CMS package requires PHP 8.5 or newer. The package metadata declares this as
 `composer.require.php = ^8.5`, and CMS code may use PHP 8.5 syntax such as the
 pipe operator (`|>`).
 
+Capture form submissions require a non-placeholder `APP_SECRET`. The public
+example value `change-me-to-a-random-secret` is rejected the same as a missing
+secret so copied `.env.example` files fail closed instead of producing stable
+public fingerprint hashes.
+
 ## Dependencies
 
 From `.registry-package.json`:

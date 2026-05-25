@@ -24,7 +24,7 @@ final class FormCaptureCompiledDescriptorCacheGarbageCollector
 	 */
 	public function run(bool $dry_run = true, ?string $definition_slug = null): array
 	{
-		$definition_slug = $definition_slug !== null && trim($definition_slug) !== '' ? trim($definition_slug) : null;
+		$definition_slug = $this->normalizeOptionalDefinitionSlug($definition_slug);
 		$current = $this->currentPublishedBySlug($definition_slug);
 		$files = [];
 		$errors = [];
@@ -76,6 +76,18 @@ final class FormCaptureCompiledDescriptorCacheGarbageCollector
 			'errors' => $errors,
 			'files' => $files,
 		];
+	}
+
+	private function normalizeOptionalDefinitionSlug(?string $definition_slug): ?string
+	{
+		if ($definition_slug === null || trim($definition_slug) === '') {
+			return null;
+		}
+
+		$definition_slug = FormCaptureDescriptorSchemaValidator::normalizeDefinitionSlugInput($definition_slug);
+		FormCaptureDescriptorSchemaValidator::validateDefinitionSlug($definition_slug);
+
+		return $definition_slug;
 	}
 
 	/**

@@ -661,6 +661,28 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		(new FormCaptureCompiledDescriptorCacheGarbageCollector())->run(true, '../*');
 	}
 
+	public function testCompiledDescriptorCacheGcNormalizesSlugBeforeMetadataLookup(): void
+	{
+		if (!class_exists('FormCaptureCompiledDescriptorCacheGarbageCollector')) {
+			self::markTestSkipped('Form cache GC is not implemented yet.');
+		}
+
+		$definition_slug = 'capture-phase4f-cache-gc-normalized';
+		$published = (new FormCaptureDefinitionRepository())->upsertPublishedDefinition($definition_slug, $this->descriptor(), $this->defaultSecurity());
+		$cache = new FormCaptureCompiledDescriptorCache();
+		$write = $cache->write($published->definition(), $published->version(), $published->descriptor(), $published->security());
+		$path = (string)$write['path'];
+
+		$dry_run = (new FormCaptureCompiledDescriptorCacheGarbageCollector($cache))->run(true, 'phase4f-cache-gc-normalized');
+
+		$this->assertSame('success', $dry_run['status']);
+		$this->assertSame(1, $dry_run['matched_files']);
+		$this->assertSame(1, $dry_run['kept_files']);
+		$this->assertSame(0, $dry_run['delete_candidates']);
+		$this->assertSame('current_published', $dry_run['files'][0]['reason'] ?? null);
+		$this->assertFileExists($path);
+	}
+
 	public function testRuntimeResolutionStillSucceedsWhenCacheRewriteFails(): void
 	{
 		if (!class_exists('FormCaptureCompiledDescriptorCache')) {

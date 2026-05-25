@@ -39,60 +39,64 @@ final class I18nTranslationService
 			throw new InvalidArgumentException('text is required');
 		}
 
-		$message = self::_loadOrCreateMessage($domain, $key, $context, $sourceTextOverride, $dryRun);
-		$existing = EntityI18n_translation::findById([
-			'domain' => $domain,
-			'key' => $key,
-			'context' => $context,
-			'locale' => $locale,
-		]);
-
-		$sourceHash = $message['source_hash'];
-		$existingText = $existing !== null ? (string) $existing->text : '';
-		$existingHumanReviewed = $existing !== null && self::_normalizeHumanReviewed($existing->human_reviewed ?? 0);
-		$existingAllowSourceMatch = $existing !== null && self::_normalizeAllowSourceMatch($existing->allow_source_match ?? 0);
-		$existingSourceHash = $existing !== null ? (string) $existing->source_hash_snapshot : '';
-		$targetHumanReviewed = self::_resolveImportedHumanReviewed($existing, $humanReviewed);
-		$targetAllowSourceMatch = self::_resolveImportedAllowSourceMatch(
-			$existing,
-			$allowSourceMatch,
-			$locale,
-			$message['source_text'],
-			$text
-		);
-
-		if ($existing !== null) {
-			$unchanged = $existingText === $text
-				&& $existingHumanReviewed === $targetHumanReviewed
-				&& $existingAllowSourceMatch === $targetAllowSourceMatch
-				&& $existingSourceHash === $sourceHash;
-
-			if ($unchanged) {
-				return [
-					'action' => 'skipped',
-					'natural_key' => $naturalKey,
-					'reason' => 'unchanged',
-					'allow_source_match' => $targetAllowSourceMatch,
-				];
-			}
-		}
-
-		if ($dryRun) {
-			return [
-				'action' => $existing === null ? 'inserted' : 'updated',
-				'natural_key' => $naturalKey,
-				'allow_source_match' => $targetAllowSourceMatch,
-			];
-		}
-
 		$pdo = Db::instance();
-		$startedTransaction = !$pdo->inTransaction();
+		$startedTransaction = !$dryRun && !$pdo->inTransaction();
 
 		if ($startedTransaction) {
 			$pdo->beginTransaction();
 		}
 
 		try {
+			$message = self::_loadOrCreateMessage($domain, $key, $context, $sourceTextOverride, $dryRun);
+			$existing = EntityI18n_translation::findById([
+				'domain' => $domain,
+				'key' => $key,
+				'context' => $context,
+				'locale' => $locale,
+			]);
+
+			$sourceHash = $message['source_hash'];
+			$existingText = $existing !== null ? (string) $existing->text : '';
+			$existingHumanReviewed = $existing !== null && self::_normalizeHumanReviewed($existing->human_reviewed ?? 0);
+			$existingAllowSourceMatch = $existing !== null && self::_normalizeAllowSourceMatch($existing->allow_source_match ?? 0);
+			$existingSourceHash = $existing !== null ? (string) $existing->source_hash_snapshot : '';
+			$targetHumanReviewed = self::_resolveImportedHumanReviewed($existing, $humanReviewed);
+			$targetAllowSourceMatch = self::_resolveImportedAllowSourceMatch(
+				$existing,
+				$allowSourceMatch,
+				$locale,
+				$message['source_text'],
+				$text
+			);
+
+			if ($existing !== null) {
+				$unchanged = $existingText === $text
+					&& $existingHumanReviewed === $targetHumanReviewed
+					&& $existingAllowSourceMatch === $targetAllowSourceMatch
+					&& $existingSourceHash === $sourceHash;
+
+				if ($unchanged) {
+					if ($startedTransaction) {
+						$pdo->commit();
+					}
+
+					return [
+						'action' => 'skipped',
+						'natural_key' => $naturalKey,
+						'reason' => 'unchanged',
+						'allow_source_match' => $targetAllowSourceMatch,
+					];
+				}
+			}
+
+			if ($dryRun) {
+				return [
+					'action' => $existing === null ? 'inserted' : 'updated',
+					'natural_key' => $naturalKey,
+					'allow_source_match' => $targetAllowSourceMatch,
+				];
+			}
+
 			if ($existing === null) {
 				EntityI18n_translation::createFromArray([
 					'domain' => $domain,
@@ -115,6 +119,17 @@ final class I18nTranslationService
 					'allow_source_match' => $targetAllowSourceMatch ? 1 : 0,
 					'source_hash_snapshot' => $sourceHash,
 				])->save();
+			}
+
+			$previousSourceHashes = array_unique([
+				(string) ($message['previous_source_hash'] ?? ''),
+				$existingSourceHash,
+			]);
+
+			foreach ($previousSourceHashes as $previousSourceHash) {
+				if ($previousSourceHash !== '' && $previousSourceHash !== $sourceHash) {
+					self::_syncTmForMessageSignature($domain, $key, $context, $previousSourceHash, $locale);
+				}
 			}
 
 			self::_syncTmForMessageSignature($domain, $key, $context, $sourceHash, $locale);
@@ -296,7 +311,7 @@ final class I18nTranslationService
 	}
 
 	/**
-	 * @return array{domain: string, key: string, context: string, source_text: string, source_hash: string}
+	 * @return array{domain: string, key: string, context: string, source_text: string, source_hash: string, previous_source_hash?: string}
 	 */
 	private static function _loadOrCreateMessage(
 		string $domain,
@@ -312,12 +327,36 @@ final class I18nTranslationService
 		]);
 
 		if ($message !== null) {
+			$currentSourceText = (string) ($message->source_text ?? '');
+			$currentSourceHash = (string) ($message->source_hash ?? '');
+			$sourceText = trim((string) ($sourceTextOverride ?? ''));
+
+			if ($sourceText !== '' && $sourceText !== $currentSourceText) {
+				$sourceHash = md5($sourceText);
+
+				if (!$dryRun) {
+					$message->patch([
+						'source_text' => $sourceText,
+						'source_hash' => $sourceHash,
+					])->save();
+				}
+
+				return [
+					'domain' => (string) $message->domain,
+					'key' => (string) $message->key,
+					'context' => (string) $message->context,
+					'source_text' => $sourceText,
+					'source_hash' => $sourceHash,
+					'previous_source_hash' => $currentSourceHash,
+				];
+			}
+
 			return [
 				'domain' => (string) $message->domain,
 				'key' => (string) $message->key,
 				'context' => (string) $message->context,
-				'source_text' => (string) ($message->source_text ?? ''),
-				'source_hash' => (string) ($message->source_hash ?? ''),
+				'source_text' => $currentSourceText,
+				'source_hash' => $currentSourceHash,
 			];
 		}
 

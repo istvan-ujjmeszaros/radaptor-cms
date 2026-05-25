@@ -343,6 +343,24 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		}
 	}
 
+	public function testPlaceholderAppSecretFailsAsControlledCaptureRuntimeError(): void
+	{
+		$resolution = $this->upsertCapture('capture-phase4-placeholder-secret');
+		putenv('APP_SECRET=change-me-to-a-random-secret');
+
+		try {
+			$this->captureForm($resolution)->process($this->validPayload());
+			$this->fail('Capture submission with placeholder APP_SECRET should fail as a controlled runtime exception.');
+		} catch (FormCaptureRuntimeException $exception) {
+			$this->assertSame('FORM_CAPTURE_SECRET_MISSING', $exception->apiCode());
+			$this->assertSame('form.capture.error_unavailable', $exception->messageKey());
+			$this->assertSame(500, $exception->httpStatus());
+			$this->assertSame(0, DbHelper::count('form_submissions', ['definition_id' => $resolution->definitionId()]));
+		} finally {
+			putenv('APP_SECRET=form-refactor-phase-4-capture-test-secret');
+		}
+	}
+
 	public function testInvalidHoneypotAndRateLimitRejectWithoutStorage(): void
 	{
 		$resolution = $this->upsertCapture('capture-phase4-security', [
@@ -570,6 +588,79 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame($published->descriptor()['title']['text'] ?? null, $resolved->descriptor()['title']['text'] ?? null);
 	}
 
+	public function testCompiledDescriptorCacheGcKeepsCurrentAndDeletesStaleOnlyOnApply(): void
+	{
+		if (!class_exists('FormCaptureCompiledDescriptorCacheGarbageCollector')) {
+			self::markTestSkipped('Form cache GC is not implemented yet.');
+		}
+
+		$definition_slug = 'capture-phase4f-cache-gc-stale';
+		$repository = new FormCaptureDefinitionRepository();
+		$cache = new FormCaptureCompiledDescriptorCache();
+		$gc = new FormCaptureCompiledDescriptorCacheGarbageCollector($cache);
+		$first = $repository->upsertPublishedDefinition($definition_slug, $this->descriptor(), $this->defaultSecurity());
+		$changed = $repository->upsertPublishedDefinition($definition_slug, $this->changedDescriptor(), $this->defaultSecurity());
+		$stale_write = $cache->write($first->definition(), $first->version(), $first->descriptor(), $first->security());
+		$current_write = $cache->write($changed->definition(), $changed->version(), $changed->descriptor(), $changed->security());
+		$stale_path = (string)$stale_write['path'];
+		$current_path = (string)$current_write['path'];
+
+		$dry_run = $gc->run(true, $definition_slug);
+
+		$this->assertSame('success', $dry_run['status']);
+		$this->assertSame(2, $dry_run['matched_files']);
+		$this->assertSame(1, $dry_run['kept_files']);
+		$this->assertSame(1, $dry_run['delete_candidates']);
+		$this->assertSame(0, $dry_run['deleted_files']);
+		$this->assertFileExists($stale_path);
+		$this->assertFileExists($current_path);
+
+		$applied = $gc->run(false, $definition_slug);
+
+		$this->assertSame('success', $applied['status']);
+		$this->assertSame(1, $applied['deleted_files']);
+		$this->assertFileDoesNotExist($stale_path);
+		$this->assertFileExists($current_path);
+	}
+
+	public function testCompiledDescriptorCacheGcDeletesCorruptCurrentCacheAndRuntimeRebuilds(): void
+	{
+		if (!class_exists('FormCaptureCompiledDescriptorCacheGarbageCollector')) {
+			self::markTestSkipped('Form cache GC is not implemented yet.');
+		}
+
+		$definition_slug = 'capture-phase4f-cache-gc-corrupt';
+		$published = (new FormCaptureDefinitionRepository())->upsertPublishedDefinition($definition_slug, $this->descriptor(), $this->defaultSecurity());
+		$cache = new FormCaptureCompiledDescriptorCache();
+		$write = $cache->write($published->definition(), $published->version(), $published->descriptor(), $published->security());
+		$path = (string)$write['path'];
+		file_put_contents($path, '<?php return [;');
+
+		$applied = (new FormCaptureCompiledDescriptorCacheGarbageCollector($cache))->run(false, $definition_slug);
+
+		$this->assertSame('success', $applied['status']);
+		$this->assertSame(1, $applied['delete_candidates']);
+		$this->assertSame(1, $applied['deleted_files']);
+		$this->assertFileDoesNotExist($path);
+
+		$resolved = FormDefinitionResolver::resolve($definition_slug);
+
+		$this->assertInstanceOf(FormDefinitionResolution::class, $resolved);
+		$this->assertSame($published->versionId(), $resolved->versionId());
+		$this->assertFileExists($path);
+	}
+
+	public function testCompiledDescriptorCacheGcRejectsUnsafeSlugBeforeGlob(): void
+	{
+		if (!class_exists('FormCaptureCompiledDescriptorCacheGarbageCollector')) {
+			self::markTestSkipped('Form cache GC is not implemented yet.');
+		}
+
+		$this->expectException(InvalidArgumentException::class);
+
+		(new FormCaptureCompiledDescriptorCacheGarbageCollector())->run(true, '../*');
+	}
+
 	public function testRuntimeResolutionStillSucceedsWhenCacheRewriteFails(): void
 	{
 		if (!class_exists('FormCaptureCompiledDescriptorCache')) {
@@ -738,6 +829,47 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertNull($definition->published_version_id);
 		$this->assertSame('abandoned', (string)$first_version?->status);
 		$this->assertSame('draft', (string)$second_version?->status);
+	}
+
+	public function testBuilderStateIncludesVersionHistoryForReadOnlySelectionUi(): void
+	{
+		$definition_slug = 'capture-phase4j-builder-version-history';
+		$service = new FormCaptureAuthoringService();
+		$created = $service->createDefinition($definition_slug, 'Builder version history');
+		$saved = $service->saveDraft($definition_slug, $this->descriptorWithTitle('Builder version history draft'), (string)$created['base_server_hash']);
+		$service->publishDraft($definition_slug, (int)($saved['active_draft']['version_id'] ?? 0));
+		$state = $service->loadDefinition($definition_slug);
+
+		$this->assertIsArray($state['versions'] ?? null);
+		$this->assertGreaterThanOrEqual(2, count($state['versions']));
+		$this->assertSame([2, 1], array_column($state['versions'], 'version_number'));
+	}
+
+	public function testAbandonedDraftGcPrunesOnlyOldUnreferencedAbandonedDrafts(): void
+	{
+		$definition_slug = 'capture-phase4j-builder-draft-gc';
+		$service = new FormCaptureAuthoringService();
+		$created = $service->createDefinition($definition_slug, 'Builder draft GC');
+		$first = $service->saveDraft($definition_slug, $this->descriptorWithTitle('Draft GC first'), (string)$created['base_server_hash']);
+		$first_draft_id = (int)($first['active_draft']['version_id'] ?? 0);
+		$second = $service->saveDraft($definition_slug, $this->descriptorWithTitle('Draft GC second'), (string)$first['base_server_hash']);
+		$second_draft_id = (int)($second['active_draft']['version_id'] ?? 0);
+		EntityFormDefinitionVersion::updateById($first_draft_id, [
+			'created_at' => date('Y-m-d H:i:s', time() - 172800),
+		]);
+
+		$gc = new FormCaptureDraftGarbageCollector();
+		$dry_run = $gc->run(1, true);
+
+		$this->assertGreaterThanOrEqual(1, $dry_run['matched_rows']);
+		$this->assertSame(0, $dry_run['deleted_rows']);
+		$this->assertInstanceOf(EntityFormDefinitionVersion::class, EntityFormDefinitionVersion::findFirst(['version_id' => $first_draft_id]));
+
+		$applied = $gc->run(1, false);
+
+		$this->assertGreaterThanOrEqual(1, $applied['deleted_rows']);
+		$this->assertNull(EntityFormDefinitionVersion::findFirst(['version_id' => $first_draft_id]));
+		$this->assertInstanceOf(EntityFormDefinitionVersion::class, EntityFormDefinitionVersion::findFirst(['version_id' => $second_draft_id]));
 	}
 
 	public function testBuilderAuthoringRejectsShippedDefinitionsAndReportsBaseHashConflict(): void

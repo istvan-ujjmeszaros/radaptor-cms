@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 final class FormCaptureSubmissionService
 {
+	private const array UNSAFE_APP_SECRET_VALUES = [
+		'change-me-to-a-random-secret',
+	];
+
 	/**
 	 * @param array{rate_limit?: array{accepted?: int, window_seconds?: int}} $security
 	 */
@@ -82,7 +86,7 @@ final class FormCaptureSubmissionService
 	{
 		$secret = trim($this->configuredAppSecret() ?? '');
 
-		if ($secret === '') {
+		if ($secret === '' || in_array($secret, self::UNSAFE_APP_SECRET_VALUES, true)) {
 			throw FormCaptureRuntimeException::missingAppSecret();
 		}
 

@@ -221,6 +221,7 @@ final class FormCaptureAuthoringService
 			'security' => $security,
 			'active_draft' => $active_draft instanceof EntityFormDefinitionVersion ? $active_draft->dto() : null,
 			'published_version' => $published instanceof EntityFormDefinitionVersion ? $published->dto() : null,
+			'versions' => $this->versionsForDefinition((int)$definition->definition_id),
 			'usage' => $this->usageForDefinition($definition_slug),
 			'base_server_hash' => $selected_version instanceof EntityFormDefinitionVersion ? (string)$selected_version->descriptor_hash : '',
 			'read_only' => (string)$definition->source !== self::SOURCE_DB,
@@ -606,6 +607,37 @@ final class FormCaptureAuthoringService
 		$version = $this->findActiveDraft((int)$definition->definition_id) ?? $this->findPublishedVersion($definition);
 
 		return $version instanceof EntityFormDefinitionVersion ? (string)$version->descriptor_hash : '';
+	}
+
+	/**
+	 * @return list<array<string, mixed>>
+	 */
+	private function versionsForDefinition(int $definition_id): array
+	{
+		$rows = DbHelper::selectManyFromQuery(
+			"SELECT
+				version_id,
+				definition_id,
+				version_number,
+				status,
+				descriptor_hash,
+				created_at,
+				published_at
+			FROM form_definition_versions
+			WHERE definition_id = ?
+			ORDER BY version_number DESC, version_id DESC",
+			[$definition_id],
+		);
+
+		return array_map(static fn (array $row): array => [
+			'version_id' => (int)$row['version_id'],
+			'definition_id' => (int)$row['definition_id'],
+			'version_number' => (int)$row['version_number'],
+			'status' => (string)$row['status'],
+			'descriptor_hash' => (string)$row['descriptor_hash'],
+			'created_at' => $row['created_at'] === null ? null : (string)$row['created_at'],
+			'published_at' => $row['published_at'] === null ? null : (string)$row['published_at'],
+		], $rows);
 	}
 
 	private function abandonDrafts(int $definition_id): void

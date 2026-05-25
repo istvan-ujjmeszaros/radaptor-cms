@@ -127,6 +127,46 @@ final class FormCaptureCompiledDescriptorCache
 	}
 
 	/**
+	 * @return list<string>
+	 */
+	public function listPaths(?string $definition_slug = null): array
+	{
+		$definition_slug = $this->normalizeOptionalDefinitionSlug($definition_slug);
+		$pattern = $definition_slug !== null
+			? $this->path($definition_slug, 0, true)
+			: $this->cacheRoot() . '/*.v*.php';
+		$paths = glob($pattern) ?: [];
+		$paths = array_values(array_filter($paths, 'is_string'));
+		sort($paths, SORT_STRING);
+
+		return $paths;
+	}
+
+	public function deletePath(string $path): bool
+	{
+		return is_file($path) && @unlink($path);
+	}
+
+	public function cacheRoot(): string
+	{
+		$root = defined('DEPLOY_ROOT') ? rtrim((string)DEPLOY_ROOT, '/') . '/' : getcwd() . '/';
+
+		return $root . self::CACHE_ROOT;
+	}
+
+	private function normalizeOptionalDefinitionSlug(?string $definition_slug): ?string
+	{
+		if ($definition_slug === null || trim($definition_slug) === '') {
+			return null;
+		}
+
+		$definition_slug = FormCaptureDescriptorSchemaValidator::normalizeDefinitionSlugInput($definition_slug);
+		FormCaptureDescriptorSchemaValidator::validateDefinitionSlug($definition_slug);
+
+		return $definition_slug;
+	}
+
+	/**
 	 * @param array<string, mixed> $data
 	 */
 	public static function hashData(array $data): string
@@ -144,10 +184,9 @@ final class FormCaptureCompiledDescriptorCache
 
 	private function path(string $definition_slug, int $version_number, bool $glob = false): string
 	{
-		$root = defined('DEPLOY_ROOT') ? rtrim((string)DEPLOY_ROOT, '/') . '/' : getcwd() . '/';
 		$version = $glob ? '*' : (string)$version_number;
 
-		return $root . self::CACHE_ROOT . '/' . $definition_slug . '.v' . $version . '.php';
+		return $this->cacheRoot() . '/' . $definition_slug . '.v' . $version . '.php';
 	}
 
 	private function ensureDirectory(string $directory): void

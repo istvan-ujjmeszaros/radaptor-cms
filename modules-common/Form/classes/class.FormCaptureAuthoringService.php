@@ -486,6 +486,7 @@ final class FormCaptureAuthoringService
 			[
 				'form_definition_resolution' => $resolution,
 				'return_target' => '',
+				FormSubmitContext::RENDER_CONTEXT_ISSUE_RENDER_STATE => false,
 			],
 		);
 		$renderer = new HtmlTreeRenderer(theme: $theme, lang_id: Kernel::getLocale(), is_editable: false);

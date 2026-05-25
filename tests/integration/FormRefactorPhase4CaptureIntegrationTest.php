@@ -667,6 +667,18 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertStringNotContainsString('name="company_website"', (string)($preview['html'] ?? ''));
 	}
 
+	public function testBuilderPreviewDoesNotIssueCaptureRenderState(): void
+	{
+		$definition_slug = 'capture-phase4j-builder-preview-render-state';
+		$published = (new FormCaptureDefinitionRepository())->upsertPublishedDefinition($definition_slug, $this->descriptor(), $this->defaultSecurity(), 'db');
+		Request::saveSessionData([FormSubmitContext::SESSION_KEY_RENDER_STATES], []);
+
+		$preview = (new FormCaptureAuthoringService())->renderPreview($definition_slug, $published->descriptor());
+
+		$this->assertIsString($preview['html'] ?? null);
+		$this->assertSame([], Request::_SESSION(FormSubmitContext::SESSION_KEY_RENDER_STATES, []));
+	}
+
 	public function testBuilderAuthoringCreatesSavesOneActiveDraftAndPublishes(): void
 	{
 		$definition_slug = 'capture-phase4j-builder-lifecycle';

@@ -15,6 +15,7 @@ final class FormSubmitContext
 	public const string FIELD_FORM_DEFINITION_VERSION_ID = 'form_definition_version_id';
 	public const string FIELD_FORM_RENDER_STATE_ID = 'form_render_state_id';
 	public const string FIELD_CSRF_TOKEN = 'csrf_token';
+	public const string RENDER_CONTEXT_ISSUE_RENDER_STATE = 'issue_render_state';
 	public const string SESSION_KEY_CSRF_TOKENS = 'formCsrfTokens';
 	public const string SESSION_KEY_RENDER_STATES = 'formRenderStates';
 	public const int CSRF_TOKEN_TTL_SECONDS = 7200;
@@ -33,6 +34,7 @@ final class FormSubmitContext
 		public readonly string $buildId,
 		public readonly ?int $formDefinitionVersionId = null,
 		public readonly array $extraParams = [],
+		public readonly bool $issueRenderState = true,
 	) {
 	}
 
@@ -78,6 +80,7 @@ final class FormSubmitContext
 			buildId: self::currentBuildId(),
 			formDefinitionVersionId: $form_definition_version_id,
 			extraParams: $get,
+			issueRenderState: (bool)($renderContext[self::RENDER_CONTEXT_ISSUE_RENDER_STATE] ?? true),
 		);
 	}
 
@@ -124,7 +127,7 @@ final class FormSubmitContext
 			self::FIELD_BUILD_ID => $this->buildId,
 			self::FIELD_CONTEXT_PARAMS => self::encodeContextParams($this->extraParams),
 			self::FIELD_FORM_DEFINITION_VERSION_ID => $this->formDefinitionVersionId ?? '',
-			self::FIELD_FORM_RENDER_STATE_ID => $this->formDefinitionVersionId !== null ? $this->issueRenderStateId() : '',
+			self::FIELD_FORM_RENDER_STATE_ID => $this->formDefinitionVersionId !== null && $this->issueRenderState ? $this->issueRenderStateId() : '',
 		];
 	}
 

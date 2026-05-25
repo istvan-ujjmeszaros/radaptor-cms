@@ -131,8 +131,9 @@ final class FormCaptureCompiledDescriptorCache
 	 */
 	public function listPaths(?string $definition_slug = null): array
 	{
-		$pattern = $definition_slug !== null && trim($definition_slug) !== ''
-			? $this->path(trim($definition_slug), 0, true)
+		$definition_slug = $this->normalizeOptionalDefinitionSlug($definition_slug);
+		$pattern = $definition_slug !== null
+			? $this->path($definition_slug, 0, true)
 			: $this->cacheRoot() . '/*.v*.php';
 		$paths = glob($pattern) ?: [];
 		$paths = array_values(array_filter($paths, 'is_string'));
@@ -151,6 +152,18 @@ final class FormCaptureCompiledDescriptorCache
 		$root = defined('DEPLOY_ROOT') ? rtrim((string)DEPLOY_ROOT, '/') . '/' : getcwd() . '/';
 
 		return $root . self::CACHE_ROOT;
+	}
+
+	private function normalizeOptionalDefinitionSlug(?string $definition_slug): ?string
+	{
+		if ($definition_slug === null || trim($definition_slug) === '') {
+			return null;
+		}
+
+		$definition_slug = FormCaptureDescriptorSchemaValidator::normalizeDefinitionSlugInput($definition_slug);
+		FormCaptureDescriptorSchemaValidator::validateDefinitionSlug($definition_slug);
+
+		return $definition_slug;
 	}
 
 	/**

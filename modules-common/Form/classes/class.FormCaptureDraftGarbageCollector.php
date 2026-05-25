@@ -61,7 +61,7 @@ final class FormCaptureDraftGarbageCollector
 	 */
 	private function candidates(string $cutoff): array
 	{
-		if (!$this->tableExists('form_definitions') || !$this->tableExists('form_definition_versions')) {
+		if (!$this->tableExists('form_definitions') || !$this->tableExists('form_definition_versions') || !$this->tableExists('form_submissions')) {
 			return [];
 		}
 

@@ -650,6 +650,17 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertFileExists($path);
 	}
 
+	public function testCompiledDescriptorCacheGcRejectsUnsafeSlugBeforeGlob(): void
+	{
+		if (!class_exists('FormCaptureCompiledDescriptorCacheGarbageCollector')) {
+			self::markTestSkipped('Form cache GC is not implemented yet.');
+		}
+
+		$this->expectException(InvalidArgumentException::class);
+
+		(new FormCaptureCompiledDescriptorCacheGarbageCollector())->run(true, '../*');
+	}
+
 	public function testRuntimeResolutionStillSucceedsWhenCacheRewriteFails(): void
 	{
 		if (!class_exists('FormCaptureCompiledDescriptorCache')) {

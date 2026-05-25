@@ -452,7 +452,7 @@ final class FormCaptureAuthoringService
 	public function renderPreview(string $definition_slug, array $descriptor): array
 	{
 		$definition_slug = trim($definition_slug) !== '' ? trim($definition_slug) : 'capture-preview';
-		$prepared = $this->prepareDescriptor($definition_slug, $descriptor, null);
+		$prepared = $this->prepareDescriptor($definition_slug, $descriptor, $this->securityForPreview($definition_slug));
 		$resolution = FormDefinitionResolution::capture(
 			$definition_slug,
 			[
@@ -499,6 +499,21 @@ final class FormCaptureAuthoringService
 			'js_top' => $renderer->getJsTop(),
 			'js' => $renderer->getJs(),
 		];
+	}
+
+	private function securityForPreview(string $definition_slug): string|null
+	{
+		if (!$this->tablesInstalled()) {
+			return null;
+		}
+
+		$definition = EntityFormDefinition::findBySlug($definition_slug);
+
+		if (!$definition instanceof EntityFormDefinition || (string)$definition->kind !== 'capture') {
+			return null;
+		}
+
+		return (string)$definition->security_json;
 	}
 
 	/**

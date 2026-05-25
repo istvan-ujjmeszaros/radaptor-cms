@@ -652,6 +652,21 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame(t('form.capture.error_unavailable'), $tree['props']['message'] ?? null);
 	}
 
+	public function testBuilderPreviewUsesStoredDefinitionSecurity(): void
+	{
+		$definition_slug = 'capture-phase4j-builder-preview-security';
+		$security = array_replace_recursive($this->defaultSecurity(), [
+			'honeypot' => [
+				'field_name' => 'preview_security_probe',
+			],
+		]);
+		$published = (new FormCaptureDefinitionRepository())->upsertPublishedDefinition($definition_slug, $this->descriptor(), $security, 'db');
+		$preview = (new FormCaptureAuthoringService())->renderPreview($definition_slug, $published->descriptor());
+
+		$this->assertStringContainsString('name="preview_security_probe"', (string)($preview['html'] ?? ''));
+		$this->assertStringNotContainsString('name="company_website"', (string)($preview['html'] ?? ''));
+	}
+
 	public function testBuilderAuthoringCreatesSavesOneActiveDraftAndPublishes(): void
 	{
 		$definition_slug = 'capture-phase4j-builder-lifecycle';

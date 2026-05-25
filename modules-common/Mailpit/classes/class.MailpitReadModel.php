@@ -79,9 +79,10 @@ final class MailpitReadModel
 
 	/**
 	 * @param array<string, scalar|null> $route_params
+	 * @param null|callable(string): string $labelResolver
 	 * @return array<string, mixed>
 	 */
-	public static function messageView(int $page_id, int $connection_id, array $route_params, ?MailpitClient $client = null): array
+	public static function messageView(int $page_id, int $connection_id, array $route_params, ?MailpitClient $client = null, ?callable $labelResolver = null): array
 	{
 		$client ??= MailpitClient::fromConfig();
 		$id = trim((string) ($route_params['id'] ?? ''));
@@ -99,7 +100,7 @@ final class MailpitReadModel
 			'connection_id' => $connection_id,
 			'id' => $id,
 			'tab' => $tab,
-			'tabs' => self::tabs($page_id, $connection_id, $id, $tab),
+			'tabs' => self::tabs($page_id, $connection_id, $id, $tab, $labelResolver),
 			'message' => $message,
 			'tab_content' => self::tabContent($client, $message, $tab, $page_id),
 			'urls' => [
@@ -164,9 +165,10 @@ final class MailpitReadModel
 	}
 
 	/**
+	 * @param null|callable(string): string $labelResolver
 	 * @return list<array{key: string, label: string, url: string, fragment_url: string, active: bool}>
 	 */
-	private static function tabs(int $page_id, int $connection_id, string $id, string $active_tab): array
+	private static function tabs(int $page_id, int $connection_id, string $id, string $active_tab, ?callable $labelResolver = null): array
 	{
 		$tabs = [];
 
@@ -174,7 +176,7 @@ final class MailpitReadModel
 			$subpath = $key === 'html' ? 'messages/' . rawurlencode($id) : 'messages/' . rawurlencode($id) . '/' . $key;
 			$tabs[] = [
 				'key' => $key,
-				'label' => t($label_key),
+				'label' => self::label($label_key, $labelResolver),
 				'url' => MailpitCatcherUrls::page($page_id, $subpath),
 				'fragment_url' => MailpitCatcherUrls::fragment($page_id, $connection_id, $subpath),
 				'active' => $key === $active_tab,
@@ -182,6 +184,14 @@ final class MailpitReadModel
 		}
 
 		return $tabs;
+	}
+
+	/**
+	 * @param null|callable(string): string $labelResolver
+	 */
+	private static function label(string $label_key, ?callable $labelResolver = null): string
+	{
+		return $labelResolver !== null ? $labelResolver($label_key) : t($label_key);
 	}
 
 	/**

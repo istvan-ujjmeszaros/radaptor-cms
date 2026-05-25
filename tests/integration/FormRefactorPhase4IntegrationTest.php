@@ -85,14 +85,16 @@ final class FormRefactorPhase4IntegrationTest extends TestCase
 		$this->assertSame('status', $tree['props']['field_refs']['status']['key']);
 		$this->assertSame('Phase4DescriptorProbe', $tree['props']['submit_context'][FormSubmitContext::FIELD_FORM_ID]);
 		$this->assertArrayNotHasKey(FormSubmitContext::FIELD_CSRF_TOKEN, $tree['props']['submit_context']);
+		$this->assertArrayHasKey('contents', $tree);
+		$this->assertSame($tree['contents'], $tree['slots']);
 
-		$this->assertCount(2, $tree['slots']['hidden_fields'] ?? []);
-		$this->assertSame('tracking_key', $tree['slots']['hidden_fields'][0]['props']['name'] ?? null);
-		$this->assertSame(FormSubmitContext::FIELD_CSRF_TOKEN, $tree['slots']['hidden_fields'][1]['props']['name'] ?? null);
-		$this->assertFalse($tree['slots']['hidden_fields'][0]['props']['save']);
-		$this->assertFalse($tree['slots']['hidden_fields'][1]['props']['save']);
+		$this->assertCount(2, $tree['contents']['hidden_fields'] ?? []);
+		$this->assertSame('tracking_key', $tree['contents']['hidden_fields'][0]['props']['name'] ?? null);
+		$this->assertSame(FormSubmitContext::FIELD_CSRF_TOKEN, $tree['contents']['hidden_fields'][1]['props']['name'] ?? null);
+		$this->assertFalse($tree['contents']['hidden_fields'][0]['props']['save']);
+		$this->assertFalse($tree['contents']['hidden_fields'][1]['props']['save']);
 
-		$title_props = $tree['slots']['rows'][0]['slots']['content'][0]['props'] ?? [];
+		$title_props = $tree['contents']['rows'][0]['contents']['content'][0]['props'] ?? [];
 		$this->assertSame('Title', $title_props['label'] ?? null);
 		$this->assertSame('title_key', $title_props['name'] ?? null);
 		$this->assertSame('title_key', $title_props['data_field_key'] ?? null);

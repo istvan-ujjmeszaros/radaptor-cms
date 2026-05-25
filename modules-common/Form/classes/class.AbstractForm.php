@@ -371,10 +371,9 @@ abstract class AbstractForm implements iForm, iListable
 			'rows' => $rows,
 		];
 
-		return [
-			'type' => 'widget',
-			'component' => 'form',
-			'props' => [
+		return SduiNode::create(
+			'form',
+			[
 				'form_id' => $this->getFormId(),
 				'form_instance_id' => $this->getFormInstanceId(),
 				'form_descriptor_id' => $this->getFormType(),
@@ -393,14 +392,14 @@ abstract class AbstractForm implements iForm, iListable
 				'field_refs' => $this->buildFieldRefs(),
 				'submit_context' => $submit_context->toHiddenFields(),
 			],
-			'contents' => $contents,
-			'slots' => $contents,
-			'meta' => [
+			$contents,
+			SduiNode::TYPE_WIDGET,
+			[
 				'html' => [
 					'wrapper_template' => $this->getMeta()->template,
 				],
 			],
-		];
+		);
 	}
 
 	/**
@@ -408,10 +407,9 @@ abstract class AbstractForm implements iForm, iListable
 	 */
 	private function buildCsrfTokenTree(FormSubmitContext $submit_context): array
 	{
-		return [
-			'type' => 'sub',
-			'component' => 'form.input.hidden',
-			'props' => [
+		return SduiNode::create(
+			'form.input.hidden',
+			[
 				'input_type' => FormInputHidden::INPUTTYPE,
 				'fieldname' => FormSubmitContext::FIELD_CSRF_TOKEN,
 				'field_key' => FormSubmitContext::FIELD_CSRF_TOKEN,
@@ -428,10 +426,7 @@ abstract class AbstractForm implements iForm, iListable
 				'info_string' => '',
 				'validators' => [],
 			],
-			'contents' => [],
-			'slots' => [],
-			'meta' => [],
-		];
+		);
 	}
 
 	/**
@@ -444,15 +439,13 @@ abstract class AbstractForm implements iForm, iListable
 			'content' => $items,
 		];
 
-		return [
-			'type' => 'sub',
-			'component' => 'form.row',
-			'props' => [
+		return SduiNode::create(
+			'form.row',
+			[
 				'row_id' => $row_id,
 			],
-			'contents' => $contents,
-			'slots' => $contents,
-		];
+			$contents,
+		);
 	}
 
 	/**

@@ -4,21 +4,9 @@ declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 
-if (!enum_exists('Config', false)) {
-	enum MailpitClientTestConfig: string
-	{
-		case EMAIL_CATCHER_HOST = 'EMAIL_CATCHER_HOST';
+require_once __DIR__ . '/CmsTestRuntime.php';
 
-		public function value(): mixed
-		{
-			return match ($this) {
-				self::EMAIL_CATCHER_HOST => getenv('MAILPIT_TEST_CATCHER_HOST') ?: 'localhost',
-			};
-		}
-	}
-
-	class_alias(MailpitClientTestConfig::class, 'Config');
-}
+CmsTestRuntime::bootstrapConsumerConfig();
 
 require_once dirname(__DIR__) . '/modules-common/Mailpit/classes/class.MailpitClientException.php';
 require_once dirname(__DIR__) . '/modules-common/Mailpit/classes/class.MailpitHttpResponse.php';
@@ -85,9 +73,11 @@ final class MailpitClientTest extends TestCase
 		$this->assertNull($seen['body']);
 	}
 
-	public function testFromConfigUsesAppMailpitHttpPortWhenConfigCaseIsMissing(): void
+	public function testFromConfigUsesAppMailpitHttpPortForPublishedHost(): void
 	{
+		$previous_host = getenv('EMAIL_CATCHER_HOST');
 		$previous_port = getenv('APP_MAILPIT_HTTP_PORT');
+		putenv('EMAIL_CATCHER_HOST=localhost');
 		putenv('APP_MAILPIT_HTTP_PORT=8123');
 
 		try {
@@ -102,15 +92,16 @@ final class MailpitClientTest extends TestCase
 
 			$this->assertSame('http://localhost:8123/api/v1/messages?start=0&limit=50', $seen['url']);
 		} finally {
+			$this->restoreEnv('EMAIL_CATCHER_HOST', $previous_host);
 			$this->restoreEnv('APP_MAILPIT_HTTP_PORT', $previous_port);
 		}
 	}
 
 	public function testFromConfigUsesInternalPortForMailpitServiceHost(): void
 	{
-		$previous_host = getenv('MAILPIT_TEST_CATCHER_HOST');
+		$previous_host = getenv('EMAIL_CATCHER_HOST');
 		$previous_port = getenv('APP_MAILPIT_HTTP_PORT');
-		putenv('MAILPIT_TEST_CATCHER_HOST=mailpit');
+		putenv('EMAIL_CATCHER_HOST=mailpit');
 		putenv('APP_MAILPIT_HTTP_PORT=8123');
 
 		try {
@@ -125,7 +116,7 @@ final class MailpitClientTest extends TestCase
 
 			$this->assertSame('http://mailpit:8025/api/v1/messages?start=0&limit=50', $seen['url']);
 		} finally {
-			$this->restoreEnv('MAILPIT_TEST_CATCHER_HOST', $previous_host);
+			$this->restoreEnv('EMAIL_CATCHER_HOST', $previous_host);
 			$this->restoreEnv('APP_MAILPIT_HTTP_PORT', $previous_port);
 		}
 	}

@@ -35,4 +35,69 @@ final class PackageSmokeTest extends TestCase
 		$this->assertFileExists($root . '/modules-common/Mailpit/i18n/seeds/en-US.csv');
 		$this->assertDirectoryExists($root . '/templates-common');
 	}
+
+	public function testI18nSeedFilenamesUseCanonicalLocalesOnly(): void
+	{
+		$root = dirname(__DIR__);
+		$seed_dirs = [];
+
+		$iterator = new RecursiveIteratorIterator(
+			new RecursiveDirectoryIterator($root, FilesystemIterator::SKIP_DOTS)
+		);
+
+		foreach ($iterator as $file) {
+			if (!$file instanceof SplFileInfo || $file->getExtension() !== 'csv') {
+				continue;
+			}
+
+			$seed_dir = $file->getPath();
+
+			if (!str_ends_with($seed_dir, '/i18n/seeds')) {
+				continue;
+			}
+
+			$seed_dirs[$seed_dir][] = $file;
+		}
+
+		$legacy_files = [];
+		$duplicate_locales = [];
+
+		foreach ($seed_dirs as $seed_dir => $files) {
+			$files_by_canonical_locale = [];
+
+			foreach ($files as $file) {
+				$locale = $file->getBasename('.csv');
+				$canonical_locale = str_replace('_', '-', $locale);
+
+				if (str_contains($locale, '_')) {
+					$legacy_files[] = $this->relativePath($file->getPathname(), $root);
+				}
+
+				$files_by_canonical_locale[$canonical_locale][] = $this->relativePath($file->getPathname(), $root);
+			}
+
+			foreach ($files_by_canonical_locale as $canonical_locale => $locale_files) {
+				if (count($locale_files) > 1) {
+					$duplicate_locales[] = $this->relativePath($seed_dir, $root) . ': ' . $canonical_locale . ' => ' . implode(', ', $locale_files);
+				}
+			}
+		}
+
+		$failures = [];
+
+		if ($legacy_files !== []) {
+			$failures[] = "Legacy underscore locale seed filenames:\n" . implode("\n", $legacy_files);
+		}
+
+		if ($duplicate_locales !== []) {
+			$failures[] = "Canonical/legacy duplicate locale seed filenames:\n" . implode("\n", $duplicate_locales);
+		}
+
+		$this->assertSame([], $failures, implode("\n\n", $failures));
+	}
+
+	private function relativePath(string $path, string $root): string
+	{
+		return ltrim(str_replace($root, '', $path), '/');
+	}
 }

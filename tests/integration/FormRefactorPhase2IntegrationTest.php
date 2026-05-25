@@ -114,17 +114,19 @@ final class FormRefactorPhase2IntegrationTest extends TestCase
 		$this->assertSame('phase2_probe', $tree['props']['submit_context'][FormSubmitContext::FIELD_FORM_INSTANCE_ID]);
 		$this->assertNotSame('', $tree['props']['submit_context'][FormSubmitContext::FIELD_BUILD_ID]);
 		$this->assertArrayNotHasKey(FormSubmitContext::FIELD_CSRF_TOKEN, $tree['props']['submit_context']);
+		$this->assertArrayHasKey('contents', $tree);
+		$this->assertSame($tree['contents'], $tree['slots']);
 
-		$hidden = $tree['slots']['hidden_fields'][0]['props'];
+		$hidden = $tree['contents']['hidden_fields'][0]['props'];
 		$this->assertSame('author_id', $hidden['name']);
 		$this->assertSame('author_id', $hidden['data_field_key']);
-		$csrf = $tree['slots']['hidden_fields'][1]['props'];
+		$csrf = $tree['contents']['hidden_fields'][1]['props'];
 		$this->assertSame(FormSubmitContext::FIELD_CSRF_TOKEN, $csrf['name']);
 		$this->assertSame(FormSubmitContext::FIELD_CSRF_TOKEN, $csrf['data_field_key']);
 		$this->assertNotSame('', $csrf['value']);
 		$this->assertFalse($csrf['save']);
 
-		$authorLabel = $tree['slots']['rows'][3]['slots']['content'][0]['props'];
+		$authorLabel = $tree['contents']['rows'][3]['contents']['content'][0]['props'];
 		$this->assertSame('author_label', $authorLabel['name']);
 		$this->assertSame('author_id', $authorLabel['connected_autocomplete_field_key']);
 	}

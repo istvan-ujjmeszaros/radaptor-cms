@@ -72,6 +72,8 @@ form,builder.create,,hu-HU,Create,Létrehozás,0,0,Létrehozás
 form,builder.palette,,hu-HU,Fields,Mezők,0,0,Mezők
 form,builder.preview,,hu-HU,Preview,Előnézet,0,0,Előnézet
 form,builder.properties,,hu-HU,Properties,Tulajdonságok,0,0,Tulajdonságok
+form,builder.panel.form,,hu-HU,Form,Űrlap,0,0,Űrlap
+form,builder.panel.input,,hu-HU,Input,Mező,0,0,Mező
 form,builder.no_selection,,hu-HU,"No field selected","Nincs kijelölt mező",0,0,"Nincs kijelölt mező"
 form,builder.label.definition,,hu-HU,Definition,Definíció,0,0,Definíció
 form,builder.label.title,,hu-HU,Title,Cím,0,0,Cím
@@ -89,6 +91,7 @@ form,builder.action.move_down,,hu-HU,"Move down","Mozgatás le",0,0,"Mozgatás l
 form,builder.action.delete,,hu-HU,Delete,Törlés,0,0,Törlés
 form,builder.action.save_draft,,hu-HU,"Save draft","Piszkozat mentése",0,0,"Piszkozat mentése"
 form,builder.action.publish,,hu-HU,Publish,Publikálás,0,0,Publikálás
+form,builder.action.close,,hu-HU,Close,Bezárás,0,0,Bezárás
 form,builder.status.clean,,hu-HU,Saved,Mentve,0,0,Mentve
 form,builder.status.dirty,,hu-HU,"Unsaved changes","Nem mentett módosítások",0,0,"Nem mentett módosítások"
 form,builder.status.saving,,hu-HU,Saving,Mentés,0,0,Mentés

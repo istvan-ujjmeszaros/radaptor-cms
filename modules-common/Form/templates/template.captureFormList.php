@@ -174,8 +174,9 @@ $tabUrl = static fn (string $source): string => '/admin/forms/?source=' . rawurl
 						></button>
 					</div>
 					<div class="modal-body p-0" data-form-list-target="editorHost">
-						<div class="form-list__editor-loading">
-							<?= e($this->strings['form.list.editor_loading']) ?>
+						<div class="form-list__editor-loading" role="status" aria-live="polite">
+							<span><?= e($this->strings['form.list.editor_loading']) ?></span>
+							<span class="spinner-border text-primary mt-3" aria-hidden="true"></span>
 						</div>
 					</div>
 				</div>

@@ -5,6 +5,7 @@ library('__ADMIN_FORM_BUILDER');
 $state = is_array($this->props['state'] ?? null) ? $this->props['state'] : [];
 $definitions = is_array($state['definitions'] ?? null) ? $state['definitions'] : [];
 $sourceFilter = (string)($state['source_filter'] ?? 'custom');
+$showLifecycleColumns = $sourceFilter !== 'system';
 $urls = is_array($this->props['urls'] ?? null) ? $this->props['urls'] : [];
 $editorFragmentUrl = (string)($urls['editor_fragment'] ?? '');
 $jsonFlags = JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT;
@@ -98,9 +99,11 @@ $tabUrl = static fn (string $source): string => '/admin/forms/?source=' . rawurl
 						<thead>
 						<tr>
 							<th><?= e($this->strings['form.list.col.slug']) ?></th>
-							<th><?= e($this->strings['form.list.col.source']) ?></th>
-							<th><?= e($this->strings['form.list.col.status']) ?></th>
-							<th><?= e($this->strings['form.list.col.version']) ?></th>
+							<?php if ($showLifecycleColumns): ?>
+								<th><?= e($this->strings['form.list.col.source']) ?></th>
+								<th><?= e($this->strings['form.list.col.status']) ?></th>
+								<th><?= e($this->strings['form.list.col.version']) ?></th>
+							<?php endif; ?>
 							<th><?= e($this->strings['form.list.col.usage']) ?></th>
 							<th class="text-end"><?= e($this->strings['form.list.col.actions']) ?></th>
 						</tr>
@@ -126,9 +129,11 @@ $tabUrl = static fn (string $source): string => '/admin/forms/?source=' . rawurl
 							?>
 							<tr data-form-list-slug="<?= e($slug) ?>">
 								<td><code><?= e($slug) ?></code></td>
-								<td><?= e((string)($definition['source'] ?? '')) ?></td>
-								<td><?= e($this->strings[$statusKey]) ?></td>
-								<td><?= e($versionLabel) ?></td>
+								<?php if ($showLifecycleColumns): ?>
+									<td><?= e((string)($definition['source'] ?? '')) ?></td>
+									<td><?= e($this->strings[$statusKey]) ?></td>
+									<td><?= e($versionLabel) ?></td>
+								<?php endif; ?>
 								<td>
 									<?php if ($usageCount > 0): ?>
 										<?= $usageCount ?>

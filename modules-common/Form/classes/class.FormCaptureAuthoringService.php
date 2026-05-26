@@ -55,6 +55,8 @@ final class FormCaptureAuthoringService
 					'preview_render' => Url::getUrl('form_builder.preview_render'),
 					'save_draft' => Url::getUrl('form_builder.save_draft'),
 					'publish' => Url::getUrl('form_builder.publish'),
+					'load_draft_version' => Url::getUrl('form_builder.load_draft_version'),
+					'update_draft_note' => Url::getUrl('form_builder.update_draft_note'),
 				],
 			],
 			type: SduiNode::TYPE_WIDGET,
@@ -218,14 +220,85 @@ final class FormCaptureAuthoringService
 		return [
 			'definition' => $definition->dto(),
 			'descriptor' => $descriptor,
+			'server_descriptor' => $descriptor,
 			'security' => $security,
 			'active_draft' => $active_draft instanceof EntityFormDefinitionVersion ? $active_draft->dto() : null,
 			'published_version' => $published instanceof EntityFormDefinitionVersion ? $published->dto() : null,
 			'versions' => $this->versionsForDefinition((int)$definition->definition_id),
 			'usage' => $this->usageForDefinition($definition_slug),
 			'base_server_hash' => $selected_version instanceof EntityFormDefinitionVersion ? (string)$selected_version->descriptor_hash : '',
+			'loaded_version' => null,
 			'read_only' => (string)$definition->source !== self::SOURCE_DB,
 			'status' => $active_draft instanceof EntityFormDefinitionVersion ? self::STATUS_DRAFT : (string)$definition->status,
+		];
+	}
+
+	/**
+	 * @return array<string, mixed>
+	 */
+	public function loadDraftVersion(string $definition_slug, int $version_id): array
+	{
+		$definition = $this->requireDbDefinition($definition_slug);
+
+		if ($version_id <= 0) {
+			throw new InvalidArgumentException('Draft version id is required.');
+		}
+
+		$version = EntityFormDefinitionVersion::findFirst([
+			'definition_id' => (int)$definition->definition_id,
+			'version_id' => $version_id,
+		]);
+
+		if (!$version instanceof EntityFormDefinitionVersion) {
+			throw new InvalidArgumentException('Draft version does not exist.');
+		}
+
+		$current = $this->loadDefinition($definition_slug);
+		$descriptor = $this->descriptorFromVersion($definition, $version);
+
+		return array_replace($current, [
+			'action' => 'loaded_draft_version',
+			'descriptor' => $descriptor,
+			'server_descriptor' => is_array($current['descriptor'] ?? null) ? $current['descriptor'] : $descriptor,
+			'loaded_version' => $version->dto(),
+		]);
+	}
+
+	/**
+	 * @return array<string, mixed>
+	 */
+	public function updateDraftNote(string $definition_slug, int $version_id, string $author_note): array
+	{
+		$definition = $this->requireDbDefinition($definition_slug);
+
+		if ($version_id <= 0) {
+			throw new InvalidArgumentException('Draft version id is required.');
+		}
+
+		$version = EntityFormDefinitionVersion::findFirst([
+			'definition_id' => (int)$definition->definition_id,
+			'version_id' => $version_id,
+		]);
+
+		if (!$version instanceof EntityFormDefinitionVersion) {
+			throw new InvalidArgumentException('Draft version does not exist.');
+		}
+
+		$author_note = trim($author_note);
+
+		if (function_exists('mb_substr')) {
+			$author_note = mb_substr($author_note, 0, 1000);
+		} else {
+			$author_note = substr($author_note, 0, 1000);
+		}
+
+		$updated = EntityFormDefinitionVersion::updateById((int)$version->version_id, [
+			'author_note' => $author_note === '' ? null : $author_note,
+		]);
+
+		return $this->loadDefinition($definition_slug) + [
+			'action' => 'updated_draft_note',
+			'updated_version' => $updated instanceof EntityFormDefinitionVersion ? $updated->dto() : null,
 		];
 	}
 
@@ -528,10 +601,14 @@ final class FormCaptureAuthoringService
 		return [
 			'definition' => null,
 			'descriptor' => $descriptor,
+			'server_descriptor' => $descriptor,
 			'security' => FormCaptureDescriptorSchemaValidator::normalizeSecurity(null, ['name']),
 			'active_draft' => null,
 			'published_version' => null,
+			'versions' => [],
+			'usage' => [],
 			'base_server_hash' => '',
+			'loaded_version' => null,
 			'read_only' => false,
 			'status' => 'new',
 		];
@@ -621,6 +698,7 @@ final class FormCaptureAuthoringService
 				version_number,
 				status,
 				descriptor_hash,
+				author_note,
 				created_at,
 				published_at
 			FROM form_definition_versions
@@ -635,6 +713,7 @@ final class FormCaptureAuthoringService
 			'version_number' => (int)$row['version_number'],
 			'status' => (string)$row['status'],
 			'descriptor_hash' => (string)$row['descriptor_hash'],
+			'author_note' => $row['author_note'] === null ? '' : (string)$row['author_note'],
 			'created_at' => $row['created_at'] === null ? null : (string)$row['created_at'],
 			'published_at' => $row['published_at'] === null ? null : (string)$row['published_at'],
 		], $rows);

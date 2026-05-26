@@ -8,21 +8,27 @@ $definition = is_array($selected['definition'] ?? null) ? $selected['definition'
 $palette = is_array($state['palette'] ?? null) ? $state['palette'] : [];
 $dropTargets = is_array($state['drop_targets'] ?? null) ? $state['drop_targets'] : [];
 $descriptor = is_array($selected['descriptor'] ?? null) ? $selected['descriptor'] : [];
+$serverDescriptor = is_array($selected['server_descriptor'] ?? null) ? $selected['server_descriptor'] : $descriptor;
 $usage = is_array($selected['usage'] ?? null) ? $selected['usage'] : [];
+$versions = is_array($selected['versions'] ?? null) ? $selected['versions'] : [];
 $urls = is_array($this->props['urls'] ?? null) ? $this->props['urls'] : [];
 $selectedSlug = is_array($definition) ? (string)($definition['definition_slug'] ?? '') : '';
 $readOnly = (bool)($selected['read_only'] ?? false);
 $activeDraft = is_array($selected['active_draft'] ?? null) ? $selected['active_draft'] : null;
 $publishedVersion = is_array($selected['published_version'] ?? null) ? $selected['published_version'] : null;
+$loadedVersion = is_array($selected['loaded_version'] ?? null) ? $selected['loaded_version'] : null;
 
 $jsonFlags = JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT;
 $stateJson = json_encode([
 	'definition_slug' => $selectedSlug,
 	'descriptor' => $descriptor,
+	'server_descriptor' => $serverDescriptor,
 	'base_server_hash' => (string)($selected['base_server_hash'] ?? ''),
 	'read_only' => $readOnly,
 	'active_draft' => $activeDraft,
 	'published_version' => $publishedVersion,
+	'versions' => $versions,
+	'loaded_version' => $loadedVersion,
 	'usage' => $usage,
 	'initial_panel' => (string)($this->props['initial_panel'] ?? 'properties'),
 	'initial_preview' => is_array($this->props['initial_preview'] ?? null) ? $this->props['initial_preview'] : [],
@@ -41,6 +47,8 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 	data-form-builder-preview-url-value="<?= e((string)($urls['preview_render'] ?? '')) ?>"
 	data-form-builder-save-url-value="<?= e((string)($urls['save_draft'] ?? '')) ?>"
 	data-form-builder-publish-url-value="<?= e((string)($urls['publish'] ?? '')) ?>"
+	data-form-builder-load-draft-url-value="<?= e((string)($urls['load_draft_version'] ?? '')) ?>"
+	data-form-builder-update-draft-note-url-value="<?= e((string)($urls['update_draft_note'] ?? '')) ?>"
 	data-form-builder-csrf-token-value="<?= e((string)($this->props['csrf_token'] ?? '')) ?>"
 >
 	<header class="form-builder__header content-card">
@@ -76,6 +84,12 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 			<i class="bi bi-link-45deg" aria-hidden="true"></i>
 			<?= e($this->strings['form.builder.panel.usage']) ?> (<?= count($usage) ?>)
 		</button>
+		<?php if (!$readOnly): ?>
+			<button type="button" class="btn btn-outline-secondary btn-sm" data-action="form-builder#showDraftsModal" data-form-builder-target="draftsButton">
+				<i class="bi bi-clock-history" aria-hidden="true"></i>
+				<?= e($this->strings['form.builder.panel.drafts']) ?> (<?= count($versions) ?>)
+			</button>
+		<?php endif; ?>
 		<button type="button" class="btn btn-outline-primary btn-sm" data-action="form-builder#saveDraft" data-form-builder-target="saveButton">
 			<i class="bi bi-save" aria-hidden="true"></i>
 			<?= e($this->strings['form.builder.action.save_draft']) ?>
@@ -246,6 +260,33 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-outline-secondary btn-sm" data-action="form-builder#closeUsageModal">
+						<?= e($this->strings['form.builder.action.close']) ?>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div
+		class="form-builder__usage-overlay form-builder__drafts-overlay"
+		role="dialog"
+		aria-modal="true"
+		aria-labelledby="form-builder-drafts-title"
+		data-form-builder-target="draftsModal"
+		data-action="click->form-builder#closeDraftsModalOnBackdrop keydown.esc@window->form-builder#closeDraftsModal"
+		hidden
+	>
+		<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2 class="modal-title h5" id="form-builder-drafts-title"><?= e($this->strings['form.builder.panel.drafts']) ?> (<?= count($versions) ?>)</h2>
+					<button type="button" class="btn-close" data-action="form-builder#closeDraftsModal" aria-label="<?= e($this->strings['form.builder.action.close']) ?>"></button>
+				</div>
+				<div class="modal-body">
+					<div class="form-builder__drafts-list" data-form-builder-target="draftsList"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-secondary btn-sm" data-action="form-builder#closeDraftsModal">
 						<?= e($this->strings['form.builder.action.close']) ?>
 					</button>
 				</div>

@@ -31,6 +31,8 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 			EventFormBuilderPreviewRender::class,
 			EventFormBuilderSaveDraft::class,
 			EventFormBuilderPublish::class,
+			EventFormBuilderLoadDraftVersion::class,
+			EventFormBuilderUpdateDraftNote::class,
 		] as $class_name) {
 			if (!class_exists($class_name)) {
 				self::markTestSkipped('The Radaptor consumer app runtime with capture-form MVP classes is required.');
@@ -869,6 +871,51 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame([2, 1], array_column($state['versions'], 'version_number'));
 	}
 
+	public function testBuilderCanLoadOlderDraftVersionAndRestoreItAsActiveDraft(): void
+	{
+		$definition_slug = 'capture-phase4j-builder-draft-load';
+		$service = new FormCaptureAuthoringService();
+		$created = $service->createDefinition($definition_slug, 'Builder draft load');
+		$first = $service->saveDraft($definition_slug, $this->descriptorWithTitle('First recoverable draft'), (string)$created['base_server_hash']);
+		$first_draft_id = (int)($first['active_draft']['version_id'] ?? 0);
+		$second = $service->saveDraft($definition_slug, $this->descriptorWithTitle('Second active draft'), (string)$first['base_server_hash']);
+		$second_draft_id = (int)($second['active_draft']['version_id'] ?? 0);
+
+		$loaded = $service->loadDraftVersion($definition_slug, $first_draft_id);
+
+		$this->assertSame('loaded_draft_version', $loaded['action'] ?? null);
+		$this->assertSame('First recoverable draft', $loaded['descriptor']['title']['text'] ?? null);
+		$this->assertSame('Second active draft', $loaded['server_descriptor']['title']['text'] ?? null);
+		$this->assertSame($first_draft_id, (int)($loaded['loaded_version']['version_id'] ?? 0));
+		$this->assertSame($second_draft_id, (int)($loaded['active_draft']['version_id'] ?? 0));
+		$this->assertSame((string)$second['base_server_hash'], (string)$loaded['base_server_hash']);
+
+		$restored = $service->saveDraft($definition_slug, $loaded['descriptor'], (string)$loaded['base_server_hash']);
+
+		$this->assertSame('saved_draft', $restored['action'] ?? null);
+		$this->assertSame($first_draft_id, (int)($restored['active_draft']['version_id'] ?? 0));
+		$this->assertSame('First recoverable draft', $restored['descriptor']['title']['text'] ?? null);
+		$this->assertSame('abandoned', (string)EntityFormDefinitionVersion::findFirst(['version_id' => $second_draft_id])?->status);
+	}
+
+	public function testBuilderDraftNotePersistsAndIsReturnedInVersionHistory(): void
+	{
+		$definition_slug = 'capture-phase4j-builder-draft-note';
+		$service = new FormCaptureAuthoringService();
+		$created = $service->createDefinition($definition_slug, 'Builder draft note');
+		$draft_id = (int)($created['active_draft']['version_id'] ?? 0);
+		$updated = $service->updateDraftNote($definition_slug, $draft_id, 'Known-good before the next redesign.');
+		$state = $service->loadDefinition($definition_slug);
+		$version_rows = array_values(array_filter(
+			$state['versions'],
+			static fn (array $row): bool => (int)($row['version_id'] ?? 0) === $draft_id,
+		));
+
+		$this->assertSame('updated_draft_note', $updated['action'] ?? null);
+		$this->assertSame('Known-good before the next redesign.', $updated['updated_version']['author_note'] ?? null);
+		$this->assertSame('Known-good before the next redesign.', $version_rows[0]['author_note'] ?? null);
+	}
+
 	public function testAbandonedDraftGcPrunesOnlyOldUnreferencedAbandonedDrafts(): void
 	{
 		$definition_slug = 'capture-phase4j-builder-draft-gc';
@@ -976,6 +1023,34 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame('draft', (string)$second_version?->status);
 	}
 
+	public function testBuilderDraftHistoryEventsLoadVersionAndUpdateNote(): void
+	{
+		$definition_slug = 'capture-phase4j-builder-event-drafts';
+		$service = new FormCaptureAuthoringService();
+		$created = $service->createDefinition($definition_slug, 'Builder event drafts');
+		$saved = $service->saveDraft($definition_slug, $this->descriptorWithTitle('Event loadable draft'), (string)$created['base_server_hash']);
+		$draft_id = (int)($saved['active_draft']['version_id'] ?? 0);
+
+		$note_response = $this->runBuilderEvent(new EventFormBuilderUpdateDraftNote(), [
+			'definition_slug' => $definition_slug,
+			'version_id' => (string)$draft_id,
+			'author_note' => 'Works before campaign launch.',
+		]);
+		$load_response = $this->runBuilderEvent(new EventFormBuilderLoadDraftVersion(), [
+			'definition_slug' => $definition_slug,
+			'version_id' => (string)$draft_id,
+		]);
+
+		$this->assertSame(200, $note_response['http_code']);
+		$this->assertTrue($note_response['body']['ok']);
+		$this->assertSame('updated_draft_note', $note_response['body']['data']['action'] ?? null);
+		$this->assertSame('Works before campaign launch.', $note_response['body']['data']['updated_version']['author_note'] ?? null);
+		$this->assertSame(200, $load_response['http_code']);
+		$this->assertTrue($load_response['body']['ok']);
+		$this->assertSame('loaded_draft_version', $load_response['body']['data']['action'] ?? null);
+		$this->assertSame($draft_id, (int)($load_response['body']['data']['loaded_version']['version_id'] ?? 0));
+	}
+
 	public function testBuilderEventsRequireContentAdminAuthorization(): void
 	{
 		$events = [
@@ -983,6 +1058,8 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 			new EventFormBuilderPreviewRender(),
 			new EventFormBuilderSaveDraft(),
 			new EventFormBuilderPublish(),
+			new EventFormBuilderLoadDraftVersion(),
+			new EventFormBuilderUpdateDraftNote(),
 		];
 
 		$this->impersonate(null);

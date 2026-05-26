@@ -370,6 +370,12 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$this->assertStringContainsString("Url::getUrl('form_builder.editor_fragment')", $list_widget_source);
 		$this->assertStringContainsString('data-form-list-editor-fragment-url-value', $list_template_source);
 		$this->assertStringNotContainsString('return_to', $list_template_source);
+		$this->assertStringContainsString("'form' => \$definitionSlug", $list_template_source);
+		$this->assertStringNotContainsString("'edit' => \$definitionSlug", $list_template_source);
+		$this->assertStringNotContainsString('?edit=', $list_template_source);
+		$this->assertStringContainsString('nav nav-tabs form-list__tabs', $list_template_source);
+		$this->assertStringContainsString('nav-link form-list__tab', $list_template_source);
+		$this->assertStringContainsString('aria-current="page"', $list_template_source);
 		$this->assertStringContainsString("'/admin/forms/'", $list_widget_source);
 
 		foreach ([

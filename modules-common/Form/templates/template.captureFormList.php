@@ -11,7 +11,7 @@ $jsonFlags = JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICO
 $stringsJson = json_encode($this->strings, $jsonFlags);
 $buildEditorUrl = static function (string $definitionSlug) use ($sourceFilter): string {
 	$params = [
-		'edit' => $definitionSlug,
+		'form' => $definitionSlug,
 	];
 
 	if ($sourceFilter === 'system') {
@@ -65,11 +65,19 @@ $tabUrl = static fn (string $source): string => '/admin/forms/?source=' . rawurl
 				</button>
 			</form>
 
-			<nav class="form-list__tabs" aria-label="<?= e($this->strings['form.list.title']) ?>">
-				<a class="form-list__tab<?= $sourceFilter === 'custom' ? ' is-active' : '' ?>" href="<?= e($tabUrl('custom')) ?>">
+			<nav class="nav nav-tabs form-list__tabs" aria-label="<?= e($this->strings['form.list.title']) ?>">
+				<a
+					class="nav-link form-list__tab<?= $sourceFilter === 'custom' ? ' active is-active' : '' ?>"
+					href="<?= e($tabUrl('custom')) ?>"
+					<?= $sourceFilter === 'custom' ? 'aria-current="page"' : '' ?>
+				>
 					<?= e($this->strings['form.list.tab.custom']) ?> (<?= (int)($state['custom_count'] ?? 0) ?>)
 				</a>
-				<a class="form-list__tab<?= $sourceFilter === 'system' ? ' is-active' : '' ?>" href="<?= e($tabUrl('system')) ?>">
+				<a
+					class="nav-link form-list__tab<?= $sourceFilter === 'system' ? ' active is-active' : '' ?>"
+					href="<?= e($tabUrl('system')) ?>"
+					<?= $sourceFilter === 'system' ? 'aria-current="page"' : '' ?>
+				>
 					<?= e($this->strings['form.list.tab.system']) ?> (<?= (int)($state['system_count'] ?? 0) ?>)
 				</a>
 			</nav>

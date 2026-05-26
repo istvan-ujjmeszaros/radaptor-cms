@@ -43,14 +43,14 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 	data-form-builder-publish-url-value="<?= e((string)($urls['publish'] ?? '')) ?>"
 	data-form-builder-csrf-token-value="<?= e((string)($this->props['csrf_token'] ?? '')) ?>"
 >
-	<header class="form-builder__header card shadow-sm">
-		<div class="form-builder__title-row">
+	<header class="form-builder__header content-card">
+		<div class="content-card-body py-3 form-builder__title-row">
 			<h1 class="form-builder__title h5 mb-0"><?= e($this->strings['form.builder.title']) ?></h1>
-			<span class="form-builder__status badge text-bg-light" data-form-builder-target="status"><?= e($this->strings[$readOnly ? 'form.builder.status.read_only' : 'form.builder.status.clean']) ?></span>
+			<span class="form-builder__status badge text-bg-secondary bg-opacity-25" data-form-builder-target="status"><?= e($this->strings[$readOnly ? 'form.builder.status.read_only' : 'form.builder.status.clean']) ?></span>
 		</div>
 	</header>
 
-	<div class="form-builder__toolbar card shadow-sm">
+	<div class="form-builder__toolbar content-card">
 		<button type="button" class="btn btn-outline-secondary btn-sm" data-action="form-builder#undo" data-form-builder-target="undoButton">
 			<i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i>
 			<?= e($this->strings['form.builder.action.undo']) ?>
@@ -93,33 +93,38 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 	</div>
 
 	<div class="form-builder__grid">
-		<aside class="form-builder__palette card shadow-sm" aria-label="<?= e($this->strings['form.builder.palette']) ?>">
-			<h2 class="h6"><?= e($this->strings['form.builder.palette']) ?></h2>
-			<div class="form-builder__palette-items">
-				<?php foreach ($palette as $item): ?>
-					<?php
-					if (!is_array($item)) {
-						continue;
-					}
-					?>
-						<button
-							type="button"
-							draggable="<?= $readOnly ? 'false' : 'true' ?>"
-							class="btn btn-outline-secondary form-builder__palette-item"
-							data-form-builder-palette-type-param="<?= e((string)($item['type'] ?? '')) ?>"
-							data-action="pointerdown->form-builder#preparePaletteDrag dragstart->form-builder#dragPaletteItem dragend->form-builder#endPaletteDrag click->form-builder#addPaletteItem"
-							<?= $readOnly ? 'disabled' : '' ?>
-					>
-						<i class="bi bi-<?= e((string)($item['icon'] ?? 'type')) ?>" aria-hidden="true"></i>
-						<span><?= e((string)($item['label'] ?? '')) ?></span>
-					</button>
-				<?php endforeach; ?>
+		<aside class="form-builder__palette content-card" aria-label="<?= e($this->strings['form.builder.palette']) ?>">
+			<div class="content-card-header">
+				<h2 class="h6"><?= e($this->strings['form.builder.palette']) ?></h2>
+			</div>
+			<div class="content-card-body form-builder__palette-items">
+					<?php foreach ($palette as $item): ?>
+						<?php
+						if (!is_array($item)) {
+							continue;
+						}
+						?>
+							<button
+								type="button"
+								draggable="<?= $readOnly ? 'false' : 'true' ?>"
+								class="btn btn-outline-secondary form-builder__palette-item"
+								data-form-builder-palette-type-param="<?= e((string)($item['type'] ?? '')) ?>"
+								data-action="pointerdown->form-builder#preparePaletteDrag dragstart->form-builder#dragPaletteItem dragend->form-builder#endPaletteDrag click->form-builder#addPaletteItem"
+								<?= $readOnly ? 'disabled' : '' ?>
+						>
+							<i class="bi bi-<?= e((string)($item['icon'] ?? 'type')) ?>" aria-hidden="true"></i>
+							<span><?= e((string)($item['label'] ?? '')) ?></span>
+						</button>
+					<?php endforeach; ?>
 			</div>
 		</aside>
 
-		<main class="form-builder__preview-panel card shadow-sm">
-			<h2 class="h6"><?= e($this->strings['form.builder.preview']) ?></h2>
-			<div class="form-builder__preview-wrap">
+		<main class="form-builder__preview-panel content-card">
+			<div class="content-card-header">
+				<h2 class="h6"><?= e($this->strings['form.builder.preview']) ?></h2>
+			</div>
+			<div class="content-card-body form-builder__preview-body">
+				<div class="form-builder__preview-wrap">
 				<iframe
 					class="form-builder__preview"
 					title="<?= e($this->strings['form.builder.preview']) ?>"
@@ -131,20 +136,25 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 					data-action="dragenter->form-builder#previewOverlayDrag dragover->form-builder#previewOverlayDrag dragleave->form-builder#previewOverlayLeave drop->form-builder#previewOverlayDrop"
 					hidden
 				></div>
+				</div>
 			</div>
 		</main>
 
-		<aside class="form-builder__properties card shadow-sm">
-			<h2 class="h6"><?= e($this->strings['form.builder.properties']) ?></h2>
-			<div class="btn-group form-builder__panel-tabs" role="tablist">
-				<button type="button" class="btn btn-outline-secondary btn-sm" data-form-builder-target="propertiesTabButton" data-action="form-builder#showPropertiesPanel">
-					<?= e($this->strings['form.builder.panel.properties']) ?>
-				</button>
-				<button type="button" class="btn btn-outline-secondary btn-sm" data-form-builder-target="usageTabButton" data-action="form-builder#showUsagePanel">
-					<?= e($this->strings['form.builder.panel.usage']) ?> (<?= count($usage) ?>)
-				</button>
+		<aside class="form-builder__properties content-card">
+			<div class="content-card-header">
+				<h2 class="h6"><?= e($this->strings['form.builder.properties']) ?></h2>
 			</div>
-			<div data-form-builder-target="propertiesPane" class="form-builder__properties-pane">
+			<div class="content-card-body">
+				<div class="btn-group form-builder__panel-tabs" role="tablist">
+					<button type="button" class="btn btn-outline-secondary btn-sm" data-form-builder-target="propertiesTabButton" data-action="form-builder#showPropertiesPanel">
+						<?= e($this->strings['form.builder.panel.properties']) ?>
+					</button>
+					<button type="button" class="btn btn-outline-secondary btn-sm" data-form-builder-target="usageTabButton" data-action="form-builder#showUsagePanel">
+						<?= e($this->strings['form.builder.panel.usage']) ?> (<?= count($usage) ?>)
+					</button>
+				</div>
+			</div>
+			<div data-form-builder-target="propertiesPane" class="content-card-body pt-0 form-builder__properties-pane">
 				<div data-form-builder-target="emptyProperties" class="form-builder__empty-properties">
 					<?= e($this->strings['form.builder.no_selection']) ?>
 				</div>
@@ -186,7 +196,7 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 					</div>
 				</div>
 			</div>
-			<div data-form-builder-target="usagePane" class="form-builder__usage-pane" hidden>
+			<div data-form-builder-target="usagePane" class="content-card-body pt-0 form-builder__usage-pane" hidden>
 				<?php if ($usage === []): ?>
 					<div class="form-builder__empty-properties"><?= e($this->strings['form.builder.usage.empty']) ?></div>
 				<?php else: ?>

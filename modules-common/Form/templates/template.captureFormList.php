@@ -30,19 +30,19 @@ $tabUrl = static fn (string $source): string => '/admin/forms/?source=' . rawurl
 	data-form-list-csrf-token-value="<?= e((string)($this->props['csrf_token'] ?? '')) ?>"
 	data-form-list-strings-value="<?= e($stringsJson ?: '{}') ?>"
 >
-	<div class="card shadow-sm form-list__card">
-		<div class="card-body">
-			<div class="d-flex flex-wrap gap-2 justify-content-between align-items-start mb-3">
-				<div>
-					<h1 class="h4 mb-1"><?= e($this->strings['form.list.title']) ?></h1>
-					<p class="text-muted mb-0"><?= e($this->strings['form.list.subtitle']) ?></p>
-				</div>
-				<span class="form-list__status" data-form-list-target="status"></span>
+	<div class="content-card form-list__card">
+		<div class="content-card-header align-items-start gap-3 flex-wrap">
+			<div>
+				<h1 class="h4 mb-1"><?= e($this->strings['form.list.title']) ?></h1>
+				<p class="text-body-secondary mb-0"><?= e($this->strings['form.list.subtitle']) ?></p>
 			</div>
+			<span class="form-list__status badge text-bg-secondary bg-opacity-25" data-form-list-target="status"></span>
+		</div>
 
-			<form class="form-list__create" data-action="submit->form-list#create">
-				<label>
-					<span><?= e($this->strings['form.list.new_slug']) ?></span>
+		<div class="content-card-body">
+			<form class="row g-3 align-items-end form-list__create" data-action="submit->form-list#create">
+				<label class="col-12 col-lg-5 form-label mb-0">
+					<span class="d-block mb-2"><?= e($this->strings['form.list.new_slug']) ?></span>
 					<input
 						type="text"
 						class="form-control form-control-sm"
@@ -55,16 +55,20 @@ $tabUrl = static fn (string $source): string => '/admin/forms/?source=' . rawurl
 						title="<?= e($this->strings['form.builder.help.slug']) ?>"
 					>
 				</label>
-				<label>
-					<span><?= e($this->strings['form.list.new_title']) ?></span>
+				<label class="col-12 col-lg-5 form-label mb-0">
+					<span class="d-block mb-2"><?= e($this->strings['form.list.new_title']) ?></span>
 					<input type="text" class="form-control form-control-sm" name="title" value="">
 				</label>
-				<button type="submit" class="btn btn-primary btn-sm">
-					<i class="bi bi-plus-lg" aria-hidden="true"></i>
-					<?= e($this->strings['form.list.create']) ?>
-				</button>
+				<div class="col-12 col-lg-auto">
+					<button type="submit" class="btn btn-primary btn-sm">
+						<i class="bi bi-plus-lg" aria-hidden="true"></i>
+						<?= e($this->strings['form.list.create']) ?>
+					</button>
+				</div>
 			</form>
+		</div>
 
+		<div class="content-card-tabs">
 			<nav class="nav nav-tabs form-list__tabs" aria-label="<?= e($this->strings['form.list.title']) ?>">
 				<a
 					class="nav-link form-list__tab<?= $sourceFilter === 'custom' ? ' active is-active' : '' ?>"
@@ -81,7 +85,9 @@ $tabUrl = static fn (string $source): string => '/admin/forms/?source=' . rawurl
 					<?= e($this->strings['form.list.tab.system']) ?> (<?= (int)($state['system_count'] ?? 0) ?>)
 				</a>
 			</nav>
+		</div>
 
+		<div class="content-card-body pt-3">
 			<?php if ($definitions === []): ?>
 				<div class="form-list__empty">
 					<?= e($this->strings[$sourceFilter === 'system' ? 'form.list.empty_system' : 'form.list.empty_custom']) ?>
@@ -132,7 +138,7 @@ $tabUrl = static fn (string $source): string => '/admin/forms/?source=' . rawurl
 								</td>
 								<td class="text-end">
 									<a
-										class="btn btn-outline-secondary btn-sm"
+										class="btn btn-outline-primary btn-sm"
 										href="<?= e($buildEditorUrl($slug)) ?>"
 										data-action="click->form-list#openEditor"
 										data-form-list-slug-param="<?= e($slug) ?>"

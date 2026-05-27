@@ -201,19 +201,112 @@ final class FormCaptureCompiledDescriptorCache
 	private function applyFilesystemMode(string $path, bool $directory): void
 	{
 		if (class_exists('Config')) {
-			$owner = Config::LINUX_FILE_OWNER->value();
-			$group = Config::LINUX_FILE_GROUP->value();
+			$owner = $this->configuredOwnerId(Config::LINUX_FILE_OWNER->value());
+			$group = $this->configuredGroupId(Config::LINUX_FILE_GROUP->value());
 
-			if (is_string($owner) && $owner !== '') {
-				@chown($path, $owner);
+			if ($owner !== null && $owner !== @fileowner($path) && $this->canChangeOwner()) {
+				$this->runFilesystemCall(static fn (): bool => chown($path, $owner));
 			}
 
-			if (is_string($group) && $group !== '') {
-				@chgrp($path, $group);
+			if ($group !== null && $group !== @filegroup($path) && $this->canChangeGroup($path, $group)) {
+				$this->runFilesystemCall(static fn (): bool => chgrp($path, $group));
 			}
 		}
 
-		@chmod($path, $directory ? $this->directoryMode() : $this->fileMode());
+		if ($this->canChangeMode($path)) {
+			$mode = $directory ? $this->directoryMode() : $this->fileMode();
+			$this->runFilesystemCall(static fn (): bool => chmod($path, $mode));
+		}
+	}
+
+	private function configuredOwnerId(mixed $owner): ?int
+	{
+		if (is_int($owner) || (is_string($owner) && ctype_digit($owner))) {
+			return (int)$owner;
+		}
+
+		if (!is_string($owner) || trim($owner) === '' || !function_exists('posix_getpwnam')) {
+			return null;
+		}
+
+		$info = posix_getpwnam($owner);
+
+		return is_array($info) && isset($info['uid']) ? (int)$info['uid'] : null;
+	}
+
+	private function configuredGroupId(mixed $group): ?int
+	{
+		if (is_int($group) || (is_string($group) && ctype_digit($group))) {
+			return (int)$group;
+		}
+
+		if (!is_string($group) || trim($group) === '' || !function_exists('posix_getgrnam')) {
+			return null;
+		}
+
+		$info = posix_getgrnam($group);
+
+		return is_array($info) && isset($info['gid']) ? (int)$info['gid'] : null;
+	}
+
+	private function currentUserId(): ?int
+	{
+		return function_exists('posix_geteuid') ? posix_geteuid() : null;
+	}
+
+	private function canChangeOwner(): bool
+	{
+		return $this->currentUserId() === 0;
+	}
+
+	private function canChangeGroup(string $path, int $group): bool
+	{
+		$current_user_id = $this->currentUserId();
+
+		if ($current_user_id === 0) {
+			return true;
+		}
+
+		if ($current_user_id === null || $current_user_id !== @fileowner($path)) {
+			return false;
+		}
+
+		return in_array($group, $this->currentGroupIds(), true);
+	}
+
+	/**
+	 * @return list<int>
+	 */
+	private function currentGroupIds(): array
+	{
+		$groups = function_exists('posix_getgroups') ? array_map('intval', posix_getgroups()) : [];
+
+		if (function_exists('posix_getegid')) {
+			$groups[] = posix_getegid();
+		}
+
+		return array_values(array_unique($groups));
+	}
+
+	private function canChangeMode(string $path): bool
+	{
+		$current_user_id = $this->currentUserId();
+
+		return $current_user_id === 0 || $current_user_id === @fileowner($path);
+	}
+
+	/**
+	 * @param callable(): bool $operation
+	 */
+	private function runFilesystemCall(callable $operation): bool
+	{
+		set_error_handler(static fn (int $_severity, string $_message): bool => true);
+
+		try {
+			return $operation();
+		} finally {
+			restore_error_handler();
+		}
 	}
 
 	private function directoryMode(): int

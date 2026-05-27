@@ -384,6 +384,23 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$this->assertStringContainsString('self::STATUS_ABANDONED', $authoring_source);
 	}
 
+	public function testCmsMutationAuditSchemaAlignmentMigrationCoversPublishedShapeChanges(): void
+	{
+		$migration_source = $this->source('migrations/20260527_121000_align_cms_mutation_audit_schema.php');
+
+		$this->assertStringContainsString("tableExists(\$pdo, 'cms_mutation_audit')", $migration_source);
+		$this->assertStringContainsString("SET `actor_type` = 'internal'", $migration_source);
+		$this->assertStringContainsString('MODIFY COLUMN `cms_mutation_audit_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT', $migration_source);
+		$this->assertStringContainsString('MODIFY COLUMN `phase` VARCHAR(64) NOT NULL', $migration_source);
+		$this->assertStringContainsString('MODIFY COLUMN `actor_type` VARCHAR(32) NOT NULL', $migration_source);
+		$this->assertStringContainsString('MODIFY COLUMN `actor_user_id` BIGINT UNSIGNED NULL', $migration_source);
+		$this->assertStringContainsString('MODIFY COLUMN `resource_id` BIGINT UNSIGNED NULL', $migration_source);
+		$this->assertStringContainsString('MODIFY COLUMN `page_id` BIGINT UNSIGNED NULL', $migration_source);
+		$this->assertStringContainsString('MODIFY COLUMN `widget_connection_id` BIGINT UNSIGNED NULL', $migration_source);
+		$this->assertStringContainsString("MODIFY COLUMN `result_status` VARCHAR(64) NOT NULL DEFAULT 'success'", $migration_source);
+		$this->assertStringContainsString('MODIFY COLUMN `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP', $migration_source);
+	}
+
 	public function testPhase4jBuilderWidgetAndPhpstanCoverageIncludesTouchedRuntimeFiles(): void
 	{
 		$authoring_source = $this->source('modules-common/Form/classes/class.FormCaptureAuthoringService.php');

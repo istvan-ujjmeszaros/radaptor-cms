@@ -208,7 +208,7 @@ final class FormCaptureCompiledDescriptorCache
 				$this->runFilesystemCall(static fn (): bool => chown($path, $owner));
 			}
 
-			if ($group !== null && $group !== @filegroup($path) && $this->canChangeOwner()) {
+			if ($group !== null && $group !== @filegroup($path) && $this->canChangeGroup($path, $group)) {
 				$this->runFilesystemCall(static fn (): bool => chgrp($path, $group));
 			}
 		}
@@ -257,6 +257,35 @@ final class FormCaptureCompiledDescriptorCache
 	private function canChangeOwner(): bool
 	{
 		return $this->currentUserId() === 0;
+	}
+
+	private function canChangeGroup(string $path, int $group): bool
+	{
+		$current_user_id = $this->currentUserId();
+
+		if ($current_user_id === 0) {
+			return true;
+		}
+
+		if ($current_user_id === null || $current_user_id !== @fileowner($path)) {
+			return false;
+		}
+
+		return in_array($group, $this->currentGroupIds(), true);
+	}
+
+	/**
+	 * @return list<int>
+	 */
+	private function currentGroupIds(): array
+	{
+		$groups = function_exists('posix_getgroups') ? array_map('intval', posix_getgroups()) : [];
+
+		if (function_exists('posix_getegid')) {
+			$groups[] = posix_getegid();
+		}
+
+		return array_values(array_unique($groups));
 	}
 
 	private function canChangeMode(string $path): bool

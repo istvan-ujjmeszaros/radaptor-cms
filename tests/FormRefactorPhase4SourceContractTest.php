@@ -303,6 +303,7 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$this->assertStringContainsString('Config::LINUX_FILE_OWNER', $cache_source);
 		$this->assertStringContainsString('Config::LINUX_FILE_GROUP', $cache_source);
 		$this->assertStringContainsString('Config::LINUX_FILE_MODE_DIRECTORY', $cache_source);
+		$this->assertStringContainsString('canChangeGroup(', $cache_source);
 		$this->assertStringContainsString('FormCaptureCompiledDescriptorCache', $repository_source);
 		$this->assertStringContainsString('hash_equals', $repository_source);
 		$this->assertStringContainsString('descriptor_hash', $repository_source);

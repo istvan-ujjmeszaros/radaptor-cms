@@ -682,3 +682,17 @@ locale_admin,message.invalid_locale,,de-DE,"Invalid locale.","Invalid locale.",0
 locale_admin,message.service_unavailable,,de-DE,"Locale administration is unavailable until the locale infrastructure is installed.","Die Locale-Verwaltung ist nicht verfügbar, bis die Locale-Infrastruktur installiert ist.",0,0,"Die Locale-Verwaltung ist nicht verfügbar, bis die Locale-Infrastruktur installiert ist."
 admin,i18n.col.allow_source_match,,de-DE,"Source match","Source match",0,1,"Source match"
 admin,i18n.allow_source_match.help,,de-DE,"Allow only when the translation intentionally matches the source text.","Allow only when the translation intentionally matches the source text.",0,1,"Allow only when the translation intentionally matches the source text."
+admin,email_queue.current_job,,de-DE,"Current job","Current job",0,1,"Current job"
+admin,email_queue.instance_state,,de-DE,State,State,0,1,State
+admin,email_queue.instances,,de-DE,"Worker instances","Worker instances",0,1,"Worker instances"
+admin,email_queue.status.paused,,de-DE,Paused,Paused,0,1,Paused
+admin,email_queue.status.pausing,,de-DE,Pausing,Pausing,0,1,Pausing
+admin,menu.forms,,de-DE,Forms,Forms,0,1,Forms
+seed,capture_demo.description,,de-DE,"Create the shipped capture contact demo definition.","Create the shipped capture contact demo definition.",0,1,"Create the shipped capture contact demo definition."
+seed,capture_demo.error.ensure_failed,,de-DE,"Unable to ensure the shipped capture demo form.","Unable to ensure the shipped capture demo form.",0,1,"Unable to ensure the shipped capture demo form."
+widget,capture_form.description,,de-DE,"Render a public DB-backed capture form with secure submission defaults.","Render a public DB-backed capture form with secure submission defaults.",0,1,"Render a public DB-backed capture form with secure submission defaults."
+widget,capture_form.name,,de-DE,"Capture form","Capture form",0,1,"Capture form"
+widget,capture_form_builder.description,,de-DE,"Admin builder for DB-backed capture forms.","Admin builder for DB-backed capture forms.",0,1,"Admin builder for DB-backed capture forms."
+widget,capture_form_builder.name,,de-DE,"Form builder","Form builder",0,1,"Form builder"
+widget,capture_form_list.description,,de-DE,"Admin list for DB-backed and shipped capture forms.","Admin list for DB-backed and shipped capture forms.",0,1,"Admin list for DB-backed and shipped capture forms."
+widget,capture_form_list.name,,de-DE,"Form list","Form list",0,1,"Form list"

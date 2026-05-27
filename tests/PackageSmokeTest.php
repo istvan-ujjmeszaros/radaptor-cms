@@ -110,6 +110,18 @@ final class PackageSmokeTest extends TestCase
 		$this->assertStringNotContainsString('widget,capture_form_list.name', $form_seed);
 	}
 
+	public function testActiveLocaleFallbackSeedsCoverFormBuilderKeys(): void
+	{
+		$root = dirname(__DIR__);
+		$root_de_seed = (string) file_get_contents($root . '/i18n/seeds/de-DE.csv');
+		$form_de_seed = (string) file_get_contents($root . '/modules-common/Form/i18n/seeds/de-DE.csv');
+
+		$this->assertStringContainsString('admin,menu.forms,,de-DE', $root_de_seed);
+		$this->assertStringContainsString('widget,capture_form_builder.name,,de-DE', $root_de_seed);
+		$this->assertStringContainsString('form,builder.title,,de-DE', $form_de_seed);
+		$this->assertStringContainsString('form,list.title,,de-DE', $form_de_seed);
+	}
+
 	private function relativePath(string $path, string $root): string
 	{
 		return ltrim(str_replace($root, '', $path), '/');

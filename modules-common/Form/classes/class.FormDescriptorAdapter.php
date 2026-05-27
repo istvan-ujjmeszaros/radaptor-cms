@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 final class FormDescriptorAdapter
 {
+	/** @var array<string, array<string, string>> */
+	private static array $_i18nCatalogs = [];
+
+	/** @var array<string, int> */
+	private static array $_i18nCatalogMtimes = [];
+
 	/** @var array<string, class-string<FormInput>> */
 	private const array INPUT_CLASSES = [
 		'checkbox' => FormInputCheckbox::class,
@@ -224,72 +230,71 @@ final class FormDescriptorAdapter
 	 */
 	private static function translatedDescriptorText(string $full_key, array $params): ?string
 	{
-		$parts = explode('.', trim($full_key), 2);
+		$full_key = trim($full_key);
 
-		if (count($parts) !== 2 || $parts[0] === '' || $parts[1] === '') {
+		if ($full_key === '' || !str_contains($full_key, '.')) {
 			return null;
 		}
 
 		try {
 			$locale = LocaleService::canonicalize(Kernel::getLocale());
 			$default_locale = LocaleService::getDefaultLocale();
-			$translation = self::findTranslation($parts[0], $parts[1], $locale);
-			$translation_locale = $locale;
-
-			if (!$translation instanceof EntityI18n_translation && $locale !== $default_locale) {
-				$translation = self::findTranslation($parts[0], $parts[1], $default_locale);
-				$translation_locale = $default_locale;
-			}
 		} catch (Throwable) {
 			return null;
 		}
 
-		if (!$translation instanceof EntityI18n_translation) {
+		if (
+			!self::catalogHasKey($locale, $full_key)
+			&& ($locale === $default_locale || !self::catalogHasKey($default_locale, $full_key))
+		) {
 			return null;
 		}
 
-		$text = (string)$translation->text;
-
-		if (trim($text) === '') {
-			return null;
-		}
-
-		return self::formatDescriptorText($text, $params, $translation_locale);
+		return t($full_key, $params);
 	}
 
-	private static function findTranslation(string $domain, string $key, string $locale): ?EntityI18n_translation
+	private static function catalogHasKey(string $locale, string $full_key): bool
 	{
-		$translation = EntityI18n_translation::findById([
-			'domain' => $domain,
-			'key' => $key,
-			'context' => '',
-			'locale' => $locale,
-		]);
-
-		return $translation instanceof EntityI18n_translation ? $translation : null;
+		return array_key_exists($full_key, self::loadCatalog($locale));
 	}
 
 	/**
-	 * @param array<string, mixed> $params
+	 * @return array<string, string>
 	 */
-	private static function formatDescriptorText(string $text, array $params, string $locale): string
+	private static function loadCatalog(string $locale): array
 	{
-		if ($params === []) {
-			return $text;
+		$locale = LocaleService::canonicalize($locale);
+		$root = defined('DEPLOY_ROOT') ? DEPLOY_ROOT : getcwd() . DIRECTORY_SEPARATOR;
+		$path = $root . 'generated/i18n/' . $locale . '.php';
+
+		if (!is_file($path)) {
+			self::$_i18nCatalogs[$locale] = [];
+			self::$_i18nCatalogMtimes[$locale] = 0;
+
+			return [];
 		}
 
-		if (extension_loaded('intl')) {
-			$formatter = new MessageFormatter(LocaleService::toIntlLocale($locale), $text);
-			$result = $formatter->format($params);
+		$mtime = (int)filemtime($path);
 
-			return $result !== false ? $result : $text;
+		if (isset(self::$_i18nCatalogs[$locale]) && (self::$_i18nCatalogMtimes[$locale] ?? -1) === $mtime) {
+			return self::$_i18nCatalogs[$locale];
 		}
 
-		return preg_replace_callback(
-			'/\{(\w+)\}/',
-			static fn (array $matches): string => array_key_exists($matches[1], $params) ? (string)$params[$matches[1]] : $matches[0],
-			$text,
-		) ?? $text;
+		$raw_catalog = require $path;
+		$catalog = [];
+
+		if (is_array($raw_catalog)) {
+			foreach ($raw_catalog as $key => $text) {
+				if (is_string($key) && is_scalar($text)) {
+					$catalog[$key] = (string)$text;
+				}
+			}
+		}
+
+		self::$_i18nCatalogs[$locale] = $catalog;
+		self::$_i18nCatalogMtimes[$locale] = $mtime;
+
+		return self::$_i18nCatalogs[$locale];
 	}
 
 	/**

@@ -982,25 +982,27 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 
 	public function testDescriptorTextResolverDoesNotTreatKeyTextAsMissing(): void
 	{
-		$key = 'capture_phase4j_builder_key_text.title';
-		$full_key = FormCaptureDescriptorSchemaValidator::FORM_I18N_DOMAIN . '.' . $key;
+		$full_key = FormCaptureDescriptorSchemaValidator::FORM_I18N_DOMAIN . '.capture_phase4j_builder_key_text.title';
 
-		I18nTranslationService::saveTranslation(
-			FormCaptureDescriptorSchemaValidator::FORM_I18N_DOMAIN,
-			$key,
-			'',
-			LocaleService::getDefaultLocale(),
-			$full_key,
-			true,
-			false,
-			$full_key,
-			false,
-		);
+		$this->withTemporaryI18nCatalogEntry($full_key, $full_key, function () use ($full_key): void {
+			$this->assertSame($full_key, FormDescriptorAdapter::resolveDescriptorText([
+				'key' => $full_key,
+				'text' => 'Fallback title',
+			]));
+		});
+	}
 
-		$this->assertSame($full_key, FormDescriptorAdapter::resolveDescriptorText([
-			'key' => $full_key,
-			'text' => 'Fallback title',
-		]));
+	public function testDescriptorTextResolverUsesCompiledCatalogWhenTranslationRowIsMissing(): void
+	{
+		$full_key = FormCaptureDescriptorSchemaValidator::FORM_I18N_DOMAIN . '.capture_phase4j_catalog_only.title';
+		$catalog_text = 'Catalog only title';
+
+		$this->withTemporaryI18nCatalogEntry($full_key, $catalog_text, function () use ($full_key, $catalog_text): void {
+			$this->assertSame($catalog_text, FormDescriptorAdapter::resolveDescriptorText([
+				'key' => $full_key,
+				'text' => 'Fallback title',
+			]));
+		});
 	}
 
 	public function testBuilderStateResolvesReadOnlySystemI18nReferencesAndTranslationFilter(): void
@@ -1674,6 +1676,41 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$ctx->userSessionInitialized = true;
 		Cache::flush(Roles::class);
 		Cache::flush(User::class);
+	}
+
+	private function withTemporaryI18nCatalogEntry(string $full_key, string $text, callable $callback): void
+	{
+		static $mtime_offset = 0;
+
+		$locale = LocaleService::getDefaultLocale();
+		$path = DEPLOY_ROOT . 'generated/i18n/' . $locale . '.php';
+
+		if (!is_file($path)) {
+			self::markTestSkipped("Missing generated i18n catalog for {$locale}.");
+		}
+
+		$original_content = (string)file_get_contents($path);
+		$original_mtime = (int)filemtime($path);
+		$catalog = require $path;
+
+		if (!is_array($catalog)) {
+			self::markTestSkipped("Generated i18n catalog for {$locale} is not an array.");
+		}
+
+		$catalog[$full_key] = $text;
+		$temporary_mtime = max(time(), $original_mtime) + (++$mtime_offset);
+
+		try {
+			file_put_contents($path, "<?php\n\nreturn " . var_export($catalog, true) . ";\n");
+			touch($path, $temporary_mtime);
+			clearstatcache(true, $path);
+
+			$callback();
+		} finally {
+			file_put_contents($path, $original_content);
+			touch($path, $original_mtime);
+			clearstatcache(true, $path);
+		}
 	}
 
 	private static function bootstrapConsumerRuntime(): void

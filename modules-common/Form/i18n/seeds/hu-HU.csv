@@ -151,7 +151,7 @@ form,builder.panel.usage,,hu-HU,"Used on pages","Oldalakon használva",0,0,"Olda
 form,builder.panel.drafts,,hu-HU,Drafts,Piszkozatok,0,0,Piszkozatok
 form,builder.usage.empty,,hu-HU,"This form is not placed on any page.","Ez az űrlap nincs kirakva oldalra.",0,0,"Ez az űrlap nincs kirakva oldalra."
 form,builder.usage.page,,hu-HU,Page,Oldal,0,0,Oldal
-form,builder.usage.slot,,hu-HU,Slot,Slot,0,1,Slot
+form,builder.usage.slot,,hu-HU,Slot,Hely,0,0,Hely
 form,builder.usage.connection,,hu-HU,Connection,Kapcsolat,0,0,Kapcsolat
 form,builder.drafts.empty,,hu-HU,"No draft versions yet.","Még nincsenek piszkozat verziók.",0,0,"Még nincsenek piszkozat verziók."
 form,builder.drafts.current,,hu-HU,Current,Aktuális,0,0,Aktuális
@@ -179,7 +179,7 @@ form,list.new_title,,hu-HU,"New title","Új cím",0,0,"Új cím"
 form,list.create,,hu-HU,"Create form","Űrlap létrehozása",0,0,"Űrlap létrehozása"
 form,list.empty_custom,,hu-HU,"No custom capture forms yet.","Még nincs egyedi capture űrlap.",0,0,"Még nincs egyedi capture űrlap."
 form,list.empty_system,,hu-HU,"No system capture forms are published.","Nincs publikált system capture űrlap.",0,0,"Nincs publikált system capture űrlap."
-form,list.col.slug,,hu-HU,Slug,Slug,0,1,Slug
+form,list.col.slug,,hu-HU,Slug,Azonosító,0,0,Azonosító
 form,list.col.source,,hu-HU,Source,Forrás,0,0,Forrás
 form,list.col.status,,hu-HU,Status,Státusz,0,0,Státusz
 form,list.col.version,,hu-HU,Version,Verzió,0,0,Verzió
@@ -195,7 +195,7 @@ form,list.status.draft,,hu-HU,Draft,Piszkozat,0,0,Piszkozat
 form,list.status.published,,hu-HU,Published,Publikált,0,0,Publikált
 form,list.status.unknown,,hu-HU,Unknown,Ismeretlen,0,0,Ismeretlen
 form,list.version.none,,hu-HU,None,Nincs,0,0,Nincs
-form,list.version.published,,hu-HU,"v{version}","v{version}",0,1,"v{version}"
+form,list.version.published,,hu-HU,"v{version}","{version}. verzió",0,0,"{version}. verzió"
 form,list.version.draft,,hu-HU,"draft v{version}","piszkozat v{version}",0,0,"piszkozat v{version}"
 form,list.usage.none,,hu-HU,None,Nincs,0,0,Nincs
 form,builder.warning.discard_unsaved,,hu-HU,"Discard unsaved form changes?","Eldobod a nem mentett űrlapmódosításokat?",0,0,"Eldobod a nem mentett űrlapmódosításokat?"

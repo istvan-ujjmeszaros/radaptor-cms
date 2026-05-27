@@ -31,6 +31,7 @@ final class FormCaptureAuthoringService
 			'drop_targets' => array_map(static fn (EditorDropTarget $target): array => $target->toArray(), $provider->getDropTargets()),
 			'i18n_available' => count($locales) > 1,
 			'default_locale' => LocaleService::getDefaultLocale(),
+			'i18n_workbench_url' => $this->i18nWorkbenchUrl(),
 			'translation_url' => (string)($state['translation_url'] ?? $this->translationUrlForDefinition($selected_slug, $selected_descriptor)),
 		];
 	}
@@ -242,6 +243,7 @@ final class FormCaptureAuthoringService
 			'loaded_version' => null,
 			'read_only' => (string)$definition->source !== self::SOURCE_DB,
 			'status' => $active_draft instanceof EntityFormDefinitionVersion ? self::STATUS_DRAFT : (string)$definition->status,
+			'i18n_workbench_url' => $this->i18nWorkbenchUrl(),
 			'translation_url' => $this->translationUrlForDefinition($definition_slug, $translation_descriptor),
 		];
 	}
@@ -627,6 +629,7 @@ final class FormCaptureAuthoringService
 			'loaded_version' => null,
 			'read_only' => false,
 			'status' => 'new',
+			'i18n_workbench_url' => $this->i18nWorkbenchUrl(),
 			'translation_url' => $this->translationUrlForDefinition('capture-new'),
 		];
 	}
@@ -978,7 +981,14 @@ final class FormCaptureAuthoringService
 			}
 		}
 
-		return '/admin/i18n/?' . http_build_query($query);
+		return $this->i18nWorkbenchUrl() . '?' . http_build_query($query);
+	}
+
+	private function i18nWorkbenchUrl(): string
+	{
+		$path = WidgetI18nWorkbench::getDefaultPathForCreation()['path'] ?? '/admin/i18n/';
+
+		return (string)$path;
 	}
 
 	/**

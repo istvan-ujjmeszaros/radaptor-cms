@@ -32,6 +32,7 @@ $stateJson = json_encode([
 	'usage' => $usage,
 	'i18n_available' => (bool)($state['i18n_available'] ?? false),
 	'default_locale' => (string)($state['default_locale'] ?? ''),
+	'i18n_workbench_url' => (string)($state['i18n_workbench_url'] ?? ''),
 	'translation_url' => (string)($state['translation_url'] ?? ''),
 	'initial_panel' => (string)($this->props['initial_panel'] ?? 'properties'),
 	'initial_preview' => is_array($this->props['initial_preview'] ?? null) ? $this->props['initial_preview'] : [],

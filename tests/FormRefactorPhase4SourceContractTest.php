@@ -400,6 +400,8 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$this->assertStringContainsString('form.builder.error_create', $widget_source);
 		$this->assertStringContainsString("Url::getUrl('form_builder.editor_fragment')", $list_widget_source);
 		$this->assertStringContainsString('data-form-list-editor-fragment-url-value', $list_template_source);
+		$this->assertStringContainsString('\'i18n_workbench_url\' => $this->i18nWorkbenchUrl()', $authoring_source);
+		$this->assertStringContainsString('\'i18n_workbench_url\' => (string)($state[\'i18n_workbench_url\'] ?? \'\')', $template_source);
 		$this->assertStringContainsString('$showLifecycleColumns = $sourceFilter !== \'system\';', $list_template_source);
 		$this->assertStringContainsString('<?php if (!$readOnly): ?>', $template_source);
 		$this->assertStringNotContainsString('return_to', $list_template_source);

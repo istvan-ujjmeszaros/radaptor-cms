@@ -945,6 +945,7 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame('Send a short message through the capture-form MVP.', $state['descriptor']['description']['text'] ?? null);
 		$this->assertSame('Send', $state['descriptor']['submit_label']['text'] ?? null);
 		$this->assertSame('Name', $state['descriptor']['fields'][0]['label']['text'] ?? null);
+		$this->assertSame('/admin/i18n/', $state['i18n_workbench_url'] ?? null);
 		$this->assertSame('form', $query['domain'] ?? null);
 		$this->assertSame('capture_demo.', $query['search'] ?? null);
 	}

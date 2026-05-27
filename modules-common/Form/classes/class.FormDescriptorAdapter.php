@@ -4,6 +4,12 @@ declare(strict_types=1);
 
 final class FormDescriptorAdapter
 {
+	/** @var array<string, array<string, string>> */
+	private static array $_i18nCatalogs = [];
+
+	/** @var array<string, int> */
+	private static array $_i18nCatalogMtimes = [];
+
 	/** @var array<string, class-string<FormInput>> */
 	private const array INPUT_CLASSES = [
 		'checkbox' => FormInputCheckbox::class,
@@ -191,13 +197,19 @@ final class FormDescriptorAdapter
 		}
 	}
 
-	private static function resolveText(mixed $value): string
+	public static function resolveDescriptorText(mixed $value): string
 	{
 		if (is_array($value)) {
 			if (isset($value['key']) && is_scalar($value['key'])) {
 				$params = is_array($value['params'] ?? null) ? $value['params'] : [];
+				$key = (string)$value['key'];
+				$translated = self::translatedDescriptorText($key, $params);
 
-				return t((string)$value['key'], $params);
+				if ($translated !== null) {
+					return $translated;
+				}
+
+				return array_key_exists('text', $value) ? (string)$value['text'] : $key;
 			}
 
 			if (array_key_exists('text', $value)) {
@@ -206,6 +218,83 @@ final class FormDescriptorAdapter
 		}
 
 		return (string)$value;
+	}
+
+	private static function resolveText(mixed $value): string
+	{
+		return self::resolveDescriptorText($value);
+	}
+
+	/**
+	 * @param array<string, mixed> $params
+	 */
+	private static function translatedDescriptorText(string $full_key, array $params): ?string
+	{
+		$full_key = trim($full_key);
+
+		if ($full_key === '' || !str_contains($full_key, '.')) {
+			return null;
+		}
+
+		try {
+			$locale = LocaleService::canonicalize(Kernel::getLocale());
+			$default_locale = LocaleService::getDefaultLocale();
+		} catch (Throwable) {
+			return null;
+		}
+
+		if (
+			!self::catalogHasKey($locale, $full_key)
+			&& ($locale === $default_locale || !self::catalogHasKey($default_locale, $full_key))
+		) {
+			return null;
+		}
+
+		return t($full_key, $params);
+	}
+
+	private static function catalogHasKey(string $locale, string $full_key): bool
+	{
+		return array_key_exists($full_key, self::loadCatalog($locale));
+	}
+
+	/**
+	 * @return array<string, string>
+	 */
+	private static function loadCatalog(string $locale): array
+	{
+		$locale = LocaleService::canonicalize($locale);
+		$root = defined('DEPLOY_ROOT') ? DEPLOY_ROOT : getcwd() . DIRECTORY_SEPARATOR;
+		$path = $root . 'generated/i18n/' . $locale . '.php';
+
+		if (!is_file($path)) {
+			self::$_i18nCatalogs[$locale] = [];
+			self::$_i18nCatalogMtimes[$locale] = 0;
+
+			return [];
+		}
+
+		$mtime = (int)filemtime($path);
+
+		if (isset(self::$_i18nCatalogs[$locale]) && (self::$_i18nCatalogMtimes[$locale] ?? -1) === $mtime) {
+			return self::$_i18nCatalogs[$locale];
+		}
+
+		$raw_catalog = require $path;
+		$catalog = [];
+
+		if (is_array($raw_catalog)) {
+			foreach ($raw_catalog as $key => $text) {
+				if (is_string($key) && is_scalar($text)) {
+					$catalog[$key] = (string)$text;
+				}
+			}
+		}
+
+		self::$_i18nCatalogs[$locale] = $catalog;
+		self::$_i18nCatalogMtimes[$locale] = $mtime;
+
+		return self::$_i18nCatalogs[$locale];
 	}
 
 	/**

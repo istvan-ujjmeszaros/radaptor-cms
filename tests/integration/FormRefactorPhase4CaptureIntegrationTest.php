@@ -31,6 +31,9 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 			EventFormBuilderPreviewRender::class,
 			EventFormBuilderSaveDraft::class,
 			EventFormBuilderPublish::class,
+			EventFormBuilderLoadDraftVersion::class,
+			EventFormBuilderUpdateDraftNote::class,
+			I18nTranslationService::class,
 		] as $class_name) {
 			if (!class_exists($class_name)) {
 				self::markTestSkipped('The Radaptor consumer app runtime with capture-form MVP classes is required.');
@@ -828,6 +831,224 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		]));
 	}
 
+	public function testBuilderKeyedI18nDescriptorCreatesDefaultLocaleRows(): void
+	{
+		$definition_slug = 'capture-phase4j-builder-i18n';
+		$service = new FormCaptureAuthoringService();
+		$created = $service->createDefinition($definition_slug, 'Builder i18n');
+		$descriptor = [
+			'kind' => 'capture',
+			'i18n_mode' => FormCaptureDescriptorSchemaValidator::I18N_MODE_KEYED,
+			'title' => [
+				'key' => 'form_def.capture_phase4j_builder_i18n.title',
+				'text' => 'Builder i18n title',
+			],
+			'fields' => [
+				[
+					'type' => 'text',
+					'name' => 'name',
+					'key' => 'name',
+					'label' => [
+						'key' => 'form_def.capture_phase4j_builder_i18n.fields.name.label',
+						'text' => 'Translated name',
+					],
+					'normalizers' => ['trim'],
+					'validators' => [
+						['type' => 'required'],
+					],
+				],
+			],
+		];
+
+		$saved = $service->saveDraft($definition_slug, $descriptor, (string)$created['base_server_hash']);
+		$rows = DbHelper::selectManyFromQuery(
+			"SELECT m.`key`, m.source_text, t.text, t.human_reviewed
+			FROM i18n_messages m
+			INNER JOIN i18n_translations t
+				ON t.domain = m.domain
+				AND t.`key` = m.`key`
+				AND t.context = m.context
+			WHERE m.domain = ?
+				AND t.locale = ?
+				AND m.`key` IN (?, ?)
+			ORDER BY m.`key`",
+			[
+				FormCaptureDescriptorSchemaValidator::FORM_I18N_DOMAIN,
+				LocaleService::getDefaultLocale(),
+				'capture_phase4j_builder_i18n.fields.name.label',
+				'capture_phase4j_builder_i18n.title',
+			],
+		);
+
+		$this->assertSame('saved_draft', $saved['action'] ?? null);
+		$this->assertCount(2, $rows);
+		$this->assertSame('Translated name', $rows[0]['source_text'] ?? null);
+		$this->assertSame('Translated name', $rows[0]['text'] ?? null);
+		$this->assertSame('Builder i18n title', $rows[1]['source_text'] ?? null);
+		$this->assertSame('Builder i18n title', $rows[1]['text'] ?? null);
+		$this->assertSame(1, (int)($rows[1]['human_reviewed'] ?? 0));
+
+		$other_locales = array_values(array_filter(
+			I18nRuntime::getAvailableLocaleCodes(),
+			static fn (string $locale): bool => $locale !== LocaleService::getDefaultLocale(),
+		));
+
+		if ($other_locales !== []) {
+			$other_rows = DbHelper::selectManyFromQuery(
+				"SELECT locale, text, human_reviewed, allow_source_match
+				FROM i18n_translations
+				WHERE domain = ?
+					AND `key` = ?
+					AND context = ''
+					AND locale = ?
+				ORDER BY locale",
+				[
+					FormCaptureDescriptorSchemaValidator::FORM_I18N_DOMAIN,
+					'capture_phase4j_builder_i18n.title',
+					$other_locales[0],
+				],
+			);
+
+			$this->assertCount(1, $other_rows);
+			$this->assertSame('Builder i18n title', $other_rows[0]['text'] ?? null);
+			$this->assertSame(0, (int)($other_rows[0]['human_reviewed'] ?? 1));
+			$this->assertSame(1, (int)($other_rows[0]['allow_source_match'] ?? 0));
+		}
+	}
+
+	public function testBuilderI18nSyncPreservesReviewedDefaultLocaleText(): void
+	{
+		$definition_slug = 'capture-phase4j-builder-i18n-preserve';
+		$service = new FormCaptureAuthoringService();
+		$created = $service->createDefinition($definition_slug, 'Builder i18n preserve');
+		$key = 'capture_phase4j_builder_i18n_preserve.title';
+		$descriptor = [
+			'kind' => 'capture',
+			'i18n_mode' => FormCaptureDescriptorSchemaValidator::I18N_MODE_KEYED,
+			'title' => [
+				'key' => FormCaptureDescriptorSchemaValidator::FORM_I18N_DOMAIN . '.' . $key,
+				'text' => 'Initial source title',
+			],
+			'fields' => [
+				[
+					'type' => 'text',
+					'name' => 'name',
+					'key' => 'name',
+					'label' => [
+						'key' => FormCaptureDescriptorSchemaValidator::FORM_I18N_DOMAIN . '.capture_phase4j_builder_i18n_preserve.fields.name.label',
+						'text' => 'Name',
+					],
+				],
+			],
+		];
+
+		$first = $service->saveDraft($definition_slug, $descriptor, (string)$created['base_server_hash']);
+		I18nTranslationService::saveTranslation(
+			FormCaptureDescriptorSchemaValidator::FORM_I18N_DOMAIN,
+			$key,
+			'',
+			LocaleService::getDefaultLocale(),
+			'Reviewed default title',
+			true,
+			false,
+			'Initial source title',
+			false,
+		);
+
+		$descriptor['title']['text'] = 'Updated source title';
+		$service->saveDraft($definition_slug, $descriptor, (string)$first['base_server_hash']);
+		$translation = EntityI18n_translation::findById([
+			'domain' => FormCaptureDescriptorSchemaValidator::FORM_I18N_DOMAIN,
+			'key' => $key,
+			'context' => '',
+			'locale' => LocaleService::getDefaultLocale(),
+		]);
+		$source_text = DbHelper::selectOneColumn(
+			'i18n_messages',
+			[
+				'domain' => FormCaptureDescriptorSchemaValidator::FORM_I18N_DOMAIN,
+				'key' => $key,
+				'context' => '',
+			],
+			'',
+			'source_text',
+		);
+
+		$this->assertInstanceOf(EntityI18n_translation::class, $translation);
+		$this->assertSame('Reviewed default title', (string)$translation->text);
+		$this->assertSame(1, (int)$translation->human_reviewed);
+		$this->assertSame('Updated source title', $source_text);
+	}
+
+	public function testDescriptorTextResolverDoesNotTreatKeyTextAsMissing(): void
+	{
+		$full_key = FormCaptureDescriptorSchemaValidator::FORM_I18N_DOMAIN . '.capture_phase4j_builder_key_text.title';
+
+		$this->withTemporaryI18nCatalogEntry($full_key, $full_key, function () use ($full_key): void {
+			$this->assertSame($full_key, FormDescriptorAdapter::resolveDescriptorText([
+				'key' => $full_key,
+				'text' => 'Fallback title',
+			]));
+		});
+	}
+
+	public function testDescriptorTextResolverUsesCompiledCatalogWhenTranslationRowIsMissing(): void
+	{
+		$full_key = FormCaptureDescriptorSchemaValidator::FORM_I18N_DOMAIN . '.capture_phase4j_catalog_only.title';
+		$catalog_text = 'Catalog only title';
+
+		$this->withTemporaryI18nCatalogEntry($full_key, $catalog_text, function () use ($full_key, $catalog_text): void {
+			$this->assertSame($catalog_text, FormDescriptorAdapter::resolveDescriptorText([
+				'key' => $full_key,
+				'text' => 'Fallback title',
+			]));
+		});
+	}
+
+	public function testBuilderStateResolvesReadOnlySystemI18nReferencesAndTranslationFilter(): void
+	{
+		$definition_slug = 'capture-phase4j-system-i18n';
+		$descriptor = [
+			'kind' => 'capture',
+			'title' => ['key' => 'form.capture_demo.title'],
+			'description' => ['key' => 'form.capture_demo.description'],
+			'submit_label' => ['key' => 'form.capture.submit'],
+			'fields' => [
+				[
+					'type' => 'text',
+					'name' => 'name',
+					'key' => 'name',
+					'label' => ['key' => 'form.capture_demo.field.name.label'],
+					'normalizers' => ['trim'],
+				],
+			],
+		];
+
+		(new FormCaptureDefinitionRepository())->upsertPublishedDefinition($definition_slug, $descriptor, $this->defaultSecurity(), 'shipped');
+		$state = (new FormCaptureAuthoringService())->loadDefinition($definition_slug);
+		$query = [];
+		parse_str((string)(parse_url((string)($state['translation_url'] ?? ''), PHP_URL_QUERY) ?: ''), $query);
+
+		$this->assertTrue((bool)($state['read_only'] ?? false));
+		$this->assertSame('Contact demo', $state['descriptor']['title']['text'] ?? null);
+		$this->assertSame('Send a short message through the capture-form MVP.', $state['descriptor']['description']['text'] ?? null);
+		$this->assertSame('Send', $state['descriptor']['submit_label']['text'] ?? null);
+		$this->assertSame('Name', $state['descriptor']['fields'][0]['label']['text'] ?? null);
+		$this->assertSame('/admin/i18n/', $state['i18n_workbench_url'] ?? null);
+		$this->assertSame('form', $query['domain'] ?? null);
+		$this->assertSame('capture_demo.', $query['search'] ?? null);
+	}
+
+	public function testBuilderStateDoesNotInjectTextFallbacksIntoDbDescriptors(): void
+	{
+		$definition_slug = 'capture-phase4j-db-key-only-text';
+		$state = (new FormCaptureAuthoringService())->createDefinition($definition_slug, 'DB key-only text');
+
+		$this->assertFalse((bool)($state['read_only'] ?? true));
+		$this->assertSame($state['server_descriptor'], $state['descriptor']);
+		$this->assertSame(['key' => 'form.capture.submit'], $state['descriptor']['submit_label'] ?? null);
+	}
+
 	public function testBuilderAuthoringRejectsAbandonedDraftPublishByExplicitVersion(): void
 	{
 		$definition_slug = 'capture-phase4j-builder-stale-draft';
@@ -867,6 +1088,51 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertIsArray($state['versions'] ?? null);
 		$this->assertGreaterThanOrEqual(2, count($state['versions']));
 		$this->assertSame([2, 1], array_column($state['versions'], 'version_number'));
+	}
+
+	public function testBuilderCanLoadOlderDraftVersionAndRestoreItAsActiveDraft(): void
+	{
+		$definition_slug = 'capture-phase4j-builder-draft-load';
+		$service = new FormCaptureAuthoringService();
+		$created = $service->createDefinition($definition_slug, 'Builder draft load');
+		$first = $service->saveDraft($definition_slug, $this->descriptorWithTitle('First recoverable draft'), (string)$created['base_server_hash']);
+		$first_draft_id = (int)($first['active_draft']['version_id'] ?? 0);
+		$second = $service->saveDraft($definition_slug, $this->descriptorWithTitle('Second active draft'), (string)$first['base_server_hash']);
+		$second_draft_id = (int)($second['active_draft']['version_id'] ?? 0);
+
+		$loaded = $service->loadDraftVersion($definition_slug, $first_draft_id);
+
+		$this->assertSame('loaded_draft_version', $loaded['action'] ?? null);
+		$this->assertSame('First recoverable draft', $loaded['descriptor']['title']['text'] ?? null);
+		$this->assertSame('Second active draft', $loaded['server_descriptor']['title']['text'] ?? null);
+		$this->assertSame($first_draft_id, (int)($loaded['loaded_version']['version_id'] ?? 0));
+		$this->assertSame($second_draft_id, (int)($loaded['active_draft']['version_id'] ?? 0));
+		$this->assertSame((string)$second['base_server_hash'], (string)$loaded['base_server_hash']);
+
+		$restored = $service->saveDraft($definition_slug, $loaded['descriptor'], (string)$loaded['base_server_hash']);
+
+		$this->assertSame('saved_draft', $restored['action'] ?? null);
+		$this->assertSame($first_draft_id, (int)($restored['active_draft']['version_id'] ?? 0));
+		$this->assertSame('First recoverable draft', $restored['descriptor']['title']['text'] ?? null);
+		$this->assertSame('abandoned', (string)EntityFormDefinitionVersion::findFirst(['version_id' => $second_draft_id])?->status);
+	}
+
+	public function testBuilderDraftNotePersistsAndIsReturnedInVersionHistory(): void
+	{
+		$definition_slug = 'capture-phase4j-builder-draft-note';
+		$service = new FormCaptureAuthoringService();
+		$created = $service->createDefinition($definition_slug, 'Builder draft note');
+		$draft_id = (int)($created['active_draft']['version_id'] ?? 0);
+		$updated = $service->updateDraftNote($definition_slug, $draft_id, 'Known-good before the next redesign.');
+		$state = $service->loadDefinition($definition_slug);
+		$version_rows = array_values(array_filter(
+			$state['versions'],
+			static fn (array $row): bool => (int)($row['version_id'] ?? 0) === $draft_id,
+		));
+
+		$this->assertSame('updated_draft_note', $updated['action'] ?? null);
+		$this->assertSame('Known-good before the next redesign.', $updated['updated_version']['author_note'] ?? null);
+		$this->assertSame('Known-good before the next redesign.', $version_rows[0]['author_note'] ?? null);
 	}
 
 	public function testAbandonedDraftGcPrunesOnlyOldUnreferencedAbandonedDrafts(): void
@@ -976,6 +1242,57 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame('draft', (string)$second_version?->status);
 	}
 
+	public function testBuilderDraftHistoryEventsLoadVersionAndUpdateNote(): void
+	{
+		$definition_slug = 'capture-phase4j-builder-event-drafts';
+		$service = new FormCaptureAuthoringService();
+		$created = $service->createDefinition($definition_slug, 'Builder event drafts');
+		$saved = $service->saveDraft($definition_slug, $this->descriptorWithTitle('Event loadable draft'), (string)$created['base_server_hash']);
+		$draft_id = (int)($saved['active_draft']['version_id'] ?? 0);
+
+		$note_response = $this->runBuilderEvent(new EventFormBuilderUpdateDraftNote(), [
+			'definition_slug' => $definition_slug,
+			'version_id' => (string)$draft_id,
+			'author_note' => 'Works before campaign launch.',
+		]);
+		$load_response = $this->runBuilderEvent(new EventFormBuilderLoadDraftVersion(), [
+			'definition_slug' => $definition_slug,
+			'version_id' => (string)$draft_id,
+		]);
+
+		$this->assertSame(200, $note_response['http_code']);
+		$this->assertTrue($note_response['body']['ok']);
+		$this->assertSame('updated_draft_note', $note_response['body']['data']['action'] ?? null);
+		$this->assertSame('Works before campaign launch.', $note_response['body']['data']['updated_version']['author_note'] ?? null);
+		$this->assertSame(200, $load_response['http_code']);
+		$this->assertTrue($load_response['body']['ok']);
+		$this->assertSame('loaded_draft_version', $load_response['body']['data']['action'] ?? null);
+		$this->assertSame($draft_id, (int)($load_response['body']['data']['loaded_version']['version_id'] ?? 0));
+	}
+
+	public function testBuilderDraftHistoryEventsMapMissingVersionToNotFound(): void
+	{
+		$definition_slug = 'capture-phase4j-builder-event-missing-draft';
+		(new FormCaptureAuthoringService())->createDefinition($definition_slug, 'Builder event missing draft');
+
+		$load_response = $this->runBuilderEvent(new EventFormBuilderLoadDraftVersion(), [
+			'definition_slug' => $definition_slug,
+			'version_id' => '99999999',
+		]);
+		$note_response = $this->runBuilderEvent(new EventFormBuilderUpdateDraftNote(), [
+			'definition_slug' => $definition_slug,
+			'version_id' => '99999999',
+			'author_note' => 'Missing',
+		]);
+
+		$this->assertSame(404, $load_response['http_code']);
+		$this->assertFalse($load_response['body']['ok']);
+		$this->assertSame('FORM_BUILDER_LOAD_DRAFT_INVALID', $load_response['body']['error']['code'] ?? null);
+		$this->assertSame(404, $note_response['http_code']);
+		$this->assertFalse($note_response['body']['ok']);
+		$this->assertSame('FORM_BUILDER_DRAFT_NOTE_INVALID', $note_response['body']['error']['code'] ?? null);
+	}
+
 	public function testBuilderEventsRequireContentAdminAuthorization(): void
 	{
 		$events = [
@@ -983,6 +1300,8 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 			new EventFormBuilderPreviewRender(),
 			new EventFormBuilderSaveDraft(),
 			new EventFormBuilderPublish(),
+			new EventFormBuilderLoadDraftVersion(),
+			new EventFormBuilderUpdateDraftNote(),
 		];
 
 		$this->impersonate(null);
@@ -1357,6 +1676,41 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$ctx->userSessionInitialized = true;
 		Cache::flush(Roles::class);
 		Cache::flush(User::class);
+	}
+
+	private function withTemporaryI18nCatalogEntry(string $full_key, string $text, callable $callback): void
+	{
+		static $mtime_offset = 0;
+
+		$locale = LocaleService::getDefaultLocale();
+		$path = DEPLOY_ROOT . 'generated/i18n/' . $locale . '.php';
+
+		if (!is_file($path)) {
+			self::markTestSkipped("Missing generated i18n catalog for {$locale}.");
+		}
+
+		$original_content = (string)file_get_contents($path);
+		$original_mtime = (int)filemtime($path);
+		$catalog = require $path;
+
+		if (!is_array($catalog)) {
+			self::markTestSkipped("Generated i18n catalog for {$locale} is not an array.");
+		}
+
+		$catalog[$full_key] = $text;
+		$temporary_mtime = max(time(), $original_mtime) + (++$mtime_offset);
+
+		try {
+			file_put_contents($path, "<?php\n\nreturn " . var_export($catalog, true) . ";\n");
+			touch($path, $temporary_mtime);
+			clearstatcache(true, $path);
+
+			$callback();
+		} finally {
+			file_put_contents($path, $original_content);
+			touch($path, $original_mtime);
+			clearstatcache(true, $path);
+		}
 	}
 
 	private static function bootstrapConsumerRuntime(): void

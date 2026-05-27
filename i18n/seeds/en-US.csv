@@ -27,6 +27,9 @@ admin,email_outbox.summary.title,,en-US,"Queue summary","Queue summary",0,0,"Que
 admin,email_outbox.title,,en-US,"Email outbox","Email outbox",0,0,"Email outbox"
 admin,email_queue.dead_letter,,en-US,"Dead letter","Dead letter",0,0,"Dead letter"
 admin,email_queue.empty,,en-US,"No email jobs are waiting right now.","No email jobs are waiting right now.",0,0,"No email jobs are waiting right now."
+admin,email_queue.current_job,,en-US,"Current job","Current job",0,0,"Current job"
+admin,email_queue.instance_state,,en-US,State,State,0,0,State
+admin,email_queue.instances,,en-US,"Worker instances","Worker instances",0,0,"Worker instances"
 admin,email_queue.last_processed,,en-US,"Last processed","Last processed",0,0,"Last processed"
 admin,email_queue.last_seen,,en-US,"Last seen","Last seen",0,0,"Last seen"
 admin,email_queue.open_outbox,,en-US,"Open email outbox","Open email outbox",0,0,"Open email outbox"
@@ -34,6 +37,8 @@ admin,email_queue.pending,,en-US,Pending,Pending,0,0,Pending
 admin,email_queue.retry_wait,,en-US,"Retry wait","Retry wait",0,0,"Retry wait"
 admin,email_queue.sent_last_24h,,en-US,"Sent in last 24h","Sent in last 24h",0,0,"Sent in last 24h"
 admin,email_queue.status.never_seen,,en-US,"Never seen","Never seen",0,0,"Never seen"
+admin,email_queue.status.paused,,en-US,Paused,Paused,0,0,Paused
+admin,email_queue.status.pausing,,en-US,Pausing,Pausing,0,0,Pausing
 admin,email_queue.status.running,,en-US,Running,Running,0,0,Running
 admin,email_queue.status.stale,,en-US,Stale,Stale,0,0,Stale
 admin,email_queue.status.unavailable,,en-US,Unavailable,Unavailable,0,0,Unavailable
@@ -96,6 +101,8 @@ admin,menu.theme_selector,,en-US,"Theme selection","Theme selection",0,0,"Theme 
 admin,menu.translations,,en-US,Translations,Translations,0,0,Translations
 admin,menu.usergroups,,en-US,"User groups","User groups",0,0,"User groups"
 admin,menu.widget_preview,,en-US,"Widget preview","Widget preview",0,0,"Widget preview"
+seed,capture_demo.description,,en-US,"Create the shipped capture contact demo definition.","Create the shipped capture contact demo definition.",0,0,"Create the shipped capture contact demo definition."
+seed,capture_demo.error.ensure_failed,,en-US,"Unable to ensure the shipped capture demo form.","Unable to ensure the shipped capture demo form.",0,0,"Unable to ensure the shipped capture demo form."
 cms,admin_dropdown.edit_mode,,en-US,"Edit mode","Edit mode",0,0,"Edit mode"
 cms,admin_dropdown.edit_mode_off,,en-US,off,off,0,0,off
 cms,admin_dropdown.edit_mode_on,,en-US,on,on,0,0,on

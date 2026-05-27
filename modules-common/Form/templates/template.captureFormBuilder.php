@@ -8,22 +8,32 @@ $definition = is_array($selected['definition'] ?? null) ? $selected['definition'
 $palette = is_array($state['palette'] ?? null) ? $state['palette'] : [];
 $dropTargets = is_array($state['drop_targets'] ?? null) ? $state['drop_targets'] : [];
 $descriptor = is_array($selected['descriptor'] ?? null) ? $selected['descriptor'] : [];
+$serverDescriptor = is_array($selected['server_descriptor'] ?? null) ? $selected['server_descriptor'] : $descriptor;
 $usage = is_array($selected['usage'] ?? null) ? $selected['usage'] : [];
+$versions = is_array($selected['versions'] ?? null) ? $selected['versions'] : [];
 $urls = is_array($this->props['urls'] ?? null) ? $this->props['urls'] : [];
 $selectedSlug = is_array($definition) ? (string)($definition['definition_slug'] ?? '') : '';
 $readOnly = (bool)($selected['read_only'] ?? false);
 $activeDraft = is_array($selected['active_draft'] ?? null) ? $selected['active_draft'] : null;
 $publishedVersion = is_array($selected['published_version'] ?? null) ? $selected['published_version'] : null;
+$loadedVersion = is_array($selected['loaded_version'] ?? null) ? $selected['loaded_version'] : null;
 
 $jsonFlags = JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT;
 $stateJson = json_encode([
 	'definition_slug' => $selectedSlug,
 	'descriptor' => $descriptor,
+	'server_descriptor' => $serverDescriptor,
 	'base_server_hash' => (string)($selected['base_server_hash'] ?? ''),
 	'read_only' => $readOnly,
 	'active_draft' => $activeDraft,
 	'published_version' => $publishedVersion,
+	'versions' => $versions,
+	'loaded_version' => $loadedVersion,
 	'usage' => $usage,
+	'i18n_available' => (bool)($state['i18n_available'] ?? false),
+	'default_locale' => (string)($state['default_locale'] ?? ''),
+	'i18n_workbench_url' => (string)($state['i18n_workbench_url'] ?? ''),
+	'translation_url' => (string)($state['translation_url'] ?? ''),
 	'initial_panel' => (string)($this->props['initial_panel'] ?? 'properties'),
 	'initial_preview' => is_array($this->props['initial_preview'] ?? null) ? $this->props['initial_preview'] : [],
 	'initial_preview_html' => (string)($this->props['initial_preview_html'] ?? ''),
@@ -41,6 +51,8 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 	data-form-builder-preview-url-value="<?= e((string)($urls['preview_render'] ?? '')) ?>"
 	data-form-builder-save-url-value="<?= e((string)($urls['save_draft'] ?? '')) ?>"
 	data-form-builder-publish-url-value="<?= e((string)($urls['publish'] ?? '')) ?>"
+	data-form-builder-load-draft-url-value="<?= e((string)($urls['load_draft_version'] ?? '')) ?>"
+	data-form-builder-update-draft-note-url-value="<?= e((string)($urls['update_draft_note'] ?? '')) ?>"
 	data-form-builder-csrf-token-value="<?= e((string)($this->props['csrf_token'] ?? '')) ?>"
 >
 	<header class="form-builder__header content-card">
@@ -76,6 +88,12 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 			<i class="bi bi-link-45deg" aria-hidden="true"></i>
 			<?= e($this->strings['form.builder.panel.usage']) ?> (<?= count($usage) ?>)
 		</button>
+		<?php if (!$readOnly): ?>
+			<button type="button" class="btn btn-outline-secondary btn-sm" data-action="form-builder#showDraftsModal" data-form-builder-target="draftsButton">
+				<i class="bi bi-clock-history" aria-hidden="true"></i>
+				<?= e($this->strings['form.builder.panel.drafts']) ?> (<?= count($versions) ?>)
+			</button>
+		<?php endif; ?>
 		<button type="button" class="btn btn-outline-primary btn-sm" data-action="form-builder#saveDraft" data-form-builder-target="saveButton">
 			<i class="bi bi-save" aria-hidden="true"></i>
 			<?= e($this->strings['form.builder.action.save_draft']) ?>
@@ -162,17 +180,81 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 				<div data-form-builder-target="formPropertiesPane">
 					<div class="form-builder__property-pane">
 						<label class="form-label w-100">
-							<span><?= e($this->strings['form.builder.label.title']) ?></span>
+							<span class="form-builder__property-label">
+								<span><?= e($this->strings['form.builder.label.title']) ?></span>
+								<a
+									class="form-builder__i18n-property-link"
+									data-form-builder-target="formTitleTranslationLink"
+									data-action="click->form-builder#stopPropertyLinkClick"
+									href="#"
+									target="_blank"
+									rel="noopener"
+									aria-label="<?= e($this->strings['form.builder.action.open_translations']) ?>"
+									title="<?= e($this->strings['form.builder.action.open_translations']) ?>"
+									hidden
+								><i class="bi bi-translate" aria-hidden="true"></i></a>
+							</span>
 							<input type="text" class="form-control form-control-sm" data-form-builder-target="formTitleInput" data-action="input->form-builder#updateFormText">
 						</label>
 						<label class="form-label w-100">
-							<span><?= e($this->strings['form.builder.label.description']) ?></span>
+							<span class="form-builder__property-label">
+								<span><?= e($this->strings['form.builder.label.description']) ?></span>
+								<a
+									class="form-builder__i18n-property-link"
+									data-form-builder-target="formDescriptionTranslationLink"
+									data-action="click->form-builder#stopPropertyLinkClick"
+									href="#"
+									target="_blank"
+									rel="noopener"
+									aria-label="<?= e($this->strings['form.builder.action.open_translations']) ?>"
+									title="<?= e($this->strings['form.builder.action.open_translations']) ?>"
+									hidden
+								><i class="bi bi-translate" aria-hidden="true"></i></a>
+							</span>
 							<textarea rows="2" class="form-control form-control-sm" data-form-builder-target="formDescriptionInput" data-action="input->form-builder#updateFormText"></textarea>
 						</label>
 						<label class="form-label w-100 mb-0">
-							<span><?= e($this->strings['form.builder.label.submit_label']) ?></span>
+							<span class="form-builder__property-label">
+								<span><?= e($this->strings['form.builder.label.submit_label']) ?></span>
+								<a
+									class="form-builder__i18n-property-link"
+									data-form-builder-target="submitLabelTranslationLink"
+									data-action="click->form-builder#stopPropertyLinkClick"
+									href="#"
+									target="_blank"
+									rel="noopener"
+									aria-label="<?= e($this->strings['form.builder.action.open_translations']) ?>"
+									title="<?= e($this->strings['form.builder.action.open_translations']) ?>"
+									hidden
+								><i class="bi bi-translate" aria-hidden="true"></i></a>
+							</span>
 							<input type="text" class="form-control form-control-sm" data-form-builder-target="submitLabelInput" data-action="input->form-builder#updateFormText">
 						</label>
+						<?php if ((bool)($state['i18n_available'] ?? false)): ?>
+							<div class="form-builder__i18n-settings">
+								<label class="form-check form-builder__checkbox">
+									<input
+										type="checkbox"
+										class="form-check-input"
+										data-form-builder-target="i18nModeInput"
+										data-action="change->form-builder#toggleI18nMode"
+										<?= $readOnly ? 'disabled' : '' ?>
+									>
+									<span><?= e($this->strings['form.builder.label.i18n_mode']) ?></span>
+								</label>
+								<div class="form-text"><?= e($this->strings['form.builder.help.i18n_mode']) ?></div>
+								<a
+									class="btn btn-outline-secondary btn-sm mt-2"
+									data-form-builder-target="translationsLink"
+									href="<?= e((string)($state['translation_url'] ?? '')) ?>"
+									target="_blank"
+									rel="noopener"
+								>
+									<i class="bi bi-translate" aria-hidden="true"></i>
+									<?= e($this->strings['form.builder.action.open_translations']) ?>
+								</a>
+							</div>
+						<?php endif; ?>
 					</div>
 				</div>
 				<div data-form-builder-target="inputPropertiesPane" hidden>
@@ -182,7 +264,20 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 						</div>
 						<div data-form-builder-target="fieldProperties" hidden>
 							<label class="form-label w-100">
-								<span><?= e($this->strings['form.builder.label.field_label']) ?></span>
+								<span class="form-builder__property-label">
+									<span><?= e($this->strings['form.builder.label.field_label']) ?></span>
+									<a
+										class="form-builder__i18n-property-link"
+										data-form-builder-target="fieldLabelTranslationLink"
+										data-action="click->form-builder#stopPropertyLinkClick"
+										href="#"
+										target="_blank"
+										rel="noopener"
+										aria-label="<?= e($this->strings['form.builder.action.open_translations']) ?>"
+										title="<?= e($this->strings['form.builder.action.open_translations']) ?>"
+										hidden
+									><i class="bi bi-translate" aria-hidden="true"></i></a>
+								</span>
 								<input type="text" class="form-control form-control-sm" data-form-builder-target="fieldLabelInput" data-action="input->form-builder#updateSelectedField">
 							</label>
 							<label class="form-label w-100">
@@ -196,9 +291,33 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 							<label class="form-check form-builder__checkbox">
 								<input type="checkbox" class="form-check-input" data-form-builder-target="fieldRequiredInput" data-action="change->form-builder#updateSelectedField">
 								<span><?= e($this->strings['form.builder.label.required']) ?></span>
+								<a
+									class="form-builder__i18n-property-link ms-auto"
+									data-form-builder-target="fieldRequiredTranslationLink"
+									data-action="click->form-builder#stopPropertyLinkClick"
+									href="#"
+									target="_blank"
+									rel="noopener"
+									aria-label="<?= e($this->strings['form.builder.action.open_translations']) ?>"
+									title="<?= e($this->strings['form.builder.action.open_translations']) ?>"
+									hidden
+								><i class="bi bi-translate" aria-hidden="true"></i></a>
 							</label>
 							<label class="form-label w-100 mb-0" data-form-builder-target="fieldOptionsGroup">
-								<span><?= e($this->strings['form.builder.label.options']) ?></span>
+								<span class="form-builder__property-label">
+									<span><?= e($this->strings['form.builder.label.options']) ?></span>
+									<a
+										class="form-builder__i18n-property-link"
+										data-form-builder-target="fieldOptionsTranslationLink"
+										data-action="click->form-builder#stopPropertyLinkClick"
+										href="#"
+										target="_blank"
+										rel="noopener"
+										aria-label="<?= e($this->strings['form.builder.action.open_translations']) ?>"
+										title="<?= e($this->strings['form.builder.action.open_translations']) ?>"
+										hidden
+									><i class="bi bi-translate" aria-hidden="true"></i></a>
+								</span>
 								<textarea rows="5" class="form-control form-control-sm" data-form-builder-target="fieldOptionsInput" data-action="input->form-builder#updateSelectedField"></textarea>
 							</label>
 						</div>
@@ -246,6 +365,33 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-outline-secondary btn-sm" data-action="form-builder#closeUsageModal">
+						<?= e($this->strings['form.builder.action.close']) ?>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div
+		class="form-builder__usage-overlay form-builder__drafts-overlay"
+		role="dialog"
+		aria-modal="true"
+		aria-labelledby="form-builder-drafts-title"
+		data-form-builder-target="draftsModal"
+		data-action="click->form-builder#closeDraftsModalOnBackdrop keydown.esc@window->form-builder#closeDraftsModal"
+		hidden
+	>
+		<div class="modal-dialog modal-dialog-centered modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2 class="modal-title h5" id="form-builder-drafts-title"><?= e($this->strings['form.builder.panel.drafts']) ?> (<?= count($versions) ?>)</h2>
+					<button type="button" class="btn-close" data-action="form-builder#closeDraftsModal" aria-label="<?= e($this->strings['form.builder.action.close']) ?>"></button>
+				</div>
+				<div class="modal-body">
+					<div class="form-builder__drafts-list" data-form-builder-target="draftsList"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-outline-secondary btn-sm" data-action="form-builder#closeDraftsModal">
 						<?= e($this->strings['form.builder.action.close']) ?>
 					</button>
 				</div>

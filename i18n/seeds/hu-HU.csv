@@ -27,6 +27,9 @@ admin,email_outbox.summary.title,,hu-HU,"Queue summary","Sor összefoglaló",0,0
 admin,email_outbox.title,,hu-HU,"Email outbox","Email kimenő",0,0,"Email kimenő"
 admin,email_queue.dead_letter,,hu-HU,"Dead letter","Hibás üzenet",0,0,"Hibás üzenet"
 admin,email_queue.empty,,hu-HU,"No email jobs are waiting right now.","Jelenleg nincs várakozó email feladat.",0,0,"Jelenleg nincs várakozó email feladat."
+admin,email_queue.current_job,,hu-HU,"Current job","Aktuális feladat",0,0,"Aktuális feladat"
+admin,email_queue.instance_state,,hu-HU,State,Állapot,0,0,Állapot
+admin,email_queue.instances,,hu-HU,"Worker instances","Feldolgozó példányok",0,0,"Feldolgozó példányok"
 admin,email_queue.last_processed,,hu-HU,"Last processed","Utoljára feldolgozva",0,0,"Utoljára feldolgozva"
 admin,email_queue.last_seen,,hu-HU,"Last seen","Utoljára látva",0,0,"Utoljára látva"
 admin,email_queue.open_outbox,,hu-HU,"Open email outbox","Email kimenő megnyitása",0,0,"Email kimenő megnyitása"
@@ -34,6 +37,8 @@ admin,email_queue.pending,,hu-HU,Pending,Függőben,0,0,Függőben
 admin,email_queue.retry_wait,,hu-HU,"Retry wait","Újrapróbálkozásra vár",0,0,"Újrapróbálkozásra vár"
 admin,email_queue.sent_last_24h,,hu-HU,"Sent in last 24h","Elküldve az elmúlt 24 órában",0,0,"Elküldve az elmúlt 24 órában"
 admin,email_queue.status.never_seen,,hu-HU,"Never seen","Még nem látható",0,0,"Még nem látható"
+admin,email_queue.status.paused,,hu-HU,Paused,Szüneteltetve,0,0,Szüneteltetve
+admin,email_queue.status.pausing,,hu-HU,Pausing,"Szüneteltetés alatt",0,0,"Szüneteltetés alatt"
 admin,email_queue.status.running,,hu-HU,Running,Fut,0,0,Fut
 admin,email_queue.status.stale,,hu-HU,Stale,Elavult,0,0,Elavult
 admin,email_queue.status.unavailable,,hu-HU,Unavailable,"Nem elérhető",0,0,"Nem elérhető"
@@ -96,6 +101,8 @@ admin,menu.theme_selector,,hu-HU,"Theme selection","Témák kiválasztása",0,0,
 admin,menu.translations,,hu-HU,Translations,Fordítások,0,0,Fordítások
 admin,menu.usergroups,,hu-HU,"User groups","Felhasználói csoportok",0,0,"Felhasználói csoportok"
 admin,menu.widget_preview,,hu-HU,"Widget preview","Widget előnézet",0,0,"Widget előnézet"
+seed,capture_demo.description,,hu-HU,"Create the shipped capture contact demo definition.","A shipped capture kapcsolat demó definíció létrehozása.",0,0,"A shipped capture kapcsolat demó definíció létrehozása."
+seed,capture_demo.error.ensure_failed,,hu-HU,"Unable to ensure the shipped capture demo form.","A shipped capture demó űrlap nem biztosítható.",0,0,"A shipped capture demó űrlap nem biztosítható."
 cms,admin_dropdown.edit_mode,,hu-HU,"Edit mode","Szerkesztő mód",0,0,"Szerkesztő mód"
 cms,admin_dropdown.edit_mode_off,,hu-HU,off,kikapcs,0,0,kikapcs
 cms,admin_dropdown.edit_mode_on,,hu-HU,on,bekapcs,0,0,bekapcs

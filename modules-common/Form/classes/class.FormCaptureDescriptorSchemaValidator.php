@@ -5,6 +5,9 @@ declare(strict_types=1);
 final class FormCaptureDescriptorSchemaValidator
 {
 	public const string CAPTURE_PREFIX = 'capture-';
+	public const string I18N_MODE_LITERAL = 'literal';
+	public const string I18N_MODE_KEYED = 'keyed';
+	public const string FORM_I18N_DOMAIN = 'form_def';
 	public const int MAX_DEFINITION_SLUG_LENGTH = 128;
 	public const string DEFAULT_HONEYPOT_FIELD = 'company_website';
 	public const int DEFAULT_RATE_LIMIT_ACCEPTED = 5;
@@ -50,6 +53,7 @@ final class FormCaptureDescriptorSchemaValidator
 	{
 		self::validateDefinitionSlug($definition_slug);
 		$field_keys = self::validateDescriptor($descriptor);
+		self::validateI18nForDefinition($definition_slug, $descriptor);
 		self::normalizeSecurity($security, $field_keys);
 	}
 
@@ -98,6 +102,7 @@ final class FormCaptureDescriptorSchemaValidator
 	{
 		self::assertNoUnknownKeys($descriptor, [
 			'kind',
+			'i18n_mode',
 			'title',
 			'description',
 			'sub_title',
@@ -107,6 +112,10 @@ final class FormCaptureDescriptorSchemaValidator
 
 		if (($descriptor['kind'] ?? null) !== 'capture') {
 			throw new InvalidArgumentException('Capture descriptors must declare kind=capture.');
+		}
+
+		if (array_key_exists('i18n_mode', $descriptor) && !in_array($descriptor['i18n_mode'], [self::I18N_MODE_LITERAL, self::I18N_MODE_KEYED], true)) {
+			throw new InvalidArgumentException('Capture descriptor i18n_mode must be literal or keyed.');
 		}
 
 		foreach (['title', 'description', 'sub_title', 'submit_label'] as $text_key) {
@@ -156,6 +165,10 @@ final class FormCaptureDescriptorSchemaValidator
 
 		$normalized = $descriptor;
 		$normalized['kind'] = 'capture';
+
+		if (array_key_exists('i18n_mode', $normalized)) {
+			$normalized['i18n_mode'] = trim((string)$normalized['i18n_mode']);
+		}
 		$normalized_fields = [];
 
 		foreach ($descriptor['fields'] as $field) {
@@ -243,6 +256,42 @@ final class FormCaptureDescriptorSchemaValidator
 		return str_replace('-', '_', trim($normalizer));
 	}
 
+	public static function i18nSlugForDefinition(string $definition_slug): string
+	{
+		self::validateDefinitionSlug($definition_slug);
+
+		return str_replace('-', '_', $definition_slug);
+	}
+
+	public static function i18nKeyPrefixForDefinition(string $definition_slug): string
+	{
+		return self::FORM_I18N_DOMAIN . '.' . self::i18nSlugForDefinition($definition_slug);
+	}
+
+	public static function isFormDefinitionI18nKey(string $definition_slug, string $key): bool
+	{
+		$prefix = self::i18nKeyPrefixForDefinition($definition_slug);
+
+		return str_starts_with($key, $prefix . '.');
+	}
+
+	public static function isValidI18nKey(string $key): bool
+	{
+		return preg_match('/^[a-z][a-z0-9_]*(?:\.[a-z0-9_]+)+$/D', $key) === 1;
+	}
+
+	/**
+	 * @param array<string, mixed> $descriptor
+	 * @return list<array{key: string, text: string, path: string}>
+	 */
+	public static function extractI18nReferences(array $descriptor): array
+	{
+		$references = [];
+		self::collectI18nReferences($descriptor, 'descriptor', $references);
+
+		return $references;
+	}
+
 	/**
 	 * @param array<string, mixed> $field
 	 * @return array{string, string}
@@ -318,6 +367,107 @@ final class FormCaptureDescriptorSchemaValidator
 		return preg_match('/^[a-z][a-z0-9_]*$/D', $value) === 1;
 	}
 
+	/**
+	 * @param array<string, mixed> $descriptor
+	 */
+	public static function validateI18nForDefinition(string $definition_slug, array $descriptor): void
+	{
+		if (($descriptor['i18n_mode'] ?? self::I18N_MODE_LITERAL) !== self::I18N_MODE_KEYED) {
+			foreach (self::extractI18nReferences($descriptor) as $reference) {
+				if (!self::isValidI18nKey($reference['key'])) {
+					throw new InvalidArgumentException("Capture descriptor {$reference['path']} has an invalid i18n key.");
+				}
+			}
+
+			return;
+		}
+
+		foreach (['title', 'description', 'sub_title', 'submit_label'] as $text_key) {
+			if (array_key_exists($text_key, $descriptor)) {
+				self::assertKeyedTextDefinition($definition_slug, $descriptor[$text_key], "descriptor.{$text_key}");
+			}
+		}
+
+		foreach (($descriptor['fields'] ?? []) as $index => $field) {
+			if (!is_array($field)) {
+				continue;
+			}
+
+			$field_name = trim((string)($field['name'] ?? $index));
+
+			foreach (['label', 'help', 'explanation'] as $text_key) {
+				if (array_key_exists($text_key, $field)) {
+					self::assertKeyedTextDefinition($definition_slug, $field[$text_key], "field {$field_name}.{$text_key}");
+				}
+			}
+
+			foreach (($field['values'] ?? $field['options'] ?? []) as $option_index => $option) {
+				if (!is_array($option)) {
+					continue;
+				}
+
+				if (array_key_exists('label', $option)) {
+					self::assertKeyedTextDefinition($definition_slug, $option['label'], "field {$field_name}.options[{$option_index}].label");
+				} elseif (array_key_exists('text', $option) || array_key_exists('key', $option)) {
+					self::assertKeyedTextDefinition($definition_slug, $option, "field {$field_name}.options[{$option_index}]");
+				}
+			}
+
+			foreach (($field['validators'] ?? []) as $validator_index => $validator) {
+				if (!is_array($validator)) {
+					continue;
+				}
+
+				foreach (['message', 'error_message'] as $message_key) {
+					if (array_key_exists($message_key, $validator)) {
+						self::assertKeyedTextDefinition($definition_slug, $validator[$message_key], "field {$field_name}.validators[{$validator_index}].{$message_key}");
+					}
+				}
+			}
+		}
+	}
+
+	private static function assertKeyedTextDefinition(string $definition_slug, mixed $value, string $path): void
+	{
+		$text = self::textDefinitionFallback($value);
+		$key = is_array($value) && isset($value['key']) && is_scalar($value['key'])
+			? trim((string)$value['key'])
+			: '';
+
+		if ($key === '' && trim($text) === '') {
+			return;
+		}
+
+		if (!is_array($value) || $key === '') {
+			throw new InvalidArgumentException("Capture descriptor {$path} must use an i18n key in keyed mode.");
+		}
+
+		if (!array_key_exists('text', $value) || !is_scalar($value['text'])) {
+			throw new InvalidArgumentException("Capture descriptor {$path} must keep default text next to the i18n key.");
+		}
+
+		if (!self::isValidI18nKey($key)) {
+			throw new InvalidArgumentException("Capture descriptor {$path} has an invalid i18n key.");
+		}
+
+		if (!self::isFormDefinitionI18nKey($definition_slug, $key)) {
+			throw new InvalidArgumentException("Capture descriptor {$path} i18n key must use the form_def namespace for this form.");
+		}
+	}
+
+	private static function textDefinitionFallback(mixed $value): string
+	{
+		if (is_array($value) && array_key_exists('text', $value) && is_scalar($value['text'])) {
+			return (string)$value['text'];
+		}
+
+		if (is_scalar($value) || $value === null) {
+			return (string)$value;
+		}
+
+		return '';
+	}
+
 	private static function assertTextDefinition(mixed $value, string $path): void
 	{
 		if (is_scalar($value) || $value === null) {
@@ -344,6 +494,33 @@ final class FormCaptureDescriptorSchemaValidator
 		foreach ((array)($value['params'] ?? []) as $param_key => $param_value) {
 			if (!is_string($param_key) || (!is_scalar($param_value) && $param_value !== null)) {
 				throw new InvalidArgumentException("Capture descriptor {$path}.params must contain scalar values.");
+			}
+		}
+	}
+
+	/**
+	 * @param array<int|string, mixed> $value
+	 * @param list<array{key: string, text: string, path: string}> $references
+	 */
+	private static function collectI18nReferences(array $value, string $path, array &$references): void
+	{
+		$key = $value['key'] ?? null;
+
+		$is_text_definition = is_string($key)
+			&& trim($key) !== ''
+			&& array_diff(array_keys($value), ['text', 'key', 'params']) === [];
+
+		if ($is_text_definition) {
+			$references[] = [
+				'key' => trim($key),
+				'text' => self::textDefinitionFallback($value),
+				'path' => $path,
+			];
+		}
+
+		foreach ($value as $child_key => $child) {
+			if (is_array($child)) {
+				self::collectI18nReferences($child, $path . '.' . (string)$child_key, $references);
 			}
 		}
 	}

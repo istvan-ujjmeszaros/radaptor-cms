@@ -57,8 +57,27 @@ form,widget_connection_settings.name,,hu-HU,"Content formatting","Tartalom form�
 form,widget_connection_settings.title,,hu-HU,"Content formatting","Tartalom formázás",0,0,"Tartalom formázás"
 form,closer.title,,hu-HU,"Closer page","Bezáró oldal",0,0,"Bezáró oldal"
 form,closer.close_window,,hu-HU,"Close this window!","Zárd be ezt az ablakot!",0,0,"Zárd be ezt az ablakot!"
+form,capture.description,,hu-HU,"Generic DB-backed capture form processor.","Általános DB-alapú capture űrlap feldolgozó.",0,0,"Általános DB-alapú capture űrlap feldolgozó."
+form,capture.error_missing_definition,,hu-HU,"Capture form definition is not configured.","A capture űrlap definíciója nincs beállítva.",0,0,"A capture űrlap definíciója nincs beállítva."
+form,capture.error_rate_limited,,hu-HU,"Too many submissions. Please try again later.","Túl sok beküldés történt. Próbáld újra később.",0,0,"Túl sok beküldés történt. Próbáld újra később."
+form,capture.error_unavailable,,hu-HU,"This form is currently unavailable.","Ez az űrlap jelenleg nem elérhető.",0,0,"Ez az űrlap jelenleg nem elérhető."
 form,capture.honeypot.label,,hu-HU,"Leave this field empty","Hagyd üresen ezt a mezőt",0,0,"Hagyd üresen ezt a mezőt"
+form,capture.name,,hu-HU,"Capture form","Capture űrlap",0,0,"Capture űrlap"
 form,capture.submit,,hu-HU,Send,Küldés,0,0,Küldés
+form,capture_demo.description,,hu-HU,"Send a short message through the capture-form MVP.","Küldj rövid üzenetet a capture form MVP-n keresztül.",0,0,"Küldj rövid üzenetet a capture form MVP-n keresztül."
+form,capture_demo.field.email.label,,hu-HU,Email,"E-mail",0,0,"E-mail"
+form,capture_demo.field.message.label,,hu-HU,Message,Üzenet,0,0,Üzenet
+form,capture_demo.field.name.label,,hu-HU,Name,Név,0,0,Név
+form,capture_demo.field.topic.label,,hu-HU,Topic,Téma,0,0,Téma
+form,capture_demo.title,,hu-HU,"Contact demo","Kapcsolat demó",0,0,"Kapcsolat demó"
+form,capture_demo.topic.billing,,hu-HU,Billing,Számlázás,0,0,Számlázás
+form,capture_demo.topic.general,,hu-HU,General,Általános,0,0,Általános
+form,capture_demo.topic.support,,hu-HU,Support,Támogatás,0,0,Támogatás
+form,capture.validation.email,,hu-HU,"Enter a valid email address.","Adj meg érvényes e-mail címet.",0,0,"Adj meg érvényes e-mail címet."
+form,capture.validation.enum,,hu-HU,"Choose one of the available options.","Válassz az elérhető opciók közül.",0,0,"Válassz az elérhető opciók közül."
+form,capture.validation.min_length,,hu-HU,"Minimum {min} characters","Minimum {min} karakter",0,0,"Minimum {min} karakter"
+widget,capture_form.description,,hu-HU,"Render a public DB-backed capture form with secure submission defaults.","Publikus DB-alapú capture űrlap megjelenítése biztonságos beküldési alapbeállításokkal.",0,0,"Publikus DB-alapú capture űrlap megjelenítése biztonságos beküldési alapbeállításokkal."
+widget,capture_form.name,,hu-HU,"Capture form","Capture űrlap",0,0,"Capture űrlap"
 widget,capture_form_builder.description,,hu-HU,"Admin builder for DB-backed capture forms.","Admin szerkesztő DB-alapú capture űrlapokhoz.",0,0,"Admin szerkesztő DB-alapú capture űrlapokhoz."
 widget,capture_form_builder.name,,hu-HU,"Form builder","Űrlap szerkesztő",0,0,"Űrlap szerkesztő"
 widget,capture_form_list.description,,hu-HU,"Admin list for DB-backed and shipped capture forms.","Admin lista DB-alapú és shipped capture űrlapokhoz.",0,0,"Admin lista DB-alapú és shipped capture űrlapokhoz."
@@ -66,7 +85,7 @@ widget,capture_form_list.name,,hu-HU,"Form list","Űrlap lista",0,0,"Űrlap list
 form,builder.title,,hu-HU,"Form builder","Űrlap szerkesztő",0,0,"Űrlap szerkesztő"
 form,builder.new_slug,,hu-HU,"New slug","Új slug",0,0,"Új slug"
 form,builder.new_title,,hu-HU,"New title","Új cím",0,0,"Új cím"
-form,builder.placeholder.slug,,hu-HU,kapcsolat,kapcsolat,0,0,kapcsolat
+form,builder.placeholder.slug,,hu-HU,contact-us,kapcsolat,0,0,kapcsolat
 form,builder.help.slug,,hu-HU,"Use letters, numbers, spaces, underscores, or hyphens. The capture- prefix is added automatically.","Betűk, számok, szóközök, aláhúzások és kötőjelek használhatók. A capture- prefix automatikusan hozzáadódik.",0,0,"Betűk, számok, szóközök, aláhúzások és kötőjelek használhatók. A capture- prefix automatikusan hozzáadódik."
 form,builder.create,,hu-HU,Create,Létrehozás,0,0,Létrehozás
 form,builder.palette,,hu-HU,Fields,Mezők,0,0,Mezők
@@ -79,6 +98,8 @@ form,builder.label.definition,,hu-HU,Definition,Definíció,0,0,Definíció
 form,builder.label.title,,hu-HU,Title,Cím,0,0,Cím
 form,builder.label.description,,hu-HU,Description,Leírás,0,0,Leírás
 form,builder.label.submit_label,,hu-HU,"Submit label","Beküldés felirat",0,0,"Beküldés felirat"
+form,builder.label.i18n_mode,,hu-HU,"Use translation keys","Fordítási kulcsok használata",0,0,"Fordítási kulcsok használata"
+form,builder.help.i18n_mode,,hu-HU,"Generate translation keys for this form and store the default text for the default locale.","A szerkesztő fordítási kulcsokat generál ehhez az űrlaphoz, és az alapértelmezett nyelv szövegét is eltárolja.",0,0,"A szerkesztő fordítási kulcsokat generál ehhez az űrlaphoz, és az alapértelmezett nyelv szövegét is eltárolja."
 form,builder.label.field_label,,hu-HU,"Field label","Mező felirat",0,0,"Mező felirat"
 form,builder.label.field_name,,hu-HU,"Field name","Mezőnév",0,0,"Mezőnév"
 form,builder.label.field_key,,hu-HU,"Payload key","Payload kulcs",0,0,"Payload kulcs"
@@ -89,6 +110,7 @@ form,builder.action.redo,,hu-HU,Redo,Újra,0,0,Újra
 form,builder.action.move_up,,hu-HU,"Move up","Mozgatás fel",0,0,"Mozgatás fel"
 form,builder.action.move_down,,hu-HU,"Move down","Mozgatás le",0,0,"Mozgatás le"
 form,builder.action.delete,,hu-HU,Delete,Törlés,0,0,Törlés
+form,builder.action.open_translations,,hu-HU,"Open translations","Fordítások megnyitása",0,0,"Fordítások megnyitása"
 form,builder.action.save_draft,,hu-HU,"Save draft","Piszkozat mentése",0,0,"Piszkozat mentése"
 form,builder.action.publish,,hu-HU,Publish,Publikálás,0,0,Publikálás
 form,builder.action.close,,hu-HU,Close,Bezárás,0,0,Bezárás
@@ -126,10 +148,28 @@ form,builder.option.default_one,,hu-HU,"Option one","Első opció",0,0,"Első op
 form,builder.option.default_two,,hu-HU,"Option two","Második opció",0,0,"Második opció"
 form,builder.panel.properties,,hu-HU,Properties,Tulajdonságok,0,0,Tulajdonságok
 form,builder.panel.usage,,hu-HU,"Used on pages","Oldalakon használva",0,0,"Oldalakon használva"
+form,builder.panel.drafts,,hu-HU,Drafts,Piszkozatok,0,0,Piszkozatok
 form,builder.usage.empty,,hu-HU,"This form is not placed on any page.","Ez az űrlap nincs kirakva oldalra.",0,0,"Ez az űrlap nincs kirakva oldalra."
 form,builder.usage.page,,hu-HU,Page,Oldal,0,0,Oldal
-form,builder.usage.slot,,hu-HU,Slot,Slot,0,0,Slot
+form,builder.usage.slot,,hu-HU,Slot,Hely,0,0,Hely
 form,builder.usage.connection,,hu-HU,Connection,Kapcsolat,0,0,Kapcsolat
+form,builder.drafts.empty,,hu-HU,"No draft versions yet.","Még nincsenek piszkozat verziók.",0,0,"Még nincsenek piszkozat verziók."
+form,builder.drafts.current,,hu-HU,Current,Aktuális,0,0,Aktuális
+form,builder.drafts.loaded,,hu-HU,Loaded,Betöltve,0,0,Betöltve
+form,builder.drafts.version,,hu-HU,Version,Verzió,0,0,Verzió
+form,builder.drafts.created,,hu-HU,Created,Létrehozva,0,0,Létrehozva
+form,builder.drafts.published,,hu-HU,Published,Publikálva,0,0,Publikálva
+form,builder.drafts.note,,hu-HU,Note,Megjegyzés,0,0,Megjegyzés
+form,builder.drafts.note_placeholder,,hu-HU,"Add a note for this version","Megjegyzés ehhez a verzióhoz",0,0,"Megjegyzés ehhez a verzióhoz"
+form,builder.drafts.status.draft,,hu-HU,Draft,Piszkozat,0,0,Piszkozat
+form,builder.drafts.status.abandoned,,hu-HU,Abandoned,Félretett,0,0,Félretett
+form,builder.drafts.status.published,,hu-HU,Published,Publikált,0,0,Publikált
+form,builder.action.load_draft,,hu-HU,Load,Betöltés,0,0,Betöltés
+form,builder.status.loaded_draft,,hu-HU,"Draft loaded","Piszkozat betöltve",0,0,"Piszkozat betöltve"
+form,builder.status.draft_note_saved,,hu-HU,"Draft note saved","Piszkozat megjegyzés mentve",0,0,"Piszkozat megjegyzés mentve"
+form,builder.warning.load_draft_discard_unsaved,,hu-HU,"Loading this version will replace unsaved editor changes. Continue?","A verzió betöltése lecseréli a nem mentett szerkesztői módosításokat. Folytatod?",0,0,"A verzió betöltése lecseréli a nem mentett szerkesztői módosításokat. Folytatod?"
+form,builder.error_load_draft,,hu-HU,"Could not load this draft.","A piszkozat nem tölthető be.",0,0,"A piszkozat nem tölthető be."
+form,builder.error_draft_note,,hu-HU,"Could not save the draft note.","A piszkozat megjegyzése nem menthető.",0,0,"A piszkozat megjegyzése nem menthető."
 form,list.title,,hu-HU,"Capture forms","Capture űrlapok",0,0,"Capture űrlapok"
 form,list.subtitle,,hu-HU,"Create, edit, and inspect capture forms.","Capture űrlapok létrehozása, szerkesztése és ellenőrzése.",0,0,"Capture űrlapok létrehozása, szerkesztése és ellenőrzése."
 form,list.tab.custom,,hu-HU,"Custom forms","Egyedi űrlapok",0,0,"Egyedi űrlapok"
@@ -139,7 +179,7 @@ form,list.new_title,,hu-HU,"New title","Új cím",0,0,"Új cím"
 form,list.create,,hu-HU,"Create form","Űrlap létrehozása",0,0,"Űrlap létrehozása"
 form,list.empty_custom,,hu-HU,"No custom capture forms yet.","Még nincs egyedi capture űrlap.",0,0,"Még nincs egyedi capture űrlap."
 form,list.empty_system,,hu-HU,"No system capture forms are published.","Nincs publikált system capture űrlap.",0,0,"Nincs publikált system capture űrlap."
-form,list.col.slug,,hu-HU,Slug,Slug,0,0,Slug
+form,list.col.slug,,hu-HU,Slug,Azonosító,0,0,Azonosító
 form,list.col.source,,hu-HU,Source,Forrás,0,0,Forrás
 form,list.col.status,,hu-HU,Status,Státusz,0,0,Státusz
 form,list.col.version,,hu-HU,Version,Verzió,0,0,Verzió
@@ -155,7 +195,7 @@ form,list.status.draft,,hu-HU,Draft,Piszkozat,0,0,Piszkozat
 form,list.status.published,,hu-HU,Published,Publikált,0,0,Publikált
 form,list.status.unknown,,hu-HU,Unknown,Ismeretlen,0,0,Ismeretlen
 form,list.version.none,,hu-HU,None,Nincs,0,0,Nincs
-form,list.version.published,,hu-HU,"v{version}","v{version}",0,0,"v{version}"
+form,list.version.published,,hu-HU,"v{version}","{version}. verzió",0,0,"{version}. verzió"
 form,list.version.draft,,hu-HU,"draft v{version}","piszkozat v{version}",0,0,"piszkozat v{version}"
 form,list.usage.none,,hu-HU,None,Nincs,0,0,Nincs
 form,builder.warning.discard_unsaved,,hu-HU,"Discard unsaved form changes?","Eldobod a nem mentett űrlapmódosításokat?",0,0,"Eldobod a nem mentett űrlapmódosításokat?"

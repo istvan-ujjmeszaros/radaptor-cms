@@ -64,6 +64,15 @@ form,capture.error_unavailable,,en-US,"This form is currently unavailable.","Thi
 form,capture.honeypot.label,,en-US,"Leave this field empty","Leave this field empty",0,0,"Leave this field empty"
 form,capture.name,,en-US,"Capture form","Capture form",0,0,"Capture form"
 form,capture.submit,,en-US,"Send","Send",0,0,"Send"
+form,capture_demo.description,,en-US,"Send a short message through the capture-form MVP.","Send a short message through the capture-form MVP.",0,0,"Send a short message through the capture-form MVP."
+form,capture_demo.field.email.label,,en-US,Email,Email,0,0,Email
+form,capture_demo.field.message.label,,en-US,Message,Message,0,0,Message
+form,capture_demo.field.name.label,,en-US,Name,Name,0,0,Name
+form,capture_demo.field.topic.label,,en-US,Topic,Topic,0,0,Topic
+form,capture_demo.title,,en-US,"Contact demo","Contact demo",0,0,"Contact demo"
+form,capture_demo.topic.billing,,en-US,Billing,Billing,0,0,Billing
+form,capture_demo.topic.general,,en-US,General,General,0,0,General
+form,capture_demo.topic.support,,en-US,Support,Support,0,0,Support
 form,capture.validation.email,,en-US,"Enter a valid email address.","Enter a valid email address.",0,0,"Enter a valid email address."
 form,capture.validation.enum,,en-US,"Choose one of the available options.","Choose one of the available options.",0,0,"Choose one of the available options."
 form,capture.validation.min_length,,en-US,"Minimum {min} characters","Minimum {min} characters",0,0,"Minimum {min} characters"
@@ -89,6 +98,8 @@ form,builder.label.definition,,en-US,Definition,Definition,0,0,Definition
 form,builder.label.title,,en-US,Title,Title,0,0,Title
 form,builder.label.description,,en-US,Description,Description,0,0,Description
 form,builder.label.submit_label,,en-US,"Submit label","Submit label",0,0,"Submit label"
+form,builder.label.i18n_mode,,en-US,"Use translation keys","Use translation keys",0,0,"Use translation keys"
+form,builder.help.i18n_mode,,en-US,"Generate translation keys for this form and store the default text for the default locale.","Generate translation keys for this form and store the default text for the default locale.",0,0,"Generate translation keys for this form and store the default text for the default locale."
 form,builder.label.field_label,,en-US,"Field label","Field label",0,0,"Field label"
 form,builder.label.field_name,,en-US,"Field name","Field name",0,0,"Field name"
 form,builder.label.field_key,,en-US,"Payload key","Payload key",0,0,"Payload key"
@@ -99,6 +110,7 @@ form,builder.action.redo,,en-US,Redo,Redo,0,0,Redo
 form,builder.action.move_up,,en-US,"Move up","Move up",0,0,"Move up"
 form,builder.action.move_down,,en-US,"Move down","Move down",0,0,"Move down"
 form,builder.action.delete,,en-US,Delete,Delete,0,0,Delete
+form,builder.action.open_translations,,en-US,"Open translations","Open translations",0,0,"Open translations"
 form,builder.action.save_draft,,en-US,"Save draft","Save draft",0,0,"Save draft"
 form,builder.action.publish,,en-US,Publish,Publish,0,0,Publish
 form,builder.action.close,,en-US,Close,Close,0,0,Close
@@ -136,10 +148,28 @@ form,builder.option.default_one,,en-US,"Option one","Option one",0,0,"Option one
 form,builder.option.default_two,,en-US,"Option two","Option two",0,0,"Option two"
 form,builder.panel.properties,,en-US,Properties,Properties,0,0,Properties
 form,builder.panel.usage,,en-US,"Used on pages","Used on pages",0,0,"Used on pages"
+form,builder.panel.drafts,,en-US,Drafts,Drafts,0,0,Drafts
 form,builder.usage.empty,,en-US,"This form is not placed on any page.","This form is not placed on any page.",0,0,"This form is not placed on any page."
 form,builder.usage.page,,en-US,Page,Page,0,0,Page
 form,builder.usage.slot,,en-US,Slot,Slot,0,0,Slot
 form,builder.usage.connection,,en-US,Connection,Connection,0,0,Connection
+form,builder.drafts.empty,,en-US,"No draft versions yet.","No draft versions yet.",0,0,"No draft versions yet."
+form,builder.drafts.current,,en-US,Current,Current,0,0,Current
+form,builder.drafts.loaded,,en-US,Loaded,Loaded,0,0,Loaded
+form,builder.drafts.version,,en-US,Version,Version,0,0,Version
+form,builder.drafts.created,,en-US,Created,Created,0,0,Created
+form,builder.drafts.published,,en-US,Published,Published,0,0,Published
+form,builder.drafts.note,,en-US,Note,Note,0,0,Note
+form,builder.drafts.note_placeholder,,en-US,"Add a note for this version","Add a note for this version",0,0,"Add a note for this version"
+form,builder.drafts.status.draft,,en-US,Draft,Draft,0,0,Draft
+form,builder.drafts.status.abandoned,,en-US,Abandoned,Abandoned,0,0,Abandoned
+form,builder.drafts.status.published,,en-US,Published,Published,0,0,Published
+form,builder.action.load_draft,,en-US,Load,Load,0,0,Load
+form,builder.status.loaded_draft,,en-US,"Draft loaded","Draft loaded",0,0,"Draft loaded"
+form,builder.status.draft_note_saved,,en-US,"Draft note saved","Draft note saved",0,0,"Draft note saved"
+form,builder.warning.load_draft_discard_unsaved,,en-US,"Loading this version will replace unsaved editor changes. Continue?","Loading this version will replace unsaved editor changes. Continue?",0,0,"Loading this version will replace unsaved editor changes. Continue?"
+form,builder.error_load_draft,,en-US,"Could not load this draft.","Could not load this draft.",0,0,"Could not load this draft."
+form,builder.error_draft_note,,en-US,"Could not save the draft note.","Could not save the draft note.",0,0,"Could not save the draft note."
 form,list.title,,en-US,"Capture forms","Capture forms",0,0,"Capture forms"
 form,list.subtitle,,en-US,"Create, edit, and inspect capture forms.","Create, edit, and inspect capture forms.",0,0,"Create, edit, and inspect capture forms."
 form,list.tab.custom,,en-US,"Custom forms","Custom forms",0,0,"Custom forms"

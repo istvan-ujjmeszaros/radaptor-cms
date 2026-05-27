@@ -4,6 +4,33 @@ declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 
+if (!class_exists('FormSubmitContext', false)) {
+	final class FormSubmitContext
+	{
+		public const string FIELD_FORM_ID = '_form_id';
+		public const string FIELD_FORM_INSTANCE_ID = '_form_instance_id';
+		public const string FIELD_ITEM_ID = '_item_id';
+		public const string FIELD_RETURN_TARGET = '_return_target';
+		public const string FIELD_HOST_PAGE_ID = '_host_page_id';
+		public const string FIELD_WIDGET_CONNECTION_ID = '_widget_connection_id';
+		public const string FIELD_BUILD_ID = '_build_id';
+		public const string FIELD_CONTEXT_PARAMS = '_context_params';
+		public const string FIELD_FORM_DEFINITION_VERSION_ID = '_form_definition_version_id';
+		public const string FIELD_FORM_RENDER_STATE_ID = '_form_render_state_id';
+		public const string FIELD_CSRF_TOKEN = '_token';
+	}
+}
+
+if (!class_exists('FormClassResolver', false)) {
+	final class FormClassResolver
+	{
+		public static function resolveClassName(string $form_id): ?string
+		{
+			return null;
+		}
+	}
+}
+
 final class FormRefactorPhase4SourceContractTest extends TestCase
 {
 	private const array EXPECTED_VALIDATOR_TYPES = [
@@ -330,12 +357,14 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$publish_source = $this->source('modules-common/Form/events/Event.FormBuilderPublish.php');
 		$preview_source = $this->source('modules-common/Form/events/Event.FormBuilderPreviewRender.php');
 		$fragment_source = $this->source('modules-common/Form/events/Event.FormBuilderEditorFragment.php');
+		$load_draft_source = $this->source('modules-common/Form/events/Event.FormBuilderLoadDraftVersion.php');
+		$note_source = $this->source('modules-common/Form/events/Event.FormBuilderUpdateDraftNote.php');
 
-		foreach ([$create_source, $save_source, $publish_source, $preview_source, $fragment_source] as $event_source) {
+		foreach ([$create_source, $save_source, $publish_source, $preview_source, $fragment_source, $load_draft_source, $note_source] as $event_source) {
 			$this->assertStringContainsString('FormBuilderEventHelper::authorizeContentAdmin', $event_source);
 		}
 
-		foreach ([$create_source, $save_source, $publish_source, $preview_source] as $event_source) {
+		foreach ([$create_source, $save_source, $publish_source, $preview_source, $load_draft_source, $note_source] as $event_source) {
 			$this->assertStringContainsString('FormBuilderEventHelper::validateCsrfFromPost', $event_source);
 		}
 
@@ -343,7 +372,9 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$this->assertStringContainsString("CmsMutationAuditService::withContext(\n\t\t\t\t'form_builder.save_draft'", $save_source);
 		$this->assertStringContainsString("CmsMutationAuditService::recordLeaf('form_builder.save_draft.conflict'", $save_source);
 		$this->assertStringContainsString("CmsMutationAuditService::withContext(\n\t\t\t\t'form_builder.publish'", $publish_source);
+		$this->assertStringContainsString("CmsMutationAuditService::withContext(\n\t\t\t\t'form_builder.update_draft_note'", $note_source);
 		$this->assertStringNotContainsString('CmsMutationAuditService::withContext', $preview_source);
+		$this->assertStringNotContainsString('CmsMutationAuditService::withContext', $load_draft_source);
 		$this->assertStringNotContainsString('FormBuilderEventHelper::validateCsrfFromPost', $fragment_source);
 		$this->assertStringNotContainsString('CmsMutationAuditService::withContext', $fragment_source);
 		$this->assertStringContainsString("'status' => self::STATUS_DRAFT", $authoring_source);
@@ -369,6 +400,10 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$this->assertStringContainsString('form.builder.error_create', $widget_source);
 		$this->assertStringContainsString("Url::getUrl('form_builder.editor_fragment')", $list_widget_source);
 		$this->assertStringContainsString('data-form-list-editor-fragment-url-value', $list_template_source);
+		$this->assertStringContainsString('\'i18n_workbench_url\' => $this->i18nWorkbenchUrl()', $authoring_source);
+		$this->assertStringContainsString('\'i18n_workbench_url\' => (string)($state[\'i18n_workbench_url\'] ?? \'\')', $template_source);
+		$this->assertStringContainsString('$showLifecycleColumns = $sourceFilter !== \'system\';', $list_template_source);
+		$this->assertStringContainsString('<?php if (!$readOnly): ?>', $template_source);
 		$this->assertStringNotContainsString('return_to', $list_template_source);
 		$this->assertStringContainsString("'form' => \$definitionSlug", $list_template_source);
 		$this->assertStringNotContainsString("'edit' => \$definitionSlug", $list_template_source);
@@ -385,11 +420,136 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 			'modules-common/Form/classes/class.FormResponseEmitter.php',
 			'modules-common/Form/events/Event.FormSubmit.php',
 			'modules-common/Form/events/Event.FormBuilderEditorFragment.php',
+			'modules-common/Form/events/Event.FormBuilderLoadDraftVersion.php',
+			'modules-common/Form/events/Event.FormBuilderUpdateDraftNote.php',
+			'modules-common/Form/classes/class.I18nReferenceAuditService.php',
 			'modules-common/Form/widgets/Widget.CaptureFormBuilder.php',
 			'modules-common/Form/widgets/Widget.CaptureFormList.php',
 		] as $path) {
 			$this->assertStringContainsString($path, $phpstan_source);
 		}
+	}
+
+	public function testI18nReferenceAuditRejectsUnseededShippedDescriptorKeys(): void
+	{
+		require_once dirname(__DIR__) . '/modules-common/Form/classes/class.FormCaptureDescriptorSchemaValidator.php';
+		require_once dirname(__DIR__) . '/modules-common/Form/classes/class.I18nReferenceAuditService.php';
+
+		$temp_dir = sys_get_temp_dir() . '/radaptor-i18n-reference-audit-' . bin2hex(random_bytes(6));
+		mkdir($temp_dir, 0o777, true);
+
+		try {
+			$this->writeSeedFile($temp_dir . '/en-US.csv', [
+				['form', 'capture_demo.title', 'en-US', 'Contact demo'],
+			]);
+			$this->writeSeedFile($temp_dir . '/hu-HU.csv', [
+				['form', 'capture_demo.title', 'hu-HU', 'Kapcsolat demó'],
+			]);
+
+			$result = I18nReferenceAuditService::audit([
+				'locales' => ['en-US', 'hu-HU'],
+				'seed_targets' => [[
+					'input_dir' => $temp_dir,
+				]],
+				'descriptor_rows' => [[
+					'definition_slug' => 'capture-contact-demo',
+					'source' => 'shipped',
+					'version_id' => 10,
+					'version_number' => 1,
+					'descriptor' => [
+						'kind' => 'capture',
+						'title' => ['key' => 'form.capture_demo.title'],
+						'description' => ['key' => 'form.capture_demo.description'],
+						'fields' => [
+							[
+								'type' => 'text',
+								'name' => 'name',
+								'key' => 'name',
+								'label' => ['text' => 'Name'],
+							],
+						],
+					],
+				]],
+			]);
+		} finally {
+			@unlink($temp_dir . '/en-US.csv');
+			@unlink($temp_dir . '/hu-HU.csv');
+			@rmdir($temp_dir);
+		}
+
+		$this->assertSame('error', $result['status']);
+		$this->assertSame(2, $result['references_scanned']);
+		$this->assertSame(2, $result['missing_references']);
+		$this->assertSame('i18n_reference_missing_seed', $result['issues'][0]['code'] ?? null);
+		$this->assertSame('form.capture_demo.description', $result['issues'][0]['key'] ?? null);
+	}
+
+	public function testCaptureDescriptorValidatorAndAuditHandleCustomFormI18nKeys(): void
+	{
+		require_once dirname(__DIR__) . '/modules-common/Form/classes/class.FormDescriptorValidatorRegistry.php';
+		require_once dirname(__DIR__) . '/modules-common/Form/classes/class.FormCaptureDescriptorSchemaValidator.php';
+		require_once dirname(__DIR__) . '/modules-common/Form/classes/class.I18nReferenceAuditService.php';
+
+		$descriptor = [
+			'kind' => 'capture',
+			'i18n_mode' => FormCaptureDescriptorSchemaValidator::I18N_MODE_KEYED,
+			'title' => [
+				'key' => 'form_def.capture_contact_demo.title',
+				'text' => 'Contact demo',
+			],
+			'fields' => [
+				[
+					'type' => 'text',
+					'name' => 'name',
+					'key' => 'name',
+					'label' => [
+						'key' => 'form_def.capture_contact_demo.fields.name.label',
+						'text' => 'Name',
+					],
+				],
+			],
+		];
+
+		FormCaptureDescriptorSchemaValidator::validateForDefinition('capture-contact-demo', $descriptor, null);
+
+		$invalid = $descriptor;
+		$invalid['title'] = ['text' => 'Missing key'];
+
+		try {
+			FormCaptureDescriptorSchemaValidator::validateForDefinition('capture-contact-demo', $invalid, null);
+			$this->fail('Keyed capture form descriptors must reject text definitions without i18n keys.');
+		} catch (InvalidArgumentException $exception) {
+			$this->assertStringContainsString('must use an i18n key', $exception->getMessage());
+		}
+
+		$invalid = $descriptor;
+		$invalid['title']['key'] = 'form_def.capture_other.title';
+
+		try {
+			FormCaptureDescriptorSchemaValidator::validateForDefinition('capture-contact-demo', $invalid, null);
+			$this->fail('Keyed capture form descriptors must reject i18n keys from another form namespace.');
+		} catch (InvalidArgumentException $exception) {
+			$this->assertStringContainsString('must use the form_def namespace for this form', $exception->getMessage());
+		}
+
+		$result = I18nReferenceAuditService::audit([
+			'locales' => ['en-US'],
+			'seed_targets' => [],
+			'message_keys' => ['form_def.capture_contact_demo.title'],
+			'descriptor_rows' => [[
+				'definition_slug' => 'capture-contact-demo',
+				'source' => 'db',
+				'version_id' => 11,
+				'version_number' => 2,
+				'descriptor' => $descriptor,
+			]],
+		]);
+
+		$this->assertSame('error', $result['status']);
+		$this->assertSame(2, $result['references_scanned']);
+		$this->assertSame(1, $result['missing_references']);
+		$this->assertSame('i18n_reference_missing_db_message', $result['issues'][0]['code'] ?? null);
+		$this->assertSame('form_def.capture_contact_demo.fields.name.label', $result['issues'][0]['key'] ?? null);
 	}
 
 	private function source(string $relativePath): string
@@ -398,5 +558,21 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$this->assertFileExists($path);
 
 		return (string) file_get_contents($path);
+	}
+
+	/**
+	 * @param list<array{0: string, 1: string, 2: string, 3: string}> $rows
+	 */
+	private function writeSeedFile(string $path, array $rows): void
+	{
+		$handle = fopen($path, 'w');
+		$this->assertIsResource($handle);
+		fputcsv($handle, ['domain', 'key', 'context', 'locale', 'source_text', 'expected_text', 'human_reviewed', 'allow_source_match', 'text']);
+
+		foreach ($rows as [$domain, $key, $locale, $text]) {
+			fputcsv($handle, [$domain, $key, '', $locale, $text, $text, '0', '0', $text]);
+		}
+
+		fclose($handle);
 	}
 }

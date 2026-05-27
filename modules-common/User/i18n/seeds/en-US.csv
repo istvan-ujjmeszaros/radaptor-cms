@@ -124,6 +124,8 @@ user,validation.timezone_invalid,,en-US,"Invalid timezone. Use an IANA name (e.g
 user,validation.username_max_length,,en-US,"Username must be 32 characters or fewer","Username must be 32 characters or fewer",0,0,"Username must be 32 characters or fewer"
 user,validation.username_taken,,en-US,"Username is already taken","Username is already taken",0,0,"Username is already taken"
 user,locale.current_label,,en-US,"Current language","Current language",0,0,"Current language"
+user,locale.forbidden,,en-US,"You are not allowed to change this locale.","You are not allowed to change this locale.",0,0,"You are not allowed to change this locale."
+user,locale.method_not_allowed,,en-US,"This locale action only accepts POST requests.","This locale action only accepts POST requests.",0,0,"This locale action only accepts POST requests."
 user,locale.invalid,,en-US,"Selected language is not available","Selected language is not available",0,0,"Selected language is not available"
 user,locale.menu_label,,en-US,Language,Language,0,0,Language
 user,locale.updated,,en-US,"Language updated","Language updated",0,0,"Language updated"

@@ -269,18 +269,6 @@ final class CaptureForm extends AbstractForm
 
 	private function resolveDescriptorText(mixed $value): string
 	{
-		if (is_array($value)) {
-			if (isset($value['key']) && is_scalar($value['key'])) {
-				$params = is_array($value['params'] ?? null) ? $value['params'] : [];
-
-				return t((string)$value['key'], $params);
-			}
-
-			if (array_key_exists('text', $value)) {
-				return (string)$value['text'];
-			}
-		}
-
-		return (string)$value;
+		return FormDescriptorAdapter::resolveDescriptorText($value);
 	}
 }

@@ -203,6 +203,36 @@ final class I18nTranslationServiceIntegrationTest extends TestCase
 		$this->assertSame(1, $this->tmEntryCount($domain, $key, $context, $locale, md5($new_source_text)));
 	}
 
+	public function testWorkbenchDomainAndSearchFiltersDoNotReuseNamedPlaceholders(): void
+	{
+		$pdo = Db::instance();
+		$domain = 'form_def';
+		$key = 'phpunit_form_' . bin2hex(random_bytes(4)) . '.title';
+		$context = '';
+		$source_text = 'PHPUnit filtered form title';
+		$translation_text = 'PHPUnit filtered form title';
+
+		$pdo->prepare(
+			'INSERT INTO i18n_messages (domain, `key`, context, source_text, source_hash)
+			VALUES (?, ?, ?, ?, ?)'
+		)->execute([$domain, $key, $context, $source_text, md5($source_text)]);
+
+		$pdo->prepare(
+			'INSERT INTO i18n_translations
+				(domain, `key`, context, locale, text, human_reviewed, allow_source_match, source_hash_snapshot)
+			VALUES (?, ?, ?, ?, ?, 1, 1, ?)'
+		)->execute([$domain, $key, $context, 'en-US', $translation_text, md5($source_text)]);
+
+		$result = I18nWorkbench::getTranslations('en-US', [
+			'domain' => $domain,
+			'search' => substr($key, 0, -6),
+		], 0, 25);
+
+		$this->assertGreaterThanOrEqual(1, $result['recordsFiltered']);
+		$keys = array_column($result['data'], 'key');
+		$this->assertContains($key, $keys);
+	}
+
 	/**
 	 * @param array<string, string> $row
 	 */

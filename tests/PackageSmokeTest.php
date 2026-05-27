@@ -96,6 +96,20 @@ final class PackageSmokeTest extends TestCase
 		$this->assertSame([], $failures, implode("\n\n", $failures));
 	}
 
+	public function testCaptureFormWidgetTranslationsLiveInRootSeedScope(): void
+	{
+		$root = dirname(__DIR__);
+		$root_seed = (string) file_get_contents($root . '/i18n/seeds/en-US.csv');
+		$form_seed = (string) file_get_contents($root . '/modules-common/Form/i18n/seeds/en-US.csv');
+
+		$this->assertStringContainsString('widget,capture_form.name', $root_seed);
+		$this->assertStringContainsString('widget,capture_form_builder.name', $root_seed);
+		$this->assertStringContainsString('widget,capture_form_list.name', $root_seed);
+		$this->assertStringNotContainsString('widget,capture_form.name', $form_seed);
+		$this->assertStringNotContainsString('widget,capture_form_builder.name', $form_seed);
+		$this->assertStringNotContainsString('widget,capture_form_list.name', $form_seed);
+	}
+
 	private function relativePath(string $path, string $root): string
 	{
 		return ltrim(str_replace($root, '', $path), '/');

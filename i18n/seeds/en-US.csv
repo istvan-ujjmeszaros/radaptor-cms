@@ -542,6 +542,12 @@ widget,blog.description,,en-US,Blog,Blog,0,0,Blog
 widget,blog.name,,en-US,Blog,Blog,0,0,Blog
 widget,blog_list.description,,en-US,"Blog list","Blog list",0,0,"Blog list"
 widget,blog_list.name,,en-US,"Blog list","Blog list",0,0,"Blog list"
+widget,capture_form.description,,en-US,"Render a public DB-backed capture form with secure submission defaults.","Render a public DB-backed capture form with secure submission defaults.",0,0,"Render a public DB-backed capture form with secure submission defaults."
+widget,capture_form.name,,en-US,"Capture form","Capture form",0,0,"Capture form"
+widget,capture_form_builder.description,,en-US,"Admin builder for DB-backed capture forms.","Admin builder for DB-backed capture forms.",0,0,"Admin builder for DB-backed capture forms."
+widget,capture_form_builder.name,,en-US,"Form builder","Form builder",0,0,"Form builder"
+widget,capture_form_list.description,,en-US,"Admin list for DB-backed and shipped capture forms.","Admin list for DB-backed and shipped capture forms.",0,0,"Admin list for DB-backed and shipped capture forms."
+widget,capture_form_list.name,,en-US,"Form list","Form list",0,0,"Form list"
 widget,cli_runner.description,,en-US,"Run CLI commands from the admin panel.","Run CLI commands from the admin panel.",0,0,"Run CLI commands from the admin panel."
 widget,cli_runner.name,,en-US,"CLI Runner","CLI Runner",0,0,"CLI Runner"
 widget,file_upload.description,,en-US,"File upload","File upload",0,0,"File upload"

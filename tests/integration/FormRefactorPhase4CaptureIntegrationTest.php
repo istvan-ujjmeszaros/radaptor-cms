@@ -916,6 +916,93 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		}
 	}
 
+	public function testBuilderI18nSyncPreservesReviewedDefaultLocaleText(): void
+	{
+		$definition_slug = 'capture-phase4j-builder-i18n-preserve';
+		$service = new FormCaptureAuthoringService();
+		$created = $service->createDefinition($definition_slug, 'Builder i18n preserve');
+		$key = 'capture_phase4j_builder_i18n_preserve.title';
+		$descriptor = [
+			'kind' => 'capture',
+			'i18n_mode' => FormCaptureDescriptorSchemaValidator::I18N_MODE_KEYED,
+			'title' => [
+				'key' => FormCaptureDescriptorSchemaValidator::FORM_I18N_DOMAIN . '.' . $key,
+				'text' => 'Initial source title',
+			],
+			'fields' => [
+				[
+					'type' => 'text',
+					'name' => 'name',
+					'key' => 'name',
+					'label' => [
+						'key' => FormCaptureDescriptorSchemaValidator::FORM_I18N_DOMAIN . '.capture_phase4j_builder_i18n_preserve.fields.name.label',
+						'text' => 'Name',
+					],
+				],
+			],
+		];
+
+		$first = $service->saveDraft($definition_slug, $descriptor, (string)$created['base_server_hash']);
+		I18nTranslationService::saveTranslation(
+			FormCaptureDescriptorSchemaValidator::FORM_I18N_DOMAIN,
+			$key,
+			'',
+			LocaleService::getDefaultLocale(),
+			'Reviewed default title',
+			true,
+			false,
+			'Initial source title',
+			false,
+		);
+
+		$descriptor['title']['text'] = 'Updated source title';
+		$service->saveDraft($definition_slug, $descriptor, (string)$first['base_server_hash']);
+		$translation = EntityI18n_translation::findById([
+			'domain' => FormCaptureDescriptorSchemaValidator::FORM_I18N_DOMAIN,
+			'key' => $key,
+			'context' => '',
+			'locale' => LocaleService::getDefaultLocale(),
+		]);
+		$source_text = DbHelper::selectOneColumn(
+			'i18n_messages',
+			[
+				'domain' => FormCaptureDescriptorSchemaValidator::FORM_I18N_DOMAIN,
+				'key' => $key,
+				'context' => '',
+			],
+			'',
+			'source_text',
+		);
+
+		$this->assertInstanceOf(EntityI18n_translation::class, $translation);
+		$this->assertSame('Reviewed default title', (string)$translation->text);
+		$this->assertSame(1, (int)$translation->human_reviewed);
+		$this->assertSame('Updated source title', $source_text);
+	}
+
+	public function testDescriptorTextResolverDoesNotTreatKeyTextAsMissing(): void
+	{
+		$key = 'capture_phase4j_builder_key_text.title';
+		$full_key = FormCaptureDescriptorSchemaValidator::FORM_I18N_DOMAIN . '.' . $key;
+
+		I18nTranslationService::saveTranslation(
+			FormCaptureDescriptorSchemaValidator::FORM_I18N_DOMAIN,
+			$key,
+			'',
+			LocaleService::getDefaultLocale(),
+			$full_key,
+			true,
+			false,
+			$full_key,
+			false,
+		);
+
+		$this->assertSame($full_key, FormDescriptorAdapter::resolveDescriptorText([
+			'key' => $full_key,
+			'text' => 'Fallback title',
+		]));
+	}
+
 	public function testBuilderStateResolvesReadOnlySystemI18nReferencesAndTranslationFilter(): void
 	{
 		$definition_slug = 'capture-phase4j-system-i18n';
@@ -1179,6 +1266,29 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertTrue($load_response['body']['ok']);
 		$this->assertSame('loaded_draft_version', $load_response['body']['data']['action'] ?? null);
 		$this->assertSame($draft_id, (int)($load_response['body']['data']['loaded_version']['version_id'] ?? 0));
+	}
+
+	public function testBuilderDraftHistoryEventsMapMissingVersionToNotFound(): void
+	{
+		$definition_slug = 'capture-phase4j-builder-event-missing-draft';
+		(new FormCaptureAuthoringService())->createDefinition($definition_slug, 'Builder event missing draft');
+
+		$load_response = $this->runBuilderEvent(new EventFormBuilderLoadDraftVersion(), [
+			'definition_slug' => $definition_slug,
+			'version_id' => '99999999',
+		]);
+		$note_response = $this->runBuilderEvent(new EventFormBuilderUpdateDraftNote(), [
+			'definition_slug' => $definition_slug,
+			'version_id' => '99999999',
+			'author_note' => 'Missing',
+		]);
+
+		$this->assertSame(404, $load_response['http_code']);
+		$this->assertFalse($load_response['body']['ok']);
+		$this->assertSame('FORM_BUILDER_LOAD_DRAFT_INVALID', $load_response['body']['error']['code'] ?? null);
+		$this->assertSame(404, $note_response['http_code']);
+		$this->assertFalse($note_response['body']['ok']);
+		$this->assertSame('FORM_BUILDER_DRAFT_NOTE_INVALID', $note_response['body']['error']['code'] ?? null);
 	}
 
 	public function testBuilderEventsRequireContentAdminAuthorization(): void

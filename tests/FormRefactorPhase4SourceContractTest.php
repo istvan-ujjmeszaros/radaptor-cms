@@ -522,6 +522,16 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 			$this->assertStringContainsString('must use an i18n key', $exception->getMessage());
 		}
 
+		$invalid = $descriptor;
+		$invalid['title']['key'] = 'form_def.capture_other.title';
+
+		try {
+			FormCaptureDescriptorSchemaValidator::validateForDefinition('capture-contact-demo', $invalid, null);
+			$this->fail('Keyed capture form descriptors must reject i18n keys from another form namespace.');
+		} catch (InvalidArgumentException $exception) {
+			$this->assertStringContainsString('must use the form_def namespace for this form', $exception->getMessage());
+		}
+
 		$result = I18nReferenceAuditService::audit([
 			'locales' => ['en-US'],
 			'seed_targets' => [],

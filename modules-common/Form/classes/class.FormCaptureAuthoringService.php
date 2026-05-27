@@ -311,10 +311,14 @@ final class FormCaptureAuthoringService
 			'author_note' => $author_note === '' ? null : $author_note,
 		]);
 
-		return $this->loadDefinition($definition_slug) + [
+		if (!$updated instanceof EntityFormDefinitionVersion) {
+			throw new RuntimeException('Draft note update did not return a version row.');
+		}
+
+		return array_replace($this->loadDefinition($definition_slug), [
 			'action' => 'updated_draft_note',
-			'updated_version' => $updated instanceof EntityFormDefinitionVersion ? $updated->dto() : null,
-		];
+			'updated_version' => $updated->dto(),
+		]);
 	}
 
 	/**
@@ -829,13 +833,34 @@ final class FormCaptureAuthoringService
 				continue;
 			}
 
-			[$domain, $key] = $this->splitI18nKey($reference['key']);
+			try {
+				[$domain, $key] = $this->splitI18nKey($reference['key']);
+			} catch (InvalidArgumentException $exception) {
+				Kernel::logException($exception, 'Skipping invalid capture form i18n reference during builder sync', [
+					'definition_slug' => $definition_slug,
+					'path' => $reference['path'] ?? '',
+				]);
+
+				continue;
+			}
+
+			$default_translation = $this->findI18nTranslation($domain, $key, '', $default_locale);
+			$default_text = $text;
+
+			if (
+				$default_translation instanceof EntityI18n_translation
+				&& (bool)(int)$default_translation->human_reviewed
+				&& trim((string)$default_translation->text) !== ''
+			) {
+				$default_text = (string)$default_translation->text;
+			}
+
 			I18nTranslationService::saveTranslation(
 				$domain,
 				$key,
 				'',
 				$default_locale,
-				$text,
+				$default_text,
 				true,
 				false,
 				$text,
@@ -843,7 +868,7 @@ final class FormCaptureAuthoringService
 			);
 
 			foreach ($locales as $locale) {
-				if ($locale === $default_locale || $this->i18nTranslationExists($domain, $key, '', $locale)) {
+				if ($locale === $default_locale || $this->findI18nTranslation($domain, $key, '', $locale) instanceof EntityI18n_translation) {
 					continue;
 				}
 
@@ -862,20 +887,16 @@ final class FormCaptureAuthoringService
 		}
 	}
 
-	private function i18nTranslationExists(string $domain, string $key, string $context, string $locale): bool
+	private function findI18nTranslation(string $domain, string $key, string $context, string $locale): ?EntityI18n_translation
 	{
-		$stmt = Db::instance()->prepare(
-			'SELECT 1
-			FROM i18n_translations
-			WHERE domain = ?
-				AND `key` = ?
-				AND context = ?
-				AND locale = ?
-			LIMIT 1'
-		);
-		$stmt->execute([$domain, $key, $context, $locale]);
+		$translation = EntityI18n_translation::findById([
+			'domain' => $domain,
+			'key' => $key,
+			'context' => $context,
+			'locale' => $locale,
+		]);
 
-		return $stmt->fetchColumn() !== false;
+		return $translation instanceof EntityI18n_translation ? $translation : null;
 	}
 
 	/**

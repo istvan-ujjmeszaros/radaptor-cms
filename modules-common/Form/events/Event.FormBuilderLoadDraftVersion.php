@@ -56,8 +56,12 @@ final class EventFormBuilderLoadDraftVersion extends AbstractEvent implements iB
 				trim((string)Request::_POST('definition_slug', '')),
 				(int)Request::_POST('version_id', 0),
 			));
-		} catch (Throwable) {
-			FormBuilderEventHelper::renderFailure('FORM_BUILDER_LOAD_DRAFT_FAILED', 'form.builder.error_load_draft', 422);
+		} catch (InvalidArgumentException $exception) {
+			$http_code = str_contains($exception->getMessage(), 'does not exist') ? 404 : 422;
+			FormBuilderEventHelper::renderFailure('FORM_BUILDER_LOAD_DRAFT_INVALID', 'form.builder.error_load_draft', $http_code);
+		} catch (Throwable $exception) {
+			Kernel::logException($exception, 'Form builder load draft failed');
+			FormBuilderEventHelper::renderFailure('FORM_BUILDER_LOAD_DRAFT_FAILED', 'form.builder.error_load_draft', 500);
 		}
 	}
 }

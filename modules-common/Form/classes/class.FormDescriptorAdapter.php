@@ -191,19 +191,19 @@ final class FormDescriptorAdapter
 		}
 	}
 
-	private static function resolveText(mixed $value): string
+	public static function resolveDescriptorText(mixed $value): string
 	{
 		if (is_array($value)) {
 			if (isset($value['key']) && is_scalar($value['key'])) {
 				$params = is_array($value['params'] ?? null) ? $value['params'] : [];
 				$key = (string)$value['key'];
-				$translated = t($key, $params);
+				$translated = self::translatedDescriptorText($key, $params);
 
-				if ($translated === $key && array_key_exists('text', $value)) {
-					return (string)$value['text'];
+				if ($translated !== null) {
+					return $translated;
 				}
 
-				return $translated;
+				return array_key_exists('text', $value) ? (string)$value['text'] : $key;
 			}
 
 			if (array_key_exists('text', $value)) {
@@ -212,6 +212,84 @@ final class FormDescriptorAdapter
 		}
 
 		return (string)$value;
+	}
+
+	private static function resolveText(mixed $value): string
+	{
+		return self::resolveDescriptorText($value);
+	}
+
+	/**
+	 * @param array<string, mixed> $params
+	 */
+	private static function translatedDescriptorText(string $full_key, array $params): ?string
+	{
+		$parts = explode('.', trim($full_key), 2);
+
+		if (count($parts) !== 2 || $parts[0] === '' || $parts[1] === '') {
+			return null;
+		}
+
+		try {
+			$locale = LocaleService::canonicalize(Kernel::getLocale());
+			$default_locale = LocaleService::getDefaultLocale();
+			$translation = self::findTranslation($parts[0], $parts[1], $locale);
+			$translation_locale = $locale;
+
+			if (!$translation instanceof EntityI18n_translation && $locale !== $default_locale) {
+				$translation = self::findTranslation($parts[0], $parts[1], $default_locale);
+				$translation_locale = $default_locale;
+			}
+		} catch (Throwable) {
+			return null;
+		}
+
+		if (!$translation instanceof EntityI18n_translation) {
+			return null;
+		}
+
+		$text = (string)$translation->text;
+
+		if (trim($text) === '') {
+			return null;
+		}
+
+		return self::formatDescriptorText($text, $params, $translation_locale);
+	}
+
+	private static function findTranslation(string $domain, string $key, string $locale): ?EntityI18n_translation
+	{
+		$translation = EntityI18n_translation::findById([
+			'domain' => $domain,
+			'key' => $key,
+			'context' => '',
+			'locale' => $locale,
+		]);
+
+		return $translation instanceof EntityI18n_translation ? $translation : null;
+	}
+
+	/**
+	 * @param array<string, mixed> $params
+	 */
+	private static function formatDescriptorText(string $text, array $params, string $locale): string
+	{
+		if ($params === []) {
+			return $text;
+		}
+
+		if (extension_loaded('intl')) {
+			$formatter = new MessageFormatter(LocaleService::toIntlLocale($locale), $text);
+			$result = $formatter->format($params);
+
+			return $result !== false ? $result : $text;
+		}
+
+		return preg_replace_callback(
+			'/\{(\w+)\}/',
+			static fn (array $matches): string => array_key_exists($matches[1], $params) ? (string)$params[$matches[1]] : $matches[0],
+			$text,
+		) ?? $text;
 	}
 
 	/**

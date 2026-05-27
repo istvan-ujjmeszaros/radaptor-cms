@@ -66,8 +66,12 @@ final class EventFormBuilderUpdateDraftNote extends AbstractEvent implements iBr
 				),
 			);
 			ApiResponse::renderSuccess($result);
-		} catch (Throwable) {
-			FormBuilderEventHelper::renderFailure('FORM_BUILDER_DRAFT_NOTE_FAILED', 'form.builder.error_draft_note', 422);
+		} catch (InvalidArgumentException $exception) {
+			$http_code = str_contains($exception->getMessage(), 'does not exist') ? 404 : 422;
+			FormBuilderEventHelper::renderFailure('FORM_BUILDER_DRAFT_NOTE_INVALID', 'form.builder.error_draft_note', $http_code);
+		} catch (Throwable $exception) {
+			Kernel::logException($exception, 'Form builder draft note update failed');
+			FormBuilderEventHelper::renderFailure('FORM_BUILDER_DRAFT_NOTE_FAILED', 'form.builder.error_draft_note', 500);
 		}
 	}
 }

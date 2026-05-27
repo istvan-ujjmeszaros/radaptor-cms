@@ -221,7 +221,8 @@ final class FormCaptureAuthoringService
 		$descriptor = $selected_version instanceof EntityFormDefinitionVersion
 			? $this->descriptorFromVersion($definition, $selected_version)
 			: $this->defaultDescriptor($definition_slug);
-		$builder_descriptor = $this->descriptorForBuilder($descriptor);
+		$resolve_text_fallbacks = (string)$definition->source !== self::SOURCE_DB;
+		$builder_descriptor = $this->descriptorForBuilder($descriptor, $resolve_text_fallbacks);
 		$security = $this->securityForDefinition($definition, $descriptor);
 		$translation_descriptor = (string)$definition->source !== self::SOURCE_DB
 			|| ($descriptor['i18n_mode'] ?? FormCaptureDescriptorSchemaValidator::I18N_MODE_LITERAL) === FormCaptureDescriptorSchemaValidator::I18N_MODE_KEYED
@@ -266,7 +267,7 @@ final class FormCaptureAuthoringService
 		}
 
 		$current = $this->loadDefinition($definition_slug);
-		$descriptor = $this->descriptorForBuilder($this->descriptorFromVersion($definition, $version));
+		$descriptor = $this->descriptorForBuilder($this->descriptorFromVersion($definition, $version), false);
 
 		return array_replace($current, [
 			'action' => 'loaded_draft_version',
@@ -918,8 +919,12 @@ final class FormCaptureAuthoringService
 	 * @param array<string, mixed> $descriptor
 	 * @return array<string, mixed>
 	 */
-	private function descriptorForBuilder(array $descriptor): array
+	private function descriptorForBuilder(array $descriptor, bool $resolve_text_fallbacks): array
 	{
+		if (!$resolve_text_fallbacks) {
+			return $descriptor;
+		}
+
 		return $this->withResolvedTextFallbacks($descriptor);
 	}
 

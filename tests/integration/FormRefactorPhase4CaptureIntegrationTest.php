@@ -949,6 +949,16 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame('capture_demo.', $query['search'] ?? null);
 	}
 
+	public function testBuilderStateDoesNotInjectTextFallbacksIntoDbDescriptors(): void
+	{
+		$definition_slug = 'capture-phase4j-db-key-only-text';
+		$state = (new FormCaptureAuthoringService())->createDefinition($definition_slug, 'DB key-only text');
+
+		$this->assertFalse((bool)($state['read_only'] ?? true));
+		$this->assertSame($state['server_descriptor'], $state['descriptor']);
+		$this->assertSame(['key' => 'form.capture.submit'], $state['descriptor']['submit_label'] ?? null);
+	}
+
 	public function testBuilderAuthoringRejectsAbandonedDraftPublishByExplicitVersion(): void
 	{
 		$definition_slug = 'capture-phase4j-builder-stale-draft';

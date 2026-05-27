@@ -593,6 +593,52 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame($published->descriptor()['title']['text'] ?? null, $resolved->descriptor()['title']['text'] ?? null);
 	}
 
+	public function testCompiledDescriptorCacheWriteDoesNotEmitOwnershipWarningsOrStdout(): void
+	{
+		if (!class_exists('FormCaptureCompiledDescriptorCache')) {
+			self::markTestSkipped('Phase 4f compiled descriptor cache is not implemented yet.');
+		}
+
+		$previous_owner = getenv('LINUX_FILE_OWNER');
+		$previous_group = getenv('LINUX_FILE_GROUP');
+		$definition_slug = 'capture-phase4f-cache-ownership-warning';
+		$cache = new FormCaptureCompiledDescriptorCache();
+		$warnings = [];
+
+		putenv('LINUX_FILE_OWNER=__radaptor_missing_owner__');
+		putenv('LINUX_FILE_GROUP=__radaptor_missing_group__');
+		set_error_handler(static function (int $_severity, string $message) use (&$warnings): bool {
+			$warnings[] = $message;
+
+			return true;
+		});
+		ob_start();
+
+		try {
+			$published = (new FormCaptureDefinitionRepository())->upsertPublishedDefinition(
+				$definition_slug,
+				$this->descriptor(),
+				$this->defaultSecurity()
+			);
+			$output = (string)ob_get_clean();
+		} catch (Throwable $exception) {
+			ob_end_clean();
+
+			throw $exception;
+		} finally {
+			restore_error_handler();
+			$this->restoreEnv('LINUX_FILE_OWNER', $previous_owner);
+			$this->restoreEnv('LINUX_FILE_GROUP', $previous_group);
+		}
+
+		$entry = $cache->read($published->definition(), $published->version());
+		$cache->deleteStaleForSlug($definition_slug, 0);
+
+		$this->assertSame('', $output);
+		$this->assertSame([], $warnings);
+		$this->assertIsArray($entry);
+	}
+
 	public function testCompiledDescriptorCacheGcKeepsCurrentAndDeletesStaleOnlyOnApply(): void
 	{
 		if (!class_exists('FormCaptureCompiledDescriptorCacheGarbageCollector')) {
@@ -1621,6 +1667,17 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		}
 
 		$this->_previous_app_secret = null;
+	}
+
+	private function restoreEnv(string $name, string|false|null $value): void
+	{
+		if ($value === false || $value === null) {
+			putenv($name);
+
+			return;
+		}
+
+		putenv($name . '=' . $value);
 	}
 
 	/**

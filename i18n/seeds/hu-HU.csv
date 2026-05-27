@@ -542,6 +542,12 @@ widget,blog.description,,hu-HU,Blog,Blog,0,1,Blog
 widget,blog.name,,hu-HU,Blog,Blog,0,1,Blog
 widget,blog_list.description,,hu-HU,"Blog list","Blog lista",0,0,"Blog lista"
 widget,blog_list.name,,hu-HU,"Blog list","Blog lista",0,0,"Blog lista"
+widget,capture_form.description,,hu-HU,"Render a public DB-backed capture form with secure submission defaults.","Publikus DB-alapú capture űrlap megjelenítése biztonságos beküldési alapbeállításokkal.",0,0,"Publikus DB-alapú capture űrlap megjelenítése biztonságos beküldési alapbeállításokkal."
+widget,capture_form.name,,hu-HU,"Capture form","Capture űrlap",0,0,"Capture űrlap"
+widget,capture_form_builder.description,,hu-HU,"Admin builder for DB-backed capture forms.","Admin szerkesztő DB-alapú capture űrlapokhoz.",0,0,"Admin szerkesztő DB-alapú capture űrlapokhoz."
+widget,capture_form_builder.name,,hu-HU,"Form builder","Űrlap szerkesztő",0,0,"Űrlap szerkesztő"
+widget,capture_form_list.description,,hu-HU,"Admin list for DB-backed and shipped capture forms.","Admin lista DB-alapú és shipped capture űrlapokhoz.",0,0,"Admin lista DB-alapú és shipped capture űrlapokhoz."
+widget,capture_form_list.name,,hu-HU,"Form list","Űrlap lista",0,0,"Űrlap lista"
 widget,cli_runner.description,,hu-HU,"Run CLI commands from the admin panel.","CLI parancsok futtatása az admin felületről.",0,0,"CLI parancsok futtatása az admin felületről."
 widget,cli_runner.name,,hu-HU,"CLI Runner","CLI futtatás",0,0,"CLI futtatás"
 widget,file_upload.description,,hu-HU,"File upload","Fájl feltöltés",0,0,"Fájl feltöltés"

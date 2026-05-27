@@ -128,3 +128,5 @@ user,locale.invalid,,de-DE,"Selected language is not available","Die ausgewählt
 user,locale.menu_label,,de-DE,Language,Sprache,0,0,Sprache
 user,locale.updated,,de-DE,"Language updated","Sprache aktualisiert",0,0,"Sprache aktualisiert"
 user,locale.home_missing,,de-DE,"No home page is configured for the selected language; staying on the current page.","Für die ausgewählte Sprache ist keine Startseite konfiguriert; die aktuelle Seite bleibt geöffnet.",0,0,"Für die ausgewählte Sprache ist keine Startseite konfiguriert; die aktuelle Seite bleibt geöffnet."
+user,locale.forbidden,,de-DE,"You are not allowed to change this locale.","You are not allowed to change this locale.",0,1,"You are not allowed to change this locale."
+user,locale.method_not_allowed,,de-DE,"This locale action only accepts POST requests.","This locale action only accepts POST requests.",0,1,"This locale action only accepts POST requests."

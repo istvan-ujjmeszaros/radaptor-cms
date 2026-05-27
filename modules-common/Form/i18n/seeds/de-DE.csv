@@ -57,3 +57,139 @@ form,widget_connection_settings.name,,de-DE,"Content formatting",Inhaltsformatie
 form,widget_connection_settings.title,,de-DE,"Content formatting",Inhaltsformatierung,0,0,Inhaltsformatierung
 form,closer.title,,de-DE,"Closer page",Schließseite,0,0,Schließseite
 form,closer.close_window,,de-DE,"Close this window!","Schließen Sie dieses Fenster!",0,0,"Schließen Sie dieses Fenster!"
+form,capture.description,,de-DE,"Generic DB-backed capture form processor.","Generic DB-backed capture form processor.",0,1,"Generic DB-backed capture form processor."
+form,capture.error_missing_definition,,de-DE,"Capture form definition is not configured.","Capture form definition is not configured.",0,1,"Capture form definition is not configured."
+form,capture.error_rate_limited,,de-DE,"Too many submissions. Please try again later.","Too many submissions. Please try again later.",0,1,"Too many submissions. Please try again later."
+form,capture.error_unavailable,,de-DE,"This form is currently unavailable.","This form is currently unavailable.",0,1,"This form is currently unavailable."
+form,capture.honeypot.label,,de-DE,"Leave this field empty","Leave this field empty",0,1,"Leave this field empty"
+form,capture.name,,de-DE,"Capture form","Capture form",0,1,"Capture form"
+form,capture.submit,,de-DE,Send,Send,0,1,Send
+form,capture_demo.description,,de-DE,"Send a short message through the capture-form MVP.","Send a short message through the capture-form MVP.",0,1,"Send a short message through the capture-form MVP."
+form,capture_demo.field.email.label,,de-DE,Email,Email,0,1,Email
+form,capture_demo.field.message.label,,de-DE,Message,Message,0,1,Message
+form,capture_demo.field.name.label,,de-DE,Name,Name,0,1,Name
+form,capture_demo.field.topic.label,,de-DE,Topic,Topic,0,1,Topic
+form,capture_demo.title,,de-DE,"Contact demo","Contact demo",0,1,"Contact demo"
+form,capture_demo.topic.billing,,de-DE,Billing,Billing,0,1,Billing
+form,capture_demo.topic.general,,de-DE,General,General,0,1,General
+form,capture_demo.topic.support,,de-DE,Support,Support,0,1,Support
+form,capture.validation.email,,de-DE,"Enter a valid email address.","Enter a valid email address.",0,1,"Enter a valid email address."
+form,capture.validation.enum,,de-DE,"Choose one of the available options.","Choose one of the available options.",0,1,"Choose one of the available options."
+form,capture.validation.min_length,,de-DE,"Minimum {min} characters","Minimum {min} characters",0,1,"Minimum {min} characters"
+form,builder.title,,de-DE,"Form builder","Form builder",0,1,"Form builder"
+form,builder.new_slug,,de-DE,"New slug","New slug",0,1,"New slug"
+form,builder.new_title,,de-DE,"New title","New title",0,1,"New title"
+form,builder.placeholder.slug,,de-DE,contact-us,contact-us,0,1,contact-us
+form,builder.help.slug,,de-DE,"Use letters, numbers, spaces, underscores, or hyphens. The capture- prefix is added automatically.","Use letters, numbers, spaces, underscores, or hyphens. The capture- prefix is added automatically.",0,1,"Use letters, numbers, spaces, underscores, or hyphens. The capture- prefix is added automatically."
+form,builder.create,,de-DE,Create,Create,0,1,Create
+form,builder.palette,,de-DE,Fields,Fields,0,1,Fields
+form,builder.preview,,de-DE,Preview,Preview,0,1,Preview
+form,builder.properties,,de-DE,Properties,Properties,0,1,Properties
+form,builder.panel.form,,de-DE,Form,Form,0,1,Form
+form,builder.panel.input,,de-DE,Input,Input,0,1,Input
+form,builder.no_selection,,de-DE,"No field selected","No field selected",0,1,"No field selected"
+form,builder.label.definition,,de-DE,Definition,Definition,0,1,Definition
+form,builder.label.title,,de-DE,Title,Title,0,1,Title
+form,builder.label.description,,de-DE,Description,Description,0,1,Description
+form,builder.label.submit_label,,de-DE,"Submit label","Submit label",0,1,"Submit label"
+form,builder.label.i18n_mode,,de-DE,"Use translation keys","Use translation keys",0,1,"Use translation keys"
+form,builder.help.i18n_mode,,de-DE,"Generate translation keys for this form and store the default text for the default locale.","Generate translation keys for this form and store the default text for the default locale.",0,1,"Generate translation keys for this form and store the default text for the default locale."
+form,builder.label.field_label,,de-DE,"Field label","Field label",0,1,"Field label"
+form,builder.label.field_name,,de-DE,"Field name","Field name",0,1,"Field name"
+form,builder.label.field_key,,de-DE,"Payload key","Payload key",0,1,"Payload key"
+form,builder.label.required,,de-DE,Required,Required,0,1,Required
+form,builder.label.options,,de-DE,Options,Options,0,1,Options
+form,builder.action.undo,,de-DE,Undo,Undo,0,1,Undo
+form,builder.action.redo,,de-DE,Redo,Redo,0,1,Redo
+form,builder.action.move_up,,de-DE,"Move up","Move up",0,1,"Move up"
+form,builder.action.move_down,,de-DE,"Move down","Move down",0,1,"Move down"
+form,builder.action.delete,,de-DE,Delete,Delete,0,1,Delete
+form,builder.action.open_translations,,de-DE,"Open translations","Open translations",0,1,"Open translations"
+form,builder.action.save_draft,,de-DE,"Save draft","Save draft",0,1,"Save draft"
+form,builder.action.publish,,de-DE,Publish,Publish,0,1,Publish
+form,builder.action.close,,de-DE,Close,Close,0,1,Close
+form,builder.status.clean,,de-DE,Saved,Saved,0,1,Saved
+form,builder.status.dirty,,de-DE,"Unsaved changes","Unsaved changes",0,1,"Unsaved changes"
+form,builder.status.saving,,de-DE,Saving,Saving,0,1,Saving
+form,builder.status.saved,,de-DE,"Draft saved","Draft saved",0,1,"Draft saved"
+form,builder.status.published,,de-DE,Published,Published,0,1,Published
+form,builder.status.conflict,,de-DE,"Server conflict","Server conflict",0,1,"Server conflict"
+form,builder.status.read_only,,de-DE,"Read-only shipped form","Read-only shipped form",0,1,"Read-only shipped form"
+form,builder.warning.key_change,,de-DE,"Changing this key changes future submission payloads. Existing submissions keep the old key, so exports may contain both keys.","Changing this key changes future submission payloads. Existing submissions keep the old key, so exports may contain both keys.",0,1,"Changing this key changes future submission payloads. Existing submissions keep the old key, so exports may contain both keys."
+form,builder.warning.local_storage,,de-DE,"Local undo history is unavailable.","Local undo history is unavailable.",0,1,"Local undo history is unavailable."
+form,builder.warning.reload_or_overwrite,,de-DE,"This draft changed elsewhere.","This draft changed elsewhere.",0,1,"This draft changed elsewhere."
+form,builder.action.reload_server,,de-DE,"Reload server state","Reload server state",0,1,"Reload server state"
+form,builder.action.overwrite_local,,de-DE,"Overwrite with local draft","Overwrite with local draft",0,1,"Overwrite with local draft"
+form,builder.error_csrf,,de-DE,"Builder session expired. Reload the page.","Builder session expired. Reload the page.",0,1,"Builder session expired. Reload the page."
+form,builder.error_create,,de-DE,"Could not create the form.","Could not create the form.",0,1,"Could not create the form."
+form,builder.error_slug_format,,de-DE,"Use letters, numbers, spaces, underscores, or hyphens. The capture- prefix is added automatically.","Use letters, numbers, spaces, underscores, or hyphens. The capture- prefix is added automatically.",0,1,"Use letters, numbers, spaces, underscores, or hyphens. The capture- prefix is added automatically."
+form,builder.error_slug_duplicate,,de-DE,"A capture form with this slug already exists.","A capture form with this slug already exists.",0,1,"A capture form with this slug already exists."
+form,builder.error_duplicate_field_key,,de-DE,"This payload key or field name is already used.","This payload key or field name is already used.",0,1,"This payload key or field name is already used."
+form,builder.error_request,,de-DE,"The request failed.","The request failed.",0,1,"The request failed."
+form,builder.error_preview,,de-DE,"Could not render the preview.","Could not render the preview.",0,1,"Could not render the preview."
+form,builder.error_save,,de-DE,"Could not save the draft.","Could not save the draft.",0,1,"Could not save the draft."
+form,builder.error_publish,,de-DE,"Could not publish the form.","Could not publish the form.",0,1,"Could not publish the form."
+form,builder.field.text,,de-DE,Text,Text,0,1,Text
+form,builder.field.textarea,,de-DE,Textarea,Textarea,0,1,Textarea
+form,builder.field.select,,de-DE,Select,Select,0,1,Select
+form,builder.field.radiogroup,,de-DE,"Radio group","Radio group",0,1,"Radio group"
+form,builder.field.checkbox,,de-DE,Checkbox,Checkbox,0,1,Checkbox
+form,builder.field.checkboxgroup,,de-DE,"Checkbox group","Checkbox group",0,1,"Checkbox group"
+form,builder.field.date,,de-DE,Date,Date,0,1,Date
+form,builder.field.datetime,,de-DE,"Date and time","Date and time",0,1,"Date and time"
+form,builder.drop_target.fields,,de-DE,"Form fields","Form fields",0,1,"Form fields"
+form,builder.option.default_one,,de-DE,"Option one","Option one",0,1,"Option one"
+form,builder.option.default_two,,de-DE,"Option two","Option two",0,1,"Option two"
+form,builder.panel.properties,,de-DE,Properties,Properties,0,1,Properties
+form,builder.panel.usage,,de-DE,"Used on pages","Used on pages",0,1,"Used on pages"
+form,builder.panel.drafts,,de-DE,Drafts,Drafts,0,1,Drafts
+form,builder.usage.empty,,de-DE,"This form is not placed on any page.","This form is not placed on any page.",0,1,"This form is not placed on any page."
+form,builder.usage.page,,de-DE,Page,Page,0,1,Page
+form,builder.usage.slot,,de-DE,Slot,Slot,0,1,Slot
+form,builder.usage.connection,,de-DE,Connection,Connection,0,1,Connection
+form,builder.drafts.empty,,de-DE,"No draft versions yet.","No draft versions yet.",0,1,"No draft versions yet."
+form,builder.drafts.current,,de-DE,Current,Current,0,1,Current
+form,builder.drafts.loaded,,de-DE,Loaded,Loaded,0,1,Loaded
+form,builder.drafts.version,,de-DE,Version,Version,0,1,Version
+form,builder.drafts.created,,de-DE,Created,Created,0,1,Created
+form,builder.drafts.published,,de-DE,Published,Published,0,1,Published
+form,builder.drafts.note,,de-DE,Note,Note,0,1,Note
+form,builder.drafts.note_placeholder,,de-DE,"Add a note for this version","Add a note for this version",0,1,"Add a note for this version"
+form,builder.drafts.status.draft,,de-DE,Draft,Draft,0,1,Draft
+form,builder.drafts.status.abandoned,,de-DE,Abandoned,Abandoned,0,1,Abandoned
+form,builder.drafts.status.published,,de-DE,Published,Published,0,1,Published
+form,builder.action.load_draft,,de-DE,Load,Load,0,1,Load
+form,builder.status.loaded_draft,,de-DE,"Draft loaded","Draft loaded",0,1,"Draft loaded"
+form,builder.status.draft_note_saved,,de-DE,"Draft note saved","Draft note saved",0,1,"Draft note saved"
+form,builder.warning.load_draft_discard_unsaved,,de-DE,"Loading this version will replace unsaved editor changes. Continue?","Loading this version will replace unsaved editor changes. Continue?",0,1,"Loading this version will replace unsaved editor changes. Continue?"
+form,builder.error_load_draft,,de-DE,"Could not load this draft.","Could not load this draft.",0,1,"Could not load this draft."
+form,builder.error_draft_note,,de-DE,"Could not save the draft note.","Could not save the draft note.",0,1,"Could not save the draft note."
+form,list.title,,de-DE,"Capture forms","Capture forms",0,1,"Capture forms"
+form,list.subtitle,,de-DE,"Create, edit, and inspect capture forms.","Create, edit, and inspect capture forms.",0,1,"Create, edit, and inspect capture forms."
+form,list.tab.custom,,de-DE,"Custom forms","Custom forms",0,1,"Custom forms"
+form,list.tab.system,,de-DE,"System forms","System forms",0,1,"System forms"
+form,list.new_slug,,de-DE,"New slug","New slug",0,1,"New slug"
+form,list.new_title,,de-DE,"New title","New title",0,1,"New title"
+form,list.create,,de-DE,"Create form","Create form",0,1,"Create form"
+form,list.empty_custom,,de-DE,"No custom capture forms yet.","No custom capture forms yet.",0,1,"No custom capture forms yet."
+form,list.empty_system,,de-DE,"No system capture forms are published.","No system capture forms are published.",0,1,"No system capture forms are published."
+form,list.col.slug,,de-DE,Slug,Slug,0,1,Slug
+form,list.col.source,,de-DE,Source,Source,0,1,Source
+form,list.col.status,,de-DE,Status,Status,0,1,Status
+form,list.col.version,,de-DE,Version,Version,0,1,Version
+form,list.col.usage,,de-DE,Usage,Usage,0,1,Usage
+form,list.col.actions,,de-DE,Actions,Actions,0,1,Actions
+form,list.action.edit,,de-DE,Edit,Edit,0,1,Edit
+form,list.action.view,,de-DE,View,View,0,1,View
+form,list.editor_title,,de-DE,"Form builder","Form builder",0,1,"Form builder"
+form,list.editor_loading,,de-DE,"Loading editor...","Loading editor...",0,1,"Loading editor..."
+form,list.editor_load_failed,,de-DE,"Could not load the form editor.","Could not load the form editor.",0,1,"Could not load the form editor."
+form,list.close,,de-DE,Close,Close,0,1,Close
+form,list.status.draft,,de-DE,Draft,Draft,0,1,Draft
+form,list.status.published,,de-DE,Published,Published,0,1,Published
+form,list.status.unknown,,de-DE,Unknown,Unknown,0,1,Unknown
+form,list.version.none,,de-DE,None,None,0,1,None
+form,list.version.published,,de-DE,v{version},v{version},0,1,v{version}
+form,list.version.draft,,de-DE,"draft v{version}","draft v{version}",0,1,"draft v{version}"
+form,list.usage.none,,de-DE,None,None,0,1,None
+form,builder.warning.discard_unsaved,,de-DE,"Discard unsaved form changes?","Discard unsaved form changes?",0,1,"Discard unsaved form changes?"

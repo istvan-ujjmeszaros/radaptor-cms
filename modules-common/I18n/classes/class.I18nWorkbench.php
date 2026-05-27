@@ -18,28 +18,30 @@ class I18nWorkbench
 		$pdo = Db::instance();
 		[$totalWhere, $totalParams] = self::_buildWhere($filters, false);
 		$totalParams[':locale'] = $locale;
+		$totalParams[':locale_compare'] = $locale;
 		$totalParams[':legacy_locale'] = $legacy_locale;
 
 		// Unfiltered total for the current scope — apply non-search filters such as domain,
 		// but ignore the free-text search term so DataTables totals stay meaningful.
 		$unfilteredStmt = $pdo->prepare(
 			"SELECT COUNT(*) FROM i18n_messages m
-			LEFT JOIN i18n_translations t ON t.domain = m.domain AND t.`key` = m.`key` AND t.context = m.context AND t.locale = :locale
-			LEFT JOIN i18n_translations tl ON tl.domain = m.domain AND tl.`key` = m.`key` AND tl.context = m.context AND tl.locale = :legacy_locale AND tl.locale <> :locale
-			{$totalWhere}"
+				LEFT JOIN i18n_translations t ON t.domain = m.domain AND t.`key` = m.`key` AND t.context = m.context AND t.locale = :locale
+				LEFT JOIN i18n_translations tl ON tl.domain = m.domain AND tl.`key` = m.`key` AND tl.context = m.context AND tl.locale = :legacy_locale AND tl.locale <> :locale_compare
+				{$totalWhere}"
 		);
 		$unfilteredStmt->execute($totalParams);
 		$recordsTotal = (int) $unfilteredStmt->fetchColumn();
 
 		[$where, $params] = self::_buildWhere($filters);
 		$params[':locale'] = $locale;
+		$params[':locale_compare'] = $locale;
 		$params[':legacy_locale'] = $legacy_locale;
 
 		// Filtered count
 		$countSql = "SELECT COUNT(*) FROM i18n_messages m
-			LEFT JOIN i18n_translations t ON t.domain = m.domain AND t.`key` = m.`key` AND t.context = m.context AND t.locale = :locale
-			LEFT JOIN i18n_translations tl ON tl.domain = m.domain AND tl.`key` = m.`key` AND tl.context = m.context AND tl.locale = :legacy_locale AND tl.locale <> :locale
-			{$where}";
+				LEFT JOIN i18n_translations t ON t.domain = m.domain AND t.`key` = m.`key` AND t.context = m.context AND t.locale = :locale
+				LEFT JOIN i18n_translations tl ON tl.domain = m.domain AND tl.`key` = m.`key` AND tl.context = m.context AND tl.locale = :legacy_locale AND tl.locale <> :locale_compare
+				{$where}";
 		$countStmt = $pdo->prepare($countSql);
 		$countStmt->execute($params);
 		$recordsFiltered = (int) $countStmt->fetchColumn();
@@ -61,10 +63,10 @@ class I18nWorkbench
 				COALESCE(t.source_hash_snapshot, tl.source_hash_snapshot) AS source_hash_snapshot
 			FROM i18n_messages m
 			LEFT JOIN i18n_translations t ON t.domain = m.domain AND t.`key` = m.`key` AND t.context = m.context AND t.locale = :locale
-			LEFT JOIN i18n_translations tl ON tl.domain = m.domain AND tl.`key` = m.`key` AND tl.context = m.context AND tl.locale = :legacy_locale AND tl.locale <> :locale
+			LEFT JOIN i18n_translations tl ON tl.domain = m.domain AND tl.`key` = m.`key` AND tl.context = m.context AND tl.locale = :legacy_locale AND tl.locale <> :locale_compare
 			{$where}
-			ORDER BY m.domain, m.`key`, m.context
-			LIMIT :length OFFSET :start";
+				ORDER BY m.domain, m.`key`, m.context
+				LIMIT :length OFFSET :start";
 
 		$dataStmt = $pdo->prepare($dataSql);
 

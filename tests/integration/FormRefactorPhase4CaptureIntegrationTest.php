@@ -33,6 +33,7 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 			EventFormBuilderPublish::class,
 			EventFormBuilderLoadDraftVersion::class,
 			EventFormBuilderUpdateDraftNote::class,
+			I18nTranslationService::class,
 		] as $class_name) {
 			if (!class_exists($class_name)) {
 				self::markTestSkipped('The Radaptor consumer app runtime with capture-form MVP classes is required.');
@@ -828,6 +829,124 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 			'definition_id' => (int)($published['definition']['definition_id'] ?? 0),
 			'status' => 'draft',
 		]));
+	}
+
+	public function testBuilderKeyedI18nDescriptorCreatesDefaultLocaleRows(): void
+	{
+		$definition_slug = 'capture-phase4j-builder-i18n';
+		$service = new FormCaptureAuthoringService();
+		$created = $service->createDefinition($definition_slug, 'Builder i18n');
+		$descriptor = [
+			'kind' => 'capture',
+			'i18n_mode' => FormCaptureDescriptorSchemaValidator::I18N_MODE_KEYED,
+			'title' => [
+				'key' => 'form_def.capture_phase4j_builder_i18n.title',
+				'text' => 'Builder i18n title',
+			],
+			'fields' => [
+				[
+					'type' => 'text',
+					'name' => 'name',
+					'key' => 'name',
+					'label' => [
+						'key' => 'form_def.capture_phase4j_builder_i18n.fields.name.label',
+						'text' => 'Translated name',
+					],
+					'normalizers' => ['trim'],
+					'validators' => [
+						['type' => 'required'],
+					],
+				],
+			],
+		];
+
+		$saved = $service->saveDraft($definition_slug, $descriptor, (string)$created['base_server_hash']);
+		$rows = DbHelper::selectManyFromQuery(
+			"SELECT m.`key`, m.source_text, t.text, t.human_reviewed
+			FROM i18n_messages m
+			INNER JOIN i18n_translations t
+				ON t.domain = m.domain
+				AND t.`key` = m.`key`
+				AND t.context = m.context
+			WHERE m.domain = ?
+				AND t.locale = ?
+				AND m.`key` IN (?, ?)
+			ORDER BY m.`key`",
+			[
+				FormCaptureDescriptorSchemaValidator::FORM_I18N_DOMAIN,
+				LocaleService::getDefaultLocale(),
+				'capture_phase4j_builder_i18n.fields.name.label',
+				'capture_phase4j_builder_i18n.title',
+			],
+		);
+
+		$this->assertSame('saved_draft', $saved['action'] ?? null);
+		$this->assertCount(2, $rows);
+		$this->assertSame('Translated name', $rows[0]['source_text'] ?? null);
+		$this->assertSame('Translated name', $rows[0]['text'] ?? null);
+		$this->assertSame('Builder i18n title', $rows[1]['source_text'] ?? null);
+		$this->assertSame('Builder i18n title', $rows[1]['text'] ?? null);
+		$this->assertSame(1, (int)($rows[1]['human_reviewed'] ?? 0));
+
+		$other_locales = array_values(array_filter(
+			I18nRuntime::getAvailableLocaleCodes(),
+			static fn (string $locale): bool => $locale !== LocaleService::getDefaultLocale(),
+		));
+
+		if ($other_locales !== []) {
+			$other_rows = DbHelper::selectManyFromQuery(
+				"SELECT locale, text, human_reviewed, allow_source_match
+				FROM i18n_translations
+				WHERE domain = ?
+					AND `key` = ?
+					AND context = ''
+					AND locale = ?
+				ORDER BY locale",
+				[
+					FormCaptureDescriptorSchemaValidator::FORM_I18N_DOMAIN,
+					'capture_phase4j_builder_i18n.title',
+					$other_locales[0],
+				],
+			);
+
+			$this->assertCount(1, $other_rows);
+			$this->assertSame('Builder i18n title', $other_rows[0]['text'] ?? null);
+			$this->assertSame(0, (int)($other_rows[0]['human_reviewed'] ?? 1));
+			$this->assertSame(1, (int)($other_rows[0]['allow_source_match'] ?? 0));
+		}
+	}
+
+	public function testBuilderStateResolvesReadOnlySystemI18nReferencesAndTranslationFilter(): void
+	{
+		$definition_slug = 'capture-phase4j-system-i18n';
+		$descriptor = [
+			'kind' => 'capture',
+			'title' => ['key' => 'form.capture_demo.title'],
+			'description' => ['key' => 'form.capture_demo.description'],
+			'submit_label' => ['key' => 'form.capture.submit'],
+			'fields' => [
+				[
+					'type' => 'text',
+					'name' => 'name',
+					'key' => 'name',
+					'label' => ['key' => 'form.capture_demo.field.name.label'],
+					'normalizers' => ['trim'],
+				],
+			],
+		];
+
+		(new FormCaptureDefinitionRepository())->upsertPublishedDefinition($definition_slug, $descriptor, $this->defaultSecurity(), 'shipped');
+		$state = (new FormCaptureAuthoringService())->loadDefinition($definition_slug);
+		$query = [];
+		parse_str((string)(parse_url((string)($state['translation_url'] ?? ''), PHP_URL_QUERY) ?: ''), $query);
+
+		$this->assertTrue((bool)($state['read_only'] ?? false));
+		$this->assertSame('Contact demo', $state['descriptor']['title']['text'] ?? null);
+		$this->assertSame('Send a short message through the capture-form MVP.', $state['descriptor']['description']['text'] ?? null);
+		$this->assertSame('Send', $state['descriptor']['submit_label']['text'] ?? null);
+		$this->assertSame('Name', $state['descriptor']['fields'][0]['label']['text'] ?? null);
+		$this->assertSame('form', $query['domain'] ?? null);
+		$this->assertSame('capture_demo.', $query['search'] ?? null);
 	}
 
 	public function testBuilderAuthoringRejectsAbandonedDraftPublishByExplicitVersion(): void

@@ -4,6 +4,33 @@ declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 
+if (!class_exists('FormSubmitContext', false)) {
+	final class FormSubmitContext
+	{
+		public const string FIELD_FORM_ID = '_form_id';
+		public const string FIELD_FORM_INSTANCE_ID = '_form_instance_id';
+		public const string FIELD_ITEM_ID = '_item_id';
+		public const string FIELD_RETURN_TARGET = '_return_target';
+		public const string FIELD_HOST_PAGE_ID = '_host_page_id';
+		public const string FIELD_WIDGET_CONNECTION_ID = '_widget_connection_id';
+		public const string FIELD_BUILD_ID = '_build_id';
+		public const string FIELD_CONTEXT_PARAMS = '_context_params';
+		public const string FIELD_FORM_DEFINITION_VERSION_ID = '_form_definition_version_id';
+		public const string FIELD_FORM_RENDER_STATE_ID = '_form_render_state_id';
+		public const string FIELD_CSRF_TOKEN = '_token';
+	}
+}
+
+if (!class_exists('FormClassResolver', false)) {
+	final class FormClassResolver
+	{
+		public static function resolveClassName(string $form_id): ?string
+		{
+			return null;
+		}
+	}
+}
+
 final class FormRefactorPhase4SourceContractTest extends TestCase
 {
 	private const array EXPECTED_VALIDATOR_TYPES = [
@@ -403,6 +430,7 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 
 	public function testI18nReferenceAuditRejectsUnseededShippedDescriptorKeys(): void
 	{
+		require_once dirname(__DIR__) . '/modules-common/Form/classes/class.FormCaptureDescriptorSchemaValidator.php';
 		require_once dirname(__DIR__) . '/modules-common/Form/classes/class.I18nReferenceAuditService.php';
 
 		$temp_dir = sys_get_temp_dir() . '/radaptor-i18n-reference-audit-' . bin2hex(random_bytes(6));
@@ -430,6 +458,14 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 						'kind' => 'capture',
 						'title' => ['key' => 'form.capture_demo.title'],
 						'description' => ['key' => 'form.capture_demo.description'],
+						'fields' => [
+							[
+								'type' => 'text',
+								'name' => 'name',
+								'key' => 'name',
+								'label' => ['text' => 'Name'],
+							],
+						],
 					],
 				]],
 			]);
@@ -444,6 +480,64 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$this->assertSame(2, $result['missing_references']);
 		$this->assertSame('i18n_reference_missing_seed', $result['issues'][0]['code'] ?? null);
 		$this->assertSame('form.capture_demo.description', $result['issues'][0]['key'] ?? null);
+	}
+
+	public function testCaptureDescriptorValidatorAndAuditHandleCustomFormI18nKeys(): void
+	{
+		require_once dirname(__DIR__) . '/modules-common/Form/classes/class.FormDescriptorValidatorRegistry.php';
+		require_once dirname(__DIR__) . '/modules-common/Form/classes/class.FormCaptureDescriptorSchemaValidator.php';
+		require_once dirname(__DIR__) . '/modules-common/Form/classes/class.I18nReferenceAuditService.php';
+
+		$descriptor = [
+			'kind' => 'capture',
+			'i18n_mode' => FormCaptureDescriptorSchemaValidator::I18N_MODE_KEYED,
+			'title' => [
+				'key' => 'form_def.capture_contact_demo.title',
+				'text' => 'Contact demo',
+			],
+			'fields' => [
+				[
+					'type' => 'text',
+					'name' => 'name',
+					'key' => 'name',
+					'label' => [
+						'key' => 'form_def.capture_contact_demo.fields.name.label',
+						'text' => 'Name',
+					],
+				],
+			],
+		];
+
+		FormCaptureDescriptorSchemaValidator::validateForDefinition('capture-contact-demo', $descriptor, null);
+
+		$invalid = $descriptor;
+		$invalid['title'] = ['text' => 'Missing key'];
+
+		try {
+			FormCaptureDescriptorSchemaValidator::validateForDefinition('capture-contact-demo', $invalid, null);
+			$this->fail('Keyed capture form descriptors must reject text definitions without i18n keys.');
+		} catch (InvalidArgumentException $exception) {
+			$this->assertStringContainsString('must use an i18n key', $exception->getMessage());
+		}
+
+		$result = I18nReferenceAuditService::audit([
+			'locales' => ['en-US'],
+			'seed_targets' => [],
+			'message_keys' => ['form_def.capture_contact_demo.title'],
+			'descriptor_rows' => [[
+				'definition_slug' => 'capture-contact-demo',
+				'source' => 'db',
+				'version_id' => 11,
+				'version_number' => 2,
+				'descriptor' => $descriptor,
+			]],
+		]);
+
+		$this->assertSame('error', $result['status']);
+		$this->assertSame(2, $result['references_scanned']);
+		$this->assertSame(1, $result['missing_references']);
+		$this->assertSame('i18n_reference_missing_db_message', $result['issues'][0]['code'] ?? null);
+		$this->assertSame('form_def.capture_contact_demo.fields.name.label', $result['issues'][0]['key'] ?? null);
 	}
 
 	private function source(string $relativePath): string

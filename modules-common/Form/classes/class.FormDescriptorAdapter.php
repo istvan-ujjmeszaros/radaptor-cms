@@ -196,8 +196,14 @@ final class FormDescriptorAdapter
 		if (is_array($value)) {
 			if (isset($value['key']) && is_scalar($value['key'])) {
 				$params = is_array($value['params'] ?? null) ? $value['params'] : [];
+				$key = (string)$value['key'];
+				$translated = t($key, $params);
 
-				return t((string)$value['key'], $params);
+				if ($translated === $key && array_key_exists('text', $value)) {
+					return (string)$value['text'];
+				}
+
+				return $translated;
 			}
 
 			if (array_key_exists('text', $value)) {

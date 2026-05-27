@@ -9,7 +9,8 @@ final class I18nReferenceAuditService
 	 *     all_packages?: bool,
 	 *     locales?: list<string>,
 	 *     seed_targets?: list<array<string, mixed>>,
-	 *     descriptor_rows?: list<array<string, mixed>>
+	 *     descriptor_rows?: list<array<string, mixed>>,
+	 *     message_keys?: list<string>
 	 * } $options
 	 * @return array{
 	 *     status: string,
@@ -33,24 +34,67 @@ final class I18nReferenceAuditService
 		]);
 		$descriptor_rows = $options['descriptor_rows'] ?? self::loadCaptureDescriptorRows();
 		$seed_index = self::buildSeedIndex($seed_targets, $locales);
+		$message_index = isset($options['message_keys']) ? self::buildMessageIndex($options['message_keys']) : null;
 		$issues = [];
 		$references_scanned = 0;
 
 		foreach ($descriptor_rows as $row) {
+			$definition_slug = (string)($row['definition_slug'] ?? '');
+			$source = (string)($row['source'] ?? '');
 			$descriptor = self::decodeDescriptorRow($row);
 
 			if (!is_array($descriptor)) {
 				$issues[] = [
 					'code' => 'i18n_reference_descriptor_invalid_json',
-					'definition_slug' => (string)($row['definition_slug'] ?? ''),
+					'definition_slug' => $definition_slug,
 					'version_id' => (int)($row['version_id'] ?? 0),
 				];
 
 				continue;
 			}
 
-			foreach (self::extractI18nKeys($descriptor) as $key) {
+			try {
+				FormCaptureDescriptorSchemaValidator::validateDescriptor($descriptor);
+
+				if ($definition_slug !== '') {
+					FormCaptureDescriptorSchemaValidator::validateI18nForDefinition($definition_slug, $descriptor);
+				}
+			} catch (InvalidArgumentException $exception) {
+				$issues[] = [
+					'code' => 'i18n_reference_descriptor_invalid',
+					'definition_slug' => $definition_slug,
+					'source' => $source,
+					'version_id' => (int)($row['version_id'] ?? 0),
+					'version_number' => (int)($row['version_number'] ?? 0),
+					'message' => $exception->getMessage(),
+				];
+
+				continue;
+			}
+
+			foreach (FormCaptureDescriptorSchemaValidator::extractI18nReferences($descriptor) as $reference) {
+				$key = $reference['key'];
 				$references_scanned++;
+
+				if ($source === 'db') {
+					$message_index ??= self::buildMessageIndex(null);
+
+					if (isset($message_index[$key])) {
+						continue;
+					}
+
+					$issues[] = [
+						'code' => 'i18n_reference_missing_db_message',
+						'key' => $key,
+						'definition_slug' => $definition_slug,
+						'source' => $source,
+						'version_id' => (int)($row['version_id'] ?? 0),
+						'version_number' => (int)($row['version_number'] ?? 0),
+						'path' => $reference['path'],
+					];
+
+					continue;
+				}
 
 				foreach ($locales as $locale) {
 					if (isset($seed_index[$locale][$key])) {
@@ -61,8 +105,8 @@ final class I18nReferenceAuditService
 						'code' => 'i18n_reference_missing_seed',
 						'key' => $key,
 						'locale' => $locale,
-						'definition_slug' => (string)($row['definition_slug'] ?? ''),
-						'source' => (string)($row['source'] ?? ''),
+						'definition_slug' => $definition_slug,
+						'source' => $source,
 						'version_id' => (int)($row['version_id'] ?? 0),
 						'version_number' => (int)($row['version_number'] ?? 0),
 					];
@@ -104,7 +148,6 @@ final class I18nReferenceAuditService
 			INNER JOIN form_definition_versions v
 				ON v.definition_id = d.definition_id
 			WHERE d.kind = 'capture'
-				AND d.source <> 'db'
 				AND (v.status = 'published' OR v.version_id = d.published_version_id)
 			ORDER BY d.definition_slug, v.version_number"
 		);
@@ -193,6 +236,48 @@ final class I18nReferenceAuditService
 	}
 
 	/**
+	 * @param list<string>|null $message_keys
+	 * @return array<string, true>
+	 */
+	private static function buildMessageIndex(?array $message_keys): array
+	{
+		if ($message_keys !== null) {
+			$index = [];
+
+			foreach ($message_keys as $key) {
+				$key = trim((string)$key);
+
+				if ($key !== '') {
+					$index[$key] = true;
+				}
+			}
+
+			return $index;
+		}
+
+		if (!DbSchemaHelper::tableExists('i18n_messages')) {
+			return [];
+		}
+
+		$rows = DbHelper::selectManyFromQuery(
+			"SELECT domain, `key`
+			FROM i18n_messages"
+		);
+		$index = [];
+
+		foreach ($rows as $row) {
+			$domain = trim((string)($row['domain'] ?? ''));
+			$key = trim((string)($row['key'] ?? ''));
+
+			if ($domain !== '' && $key !== '') {
+				$index[$domain . '.' . $key] = true;
+			}
+		}
+
+		return $index;
+	}
+
+	/**
 	 * @param array<int, mixed> $row
 	 */
 	private static function isIgnorableCsvRow(array $row): bool
@@ -231,43 +316,6 @@ final class I18nReferenceAuditService
 		}
 
 		return is_array($decoded) ? $decoded : null;
-	}
-
-	/**
-	 * @param array<string, mixed> $descriptor
-	 * @return list<string>
-	 */
-	private static function extractI18nKeys(array $descriptor): array
-	{
-		$keys = [];
-		self::collectI18nKeys($descriptor, $keys);
-		sort($keys);
-
-		return array_values(array_unique($keys));
-	}
-
-	/**
-	 * @param array<int|string, mixed> $value
-	 * @param list<string> $keys
-	 */
-	private static function collectI18nKeys(array $value, array &$keys): void
-	{
-		$key = $value['key'] ?? null;
-
-		if (is_string($key) && self::isI18nKey($key)) {
-			$keys[] = $key;
-		}
-
-		foreach ($value as $child) {
-			if (is_array($child)) {
-				self::collectI18nKeys($child, $keys);
-			}
-		}
-	}
-
-	private static function isI18nKey(string $key): bool
-	{
-		return preg_match('/^[A-Za-z0-9_]+(?:\.[A-Za-z0-9_]+)+$/', $key) === 1;
 	}
 
 	/**

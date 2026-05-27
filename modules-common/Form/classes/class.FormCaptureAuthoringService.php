@@ -20,12 +20,18 @@ final class FormCaptureAuthoringService
 		$selected = $definition_slug !== '' ? $definition_slug : (string)($definitions[0]['definition_slug'] ?? '');
 		$state = $selected !== '' ? $this->loadDefinition($selected) : $this->emptyDefinitionState();
 		$provider = new FormCaptureEditorPaletteProvider();
+		$selected_slug = (string)($state['definition']['definition_slug'] ?? $selected);
+		$selected_descriptor = is_array($state['descriptor'] ?? null) ? $state['descriptor'] : [];
+		$locales = I18nRuntime::getAvailableLocaleCodes();
 
 		return [
 			'definitions' => $definitions,
 			'selected' => $state,
 			'palette' => array_map(static fn (EditorPaletteItem $item): array => $item->toArray(), $provider->getPaletteItems()),
 			'drop_targets' => array_map(static fn (EditorDropTarget $target): array => $target->toArray(), $provider->getDropTargets()),
+			'i18n_available' => count($locales) > 1,
+			'default_locale' => LocaleService::getDefaultLocale(),
+			'translation_url' => (string)($state['translation_url'] ?? $this->translationUrlForDefinition($selected_slug, $selected_descriptor)),
 		];
 	}
 
@@ -215,12 +221,17 @@ final class FormCaptureAuthoringService
 		$descriptor = $selected_version instanceof EntityFormDefinitionVersion
 			? $this->descriptorFromVersion($definition, $selected_version)
 			: $this->defaultDescriptor($definition_slug);
+		$builder_descriptor = $this->descriptorForBuilder($descriptor);
 		$security = $this->securityForDefinition($definition, $descriptor);
+		$translation_descriptor = (string)$definition->source !== self::SOURCE_DB
+			|| ($descriptor['i18n_mode'] ?? FormCaptureDescriptorSchemaValidator::I18N_MODE_LITERAL) === FormCaptureDescriptorSchemaValidator::I18N_MODE_KEYED
+			? $descriptor
+			: null;
 
 		return [
 			'definition' => $definition->dto(),
-			'descriptor' => $descriptor,
-			'server_descriptor' => $descriptor,
+			'descriptor' => $builder_descriptor,
+			'server_descriptor' => $builder_descriptor,
 			'security' => $security,
 			'active_draft' => $active_draft instanceof EntityFormDefinitionVersion ? $active_draft->dto() : null,
 			'published_version' => $published instanceof EntityFormDefinitionVersion ? $published->dto() : null,
@@ -230,6 +241,7 @@ final class FormCaptureAuthoringService
 			'loaded_version' => null,
 			'read_only' => (string)$definition->source !== self::SOURCE_DB,
 			'status' => $active_draft instanceof EntityFormDefinitionVersion ? self::STATUS_DRAFT : (string)$definition->status,
+			'translation_url' => $this->translationUrlForDefinition($definition_slug, $translation_descriptor),
 		];
 	}
 
@@ -254,7 +266,7 @@ final class FormCaptureAuthoringService
 		}
 
 		$current = $this->loadDefinition($definition_slug);
-		$descriptor = $this->descriptorFromVersion($definition, $version);
+		$descriptor = $this->descriptorForBuilder($this->descriptorFromVersion($definition, $version));
 
 		return array_replace($current, [
 			'action' => 'loaded_draft_version',
@@ -344,6 +356,7 @@ final class FormCaptureAuthoringService
 				'descriptor_hash' => $prepared['descriptor_hash'],
 				'published_at' => null,
 			]);
+			$this->syncDescriptorI18nRows($definition_slug, $prepared['descriptor']);
 
 			if ($started_transaction) {
 				$pdo->commit();
@@ -388,6 +401,7 @@ final class FormCaptureAuthoringService
 
 			$published_match = $this->findPublishedVersionByHash((int)$definition->definition_id, $prepared['descriptor_hash']);
 			$this->abandonDrafts((int)$definition->definition_id);
+			$this->syncDescriptorI18nRows($definition_slug, $prepared['descriptor']);
 
 			if ($published_match instanceof EntityFormDefinitionVersion) {
 				if ($started_transaction) {
@@ -486,6 +500,7 @@ final class FormCaptureAuthoringService
 				$pdo->beginTransaction();
 			}
 
+			$this->syncDescriptorI18nRows($definition_slug, $descriptor);
 			$version = EntityFormDefinitionVersion::updateById((int)$version->version_id, [
 				'status' => self::STATUS_PUBLISHED,
 				'published_at' => date('Y-m-d H:i:s'),
@@ -611,6 +626,7 @@ final class FormCaptureAuthoringService
 			'loaded_version' => null,
 			'read_only' => false,
 			'status' => 'new',
+			'translation_url' => $this->translationUrlForDefinition('capture-new'),
 		];
 	}
 
@@ -621,6 +637,7 @@ final class FormCaptureAuthoringService
 	{
 		return [
 			'kind' => 'capture',
+			'i18n_mode' => FormCaptureDescriptorSchemaValidator::I18N_MODE_LITERAL,
 			'title' => ['text' => $title ?? $definition_slug],
 			'description' => ['text' => ''],
 			'submit_label' => ['key' => 'form.capture.submit'],
@@ -783,6 +800,95 @@ final class FormCaptureAuthoringService
 	}
 
 	/**
+	 * @param array<string, mixed> $descriptor
+	 */
+	private function syncDescriptorI18nRows(string $definition_slug, array $descriptor): void
+	{
+		if (($descriptor['i18n_mode'] ?? FormCaptureDescriptorSchemaValidator::I18N_MODE_LITERAL) !== FormCaptureDescriptorSchemaValidator::I18N_MODE_KEYED) {
+			return;
+		}
+
+		if (!$this->tableExists('i18n_messages') || !$this->tableExists('i18n_translations')) {
+			return;
+		}
+
+		$default_locale = LocaleService::getDefaultLocale();
+		$locales = array_values(array_unique(array_merge(
+			[$default_locale],
+			array_map('strval', I18nRuntime::getAvailableLocaleCodes()),
+		)));
+
+		foreach (FormCaptureDescriptorSchemaValidator::extractI18nReferences($descriptor) as $reference) {
+			$text = trim($reference['text']);
+
+			if ($text === '') {
+				continue;
+			}
+
+			[$domain, $key] = $this->splitI18nKey($reference['key']);
+			I18nTranslationService::saveTranslation(
+				$domain,
+				$key,
+				'',
+				$default_locale,
+				$text,
+				true,
+				false,
+				$text,
+				false,
+			);
+
+			foreach ($locales as $locale) {
+				if ($locale === $default_locale || $this->i18nTranslationExists($domain, $key, '', $locale)) {
+					continue;
+				}
+
+				I18nTranslationService::saveTranslation(
+					$domain,
+					$key,
+					'',
+					$locale,
+					$text,
+					false,
+					false,
+					$text,
+					true,
+				);
+			}
+		}
+	}
+
+	private function i18nTranslationExists(string $domain, string $key, string $context, string $locale): bool
+	{
+		$stmt = Db::instance()->prepare(
+			'SELECT 1
+			FROM i18n_translations
+			WHERE domain = ?
+				AND `key` = ?
+				AND context = ?
+				AND locale = ?
+			LIMIT 1'
+		);
+		$stmt->execute([$domain, $key, $context, $locale]);
+
+		return $stmt->fetchColumn() !== false;
+	}
+
+	/**
+	 * @return array{string, string}
+	 */
+	private function splitI18nKey(string $key): array
+	{
+		$parts = explode('.', $key, 2);
+
+		if (count($parts) !== 2 || $parts[0] === '' || $parts[1] === '') {
+			throw new InvalidArgumentException("Invalid form i18n key '{$key}'.");
+		}
+
+		return [$parts[0], $parts[1]];
+	}
+
+	/**
 	 * @return array<string, mixed>
 	 */
 	private function decodeJsonObject(string $json, string $label): array
@@ -806,6 +912,118 @@ final class FormCaptureAuthoringService
 			'SELECT COALESCE(MAX(version_number), 0) + 1 FROM form_definition_versions WHERE definition_id=?',
 			[$definition_id],
 		);
+	}
+
+	/**
+	 * @param array<string, mixed> $descriptor
+	 * @return array<string, mixed>
+	 */
+	private function descriptorForBuilder(array $descriptor): array
+	{
+		return $this->withResolvedTextFallbacks($descriptor);
+	}
+
+	/**
+	 * @param array<int|string, mixed> $value
+	 * @return array<int|string, mixed>
+	 */
+	private function withResolvedTextFallbacks(array $value): array
+	{
+		$key = $value['key'] ?? null;
+		$is_text_definition = is_string($key)
+			&& trim($key) !== ''
+			&& array_diff(array_keys($value), ['text', 'key', 'params']) === [];
+
+		if ($is_text_definition && !array_key_exists('text', $value)) {
+			$params = is_array($value['params'] ?? null) ? $value['params'] : [];
+			$text = t(trim($key), $params);
+
+			if ($text !== trim($key)) {
+				$value['text'] = $text;
+			}
+		}
+
+		foreach ($value as $child_key => $child) {
+			if (is_array($child)) {
+				$value[$child_key] = $this->withResolvedTextFallbacks($child);
+			}
+		}
+
+		return $value;
+	}
+
+	/**
+	 * @param array<string, mixed>|null $descriptor
+	 */
+	private function translationUrlForDefinition(string $definition_slug, ?array $descriptor = null): string
+	{
+		$definition_slug = trim($definition_slug);
+		$query = $descriptor !== null ? $this->translationFilterForDescriptor($descriptor) : null;
+
+		if ($query === null) {
+			$query = [
+				'domain' => FormCaptureDescriptorSchemaValidator::FORM_I18N_DOMAIN,
+			];
+
+			if ($definition_slug !== '') {
+				try {
+					$query['search'] = FormCaptureDescriptorSchemaValidator::i18nSlugForDefinition($definition_slug) . '.';
+				} catch (Throwable) {
+				}
+			}
+		}
+
+		return '/admin/i18n/?' . http_build_query($query);
+	}
+
+	/**
+	 * @param array<string, mixed> $descriptor
+	 * @return array{domain: string, search?: string}|null
+	 */
+	private function translationFilterForDescriptor(array $descriptor): ?array
+	{
+		$groups = [];
+
+		foreach (FormCaptureDescriptorSchemaValidator::extractI18nReferences($descriptor) as $reference) {
+			$parts = explode('.', $reference['key'], 3);
+
+			if (count($parts) < 3 || $parts[0] === '' || $parts[1] === '') {
+				continue;
+			}
+
+			$group_key = $parts[0] . "\0" . $parts[1];
+			$groups[$group_key] = ($groups[$group_key] ?? 0) + 1;
+		}
+
+		if ($groups === []) {
+			return null;
+		}
+
+		uksort($groups, static function (string $left, string $right) use ($groups): int {
+			$count_compare = $groups[$right] <=> $groups[$left];
+
+			if ($count_compare !== 0) {
+				return $count_compare;
+			}
+
+			[$left_domain, $left_prefix] = explode("\0", $left, 2);
+			[$right_domain, $right_prefix] = explode("\0", $right, 2);
+			$domain_compare = ($right_domain === FormCaptureDescriptorSchemaValidator::FORM_I18N_DOMAIN ? 1 : 0)
+				<=> ($left_domain === FormCaptureDescriptorSchemaValidator::FORM_I18N_DOMAIN ? 1 : 0);
+
+			if ($domain_compare !== 0) {
+				return $domain_compare;
+			}
+
+			return strlen($right_prefix) <=> strlen($left_prefix);
+		});
+
+		[$domain, $prefix] = explode("\0", array_key_first($groups), 2);
+
+		return [
+			'domain' => $domain,
+			'search' => $prefix . '.',
+		];
 	}
 
 	private function currentAdminTheme(): ?AbstractThemeData

@@ -30,6 +30,9 @@ $stateJson = json_encode([
 	'versions' => $versions,
 	'loaded_version' => $loadedVersion,
 	'usage' => $usage,
+	'i18n_available' => (bool)($state['i18n_available'] ?? false),
+	'default_locale' => (string)($state['default_locale'] ?? ''),
+	'translation_url' => (string)($state['translation_url'] ?? ''),
 	'initial_panel' => (string)($this->props['initial_panel'] ?? 'properties'),
 	'initial_preview' => is_array($this->props['initial_preview'] ?? null) ? $this->props['initial_preview'] : [],
 	'initial_preview_html' => (string)($this->props['initial_preview_html'] ?? ''),
@@ -176,17 +179,81 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 				<div data-form-builder-target="formPropertiesPane">
 					<div class="form-builder__property-pane">
 						<label class="form-label w-100">
-							<span><?= e($this->strings['form.builder.label.title']) ?></span>
+							<span class="form-builder__property-label">
+								<span><?= e($this->strings['form.builder.label.title']) ?></span>
+								<a
+									class="form-builder__i18n-property-link"
+									data-form-builder-target="formTitleTranslationLink"
+									data-action="click->form-builder#stopPropertyLinkClick"
+									href="#"
+									target="_blank"
+									rel="noopener"
+									aria-label="<?= e($this->strings['form.builder.action.open_translations']) ?>"
+									title="<?= e($this->strings['form.builder.action.open_translations']) ?>"
+									hidden
+								><i class="bi bi-translate" aria-hidden="true"></i></a>
+							</span>
 							<input type="text" class="form-control form-control-sm" data-form-builder-target="formTitleInput" data-action="input->form-builder#updateFormText">
 						</label>
 						<label class="form-label w-100">
-							<span><?= e($this->strings['form.builder.label.description']) ?></span>
+							<span class="form-builder__property-label">
+								<span><?= e($this->strings['form.builder.label.description']) ?></span>
+								<a
+									class="form-builder__i18n-property-link"
+									data-form-builder-target="formDescriptionTranslationLink"
+									data-action="click->form-builder#stopPropertyLinkClick"
+									href="#"
+									target="_blank"
+									rel="noopener"
+									aria-label="<?= e($this->strings['form.builder.action.open_translations']) ?>"
+									title="<?= e($this->strings['form.builder.action.open_translations']) ?>"
+									hidden
+								><i class="bi bi-translate" aria-hidden="true"></i></a>
+							</span>
 							<textarea rows="2" class="form-control form-control-sm" data-form-builder-target="formDescriptionInput" data-action="input->form-builder#updateFormText"></textarea>
 						</label>
 						<label class="form-label w-100 mb-0">
-							<span><?= e($this->strings['form.builder.label.submit_label']) ?></span>
+							<span class="form-builder__property-label">
+								<span><?= e($this->strings['form.builder.label.submit_label']) ?></span>
+								<a
+									class="form-builder__i18n-property-link"
+									data-form-builder-target="submitLabelTranslationLink"
+									data-action="click->form-builder#stopPropertyLinkClick"
+									href="#"
+									target="_blank"
+									rel="noopener"
+									aria-label="<?= e($this->strings['form.builder.action.open_translations']) ?>"
+									title="<?= e($this->strings['form.builder.action.open_translations']) ?>"
+									hidden
+								><i class="bi bi-translate" aria-hidden="true"></i></a>
+							</span>
 							<input type="text" class="form-control form-control-sm" data-form-builder-target="submitLabelInput" data-action="input->form-builder#updateFormText">
 						</label>
+						<?php if ((bool)($state['i18n_available'] ?? false)): ?>
+							<div class="form-builder__i18n-settings">
+								<label class="form-check form-builder__checkbox">
+									<input
+										type="checkbox"
+										class="form-check-input"
+										data-form-builder-target="i18nModeInput"
+										data-action="change->form-builder#toggleI18nMode"
+										<?= $readOnly ? 'disabled' : '' ?>
+									>
+									<span><?= e($this->strings['form.builder.label.i18n_mode']) ?></span>
+								</label>
+								<div class="form-text"><?= e($this->strings['form.builder.help.i18n_mode']) ?></div>
+								<a
+									class="btn btn-outline-secondary btn-sm mt-2"
+									data-form-builder-target="translationsLink"
+									href="<?= e((string)($state['translation_url'] ?? '')) ?>"
+									target="_blank"
+									rel="noopener"
+								>
+									<i class="bi bi-translate" aria-hidden="true"></i>
+									<?= e($this->strings['form.builder.action.open_translations']) ?>
+								</a>
+							</div>
+						<?php endif; ?>
 					</div>
 				</div>
 				<div data-form-builder-target="inputPropertiesPane" hidden>
@@ -196,7 +263,20 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 						</div>
 						<div data-form-builder-target="fieldProperties" hidden>
 							<label class="form-label w-100">
-								<span><?= e($this->strings['form.builder.label.field_label']) ?></span>
+								<span class="form-builder__property-label">
+									<span><?= e($this->strings['form.builder.label.field_label']) ?></span>
+									<a
+										class="form-builder__i18n-property-link"
+										data-form-builder-target="fieldLabelTranslationLink"
+										data-action="click->form-builder#stopPropertyLinkClick"
+										href="#"
+										target="_blank"
+										rel="noopener"
+										aria-label="<?= e($this->strings['form.builder.action.open_translations']) ?>"
+										title="<?= e($this->strings['form.builder.action.open_translations']) ?>"
+										hidden
+									><i class="bi bi-translate" aria-hidden="true"></i></a>
+								</span>
 								<input type="text" class="form-control form-control-sm" data-form-builder-target="fieldLabelInput" data-action="input->form-builder#updateSelectedField">
 							</label>
 							<label class="form-label w-100">
@@ -210,9 +290,33 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 							<label class="form-check form-builder__checkbox">
 								<input type="checkbox" class="form-check-input" data-form-builder-target="fieldRequiredInput" data-action="change->form-builder#updateSelectedField">
 								<span><?= e($this->strings['form.builder.label.required']) ?></span>
+								<a
+									class="form-builder__i18n-property-link ms-auto"
+									data-form-builder-target="fieldRequiredTranslationLink"
+									data-action="click->form-builder#stopPropertyLinkClick"
+									href="#"
+									target="_blank"
+									rel="noopener"
+									aria-label="<?= e($this->strings['form.builder.action.open_translations']) ?>"
+									title="<?= e($this->strings['form.builder.action.open_translations']) ?>"
+									hidden
+								><i class="bi bi-translate" aria-hidden="true"></i></a>
 							</label>
 							<label class="form-label w-100 mb-0" data-form-builder-target="fieldOptionsGroup">
-								<span><?= e($this->strings['form.builder.label.options']) ?></span>
+								<span class="form-builder__property-label">
+									<span><?= e($this->strings['form.builder.label.options']) ?></span>
+									<a
+										class="form-builder__i18n-property-link"
+										data-form-builder-target="fieldOptionsTranslationLink"
+										data-action="click->form-builder#stopPropertyLinkClick"
+										href="#"
+										target="_blank"
+										rel="noopener"
+										aria-label="<?= e($this->strings['form.builder.action.open_translations']) ?>"
+										title="<?= e($this->strings['form.builder.action.open_translations']) ?>"
+										hidden
+									><i class="bi bi-translate" aria-hidden="true"></i></a>
+								</span>
 								<textarea rows="5" class="form-control form-control-sm" data-form-builder-target="fieldOptionsInput" data-action="input->form-builder#updateSelectedField"></textarea>
 							</label>
 						</div>

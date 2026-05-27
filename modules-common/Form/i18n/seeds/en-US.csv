@@ -98,6 +98,8 @@ form,builder.label.definition,,en-US,Definition,Definition,0,0,Definition
 form,builder.label.title,,en-US,Title,Title,0,0,Title
 form,builder.label.description,,en-US,Description,Description,0,0,Description
 form,builder.label.submit_label,,en-US,"Submit label","Submit label",0,0,"Submit label"
+form,builder.label.i18n_mode,,en-US,"Use translation keys","Use translation keys",0,0,"Use translation keys"
+form,builder.help.i18n_mode,,en-US,"Generate translation keys for this form and store the default text for the default locale.","Generate translation keys for this form and store the default text for the default locale.",0,0,"Generate translation keys for this form and store the default text for the default locale."
 form,builder.label.field_label,,en-US,"Field label","Field label",0,0,"Field label"
 form,builder.label.field_name,,en-US,"Field name","Field name",0,0,"Field name"
 form,builder.label.field_key,,en-US,"Payload key","Payload key",0,0,"Payload key"
@@ -108,6 +110,7 @@ form,builder.action.redo,,en-US,Redo,Redo,0,0,Redo
 form,builder.action.move_up,,en-US,"Move up","Move up",0,0,"Move up"
 form,builder.action.move_down,,en-US,"Move down","Move down",0,0,"Move down"
 form,builder.action.delete,,en-US,Delete,Delete,0,0,Delete
+form,builder.action.open_translations,,en-US,"Open translations","Open translations",0,0,"Open translations"
 form,builder.action.save_draft,,en-US,"Save draft","Save draft",0,0,"Save draft"
 form,builder.action.publish,,en-US,Publish,Publish,0,0,Publish
 form,builder.action.close,,en-US,Close,Close,0,0,Close

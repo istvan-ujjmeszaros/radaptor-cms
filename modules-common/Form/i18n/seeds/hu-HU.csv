@@ -98,6 +98,8 @@ form,builder.label.definition,,hu-HU,Definition,Definíció,0,0,Definíció
 form,builder.label.title,,hu-HU,Title,Cím,0,0,Cím
 form,builder.label.description,,hu-HU,Description,Leírás,0,0,Leírás
 form,builder.label.submit_label,,hu-HU,"Submit label","Beküldés felirat",0,0,"Beküldés felirat"
+form,builder.label.i18n_mode,,hu-HU,"Use translation keys","Fordítási kulcsok használata",0,0,"Fordítási kulcsok használata"
+form,builder.help.i18n_mode,,hu-HU,"Generate translation keys for this form and store the default text for the default locale.","A szerkesztő fordítási kulcsokat generál ehhez az űrlaphoz, és az alapértelmezett nyelv szövegét is eltárolja.",0,0,"A szerkesztő fordítási kulcsokat generál ehhez az űrlaphoz, és az alapértelmezett nyelv szövegét is eltárolja."
 form,builder.label.field_label,,hu-HU,"Field label","Mező felirat",0,0,"Mező felirat"
 form,builder.label.field_name,,hu-HU,"Field name","Mezőnév",0,0,"Mezőnév"
 form,builder.label.field_key,,hu-HU,"Payload key","Payload kulcs",0,0,"Payload kulcs"
@@ -108,6 +110,7 @@ form,builder.action.redo,,hu-HU,Redo,Újra,0,0,Újra
 form,builder.action.move_up,,hu-HU,"Move up","Mozgatás fel",0,0,"Mozgatás fel"
 form,builder.action.move_down,,hu-HU,"Move down","Mozgatás le",0,0,"Mozgatás le"
 form,builder.action.delete,,hu-HU,Delete,Törlés,0,0,Törlés
+form,builder.action.open_translations,,hu-HU,"Open translations","Fordítások megnyitása",0,0,"Fordítások megnyitása"
 form,builder.action.save_draft,,hu-HU,"Save draft","Piszkozat mentése",0,0,"Piszkozat mentése"
 form,builder.action.publish,,hu-HU,Publish,Publikálás,0,0,Publikálás
 form,builder.action.close,,hu-HU,Close,Bezárás,0,0,Bezárás

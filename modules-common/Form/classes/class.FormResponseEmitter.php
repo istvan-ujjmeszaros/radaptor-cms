@@ -37,12 +37,14 @@ final class FormResponseEmitter
 
 		http_response_code($result->isDenied() ? 403 : 422);
 
-		if ($context->hostPageId !== null && !$result->isDenied()) {
-			FormSubmissionStateStore::prime($context, $result, $payload, $files);
+		$host_redirect_target = $context->hostedInvalidRedirectTarget();
 
-			if ($this->renderHostPage($context)) {
-				return;
-			}
+		if ($host_redirect_target !== '' && !$result->isDenied()) {
+			FormSubmissionStateStore::prime($context, $result, $payload, $files);
+			FormSubmissionStateStore::flash($context, $result, $payload);
+			$this->emitSeeOther($host_redirect_target);
+
+			return;
 		}
 
 		echo $this->renderFormDocument($form, $result);
@@ -111,24 +113,11 @@ final class FormResponseEmitter
 		return $this->renderErrorSummary($result) . $html . $renderer->getJs();
 	}
 
-	private function renderHostPage(FormSubmitContext $context): bool
+	private function emitSeeOther(string $location): void
 	{
-		$resource = ResourceTypeFactory::Factory((int)$context->hostPageId);
-
-		if (!$resource instanceof ResourceTypeWebpage) {
-			return false;
-		}
-
-		RequestContextHolder::disablePersistentCacheWrite();
 		ResourceTreeHandler::setNoCacheHeaders();
-
-		if ($resource->getView()->isHtmlOutputChannel()) {
-			SystemMessages::setSystemMessagesDependencies($resource->getView());
-		}
-
-		$resource->view();
-
-		return true;
+		http_response_code(303);
+		WebpageView::header('Location: ' . $location);
 	}
 
 	private function renderErrorSummary(FormResult $result): string

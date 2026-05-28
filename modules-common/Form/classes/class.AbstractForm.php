@@ -294,7 +294,7 @@ abstract class AbstractForm implements iForm, iListable
 
 	private function applySubmittedRenderState(): void
 	{
-		$state = FormSubmissionStateStore::get($this);
+		$state = FormSubmissionStateStore::get($this, FormSubmitContext::fromForm($this, $this->_render_context));
 
 		if ($state === null) {
 			return;

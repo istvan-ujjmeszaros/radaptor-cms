@@ -215,7 +215,7 @@ final class FormRefactorPhase2IntegrationTest extends TestCase
 			formInstanceId: 'phase2_probe',
 			itemId: null,
 			returnTarget: '/phase-2-return',
-			hostPageId: null,
+			hostPageId: 1,
 			widgetConnectionId: null,
 			buildId: FormSubmitContext::currentBuildId(),
 		);
@@ -240,6 +240,7 @@ final class FormRefactorPhase2IntegrationTest extends TestCase
 		$this->assertSame('FORM_INVALID', $ctx->capturedApiResponse['error']['code']);
 		$this->assertSame('invalid', $ctx->capturedApiResponse['meta']['form']['outcome']);
 		$this->assertArrayHasKey('submit_button', $ctx->capturedApiResponse['meta']['form']['errors']);
+		$this->assertSame([], Request::_SESSION(FormSubmissionStateStore::SESSION_KEY_FLASH_STATES, []));
 	}
 
 	public function testSubmitEndpointRunsProbeThroughFullChokepointAndAppliesRuntimeGet(): void
@@ -524,7 +525,7 @@ final class FormRefactorPhase2IntegrationTest extends TestCase
 		$this->assertArrayHasKey('node_name', $response['body']['meta']['form']['errors']);
 	}
 
-	public function testClassicInvalidSubmitRerendersHostPageWithPrimedFormState(): void
+	public function testClassicHostedInvalidSubmitRedirectsAndRehydratesHostPageOnce(): void
 	{
 		$page_id = ResourceTypeWebpage::getWebpageIdByFormType(FormList::USERLOGIN);
 
@@ -538,12 +539,27 @@ final class FormRefactorPhase2IntegrationTest extends TestCase
 			self::markTestSkipped('Missing login form widget connection for classic invalid form submit integration coverage.');
 		}
 
+		$host_url = Url::getSeoUrl($page_id);
+
+		if (!is_string($host_url) || trim($host_url) === '') {
+			self::markTestSkipped('Missing login page URL for classic invalid form submit integration coverage.');
+		}
+
+		$return_target = 'http://localhost/admin/index.html';
 		$context = $this->submitContext(
 			formId: FormList::USERLOGIN,
 			formInstanceId: md5(FormList::USERLOGIN . '_' . $connection_id),
 			hostPageId: $page_id,
 			widgetConnectionId: $connection_id,
+			returnTarget: $return_target,
 		);
+		$redirect_target = $context->hostedInvalidRedirectTarget();
+		$redirect_query = [];
+		parse_str((string)parse_url($redirect_target, PHP_URL_QUERY), $redirect_query);
+
+		$this->assertNotSame($return_target, $redirect_target);
+		$this->assertSame((string)parse_url($host_url, PHP_URL_PATH), (string)parse_url($redirect_target, PHP_URL_PATH));
+		$this->assertSame($return_target, $redirect_query['referer'] ?? null);
 		$post = array_merge($context->toHiddenFields(), [
 			FormSubmitContext::FIELD_CSRF_TOKEN => $context->issueCsrfToken(),
 			'submit_button' => AbstractForm::_SUBMIT_VALUE_SAVE,
@@ -566,14 +582,191 @@ final class FormRefactorPhase2IntegrationTest extends TestCase
 		(new EventFormSubmit())->run();
 		$output = (string)ob_get_clean();
 
-		$this->assertStringContainsString('Wrong username or password', $output);
-		$this->assertStringContainsString('name="username"', $output);
-		$this->assertStringContainsString('data-field-key="username"', $output);
+		$this->assertSame('', $output);
+		$this->assertSame(303, http_response_code());
+		$this->assertNotSame([], Request::_SESSION(FormSubmissionStateStore::SESSION_KEY_FLASH_STATES, []));
+
+		$host_output = $this->renderWebpageForRequest($page_id, $redirect_target);
+
+		$this->assertStringContainsString('<html', strtolower($host_output));
+		$this->assertStringContainsString('Wrong username or password', $host_output);
+		$this->assertStringContainsString('name="username"', $host_output);
+		$this->assertStringContainsString('data-field-key="username"', $host_output);
+		$this->assertStringContainsString('value="admin_developer"', $host_output);
+		$this->assertStringContainsString('value="http://localhost/admin/index.html"', $host_output);
+		$this->assertSame([], Request::_SESSION(FormSubmissionStateStore::SESSION_KEY_FLASH_STATES, []));
+
+		$second_host_output = $this->renderWebpageForRequest($page_id, $redirect_target);
+
+		$this->assertStringNotContainsString('Wrong username or password', $second_host_output);
+		$this->assertStringNotContainsString('value="admin_developer"', $second_host_output);
+	}
+
+	public function testSubmissionFlashStateRequiresMatchingHostContextAndIsOneShot(): void
+	{
+		$context = new FormSubmitContext(
+			formId: 'Phase2Probe',
+			formInstanceId: 'phase2_probe',
+			itemId: null,
+			returnTarget: '/phase-2-return',
+			hostPageId: 10,
+			widgetConnectionId: 20,
+			buildId: FormSubmitContext::currentBuildId(),
+		);
+
+		FormSubmissionStateStore::flash($context, FormResult::invalid([
+			'title_key' => ['Title is required'],
+		]), [
+			'submit_button' => AbstractForm::_SUBMIT_VALUE_SAVE,
+			'title_key' => 'Submitted title',
+		]);
+
+		$mismatched = $this->probeFormWithRenderContext([
+			'host_page_id' => 11,
+			'widget_connection_id' => 20,
+			'return_target' => '/phase-2-return',
+		]);
+
+		$this->assertNull($mismatched->getInput('title')?->getValue());
+		$this->assertSame([], $mismatched->getInput('title')?->getErrors());
+		$this->assertNotSame([], Request::_SESSION(FormSubmissionStateStore::SESSION_KEY_FLASH_STATES, []));
+
+		$matched = $this->probeFormWithRenderContext([
+			'host_page_id' => 10,
+			'widget_connection_id' => 20,
+			'return_target' => '/phase-2-return',
+		]);
+
+		$this->assertSame('Submitted title', $matched->getInput('title')?->getValue());
+		$this->assertSame(['Title is required'], $matched->getInput('title')?->getErrors());
+		$this->assertSame([], Request::_SESSION(FormSubmissionStateStore::SESSION_KEY_FLASH_STATES, []));
+
+		$second_matched = $this->probeFormWithRenderContext([
+			'host_page_id' => 10,
+			'widget_connection_id' => 20,
+			'return_target' => '/phase-2-return',
+		]);
+
+		$this->assertNull($second_matched->getInput('title')?->getValue());
+		$this->assertSame([], $second_matched->getInput('title')?->getErrors());
+	}
+
+	public function testClassicHostedInvalidSubmitWithoutReturnTargetUsesStandaloneFallback(): void
+	{
+		$form = $this->probeForm();
+		$result = FormResult::invalid([
+			'title_key' => ['Title is required'],
+		]);
+		$context = new FormSubmitContext(
+			formId: 'Phase2Probe',
+			formInstanceId: 'phase2_probe',
+			itemId: null,
+			returnTarget: '',
+			hostPageId: 1,
+			widgetConnectionId: null,
+			buildId: FormSubmitContext::currentBuildId(),
+		);
+		$this->setRequestContext(server: [
+			'HTTP_HOST' => 'localhost',
+			'REQUEST_URI' => '/?context=form&event=submit',
+			'REQUEST_METHOD' => 'POST',
+			'HTTP_ACCEPT' => 'text/html',
+		]);
+
+		ob_start();
+		(new FormResponseEmitter())->emit($form, $result, $context, [
+			'submit_button' => AbstractForm::_SUBMIT_VALUE_SAVE,
+			'title_key' => '',
+		]);
+		$output = (string)ob_get_clean();
+
+		$this->assertSame(422, http_response_code());
+		$this->assertStringContainsString('<!doctype html>', $output);
+		$this->assertStringContainsString('form-submit-errors', $output);
+		$this->assertStringContainsString('Title is required', $output);
+		$this->assertSame([], Request::_SESSION(FormSubmissionStateStore::SESSION_KEY_FLASH_STATES, []));
+	}
+
+	public function testClassicHostedDeniedSubmitDoesNotRedirect(): void
+	{
+		$form = $this->probeForm();
+		$context = new FormSubmitContext(
+			formId: 'Phase2Probe',
+			formInstanceId: 'phase2_probe',
+			itemId: null,
+			returnTarget: '/phase-2-return',
+			hostPageId: 1,
+			widgetConnectionId: null,
+			buildId: FormSubmitContext::currentBuildId(),
+		);
+		$this->setRequestContext(server: [
+			'HTTP_HOST' => 'localhost',
+			'REQUEST_URI' => '/?context=form&event=submit',
+			'REQUEST_METHOD' => 'POST',
+			'HTTP_ACCEPT' => 'text/html',
+		]);
+
+		ob_start();
+		(new FormResponseEmitter())->emit($form, FormResult::denied(new ApiError('FORM_DENIED', 'Denied')), $context);
+		$output = (string)ob_get_clean();
+
+		$this->assertSame(403, http_response_code());
+		$this->assertStringContainsString('<!doctype html>', $output);
+		$this->assertStringContainsString('Denied', $output);
+		$this->assertSame([], Request::_SESSION(FormSubmissionStateStore::SESSION_KEY_FLASH_STATES, []));
+	}
+
+	public function testHtmxHostedInvalidSubmitStillReturnsFragment(): void
+	{
+		$form = $this->probeForm();
+		$result = FormResult::invalid([
+			'title_key' => ['Title is required'],
+		]);
+		$context = new FormSubmitContext(
+			formId: 'Phase2Probe',
+			formInstanceId: 'phase2_probe',
+			itemId: null,
+			returnTarget: '/phase-2-return',
+			hostPageId: 1,
+			widgetConnectionId: null,
+			buildId: FormSubmitContext::currentBuildId(),
+		);
+		$this->setRequestContext(server: [
+			'HTTP_HOST' => 'localhost',
+			'REQUEST_URI' => '/?context=form&event=submit',
+			'REQUEST_METHOD' => 'POST',
+			'HTTP_ACCEPT' => 'text/html',
+			'HTTP_HX_REQUEST' => 'true',
+		]);
+
+		ob_start();
+		(new FormResponseEmitter())->emit($form, $result, $context);
+		$output = (string)ob_get_clean();
+
+		$this->assertSame(422, http_response_code());
+		$this->assertStringNotContainsString('<!doctype html>', $output);
+		$this->assertStringContainsString('form-submit-errors', $output);
+		$this->assertStringContainsString('Title is required', $output);
+		$this->assertSame([], Request::_SESSION(FormSubmissionStateStore::SESSION_KEY_FLASH_STATES, []));
 	}
 
 	private function probeForm(): AbstractForm
 	{
 		return new FormTypePhase2Probe('Phase2Probe', 'phase2_probe', $this->treeContext(), '/phase-2-return');
+	}
+
+	/**
+	 * @param array<string, mixed> $renderContext
+	 */
+	private function probeFormWithRenderContext(array $renderContext): AbstractForm
+	{
+		return new FormTypePhase2Probe(
+			'Phase2Probe',
+			'phase2_probe',
+			$this->treeContext(),
+			(string)($renderContext['return_target'] ?? '/phase-2-return'),
+			$renderContext,
+		);
 	}
 
 	/**
@@ -586,12 +779,13 @@ final class FormRefactorPhase2IntegrationTest extends TestCase
 		array $extraParams = [],
 		?int $hostPageId = null,
 		?int $widgetConnectionId = null,
+		string $returnTarget = '/phase-2-return',
 	): FormSubmitContext {
 		return new FormSubmitContext(
 			formId: $formId,
 			formInstanceId: $formInstanceId,
 			itemId: $itemId,
-			returnTarget: '/phase-2-return',
+			returnTarget: $returnTarget,
 			hostPageId: $hostPageId,
 			widgetConnectionId: $widgetConnectionId,
 			buildId: FormSubmitContext::currentBuildId(),
@@ -698,6 +892,45 @@ final class FormRefactorPhase2IntegrationTest extends TestCase
 		$_POST = $post;
 		$_SERVER = $server;
 		RequestContextHolder::initializeRequest(get: $get, post: $post, server: $server);
+	}
+
+	private function renderWebpageForRequest(int $pageId, string $requestUri): string
+	{
+		$parsed_url = parse_url($requestUri);
+
+		if (!is_array($parsed_url)) {
+			$parsed_url = [];
+		}
+
+		$get = [];
+
+		if (isset($parsed_url['query']) && is_string($parsed_url['query'])) {
+			parse_str($parsed_url['query'], $get);
+		}
+
+		$effective_request_uri = (string)($parsed_url['path'] ?? $requestUri);
+
+		if (isset($parsed_url['query']) && is_string($parsed_url['query']) && $parsed_url['query'] !== '') {
+			$effective_request_uri .= '?' . $parsed_url['query'];
+		}
+
+		$this->setRequestContext(get: $get, server: [
+			'HTTP_HOST' => 'localhost',
+			'REQUEST_URI' => $effective_request_uri,
+			'REQUEST_METHOD' => 'GET',
+			'HTTP_ACCEPT' => 'text/html',
+		]);
+
+		$resource = ResourceTypeFactory::Factory($pageId);
+
+		if (!$resource instanceof ResourceTypeWebpage) {
+			self::markTestSkipped('Expected login resource to be a webpage.');
+		}
+
+		ob_start();
+		$resource->view();
+
+		return (string)ob_get_clean();
 	}
 
 	private function ensureProbeFormClass(): void

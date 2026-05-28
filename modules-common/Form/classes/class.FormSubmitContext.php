@@ -218,6 +218,21 @@ final class FormSubmitContext
 		return $get;
 	}
 
+	public function hostedInvalidRedirectTarget(): string
+	{
+		if ($this->hostPageId === null || $this->returnTarget === '') {
+			return '';
+		}
+
+		$host_url = Url::getSeoUrl($this->hostPageId);
+
+		if (!is_string($host_url) || trim($host_url) === '') {
+			return '';
+		}
+
+		return self::appendQueryParams($host_url, $this->toRuntimeGet());
+	}
+
 	public function isCurrentBuild(): bool
 	{
 		return $this->buildId === '' || hash_equals(self::currentBuildId(), $this->buildId);
@@ -398,6 +413,30 @@ final class FormSubmitContext
 		}
 
 		return is_array($params) ? $params : [];
+	}
+
+	/**
+	 * @param array<string, mixed> $params
+	 */
+	private static function appendQueryParams(string $url, array $params): string
+	{
+		$query = http_build_query($params, '', '&');
+
+		if ($query === '') {
+			return $url;
+		}
+
+		$fragment = '';
+		$fragment_position = strpos($url, '#');
+
+		if ($fragment_position !== false) {
+			$fragment = substr($url, $fragment_position);
+			$url = substr($url, 0, $fragment_position);
+		}
+
+		$separator = str_contains($url, '?') ? '&' : '?';
+
+		return $url . $separator . $query . $fragment;
 	}
 
 	private static function csrfError(string $reason): ApiError

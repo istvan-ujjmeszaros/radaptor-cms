@@ -40,7 +40,13 @@ final class FormHookConfigService
 	{
 		$this->assertTablesInstalled();
 		$definition = $this->requireDefinition($definition_slug);
-		$existing = $this->existingHookForDefinition($definition, (int)($input['hook_id'] ?? 0));
+		$hook_id = (int)($input['hook_id'] ?? 0);
+		$existing = $this->existingHookForDefinition($definition, $hook_id);
+
+		if ($hook_id > 0 && !($existing instanceof EntityFormHookTarget)) {
+			throw new FormHookConfigValidationException('FORM_HOOK_NOT_FOUND', 'common.error_save', 404);
+		}
+
 		$prepared = $this->prepareConfig($definition, $input, $existing);
 		$user_id = User::getCurrentUserId();
 
@@ -308,9 +314,9 @@ final class FormHookConfigService
 		if (array_key_exists('excluded_field_keys', $input)) {
 			$value = $input['excluded_field_keys'];
 		} elseif (array_key_exists('excluded_field_keys_json', $input)) {
-			$value = json_decode((string)$input['excluded_field_keys_json'], true);
+			$value = $this->decodeJsonList((string)$input['excluded_field_keys_json'], 'excluded_field_keys_json');
 		} elseif ($existing instanceof EntityFormHookTarget) {
-			$value = json_decode((string)$existing->excluded_field_keys_json, true);
+			$value = $this->decodeJsonList((string)$existing->excluded_field_keys_json, 'excluded_field_keys_json');
 		} else {
 			$value = [];
 		}
@@ -486,6 +492,24 @@ final class FormHookConfigService
 
 		if (!is_array($data) || array_is_list($data)) {
 			throw new FormHookConfigValidationException('FORM_HOOK_INVALID_JSON', 'common.error_save', 422, [$label => ['object_required']]);
+		}
+
+		return $data;
+	}
+
+	/**
+	 * @return list<mixed>
+	 */
+	private function decodeJsonList(string $json, string $label): array
+	{
+		try {
+			$data = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
+		} catch (JsonException $exception) {
+			throw new FormHookConfigValidationException('FORM_HOOK_INVALID_JSON', 'common.error_save', 422, [$label => ['invalid_json']], ['message' => $exception->getMessage()]);
+		}
+
+		if (!is_array($data) || !array_is_list($data)) {
+			throw new FormHookConfigValidationException('FORM_HOOK_INVALID_EXCLUDED_FIELDS', 'common.error_save', 422, ['excluded_field_keys' => ['list_required']]);
 		}
 
 		return $data;

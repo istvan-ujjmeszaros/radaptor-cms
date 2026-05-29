@@ -194,6 +194,55 @@ final class FormHookBackendIntegrationTest extends TestCase
 		});
 	}
 
+	public function testMutationRejectsStaleHookIdsAndMalformedJson(): void
+	{
+		$source_slug = $this->slug('stale-source');
+		$target_slug = $this->slug('stale-target');
+		$this->upsertCapture($source_slug);
+		$this->upsertCapture($target_slug);
+		$this->impersonateAndRequireRole('form_phase1_content_admin', RoleList::ROLE_CONTENT_ADMIN);
+		$service = new FormHookConfigService();
+
+		$created = $service->saveForForm($source_slug, [
+			'target_kind' => FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL,
+			'label' => 'Source notification',
+			'metadata' => ['to' => 'source@example.com'],
+		]);
+		$stale_hook_id = (int)$created['hook']['hook_id'];
+
+		$this->expectConfigExceptionCode('FORM_HOOK_NOT_FOUND', function () use ($service, $target_slug, $stale_hook_id): void {
+			$service->saveForForm($target_slug, [
+				'hook_id' => $stale_hook_id,
+				'target_kind' => FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL,
+				'label' => 'Wrong form notification',
+				'metadata' => ['to' => 'target@example.com'],
+			]);
+		});
+		$this->assertSame(0, DbHelper::count('form_hook_targets', ['definition_id' => $this->definitionId($target_slug)]));
+
+		$metadata_response = $this->runHookEvent(new EventFormHookSave(), [
+			'definition_slug' => $target_slug,
+			'target_kind' => FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL,
+			'label' => 'Malformed metadata',
+			'metadata_json' => '{"to":',
+		]);
+		$this->assertSame(422, $metadata_response['http_code']);
+		$this->assertFalse($metadata_response['body']['ok']);
+		$this->assertSame('FORM_HOOK_INVALID_JSON', $metadata_response['body']['error']['code']);
+
+		$excluded_response = $this->runHookEvent(new EventFormHookSave(), [
+			'definition_slug' => $target_slug,
+			'target_kind' => FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL,
+			'label' => 'Malformed excluded fields',
+			'metadata_json' => '{"to":"target@example.com"}',
+			'excluded_field_keys_json' => '["email"',
+		]);
+		$this->assertSame(422, $excluded_response['http_code']);
+		$this->assertFalse($excluded_response['body']['ok']);
+		$this->assertSame('FORM_HOOK_INVALID_JSON', $excluded_response['body']['error']['code']);
+		$this->assertSame(0, DbHelper::count('form_hook_targets', ['definition_id' => $this->definitionId($target_slug)]));
+	}
+
 	public function testNonProductionSuppressionExcludedFieldsAndSubmitIntegration(): void
 	{
 		$definition_slug = $this->slug('submit');

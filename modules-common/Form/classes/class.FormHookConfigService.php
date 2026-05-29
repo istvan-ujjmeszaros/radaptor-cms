@@ -278,15 +278,6 @@ final class FormHookConfigService
 			throw FormHookConfigValidationException::developerRoleRequired('secret');
 		}
 
-		if ($existing instanceof EntityFormHookTarget && $secret !== '' && hash_equals((string)$existing->secret_mask, $secret)) {
-			return [
-				'secret_ciphertext' => $existing->secret_ciphertext,
-				'secret_nonce' => $existing->secret_nonce,
-				'secret_tag' => $existing->secret_tag,
-				'secret_mask' => $existing->secret_mask,
-			];
-		}
-
 		if ($secret === '' && !($existing instanceof EntityFormHookTarget)) {
 			throw new FormHookConfigValidationException('FORM_HOOK_SECRET_REQUIRED', 'common.error_save', 422, ['secret' => ['required']]);
 		}
@@ -444,7 +435,9 @@ final class FormHookConfigService
 	 */
 	private function hookToArray(EntityFormHookTarget $hook): array
 	{
-		$secret_mask = trim((string)($hook->secret_mask ?? ''));
+		$has_secret = trim((string)($hook->secret_ciphertext ?? '')) !== ''
+			&& trim((string)($hook->secret_nonce ?? '')) !== ''
+			&& trim((string)($hook->secret_tag ?? '')) !== '';
 
 		return [
 			'hook_id' => (int)$hook->hook_id,
@@ -462,8 +455,7 @@ final class FormHookConfigService
 			'excluded_field_keys' => $this->decodeStringList((string)$hook->excluded_field_keys_json),
 			'enabled_non_production' => (bool)(int)$hook->enable_in_non_production,
 			'enable_in_non_production' => (bool)(int)$hook->enable_in_non_production,
-			'has_secret' => $secret_mask !== '',
-			'secret_mask' => $secret_mask,
+			'has_secret' => $has_secret,
 			'recent_logs' => $this->recentLogsForHook((int)$hook->hook_id),
 		];
 	}

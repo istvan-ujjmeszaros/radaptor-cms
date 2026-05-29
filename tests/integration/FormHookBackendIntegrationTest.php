@@ -190,7 +190,7 @@ final class FormHookBackendIntegrationTest extends TestCase
 		$this->assertSame(FormHookTargetRegistry::KIND_CUSTOM_HTTPS_WEBHOOK, $webhook['hook']['target_kind']);
 		$this->assertTrue($webhook['hook']['enable_in_non_production']);
 		$this->assertTrue($webhook['hook']['has_secret']);
-		$this->assertStringEndsWith('alue', $webhook['hook']['secret_mask']);
+		$this->assertArrayNotHasKey('secret_mask', $webhook['hook']);
 
 		$empty_metadata_webhook = $service->saveForForm($definition_slug, [
 			'target_kind' => FormHookTargetRegistry::KIND_CUSTOM_HTTPS_WEBHOOK,
@@ -335,6 +335,13 @@ final class FormHookBackendIntegrationTest extends TestCase
 
 		$logs = (new FormHookConfigService())->deliveriesForForm($definition_slug, 5);
 		$this->assertSame(FormHookResult::STATUS_SUPPRESSED, $logs['deliveries'][0]['status']);
+
+		DbHelper::prexecute('UPDATE form_hook_deliveries SET created_at = ? WHERE delivery_id = ?', [
+			date('Y-m-d H:i:s', time() - 31 * 86400),
+			(int)$delivery['delivery_id'],
+		]);
+		$this->assertSame(1, (new FormHookInvocationService())->pruneExpiredDeliveries(30));
+		$this->assertSame(0, DbHelper::count('form_hook_deliveries', ['definition_id' => $resolution->definitionId()]));
 	}
 
 	public function testHookEventsRequireAuthorizedConfiguratorAndCsrfForMutation(): void

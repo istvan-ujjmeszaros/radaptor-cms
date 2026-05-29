@@ -46,11 +46,7 @@ final class FormHookTargetCustomHttpsWebhook implements iFormHookTarget
 				);
 			}
 		} else {
-			$parts = parse_url($url);
-
-			if (!is_array($parts) || strtolower((string)($parts['scheme'] ?? '')) !== 'https') {
-				throw new FormHookConfigValidationException('FORM_HOOK_URL_NOT_ALLOWED', 'common.error_save', 422, ['url' => ['https_required']]);
-			}
+			throw new FormHookConfigValidationException('FORM_HOOK_URL_NOT_ALLOWED', 'common.error_save', 422, ['url' => ['url_policy_unavailable']]);
 		}
 	}
 

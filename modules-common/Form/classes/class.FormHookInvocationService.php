@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 final class FormHookInvocationService
 {
+	private const int DEFAULT_DELIVERY_RETENTION_DAYS = 30;
+
+	private static bool $deliveryPrunedThisRequest = false;
+
 	/**
 	 * @param array<string, mixed> $payload
 	 * @param array<string, mixed> $render_context
@@ -25,6 +29,25 @@ final class FormHookInvocationService
 		foreach ($hooks as $hook) {
 			$this->invokeHook($hook, $resolution, $submission_id, $payload, $render_context, $environment);
 		}
+
+		$this->pruneExpiredDeliveriesOnce();
+	}
+
+	public function pruneExpiredDeliveries(int $older_than_days = self::DEFAULT_DELIVERY_RETENTION_DAYS): int
+	{
+		if ($older_than_days < 0) {
+			throw new InvalidArgumentException('older_than_days must be zero or greater.');
+		}
+
+		if (!$this->tableExists('form_hook_deliveries')) {
+			return 0;
+		}
+
+		$cutoff = date('Y-m-d H:i:s', time() - ($older_than_days * 86400));
+		$stmt = Db::instance()->prepare('DELETE FROM form_hook_deliveries WHERE created_at < ?');
+		$stmt->execute([$cutoff]);
+
+		return $stmt->rowCount();
 	}
 
 	/**
@@ -169,6 +192,21 @@ final class FormHookInvocationService
 		$value = (int)$value;
 
 		return $value > 0 ? $value : null;
+	}
+
+	private function pruneExpiredDeliveriesOnce(): void
+	{
+		if (self::$deliveryPrunedThisRequest) {
+			return;
+		}
+
+		self::$deliveryPrunedThisRequest = true;
+
+		try {
+			$this->pruneExpiredDeliveries();
+		} catch (Throwable $exception) {
+			Kernel::logException($exception, 'Capture form hook delivery pruning failed');
+		}
 	}
 
 	private function tablesInstalled(): bool

@@ -53,8 +53,16 @@ final class FormHookTargetRawEmail implements iFormHookTarget
 			throw new FormHookConfigValidationException('FORM_HOOK_EMAIL_TO_INVALID', 'common.error_save', 422, ['metadata.to' => ['email']]);
 		}
 
-		if ($recipient === '' && $preset_key !== self::DEFAULT_RECIPIENT_PRESET_KEY) {
-			throw new FormHookConfigValidationException('FORM_HOOK_EMAIL_TO_REQUIRED', 'common.error_save', 422, ['metadata.to' => ['required']]);
+		if ($recipient === '') {
+			if ($preset_key !== self::DEFAULT_RECIPIENT_PRESET_KEY) {
+				throw new FormHookConfigValidationException('FORM_HOOK_EMAIL_TO_REQUIRED', 'common.error_save', 422, ['metadata.to' => ['required']]);
+			}
+
+			$recipient = $this->defaultRecipient();
+
+			if ($recipient === '' || !filter_var($recipient, FILTER_VALIDATE_EMAIL)) {
+				throw new FormHookConfigValidationException('FORM_HOOK_EMAIL_TO_INVALID', 'common.error_save', 422, ['preset_key' => ['default_recipient_invalid']]);
+			}
 		}
 
 		if (mb_strlen($subject) > 190) {

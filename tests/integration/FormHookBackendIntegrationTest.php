@@ -118,6 +118,7 @@ final class FormHookBackendIntegrationTest extends TestCase
 			'label' => 'Internal notification',
 			'preset_key' => 'default',
 			'metadata' => [
+				'to' => 'ops@example.com',
 				'subject' => 'New capture submission',
 				'reply_to_field_key' => 'email',
 			],
@@ -168,6 +169,13 @@ final class FormHookBackendIntegrationTest extends TestCase
 				'preset_key' => FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL,
 			]);
 		});
+		$this->expectConfigExceptionCode('FORM_HOOK_EMAIL_TO_INVALID', function () use ($service, $definition_slug): void {
+			$service->saveForForm($definition_slug, [
+				'target_kind' => FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL,
+				'label' => 'Unconfigured default recipient',
+				'preset_key' => 'default',
+			]);
+		});
 
 		$this->impersonateAndRequireRole('form_phase1_system_developer', RoleList::ROLE_SYSTEM_DEVELOPER);
 		$webhook = $service->saveForForm($definition_slug, [
@@ -183,6 +191,28 @@ final class FormHookBackendIntegrationTest extends TestCase
 		$this->assertTrue($webhook['hook']['enable_in_non_production']);
 		$this->assertTrue($webhook['hook']['has_secret']);
 		$this->assertStringEndsWith('alue', $webhook['hook']['secret_mask']);
+
+		$empty_metadata_webhook = $service->saveForForm($definition_slug, [
+			'target_kind' => FormHookTargetRegistry::KIND_CUSTOM_HTTPS_WEBHOOK,
+			'label' => 'Empty metadata webhook',
+			'url' => 'https://hooks.example.com/empty-metadata',
+			'secret' => 'hook-secret-value',
+			'metadata_json' => '{}',
+		]);
+
+		$this->assertSame([], $empty_metadata_webhook['hook']['metadata']);
+
+		$converted = $service->saveForForm($definition_slug, [
+			'hook_id' => $webhook['hook']['hook_id'],
+			'target_kind' => FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL,
+			'label' => 'Converted notification',
+			'metadata' => ['to' => 'converted@example.com'],
+		]);
+
+		$this->assertSame(FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL, $converted['hook']['target_kind']);
+		$this->assertSame('', $converted['hook']['url']);
+		$this->assertSame('', $converted['hook']['preset_key']);
+		$this->assertFalse($converted['hook']['has_secret']);
 
 		$this->expectConfigExceptionCode('FORM_HOOK_EMAIL_TO_INVALID', function () use ($service, $definition_slug): void {
 			$service->saveForForm($definition_slug, [

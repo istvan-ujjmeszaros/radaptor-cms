@@ -128,7 +128,9 @@ final class FormHookConfigService
 			);
 		}
 
-		if ($target->definition()->requiresSystemDeveloper && !$is_system_developer) {
+		$target_definition = $target->definition();
+
+		if ($target_definition->requiresSystemDeveloper && !$is_system_developer) {
 			throw FormHookConfigValidationException::developerRoleRequired('target_kind');
 		}
 
@@ -138,6 +140,14 @@ final class FormHookConfigService
 		$excluded_field_keys = $this->excludedFieldKeysFromInput($input, $existing);
 		$field_keys = $this->fieldKeysForDefinition($definition);
 		$enable_in_non_production = $this->boolValue($input['enable_in_non_production'] ?? $existing?->enable_in_non_production ?? false);
+
+		if (!$target_definition->supportsUrl) {
+			$url = null;
+		}
+
+		if (!$target_definition->supportsPresetKey) {
+			$preset_key = null;
+		}
 
 		if ($url !== null && $url !== '' && !$is_system_developer) {
 			throw FormHookConfigValidationException::developerRoleRequired('url');
@@ -172,7 +182,7 @@ final class FormHookConfigService
 		$label = trim((string)($input['label'] ?? $existing?->label ?? ''));
 
 		if ($label === '') {
-			$label = t($target->definition()->nameKey);
+			$label = t($target_definition->nameKey);
 		}
 
 		$save_data = [
@@ -186,7 +196,7 @@ final class FormHookConfigService
 			'enable_in_non_production' => $enable_in_non_production ? 1 : 0,
 		];
 
-		return $save_data + $this->secretSaveData($input, $existing, $is_system_developer, $target->definition()->supportsSecret);
+		return $save_data + $this->secretSaveData($input, $existing, $is_system_developer, $target_definition->supportsSecret);
 	}
 
 	/**
@@ -485,12 +495,18 @@ final class FormHookConfigService
 	private function decodeJsonObject(string $json, string $label): array
 	{
 		try {
-			$data = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
+			$root = json_decode($json, false, 512, JSON_THROW_ON_ERROR);
 		} catch (JsonException $exception) {
 			throw new FormHookConfigValidationException('FORM_HOOK_INVALID_JSON', 'common.error_save', 422, [$label => ['invalid_json']], ['message' => $exception->getMessage()]);
 		}
 
-		if (!is_array($data) || array_is_list($data)) {
+		if (!$root instanceof stdClass) {
+			throw new FormHookConfigValidationException('FORM_HOOK_INVALID_JSON', 'common.error_save', 422, [$label => ['object_required']]);
+		}
+
+		$data = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
+
+		if (!is_array($data)) {
 			throw new FormHookConfigValidationException('FORM_HOOK_INVALID_JSON', 'common.error_save', 422, [$label => ['object_required']]);
 		}
 

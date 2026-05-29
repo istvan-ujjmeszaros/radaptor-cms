@@ -143,6 +143,46 @@ form,builder.option.default_two,,hu-HU,"Option two","Második opció",0,0,"Máso
 form,builder.panel.properties,,hu-HU,Properties,Tulajdonságok,0,0,Tulajdonságok
 form,builder.panel.usage,,hu-HU,"Used on pages","Oldalakon használva",0,0,"Oldalakon használva"
 form,builder.panel.drafts,,hu-HU,Drafts,Piszkozatok,0,0,Piszkozatok
+form,builder.panel.hooks,,hu-HU,Hooks,Hookok,0,0,Hookok
+form,builder.hooks.loading,,hu-HU,"Loading hooks...","Hookok betöltése...",0,0,"Hookok betöltése..."
+form,builder.hooks.unavailable,,hu-HU,"Hook configuration is unavailable.","A hook konfiguráció nem érhető el.",0,0,"A hook konfiguráció nem érhető el."
+form,builder.hooks.empty,,hu-HU,"No hooks configured yet.","Még nincs hook beállítva.",0,0,"Még nincs hook beállítva."
+form,builder.hooks.target,,hu-HU,Target,Cél,0,0,Cél
+form,builder.hooks.target_url,,hu-HU,"Target URL","Cél URL",0,0,"Cél URL"
+form,builder.hooks.target_placeholder,,hu-HU,https://example.com/hooks/radaptor,https://example.com/hooks/radaptor,0,1,https://example.com/hooks/radaptor
+form,builder.hooks.secret,,hu-HU,Secret,Titok,0,0,Titok
+form,builder.hooks.secret_placeholder,,hu-HU,"Leave blank to keep existing secret","Hagyd üresen a meglévő titok megtartásához",0,0,"Hagyd üresen a meglévő titok megtartásához"
+form,builder.hooks.enabled,,hu-HU,Enabled,Engedélyezve,0,0,Engedélyezve
+form,builder.hooks.enabled_non_production,,hu-HU,"Run outside production","Futás production környezeten kívül",0,0,"Futás production környezeten kívül"
+form,builder.hooks.preset,,hu-HU,Preset,Sablon,0,0,Sablon
+form,builder.hooks.preset.custom,,hu-HU,Custom,Egyedi,0,0,Egyedi
+form,builder.hooks.create,,hu-HU,"Add hook","Hook hozzáadása",0,0,"Hook hozzáadása"
+form,builder.hooks.save,,hu-HU,"Save hook","Hook mentése",0,0,"Hook mentése"
+form,builder.hooks.delete,,hu-HU,"Delete hook","Hook törlése",0,0,"Hook törlése"
+form,builder.hooks.metadata,,hu-HU,Metadata,Metaadatok,0,0,Metaadatok
+form,builder.hooks.metadata_key,,hu-HU,Key,Kulcs,0,0,Kulcs
+form,builder.hooks.metadata_value,,hu-HU,Value,Érték,0,0,Érték
+form,builder.hooks.metadata.to,,hu-HU,"Recipient email","Címzett email",0,0,"Címzett email"
+form,builder.hooks.metadata.subject,,hu-HU,Subject,Tárgy,0,0,Tárgy
+form,builder.hooks.metadata.no_field,,hu-HU,"No field","Nincs mező",0,0,"Nincs mező"
+form,builder.hooks.add_metadata,,hu-HU,"Add metadata","Metaadat hozzáadása",0,0,"Metaadat hozzáadása"
+form,builder.hooks.remove_metadata,,hu-HU,"Remove metadata","Metaadat eltávolítása",0,0,"Metaadat eltávolítása"
+form,builder.hooks.excluded_fields,,hu-HU,"Excluded fields","Kihagyott mezők",0,0,"Kihagyott mezők"
+form,builder.hooks.no_fields,,hu-HU,"No fields available.","Nincs elérhető mező.",0,0,"Nincs elérhető mező."
+form,builder.hooks.recent_logs,,hu-HU,"Recent deliveries","Legutóbbi kézbesítések",0,0,"Legutóbbi kézbesítések"
+form,builder.hooks.log_time,,hu-HU,Time,Idő,0,0,Idő
+form,builder.hooks.log_status,,hu-HU,Status,Státusz,0,0,Státusz
+form,builder.hooks.log_http_status,,hu-HU,HTTP,HTTP,0,1,HTTP
+form,builder.hooks.log_message,,hu-HU,Message,Üzenet,0,0,Üzenet
+form,builder.hooks.no_logs,,hu-HU,"No delivery logs yet.","Még nincs kézbesítési napló.",0,0,"Még nincs kézbesítési napló."
+form,builder.hooks.select_hook,,hu-HU,"Select a hook to edit.","Válassz hookot a szerkesztéshez.",0,0,"Válassz hookot a szerkesztéshez."
+form,builder.hooks.status.loaded,,hu-HU,"Hooks loaded.","Hookok betöltve.",0,0,"Hookok betöltve."
+form,builder.hooks.status.saved,,hu-HU,"Hook saved.","Hook mentve.",0,0,"Hook mentve."
+form,builder.hooks.status.deleted,,hu-HU,"Hook deleted.","Hook törölve.",0,0,"Hook törölve."
+form,builder.hooks.error_load,,hu-HU,"Could not load hooks.","A hookok nem tölthetők be.",0,0,"A hookok nem tölthetők be."
+form,builder.hooks.error_save,,hu-HU,"Could not save hook.","A hook nem menthető.",0,0,"A hook nem menthető."
+form,builder.hooks.error_delete,,hu-HU,"Could not delete hook.","A hook nem törölhető.",0,0,"A hook nem törölhető."
+form,builder.hooks.confirm_delete,,hu-HU,"Delete this hook?","Törlöd ezt a hookot?",0,0,"Törlöd ezt a hookot?"
 form,builder.usage.empty,,hu-HU,"This form is not placed on any page.","Ez az űrlap nincs kirakva oldalra.",0,0,"Ez az űrlap nincs kirakva oldalra."
 form,builder.usage.page,,hu-HU,Page,Oldal,0,0,Oldal
 form,builder.usage.slot,,hu-HU,Slot,Hely,0,0,Hely
@@ -193,3 +233,8 @@ form,list.version.published,,hu-HU,"v{version}","{version}. verzió",0,0,"{versi
 form,list.version.draft,,hu-HU,"draft v{version}","piszkozat v{version}",0,0,"piszkozat v{version}"
 form,list.usage.none,,hu-HU,None,Nincs,0,0,Nincs
 form,builder.warning.discard_unsaved,,hu-HU,"Discard unsaved form changes?","Eldobod a nem mentett űrlapmódosításokat?",0,0,"Eldobod a nem mentett űrlapmódosításokat?"
+form,hooks.target.custom_https_webhook.name,,hu-HU,"Custom HTTPS webhook","Egyedi HTTPS webhook",0,0,"Egyedi HTTPS webhook"
+form,hooks.target.custom_https_webhook.description,,hu-HU,"Send capture submissions to a custom HTTPS endpoint.","Capture beküldések továbbítása egyedi HTTPS végpontra.",0,0,"Capture beküldések továbbítása egyedi HTTPS végpontra."
+form,hooks.target.raw_form_data_email.name,,hu-HU,"Raw form data as email","Nyers űrlapadatok emailben",0,0,"Nyers űrlapadatok emailben"
+form,hooks.target.raw_form_data_email.description,,hu-HU,"Email the raw capture submission payload through the system email queue.","A nyers capture beküldési payload elküldése a rendszer email queue-ján keresztül.",0,0,"A nyers capture beküldési payload elküldése a rendszer email queue-ján keresztül."
+form,hooks.email.default_subject,,hu-HU,"Capture form submission: {form}","Capture űrlap beküldés: {form}",0,0,"Capture űrlap beküldés: {form}"

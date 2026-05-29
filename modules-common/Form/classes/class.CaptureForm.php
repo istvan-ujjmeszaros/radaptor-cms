@@ -159,6 +159,20 @@ final class CaptureForm extends AbstractForm
 			$this->_capture_render_context,
 		);
 		$this->savedata['_submission_id'] = $submission_id;
+
+		try {
+			(new FormHookInvocationService())->invokeForSubmission(
+				$this->_resolution,
+				$submission_id,
+				$this->savedata,
+				$this->_capture_render_context,
+			);
+		} catch (Throwable $exception) {
+			Kernel::logException($exception, 'Capture form hook invocation failed after submission commit', [
+				'definition_slug' => $this->_resolution->definitionSlug(),
+				'submission_id' => $submission_id,
+			]);
+		}
 	}
 
 	public function buildTree(): array

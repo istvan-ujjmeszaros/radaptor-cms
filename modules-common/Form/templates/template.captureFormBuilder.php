@@ -17,6 +17,10 @@ $readOnly = (bool)($selected['read_only'] ?? false);
 $activeDraft = is_array($selected['active_draft'] ?? null) ? $selected['active_draft'] : null;
 $publishedVersion = is_array($selected['published_version'] ?? null) ? $selected['published_version'] : null;
 $loadedVersion = is_array($selected['loaded_version'] ?? null) ? $selected['loaded_version'] : null;
+$hooksListUrl = (string)($urls['hooks_list'] ?? Url::getUrl('form_hooks.list'));
+$hooksSaveUrl = (string)($urls['hooks_save'] ?? Url::getUrl('form_hooks.save'));
+$hooksDeleteUrl = (string)($urls['hooks_delete'] ?? Url::getUrl('form_hooks.delete'));
+$hooksDeliveriesUrl = (string)($urls['hooks_deliveries'] ?? Url::getUrl('form_hooks.deliveries'));
 
 $jsonFlags = JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT;
 $stateJson = json_encode([
@@ -53,6 +57,10 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 	data-form-builder-publish-url-value="<?= e((string)($urls['publish'] ?? '')) ?>"
 	data-form-builder-load-draft-url-value="<?= e((string)($urls['load_draft_version'] ?? '')) ?>"
 	data-form-builder-update-draft-note-url-value="<?= e((string)($urls['update_draft_note'] ?? '')) ?>"
+	data-form-builder-hooks-list-url-value="<?= e($hooksListUrl) ?>"
+	data-form-builder-hooks-save-url-value="<?= e($hooksSaveUrl) ?>"
+	data-form-builder-hooks-delete-url-value="<?= e($hooksDeleteUrl) ?>"
+	data-form-builder-hooks-deliveries-url-value="<?= e($hooksDeliveriesUrl) ?>"
 	data-form-builder-csrf-token-value="<?= e((string)($this->props['csrf_token'] ?? '')) ?>"
 >
 	<header class="form-builder__header content-card">
@@ -84,6 +92,10 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 			<?= e($this->strings['form.builder.action.delete']) ?>
 		</button>
 		<span class="form-builder__toolbar-spacer"></span>
+		<button type="button" class="btn btn-outline-secondary btn-sm" data-action="form-builder#showHooksModal" data-form-builder-target="hooksButton">
+			<i class="bi bi-diagram-3" aria-hidden="true"></i>
+			<?= e($this->strings['form.builder.panel.hooks']) ?>
+		</button>
 		<button type="button" class="btn btn-outline-secondary btn-sm" data-action="form-builder#showUsageModal" data-form-builder-target="usageButton">
 			<i class="bi bi-link-45deg" aria-hidden="true"></i>
 			<?= e($this->strings['form.builder.panel.usage']) ?> (<?= count($usage) ?>)
@@ -325,6 +337,116 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 				</div>
 			</div>
 		</aside>
+	</div>
+
+	<div
+		class="form-builder__usage-overlay form-builder__hooks-overlay"
+		role="dialog"
+		aria-modal="true"
+		aria-labelledby="form-builder-hooks-title"
+		data-form-builder-target="hooksModal"
+		data-action="click->form-builder#closeHooksModalOnBackdrop keydown.esc@window->form-builder#closeHooksModal"
+		hidden
+	>
+		<div class="modal-dialog modal-dialog-centered modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h2 class="modal-title h5" id="form-builder-hooks-title">
+						<?= e($this->strings['form.builder.panel.hooks']) ?>
+						<small class="text-body-secondary" data-form-builder-target="hooksTitleSlug"></small>
+					</h2>
+					<button type="button" class="btn-close" data-action="form-builder#closeHooksModal" aria-label="<?= e($this->strings['form.builder.action.close']) ?>"></button>
+				</div>
+				<div class="modal-body">
+					<div class="form-builder__hooks-status" data-form-builder-target="hooksStatus" role="status" aria-live="polite"></div>
+					<div class="form-builder__hooks-grid">
+						<aside class="form-builder__hooks-sidebar">
+							<div class="form-builder__hooks-create-row">
+								<label class="form-label mb-0">
+									<span><?= e($this->strings['form.builder.hooks.preset']) ?></span>
+									<select class="form-select form-select-sm" data-form-builder-target="hooksPresetSelect"></select>
+								</label>
+								<button type="button" class="btn btn-outline-primary btn-sm" data-action="form-builder#createHook">
+									<i class="bi bi-plus-lg" aria-hidden="true"></i>
+									<?= e($this->strings['form.builder.hooks.create']) ?>
+								</button>
+							</div>
+							<div class="form-builder__hook-target-list" data-form-builder-target="hooksList"></div>
+						</aside>
+						<section class="form-builder__hook-editor" data-form-builder-target="hooksEditor" hidden>
+							<form data-action="submit->form-builder#saveHook">
+								<div class="form-builder__hook-editor-grid">
+										<label class="form-label form-builder__hook-full" data-form-builder-target="hookTargetUrlGroup">
+											<span><?= e($this->strings['form.builder.hooks.target_url']) ?></span>
+											<input type="url" class="form-control form-control-sm" data-form-builder-target="hookTargetUrlInput" placeholder="<?= e($this->strings['form.builder.hooks.target_placeholder']) ?>">
+										</label>
+										<label class="form-label form-builder__hook-full" data-form-builder-target="hookSecretGroup">
+											<span><?= e($this->strings['form.builder.hooks.secret']) ?></span>
+											<input type="password" class="form-control form-control-sm" data-form-builder-target="hookSecretInput" autocomplete="new-password" placeholder="<?= e($this->strings['form.builder.hooks.secret_placeholder']) ?>">
+										</label>
+									<label class="form-check form-builder__checkbox">
+										<input type="checkbox" class="form-check-input" data-form-builder-target="hookEnabledInput">
+										<span><?= e($this->strings['form.builder.hooks.enabled']) ?></span>
+									</label>
+									<label class="form-check form-builder__checkbox">
+										<input type="checkbox" class="form-check-input" data-form-builder-target="hookNonProductionInput">
+										<span><?= e($this->strings['form.builder.hooks.enabled_non_production']) ?></span>
+									</label>
+								</div>
+								<div class="form-builder__hooks-section">
+									<div class="form-builder__hooks-section-header">
+										<h3><?= e($this->strings['form.builder.hooks.metadata']) ?></h3>
+											<button type="button" class="btn btn-outline-secondary btn-sm" data-form-builder-target="hookMetadataAddButton" data-action="form-builder#addHookMetadataRow">
+											<i class="bi bi-plus-lg" aria-hidden="true"></i>
+											<?= e($this->strings['form.builder.hooks.add_metadata']) ?>
+										</button>
+									</div>
+									<div class="form-builder__hook-metadata" data-form-builder-target="hookMetadataRows"></div>
+								</div>
+								<div class="form-builder__hooks-section">
+									<div class="form-builder__hooks-section-header">
+										<h3><?= e($this->strings['form.builder.hooks.excluded_fields']) ?></h3>
+									</div>
+									<div class="form-builder__hook-checklist" data-form-builder-target="hookExcludedFields"></div>
+								</div>
+								<div class="form-builder__hooks-section">
+									<div class="form-builder__hooks-section-header">
+										<h3><?= e($this->strings['form.builder.hooks.recent_logs']) ?></h3>
+									</div>
+									<div class="table-responsive">
+										<table class="table table-sm align-middle mb-0 form-builder__hooks-log-table">
+											<thead>
+											<tr>
+												<th><?= e($this->strings['form.builder.hooks.log_time']) ?></th>
+												<th><?= e($this->strings['form.builder.hooks.log_status']) ?></th>
+												<th><?= e($this->strings['form.builder.hooks.log_http_status']) ?></th>
+												<th><?= e($this->strings['form.builder.hooks.log_message']) ?></th>
+											</tr>
+											</thead>
+											<tbody data-form-builder-target="hookLogsBody"></tbody>
+										</table>
+									</div>
+								</div>
+								<div class="form-builder__hook-actions">
+									<button type="button" class="btn btn-outline-danger btn-sm" data-form-builder-target="hookDeleteButton" data-action="form-builder#deleteHook">
+										<i class="bi bi-trash" aria-hidden="true"></i>
+										<?= e($this->strings['form.builder.hooks.delete']) ?>
+									</button>
+									<span class="form-builder__toolbar-spacer"></span>
+									<button type="button" class="btn btn-outline-secondary btn-sm" data-action="form-builder#closeHooksModal">
+										<?= e($this->strings['form.builder.action.close']) ?>
+									</button>
+									<button type="submit" class="btn btn-primary btn-sm" data-form-builder-target="hookSaveButton">
+										<i class="bi bi-save" aria-hidden="true"></i>
+										<?= e($this->strings['form.builder.hooks.save']) ?>
+									</button>
+								</div>
+							</form>
+						</section>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<div

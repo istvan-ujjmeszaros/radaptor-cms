@@ -143,6 +143,46 @@ form,builder.option.default_two,,de-DE,"Option two","Option two",0,1,"Option two
 form,builder.panel.properties,,de-DE,Properties,Properties,0,1,Properties
 form,builder.panel.usage,,de-DE,"Used on pages","Used on pages",0,1,"Used on pages"
 form,builder.panel.drafts,,de-DE,Drafts,Drafts,0,1,Drafts
+form,builder.panel.hooks,,de-DE,Hooks,Hooks,0,1,Hooks
+form,builder.hooks.loading,,de-DE,"Loading hooks...","Loading hooks...",0,1,"Loading hooks..."
+form,builder.hooks.unavailable,,de-DE,"Hook configuration is unavailable.","Hook configuration is unavailable.",0,1,"Hook configuration is unavailable."
+form,builder.hooks.empty,,de-DE,"No hooks configured yet.","No hooks configured yet.",0,1,"No hooks configured yet."
+form,builder.hooks.target,,de-DE,Target,Target,0,1,Target
+form,builder.hooks.target_url,,de-DE,"Target URL","Target URL",0,1,"Target URL"
+form,builder.hooks.target_placeholder,,de-DE,https://example.com/hooks/radaptor,https://example.com/hooks/radaptor,0,1,https://example.com/hooks/radaptor
+form,builder.hooks.secret,,de-DE,Secret,Secret,0,1,Secret
+form,builder.hooks.secret_placeholder,,de-DE,"Leave blank to keep existing secret","Leave blank to keep existing secret",0,1,"Leave blank to keep existing secret"
+form,builder.hooks.enabled,,de-DE,Enabled,Enabled,0,1,Enabled
+form,builder.hooks.enabled_non_production,,de-DE,"Run outside production","Run outside production",0,1,"Run outside production"
+form,builder.hooks.preset,,de-DE,Preset,Preset,0,1,Preset
+form,builder.hooks.preset.custom,,de-DE,Custom,Custom,0,1,Custom
+form,builder.hooks.create,,de-DE,"Add hook","Add hook",0,1,"Add hook"
+form,builder.hooks.save,,de-DE,"Save hook","Save hook",0,1,"Save hook"
+form,builder.hooks.delete,,de-DE,"Delete hook","Delete hook",0,1,"Delete hook"
+form,builder.hooks.metadata,,de-DE,Metadata,Metadata,0,1,Metadata
+form,builder.hooks.metadata_key,,de-DE,Key,Key,0,1,Key
+form,builder.hooks.metadata_value,,de-DE,Value,Value,0,1,Value
+form,builder.hooks.metadata.to,,de-DE,"Recipient email","Recipient email",0,1,"Recipient email"
+form,builder.hooks.metadata.subject,,de-DE,Subject,Subject,0,1,Subject
+form,builder.hooks.metadata.no_field,,de-DE,"No field","No field",0,1,"No field"
+form,builder.hooks.add_metadata,,de-DE,"Add metadata","Add metadata",0,1,"Add metadata"
+form,builder.hooks.remove_metadata,,de-DE,"Remove metadata","Remove metadata",0,1,"Remove metadata"
+form,builder.hooks.excluded_fields,,de-DE,"Excluded fields","Excluded fields",0,1,"Excluded fields"
+form,builder.hooks.no_fields,,de-DE,"No fields available.","No fields available.",0,1,"No fields available."
+form,builder.hooks.recent_logs,,de-DE,"Recent deliveries","Recent deliveries",0,1,"Recent deliveries"
+form,builder.hooks.log_time,,de-DE,Time,Time,0,1,Time
+form,builder.hooks.log_status,,de-DE,Status,Status,0,1,Status
+form,builder.hooks.log_http_status,,de-DE,HTTP,HTTP,0,1,HTTP
+form,builder.hooks.log_message,,de-DE,Message,Message,0,1,Message
+form,builder.hooks.no_logs,,de-DE,"No delivery logs yet.","No delivery logs yet.",0,1,"No delivery logs yet."
+form,builder.hooks.select_hook,,de-DE,"Select a hook to edit.","Select a hook to edit.",0,1,"Select a hook to edit."
+form,builder.hooks.status.loaded,,de-DE,"Hooks loaded.","Hooks loaded.",0,1,"Hooks loaded."
+form,builder.hooks.status.saved,,de-DE,"Hook saved.","Hook saved.",0,1,"Hook saved."
+form,builder.hooks.status.deleted,,de-DE,"Hook deleted.","Hook deleted.",0,1,"Hook deleted."
+form,builder.hooks.error_load,,de-DE,"Could not load hooks.","Could not load hooks.",0,1,"Could not load hooks."
+form,builder.hooks.error_save,,de-DE,"Could not save hook.","Could not save hook.",0,1,"Could not save hook."
+form,builder.hooks.error_delete,,de-DE,"Could not delete hook.","Could not delete hook.",0,1,"Could not delete hook."
+form,builder.hooks.confirm_delete,,de-DE,"Delete this hook?","Delete this hook?",0,1,"Delete this hook?"
 form,builder.usage.empty,,de-DE,"This form is not placed on any page.","This form is not placed on any page.",0,1,"This form is not placed on any page."
 form,builder.usage.page,,de-DE,Page,Page,0,1,Page
 form,builder.usage.slot,,de-DE,Slot,Slot,0,1,Slot
@@ -193,3 +233,8 @@ form,list.version.published,,de-DE,v{version},v{version},0,1,v{version}
 form,list.version.draft,,de-DE,"draft v{version}","draft v{version}",0,1,"draft v{version}"
 form,list.usage.none,,de-DE,None,None,0,1,None
 form,builder.warning.discard_unsaved,,de-DE,"Discard unsaved form changes?","Discard unsaved form changes?",0,1,"Discard unsaved form changes?"
+form,hooks.target.custom_https_webhook.name,,de-DE,"Custom HTTPS webhook","Custom HTTPS webhook",0,1,"Custom HTTPS webhook"
+form,hooks.target.custom_https_webhook.description,,de-DE,"Send capture submissions to a custom HTTPS endpoint.","Send capture submissions to a custom HTTPS endpoint.",0,1,"Send capture submissions to a custom HTTPS endpoint."
+form,hooks.target.raw_form_data_email.name,,de-DE,"Raw form data as email","Raw form data as email",0,1,"Raw form data as email"
+form,hooks.target.raw_form_data_email.description,,de-DE,"Email the raw capture submission payload through the system email queue.","Email the raw capture submission payload through the system email queue.",0,1,"Email the raw capture submission payload through the system email queue."
+form,hooks.email.default_subject,,de-DE,"Capture form submission: {form}","Capture form submission: {form}",0,1,"Capture form submission: {form}"

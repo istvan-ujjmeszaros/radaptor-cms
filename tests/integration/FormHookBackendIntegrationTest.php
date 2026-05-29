@@ -161,6 +161,13 @@ final class FormHookBackendIntegrationTest extends TestCase
 				'excluded_field_keys' => ['missing_field'],
 			]);
 		});
+		$this->expectConfigExceptionCode('FORM_HOOK_EMAIL_TO_REQUIRED', function () use ($service, $definition_slug): void {
+			$service->saveForForm($definition_slug, [
+				'target_kind' => FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL,
+				'label' => 'Unresolved preset recipient',
+				'preset_key' => FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL,
+			]);
+		});
 
 		$this->impersonateAndRequireRole('form_phase1_system_developer', RoleList::ROLE_SYSTEM_DEVELOPER);
 		$webhook = $service->saveForForm($definition_slug, [

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 final class FormHookTargetRawEmail implements iFormHookTarget
 {
+	private const string DEFAULT_RECIPIENT_PRESET_KEY = 'default';
+
 	private const array SAFE_METADATA_KEYS = [
 		'subject',
 		'include_empty_fields',
@@ -51,8 +53,8 @@ final class FormHookTargetRawEmail implements iFormHookTarget
 			throw new FormHookConfigValidationException('FORM_HOOK_EMAIL_TO_INVALID', 'common.error_save', 422, ['metadata.to' => ['email']]);
 		}
 
-		if ($recipient === '' && $preset_key === '') {
-			throw new FormHookConfigValidationException('FORM_HOOK_EMAIL_PRESET_REQUIRED', 'common.error_save', 422, ['preset_key' => ['required']]);
+		if ($recipient === '' && $preset_key !== self::DEFAULT_RECIPIENT_PRESET_KEY) {
+			throw new FormHookConfigValidationException('FORM_HOOK_EMAIL_TO_REQUIRED', 'common.error_save', 422, ['metadata.to' => ['required']]);
 		}
 
 		if (mb_strlen($subject) > 190) {
@@ -108,7 +110,7 @@ final class FormHookTargetRawEmail implements iFormHookTarget
 	{
 		$recipient = trim((string)($invocation->metadata['to'] ?? ''));
 
-		if ($recipient === '' && trim((string)$invocation->hook->preset_key) === 'default') {
+		if ($recipient === '' && trim((string)$invocation->hook->preset_key) === self::DEFAULT_RECIPIENT_PRESET_KEY) {
 			$recipient = $this->defaultRecipient();
 		}
 

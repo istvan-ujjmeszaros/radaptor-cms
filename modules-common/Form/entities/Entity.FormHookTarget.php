@@ -17,7 +17,6 @@ declare(strict_types=1);
  *     secret_ciphertext?: string|null,
  *     secret_nonce?: string|null,
  *     secret_tag?: string|null,
- *     secret_mask?: string|null,
  *     created_by_user_id?: int|null,
  *     updated_by_user_id?: int|null,
  * }
@@ -35,7 +34,6 @@ declare(strict_types=1);
  * @property ?string $secret_ciphertext
  * @property ?string $secret_nonce
  * @property ?string $secret_tag
- * @property ?string $secret_mask
  * @property ?int $created_by_user_id
  * @property ?int $updated_by_user_id
  *

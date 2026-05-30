@@ -53,6 +53,11 @@ final class FormHookTargetCustomHttpsWebhook implements iFormHookTarget
 	public function invoke(FormHookInvocation $invocation): FormHookResult
 	{
 		$secret = FormHookSecretStore::decrypt($invocation->hook);
+
+		if ($secret === null || trim($secret) === '') {
+			return FormHookResult::failed('FORM_HOOK_SECRET_REQUIRED', 'Custom HTTPS webhook secret is missing.');
+		}
+
 		$timestamp = (string)time();
 		$body = FormCaptureCompiledDescriptorCache::encodeJson($invocation->payload);
 		$headers = [
@@ -61,9 +66,7 @@ final class FormHookTargetCustomHttpsWebhook implements iFormHookTarget
 			'X-Radaptor-Hook-Timestamp' => $timestamp,
 		];
 
-		if ($secret !== null && trim($secret) !== '') {
-			$headers['X-Radaptor-Hook-Signature-256'] = 'sha256=' . hash_hmac('sha256', $timestamp . '.' . $body, $secret);
-		}
+		$headers['X-Radaptor-Hook-Signature-256'] = 'sha256=' . hash_hmac('sha256', $timestamp . '.' . $body, $secret);
 
 		return (new FormHookOutboundDeliveryAdapter())->enqueue([
 			'job_id' => 'formhook_' . $invocation->deliveryId,

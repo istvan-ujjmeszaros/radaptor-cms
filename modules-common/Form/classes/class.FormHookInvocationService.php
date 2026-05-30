@@ -5,6 +5,8 @@ declare(strict_types=1);
 final class FormHookInvocationService
 {
 	private const int DEFAULT_DELIVERY_RETENTION_DAYS = 30;
+	private const int DEFAULT_DELIVERY_PRUNE_LIMIT = 5000;
+	private const int SUBMIT_PATH_DELIVERY_PRUNE_LIMIT = 100;
 
 	private static bool $deliveryPrunedThisRequest = false;
 
@@ -33,21 +35,64 @@ final class FormHookInvocationService
 		$this->pruneExpiredDeliveriesOnce();
 	}
 
-	public function pruneExpiredDeliveries(int $older_than_days = self::DEFAULT_DELIVERY_RETENTION_DAYS): int
+	/**
+	 * @return array{
+	 *     status: string,
+	 *     dry_run: bool,
+	 *     older_than_days: int,
+	 *     limit: int,
+	 *     cutoff: string,
+	 *     matched_rows: int,
+	 *     deleted_rows: int,
+	 *     message?: string
+	 * }
+	 */
+	public function pruneExpiredDeliveries(int $older_than_days = self::DEFAULT_DELIVERY_RETENTION_DAYS, bool $dry_run = true, int $limit = self::DEFAULT_DELIVERY_PRUNE_LIMIT): array
 	{
 		if ($older_than_days < 0) {
 			throw new InvalidArgumentException('older_than_days must be zero or greater.');
 		}
 
-		if (!$this->tableExists('form_hook_deliveries')) {
-			return 0;
+		if ($limit < 1) {
+			throw new InvalidArgumentException('limit must be at least 1.');
 		}
 
 		$cutoff = date('Y-m-d H:i:s', time() - ($older_than_days * 86400));
-		$stmt = Db::instance()->prepare('DELETE FROM form_hook_deliveries WHERE created_at < ?');
-		$stmt->execute([$cutoff]);
 
-		return $stmt->rowCount();
+		if (!$this->tableExists('form_hook_deliveries')) {
+			return [
+				'status' => 'skipped',
+				'dry_run' => $dry_run,
+				'older_than_days' => $older_than_days,
+				'limit' => $limit,
+				'cutoff' => $cutoff,
+				'matched_rows' => 0,
+				'deleted_rows' => 0,
+				'message' => 'form_hook_deliveries table does not exist.',
+			];
+		}
+
+		$pdo = Db::instance();
+		$count = $pdo->prepare('SELECT COUNT(*) FROM form_hook_deliveries WHERE created_at < ?');
+		$count->execute([$cutoff]);
+		$matched = (int)$count->fetchColumn();
+		$deleted = 0;
+
+		if (!$dry_run && $matched > 0) {
+			$delete = $pdo->prepare("DELETE FROM form_hook_deliveries WHERE created_at < ? ORDER BY created_at ASC, delivery_id ASC LIMIT {$limit}");
+			$delete->execute([$cutoff]);
+			$deleted = $delete->rowCount();
+		}
+
+		return [
+			'status' => 'success',
+			'dry_run' => $dry_run,
+			'older_than_days' => $older_than_days,
+			'limit' => $limit,
+			'cutoff' => $cutoff,
+			'matched_rows' => $matched,
+			'deleted_rows' => $deleted,
+		];
 	}
 
 	/**
@@ -203,7 +248,7 @@ final class FormHookInvocationService
 		self::$deliveryPrunedThisRequest = true;
 
 		try {
-			$this->pruneExpiredDeliveries();
+			$this->pruneExpiredDeliveries(self::DEFAULT_DELIVERY_RETENTION_DAYS, false, self::SUBMIT_PATH_DELIVERY_PRUNE_LIMIT);
 		} catch (Throwable $exception) {
 			Kernel::logException($exception, 'Capture form hook delivery pruning failed');
 		}

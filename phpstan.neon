@@ -68,6 +68,7 @@ parameters:
 		- modules-common/CLI/events/CLICommand.FormSync.php
 		- modules-common/CLI/events/CLICommand.FormCacheGc.php
 		- modules-common/CLI/events/CLICommand.FormDraftGc.php
+		- modules-common/CLI/events/CLICommand.FormHookDeliveryPrune.php
 		- modules-common/Cms/classes/class.CmsPathHelper.php
 		- modules-common/Cms/classes/class.CmsResourceSpecService.php
 		- modules-common/Cms/classes/class.AbstractWebpageViewComposer.php

@@ -152,6 +152,7 @@ form,builder.hooks.target_url,,de-DE,"Target URL","Target URL",0,1,"Target URL"
 form,builder.hooks.target_placeholder,,de-DE,https://example.com/hooks/radaptor,https://example.com/hooks/radaptor,0,1,https://example.com/hooks/radaptor
 form,builder.hooks.secret,,de-DE,Secret,Secret,0,1,Secret
 form,builder.hooks.secret_placeholder,,de-DE,"Leave blank to keep existing secret","Leave blank to keep existing secret",0,1,"Leave blank to keep existing secret"
+form,builder.hooks.secret_configured,,de-DE,"A secret is already configured.","A secret is already configured.",0,1,"A secret is already configured."
 form,builder.hooks.enabled,,de-DE,Enabled,Enabled,0,1,Enabled
 form,builder.hooks.enabled_non_production,,de-DE,"Run outside production","Run outside production",0,1,"Run outside production"
 form,builder.hooks.preset,,de-DE,Preset,Preset,0,1,Preset

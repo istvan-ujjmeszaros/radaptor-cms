@@ -90,9 +90,9 @@ final class FormHookTargetRegistry
 				'id' => $definition->kind,
 				'label' => $target_data['name'],
 				'target_kind' => $definition->kind,
-				'target_url' => '',
+				'url' => '',
 				'metadata' => [],
-				'excluded_fields' => [],
+				'excluded_field_keys' => [],
 			];
 		}
 

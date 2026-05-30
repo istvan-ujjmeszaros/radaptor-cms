@@ -103,7 +103,7 @@ final class FormHookBackendIntegrationTest extends TestCase
 		$this->assertTrue($targets[FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL]['metadata_schema']['to']['required']);
 		$this->assertFalse($targets[FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL]['supports_url']);
 		$this->assertFalse($targets[FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL]['supports_secret']);
-		$this->assertContains('email', $response['body']['data']['available_field_keys']);
+		$this->assertContains('email', array_column($response['body']['data']['fields'], 'key'));
 	}
 
 	public function testConfigValidationAndRoleBoundaries(): void
@@ -115,14 +115,9 @@ final class FormHookBackendIntegrationTest extends TestCase
 		$this->impersonateAndRequireRole('form_phase1_content_admin', RoleList::ROLE_CONTENT_ADMIN);
 		$email = $service->saveForForm($definition_slug, [
 			'target_kind' => FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL,
-			'label' => 'Internal notification',
 			'preset_key' => 'default',
-			'metadata' => [
-				'to' => 'ops@example.com',
-				'subject' => 'New capture submission',
-				'reply_to_field_key' => 'email',
-			],
-			'excluded_field_keys' => ['message'],
+			'metadata_json' => '{"to":"ops@example.com","subject":"New capture submission","reply_to_field_key":"email"}',
+			'excluded_field_keys_json' => '["message"]',
 		]);
 
 		$this->assertSame(FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL, $email['hook']['target_kind']);
@@ -130,11 +125,7 @@ final class FormHookBackendIntegrationTest extends TestCase
 
 		$external_email = $service->saveForForm($definition_slug, [
 			'target_kind' => FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL,
-			'label' => 'External notification',
-			'metadata' => [
-				'to' => 'external@example.com',
-				'subject' => 'External capture submission',
-			],
+			'metadata_json' => '{"to":"external@example.com","subject":"External capture submission"}',
 		]);
 
 		$this->assertSame('external@example.com', $external_email['hook']['metadata']['to']);
@@ -142,37 +133,32 @@ final class FormHookBackendIntegrationTest extends TestCase
 		$this->expectConfigExceptionCode('FORM_HOOK_DEVELOPER_ROLE_REQUIRED', function () use ($service, $definition_slug): void {
 			$service->saveForForm($definition_slug, [
 				'target_kind' => FormHookTargetRegistry::KIND_CUSTOM_HTTPS_WEBHOOK,
-				'label' => 'External webhook',
 				'url' => 'https://hooks.example.test/capture',
 			]);
 		});
 		$this->expectConfigExceptionCode('FORM_HOOK_DEVELOPER_ROLE_REQUIRED', function () use ($service, $definition_slug): void {
 			$service->saveForForm($definition_slug, [
 				'target_kind' => FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL,
-				'label' => 'Unsafe metadata',
 				'preset_key' => 'default',
-				'metadata' => ['transport' => 'smtp://example.test'],
+				'metadata_json' => '{"transport":"smtp://example.test"}',
 			]);
 		});
 		$this->expectConfigExceptionCode('FORM_HOOK_UNKNOWN_EXCLUDED_FIELD_KEY', function () use ($service, $definition_slug): void {
 			$service->saveForForm($definition_slug, [
 				'target_kind' => FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL,
-				'label' => 'Unknown field',
 				'preset_key' => 'default',
-				'excluded_field_keys' => ['missing_field'],
+				'excluded_field_keys_json' => '["missing_field"]',
 			]);
 		});
 		$this->expectConfigExceptionCode('FORM_HOOK_EMAIL_TO_REQUIRED', function () use ($service, $definition_slug): void {
 			$service->saveForForm($definition_slug, [
 				'target_kind' => FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL,
-				'label' => 'Unresolved preset recipient',
 				'preset_key' => FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL,
 			]);
 		});
 		$this->expectConfigExceptionCode('FORM_HOOK_EMAIL_TO_INVALID', function () use ($service, $definition_slug): void {
 			$service->saveForForm($definition_slug, [
 				'target_kind' => FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL,
-				'label' => 'Unconfigured default recipient',
 				'preset_key' => 'default',
 			]);
 		});
@@ -180,11 +166,10 @@ final class FormHookBackendIntegrationTest extends TestCase
 		$this->impersonateAndRequireRole('form_phase1_system_developer', RoleList::ROLE_SYSTEM_DEVELOPER);
 		$webhook = $service->saveForForm($definition_slug, [
 			'target_kind' => FormHookTargetRegistry::KIND_CUSTOM_HTTPS_WEBHOOK,
-			'label' => 'External webhook',
 			'url' => 'https://hooks.example.com/capture',
 			'enable_in_non_production' => true,
 			'secret' => 'hook-secret-value',
-			'excluded_field_keys' => ['email'],
+			'excluded_field_keys_json' => '["email"]',
 		]);
 
 		$this->assertSame(FormHookTargetRegistry::KIND_CUSTOM_HTTPS_WEBHOOK, $webhook['hook']['target_kind']);
@@ -194,7 +179,6 @@ final class FormHookBackendIntegrationTest extends TestCase
 
 		$empty_metadata_webhook = $service->saveForForm($definition_slug, [
 			'target_kind' => FormHookTargetRegistry::KIND_CUSTOM_HTTPS_WEBHOOK,
-			'label' => 'Empty metadata webhook',
 			'url' => 'https://hooks.example.com/empty-metadata',
 			'secret' => 'hook-secret-value',
 			'metadata_json' => '{}',
@@ -205,8 +189,7 @@ final class FormHookBackendIntegrationTest extends TestCase
 		$converted = $service->saveForForm($definition_slug, [
 			'hook_id' => $webhook['hook']['hook_id'],
 			'target_kind' => FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL,
-			'label' => 'Converted notification',
-			'metadata' => ['to' => 'converted@example.com'],
+			'metadata_json' => '{"to":"converted@example.com"}',
 		]);
 
 		$this->assertSame(FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL, $converted['hook']['target_kind']);
@@ -217,15 +200,20 @@ final class FormHookBackendIntegrationTest extends TestCase
 		$this->expectConfigExceptionCode('FORM_HOOK_EMAIL_TO_INVALID', function () use ($service, $definition_slug): void {
 			$service->saveForForm($definition_slug, [
 				'target_kind' => FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL,
-				'label' => 'Invalid recipient',
-				'metadata' => ['to' => 'not-an-email'],
+				'metadata_json' => '{"to":"not-an-email"}',
 			]);
 		});
 		$this->expectConfigExceptionCode('FORM_HOOK_URL_NOT_ALLOWED', function () use ($service, $definition_slug): void {
 			$service->saveForForm($definition_slug, [
 				'target_kind' => FormHookTargetRegistry::KIND_CUSTOM_HTTPS_WEBHOOK,
-				'label' => 'Local webhook',
 				'url' => 'https://localhost/capture',
+				'secret' => 'hook-secret-value',
+			]);
+		});
+		$this->expectConfigExceptionCode('FORM_HOOK_UNKNOWN_FIELD', function () use ($service, $definition_slug): void {
+			$service->saveForForm($definition_slug, [
+				'target_kind' => FormHookTargetRegistry::KIND_CUSTOM_HTTPS_WEBHOOK,
+				'target_url' => 'https://hooks.example.com/capture',
 				'secret' => 'hook-secret-value',
 			]);
 		});
@@ -242,8 +230,7 @@ final class FormHookBackendIntegrationTest extends TestCase
 
 		$created = $service->saveForForm($source_slug, [
 			'target_kind' => FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL,
-			'label' => 'Source notification',
-			'metadata' => ['to' => 'source@example.com'],
+			'metadata_json' => '{"to":"source@example.com"}',
 		]);
 		$stale_hook_id = (int)$created['hook']['hook_id'];
 
@@ -251,8 +238,7 @@ final class FormHookBackendIntegrationTest extends TestCase
 			$service->saveForForm($target_slug, [
 				'hook_id' => $stale_hook_id,
 				'target_kind' => FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL,
-				'label' => 'Wrong form notification',
-				'metadata' => ['to' => 'target@example.com'],
+				'metadata_json' => '{"to":"target@example.com"}',
 			]);
 		});
 		$this->assertSame(0, DbHelper::count('form_hook_targets', ['definition_id' => $this->definitionId($target_slug)]));
@@ -260,7 +246,6 @@ final class FormHookBackendIntegrationTest extends TestCase
 		$metadata_response = $this->runHookEvent(new EventFormHookSave(), [
 			'definition_slug' => $target_slug,
 			'target_kind' => FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL,
-			'label' => 'Malformed metadata',
 			'metadata_json' => '{"to":',
 		]);
 		$this->assertSame(422, $metadata_response['http_code']);
@@ -270,7 +255,6 @@ final class FormHookBackendIntegrationTest extends TestCase
 		$excluded_response = $this->runHookEvent(new EventFormHookSave(), [
 			'definition_slug' => $target_slug,
 			'target_kind' => FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL,
-			'label' => 'Malformed excluded fields',
 			'metadata_json' => '{"to":"target@example.com"}',
 			'excluded_field_keys_json' => '["email"',
 		]);
@@ -288,11 +272,10 @@ final class FormHookBackendIntegrationTest extends TestCase
 
 		(new FormHookConfigService())->saveForForm($definition_slug, [
 			'target_kind' => FormHookTargetRegistry::KIND_CUSTOM_HTTPS_WEBHOOK,
-			'label' => 'Suppressed webhook',
 			'url' => 'https://hooks.example.com/capture',
 			'secret' => 'hook-secret-value',
 			'enable_in_non_production' => false,
-			'excluded_field_keys' => ['email'],
+			'excluded_field_keys_json' => '["email"]',
 		]);
 
 		$invalid = $this->captureForm($resolution)->process([
@@ -340,8 +323,64 @@ final class FormHookBackendIntegrationTest extends TestCase
 			date('Y-m-d H:i:s', time() - 31 * 86400),
 			(int)$delivery['delivery_id'],
 		]);
-		$this->assertSame(1, (new FormHookInvocationService())->pruneExpiredDeliveries(30));
+		$prune = (new FormHookInvocationService())->pruneExpiredDeliveries(30, false, 100);
+		$this->assertSame(1, $prune['matched_rows']);
+		$this->assertSame(1, $prune['deleted_rows']);
 		$this->assertSame(0, DbHelper::count('form_hook_deliveries', ['definition_id' => $resolution->definitionId()]));
+	}
+
+	public function testHookDeliveryPruneDryRunApplyLimitAndIndex(): void
+	{
+		$definition_slug = $this->slug('prune');
+		$resolution = $this->upsertCapture($definition_slug);
+		$this->insertHookDelivery($resolution, 'old-a', date('Y-m-d H:i:s', time() - 31 * 86400));
+		$this->insertHookDelivery($resolution, 'old-b', date('Y-m-d H:i:s', time() - 32 * 86400));
+		$this->insertHookDelivery($resolution, 'new', date('Y-m-d H:i:s'));
+		$service = new FormHookInvocationService();
+
+		$this->assertTrue($this->indexExists('form_hook_deliveries', 'idx_form_hook_deliveries_prune'));
+		$dry_run = $service->pruneExpiredDeliveries(30, true, 1);
+		$this->assertSame(2, $dry_run['matched_rows']);
+		$this->assertSame(0, $dry_run['deleted_rows']);
+		$this->assertSame(3, DbHelper::count('form_hook_deliveries', ['definition_id' => $resolution->definitionId()]));
+
+		$first_apply = $service->pruneExpiredDeliveries(30, false, 1);
+		$this->assertSame(2, $first_apply['matched_rows']);
+		$this->assertSame(1, $first_apply['deleted_rows']);
+		$this->assertSame(2, DbHelper::count('form_hook_deliveries', ['definition_id' => $resolution->definitionId()]));
+
+		$second_apply = $service->pruneExpiredDeliveries(30, false, 10);
+		$this->assertSame(1, $second_apply['matched_rows']);
+		$this->assertSame(1, $second_apply['deleted_rows']);
+		$this->assertSame(1, DbHelper::count('form_hook_deliveries', ['definition_id' => $resolution->definitionId()]));
+	}
+
+	public function testCustomWebhookWithoutStoredSecretFailsWithoutEnqueue(): void
+	{
+		$definition_slug = $this->slug('missing-secret');
+		$resolution = $this->upsertCapture($definition_slug);
+		$this->impersonateAndRequireRole('form_phase1_system_developer', RoleList::ROLE_SYSTEM_DEVELOPER);
+		$created = (new FormHookConfigService())->saveForForm($definition_slug, [
+			'target_kind' => FormHookTargetRegistry::KIND_CUSTOM_HTTPS_WEBHOOK,
+			'url' => 'https://hooks.example.com/capture',
+			'secret' => 'hook-secret-value',
+			'enable_in_non_production' => true,
+		]);
+		DbHelper::updateHelper('form_hook_targets', [
+			'secret_ciphertext' => null,
+			'secret_nonce' => null,
+			'secret_tag' => null,
+		], [
+			'hook_id' => (int)$created['hook']['hook_id'],
+		]);
+
+		$valid = $this->captureForm($resolution)->process($this->validPayload());
+
+		$this->assertTrue($valid->isSuccess());
+		$delivery = DbHelper::selectOne('form_hook_deliveries', ['definition_id' => $resolution->definitionId()]);
+		$this->assertIsArray($delivery);
+		$this->assertSame(FormHookResult::STATUS_FAILED, (string)$delivery['status']);
+		$this->assertSame('FORM_HOOK_SECRET_REQUIRED', (string)$delivery['error_code']);
 	}
 
 	public function testHookEventsRequireAuthorizedConfiguratorAndCsrfForMutation(): void
@@ -374,8 +413,7 @@ final class FormHookBackendIntegrationTest extends TestCase
 		$response = $this->runHookEvent(new EventFormHookSave(), [
 			'definition_slug' => $definition_slug,
 			'target_kind' => FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL,
-			'label' => 'Missing CSRF',
-			'metadata' => ['to' => 'ops@example.com'],
+			'metadata_json' => '{"to":"ops@example.com"}',
 		], includeCsrfToken: false);
 
 		$this->assertSame(403, $response['http_code']);
@@ -405,6 +443,55 @@ final class FormHookBackendIntegrationTest extends TestCase
 				'form_definition_resolution' => $resolution,
 			],
 		);
+	}
+
+	private function insertHookDelivery(FormDefinitionResolution $resolution, string $label, string $created_at): int
+	{
+		$submission_id = $this->submissionIdForResolution($resolution);
+		$delivery = EntityFormHookDelivery::createFromArray([
+			'hook_id' => null,
+			'definition_id' => $resolution->definitionId(),
+			'version_id' => $resolution->versionId(),
+			'submission_id' => $submission_id,
+			'target_kind' => FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL,
+			'target_label' => $label,
+			'status' => FormHookResult::STATUS_SUPPRESSED,
+			'environment' => Kernel::getEnvironment(),
+			'payload_json' => '{}',
+			'result_json' => '{}',
+			'created_at' => $created_at,
+		]);
+
+		return (int)$delivery->delivery_id;
+	}
+
+	private function submissionIdForResolution(FormDefinitionResolution $resolution): int
+	{
+		$row = DbHelper::selectOne('form_submissions', ['definition_id' => $resolution->definitionId()]);
+
+		if (!is_array($row)) {
+			$result = $this->captureForm($resolution)->process($this->validPayload());
+			$this->assertTrue($result->isSuccess());
+			$row = DbHelper::selectOne('form_submissions', ['definition_id' => $resolution->definitionId()]);
+		}
+
+		$this->assertIsArray($row);
+
+		return (int)$row['submission_id'];
+	}
+
+	private function indexExists(string $table, string $index): bool
+	{
+		$stmt = Db::instance()->prepare(
+			"SELECT 1
+			FROM information_schema.STATISTICS
+			WHERE TABLE_SCHEMA = DATABASE()
+			  AND TABLE_NAME = ?
+			  AND INDEX_NAME = ?"
+		);
+		$stmt->execute([$table, $index]);
+
+		return (bool)$stmt->fetchColumn();
 	}
 
 	/**
@@ -670,6 +757,7 @@ final class FormHookBackendIntegrationTest extends TestCase
 	private static function installHookTables(): void
 	{
 		(new Migration_20260529_101000_capture_form_hooks())->run();
+		(new Migration_20260530_143000_harden_capture_form_hooks())->run();
 
 		if (self::$_runtime_schema_token === null) {
 			self::$_runtime_schema_token = DbSchemaData::pushRuntimeSchema(
@@ -684,6 +772,7 @@ final class FormHookBackendIntegrationTest extends TestCase
 
 		foreach ([
 			'migrations/20260529_101000_capture_form_hooks.php',
+			'migrations/20260530_143000_harden_capture_form_hooks.php',
 			'modules-common/Form/classes/class.CaptureForm.php',
 			'modules-common/Form/interfaces/interface.iFormHookTarget.php',
 			'modules-common/Form/entities/Entity.FormHookTarget.php',

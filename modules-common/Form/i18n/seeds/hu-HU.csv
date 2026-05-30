@@ -152,6 +152,7 @@ form,builder.hooks.target_url,,hu-HU,"Target URL","Cél URL",0,0,"Cél URL"
 form,builder.hooks.target_placeholder,,hu-HU,https://example.com/hooks/radaptor,https://example.com/hooks/radaptor,0,1,https://example.com/hooks/radaptor
 form,builder.hooks.secret,,hu-HU,Secret,Titok,0,0,Titok
 form,builder.hooks.secret_placeholder,,hu-HU,"Leave blank to keep existing secret","Hagyd üresen a meglévő titok megtartásához",0,0,"Hagyd üresen a meglévő titok megtartásához"
+form,builder.hooks.secret_configured,,hu-HU,"A secret is already configured.","Már van titok beállítva.",0,0,"Már van titok beállítva."
 form,builder.hooks.enabled,,hu-HU,Enabled,Engedélyezve,0,0,Engedélyezve
 form,builder.hooks.enabled_non_production,,hu-HU,"Run outside production","Futás production környezeten kívül",0,0,"Futás production környezeten kívül"
 form,builder.hooks.preset,,hu-HU,Preset,Sablon,0,0,Sablon

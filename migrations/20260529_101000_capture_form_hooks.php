@@ -23,7 +23,6 @@ class Migration_20260529_101000_capture_form_hooks
 				`secret_ciphertext` LONGTEXT NULL DEFAULT NULL,
 				`secret_nonce` VARCHAR(64) NULL DEFAULT NULL,
 				`secret_tag` VARCHAR(64) NULL DEFAULT NULL,
-				`secret_mask` VARCHAR(128) NULL DEFAULT NULL,
 				`created_by_user_id` INT NULL DEFAULT NULL,
 				`updated_by_user_id` INT NULL DEFAULT NULL,
 				`created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -61,6 +60,7 @@ class Migration_20260529_101000_capture_form_hooks
 				KEY `idx_form_hook_deliveries_submission` (`submission_id`),
 				KEY `idx_form_hook_deliveries_hook` (`hook_id`),
 				KEY `idx_form_hook_deliveries_status` (`status`, `created_at`),
+				KEY `idx_form_hook_deliveries_prune` (`created_at`, `delivery_id`),
 				CONSTRAINT `fk_form_hook_deliveries_hook`
 					FOREIGN KEY (`hook_id`) REFERENCES `form_hook_targets` (`hook_id`)
 					ON DELETE SET NULL,

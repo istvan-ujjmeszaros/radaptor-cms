@@ -7,7 +7,7 @@ final class FormHookSecretStore
 	private const string CIPHER = 'aes-256-gcm';
 
 	/**
-	 * @return array{secret_ciphertext: string|null, secret_nonce: string|null, secret_tag: string|null, secret_mask: string|null}
+	 * @return array{secret_ciphertext: string|null, secret_nonce: string|null, secret_tag: string|null}
 	 */
 	public static function encryptNullable(?string $secret): array
 	{
@@ -18,7 +18,6 @@ final class FormHookSecretStore
 				'secret_ciphertext' => null,
 				'secret_nonce' => null,
 				'secret_tag' => null,
-				'secret_mask' => null,
 			];
 		}
 
@@ -45,7 +44,6 @@ final class FormHookSecretStore
 			'secret_ciphertext' => base64_encode($ciphertext),
 			'secret_nonce' => base64_encode($nonce),
 			'secret_tag' => base64_encode($tag),
-			'secret_mask' => self::mask($secret),
 		];
 	}
 
@@ -77,18 +75,6 @@ final class FormHookSecretStore
 		}
 
 		return $plain;
-	}
-
-	public static function mask(string $secret): string
-	{
-		$secret = trim($secret);
-		$length = strlen($secret);
-
-		if ($length <= 4) {
-			return '****';
-		}
-
-		return str_repeat('*', min(16, max(8, $length - 4))) . substr($secret, -4);
 	}
 
 	private static function encryptionKey(): string

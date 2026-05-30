@@ -24,7 +24,6 @@ final class FormHookConfigService
 				fn (EntityFormHookTarget $hook): array => $this->hookToArray($hook),
 				EntityFormHookTarget::findMany(['definition_id' => (int)$definition->definition_id], 'hook_id ASC'),
 			),
-			'available_field_keys' => $field_keys,
 			'fields' => array_map(
 				static fn (string $field_key): array => ['key' => $field_key, 'label' => $field_key],
 				$field_keys,
@@ -39,6 +38,7 @@ final class FormHookConfigService
 	public function saveForForm(string $definition_slug, array $input): array
 	{
 		$this->assertTablesInstalled();
+		$this->assertAllowedInputKeys($input);
 		$definition = $this->requireDefinition($definition_slug);
 		$hook_id = (int)($input['hook_id'] ?? 0);
 		$existing = $this->existingHookForDefinition($definition, $hook_id);
@@ -114,9 +114,17 @@ final class FormHookConfigService
 	 */
 	private function prepareConfig(EntityFormDefinition $definition, array $input, ?EntityFormHookTarget $existing): array
 	{
-		$input = $this->normalizeInputAliases($input);
 		$is_system_developer = Roles::hasRole(RoleList::ROLE_SYSTEM_DEVELOPER);
-		$target_kind = FormHookTargetRegistry::normalizeKind((string)($input['target_kind'] ?? $existing?->target_kind ?? $this->defaultTargetKindFromInput($input)));
+		$target_kind = FormHookTargetRegistry::normalizeKind((string)($input['target_kind'] ?? $existing?->target_kind ?? ''));
+
+		if ($target_kind === '') {
+			throw new FormHookConfigValidationException(
+				'FORM_HOOK_TARGET_KIND_REQUIRED',
+				'common.error_save',
+				422,
+				['target_kind' => ['required']],
+			);
+		}
 		$target = FormHookTargetRegistry::get($target_kind);
 
 		if (!$target instanceof iFormHookTarget) {
@@ -179,11 +187,7 @@ final class FormHookConfigService
 		];
 		$target->validateConfig($config, $field_keys, $is_system_developer);
 
-		$label = trim((string)($input['label'] ?? $existing?->label ?? ''));
-
-		if ($label === '') {
-			$label = t($target_definition->nameKey);
-		}
+		$label = t($target_definition->nameKey);
 
 		$save_data = [
 			'target_kind' => $target_kind,
@@ -201,52 +205,38 @@ final class FormHookConfigService
 
 	/**
 	 * @param array<string, mixed> $input
-	 * @return array<string, mixed>
 	 */
-	private function normalizeInputAliases(array $input): array
+	private function assertAllowedInputKeys(array $input): void
 	{
-		$aliases = [
-			'target_url' => 'url',
-			'preset' => 'preset_key',
-			'enabled_non_production' => 'enable_in_non_production',
-			'excluded_fields_json' => 'excluded_field_keys_json',
-			'excluded_fields' => 'excluded_field_keys',
+		$allowed = [
+			'definition_slug' => true,
+			'hook_id' => true,
+			'target_kind' => true,
+			'url' => true,
+			'preset_key' => true,
+			'enabled' => true,
+			'enable_in_non_production' => true,
+			'metadata_json' => true,
+			'excluded_field_keys_json' => true,
+			'csrf_token' => true,
+			'secret' => true,
 		];
 
-		foreach ($aliases as $alias => $canonical) {
-			if (array_key_exists($alias, $input) && !array_key_exists($canonical, $input)) {
-				$input[$canonical] = $input[$alias];
+		foreach (array_keys($input) as $key) {
+			if (!isset($allowed[(string)$key])) {
+				throw new FormHookConfigValidationException(
+					'FORM_HOOK_UNKNOWN_FIELD',
+					'common.error_save',
+					422,
+					[(string)$key => ['unknown']],
+				);
 			}
 		}
-
-		if (!isset($input['target_kind']) && isset($input['preset_key'])) {
-			$preset = FormHookTargetRegistry::normalizeKind((string)$input['preset_key']);
-
-			if ($preset !== 'custom') {
-				$input['target_kind'] = $preset;
-			}
-		}
-
-		return $input;
 	}
 
 	/**
 	 * @param array<string, mixed> $input
-	 */
-	private function defaultTargetKindFromInput(array $input): string
-	{
-		$preset_key = FormHookTargetRegistry::normalizeKind((string)($input['preset_key'] ?? ''));
-
-		if (FormHookTargetRegistry::get($preset_key) instanceof iFormHookTarget) {
-			return $preset_key;
-		}
-
-		return 'custom_https_webhook';
-	}
-
-	/**
-	 * @param array<string, mixed> $input
-	 * @return array{secret_ciphertext: string|null, secret_nonce: string|null, secret_tag: string|null, secret_mask: string|null}
+	 * @return array{secret_ciphertext: string|null, secret_nonce: string|null, secret_tag: string|null}
 	 */
 	private function secretSaveData(array $input, ?EntityFormHookTarget $existing, bool $is_system_developer, bool $supports_secret): array
 	{
@@ -255,7 +245,6 @@ final class FormHookConfigService
 				'secret_ciphertext' => null,
 				'secret_nonce' => null,
 				'secret_tag' => null,
-				'secret_mask' => null,
 			];
 		}
 
@@ -268,7 +257,6 @@ final class FormHookConfigService
 				'secret_ciphertext' => $existing?->secret_ciphertext,
 				'secret_nonce' => $existing?->secret_nonce,
 				'secret_tag' => $existing?->secret_tag,
-				'secret_mask' => $existing?->secret_mask,
 			];
 		}
 
@@ -290,14 +278,6 @@ final class FormHookConfigService
 	 */
 	private function metadataFromInput(array $input, ?EntityFormHookTarget $existing): array
 	{
-		if (array_key_exists('metadata', $input)) {
-			if (!is_array($input['metadata'])) {
-				throw new FormHookConfigValidationException('FORM_HOOK_INVALID_METADATA', 'common.error_save', 422, ['metadata' => ['object_required']]);
-			}
-
-			return $input['metadata'];
-		}
-
 		if (array_key_exists('metadata_json', $input)) {
 			return $this->decodeJsonObject((string)$input['metadata_json'], 'metadata_json');
 		}
@@ -312,9 +292,7 @@ final class FormHookConfigService
 	 */
 	private function excludedFieldKeysFromInput(array $input, ?EntityFormHookTarget $existing): array
 	{
-		if (array_key_exists('excluded_field_keys', $input)) {
-			$value = $input['excluded_field_keys'];
-		} elseif (array_key_exists('excluded_field_keys_json', $input)) {
+		if (array_key_exists('excluded_field_keys_json', $input)) {
 			$value = $this->decodeJsonList((string)$input['excluded_field_keys_json'], 'excluded_field_keys_json');
 		} elseif ($existing instanceof EntityFormHookTarget) {
 			$value = $this->decodeJsonList((string)$existing->excluded_field_keys_json, 'excluded_field_keys_json');
@@ -441,19 +419,14 @@ final class FormHookConfigService
 
 		return [
 			'hook_id' => (int)$hook->hook_id,
-			'id' => (int)$hook->hook_id,
 			'definition_id' => (int)$hook->definition_id,
 			'target_kind' => (string)$hook->target_kind,
 			'enabled' => (bool)(int)$hook->enabled,
 			'label' => (string)$hook->label,
-			'target_url' => $hook->url === null ? '' : (string)$hook->url,
 			'url' => $hook->url === null ? '' : (string)$hook->url,
-			'preset' => $hook->preset_key === null ? (string)$hook->target_kind : (string)$hook->preset_key,
 			'preset_key' => $hook->preset_key === null ? '' : (string)$hook->preset_key,
 			'metadata' => $this->decodeJsonObjectOrNull($hook->metadata_json) ?? [],
-			'excluded_fields' => $this->decodeStringList((string)$hook->excluded_field_keys_json),
 			'excluded_field_keys' => $this->decodeStringList((string)$hook->excluded_field_keys_json),
-			'enabled_non_production' => (bool)(int)$hook->enable_in_non_production,
 			'enable_in_non_production' => (bool)(int)$hook->enable_in_non_production,
 			'has_secret' => $has_secret,
 			'recent_logs' => $this->recentLogsForHook((int)$hook->hook_id),

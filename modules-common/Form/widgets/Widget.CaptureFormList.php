@@ -105,6 +105,7 @@ final class WidgetCaptureFormList extends AbstractWidget
 			'form.builder.hooks.target_placeholder',
 			'form.builder.hooks.secret',
 			'form.builder.hooks.secret_placeholder',
+			'form.builder.hooks.secret_configured',
 			'form.builder.hooks.enabled',
 			'form.builder.hooks.enabled_non_production',
 			'form.builder.hooks.preset',

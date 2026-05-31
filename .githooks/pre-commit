@@ -39,6 +39,9 @@ find_consumer_app_root() {
 	return 1
 }
 
+# Baseline-managed package-dev runtime discovery. The workspace baseline
+# template is the source of truth; keep this hook and check-repo-baseline copies
+# in sync. The container path is coupled to docker-compose.packages-dev.yml.
 find_packages_dev_runtime() {
 	local dir="$REPO_ROOT"
 

@@ -43,7 +43,7 @@ require_executable() {
 
 require_tracked_executable() {
 	local path="$1"
-	local mode=""
+	local mode
 
 	require_executable "$path"
 
@@ -68,6 +68,10 @@ find_consumer_app_root() {
 	return 1
 }
 
+# Baseline-managed package-dev runtime discovery. The workspace baseline
+# template is the source of truth; keep this helper and the php-generic
+# pre-commit hook copy in sync. The container path is coupled to
+# docker-compose.packages-dev.yml.
 find_packages_dev_runtime() {
 	local dir="$REPO_ROOT"
 

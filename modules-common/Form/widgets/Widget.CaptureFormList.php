@@ -130,7 +130,6 @@ final class WidgetCaptureFormList extends AbstractWidget
 			'form.builder.hooks.log_message',
 			'form.builder.hooks.no_logs',
 			'form.builder.hooks.select_hook',
-			'form.builder.hooks.status.loaded',
 			'form.builder.hooks.status.saved',
 			'form.builder.hooks.status.deleted',
 			'form.builder.hooks.error_load',

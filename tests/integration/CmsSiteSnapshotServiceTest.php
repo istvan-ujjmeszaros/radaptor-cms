@@ -117,6 +117,31 @@ final class CmsSiteSnapshotServiceTest extends TestCase
 		}
 	}
 
+	public function testWorkerPauseAggregationFailsClosedWhenAnyScopeDoesNotConfirm(): void
+	{
+		if (!class_exists('RuntimeWorkerRegistry') || !class_exists('RuntimeWorkerPauseControl')) {
+			self::markTestSkipped('Runtime worker registry support is required for multi-scope pause aggregation tests.');
+		}
+
+		$worker_instance_id = RuntimeWorkerRegistry::register('outbound_delivery', 'http_webhook', ['test' => self::class]);
+
+		if ($worker_instance_id === null) {
+			self::markTestSkipped('Runtime worker registry tables are not available.');
+		}
+
+		$method = new ReflectionMethod(CmsSiteSnapshotService::class, 'requestAndWaitForWorkerPauses');
+		$result = $method->invoke(null, 'site_migration_export', 'test_snapshot', [
+			'pause_timeout_seconds' => 0,
+			'allow_stale_workers' => false,
+		]);
+
+		$this->assertTrue($result['requested']);
+		$this->assertFalse($result['confirmed']);
+		$this->assertArrayHasKey('outbound_delivery/http_webhook', $result['confirmations']);
+		$this->assertFalse($result['confirmations']['outbound_delivery/http_webhook']['confirmed']);
+		$this->assertNotEmpty($result['confirmations']['outbound_delivery/http_webhook']['pending_workers']);
+	}
+
 	/**
 	 * @return array<string, mixed>
 	 */

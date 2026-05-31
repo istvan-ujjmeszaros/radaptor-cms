@@ -177,7 +177,6 @@ form,builder.hooks.log_http_status,,de-DE,HTTP,HTTP,0,1,HTTP
 form,builder.hooks.log_message,,de-DE,Message,Message,0,1,Message
 form,builder.hooks.no_logs,,de-DE,"No delivery logs yet.","No delivery logs yet.",0,1,"No delivery logs yet."
 form,builder.hooks.select_hook,,de-DE,"Select a hook to edit.","Select a hook to edit.",0,1,"Select a hook to edit."
-form,builder.hooks.status.loaded,,de-DE,"Hooks loaded.","Hooks loaded.",0,1,"Hooks loaded."
 form,builder.hooks.status.saved,,de-DE,"Hook saved.","Hook saved.",0,1,"Hook saved."
 form,builder.hooks.status.deleted,,de-DE,"Hook deleted.","Hook deleted.",0,1,"Hook deleted."
 form,builder.hooks.error_load,,de-DE,"Could not load hooks.","Could not load hooks.",0,1,"Could not load hooks."

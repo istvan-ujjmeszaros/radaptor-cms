@@ -177,7 +177,6 @@ form,builder.hooks.log_http_status,,hu-HU,HTTP,HTTP,0,1,HTTP
 form,builder.hooks.log_message,,hu-HU,Message,Üzenet,0,0,Üzenet
 form,builder.hooks.no_logs,,hu-HU,"No delivery logs yet.","Még nincs kézbesítési napló.",0,0,"Még nincs kézbesítési napló."
 form,builder.hooks.select_hook,,hu-HU,"Select a hook to edit.","Válassz hookot a szerkesztéshez.",0,0,"Válassz hookot a szerkesztéshez."
-form,builder.hooks.status.loaded,,hu-HU,"Hooks loaded.","Hookok betöltve.",0,0,"Hookok betöltve."
 form,builder.hooks.status.saved,,hu-HU,"Hook saved.","Hook mentve.",0,0,"Hook mentve."
 form,builder.hooks.status.deleted,,hu-HU,"Hook deleted.","Hook törölve.",0,0,"Hook törölve."
 form,builder.hooks.error_load,,hu-HU,"Could not load hooks.","A hookok nem tölthetők be.",0,0,"A hookok nem tölthetők be."

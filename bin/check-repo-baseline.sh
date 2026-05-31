@@ -31,6 +31,16 @@ require_file() {
 	fi
 }
 
+require_executable() {
+	local path="$1"
+
+	require_file "$path"
+
+	if [ ! -x "$path" ]; then
+		fail "Required baseline file is not executable: $path"
+	fi
+}
+
 find_consumer_app_root() {
 	local dir="$REPO_ROOT"
 
@@ -111,9 +121,9 @@ run_php_cs_fixer_check() {
 PROFILE_FILE=".repo-baseline-profile"
 
 require_file "$PROFILE_FILE"
-require_file ".githooks/install.sh"
-require_file ".githooks/pre-commit"
-require_file "bin/check-repo-baseline.sh"
+require_executable ".githooks/install.sh"
+require_executable ".githooks/pre-commit"
+require_executable "bin/check-repo-baseline.sh"
 require_file ".github/workflows/repo-checks.yml"
 
 if [ ! -d ".git" ] && [ ! -f ".git" ]; then
@@ -134,11 +144,8 @@ case "$PROFILE" in
 		;;
 esac
 
-chmod +x .githooks/install.sh .githooks/pre-commit bin/check-repo-baseline.sh
-./.githooks/install.sh >/dev/null
-
 if [ "$(git config --get core.hooksPath || true)" != ".githooks" ]; then
-	fail "core.hooksPath is not configured to .githooks"
+	fail "core.hooksPath is not configured to .githooks. Run ./.githooks/install.sh before checking the baseline."
 fi
 
 if [ "$PROFILE" = "generic" ]; then
@@ -148,5 +155,10 @@ fi
 
 require_file ".php-cs-fixer.php"
 run_php_cs_fixer_check
+
+if [ "$PROFILE" = "php-consumer-app" ]; then
+	require_executable "bin/check-local-override-state.sh"
+	./bin/check-local-override-state.sh
+fi
 
 success "Repo baseline check passed for profile: $PROFILE"

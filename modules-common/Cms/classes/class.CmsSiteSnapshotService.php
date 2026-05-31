@@ -77,7 +77,7 @@ class CmsSiteSnapshotService
 		}
 
 		if (($worker_pause_report['required'] ?? false) === true && ($worker_pause_report['confirmed'] ?? false) !== true) {
-			throw new RuntimeException('Source email queue workers did not confirm pause before site migration export.');
+			throw new RuntimeException(t('import_export.error.source_workers_pause_required'));
 		}
 
 		$export_data = self::readExportSnapshotFromDatabase($profile);
@@ -213,7 +213,7 @@ class CmsSiteSnapshotService
 			$worker_pause_report = self::prepareImportWorkerPause($profile, $options);
 
 			if (($worker_pause_report['required'] ?? false) === true && ($worker_pause_report['confirmed'] ?? false) !== true) {
-				$errors[] = 'Target email queue workers did not confirm pause before site migration restore.';
+				$errors[] = t('import_export.error.target_workers_pause_required');
 			}
 		}
 
@@ -333,7 +333,8 @@ class CmsSiteSnapshotService
 				'requested' => false,
 				'confirmed' => true,
 				'skipped' => true,
-				'scope' => self::emailQueueWorkerScope(),
+				'scope' => self::firstWorkerScope(),
+				'scopes' => self::migrationSensitiveWorkerScopes(),
 			];
 		}
 
@@ -346,18 +347,33 @@ class CmsSiteSnapshotService
 			$metadata['cutover_lock_id'] = $cutover_lock_id;
 		}
 
-		$result = self::requestAndWaitForEmailWorkerPause('site_migration_export', (string) ($options['pause_context'] ?? 'site_snapshot_export'), $options, $metadata);
-		$pause_request_id = (string) ($result['request']['pause_request_id'] ?? '');
-		$request_status = (string) ($result['request']['status'] ?? '');
+		$result = self::requestAndWaitForWorkerPauses('site_migration_export', (string) ($options['pause_context'] ?? 'site_snapshot_export'), $options, $metadata);
+		$cutover_worker_pause_links = [];
 
 		if (
 			$cutover_lock_id !== ''
-			&& $pause_request_id !== ''
 			&& class_exists(RuntimeWorkerPauseControl::class)
-			&& $request_status === RuntimeWorkerPauseControl::STATUS_REQUESTED
 			&& class_exists(RuntimeSiteCutoverGuard::class)
 		) {
-			$result['cutover_worker_pause_link'] = RuntimeSiteCutoverGuard::attachWorkerPauseRequest($cutover_lock_id, $pause_request_id);
+			foreach (($result['requests'] ?? []) as $scope_key => $request) {
+				if (!is_array($request)) {
+					continue;
+				}
+
+				$pause_request_id = (string) ($request['pause_request_id'] ?? '');
+				$request_status = (string) ($request['status'] ?? '');
+
+				if ($pause_request_id === '' || $request_status !== RuntimeWorkerPauseControl::STATUS_REQUESTED) {
+					continue;
+				}
+
+				$cutover_worker_pause_links[(string) $scope_key] = RuntimeSiteCutoverGuard::attachWorkerPauseRequest($cutover_lock_id, $pause_request_id);
+			}
+		}
+
+		if ($cutover_worker_pause_links !== []) {
+			$result['cutover_worker_pause_links'] = $cutover_worker_pause_links;
+			$result['cutover_worker_pause_link'] = reset($cutover_worker_pause_links);
 		}
 
 		return $result;
@@ -378,7 +394,8 @@ class CmsSiteSnapshotService
 			'requested' => false,
 			'confirmed' => false,
 			'will_pause_target_workers' => self::optionBool($options, 'pause_target_workers', true),
-			'scope' => self::emailQueueWorkerScope(),
+			'scope' => self::firstWorkerScope(),
+			'scopes' => self::migrationSensitiveWorkerScopes(),
 		];
 	}
 
@@ -398,59 +415,89 @@ class CmsSiteSnapshotService
 				'requested' => false,
 				'confirmed' => true,
 				'skipped' => true,
-				'scope' => self::emailQueueWorkerScope(),
+				'scope' => self::firstWorkerScope(),
+				'scopes' => self::migrationSensitiveWorkerScopes(),
 			];
 		}
 
-		return self::requestAndWaitForEmailWorkerPause('site_migration_restore', (string) ($options['pause_context'] ?? 'site_snapshot_restore'), $options);
+		return self::requestAndWaitForWorkerPauses('site_migration_restore', (string) ($options['pause_context'] ?? 'site_snapshot_restore'), $options);
 	}
 
 	/**
 	 * @param array<string, mixed> $options
 	 * @return array<string, mixed>
 	 */
-	private static function requestAndWaitForEmailWorkerPause(string $reason, string $context, array $options, array $metadata = []): array
+	private static function requestAndWaitForWorkerPauses(string $reason, string $context, array $options, array $metadata = []): array
 	{
-		$scope = self::emailQueueWorkerScope();
+		$scopes = self::migrationSensitiveWorkerScopes();
+		$scope = self::firstWorkerScope($scopes);
 
-		if (!class_exists(RuntimeWorkerPauseControl::class) || !class_exists(EmailQueueWorker::class)) {
+		if (!class_exists(RuntimeWorkerPauseControl::class)) {
 			return [
 				'required' => true,
 				'requested' => false,
 				'confirmed' => false,
 				'available' => false,
 				'scope' => $scope,
+				'scopes' => $scopes,
 			];
 		}
 
-		$request = RuntimeWorkerPauseControl::requestPause(
-			EmailQueueWorker::WORKER_TYPE,
-			EmailQueueWorker::QUEUE_NAME,
-			$reason,
-			$context,
-			$metadata === [] ? ['source' => self::FORMAT] : $metadata
-		);
-		$pause_request_id = $request['pause_request_id'] ?? null;
-		$confirmation = null;
+		$requests = [];
+		$confirmations = [];
+		$pause_request_ids = [];
+		$all_requested = true;
+		$all_confirmed = true;
 
-		if (is_string($pause_request_id) && $pause_request_id !== '') {
-			$confirmation = RuntimeWorkerPauseControl::waitForPauseConfirmation(
-				EmailQueueWorker::WORKER_TYPE,
-				EmailQueueWorker::QUEUE_NAME,
-				$pause_request_id,
-				self::optionInt($options, 'pause_timeout_seconds', 30),
-				self::optionBool($options, 'allow_stale_workers', false)
+		foreach ($scopes as $worker_scope) {
+			$scope_key = self::workerScopeKey($worker_scope);
+			$scope_metadata = $metadata === [] ? ['source' => self::FORMAT] : $metadata;
+			$scope_metadata['worker_type'] = $worker_scope['worker_type'];
+			$scope_metadata['queue_name'] = $worker_scope['queue_name'];
+			$request = RuntimeWorkerPauseControl::requestPause(
+				$worker_scope['worker_type'],
+				$worker_scope['queue_name'],
+				$reason,
+				$context,
+				$scope_metadata
 			);
+			$pause_request_id = $request['pause_request_id'] ?? null;
+			$confirmation = null;
+
+			if (is_string($pause_request_id) && $pause_request_id !== '') {
+				$pause_request_ids[] = $pause_request_id;
+				$confirmation = RuntimeWorkerPauseControl::waitForPauseConfirmation(
+					$worker_scope['worker_type'],
+					$worker_scope['queue_name'],
+					$pause_request_id,
+					self::optionInt($options, 'pause_timeout_seconds', 30),
+					self::optionBool($options, 'allow_stale_workers', false),
+					self::resolveWorkerScopeStaleAfterSeconds($worker_scope)
+				);
+			} else {
+				$all_requested = false;
+			}
+
+			if (($confirmation['confirmed'] ?? false) !== true) {
+				$all_confirmed = false;
+			}
+
+			$requests[$scope_key] = $request;
+			$confirmations[$scope_key] = $confirmation;
 		}
 
 		return [
 			'required' => true,
-			'requested' => is_string($pause_request_id) && $pause_request_id !== '',
-			'confirmed' => (bool) ($confirmation['confirmed'] ?? false),
+			'requested' => $all_requested,
+			'confirmed' => $all_confirmed,
 			'skipped' => false,
 			'scope' => $scope,
-			'request' => $request,
-			'confirmation' => $confirmation,
+			'scopes' => $scopes,
+			'request' => reset($requests) ?: null,
+			'confirmation' => reset($confirmations) ?: null,
+			'requests' => $requests,
+			'confirmations' => $confirmations,
+			'pause_request_ids' => $pause_request_ids,
 		];
 	}
 
@@ -481,6 +528,61 @@ class CmsSiteSnapshotService
 			'worker_type' => class_exists(EmailQueueWorker::class) ? EmailQueueWorker::WORKER_TYPE : 'email_queue',
 			'queue_name' => class_exists(EmailQueueWorker::class) ? EmailQueueWorker::QUEUE_NAME : 'transactional_email',
 		];
+	}
+
+	/**
+	 * @return list<array{worker_type: string, queue_name: string}>
+	 */
+	private static function migrationSensitiveWorkerScopes(): array
+	{
+		if (class_exists(RuntimeWorkerHandlerRegistry::class)) {
+			$scopes = RuntimeWorkerHandlerRegistry::getMigrationSensitiveScopes();
+
+			if ($scopes !== []) {
+				return $scopes;
+			}
+		}
+
+		return [self::emailQueueWorkerScope()];
+	}
+
+	/**
+	 * @param list<array{worker_type: string, queue_name: string}>|null $scopes
+	 * @return array{worker_type: string, queue_name: string}
+	 */
+	private static function firstWorkerScope(?array $scopes = null): array
+	{
+		$scopes ??= self::migrationSensitiveWorkerScopes();
+
+		return $scopes[0] ?? self::emailQueueWorkerScope();
+	}
+
+	/**
+	 * @param array{worker_type: string, queue_name: string} $scope
+	 */
+	private static function workerScopeKey(array $scope): string
+	{
+		return $scope['worker_type'] . '/' . $scope['queue_name'];
+	}
+
+	/**
+	 * @param array{worker_type: string, queue_name: string} $scope
+	 */
+	private static function resolveWorkerScopeStaleAfterSeconds(array $scope): int
+	{
+		if (class_exists(RuntimeWorkerHandlerRegistry::class)) {
+			return RuntimeWorkerHandlerRegistry::getStaleAfterSeconds($scope['worker_type'], $scope['queue_name']);
+		}
+
+		if (
+			class_exists(EmailQueueWorker::class)
+			&& $scope['worker_type'] === EmailQueueWorker::WORKER_TYPE
+			&& $scope['queue_name'] === EmailQueueWorker::QUEUE_NAME
+		) {
+			return EmailQueueWorker::getStaleAfterSeconds();
+		}
+
+		return 30;
 	}
 
 	/**

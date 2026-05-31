@@ -25,6 +25,7 @@
 - A bare `@codex review` PR comment is not the primary gate. Use it only when explicitly requested as a fallback/extra signal; it does not replace the local Codex CLI review agent result.
 - When addressing review feedback, use a thread-aware read of GitHub review threads; flat comment lists are not enough because they lose resolved/outdated state.
 - After implementing, validating, committing, and pushing a fix, always mark every review thread resolved that the pushed commit actually addresses.
+- If the fresh Codex review agent posts any actionable finding, fix it, validate, push, re-read thread-aware state, resolve only addressed threads, and request another fresh local Codex CLI review agent pass. Repeat until the current HEAD has an explicit no-findings result from the review agent.
 - Never resolve a thread just to clear the list. If a thread remains unresolved intentionally, say why and include the next concrete fix.
 - Before requesting a fresh local Codex CLI review agent, merging, or publishing, re-check unresolved review threads and report the count. Before merging or publishing, also verify that the latest local Codex CLI review agent result was posted for the current HEAD.
 - Merge and publish only after the relevant PR has a completed local Codex CLI review agent result for the current HEAD, no unresolved review threads, required checks are green or explicitly accepted, any dependent lockfile/runtime update plan is clear, and the maintainer explicitly approves the merge/publish step.

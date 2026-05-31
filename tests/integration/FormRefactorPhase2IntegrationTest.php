@@ -1097,9 +1097,15 @@ final class FormRefactorPhase2IntegrationTest extends TestCase
 			self::markTestSkipped('Set RADAPTOR_APP_TEST_BOOTSTRAP or run from the Radaptor app container to execute form refactor integration tests.');
 		}
 
+		$bootstrap_path = realpath($bootstrap) ?: $bootstrap;
+		$included_before = in_array($bootstrap_path, array_map(static fn (string $path): string => realpath($path) ?: $path, get_included_files()), true);
+
 		require_once $bootstrap;
-		restore_error_handler();
-		restore_exception_handler();
+
+		if (!$included_before) {
+			restore_error_handler();
+			restore_exception_handler();
+		}
 
 		self::$_runtime_bootstrapped = true;
 	}

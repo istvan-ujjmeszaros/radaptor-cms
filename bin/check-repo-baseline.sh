@@ -41,12 +41,81 @@ require_executable() {
 	fi
 }
 
+require_tracked_executable() {
+	local path="$1"
+	local mode=""
+
+	require_executable "$path"
+
+	mode="$(git ls-files -s -- "$path" | awk 'NR == 1 {print $1}')"
+	if [ "$mode" != "100755" ]; then
+		fail "Required baseline file is not tracked executable: $path"
+	fi
+}
+
 find_consumer_app_root() {
 	local dir="$REPO_ROOT"
 
 	while [ "$dir" != "/" ]; do
 		if [ -f "$dir/docker-compose-dev.yml" ] && [ -x "$dir/php-cs-fixer.sh" ]; then
 			echo "$dir"
+			return 0
+		fi
+
+		dir="$(dirname "$dir")"
+	done
+
+	return 1
+}
+
+find_packages_dev_runtime() {
+	local dir="$REPO_ROOT"
+
+	while [ "$dir" != "/" ]; do
+		if [ "$(basename "$dir")" = "packages-dev" ] && [ -d "$dir" ]; then
+			local workspace_root
+			workspace_root="$(dirname "$dir")"
+			local repo_relative_to_packages_dev="${REPO_ROOT#"$dir/"}"
+			local container_repo_root="/workspace/packages-dev/$repo_relative_to_packages_dev"
+			local docker_service="${RADAPTOR_DOCKER_PHP_SERVICE:-php}"
+			local preferred_container=""
+			local fallback_container=""
+			local container_name=""
+			local project_working_dir=""
+			local config_files=""
+
+			if ! command -v docker >/dev/null 2>&1; then
+				return 1
+			fi
+
+			while IFS=$'\t' read -r container_name project_working_dir config_files; do
+				if [ -z "$container_name" ]; then
+					continue
+				fi
+
+				if [[ "$config_files" != *"$workspace_root/docker-compose.packages-dev.yml"* ]]; then
+					continue
+				fi
+
+				if [ -z "$fallback_container" ]; then
+					fallback_container="$container_name"
+				fi
+
+				if [ "$project_working_dir" = "$workspace_root/radaptor-app-skeleton" ]; then
+					preferred_container="$container_name"
+					break
+				fi
+			done < <(
+				docker ps \
+					--filter "label=com.docker.compose.service=$docker_service" \
+					--format '{{.Names}}\t{{.Label "com.docker.compose.project.working_dir"}}\t{{.Label "com.docker.compose.project.config_files"}}'
+			)
+
+			if [ -z "$preferred_container" ] && [ -z "$fallback_container" ]; then
+				return 1
+			fi
+
+			printf '%s|%s\n' "${preferred_container:-$fallback_container}" "$container_repo_root"
 			return 0
 		fi
 
@@ -98,8 +167,18 @@ run_php_cs_fixer_check_in_consumer_app() {
 		"cd '$container_repo_root' && php-cs-fixer fix --dry-run --diff --config=.php-cs-fixer.php"
 }
 
+run_php_cs_fixer_check_in_packages_dev_runtime() {
+	local runtime="$1"
+	local container="${runtime%%|*}"
+	local container_repo_root="${runtime#*|}"
+
+	docker exec "$container" bash -lc \
+		"cd '$container_repo_root' && php-cs-fixer fix --dry-run --diff --config=.php-cs-fixer.php"
+}
+
 run_php_cs_fixer_check() {
 	local app_root
+	local runtime_spec
 
 	info "Running baseline formatting check..."
 
@@ -115,20 +194,28 @@ run_php_cs_fixer_check() {
 		fi
 	fi
 
-	fail "Unable to run php-cs-fixer locally or through a running consumer app container."
+	if runtime_spec="$(find_packages_dev_runtime)"; then
+		info "Using packages-dev workspace container ${runtime_spec%%|*} for formatting check."
+
+		if run_php_cs_fixer_check_in_packages_dev_runtime "$runtime_spec"; then
+			return 0
+		fi
+	fi
+
+	fail "Unable to run php-cs-fixer locally or through a running consumer app or packages-dev container."
 }
 
 PROFILE_FILE=".repo-baseline-profile"
 
 require_file "$PROFILE_FILE"
-require_executable ".githooks/install.sh"
-require_executable ".githooks/pre-commit"
-require_executable "bin/check-repo-baseline.sh"
-require_file ".github/workflows/repo-checks.yml"
-
 if [ ! -d ".git" ] && [ ! -f ".git" ]; then
 	fail "Repo baseline check requires a Git worktree at $REPO_ROOT"
 fi
+
+require_tracked_executable ".githooks/install.sh"
+require_tracked_executable ".githooks/pre-commit"
+require_tracked_executable "bin/check-repo-baseline.sh"
+require_file ".github/workflows/repo-checks.yml"
 
 if [ -f ".github/workflows/php-cs-fixer.yml" ]; then
 	fail "Legacy workflow still present: .github/workflows/php-cs-fixer.yml"
@@ -157,7 +244,7 @@ require_file ".php-cs-fixer.php"
 run_php_cs_fixer_check
 
 if [ "$PROFILE" = "php-consumer-app" ]; then
-	require_executable "bin/check-local-override-state.sh"
+	require_tracked_executable "bin/check-local-override-state.sh"
 	./bin/check-local-override-state.sh
 fi
 

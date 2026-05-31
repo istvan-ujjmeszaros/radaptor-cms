@@ -34,10 +34,14 @@ jobs:
         if: ${{ hashFiles('.php-cs-fixer.php') != '' }}
         run: echo "$(composer global config home --absolute)/vendor/bin" >> "$GITHUB_PATH"
 
-      - name: Install Git hooks
+      - name: Configure Git hooks path
         shell: bash
-        run: ./.githooks/install.sh
+        run: git config core.hooksPath .githooks
 
       - name: Run repo checks
         shell: bash
-        run: ./bin/check-repo-baseline.sh
+        run: bash ./bin/check-repo-baseline.sh
+
+      - name: Install Git hooks
+        shell: bash
+        run: ./.githooks/install.sh

@@ -93,6 +93,30 @@ final class CmsSiteSnapshotServiceTest extends TestCase
 		);
 	}
 
+	public function testSiteMigrationWorkerScopesComeFromRuntimeRegistryWhenAvailable(): void
+	{
+		$method = new ReflectionMethod(CmsSiteSnapshotService::class, 'migrationSensitiveWorkerScopes');
+		$scopes = $method->invoke(null);
+
+		$this->assertContains(
+			[
+				'worker_type' => 'email_queue',
+				'queue_name' => 'transactional_email',
+			],
+			$scopes
+		);
+
+		if (class_exists('OutboundDeliveryWorker')) {
+			$this->assertContains(
+				[
+					'worker_type' => 'outbound_delivery',
+					'queue_name' => 'http_webhook',
+				],
+				$scopes
+			);
+		}
+	}
+
 	/**
 	 * @return array<string, mixed>
 	 */

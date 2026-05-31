@@ -19,13 +19,13 @@
 ## GitHub PR Review Workflow
 
 - Do not commit without explicit maintainer/user approval.
-- After opening or updating a GitHub PR, start a local CLI review agent for the exact PR URL and current HEAD before merging, publishing, releasing, or treating the PR as approved dependency input. The review task is review-only: no edits, commits, pushes, or merges.
+- After opening or updating a GitHub PR, start a local Codex CLI review agent for the exact PR URL and current HEAD before merging, publishing, releasing, or treating the PR as approved dependency input. The review task is review-only: no edits, commits, pushes, or merges.
 - The review agent must post its result on the PR, using inline comments for line-tied findings when possible and a top-level PR comment otherwise. A no-findings result must also be posted for the reviewed HEAD.
 - If the maintainer asks for Claude review, use `claudee` from the CLI for one PR at a time. If `claudee` is unavailable or fails, report that and fall back to a local Codex review worker.
-- A bare `@codex review` PR comment is not the primary gate. Use it only when explicitly requested as a fallback/extra signal; it does not replace the local CLI review agent result.
+- A bare `@codex review` PR comment is not the primary gate. Use it only when explicitly requested as a fallback/extra signal; it does not replace the local Codex CLI review agent result.
 - When addressing review feedback, use a thread-aware read of GitHub review threads; flat comment lists are not enough because they lose resolved/outdated state.
 - After implementing, validating, committing, and pushing a fix, always mark every review thread resolved that the pushed commit actually addresses.
 - Never resolve a thread just to clear the list. If a thread remains unresolved intentionally, say why and include the next concrete fix.
-- Before requesting a fresh local CLI review, merging, or publishing, re-check unresolved review threads and report the count. Before merging or publishing, also verify that the latest local CLI review result was posted for the current HEAD.
-- Merge and publish only after the relevant PR has a completed local CLI review result for the current HEAD, no unresolved review threads, required checks are green or explicitly accepted, any dependent lockfile/runtime update plan is clear, and the maintainer explicitly approves the merge/publish step.
+- Before requesting a fresh local Codex CLI review agent, merging, or publishing, re-check unresolved review threads and report the count. Before merging or publishing, also verify that the latest local Codex CLI review agent result was posted for the current HEAD.
+- Merge and publish only after the relevant PR has a completed local Codex CLI review agent result for the current HEAD, no unresolved review threads, required checks are green or explicitly accepted, any dependent lockfile/runtime update plan is clear, and the maintainer explicitly approves the merge/publish step.
 - After publishing this package, update every dependent consumer lockfile/runtime that should consume the new immutable version, then commit those dependency updates separately.

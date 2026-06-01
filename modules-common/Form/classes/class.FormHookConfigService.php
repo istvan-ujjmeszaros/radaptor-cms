@@ -11,7 +11,7 @@ final class FormHookConfigService
 	{
 		$definition = $this->requireDefinition($definition_slug);
 		$discovery = FormHookTargetRegistry::discoveryPayload();
-		$field_keys = $this->fieldKeysForDefinition($definition);
+		$fields = $this->fieldsForDefinition($definition);
 
 		return [
 			'definition' => [
@@ -24,10 +24,7 @@ final class FormHookConfigService
 				fn (EntityFormHookTarget $hook): array => $this->hookToArray($hook),
 				EntityFormHookTarget::findMany(['definition_id' => (int)$definition->definition_id], 'hook_id ASC'),
 			),
-			'fields' => array_map(
-				static fn (string $field_key): array => ['key' => $field_key, 'label' => $field_key],
-				$field_keys,
-			),
+			'fields' => $fields,
 		];
 	}
 
@@ -353,6 +350,20 @@ final class FormHookConfigService
 	 */
 	private function fieldKeysForDefinition(EntityFormDefinition $definition): array
 	{
+		$keys = [];
+
+		foreach ($this->fieldsForDefinition($definition) as $field) {
+			$keys[] = $field['key'];
+		}
+
+		return $keys;
+	}
+
+	/**
+	 * @return list<array{key: string, label: string, name: string, type: string}>
+	 */
+	private function fieldsForDefinition(EntityFormDefinition $definition): array
+	{
 		$version = EntityFormDefinitionVersion::findFirst(
 			['definition_id' => (int)$definition->definition_id, 'status' => 'draft'],
 			'version_number DESC, version_id DESC',
@@ -369,11 +380,55 @@ final class FormHookConfigService
 		try {
 			$descriptor = $this->decodeJsonObject((string)$version->descriptor_json, 'descriptor_json');
 			$descriptor = FormCaptureDescriptorSchemaValidator::normalizeDescriptor($descriptor);
+			FormCaptureDescriptorSchemaValidator::validateDescriptor($descriptor);
+			$fields = [];
+			$seen = [];
 
-			return FormCaptureDescriptorSchemaValidator::validateDescriptor($descriptor);
+			foreach (($descriptor['fields'] ?? []) as $field) {
+				if (!is_array($field)) {
+					continue;
+				}
+
+				$name = trim((string)($field['name'] ?? ''));
+				$key = trim((string)($field['key'] ?? $name));
+
+				if ($key === '' || isset($seen[$key])) {
+					continue;
+				}
+
+				$seen[$key] = true;
+				$fields[] = [
+					'key' => $key,
+					'label' => $this->fieldLabel($field, $key),
+					'name' => $name,
+					'type' => trim((string)($field['type'] ?? 'text')),
+				];
+			}
+
+			return $fields;
 		} catch (Throwable) {
 			return [];
 		}
+	}
+
+	/**
+	 * @param array<string, mixed> $field
+	 */
+	private function fieldLabel(array $field, string $fallback): string
+	{
+		if (array_key_exists('label', $field)) {
+			try {
+				$label = trim(FormDescriptorAdapter::resolveDescriptorText($field['label']));
+
+				if ($label !== '') {
+					return $label;
+				}
+			} catch (Throwable) {
+				// Invalid descriptor labels fall back to stable field keys.
+			}
+		}
+
+		return $fallback;
 	}
 
 	/**
@@ -384,6 +439,7 @@ final class FormHookConfigService
 	{
 		$result = $this->decodeJsonObjectOrNull($row['result_json'] ?? null);
 		$error_message = $row['error_message'] === null ? null : (string)$row['error_message'];
+		$queued_reference = $this->queuedReference($result);
 
 		return [
 			'delivery_id' => (int)($row['delivery_id'] ?? 0),
@@ -397,15 +453,41 @@ final class FormHookConfigService
 			'environment' => (string)($row['environment'] ?? ''),
 			'payload' => $this->decodeJsonObjectOrNull($row['payload_json'] ?? null),
 			'result' => $result,
+			'queued_reference' => $queued_reference,
 			'http_status' => is_array($result) && isset($result['http_status']) ? (int)$result['http_status'] : null,
 			'error_code' => $row['error_code'] === null ? null : (string)$row['error_code'],
 			'error_message' => $error_message,
-			'message' => $error_message ?? (is_array($result) ? (string)($result['message'] ?? '') : ''),
+			'message' => $error_message ?? (is_array($result) ? (string)($result['message'] ?? $queued_reference ?? '') : ''),
 			'error' => $error_message,
 			'queued_at' => $row['queued_at'] === null ? null : (string)$row['queued_at'],
 			'completed_at' => $row['completed_at'] === null ? null : (string)$row['completed_at'],
 			'created_at' => $row['created_at'] === null ? null : (string)$row['created_at'],
 		];
+	}
+
+	/**
+	 * @param array<string, mixed>|null $result
+	 */
+	private function queuedReference(?array $result): ?string
+	{
+		if (!is_array($result)) {
+			return null;
+		}
+
+		if (isset($result['job_id']) && is_scalar($result['job_id'])) {
+			$job_id = trim((string)$result['job_id']);
+
+			return $job_id === '' ? null : $job_id;
+		}
+
+		if (isset($result['outbox_id']) && is_scalar($result['outbox_id'])) {
+			$outbox_id = (int)$result['outbox_id'];
+			$queued_jobs = isset($result['queued_jobs']) && is_scalar($result['queued_jobs']) ? (int)$result['queued_jobs'] : 0;
+
+			return $outbox_id > 0 ? "email_outbox:{$outbox_id}/jobs:{$queued_jobs}" : null;
+		}
+
+		return null;
 	}
 
 	/**

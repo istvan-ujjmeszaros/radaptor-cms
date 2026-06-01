@@ -15,6 +15,7 @@ final class FormSubmitContext
 	public const string FIELD_FORM_DEFINITION_VERSION_ID = 'form_definition_version_id';
 	public const string FIELD_FORM_RENDER_STATE_ID = 'form_render_state_id';
 	public const string FIELD_CSRF_TOKEN = 'csrf_token';
+	public const string HTML_FIELD_PREFIX = '__radaptor_';
 	public const string RENDER_CONTEXT_ISSUE_RENDER_STATE = 'issue_render_state';
 	public const string SESSION_KEY_CSRF_TOKENS = 'formCsrfTokens';
 	public const string SESSION_KEY_RENDER_STATES = 'formRenderStates';
@@ -89,27 +90,32 @@ final class FormSubmitContext
 	 */
 	public static function fromPost(array $post): ?self
 	{
-		$form_id = trim((string)($post[self::FIELD_FORM_ID] ?? ''));
-		$form_instance_id = trim((string)($post[self::FIELD_FORM_INSTANCE_ID] ?? ''));
+		$form_id = self::postString($post, self::FIELD_FORM_ID);
+		$form_instance_id = self::postString($post, self::FIELD_FORM_INSTANCE_ID);
 
 		if ($form_id === '' || $form_instance_id === '') {
 			return null;
 		}
 
-		$extra_params = self::decodeContextParams((string)($post[self::FIELD_CONTEXT_PARAMS] ?? ''));
-		$item_id = self::positiveIntOrNull($post[self::FIELD_ITEM_ID] ?? null);
+		$extra_params = self::decodeContextParams(self::postString($post, self::FIELD_CONTEXT_PARAMS));
+		$item_id = self::positiveIntOrNull(self::postValue($post, self::FIELD_ITEM_ID));
 
 		return new self(
 			formId: $form_id,
 			formInstanceId: $form_instance_id,
 			itemId: $item_id,
-			returnTarget: Url::sanitizeRefererUrl((string)($post[self::FIELD_RETURN_TARGET] ?? '')),
-			hostPageId: self::positiveIntOrNull($post[self::FIELD_HOST_PAGE_ID] ?? null),
-			widgetConnectionId: self::positiveIntOrNull($post[self::FIELD_WIDGET_CONNECTION_ID] ?? null),
-			buildId: trim((string)($post[self::FIELD_BUILD_ID] ?? '')),
-			formDefinitionVersionId: self::positiveIntOrNull($post[self::FIELD_FORM_DEFINITION_VERSION_ID] ?? null),
+			returnTarget: Url::sanitizeRefererUrl(self::postString($post, self::FIELD_RETURN_TARGET)),
+			hostPageId: self::positiveIntOrNull(self::postValue($post, self::FIELD_HOST_PAGE_ID)),
+			widgetConnectionId: self::positiveIntOrNull(self::postValue($post, self::FIELD_WIDGET_CONNECTION_ID)),
+			buildId: self::postString($post, self::FIELD_BUILD_ID),
+			formDefinitionVersionId: self::positiveIntOrNull(self::postValue($post, self::FIELD_FORM_DEFINITION_VERSION_ID)),
 			extraParams: $extra_params,
 		);
+	}
+
+	public static function htmlFieldName(string $fieldName): string
+	{
+		return self::HTML_FIELD_PREFIX . $fieldName;
 	}
 
 	/**
@@ -157,9 +163,7 @@ final class FormSubmitContext
 			return null;
 		}
 
-		$render_state_id = is_scalar($post[self::FIELD_FORM_RENDER_STATE_ID] ?? null)
-			? trim((string)$post[self::FIELD_FORM_RENDER_STATE_ID])
-			: '';
+		$render_state_id = self::postString($post, self::FIELD_FORM_RENDER_STATE_ID);
 
 		if ($render_state_id === '') {
 			return self::renderStateError('missing');
@@ -437,6 +441,30 @@ final class FormSubmitContext
 		$separator = str_contains($url, '?') ? '&' : '?';
 
 		return $url . $separator . $query . $fragment;
+	}
+
+	/**
+	 * @param array<string, mixed> $post
+	 */
+	private static function postString(array $post, string $fieldName): string
+	{
+		$value = self::postValue($post, $fieldName);
+
+		return is_scalar($value) ? trim((string)$value) : '';
+	}
+
+	/**
+	 * @param array<string, mixed> $post
+	 */
+	private static function postValue(array $post, string $fieldName): mixed
+	{
+		$html_field_name = self::htmlFieldName($fieldName);
+
+		if (array_key_exists($html_field_name, $post)) {
+			return $post[$html_field_name];
+		}
+
+		return $post[$fieldName] ?? null;
 	}
 
 	private static function csrfError(string $reason): ApiError

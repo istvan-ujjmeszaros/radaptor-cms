@@ -4,16 +4,6 @@ $this->registerLibrary('STIMULUS_LOADER');
 $this->registerLibrary('TIPPY');
 
 $form_id = (string)($this->props['form_id'] ?? '');
-$form_descriptor_id = (string)($this->props['form_descriptor_id'] ?? '');
-
-if ($form_descriptor_id === '') {
-	$form_descriptor_id = (string)($this->props['form_name'] ?? '');
-}
-
-if ($form_descriptor_id === '') {
-	$form_descriptor_id = $form_id;
-}
-
 $action = (string)($this->props['action'] ?? '');
 $method = (string)($this->props['method'] ?? 'post');
 $form_class = trim((string)($this->props['form_class'] ?? ''));
@@ -62,12 +52,8 @@ foreach ($html_attributes as $attribute_name => $attribute_value) {
 		<h2><?= e($sub_title) ?></h2>
 	<?php endif; ?>
 
-		<input type="hidden" name="form_id" value="<?= e($form_descriptor_id) ?>">
 		<?php foreach ($submit_context as $context_name => $context_value): ?>
-			<?php if ((string)$context_name === 'form_id') {
-				continue;
-			} ?>
-			<input type="hidden" name="<?= e((string)$context_name) ?>" value="<?= e((string)$context_value) ?>">
+			<input type="hidden" name="<?= e(FormSubmitContext::htmlFieldName((string)$context_name)) ?>" value="<?= e((string)$context_value) ?>">
 		<?php endforeach; ?>
 		<?= $this->fetchContent('hidden_fields') ?>
 	<?= $this->fetchContent('rows') ?>

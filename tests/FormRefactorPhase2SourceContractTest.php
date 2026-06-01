@@ -72,7 +72,9 @@ final class FormRefactorPhase2SourceContractTest extends TestCase
 		$form_template_source = $this->source('templates-common/default-SoAdmin/Form/template.sdui.form.php');
 		$text_template_source = $this->source('templates-common/default-SoAdmin/Form/template.sdui.form.input.text.php');
 
-		$this->assertStringContainsString('$form_descriptor_id = $form_id;', $form_template_source);
+		$this->assertStringContainsString('FormSubmitContext::htmlFieldName((string)$context_name)', $form_template_source);
+		$this->assertStringNotContainsString('$form_descriptor_id = $form_id;', $form_template_source);
+		$this->assertStringNotContainsString('name="form_id" value=', $form_template_source);
 		$this->assertStringContainsString('document.getElementById(connectedAutocompleteInputId)', $text_template_source);
 		$this->assertStringContainsString('$(source).closest("form").find("[data-field-key]")', $text_template_source);
 		$this->assertStringNotContainsString('$(' . "'[data-field-key=", $text_template_source);

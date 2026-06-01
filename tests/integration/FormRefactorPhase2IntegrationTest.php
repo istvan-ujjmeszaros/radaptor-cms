@@ -508,6 +508,78 @@ final class FormRefactorPhase2IntegrationTest extends TestCase
 		$this->assertSame('success', $response['body']['data']['form']['outcome']);
 	}
 
+	public function testFormSettingsCancelKeepsSubmitContextSeparateFromFormIdPayloadField(): void
+	{
+		$connection_id = $this->prepareEditableFormSettingsFixtureConnection();
+		$context = $this->submitContext(FormList::FORMSETTINGS, 'phase2_form_settings_cancel', $connection_id);
+		$post = [];
+
+		foreach ($context->toHiddenFields() as $context_name => $context_value) {
+			$post[FormSubmitContext::htmlFieldName($context_name)] = $context_value;
+		}
+
+		$post[FormSubmitContext::FIELD_CSRF_TOKEN] = $context->issueCsrfToken();
+		$post[FormSubmitContext::FIELD_FORM_ID] = '';
+		$post['submit_button'] = AbstractForm::_SUBMIT_VALUE_CANCEL;
+
+		$this->setRequestContext(
+			post: $post,
+			server: [
+				'HTTP_HOST' => 'localhost',
+				'REQUEST_URI' => '/?context=form&event=submit',
+				'REQUEST_METHOD' => 'POST',
+				'HTTP_ACCEPT' => 'application/json',
+			],
+		);
+		$this->impersonate('admin_developer');
+
+		$ctx = RequestContextHolder::current();
+		$ctx->apiResponseCaptureEnabled = true;
+
+		ob_start();
+		(new EventFormSubmit())->run();
+		$output = (string)ob_get_clean();
+
+		$this->assertSame('', $output);
+		$this->assertSame(200, $ctx->capturedApiResponseHttpCode);
+		$this->assertTrue($ctx->capturedApiResponse['ok']);
+		$this->assertSame('cancel', $ctx->capturedApiResponse['data']['form']['outcome']);
+	}
+
+	public function testFormTemplateRendersSubmitContextOutsideFormPayloadNamespace(): void
+	{
+		$connection_id = $this->prepareEditableFormSettingsFixtureConnection();
+		$this->setRequestContext(
+			get: [
+				FormSubmitContext::FIELD_ITEM_ID => (string)$connection_id,
+			],
+			server: [
+				'HTTP_HOST' => 'localhost',
+				'REQUEST_URI' => '/admin/form-settings.html?item_id=' . $connection_id,
+				'REQUEST_METHOD' => 'GET',
+			],
+		);
+		$this->impersonate('admin_developer');
+
+		$form = Form::factory(
+			FormList::FORMSETTINGS,
+			'phase2_form_settings_render',
+			$this->treeContext(),
+			'/admin/widget-preview.html',
+		);
+		$renderer = new HtmlTreeRenderer(
+			theme: $form->getTreeBuildContext()->getTheme(),
+			lang_id: Kernel::getLocale(),
+			page_id: $form->getTreeBuildContext()->getPageId(),
+			is_editable: $form->getTreeBuildContext()->isEditable(),
+		);
+		$html = $renderer->render($form->buildTree());
+
+		$this->assertStringContainsString('name="' . FormSubmitContext::htmlFieldName(FormSubmitContext::FIELD_FORM_ID) . '"', $html);
+		$this->assertStringNotContainsString('type="hidden" name="' . FormSubmitContext::FIELD_FORM_ID . '"', $html);
+		$this->assertStringContainsString('name="' . FormSubmitContext::FIELD_FORM_ID . '"', $html);
+	}
+
 	public function testAdminMenuGoldenFormValidatesThroughSubmitEndpointWithoutWebpageComposer(): void
 	{
 		$this->impersonateAndRequireRole('admin_developer', RoleList::ROLE_SYSTEM_DEVELOPER);
@@ -1083,6 +1155,60 @@ final class FormRefactorPhase2IntegrationTest extends TestCase
 		$ctx->userSessionInitialized = true;
 		Cache::flush(Roles::class);
 		Cache::flush(User::class);
+	}
+
+	private function allowCurrentUserToEditResource(int $resourceId): void
+	{
+		$user_id = (int)User::getCurrentUserId();
+
+		if ($user_id <= 0) {
+			self::markTestSkipped('A current user is required for resource ACL setup.');
+		}
+
+		$savedata = [
+			'resource_id' => $resourceId,
+			'subject_type' => 'user',
+			'subject_id' => $user_id,
+			'allow_view' => 1,
+			'allow_edit' => 1,
+			'allow_delete' => 0,
+			'allow_publish' => 0,
+			'allow_list' => 1,
+			'allow_create' => 0,
+		];
+		$row = DbHelper::selectOne('resource_acl', [
+			'resource_id' => $resourceId,
+			'subject_type' => 'user',
+			'subject_id' => $user_id,
+		]);
+
+		if (is_array($row)) {
+			DbHelper::updateHelper('resource_acl', $savedata, (int)$row['acl_id']);
+
+			return;
+		}
+
+		DbHelper::insertHelper('resource_acl', $savedata);
+	}
+
+	private function prepareEditableFormSettingsFixtureConnection(): int
+	{
+		$connection_id = 9083;
+
+		if (DbHelper::selectOne('widget_connections', ['connection_id' => $connection_id]) === null) {
+			self::markTestSkipped('Missing widget connection fixture 9083 for form settings integration coverage.');
+		}
+
+		$this->impersonateAndRequireRole('admin_developer', RoleList::ROLE_CONTENT_ADMIN);
+		$resource_id = (int)ResourceTreeHandler::getResourceIdFromConnectionId($connection_id);
+
+		if ($resource_id <= 0) {
+			self::markTestSkipped('Missing owner resource for widget connection fixture 9083.');
+		}
+
+		$this->allowCurrentUserToEditResource($resource_id);
+
+		return $connection_id;
 	}
 
 	private static function bootstrapConsumerRuntime(): void

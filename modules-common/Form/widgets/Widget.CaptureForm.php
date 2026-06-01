@@ -71,6 +71,23 @@ class WidgetCaptureForm extends AbstractWidget
 		return $form->buildTree();
 	}
 
+	public function getEditableCommands(WidgetConnection $connection): array
+	{
+		if (!Roles::hasRole(RoleList::ROLE_CONTENT_ADMIN)) {
+			return [];
+		}
+
+		$settings = new WidgetEditCommand();
+		$settings->title = t('form.form_settings.title');
+		$form_id = defined(FormList::class . '::CAPTUREFORMSETTINGS')
+			? (string)constant(FormList::class . '::CAPTUREFORMSETTINGS')
+			: 'CaptureFormSettings';
+		$settings->url = Form::getSeoUrl($form_id, $connection->connection_id);
+		$settings->icon = IconNames::CHOOSE;
+
+		return [$settings];
+	}
+
 	public function canAccess(iTreeBuildContext $tree_build_context, WidgetConnection $connection): bool
 	{
 		return true;

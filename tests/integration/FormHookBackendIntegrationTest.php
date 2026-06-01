@@ -104,6 +104,15 @@ final class FormHookBackendIntegrationTest extends TestCase
 		$this->assertFalse($targets[FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL]['supports_url']);
 		$this->assertFalse($targets[FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL]['supports_secret']);
 		$this->assertContains('email', array_column($response['body']['data']['fields'], 'key'));
+		$fields = [];
+
+		foreach ($response['body']['data']['fields'] as $field) {
+			$fields[(string)$field['key']] = $field;
+		}
+		$this->assertSame('Name', $fields['name_key']['label'] ?? null);
+		$this->assertSame('name', $fields['name_key']['name'] ?? null);
+		$this->assertSame('Email', $fields['email']['label'] ?? null);
+		$this->assertSame('text', $fields['email']['type'] ?? null);
 	}
 
 	public function testConfigValidationAndRoleBoundaries(): void
@@ -355,6 +364,86 @@ final class FormHookBackendIntegrationTest extends TestCase
 		$this->assertSame(1, DbHelper::count('form_hook_deliveries', ['definition_id' => $resolution->definitionId()]));
 	}
 
+	public function testRawEmailHookQueuesEmailSnapshotAndExposesAuditReference(): void
+	{
+		if (!$this->tableExists('email_outbox') || !$this->tableExists('email_queue_transactional')) {
+			self::markTestSkipped('Email queue tables are required for raw email hook enqueue coverage.');
+		}
+
+		$definition_slug = $this->slug('email-queue');
+		$resolution = $this->upsertCapture($definition_slug);
+		$this->impersonateAndRequireRole('form_phase1_system_developer', RoleList::ROLE_SYSTEM_DEVELOPER);
+		$before_outbox = DbHelper::count('email_outbox', []);
+		$before_queue = DbHelper::count('email_queue_transactional', []);
+
+		(new FormHookConfigService())->saveForForm($definition_slug, [
+			'target_kind' => FormHookTargetRegistry::KIND_RAW_FORM_DATA_EMAIL,
+			'metadata_json' => '{"to":"ops@example.com","subject":"Queued raw capture"}',
+			'enable_in_non_production' => true,
+			'excluded_field_keys_json' => '["message"]',
+		]);
+
+		$result = $this->captureForm($resolution)->process($this->validPayload());
+
+		$this->assertTrue($result->isSuccess());
+		$this->assertSame($before_outbox + 1, DbHelper::count('email_outbox', []));
+		$this->assertSame($before_queue + 1, DbHelper::count('email_queue_transactional', []));
+
+		$delivery_log = (new FormHookConfigService())->deliveriesForForm($definition_slug, 5);
+		$delivery = $delivery_log['deliveries'][0];
+		$this->assertSame(FormHookResult::STATUS_QUEUED, $delivery['status']);
+		$this->assertIsArray($delivery['result']);
+		$this->assertArrayHasKey('outbox_id', $delivery['result']);
+		$this->assertArrayHasKey('queued_jobs', $delivery['result']);
+		$this->assertNotSame('', $delivery['queued_reference']);
+		$this->assertSame($delivery['queued_reference'], $delivery['message']);
+		$this->assertIsArray($delivery['payload']);
+		$this->assertIsArray($delivery['payload']['data']);
+		$this->assertArrayNotHasKey('message', $delivery['payload']['data']);
+	}
+
+	public function testCustomHttpsHookQueuesOutboundDeliveryJobAndExposesAuditReference(): void
+	{
+		if (!$this->tableExists('outbound_delivery_queue')) {
+			self::markTestSkipped('Outbound delivery queue table is required for HTTPS hook enqueue coverage.');
+		}
+
+		$definition_slug = $this->slug('https-queue');
+		$resolution = $this->upsertCapture($definition_slug);
+		$this->impersonateAndRequireRole('form_phase1_system_developer', RoleList::ROLE_SYSTEM_DEVELOPER);
+
+		(new FormHookConfigService())->saveForForm($definition_slug, [
+			'target_kind' => FormHookTargetRegistry::KIND_CUSTOM_HTTPS_WEBHOOK,
+			'url' => 'https://hooks.example.com/capture',
+			'secret' => 'hook-secret-value',
+			'enable_in_non_production' => true,
+			'excluded_field_keys_json' => '["email"]',
+		]);
+
+		$result = $this->captureForm($resolution)->process($this->validPayload());
+
+		$this->assertTrue($result->isSuccess());
+
+		$delivery_log = (new FormHookConfigService())->deliveriesForForm($definition_slug, 5);
+		$delivery = $delivery_log['deliveries'][0];
+		$this->assertSame(FormHookResult::STATUS_QUEUED, $delivery['status']);
+		$this->assertSame('formhook_' . $delivery['delivery_id'], $delivery['queued_reference']);
+		$this->assertSame($delivery['queued_reference'], $delivery['message']);
+		$this->assertIsArray($delivery['payload']);
+		$this->assertIsArray($delivery['payload']['data']);
+		$this->assertArrayNotHasKey('email', $delivery['payload']['data']);
+
+		$queue_row = DbHelper::selectOne('outbound_delivery_queue', ['job_id' => $delivery['queued_reference']]);
+		$this->assertIsArray($queue_row);
+		$this->assertSame('https://hooks.example.com/capture', (string)$queue_row['target_url']);
+		$headers = json_decode((string)$queue_row['headers_json'], true, 512, JSON_THROW_ON_ERROR);
+		$this->assertSame($delivery['queued_reference'], $headers['X-Radaptor-Hook-Delivery'] ?? null);
+		$this->assertStringStartsWith('sha256=', (string)($headers['X-Radaptor-Hook-Signature-256'] ?? ''));
+		$payload = json_decode((string)$queue_row['payload_json'], true, 512, JSON_THROW_ON_ERROR);
+		$this->assertSame('capture_form.submitted', $payload['event']);
+		$this->assertArrayNotHasKey('email', $payload['data']);
+	}
+
 	public function testCustomWebhookWithoutStoredSecretFailsWithoutEnqueue(): void
 	{
 		$definition_slug = $this->slug('missing-secret');
@@ -490,6 +579,20 @@ final class FormHookBackendIntegrationTest extends TestCase
 			  AND INDEX_NAME = ?"
 		);
 		$stmt->execute([$table, $index]);
+
+		return (bool)$stmt->fetchColumn();
+	}
+
+	private function tableExists(string $table): bool
+	{
+		$stmt = Db::instance()->prepare(
+			"SELECT 1
+			FROM information_schema.TABLES
+			WHERE TABLE_SCHEMA = DATABASE()
+			  AND TABLE_TYPE = 'BASE TABLE'
+			  AND TABLE_NAME = ?"
+		);
+		$stmt->execute([$table]);
 
 		return (bool)$stmt->fetchColumn();
 	}

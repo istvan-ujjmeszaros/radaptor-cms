@@ -90,7 +90,10 @@ final class EventFormEditorMoveField extends AbstractEvent implements iBrowserEv
 			$this->responder()->succeed(
 				'form.field_edit.status_draft_updated',
 				$host_page_id,
-				[EditModeMutationCommand::replaceForm($widget_connection_id, $reveal_target_id)],
+				[
+					EditModeMutationCommand::replaceForm($widget_connection_id, $reveal_target_id),
+					EditModeMutationCommand::replaceWidgetToolbar($widget_connection_id),
+				],
 				$result,
 			);
 		} catch (InvalidArgumentException) {

@@ -124,6 +124,19 @@ final class EditModeMutationResponder
 				continue;
 			}
 
+			if ($command->targetType() === EditModeMutationCommand::TARGET_WIDGET_ELEMENT) {
+				$context = $command->context();
+				$widget_connection_id = (int)($context['widget_connection_id'] ?? 0);
+
+				if ($widget_connection_id <= 0) {
+					throw new InvalidArgumentException('Widget element mutation command is missing widget_connection_id.');
+				}
+
+				$element_targets_by_widget[$widget_connection_id][] = $command->targetId();
+
+				continue;
+			}
+
 			if ($command->targetType() === EditModeMutationCommand::TARGET_FORM) {
 				$context = $command->context();
 				$widget_connection_id = (int)($context['widget_connection_id'] ?? 0);

@@ -245,6 +245,7 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$validator_source = $this->source('modules-common/Form/classes/class.FormCaptureDescriptorSchemaValidator.php');
 		$abstract_form_source = $this->source('modules-common/Form/classes/class.AbstractForm.php');
 		$authoring_source = $this->source('modules-common/Form/classes/class.FormCaptureAuthoringService.php');
+		$mutation_command_source = $this->source('modules-common/Cms/classes/class.EditModeMutationCommand.php');
 		$responder_source = $this->source('modules-common/Cms/classes/class.EditModeMutationResponder.php');
 		$fragment_source = $this->source('modules-common/Cms/classes/class.CmsFragmentRenderer.php');
 		$tree_builder_source = $this->source('modules-common/Cms/classes/class.WebpageTreeBuilder.php');
@@ -273,6 +274,8 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$this->assertStringContainsString('CSRF_INLINE_FORM_COMMAND_FORM_ID', $capture_widget_source);
 		$this->assertStringContainsString("public string \$method = 'get'", $widget_command_source);
 		$this->assertStringContainsString('public array $payload = []', $widget_command_source);
+		$this->assertStringContainsString("public const string TARGET_WIDGET_ELEMENT = 'widget_element';", $mutation_command_source);
+		$this->assertStringContainsString('replaceWidgetToolbar(int $widget_connection_id)', $mutation_command_source);
 		$this->assertStringContainsString("'method' => strtolower(\$command->method)", $widget_source);
 		$this->assertStringContainsString('hx-post', $edit_bar_source);
 		$this->assertStringContainsString('hx-vals', $edit_bar_source);
@@ -282,6 +285,8 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$this->assertStringContainsString("if (\$type === 'component')", $fragment_source);
 		$this->assertStringContainsString('return $this->view->isEditable() || $this->view->getLayoutType() instanceof iPartialNavigableLayout;', $tree_builder_source);
 		$this->assertStringContainsString('HX-Trigger', $responder_source);
+		$this->assertStringContainsString('EditModeMutationCommand::TARGET_WIDGET_ELEMENT', $responder_source);
+		$this->assertStringContainsString('Widget element mutation command is missing widget_connection_id.', $responder_source);
 		$this->assertStringContainsString('implements iFormEditorFieldCommandProvider', $field_command_provider_source);
 		$this->assertStringContainsString("Url::getUrl('form_editor.move_field')", $field_command_provider_source);
 		$this->assertStringContainsString("Url::getUrl('form_editor.remove_field')", $field_command_provider_source);
@@ -293,6 +298,10 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$this->assertStringContainsString('EditModeMutationCommand::replaceForm($widget_connection_id)', $remove_event_source);
 		$this->assertStringContainsString('EditModeMutationCommand::replaceForm($widget_connection_id)', $publish_event_source);
 		$this->assertStringContainsString('EditModeMutationCommand::replaceFormField($widget_connection_id, $field_uid)', $update_event_source);
+
+		foreach ([$insert_event_source, $move_event_source, $remove_event_source, $publish_event_source, $update_event_source] as $event_source) {
+			$this->assertStringContainsString('EditModeMutationCommand::replaceWidgetToolbar($widget_connection_id)', $event_source);
+		}
 		$this->assertStringContainsString('EditModeMutationCommand::replaceSlot($slot_name, \'edit-widget-\' . (int)$connection_id)', $widget_add_source);
 		$this->assertStringContainsString('EditModeMutationCommand::replaceSlot($slot_name)', $widget_remove_source);
 		$this->assertStringContainsString('array_values($commands)', $widget_swap_source);

@@ -73,7 +73,10 @@ final class EventFormEditorPublish extends AbstractEvent implements iBrowserEven
 			$this->responder()->succeed(
 				'form.builder.status.published',
 				$host_page_id,
-				[EditModeMutationCommand::replaceForm($widget_connection_id)],
+				[
+					EditModeMutationCommand::replaceForm($widget_connection_id),
+					EditModeMutationCommand::replaceWidgetToolbar($widget_connection_id),
+				],
 				$result,
 			);
 		} catch (InvalidArgumentException) {

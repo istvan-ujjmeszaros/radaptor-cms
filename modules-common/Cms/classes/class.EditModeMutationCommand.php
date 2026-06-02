@@ -7,6 +7,7 @@ final class EditModeMutationCommand
 	public const string OPERATION_REPLACE = 'replace';
 	public const string TARGET_SLOT = 'slot';
 	public const string TARGET_WIDGET = 'widget';
+	public const string TARGET_WIDGET_ELEMENT = 'widget_element';
 	public const string TARGET_FORM = 'form';
 	public const string TARGET_FORM_FIELD = 'form_field';
 
@@ -40,6 +41,18 @@ final class EditModeMutationCommand
 			self::TARGET_FORM,
 			FormCaptureFieldIdentity::formTargetId($widget_connection_id),
 			self::revealContext($reveal_target_id) + [
+				'widget_connection_id' => $widget_connection_id,
+			],
+		);
+	}
+
+	public static function replaceWidgetToolbar(int $widget_connection_id): self
+	{
+		return new self(
+			self::OPERATION_REPLACE,
+			self::TARGET_WIDGET_ELEMENT,
+			'edit-widget-toolbar-' . $widget_connection_id,
+			[
 				'widget_connection_id' => $widget_connection_id,
 			],
 		);

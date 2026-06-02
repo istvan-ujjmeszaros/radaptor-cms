@@ -1289,6 +1289,7 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame(EditModeMutationCommand::TARGET_FORM_FIELD, $command['target_type'] ?? null);
 		$this->assertSame('edit-widget-' . $widget_connection_id . '__field-' . $field_uid, $command['target_id'] ?? null);
 		$this->assertSame($widget_connection_id, $command['context']['widget_connection_id'] ?? null);
+		$this->assertToolbarRefreshCommand($response['body']['data']['commands'][1] ?? [], $widget_connection_id);
 		$this->assertSame($field_uid, $response['body']['data']['field_uid'] ?? null);
 	}
 
@@ -1321,6 +1322,7 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$field_uid = (string)($response['body']['data']['field_uid'] ?? '');
 		$this->assertMatchesRegularExpression('/^f_[a-z0-9]{16}$/', $field_uid);
 		$this->assertSame('edit-widget-' . $widget_connection_id . '__field-' . $field_uid, $command['context']['reveal_target_id'] ?? null);
+		$this->assertToolbarRefreshCommand($response['body']['data']['commands'][1] ?? [], $widget_connection_id);
 	}
 
 	public function testFormEditorMoveEventReturnsFormMutationCommandForJsonClients(): void
@@ -1354,6 +1356,7 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame('edit-widget-' . $widget_connection_id . '__form', $command['target_id'] ?? null);
 		$this->assertSame($widget_connection_id, $command['context']['widget_connection_id'] ?? null);
 		$this->assertSame('edit-widget-' . $widget_connection_id . '__field-' . $field_uid, $command['context']['reveal_target_id'] ?? null);
+		$this->assertToolbarRefreshCommand($response['body']['data']['commands'][1] ?? [], $widget_connection_id);
 	}
 
 	public function testFormEditorRemoveEventReturnsFormMutationCommandForJsonClients(): void
@@ -1386,6 +1389,7 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame('edit-widget-' . $widget_connection_id . '__form', $command['target_id'] ?? null);
 		$this->assertSame($widget_connection_id, $command['context']['widget_connection_id'] ?? null);
 		$this->assertArrayNotHasKey('reveal_target_id', $command['context'] ?? []);
+		$this->assertToolbarRefreshCommand($response['body']['data']['commands'][1] ?? [], $widget_connection_id);
 	}
 
 	public function testFormEditorPublishEventPublishesDraftAndReturnsFormMutationCommandForJsonClients(): void
@@ -1414,6 +1418,7 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame('edit-widget-' . $widget_connection_id . '__form', $command['target_id'] ?? null);
 		$this->assertSame($widget_connection_id, $command['context']['widget_connection_id'] ?? null);
 		$this->assertArrayNotHasKey('reveal_target_id', $command['context'] ?? []);
+		$this->assertToolbarRefreshCommand($response['body']['data']['commands'][1] ?? [], $widget_connection_id);
 	}
 
 	public function testCaptureFormEditBarCommandsIncludePublishForActiveDraft(): void
@@ -2291,6 +2296,17 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		}
 
 		return $this->runSubmitPost($post);
+	}
+
+	/**
+	 * @param array<string, mixed> $command
+	 */
+	private function assertToolbarRefreshCommand(array $command, int $widget_connection_id): void
+	{
+		$this->assertSame(EditModeMutationCommand::OPERATION_REPLACE, $command['operation'] ?? null);
+		$this->assertSame(EditModeMutationCommand::TARGET_WIDGET_ELEMENT, $command['target_type'] ?? null);
+		$this->assertSame('edit-widget-toolbar-' . $widget_connection_id, $command['target_id'] ?? null);
+		$this->assertSame($widget_connection_id, $command['context']['widget_connection_id'] ?? null);
 	}
 
 	/**

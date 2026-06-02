@@ -44,6 +44,7 @@ $edit_mode_hx_swap = 'none show:none focus-scroll:false';
 								value="<?= e($encoded_payload) ?>"
 								hx-post="<?= e($insert_url) ?>"
 								hx-vals="<?= e($hx_values) ?>"
+								hx-params="<?= e($item_payload_name) ?>"
 								hx-swap="<?= e($edit_mode_hx_swap) ?>">
 							<?= e((string)($item['label'] ?? $item['type'])) ?>
 						</button>

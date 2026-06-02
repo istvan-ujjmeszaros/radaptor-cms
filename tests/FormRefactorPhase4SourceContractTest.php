@@ -308,6 +308,7 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$this->assertStringContainsString("\$edit_mode_hx_swap = 'none show:none focus-scroll:false';", $editor_insert_source);
 		$this->assertStringContainsString("\$edit_mode_hx_swap = 'none show:none focus-scroll:false';", $edit_bar_source);
 		$this->assertStringContainsString('hx-vals="<?= e($hx_values) ?>"', $editor_insert_source);
+		$this->assertStringContainsString('hx-params="<?= e($item_payload_name) ?>"', $editor_insert_source);
 		$this->assertStringContainsString('hx-get="<?= event_url(\'widgetConnection.remove\'', $edit_bar_source);
 		$this->assertStringContainsString('data-edit-mode-command', $edit_bar_source);
 		$this->assertStringContainsString('data-edit-mode-confirm', $edit_bar_source);

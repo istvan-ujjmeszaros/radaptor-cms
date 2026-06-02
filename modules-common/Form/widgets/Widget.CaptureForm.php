@@ -88,7 +88,50 @@ class WidgetCaptureForm extends AbstractWidget
 		$settings->url = Form::getSeoUrl($form_id, $connection->connection_id);
 		$settings->icon = IconNames::CHOOSE;
 
-		return [$settings];
+		$commands = [$settings];
+		$publish = $this->buildPublishCommand($connection);
+
+		if ($publish instanceof WidgetEditCommand) {
+			$commands[] = $publish;
+		}
+
+		return $commands;
+	}
+
+	private function buildPublishCommand(WidgetConnection $connection): ?WidgetEditCommand
+	{
+		$definition_slug = trim((string)$connection->getExtraparam('definition_slug'));
+		$page_id = WidgetConnection::getOwnerWebpageId((int)$connection->connection_id);
+
+		if ($definition_slug === '' || $page_id === null) {
+			return null;
+		}
+
+		try {
+			$resolution = FormDefinitionResolver::resolveForRender($definition_slug, ['structure_editable' => true]);
+		} catch (FormCaptureRuntimeException) {
+			return null;
+		}
+
+		if (!$resolution instanceof FormDefinitionResolution || !$resolution->isStructureEditable() || (string)($resolution->version()['status'] ?? '') !== 'draft') {
+			return null;
+		}
+
+		$publish = new WidgetEditCommand();
+		$publish->title = t('form.builder.action.publish');
+		$publish->url = Url::getUrl('form_editor.publish');
+		$publish->icon = IconNames::UPLOAD;
+		$publish->method = 'post';
+		$publish->loader = true;
+		$publish->payload = [
+			FormSubmitContext::FIELD_CSRF_TOKEN => FormSubmitContext::issueCsrfTokenForForm(FormBuilderEventHelper::CSRF_INLINE_FORM_COMMAND_FORM_ID),
+			'definition_slug' => $definition_slug,
+			'host_page_id' => $page_id,
+			'widget_connection_id' => (int)$connection->connection_id,
+			'return_target' => Url::getCurrentUrlForReferer(),
+		];
+
+		return $publish;
 	}
 
 	public function canAccess(iTreeBuildContext $tree_build_context, WidgetConnection $connection): bool

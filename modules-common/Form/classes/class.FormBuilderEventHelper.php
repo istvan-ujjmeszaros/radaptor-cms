@@ -8,6 +8,7 @@ final class FormBuilderEventHelper
 	public const string CSRF_INLINE_INSERT_FORM_ID = 'form_inline_insert';
 	public const string CSRF_INLINE_FIELD_PROPERTIES_FORM_ID = 'form_inline_field_properties';
 	public const string CSRF_INLINE_FIELD_COMMAND_FORM_ID = 'form_inline_field_command';
+	public const string CSRF_INLINE_FORM_COMMAND_FORM_ID = 'form_inline_form_command';
 
 	public static function authorizeContentAdmin(PolicyContext $policyContext): PolicyDecision
 	{

@@ -36,6 +36,7 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 			EventFormEditorInsertField::class,
 			EventFormEditorMoveField::class,
 			EventFormEditorRemoveField::class,
+			EventFormEditorPublish::class,
 			EventFormEditorUpdateField::class,
 			EditorInsertItem::class,
 			EditorInsertSurfaceBuilder::class,
@@ -48,6 +49,8 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 			FormEditorFieldCommand::class,
 			FormEditorFieldCommandContext::class,
 			I18nTranslationService::class,
+			WidgetCaptureForm::class,
+			WidgetEditCommand::class,
 		] as $class_name) {
 			if (!class_exists($class_name)) {
 				self::markTestSkipped('The Radaptor consumer app runtime with capture-form MVP classes is required.');
@@ -1383,6 +1386,71 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame('edit-widget-' . $widget_connection_id . '__form', $command['target_id'] ?? null);
 		$this->assertSame($widget_connection_id, $command['context']['widget_connection_id'] ?? null);
 		$this->assertArrayNotHasKey('reveal_target_id', $command['context'] ?? []);
+	}
+
+	public function testFormEditorPublishEventPublishesDraftAndReturnsFormMutationCommandForJsonClients(): void
+	{
+		$this->impersonateAndRequireRole('admin_developer', RoleList::ROLE_CONTENT_ADMIN);
+		$definition_slug = 'capture-phase4-inline-publish-event-command';
+		(new FormCaptureDefinitionRepository())->upsertPublishedDefinition($definition_slug, $this->descriptor(), $this->defaultSecurity(), 'db');
+		$widget_connection_id = $this->createCaptureWidgetConnection($definition_slug);
+		$draft_result = (new FormCaptureAuthoringService())->insertFieldIntoDraft($definition_slug, 'text', 1);
+
+		$this->assertSame('saved_draft', $draft_result['action'] ?? null);
+
+		$response = $this->runEditorEvent(new EventFormEditorPublish(), [
+			FormSubmitContext::FIELD_CSRF_TOKEN => FormSubmitContext::issueCsrfTokenForForm(FormBuilderEventHelper::CSRF_INLINE_FORM_COMMAND_FORM_ID),
+			'definition_slug' => $definition_slug,
+			'host_page_id' => '1',
+			'widget_connection_id' => (string)$widget_connection_id,
+		]);
+
+		$this->assertSame(200, $response['http_code']);
+		$this->assertTrue($response['body']['ok']);
+		$this->assertSame('published', $response['body']['data']['action'] ?? null);
+		$command = $response['body']['data']['commands'][0] ?? [];
+		$this->assertSame(EditModeMutationCommand::OPERATION_REPLACE, $command['operation'] ?? null);
+		$this->assertSame(EditModeMutationCommand::TARGET_FORM, $command['target_type'] ?? null);
+		$this->assertSame('edit-widget-' . $widget_connection_id . '__form', $command['target_id'] ?? null);
+		$this->assertSame($widget_connection_id, $command['context']['widget_connection_id'] ?? null);
+		$this->assertArrayNotHasKey('reveal_target_id', $command['context'] ?? []);
+	}
+
+	public function testCaptureFormEditBarCommandsIncludePublishForActiveDraft(): void
+	{
+		$this->impersonateAndRequireRole('admin_developer', RoleList::ROLE_CONTENT_ADMIN);
+		$definition_slug = 'capture-phase4-editbar-publish-command';
+		(new FormCaptureDefinitionRepository())->upsertPublishedDefinition($definition_slug, $this->descriptor(), $this->defaultSecurity(), 'db');
+		(new FormCaptureAuthoringService())->insertFieldIntoDraft($definition_slug, 'text', 1);
+		$widget_connection_id = $this->createCaptureWidgetConnection($definition_slug);
+		$connection = new WidgetConnection([
+			'connection_id' => $widget_connection_id,
+			'widget_name' => 'CaptureForm',
+			'slot_name' => 'content',
+			'seq' => 1000,
+			'extraparams' => ['definition_slug' => $definition_slug],
+			'first' => true,
+			'last' => true,
+		]);
+		$commands = (new WidgetCaptureForm())->getEditableCommands($connection);
+		$publish = null;
+
+		foreach ($commands as $command) {
+			if ($command instanceof WidgetEditCommand && $command->url === Url::getUrl('form_editor.publish')) {
+				$publish = $command;
+
+				break;
+			}
+		}
+
+		$this->assertInstanceOf(WidgetEditCommand::class, $publish);
+		$this->assertSame('post', $publish->method);
+		$this->assertSame(IconNames::UPLOAD, $publish->icon);
+		$this->assertTrue($publish->loader);
+		$this->assertSame($definition_slug, $publish->payload['definition_slug'] ?? null);
+		$this->assertSame(1, $publish->payload['host_page_id'] ?? null);
+		$this->assertSame($widget_connection_id, $publish->payload['widget_connection_id'] ?? null);
+		$this->assertArrayHasKey(FormSubmitContext::FIELD_CSRF_TOKEN, $publish->payload);
 	}
 
 	public function testWidgetAddEventReturnsRevealTargetForJsonClients(): void

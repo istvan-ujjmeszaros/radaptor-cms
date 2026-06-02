@@ -416,10 +416,21 @@ class Widget extends WidgetList
 		$return = [];
 
 		foreach ($commands as $command) {
+			$payload = [];
+
+			foreach ($command->payload as $name => $value) {
+				if (is_scalar($value) || $value === null) {
+					$payload[(string)$name] = $value;
+				}
+			}
+
 			$return[] = [
 				'title' => $command->title,
 				'url' => $command->url,
 				'icon' => $command->icon?->value,
+				'method' => strtolower($command->method),
+				'payload' => $payload,
+				'loader' => $command->loader,
 			];
 		}
 

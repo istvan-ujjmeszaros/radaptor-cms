@@ -48,6 +48,7 @@ parameters:
 		- modules-common/Cms/classes/class.EditorPaletteItem.php
 		- modules-common/Cms/classes/class.EditModeMutationCommand.php
 		- modules-common/Cms/classes/class.EditModeMutationResponder.php
+		- modules-common/Cms/classes/class.WidgetEditCommand.php
 		- modules-common/Cms/classes/class.CmsFragmentRenderer.php
 		- modules-common/Cms/interfaces/interface.iEditorPaletteItemProvider.php
 		- modules-common/Form/interfaces/interface.iFormEditorFieldCommandProvider.php
@@ -63,6 +64,7 @@ parameters:
 		- modules-common/Form/events/Event.FormEditorInsertField.php
 		- modules-common/Form/events/Event.FormEditorMoveField.php
 		- modules-common/Form/events/Event.FormEditorRemoveField.php
+		- modules-common/Form/events/Event.FormEditorPublish.php
 		- modules-common/Form/events/Event.FormEditorUpdateField.php
 		- modules-common/Form/events/Event.FormHookDelete.php
 		- modules-common/Form/events/Event.FormHookDeliveries.php
@@ -74,6 +76,7 @@ parameters:
 		- modules-common/Form/events/Event.FormHooksSave.php
 		- modules-common/Form/entities/Entity.FormHookDelivery.php
 		- modules-common/Form/entities/Entity.FormHookTarget.php
+		- modules-common/Form/widgets/Widget.CaptureForm.php
 		- modules-common/Form/widgets/Widget.CaptureFormBuilder.php
 		- modules-common/Form/widgets/Widget.CaptureFormList.php
 		- modules-common/I18n/classes/ImportExportDataset.I18nTranslations.php

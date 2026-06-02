@@ -104,9 +104,10 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$note_source = $this->source('modules-common/Form/events/Event.FormBuilderUpdateDraftNote.php');
 		$field_move_source = $this->source('modules-common/Form/events/Event.FormEditorMoveField.php');
 		$field_remove_source = $this->source('modules-common/Form/events/Event.FormEditorRemoveField.php');
+		$field_publish_source = $this->source('modules-common/Form/events/Event.FormEditorPublish.php');
 		$field_update_source = $this->source('modules-common/Form/events/Event.FormEditorUpdateField.php');
 
-		foreach ([$create_source, $save_source, $publish_source, $preview_source, $fragment_source, $load_draft_source, $note_source, $field_move_source, $field_remove_source, $field_update_source] as $event_source) {
+		foreach ([$create_source, $save_source, $publish_source, $preview_source, $fragment_source, $load_draft_source, $note_source, $field_move_source, $field_remove_source, $field_publish_source, $field_update_source] as $event_source) {
 			$this->assertStringContainsString('FormBuilderEventHelper::authorizeContentAdmin', $event_source);
 		}
 
@@ -121,7 +122,11 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$this->assertStringContainsString("CmsMutationAuditService::withContext(\n\t\t\t\t'form_builder.update_draft_note'", $note_source);
 		$this->assertStringContainsString("CmsMutationAuditService::withContext(\n\t\t\t\t'form_editor.move_field'", $field_move_source);
 		$this->assertStringContainsString("CmsMutationAuditService::withContext(\n\t\t\t\t'form_editor.remove_field'", $field_remove_source);
+		$this->assertStringContainsString("CmsMutationAuditService::withContext(\n\t\t\t\t'form_editor.publish'", $field_publish_source);
 		$this->assertStringContainsString("CmsMutationAuditService::withContext(\n\t\t\t\t'form_editor.update_field'", $field_update_source);
+		$this->assertStringContainsString('CSRF_INLINE_FORM_COMMAND_FORM_ID', $field_publish_source);
+		$this->assertStringContainsString('publishDraft($definition_slug)', $field_publish_source);
+		$this->assertStringContainsString('EditModeMutationCommand::replaceForm($widget_connection_id)', $field_publish_source);
 		$this->assertStringNotContainsString('CmsMutationAuditService::withContext', $preview_source);
 		$this->assertStringNotContainsString('CmsMutationAuditService::withContext', $load_draft_source);
 		$this->assertStringNotContainsString('FormBuilderEventHelper::validateCsrfFromPost', $fragment_source);
@@ -210,12 +215,14 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 			'modules-common/Cms/classes/class.EditorInsertSurfaceBuilder.php',
 			'modules-common/Cms/classes/class.EditModeMutationCommand.php',
 			'modules-common/Cms/classes/class.EditModeMutationResponder.php',
+			'modules-common/Cms/classes/class.WidgetEditCommand.php',
 			'modules-common/Cms/classes/class.CmsFragmentRenderer.php',
 			'modules-common/Form/interfaces/interface.iFormEditorFieldCommandProvider.php',
 			'modules-common/Form/events/Event.FormSubmit.php',
 			'modules-common/Form/events/Event.FormEditorInsertField.php',
 			'modules-common/Form/events/Event.FormEditorMoveField.php',
 			'modules-common/Form/events/Event.FormEditorRemoveField.php',
+			'modules-common/Form/events/Event.FormEditorPublish.php',
 			'modules-common/Form/events/Event.FormEditorUpdateField.php',
 			'modules-common/Cms/events/Event.WidgetConnectionAdd.php',
 			'modules-common/Cms/events/Event.WidgetConnectionRemove.php',
@@ -223,6 +230,7 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 			'modules-common/Form/events/Event.FormBuilderEditorFragment.php',
 			'modules-common/Form/events/Event.FormBuilderLoadDraftVersion.php',
 			'modules-common/Form/events/Event.FormBuilderUpdateDraftNote.php',
+			'modules-common/Form/widgets/Widget.CaptureForm.php',
 			'modules-common/Form/classes/class.I18nReferenceAuditService.php',
 			'modules-common/Form/widgets/Widget.CaptureFormBuilder.php',
 			'modules-common/Form/widgets/Widget.CaptureFormList.php',
@@ -245,10 +253,14 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$insert_event_source = $this->source('modules-common/Form/events/Event.FormEditorInsertField.php');
 		$move_event_source = $this->source('modules-common/Form/events/Event.FormEditorMoveField.php');
 		$remove_event_source = $this->source('modules-common/Form/events/Event.FormEditorRemoveField.php');
+		$publish_event_source = $this->source('modules-common/Form/events/Event.FormEditorPublish.php');
 		$update_event_source = $this->source('modules-common/Form/events/Event.FormEditorUpdateField.php');
 		$widget_add_source = $this->source('modules-common/Cms/events/Event.WidgetConnectionAdd.php');
 		$widget_remove_source = $this->source('modules-common/Cms/events/Event.WidgetConnectionRemove.php');
 		$widget_swap_source = $this->source('modules-common/Cms/events/Event.WidgetConnectionSwap.php');
+		$capture_widget_source = $this->source('modules-common/Form/widgets/Widget.CaptureForm.php');
+		$widget_command_source = $this->source('modules-common/Cms/classes/class.WidgetEditCommand.php');
+		$widget_source = $this->source('modules-common/Cms/classes/class.Widget.php');
 		$editor_insert_source = $this->source('templates-common/default-SoAdmin/Cms/template.editorInsert.php');
 		$edit_bar_source = $this->source('templates-common/default-SoAdmin/Cms/template.editBar.common.php');
 
@@ -256,6 +268,14 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$this->assertStringContainsString('ensureDescriptorFieldUids($normalized)', $validator_source);
 		$this->assertStringContainsString('FormCaptureFieldIdentity::formTargetId($this->editableWidgetConnectionId())', $abstract_form_source);
 		$this->assertStringContainsString('FormCaptureFieldIdentity::fieldTargetId($widget_connection_id, $field_uid)', $abstract_form_source);
+		$this->assertStringContainsString('buildPublishCommand(WidgetConnection $connection)', $capture_widget_source);
+		$this->assertStringContainsString("Url::getUrl('form_editor.publish')", $capture_widget_source);
+		$this->assertStringContainsString('CSRF_INLINE_FORM_COMMAND_FORM_ID', $capture_widget_source);
+		$this->assertStringContainsString("public string \$method = 'get'", $widget_command_source);
+		$this->assertStringContainsString('public array $payload = []', $widget_command_source);
+		$this->assertStringContainsString("'method' => strtolower(\$command->method)", $widget_source);
+		$this->assertStringContainsString('hx-post', $edit_bar_source);
+		$this->assertStringContainsString('hx-vals', $edit_bar_source);
 		$this->assertStringContainsString('FormCaptureFieldIdentity::generateUid($this->existingFieldUids($descriptor))', $authoring_source);
 		$this->assertStringContainsString('renderElementTargetsFromWidget', $fragment_source);
 		$this->assertStringContainsString('if ($targets === []) {', $fragment_source);
@@ -271,6 +291,7 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$this->assertStringContainsString('EditModeMutationCommand::replaceForm($widget_connection_id, $reveal_target_id)', $insert_event_source);
 		$this->assertStringContainsString('EditModeMutationCommand::replaceForm($widget_connection_id, $reveal_target_id)', $move_event_source);
 		$this->assertStringContainsString('EditModeMutationCommand::replaceForm($widget_connection_id)', $remove_event_source);
+		$this->assertStringContainsString('EditModeMutationCommand::replaceForm($widget_connection_id)', $publish_event_source);
 		$this->assertStringContainsString('EditModeMutationCommand::replaceFormField($widget_connection_id, $field_uid)', $update_event_source);
 		$this->assertStringContainsString('EditModeMutationCommand::replaceSlot($slot_name, \'edit-widget-\' . (int)$connection_id)', $widget_add_source);
 		$this->assertStringContainsString('EditModeMutationCommand::replaceSlot($slot_name)', $widget_remove_source);

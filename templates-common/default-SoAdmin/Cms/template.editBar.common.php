@@ -8,8 +8,25 @@
 				} ?>
 				<td><?php //var_dump($widgetEditCommand);?></td>
 				<?php $icon = isset($widgetEditCommand['icon']) ? IconNames::tryFrom((string)$widgetEditCommand['icon']) : null; ?>
+				<?php
+				$method = strtolower((string)($widgetEditCommand['method'] ?? 'get'));
+				$payload = is_array($widgetEditCommand['payload'] ?? null) ? $widgetEditCommand['payload'] : [];
+				$hx_vals = $payload !== [] ? json_encode($payload, JSON_THROW_ON_ERROR) : '';
+				?>
 				<td>
-					<a style="display:block;margin-bottom:3px;" title="<?= (string)($widgetEditCommand['title'] ?? ''); ?>" href="<?= (string)($widgetEditCommand['url'] ?? ''); ?>"><?= Icons::get($icon); ?></a>
+					<?php if ($method === 'post'): ?>
+						<button
+							type="button"
+							style="display:block;margin-bottom:3px;"
+							title="<?= e((string)($widgetEditCommand['title'] ?? '')); ?>"
+							hx-post="<?= e((string)($widgetEditCommand['url'] ?? '')); ?>"
+							hx-swap="<?= e($edit_mode_hx_swap) ?>"
+							<?= $hx_vals !== '' ? 'hx-vals="' . e($hx_vals) . '"' : '' ?>
+							<?= !empty($widgetEditCommand['loader']) ? 'data-edit-mode-command' : '' ?>
+						><?= Icons::get($icon); ?></button>
+					<?php else: ?>
+						<a style="display:block;margin-bottom:3px;" title="<?= e((string)($widgetEditCommand['title'] ?? '')); ?>" href="<?= e((string)($widgetEditCommand['url'] ?? '')); ?>"><?= Icons::get($icon); ?></a>
+					<?php endif; ?>
 				</td>
 			<?php endforeach; ?>
 		<?php if ($this->getWidgetConnection()->getWidget()->defaultEditCommandsAreEnabled()): ?>

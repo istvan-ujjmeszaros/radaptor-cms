@@ -476,6 +476,74 @@ final class FormCaptureAuthoringService
 	/**
 	 * @return array<string, mixed>
 	 */
+	public function insertFieldIntoDraft(string $definition_slug, string $field_type, int $insert_index): array
+	{
+		$definition = $this->requireDbDefinition($definition_slug);
+		$version = $this->findActiveDraft((int)$definition->definition_id) ?? $this->findPublishedVersion($definition);
+
+		if (!$version instanceof EntityFormDefinitionVersion) {
+			throw new InvalidArgumentException('No editable capture form version is available.');
+		}
+
+		$descriptor = $this->descriptorFromVersion($definition, $version);
+		$field = $this->newFieldDescriptorFromPalette($definition_slug, $descriptor, $field_type);
+		$descriptor['fields'] = $this->insertFieldAtVisibleIndex(
+			is_array($descriptor['fields'] ?? null) ? $descriptor['fields'] : [],
+			$field,
+			$insert_index,
+		);
+
+		$result = $this->saveDraft($definition_slug, $descriptor, (string)$version->descriptor_hash);
+
+		return $result + [
+			'inserted_field' => $field,
+			'insert_index' => $insert_index,
+		];
+	}
+
+	/**
+	 * @param array<string, mixed> $submitted
+	 * @return array<string, mixed>
+	 */
+	public function updateFieldPropertiesInDraft(string $definition_slug, string $field_key, int $field_index, array $submitted): array
+	{
+		$definition = $this->requireDbDefinition($definition_slug);
+		$version = $this->findActiveDraft((int)$definition->definition_id) ?? $this->findPublishedVersion($definition);
+
+		if (!$version instanceof EntityFormDefinitionVersion) {
+			throw new InvalidArgumentException('No editable capture form version is available.');
+		}
+
+		$descriptor = $this->descriptorFromVersion($definition, $version);
+		$fields = [];
+
+		foreach (($descriptor['fields'] ?? []) as $field) {
+			if (is_array($field)) {
+				$fields[] = $field;
+			}
+		}
+		$field_offset = $this->findFieldOffset($fields, $field_key, $field_index);
+		$current_field = is_array($fields[$field_offset] ?? null) ? $fields[$field_offset] : [];
+		$fields[$field_offset] = (new FormCaptureFieldPropertyProvider())->applySubmittedValues(
+			$definition_slug,
+			$descriptor,
+			$current_field,
+			$submitted,
+			$fields,
+			$field_offset,
+		);
+		$descriptor['fields'] = array_values($fields);
+		$result = $this->saveDraft($definition_slug, $descriptor, (string)$version->descriptor_hash);
+
+		return $result + [
+			'updated_field' => $fields[$field_offset],
+			'field_index' => $field_offset,
+		];
+	}
+
+	/**
+	 * @return array<string, mixed>
+	 */
 	public function publishDraft(string $definition_slug, ?int $version_id = null): array
 	{
 		$definition = $this->requireDbDefinition($definition_slug);
@@ -717,6 +785,192 @@ final class FormCaptureAuthoringService
 		$version = $this->findActiveDraft((int)$definition->definition_id) ?? $this->findPublishedVersion($definition);
 
 		return $version instanceof EntityFormDefinitionVersion ? (string)$version->descriptor_hash : '';
+	}
+
+	/**
+	 * @param array<string, mixed> $descriptor
+	 * @return array<string, mixed>
+	 */
+	private function newFieldDescriptorFromPalette(string $definition_slug, array $descriptor, string $field_type): array
+	{
+		$item = $this->findPaletteItem($field_type);
+
+		if (!$item instanceof EditorPaletteItem) {
+			throw new InvalidArgumentException('The selected form element is not available.');
+		}
+
+		$field = $item->defaults;
+		$field['type'] = $item->type;
+		$default_name = trim((string)($field['name'] ?? $item->type));
+		$default_key = trim((string)($field['key'] ?? $default_name));
+		$existing_names = [];
+		$existing_keys = [];
+
+		foreach (($descriptor['fields'] ?? []) as $existing_field) {
+			if (!is_array($existing_field)) {
+				continue;
+			}
+
+			$name = trim((string)($existing_field['name'] ?? ''));
+			$key = trim((string)($existing_field['key'] ?? $name));
+
+			if ($name !== '') {
+				$existing_names[$name] = true;
+			}
+
+			if ($key !== '') {
+				$existing_keys[$key] = true;
+			}
+		}
+
+		$field['name'] = $this->uniqueFieldIdentifier($default_name !== '' ? $default_name : $item->type, $existing_names);
+		$key_base = $default_key === $default_name ? (string)$field['name'] : ($default_key !== '' ? $default_key : (string)$field['name']);
+		$field['key'] = $this->uniqueFieldIdentifier($key_base, $existing_keys);
+
+		if (($descriptor['i18n_mode'] ?? FormCaptureDescriptorSchemaValidator::I18N_MODE_LITERAL) === FormCaptureDescriptorSchemaValidator::I18N_MODE_KEYED) {
+			$field = $this->applyKeyedI18nDefaults($definition_slug, $field, $item->label);
+		}
+
+		return $field;
+	}
+
+	/**
+	 * @param array<string, mixed> $field
+	 * @return array<string, mixed>
+	 */
+	private function applyKeyedI18nDefaults(string $definition_slug, array $field, string $label_text): array
+	{
+		$field_key = (string)$field['key'];
+		$key_prefix = FormCaptureDescriptorSchemaValidator::i18nKeyPrefixForDefinition($definition_slug)
+			. '.fields.' . $field_key;
+		$label = is_array($field['label'] ?? null) ? $field['label'] : ['text' => $label_text];
+		$label['text'] = (string)($label['text'] ?? $label_text);
+		$label['key'] = $key_prefix . '.label';
+		$field['label'] = $label;
+
+		if (is_array($field['values'] ?? null)) {
+			foreach ($field['values'] as $index => $option) {
+				if (!is_array($option)) {
+					continue;
+				}
+
+				$option_segment = $this->i18nKeySegment((string)($option['value'] ?? 'option_' . ((int)$index + 1)));
+				$option_label = is_array($option['label'] ?? null) ? $option['label'] : [
+					'text' => (string)($option['label'] ?? $option['value'] ?? $option_segment),
+				];
+				$option_label['text'] = (string)($option_label['text'] ?? $option['value'] ?? $option_segment);
+				$option_label['key'] = $key_prefix . '.options.' . $option_segment . '.label';
+				$option['label'] = $option_label;
+				$field['values'][$index] = $option;
+			}
+		}
+
+		return $field;
+	}
+
+	private function findPaletteItem(string $field_type): ?EditorPaletteItem
+	{
+		$field_type = trim($field_type);
+		$provider = new FormCaptureEditorPaletteProvider();
+
+		foreach ($provider->getPaletteItems() as $item) {
+			if ($item->type === $field_type && in_array(FormCaptureEditorPaletteProvider::TARGET_FIELDS, $item->dropTargetIds, true)) {
+				return $item;
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * @param array<string, true> $existing
+	 */
+	private function uniqueFieldIdentifier(string $base, array $existing): string
+	{
+		$base = strtolower(trim($base));
+		$base = (string)preg_replace('/[^a-z0-9_]+/', '_', $base);
+		$base = trim($base, '_');
+
+		if ($base === '' || preg_match('/^[a-z]/', $base) !== 1) {
+			$base = 'field_' . $base;
+		}
+
+		$candidate = $base;
+		$suffix = 2;
+
+		while (isset($existing[$candidate])) {
+			$candidate = $base . '_' . $suffix;
+			++$suffix;
+		}
+
+		return $candidate;
+	}
+
+	private function i18nKeySegment(string $value): string
+	{
+		$segment = strtolower(trim($value));
+		$segment = (string)preg_replace('/[^a-z0-9_]+/', '_', $segment);
+		$segment = trim($segment, '_');
+
+		return $segment !== '' && preg_match('/^[a-z]/', $segment) === 1 ? $segment : 'option';
+	}
+
+	/**
+	 * @param list<array<string, mixed>> $fields
+	 * @param array<string, mixed> $field
+	 * @return list<array<string, mixed>>
+	 */
+	private function insertFieldAtVisibleIndex(array $fields, array $field, int $insert_index): array
+	{
+		$insert_index = max(0, $insert_index);
+		$visible_index = 0;
+
+		foreach ($fields as $offset => $existing_field) {
+			if (!is_array($existing_field) || (string)($existing_field['type'] ?? '') === 'hidden') {
+				continue;
+			}
+
+			if ($visible_index === $insert_index) {
+				array_splice($fields, $offset, 0, [$field]);
+
+				return array_values($fields);
+			}
+
+			++$visible_index;
+		}
+
+		$fields[] = $field;
+
+		return array_values($fields);
+	}
+
+	/**
+	 * @param list<array<string, mixed>> $fields
+	 */
+	private function findFieldOffset(array $fields, string $field_key, int $field_index): int
+	{
+		$field_key = trim($field_key);
+
+		if ($field_key !== '') {
+			foreach ($fields as $offset => $field) {
+				if (!is_array($field)) {
+					continue;
+				}
+
+				$key = trim((string)($field['key'] ?? $field['name'] ?? ''));
+				$name = trim((string)($field['name'] ?? ''));
+
+				if ($field_key === $key || $field_key === $name) {
+					return $offset;
+				}
+			}
+		}
+
+		if ($field_index >= 0 && isset($fields[$field_index]) && is_array($fields[$field_index])) {
+			return $field_index;
+		}
+
+		throw new InvalidArgumentException('Capture form field does not exist.');
 	}
 
 	/**

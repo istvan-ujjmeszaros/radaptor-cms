@@ -42,7 +42,9 @@ class WidgetCaptureForm extends AbstractWidget
 		}
 
 		try {
-			$resolution = FormDefinitionResolver::resolve($definition_slug);
+			$resolution = FormDefinitionResolver::resolveForRender($definition_slug, [
+				'structure_editable' => $tree_build_context->isEditable() && Roles::hasRole(RoleList::ROLE_CONTENT_ADMIN),
+			]);
 		} catch (FormCaptureRuntimeException) {
 			return $this->buildStatusTree([
 				'severity' => 'warning',
@@ -65,6 +67,7 @@ class WidgetCaptureForm extends AbstractWidget
 				? Url::sanitizeRefererUrl((string)Request::_GET('referer'))
 				: Url::getCurrentUrlForReferer(),
 			'form_definition_resolution' => $resolution,
+			'structure_editable' => $resolution->isStructureEditable(),
 		];
 		$form = Form::factory($definition_slug, $form_instance_id, $tree_build_context, null, $render_context);
 

@@ -479,25 +479,38 @@ abstract class AbstractWebpageViewBase implements iView, iWebpageComposer
 		++$this->_widgetInsertCounter;
 
 		$strings = self::buildWidgetInserterStrings();
-		$props = [
+		$clipboard = WidgetConnection::getClipboard();
+		$target = [
+			'pageid' => $this->getPageId(),
 			'slot_name' => $slot_name,
-			'counter' => $this->_widgetInsertCounter,
-			'visibleWidgets' => $this->_visibleWidgets,
+			'seq' => $connection?->seq(),
 		];
 
-		return SduiNode::create(
-			component: 'widgetInsert',
-			props: $props,
-			contents: [
-				'add_widget_from_list' => [
-					SduiNode::create('addWidgetFromList', $props, strings: $strings),
-				],
+		return (new EditorInsertSurfaceBuilder())->build(
+			scope: EditorInsertSurfaceBuilder::SCOPE_WIDGET,
+			variant: EditorInsertSurfaceBuilder::VARIANT_WIDGET,
+			transport: EditorInsertSurfaceBuilder::TRANSPORT_STANDALONE_FORM,
+			items: array_map(static fn (array $widget): EditorInsertItem => EditorInsertItem::fromWidgetMetadata($widget), $this->_visibleWidgets),
+			target: $target,
+			insert_url: Url::getUrl('widgetConnection.add', $target),
+			counter: $this->_widgetInsertCounter,
+			strings: $strings,
+			extra_props: [
+				'slot_name' => $slot_name,
+				'visibleWidgets' => $this->_visibleWidgets,
+				'clipboard' => $clipboard,
+				'clipboard_url' => $clipboard === null || $clipboard === false
+					? ''
+					: Url::getUrl('widgetConnection.add', array_replace($target, [
+						'widget_name' => $clipboard,
+					])),
+				'item_payload_name' => 'widget_name',
+				'button_icon' => IconNames::WIDGET_ADD->value,
+				'clipboard_icon' => IconNames::WIDGET_INSERT->value,
 			],
-			type: SduiNode::TYPE_SUB,
 			meta: [
 				'widget_connection' => WidgetConnection::toTreeMetadata($connection),
 			],
-			strings: $strings,
 		);
 	}
 

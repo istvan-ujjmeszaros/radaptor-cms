@@ -694,5 +694,20 @@ locale_admin,message.disabled,,hu-HU,"Locale {locale} disabled.","A(z) {locale} 
 locale_admin,message.error,,hu-HU,"Locale {locale} could not be updated.","A(z) {locale} locale nem módosítható.",0,0,"A(z) {locale} locale nem módosítható."
 locale_admin,message.invalid_locale,,hu-HU,"Invalid locale.","Érvénytelen locale.",0,0,"Érvénytelen locale."
 locale_admin,message.service_unavailable,,hu-HU,"Locale administration is unavailable until the locale infrastructure is installed.","A nyelvkezelés nem érhető el, amíg a locale infrastruktúra nincs telepítve.",0,0,"A nyelvkezelés nem érhető el, amíg a locale infrastruktúra nincs telepítve."
+form,insert.button,,hu-HU,Insert,Beszúrás,0,0,Beszúrás
+form,insert.icon_title,,hu-HU,"Insert form element","Űrlapelem beszúrása",0,0,"Űrlapelem beszúrása"
+form,insert.error_unavailable,,hu-HU,"This form cannot be edited here.","Ez az űrlap itt nem szerkeszthető.",0,0,"Ez az űrlap itt nem szerkeszthető."
+form,insert.error_invalid_type,,hu-HU,"The selected form element is not available.","A kiválasztott űrlapelem nem érhető el.",0,0,"A kiválasztott űrlapelem nem érhető el."
+form,insert.error_save_failed,,hu-HU,"Unable to update the form draft.","Az űrlap piszkozata nem frissíthető.",0,0,"Az űrlap piszkozata nem frissíthető."
+form,insert.status_draft_updated,,hu-HU,"Form draft updated. Publish it from the form builder when ready.","Az űrlap piszkozata frissítve. Ha kész, tedd közzé az űrlapépítőből.",0,0,"Az űrlap piszkozata frissítve. Ha kész, tedd közzé az űrlapépítőből."
+form,field_edit.button,,hu-HU,Edit,Szerkesztés,0,0,Szerkesztés
+form,field_edit.icon_title,,hu-HU,"Edit form field","Űrlapmező szerkesztése",0,0,"Űrlapmező szerkesztése"
+form,field_edit.title,,hu-HU,"Form field properties","Űrlapmező tulajdonságai",0,0,"Űrlapmező tulajdonságai"
+form,field_edit.action.save,,hu-HU,"Save draft","Piszkozat mentése",0,0,"Piszkozat mentése"
+form,field_edit.action.close,,hu-HU,Close,Bezárás,0,0,Bezárás
+form,field_edit.error_unavailable,,hu-HU,"This form field cannot be edited here.","Ez az űrlapmező itt nem szerkeszthető.",0,0,"Ez az űrlapmező itt nem szerkeszthető."
+form,field_edit.error_invalid,,hu-HU,"The submitted form field properties are invalid.","A beküldött űrlapmező-tulajdonságok érvénytelenek.",0,0,"A beküldött űrlapmező-tulajdonságok érvénytelenek."
+form,field_edit.error_save_failed,,hu-HU,"Unable to update the form field draft.","Az űrlapmező piszkozata nem frissíthető.",0,0,"Az űrlapmező piszkozata nem frissíthető."
+form,field_edit.status_draft_updated,,hu-HU,"Form field draft updated. Publish it from the form builder when ready.","Az űrlapmező piszkozata frissítve. Ha kész, tedd közzé az űrlapépítőből.",0,0,"Az űrlapmező piszkozata frissítve. Ha kész, tedd közzé az űrlapépítőből."
 admin,i18n.col.allow_source_match,,hu-HU,"Source match",Forrásegyezés,0,0,Forrásegyezés
 admin,i18n.allow_source_match.help,,hu-HU,"Allow only when the translation intentionally matches the source text.","Csak akkor engedélyezd, ha a fordítás szándékosan egyezik a forrásszöveggel.",0,0,"Csak akkor engedélyezd, ha a fordítás szándékosan egyezik a forrásszöveggel."

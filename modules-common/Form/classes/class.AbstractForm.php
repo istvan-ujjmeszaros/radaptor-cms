@@ -329,8 +329,12 @@ abstract class AbstractForm implements iForm, iListable
 	{
 		$hidden_fields = [];
 		$rows = [];
+		$field_property_forms = [];
 		$current_row_items = [];
 		$current_row_id = null;
+		$structure_editable = $this->canEditStructure();
+		$visible_insert_index = 0;
+		$insert_counter = 0;
 
 		foreach ($this->_form_inputs as $input) {
 			$input_tree = $input->buildTree();
@@ -350,7 +354,15 @@ abstract class AbstractForm implements iForm, iListable
 				$current_row_id = $this->getRowId($input->fieldname);
 			}
 
-			$current_row_items[] = $input_tree;
+			if ($structure_editable) {
+				$current_row_items[] = $this->buildStructureInsertTree($visible_insert_index, ++$insert_counter);
+				$current_row_items[] = $this->buildEditableFieldTree($input, $input_tree, $visible_insert_index);
+				$field_property_forms[] = $this->buildFieldPropertyFormTree($input, $visible_insert_index);
+			} else {
+				$current_row_items[] = $input_tree;
+			}
+
+			++$visible_insert_index;
 
 			if ($input->last_in_row) {
 				$rows[] = $this->buildRowTree((string)$current_row_id, $current_row_items);
@@ -363,12 +375,20 @@ abstract class AbstractForm implements iForm, iListable
 			$rows[] = $this->buildRowTree((string)$current_row_id, $current_row_items);
 		}
 
+		if ($structure_editable && $visible_insert_index > 0) {
+			$rows[] = $this->buildRowTree(
+				$this->getFormId() . '_structure_insert_after',
+				[$this->buildStructureInsertTree($visible_insert_index, ++$insert_counter)]
+			);
+		}
+
 		RequestContextHolder::disablePersistentCacheWrite();
 		$submit_context = FormSubmitContext::fromForm($this, $this->_render_context);
 		$hidden_fields[] = $this->buildCsrfTokenTree($submit_context);
 		$contents = [
 			'hidden_fields' => $hidden_fields,
 			'rows' => $rows,
+			'post_form_chrome' => $field_property_forms,
 		];
 
 		return SduiNode::create(
@@ -400,6 +420,188 @@ abstract class AbstractForm implements iForm, iListable
 				],
 			],
 		);
+	}
+
+	public function canEditStructure(): bool
+	{
+		$resolution = $this->_render_context['form_definition_resolution'] ?? null;
+
+		return $this->_tree_build_context->isEditable()
+			&& $resolution instanceof FormDefinitionResolution
+			&& $resolution->isStructureEditable()
+			&& Roles::hasRole(RoleList::ROLE_CONTENT_ADMIN);
+	}
+
+	/**
+	 * @return array<string, mixed>
+	 */
+	private function buildStructureInsertTree(int $insert_index, int $counter): array
+	{
+		$resolution = $this->_render_context['form_definition_resolution'] ?? null;
+
+		if (!$resolution instanceof FormDefinitionResolution) {
+			Kernel::abort('Editable form insert requested without a form definition resolution.');
+		}
+
+		$target = $this->buildEditableFormTarget($resolution) + [
+			'insert_index' => $insert_index,
+		];
+
+		return (new EditorInsertSurfaceBuilder())->build(
+			scope: EditorInsertSurfaceBuilder::SCOPE_FORM,
+			variant: EditorInsertSurfaceBuilder::VARIANT_FORM,
+			transport: EditorInsertSurfaceBuilder::TRANSPORT_INSIDE_FORM,
+			items: $this->buildStructureInsertItems(),
+			target: $target,
+			insert_url: Url::getUrl('form_editor.insert_field'),
+			counter: $this->getFormId() . '-' . $counter,
+			strings: [
+				'form.insert.button' => t('form.insert.button'),
+				'form.insert.icon_title' => t('form.insert.icon_title'),
+			],
+			extra_props: [
+				'definition_slug' => $resolution->definitionSlug(),
+				'insert_index' => $insert_index,
+				'csrf_token' => FormSubmitContext::issueCsrfTokenForForm(FormBuilderEventHelper::CSRF_INLINE_INSERT_FORM_ID),
+				'inside_form' => true,
+				'item_payload_name' => 'form_edit_insert',
+				'button_icon' => IconNames::PLUS->value,
+			],
+		);
+	}
+
+	/**
+	 * @param array<string, mixed> $input_tree
+	 * @return array<string, mixed>
+	 */
+	private function buildEditableFieldTree(FormInput $input, array $input_tree, int $field_index): array
+	{
+		$field_key = $input->getKey();
+		$panel_id = $this->fieldPropertyPanelId($field_index, $field_key);
+		$provider = new FormCaptureFieldPropertyProvider();
+
+		return SduiNode::create(
+			'formEditorField',
+			[
+				'form_id' => $this->getFormId(),
+				'field_key' => $field_key,
+				'field_index' => $field_index,
+				'field_label' => $input->label ?? $field_key,
+				'panel_id' => $panel_id,
+			],
+			[
+				'field' => [$input_tree],
+			],
+			strings: $provider->getStrings(),
+		);
+	}
+
+	/**
+	 * @return array<string, mixed>
+	 */
+	private function buildFieldPropertyFormTree(FormInput $input, int $field_index): array
+	{
+		$resolution = $this->_render_context['form_definition_resolution'] ?? null;
+
+		if (!$resolution instanceof FormDefinitionResolution) {
+			Kernel::abort('Editable form field properties requested without a form definition resolution.');
+		}
+
+		$provider = new FormCaptureFieldPropertyProvider();
+		$field = $this->findDescriptorFieldForInput($resolution->descriptor(), $input, $field_index);
+		$panel_id = $this->fieldPropertyPanelId($field_index, $input->getKey());
+
+		return SduiNode::create(
+			'captureFieldProperties',
+			[
+				'mode' => FormCaptureFieldPropertyProvider::MODE_EDITMODE,
+				'properties' => $provider->getProperties(),
+				'field' => $field,
+				'values' => $provider->valuesForField($field),
+				'form_id' => $this->getFormId() . '_field_properties_' . $field_index,
+				'panel_id' => $panel_id,
+				'field_index' => $field_index,
+				'action' => Url::getUrl('form_editor.update_field'),
+				'target' => $this->buildEditableFormTarget($resolution),
+				'csrf_token' => FormSubmitContext::issueCsrfTokenForForm(FormBuilderEventHelper::CSRF_INLINE_FIELD_PROPERTIES_FORM_ID),
+			],
+			strings: $provider->getStrings(),
+		);
+	}
+
+	/**
+	 * @return array<string, mixed>
+	 */
+	private function buildEditableFormTarget(FormDefinitionResolution $resolution): array
+	{
+		return [
+			'definition_slug' => $resolution->definitionSlug(),
+			'host_page_id' => $this->_render_context['host_page_id'] ?? $this->_tree_build_context->getPageId(),
+			'widget_connection_id' => $this->_render_context['widget_connection_id'] ?? null,
+			'return_target' => $this->_render_context['return_target'] ?? Url::getCurrentUrlForReferer(),
+		];
+	}
+
+	/**
+	 * @param array<string, mixed> $descriptor
+	 * @return array<string, mixed>
+	 */
+	private function findDescriptorFieldForInput(array $descriptor, FormInput $input, int $field_index): array
+	{
+		$field_key = $input->getKey();
+
+		foreach (($descriptor['fields'] ?? []) as $field) {
+			if (!is_array($field)) {
+				continue;
+			}
+
+			$key = (string)($field['key'] ?? $field['name'] ?? '');
+			$name = (string)($field['name'] ?? '');
+
+			if ($field_key === $key || $field_key === $name || $input->fieldname === $name) {
+				return $field;
+			}
+		}
+
+		$field = $descriptor['fields'][$field_index] ?? null;
+
+		if (is_array($field)) {
+			return $field;
+		}
+
+		return [
+			'type' => $input->getInputtype(),
+			'name' => $input->fieldname,
+			'key' => $field_key,
+			'label' => ['text' => $input->label ?? $field_key],
+			'validators' => [],
+		];
+	}
+
+	private function fieldPropertyPanelId(int $field_index, string $field_key): string
+	{
+		$safe_key = (string)preg_replace('/[^A-Za-z0-9_-]+/', '-', $field_key);
+
+		return $this->getFormId() . '-field-properties-' . $field_index . '-' . trim($safe_key, '-');
+	}
+
+	/**
+	 * @return list<EditorInsertItem>
+	 */
+	private function buildStructureInsertItems(): array
+	{
+		$provider = new FormCaptureEditorPaletteProvider();
+		$items = [];
+
+		foreach ($provider->getPaletteItems() as $item) {
+			if (!in_array(FormCaptureEditorPaletteProvider::TARGET_FIELDS, $item->dropTargetIds, true)) {
+				continue;
+			}
+
+			$items[] = EditorInsertItem::fromPaletteItem($item);
+		}
+
+		return $items;
 	}
 
 	/**

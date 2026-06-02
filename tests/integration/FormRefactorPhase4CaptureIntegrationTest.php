@@ -33,6 +33,11 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 			EventFormBuilderPublish::class,
 			EventFormBuilderLoadDraftVersion::class,
 			EventFormBuilderUpdateDraftNote::class,
+			EventFormEditorInsertField::class,
+			EventFormEditorUpdateField::class,
+			EditorInsertItem::class,
+			EditorInsertSurfaceBuilder::class,
+			FormCaptureFieldPropertyProvider::class,
 			I18nTranslationService::class,
 		] as $class_name) {
 			if (!class_exists($class_name)) {
@@ -992,6 +997,160 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		]));
 	}
 
+	public function testEditableDbCaptureFormTreeIncludesEditorInsertNodes(): void
+	{
+		$this->impersonateAndRequireRole('admin_developer', RoleList::ROLE_CONTENT_ADMIN);
+		$definition_slug = 'capture-phase4-inline-insert-tree';
+		(new FormCaptureDefinitionRepository())->upsertPublishedDefinition($definition_slug, $this->descriptor(), $this->defaultSecurity(), 'db');
+		$resolution = FormDefinitionResolver::resolveForRender($definition_slug, ['structure_editable' => true]);
+
+		$this->assertInstanceOf(FormDefinitionResolution::class, $resolution);
+		$this->assertTrue($resolution->isStructureEditable());
+
+		$form = new CaptureForm(
+			$definition_slug,
+			'phase4_inline_insert_tree',
+			$this->treeContext(true),
+			'/capture-return',
+			[
+				'host_page_id' => 1,
+				'widget_connection_id' => 2,
+				'form_definition_resolution' => $resolution,
+			],
+		);
+		$tree = $form->buildTree();
+		$insert_nodes = $this->formRowEditorInsertNodes($tree);
+		$field_nodes = $this->nodesByComponent($tree['contents']['rows'] ?? [], 'formEditorField');
+		$property_nodes = $this->nodesByComponent($tree['contents']['post_form_chrome'] ?? [], 'captureFieldProperties');
+
+		$this->assertCount(5, $insert_nodes);
+		$this->assertCount(4, $field_nodes);
+		$this->assertCount(4, $property_nodes);
+		$this->assertSame(EditorInsertSurfaceBuilder::SCOPE_FORM, $insert_nodes[0]['props']['scope'] ?? null);
+		$this->assertSame(EditorInsertSurfaceBuilder::VARIANT_FORM, $insert_nodes[0]['props']['variant'] ?? null);
+		$this->assertSame(EditorInsertSurfaceBuilder::TRANSPORT_INSIDE_FORM, $insert_nodes[0]['props']['transport'] ?? null);
+		$this->assertSame(0, $insert_nodes[0]['props']['insert_index'] ?? null);
+		$this->assertSame(4, $insert_nodes[4]['props']['insert_index'] ?? null);
+		$this->assertContains('textarea', array_column($insert_nodes[0]['props']['items'] ?? [], 'type'));
+		$this->assertSame('name_key', $field_nodes[0]['props']['field_key'] ?? null);
+		$this->assertSame(FormCaptureFieldPropertyProvider::MODE_EDITMODE, $property_nodes[0]['props']['mode'] ?? null);
+		$this->assertSame(Url::getUrl('form_editor.update_field'), $property_nodes[0]['props']['action'] ?? null);
+		$this->assertSame([], $this->nodesByComponent($tree['contents']['hidden_fields'] ?? [], 'editorInsert'));
+		$this->assertSame([], $this->nodesByComponent($tree['contents']['rows'] ?? [], 'captureFieldProperties'));
+	}
+
+	public function testCaptureFormTreeOmitsEditorInsertNodesOutsideEditableDbDraftContext(): void
+	{
+		$this->impersonateAndRequireRole('admin_developer', RoleList::ROLE_CONTENT_ADMIN);
+		$shipped_slug = 'capture-phase4-inline-insert-shipped';
+		(new FormCaptureDefinitionRepository())->upsertPublishedDefinition($shipped_slug, $this->descriptor(), $this->defaultSecurity(), 'shipped');
+		$editable_resolution = FormDefinitionResolver::resolveForRender($shipped_slug, ['structure_editable' => true]);
+
+		$this->assertInstanceOf(FormDefinitionResolution::class, $editable_resolution);
+		$this->assertFalse($editable_resolution->isStructureEditable());
+		$form = new CaptureForm(
+			$shipped_slug,
+			'phase4_inline_insert_shipped',
+			$this->treeContext(true),
+			'/capture-return',
+			[
+				'host_page_id' => 1,
+				'widget_connection_id' => 2,
+				'form_definition_resolution' => $editable_resolution,
+			],
+		);
+		$this->assertSame([], $this->formRowEditorInsertNodes($form->buildTree()));
+	}
+
+	public function testInlineInsertUpdatesDraftWithoutChangingPublishedCaptureDescriptor(): void
+	{
+		$definition_slug = 'capture-phase4-inline-insert-draft';
+		$published = (new FormCaptureDefinitionRepository())->upsertPublishedDefinition($definition_slug, $this->descriptor(), $this->defaultSecurity(), 'db');
+		$result = (new FormCaptureAuthoringService())->insertFieldIntoDraft($definition_slug, 'text', 0);
+		$public_resolution = FormDefinitionResolver::resolve($definition_slug);
+		$editable_resolution = FormDefinitionResolver::resolveForRender($definition_slug, ['structure_editable' => true]);
+
+		$this->assertSame('saved_draft', $result['action'] ?? null);
+		$this->assertInstanceOf(FormDefinitionResolution::class, $public_resolution);
+		$this->assertSame($published->versionId(), $public_resolution->versionId());
+		$this->assertSame('name', $public_resolution->descriptor()['fields'][0]['name'] ?? null);
+		$this->assertInstanceOf(FormDefinitionResolution::class, $editable_resolution);
+		$this->assertTrue($editable_resolution->isStructureEditable());
+		$this->assertNotSame($published->versionId(), $editable_resolution->versionId());
+		$this->assertSame('text', $editable_resolution->descriptor()['fields'][0]['name'] ?? null);
+		$this->assertSame('name', $editable_resolution->descriptor()['fields'][1]['name'] ?? null);
+	}
+
+	public function testInlineFieldPropertyUpdateUpdatesDraftWithoutChangingPublishedCaptureDescriptor(): void
+	{
+		$definition_slug = 'capture-phase4-inline-field-properties-draft';
+		$published = (new FormCaptureDefinitionRepository())->upsertPublishedDefinition($definition_slug, $this->descriptor(), $this->defaultSecurity(), 'db');
+		$result = (new FormCaptureAuthoringService())->updateFieldPropertiesInDraft($definition_slug, 'topic', 2, [
+			'field_label' => 'Subject',
+			'field_name' => 'subject',
+			'field_key_new' => 'subject_key',
+			'field_required' => true,
+			'field_options' => "sales=Sales\nsupport=Support",
+		]);
+		$public_resolution = FormDefinitionResolver::resolve($definition_slug);
+		$editable_resolution = FormDefinitionResolver::resolveForRender($definition_slug, ['structure_editable' => true]);
+
+		$this->assertSame('saved_draft', $result['action'] ?? null);
+		$this->assertInstanceOf(FormDefinitionResolution::class, $public_resolution);
+		$this->assertSame($published->versionId(), $public_resolution->versionId());
+		$this->assertSame('topic', $public_resolution->descriptor()['fields'][2]['name'] ?? null);
+		$this->assertInstanceOf(FormDefinitionResolution::class, $editable_resolution);
+		$this->assertTrue($editable_resolution->isStructureEditable());
+		$this->assertNotSame($published->versionId(), $editable_resolution->versionId());
+
+		$field = $editable_resolution->descriptor()['fields'][2] ?? [];
+		$validators = is_array($field['validators'] ?? null) ? $field['validators'] : [];
+
+		$this->assertSame('subject', $field['name'] ?? null);
+		$this->assertSame('subject_key', $field['key'] ?? null);
+		$this->assertSame('Subject', $field['label']['text'] ?? null);
+		$this->assertSame('sales', $field['values'][0]['value'] ?? null);
+		$this->assertSame('Sales', $field['values'][0]['label']['text'] ?? null);
+		$this->assertNotEmpty(array_filter($validators, static fn (array $validator): bool => ($validator['type'] ?? '') === 'required'));
+		$this->assertNotEmpty(array_filter($validators, static fn (array $validator): bool => ($validator['type'] ?? '') === 'enum' && ($validator['values'] ?? []) === ['sales', 'support']));
+	}
+
+	public function testInlineInsertAddsOptionI18nKeysForKeyedCaptureDescriptors(): void
+	{
+		$definition_slug = 'capture-phase4-inline-insert-keyed';
+		$key_prefix = FormCaptureDescriptorSchemaValidator::i18nKeyPrefixForDefinition($definition_slug);
+		$descriptor = [
+			'kind' => 'capture',
+			'i18n_mode' => FormCaptureDescriptorSchemaValidator::I18N_MODE_KEYED,
+			'title' => [
+				'key' => $key_prefix . '.title',
+				'text' => 'Keyed inline insert',
+			],
+			'fields' => [
+				[
+					'type' => 'text',
+					'name' => 'name',
+					'key' => 'name',
+					'label' => [
+						'key' => $key_prefix . '.fields.name.label',
+						'text' => 'Name',
+					],
+				],
+			],
+		];
+
+		(new FormCaptureDefinitionRepository())->upsertPublishedDefinition($definition_slug, $descriptor, $this->defaultSecurity(), 'db');
+		(new FormCaptureAuthoringService())->insertFieldIntoDraft($definition_slug, 'select', 1);
+		$editable_resolution = FormDefinitionResolver::resolveForRender($definition_slug, ['structure_editable' => true]);
+
+		$this->assertInstanceOf(FormDefinitionResolution::class, $editable_resolution);
+		$inserted = $editable_resolution->descriptor()['fields'][1] ?? [];
+		$this->assertSame('select', $inserted['type'] ?? null);
+		$this->assertSame($key_prefix . '.fields.select.label', $inserted['label']['key'] ?? null);
+		$this->assertSame($key_prefix . '.fields.select.options.option_1.label', $inserted['values'][0]['label']['key'] ?? null);
+		$this->assertSame($key_prefix . '.fields.select.options.option_2.label', $inserted['values'][1]['label']['key'] ?? null);
+	}
+
 	public function testBuilderKeyedI18nDescriptorCreatesDefaultLocaleRows(): void
 	{
 		$definition_slug = 'capture-phase4j-builder-i18n';
@@ -1463,6 +1622,8 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 			new EventFormBuilderPublish(),
 			new EventFormBuilderLoadDraftVersion(),
 			new EventFormBuilderUpdateDraftNote(),
+			new EventFormEditorInsertField(),
+			new EventFormEditorUpdateField(),
 		];
 
 		$this->impersonate(null);
@@ -1631,9 +1792,13 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		];
 	}
 
-	private function treeContext(): iTreeBuildContext
+	private function treeContext(bool $editable = false): iTreeBuildContext
 	{
-		return new class () implements iTreeBuildContext {
+		return new class ($editable) implements iTreeBuildContext {
+			public function __construct(private readonly bool $editable)
+			{
+			}
+
 			public function getPageId(): ?int
 			{
 				return 1;
@@ -1659,7 +1824,7 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 
 			public function isEditable(): bool
 			{
-				return false;
+				return $this->editable;
 			}
 
 			public function getTheme(): ?AbstractThemeData
@@ -1671,6 +1836,61 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 			{
 			}
 		};
+	}
+
+	/**
+	 * @param mixed $node
+	 * @return list<array<string, mixed>>
+	 */
+	private function nodesByComponent(mixed $node, string $component): array
+	{
+		$matches = [];
+
+		if (!is_array($node)) {
+			return [];
+		}
+
+		if (($node['component'] ?? null) === $component) {
+			$matches[] = $node;
+		}
+
+		foreach ($node as $key => $value) {
+			if ($key === 'slots') {
+				continue;
+			}
+
+			if (!is_array($value)) {
+				continue;
+			}
+
+			foreach ($this->nodesByComponent($value, $component) as $match) {
+				$matches[] = $match;
+			}
+		}
+
+		return $matches;
+	}
+
+	/**
+	 * @param array<string, mixed> $form_tree
+	 * @return list<array<string, mixed>>
+	 */
+	private function formRowEditorInsertNodes(array $form_tree): array
+	{
+		$matches = [];
+		$rows = is_array($form_tree['contents']['rows'] ?? null) ? $form_tree['contents']['rows'] : [];
+
+		foreach ($rows as $row) {
+			$items = is_array($row['contents']['content'] ?? null) ? $row['contents']['content'] : [];
+
+			foreach ($items as $item) {
+				if (is_array($item) && ($item['component'] ?? null) === 'editorInsert') {
+					$matches[] = $item;
+				}
+			}
+		}
+
+		return $matches;
 	}
 
 	private function expectedClientFingerprintHash(string $value, string $context): string

@@ -274,65 +274,16 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 						<div data-form-builder-target="emptyProperties" class="form-builder__empty-properties">
 							<?= e($this->strings['form.builder.no_selection']) ?>
 						</div>
-						<div data-form-builder-target="fieldProperties" hidden>
-							<label class="form-label w-100">
-								<span class="form-builder__property-label">
-									<span><?= e($this->strings['form.builder.label.field_label']) ?></span>
-									<a
-										class="form-builder__i18n-property-link"
-										data-form-builder-target="fieldLabelTranslationLink"
-										data-action="click->form-builder#stopPropertyLinkClick"
-										href="#"
-										target="_blank"
-										rel="noopener"
-										aria-label="<?= e($this->strings['form.builder.action.open_translations']) ?>"
-										title="<?= e($this->strings['form.builder.action.open_translations']) ?>"
-										hidden
-									><i class="bi bi-translate" aria-hidden="true"></i></a>
-								</span>
-								<input type="text" class="form-control form-control-sm" data-form-builder-target="fieldLabelInput" data-action="input->form-builder#updateSelectedField">
-							</label>
-							<label class="form-label w-100">
-								<span><?= e($this->strings['form.builder.label.field_name']) ?></span>
-								<input type="text" class="form-control form-control-sm" data-form-builder-target="fieldNameInput" data-action="input->form-builder#updateSelectedField">
-							</label>
-							<label class="form-label w-100">
-								<span><?= e($this->strings['form.builder.label.field_key']) ?></span>
-								<input type="text" class="form-control form-control-sm" data-form-builder-target="fieldKeyInput" data-action="change->form-builder#confirmAndUpdateFieldKey">
-							</label>
-							<label class="form-check form-builder__checkbox">
-								<input type="checkbox" class="form-check-input" data-form-builder-target="fieldRequiredInput" data-action="change->form-builder#updateSelectedField">
-								<span><?= e($this->strings['form.builder.label.required']) ?></span>
-								<a
-									class="form-builder__i18n-property-link ms-auto"
-									data-form-builder-target="fieldRequiredTranslationLink"
-									data-action="click->form-builder#stopPropertyLinkClick"
-									href="#"
-									target="_blank"
-									rel="noopener"
-									aria-label="<?= e($this->strings['form.builder.action.open_translations']) ?>"
-									title="<?= e($this->strings['form.builder.action.open_translations']) ?>"
-									hidden
-								><i class="bi bi-translate" aria-hidden="true"></i></a>
-							</label>
-							<label class="form-label w-100 mb-0" data-form-builder-target="fieldOptionsGroup">
-								<span class="form-builder__property-label">
-									<span><?= e($this->strings['form.builder.label.options']) ?></span>
-									<a
-										class="form-builder__i18n-property-link"
-										data-form-builder-target="fieldOptionsTranslationLink"
-										data-action="click->form-builder#stopPropertyLinkClick"
-										href="#"
-										target="_blank"
-										rel="noopener"
-										aria-label="<?= e($this->strings['form.builder.action.open_translations']) ?>"
-										title="<?= e($this->strings['form.builder.action.open_translations']) ?>"
-										hidden
-									><i class="bi bi-translate" aria-hidden="true"></i></a>
-								</span>
-								<textarea rows="5" class="form-control form-control-sm" data-form-builder-target="fieldOptionsInput" data-action="input->form-builder#updateSelectedField"></textarea>
-							</label>
-						</div>
+						<?php
+						$fieldPropertiesTemplate = new Template('captureFieldProperties', $this->getRenderer(), $this->getWidgetConnection());
+$fieldPropertiesTemplate->strings = $this->strings;
+$fieldPropertiesTemplate->props = [
+	'mode' => FormCaptureFieldPropertyProvider::MODE_BUILDER,
+	'properties' => (new FormCaptureFieldPropertyProvider())->getProperties(),
+	'read_only' => $readOnly,
+];
+?>
+						<?= $fieldPropertiesTemplate->fetch() ?>
 					</div>
 				</div>
 			</div>
@@ -471,9 +422,9 @@ $stringsJson = json_encode($this->strings, $jsonFlags);
 					<ul class="form-builder__usage-list">
 						<?php foreach ($usage as $placement): ?>
 							<?php
-							if (!is_array($placement)) {
-								continue;
-							}
+	if (!is_array($placement)) {
+		continue;
+	}
 							$path = (string)($placement['path'] ?? '');
 							?>
 							<li>

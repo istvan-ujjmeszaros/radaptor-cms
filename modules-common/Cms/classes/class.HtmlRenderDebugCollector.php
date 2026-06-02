@@ -236,7 +236,7 @@ class HtmlRenderDebugCollector
 			return 'slot';
 		}
 
-		if ($component === 'widgetInsert' || $component === 'addWidgetFromList') {
+		if ($component === 'editorInsert' || $component === 'widgetInsert' || $component === 'addWidgetFromList') {
 			return 'edit-inserter';
 		}
 

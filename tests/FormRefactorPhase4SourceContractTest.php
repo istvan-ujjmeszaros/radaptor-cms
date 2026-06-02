@@ -55,7 +55,7 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 	{
 		$source = $this->source('modules-common/Form/widgets/Widget.CaptureForm.php');
 
-		$this->assertStringContainsString('FormDefinitionResolver::resolve($definition_slug)', $source);
+		$this->assertStringContainsString('FormDefinitionResolver::resolveForRender($definition_slug', $source);
 		$this->assertStringContainsString('catch (FormCaptureRuntimeException)', $source);
 		$this->assertStringContainsString("t('form.capture.error_unavailable')", $source);
 		$this->assertStringContainsString('$resolution === null || !$resolution->isCapture()', $source);
@@ -102,8 +102,9 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$fragment_source = $this->source('modules-common/Form/events/Event.FormBuilderEditorFragment.php');
 		$load_draft_source = $this->source('modules-common/Form/events/Event.FormBuilderLoadDraftVersion.php');
 		$note_source = $this->source('modules-common/Form/events/Event.FormBuilderUpdateDraftNote.php');
+		$field_update_source = $this->source('modules-common/Form/events/Event.FormEditorUpdateField.php');
 
-		foreach ([$create_source, $save_source, $publish_source, $preview_source, $fragment_source, $load_draft_source, $note_source] as $event_source) {
+		foreach ([$create_source, $save_source, $publish_source, $preview_source, $fragment_source, $load_draft_source, $note_source, $field_update_source] as $event_source) {
 			$this->assertStringContainsString('FormBuilderEventHelper::authorizeContentAdmin', $event_source);
 		}
 
@@ -116,6 +117,7 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$this->assertStringContainsString("CmsMutationAuditService::recordLeaf('form_builder.save_draft.conflict'", $save_source);
 		$this->assertStringContainsString("CmsMutationAuditService::withContext(\n\t\t\t\t'form_builder.publish'", $publish_source);
 		$this->assertStringContainsString("CmsMutationAuditService::withContext(\n\t\t\t\t'form_builder.update_draft_note'", $note_source);
+		$this->assertStringContainsString("CmsMutationAuditService::withContext(\n\t\t\t\t'form_editor.update_field'", $field_update_source);
 		$this->assertStringNotContainsString('CmsMutationAuditService::withContext', $preview_source);
 		$this->assertStringNotContainsString('CmsMutationAuditService::withContext', $load_draft_source);
 		$this->assertStringNotContainsString('FormBuilderEventHelper::validateCsrfFromPost', $fragment_source);
@@ -150,13 +152,26 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$widget_source = $this->source('modules-common/Form/widgets/Widget.CaptureFormBuilder.php');
 		$list_widget_source = $this->source('modules-common/Form/widgets/Widget.CaptureFormList.php');
 		$template_source = $this->source('modules-common/Form/templates/template.captureFormBuilder.php');
+		$field_properties_template_source = $this->source('modules-common/Form/templates/template.captureFieldProperties.php');
+		$field_wrapper_template_source = $this->source('modules-common/Form/templates/template.formEditorField.php');
 		$list_template_source = $this->source('modules-common/Form/templates/template.captureFormList.php');
+		$so_admin_form_template_source = $this->source('templates-common/default-SoAdmin/Form/template.sdui.form.php');
 		$phpstan_source = $this->source('phpstan.neon');
 
 		$this->assertStringContainsString("library('__ADMIN_FORM_BUILDER')", $template_source);
 		$this->assertStringContainsString("library('__ADMIN_FORM_BUILDER')", $list_template_source);
 		$this->assertStringContainsString('FormSubmitContext::issueCsrfTokenForForm(FormBuilderEventHelper::CSRF_FORM_ID)', $authoring_source);
 		$this->assertStringContainsString('FormSubmitContext::issueCsrfTokenForForm(FormBuilderEventHelper::CSRF_FORM_ID)', $list_widget_source);
+		$this->assertStringContainsString('new FormCaptureFieldPropertyProvider()', $template_source);
+		$this->assertStringContainsString('FormCaptureFieldPropertyProvider::MODE_BUILDER', $template_source);
+		$this->assertStringContainsString('FormCaptureFieldPropertyProvider::MODE_EDITMODE', $field_properties_template_source);
+		$this->assertStringContainsString('data-form-editor-field-toggle', $field_wrapper_template_source);
+		$this->assertStringContainsString('data-form-editor-field-panel', $field_properties_template_source);
+		$form_close_position = strpos($so_admin_form_template_source, '</form>');
+		$post_form_chrome_position = strpos($so_admin_form_template_source, "\$this->fetchContent('post_form_chrome')");
+		$this->assertIsInt($form_close_position);
+		$this->assertIsInt($post_form_chrome_position);
+		$this->assertGreaterThan($form_close_position, $post_form_chrome_position);
 		$this->assertStringContainsString('form.builder.error_create', $widget_source);
 		$this->assertStringContainsString("Url::getUrl('form_builder.editor_fragment')", $list_widget_source);
 		$this->assertStringContainsString('data-form-list-editor-fragment-url-value', $list_template_source);
@@ -175,10 +190,15 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 
 		foreach ([
 			'modules-common/Form/classes/class.FormSubmitContext.php',
+			'modules-common/Form/classes/class.FormCaptureFieldPropertyProvider.php',
 			'modules-common/Form/classes/class.FormDefinitionResolver.php',
 			'modules-common/Form/classes/class.FormDefinitionResolution.php',
 			'modules-common/Form/classes/class.FormResponseEmitter.php',
+			'modules-common/Cms/classes/class.EditorInsertItem.php',
+			'modules-common/Cms/classes/class.EditorInsertSurfaceBuilder.php',
 			'modules-common/Form/events/Event.FormSubmit.php',
+			'modules-common/Form/events/Event.FormEditorInsertField.php',
+			'modules-common/Form/events/Event.FormEditorUpdateField.php',
 			'modules-common/Form/events/Event.FormBuilderEditorFragment.php',
 			'modules-common/Form/events/Event.FormBuilderLoadDraftVersion.php',
 			'modules-common/Form/events/Event.FormBuilderUpdateDraftNote.php',

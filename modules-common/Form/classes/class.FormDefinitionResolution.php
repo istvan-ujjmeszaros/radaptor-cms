@@ -22,6 +22,7 @@ final class FormDefinitionResolution
 		private readonly array $_version = [],
 		private readonly array $_descriptor = [],
 		private readonly array $_security = [],
+		private readonly bool $_structure_editable = false,
 	) {
 	}
 
@@ -39,9 +40,9 @@ final class FormDefinitionResolution
 	 * @param array<string, mixed> $descriptor
 	 * @param array<string, mixed> $security
 	 */
-	public static function capture(string $definition_slug, array $definition, array $version, array $descriptor, array $security): self
+	public static function capture(string $definition_slug, array $definition, array $version, array $descriptor, array $security, bool $structure_editable = false): self
 	{
-		return new self(self::KIND_CAPTURE, $definition_slug, CaptureForm::class, $definition, $version, $descriptor, $security);
+		return new self(self::KIND_CAPTURE, $definition_slug, CaptureForm::class, $definition, $version, $descriptor, $security, $structure_editable);
 	}
 
 	public function kind(): string
@@ -62,6 +63,11 @@ final class FormDefinitionResolution
 	public function isCapture(): bool
 	{
 		return $this->_kind === self::KIND_CAPTURE;
+	}
+
+	public function isStructureEditable(): bool
+	{
+		return $this->_structure_editable;
 	}
 
 	/**
@@ -121,5 +127,10 @@ final class FormDefinitionResolution
 	public function definitionSlug(): string
 	{
 		return (string)($this->_definition['definition_slug'] ?? $this->_form_id);
+	}
+
+	public function source(): string
+	{
+		return (string)($this->_definition['source'] ?? '');
 	}
 }

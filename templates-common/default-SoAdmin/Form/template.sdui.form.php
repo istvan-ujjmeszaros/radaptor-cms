@@ -76,6 +76,8 @@ foreach ($html_attributes as $attribute_name => $attribute_value) {
 	<div style="clear:both"></div>
 </form>
 
+<?= $this->fetchContent('post_form_chrome') ?>
+
 <?php if ($post_javascript_file !== ''): ?>
 	<script type="text/javascript" src="<?= Config::PATH_CDN->value(); ?>scripts_form/<?= e($post_javascript_file) ?>"></script>
 <?php endif; ?>

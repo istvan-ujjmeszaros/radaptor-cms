@@ -164,7 +164,7 @@ $renderEditmodeControl = static function (array $property) use ($labelFor, $valu
 			<?php endforeach; ?>
 		</div>
 		<div class="form-editor-field-properties__actions">
-			<button type="submit" class="btn btn-primary btn-sm">
+			<button type="submit" class="btn btn-primary btn-sm" data-edit-mode-command>
 				<?= Icons::get(IconNames::FORM_SAVE, $buttonLabel) ?>
 				<?= e($buttonLabel) ?>
 			</button>

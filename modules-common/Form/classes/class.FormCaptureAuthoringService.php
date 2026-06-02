@@ -546,6 +546,88 @@ final class FormCaptureAuthoringService
 	/**
 	 * @return array<string, mixed>
 	 */
+	public function removeFieldFromDraft(string $definition_slug, string $field_key, int $field_index, string $field_uid = ''): array
+	{
+		$definition = $this->requireDbDefinition($definition_slug);
+		$version = $this->findActiveDraft((int)$definition->definition_id) ?? $this->findPublishedVersion($definition);
+
+		if (!$version instanceof EntityFormDefinitionVersion) {
+			throw new InvalidArgumentException('No editable capture form version is available.');
+		}
+
+		$descriptor = $this->descriptorFromVersion($definition, $version);
+		$fields = $this->normalizedDescriptorFields($descriptor);
+		$field_offset = $this->findFieldOffset($fields, $field_uid, $field_key, $field_index);
+		$this->assertVisibleFieldOffset($fields, $field_offset);
+
+		if (count($this->visibleFieldOffsets($fields)) <= 1) {
+			throw new InvalidArgumentException('Capture forms must keep at least one editable field.');
+		}
+
+		$removed_field = $fields[$field_offset];
+		array_splice($fields, $field_offset, 1);
+		$descriptor['fields'] = array_values($fields);
+		$result = $this->saveDraft($definition_slug, $descriptor, (string)$version->descriptor_hash);
+
+		return $result + [
+			'removed_field' => $removed_field,
+			'field_uid' => (string)($removed_field[FormCaptureFieldIdentity::DESCRIPTOR_KEY] ?? ''),
+			'field_index' => $field_offset,
+		];
+	}
+
+	/**
+	 * @return array<string, mixed>
+	 */
+	public function moveFieldInDraft(string $definition_slug, string $field_key, int $field_index, string $direction, string $field_uid = ''): array
+	{
+		$definition = $this->requireDbDefinition($definition_slug);
+		$version = $this->findActiveDraft((int)$definition->definition_id) ?? $this->findPublishedVersion($definition);
+
+		if (!$version instanceof EntityFormDefinitionVersion) {
+			throw new InvalidArgumentException('No editable capture form version is available.');
+		}
+
+		$direction = trim($direction);
+
+		if (!in_array($direction, ['up', 'down'], true)) {
+			throw new InvalidArgumentException('Unsupported capture form field move direction.');
+		}
+
+		$descriptor = $this->descriptorFromVersion($definition, $version);
+		$fields = $this->normalizedDescriptorFields($descriptor);
+		$field_offset = $this->findFieldOffset($fields, $field_uid, $field_key, $field_index);
+		$visible_offsets = $this->visibleFieldOffsets($fields);
+		$visible_position = array_search($field_offset, $visible_offsets, true);
+
+		if ($visible_position === false) {
+			throw new InvalidArgumentException('Only visible capture form fields can be moved from edit mode.');
+		}
+
+		$target_position = $direction === 'up' ? $visible_position - 1 : $visible_position + 1;
+
+		if (!isset($visible_offsets[$target_position])) {
+			throw new InvalidArgumentException('Capture form field cannot be moved in that direction.');
+		}
+
+		$target_offset = $visible_offsets[$target_position];
+		$moved_field = $fields[$field_offset];
+		$fields[$field_offset] = $fields[$target_offset];
+		$fields[$target_offset] = $moved_field;
+		$descriptor['fields'] = array_values($fields);
+		$result = $this->saveDraft($definition_slug, $descriptor, (string)$version->descriptor_hash);
+
+		return $result + [
+			'moved_field' => $moved_field,
+			'field_uid' => (string)($moved_field[FormCaptureFieldIdentity::DESCRIPTOR_KEY] ?? ''),
+			'field_index' => $target_offset,
+			'direction' => $direction,
+		];
+	}
+
+	/**
+	 * @return array<string, mixed>
+	 */
 	public function publishDraft(string $definition_slug, ?int $version_id = null): array
 	{
 		$definition = $this->requireDbDefinition($definition_slug);
@@ -945,6 +1027,50 @@ final class FormCaptureAuthoringService
 		$fields[] = $field;
 
 		return array_values($fields);
+	}
+
+	/**
+	 * @param array<string, mixed> $descriptor
+	 * @return list<array<string, mixed>>
+	 */
+	private function normalizedDescriptorFields(array $descriptor): array
+	{
+		$fields = [];
+
+		foreach (($descriptor['fields'] ?? []) as $field) {
+			if (is_array($field)) {
+				$fields[] = $field;
+			}
+		}
+
+		return $fields;
+	}
+
+	/**
+	 * @param list<array<string, mixed>> $fields
+	 * @return list<int>
+	 */
+	private function visibleFieldOffsets(array $fields): array
+	{
+		$offsets = [];
+
+		foreach ($fields as $offset => $field) {
+			if ((string)($field['type'] ?? '') !== 'hidden') {
+				$offsets[] = (int)$offset;
+			}
+		}
+
+		return $offsets;
+	}
+
+	/**
+	 * @param list<array<string, mixed>> $fields
+	 */
+	private function assertVisibleFieldOffset(array $fields, int $field_offset): void
+	{
+		if (!isset($fields[$field_offset]) || (string)($fields[$field_offset]['type'] ?? '') === 'hidden') {
+			throw new InvalidArgumentException('Only visible capture form fields can be edited from edit mode.');
+		}
 	}
 
 	/**

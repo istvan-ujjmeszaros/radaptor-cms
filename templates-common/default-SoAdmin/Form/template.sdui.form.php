@@ -97,7 +97,7 @@ $(function() {
 		el.removeAttribute("title");
 	});
 	<?php if ($focusable): ?>
-	$("input:visible:enabled:first").focus();
+	$("input:visible:enabled:not([tabindex='-1']):first").focus();
 	<?php endif; ?>
 	$('.select-downarrow').bind("click", function () {
 		var input = $(this).prev();

@@ -73,11 +73,13 @@ final class EventFormEditorInsertField extends AbstractEvent implements iBrowser
 					$insert_index,
 				),
 			);
+			$field_uid = FormCaptureFieldIdentity::normalizeUid($result['field_uid'] ?? '');
+			$reveal_target_id = $field_uid !== '' ? FormCaptureFieldIdentity::fieldTargetId($widget_connection_id, $field_uid) : '';
 
 			$this->responder()->succeed(
 				'form.insert.status_draft_updated',
 				$host_page_id,
-				[EditModeMutationCommand::replaceForm($widget_connection_id)],
+				[EditModeMutationCommand::replaceForm($widget_connection_id, $reveal_target_id)],
 				$result,
 			);
 		} catch (InvalidArgumentException) {

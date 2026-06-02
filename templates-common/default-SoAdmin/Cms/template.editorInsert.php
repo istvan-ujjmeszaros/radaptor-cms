@@ -9,6 +9,7 @@ $item_payload_name = (string)($this->props['item_payload_name'] ?? ($scope === '
 $button_label = $scope === 'form'
 	? (string)($this->strings['form.insert.button'] ?? '')
 	: (string)($this->strings['cms.widget.insert.button'] ?? '');
+$edit_mode_hx_swap = 'none show:none focus-scroll:false';
 ?>
 <div class="editor-insert editor-insert--<?= e($scope) ?><?= $scope === 'widget' ? ' widget-insert' : '' ?>">
 	<?php if ($scope === 'widget' && !empty($this->props['clipboard'])): ?>
@@ -43,11 +44,11 @@ $button_label = $scope === 'form'
 								value="<?= e($encoded_payload) ?>"
 								hx-post="<?= e($insert_url) ?>"
 								hx-vals="<?= e($hx_values) ?>"
-								hx-swap="none">
+								hx-swap="<?= e($edit_mode_hx_swap) ?>">
 							<?= e((string)($item['label'] ?? $item['type'])) ?>
 						</button>
 					<?php else: ?>
-						<form method="post" data-controller="form-timezone" action="<?= e($insert_url) ?>" hx-post="<?= e($insert_url) ?>" hx-swap="none">
+						<form method="post" data-controller="form-timezone" action="<?= e($insert_url) ?>" hx-post="<?= e($insert_url) ?>" hx-swap="<?= e($edit_mode_hx_swap) ?>">
 							<input type="hidden" name="<?= e($item_payload_name) ?>" value="<?= e((string)$item['type']) ?>">
 							<button class="submit_button editor-insert-menu-item" type="submit" value="save">
 								<?= e((string)($item['label'] ?? $item['type'])) ?>

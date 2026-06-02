@@ -1,0 +1,115 @@
+<?php
+
+declare(strict_types=1);
+
+final class EventFormEditorMoveField extends AbstractEvent implements iBrowserEventDocumentable
+{
+	public function authorize(PolicyContext $policyContext): PolicyDecision
+	{
+		return FormBuilderEventHelper::authorizeContentAdmin($policyContext);
+	}
+
+	public static function describeBrowserEvent(): array
+	{
+		return [
+			'event_name' => 'form_editor.move_field',
+			'group' => 'CMS Authoring',
+			'name' => 'Move capture form field',
+			'summary' => 'Moves one DB-authored capture form field in page edit mode.',
+			'request' => [
+				'method' => 'POST',
+				'params' => [
+					BrowserEventDocumentationHelper::param('definition_slug', 'body', 'string', true, 'Capture definition slug.'),
+					BrowserEventDocumentationHelper::param('field_uid', 'body', 'string', true, 'Immutable editor field uid.'),
+					BrowserEventDocumentationHelper::param('field_key', 'body', 'string', false, 'Current field key fallback.'),
+					BrowserEventDocumentationHelper::param('field_index', 'body', 'int', false, 'Current visible field index fallback.'),
+					BrowserEventDocumentationHelper::param('direction', 'body', 'string', true, 'Move direction: up or down.'),
+					BrowserEventDocumentationHelper::param('csrf_token', 'body', 'string', true, 'Session-bound inline field command CSRF token.'),
+				],
+			],
+			'response' => [
+				'kind' => 'redirect|api-json',
+				'content_type' => 'text/html or application/json',
+			],
+			'authorization' => [
+				'visibility' => 'role:content_admin',
+			],
+			'side_effects' => BrowserEventDocumentationHelper::lines('Creates or replaces the active draft version without publishing it.'),
+		];
+	}
+
+	public function run(): void
+	{
+		if (Request::getMethod() !== 'POST') {
+			$this->fail('FORM_EDITOR_METHOD_NOT_ALLOWED', 'response_error.access_denied', 405);
+
+			return;
+		}
+
+		$csrf_error = FormSubmitContext::validateCsrfTokenForForm(
+			FormBuilderEventHelper::CSRF_INLINE_FIELD_COMMAND_FORM_ID,
+			Request::_POST(FormSubmitContext::FIELD_CSRF_TOKEN, null),
+		);
+
+		if ($csrf_error !== null) {
+			$this->fail($csrf_error->code, 'form.builder.error_csrf', 403);
+
+			return;
+		}
+
+		$definition_slug = trim((string)Request::_POST('definition_slug', ''));
+		$field_uid = trim((string)Request::_POST('field_uid', ''));
+		$field_key = trim((string)Request::_POST('field_key', ''));
+		$field_index = (int)Request::_POST('field_index', -1);
+		$direction = trim((string)Request::_POST('direction', ''));
+		$host_page_id = (int)Request::_POST('host_page_id', 0);
+		$widget_connection_id = (int)Request::_POST('widget_connection_id', 0);
+
+		try {
+			FormBuilderEventHelper::assertEditableCaptureTarget($definition_slug, $host_page_id, $widget_connection_id);
+			$result = CmsMutationAuditService::withContext(
+				'form_editor.move_field',
+				[
+					'definition_slug' => $definition_slug,
+					'field_uid' => $field_uid,
+					'field_key' => $field_key,
+					'field_index' => $field_index,
+					'direction' => $direction,
+				],
+				static fn (): array => (new FormCaptureAuthoringService())->moveFieldInDraft(
+					$definition_slug,
+					$field_key,
+					$field_index,
+					$direction,
+					$field_uid,
+				),
+			);
+			$field_uid = FormCaptureFieldIdentity::normalizeUid((string)($result['field_uid'] ?? $field_uid));
+			$reveal_target_id = $field_uid !== '' ? FormCaptureFieldIdentity::fieldTargetId($widget_connection_id, $field_uid) : '';
+
+			$this->responder()->succeed(
+				'form.field_edit.status_draft_updated',
+				$host_page_id,
+				[EditModeMutationCommand::replaceForm($widget_connection_id, $reveal_target_id)],
+				$result,
+			);
+		} catch (InvalidArgumentException) {
+			$this->fail('FORM_EDITOR_FIELD_INVALID', 'form.field_edit.error_invalid', 422);
+		} catch (UnexpectedValueException) {
+			$this->fail('FORM_EDITOR_FIELD_UNAVAILABLE', 'form.field_edit.error_unavailable', 403);
+		} catch (Throwable $exception) {
+			Kernel::logException($exception, 'Inline capture form field move failed');
+			$this->fail('FORM_EDITOR_FIELD_FAILED', 'form.field_edit.error_save_failed', 422);
+		}
+	}
+
+	private function fail(string $code, string $message_key, int $http_code): void
+	{
+		$this->responder()->fail($code, $message_key, $http_code);
+	}
+
+	private function responder(): EditModeMutationResponder
+	{
+		return new EditModeMutationResponder();
+	}
+}

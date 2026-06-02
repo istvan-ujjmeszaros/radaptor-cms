@@ -61,10 +61,10 @@ class CmsFragmentRenderer
 	 */
 	public function renderTargets(array $targets): string
 	{
-		$this->assertPartialNavigableLayout();
 		$targets = $this->normalizeTargets($targets);
 
 		if ($targets === []) {
+			$this->assertPartialNavigableLayout();
 			$targets = $this->normalizeTargets($this->layout::getPageFragmentTargets());
 		}
 
@@ -72,6 +72,11 @@ class CmsFragmentRenderer
 
 		foreach ($targets as $target) {
 			[$type, $name] = explode(':', $target, 2);
+
+			if ($type === 'component') {
+				$this->assertPartialNavigableLayout();
+			}
+
 			$tree = match ($type) {
 				'slot' => $this->buildSlotTargetTree($name),
 				'widget' => $this->buildWidgetTargetTree((int)$name),

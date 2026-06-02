@@ -106,7 +106,7 @@ abstract class AbstractForm implements iForm, iListable
 			$this->makeInputs();
 		}
 
-		if (!current($this->_form_inputs) instanceof FormInput) {
+		if (!current($this->_form_inputs) instanceof FormInput && !$this->canEditStructure()) {
 			Kernel::abort('Form descriptor or makeInputs() must produce FormInput elements! (' . $this->_form_type . ')');
 		}
 
@@ -159,6 +159,10 @@ abstract class AbstractForm implements iForm, iListable
 
 	public function focusable(): bool
 	{
+		if ($this->canEditStructure()) {
+			return false;
+		}
+
 		return $this->_meta->focusable;
 	}
 
@@ -333,6 +337,7 @@ abstract class AbstractForm implements iForm, iListable
 		$current_row_items = [];
 		$current_row_id = null;
 		$structure_editable = $this->canEditStructure();
+		$visible_field_count = $structure_editable ? $this->visibleEditableFieldCount() : 0;
 		$visible_insert_index = 0;
 		$insert_counter = 0;
 
@@ -356,7 +361,7 @@ abstract class AbstractForm implements iForm, iListable
 
 			if ($structure_editable) {
 				$current_row_items[] = $this->buildStructureInsertTree($visible_insert_index, ++$insert_counter);
-				$current_row_items[] = $this->buildEditableFieldTree($input, $input_tree, $visible_insert_index);
+				$current_row_items[] = $this->buildEditableFieldTree($input, $input_tree, $visible_insert_index, $visible_field_count);
 				$field_property_forms[] = $this->buildFieldPropertyFormTree($input, $visible_insert_index);
 			} else {
 				$current_row_items[] = $input_tree;
@@ -375,7 +380,7 @@ abstract class AbstractForm implements iForm, iListable
 			$rows[] = $this->buildRowTree((string)$current_row_id, $current_row_items);
 		}
 
-		if ($structure_editable && $visible_insert_index > 0) {
+		if ($structure_editable) {
 			$rows[] = $this->buildRowTree(
 				$this->getFormId() . '_structure_insert_after',
 				[$this->buildStructureInsertTree($visible_insert_index, ++$insert_counter)]
@@ -476,7 +481,7 @@ abstract class AbstractForm implements iForm, iListable
 	 * @param array<string, mixed> $input_tree
 	 * @return array<string, mixed>
 	 */
-	private function buildEditableFieldTree(FormInput $input, array $input_tree, int $field_index): array
+	private function buildEditableFieldTree(FormInput $input, array $input_tree, int $field_index, int $visible_field_count): array
 	{
 		$resolution = $this->_render_context['form_definition_resolution'] ?? null;
 
@@ -491,6 +496,21 @@ abstract class AbstractForm implements iForm, iListable
 		$field_target_id = FormCaptureFieldIdentity::fieldTargetId($widget_connection_id, $field_uid);
 		$panel_id = FormCaptureFieldIdentity::panelTargetId($widget_connection_id, $field_uid);
 		$provider = new FormCaptureFieldPropertyProvider();
+		$command_provider = new FormCaptureFieldEditorCommandProvider();
+		$target = $this->buildEditableFormTarget($resolution);
+		$command_context = new FormEditorFieldCommandContext(
+			formId: $this->getFormId(),
+			definitionSlug: $resolution->definitionSlug(),
+			hostPageId: (int)($target['host_page_id'] ?? 0),
+			widgetConnectionId: $widget_connection_id,
+			fieldUid: $field_uid,
+			fieldKey: $field_key,
+			fieldIndex: $field_index,
+			visibleFieldCount: $visible_field_count,
+			panelId: $panel_id,
+			field: $field,
+			target: $target,
+		);
 
 		return SduiNode::create(
 			'formEditorField',
@@ -502,11 +522,12 @@ abstract class AbstractForm implements iForm, iListable
 				'field_index' => $field_index,
 				'field_label' => $input->label ?? $field_key,
 				'panel_id' => $panel_id,
+				'commands' => array_map(static fn (FormEditorFieldCommand $command): array => $command->toArray(), $command_provider->getCommands($command_context)),
 			],
 			[
 				'field' => [$input_tree],
 			],
-			strings: $provider->getStrings(),
+			strings: array_replace($provider->getStrings(), $command_provider->getStrings()),
 		);
 	}
 
@@ -557,6 +578,19 @@ abstract class AbstractForm implements iForm, iListable
 			'widget_connection_id' => $this->_render_context['widget_connection_id'] ?? null,
 			'return_target' => $this->_render_context['return_target'] ?? Url::getCurrentUrlForReferer(),
 		];
+	}
+
+	private function visibleEditableFieldCount(): int
+	{
+		$count = 0;
+
+		foreach ($this->_form_inputs as $input) {
+			if (!$input instanceof FormInputHidden) {
+				++$count;
+			}
+		}
+
+		return $count;
 	}
 
 	/**

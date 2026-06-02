@@ -132,8 +132,11 @@ $renderEditmodeControl = static function (array $property) use ($labelFor, $valu
 		class="form-editor-field-properties"
 		method="post"
 		action="<?= e($action) ?>"
+		hx-post="<?= e($action) ?>"
+		hx-swap="none"
 		data-controller="form-timezone"
 		data-form-editor-field-panel
+		data-form-editor-field-uid="<?= e((string)($this->props['field_uid'] ?? '')) ?>"
 		data-form-editor-field-key="<?= e((string)($field['key'] ?? $field['name'] ?? '')) ?>"
 		hidden
 	>
@@ -143,6 +146,7 @@ $renderEditmodeControl = static function (array $property) use ($labelFor, $valu
 				<input type="hidden" name="<?= e((string)$name) ?>" value="<?= e((string)$value) ?>">
 			<?php endif; ?>
 		<?php endforeach; ?>
+		<input type="hidden" name="field_uid" value="<?= e((string)($this->props['field_uid'] ?? '')) ?>">
 		<input type="hidden" name="field_key" value="<?= e((string)($field['key'] ?? $field['name'] ?? '')) ?>">
 		<input type="hidden" name="field_index" value="<?= e((string)($this->props['field_index'] ?? 0)) ?>">
 

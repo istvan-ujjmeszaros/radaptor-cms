@@ -192,6 +192,7 @@ final class FormCaptureDescriptorSchemaValidator
 		}
 
 		$normalized['fields'] = $normalized_fields;
+		$normalized = FormCaptureFieldIdentity::ensureDescriptorFieldUids($normalized);
 		self::validateDescriptor($normalized);
 
 		return $normalized;
@@ -317,6 +318,7 @@ final class FormCaptureDescriptorSchemaValidator
 			'labelstyle',
 			'value',
 			'initvalue',
+			FormCaptureFieldIdentity::DESCRIPTOR_KEY,
 		], "fields[{$index}]");
 
 		$type = trim((string)($field['type'] ?? 'text'));

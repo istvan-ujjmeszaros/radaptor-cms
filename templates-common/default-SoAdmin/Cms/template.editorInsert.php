@@ -35,18 +35,19 @@ $button_label = $scope === 'form'
 							'csrf_token' => (string)($this->props['csrf_token'] ?? ''),
 						]);
 						$encoded_payload = base64_encode(json_encode($payload, JSON_THROW_ON_ERROR));
+						$hx_values = json_encode([$item_payload_name => $encoded_payload], JSON_THROW_ON_ERROR);
 						?>
-						<button type="submit"
+						<button type="button"
 								class="editor-insert-menu-item"
 								name="<?= e($item_payload_name) ?>"
 								value="<?= e($encoded_payload) ?>"
-								formaction="<?= e($insert_url) ?>"
-								formmethod="post"
-								formnovalidate>
+								hx-post="<?= e($insert_url) ?>"
+								hx-vals="<?= e($hx_values) ?>"
+								hx-swap="none">
 							<?= e((string)($item['label'] ?? $item['type'])) ?>
 						</button>
 					<?php else: ?>
-						<form method="post" data-controller="form-timezone" action="<?= e($insert_url) ?>">
+						<form method="post" data-controller="form-timezone" action="<?= e($insert_url) ?>" hx-post="<?= e($insert_url) ?>" hx-swap="none">
 							<input type="hidden" name="<?= e($item_payload_name) ?>" value="<?= e((string)$item['type']) ?>">
 							<button class="submit_button editor-insert-menu-item" type="submit" value="save">
 								<?= e((string)($item['label'] ?? $item['type'])) ?>

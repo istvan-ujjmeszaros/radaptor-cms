@@ -37,6 +37,9 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 			EventFormEditorUpdateField::class,
 			EditorInsertItem::class,
 			EditorInsertSurfaceBuilder::class,
+			EditModeMutationCommand::class,
+			EditModeMutationResponder::class,
+			FormCaptureFieldIdentity::class,
 			FormCaptureFieldPropertyProvider::class,
 			I18nTranslationService::class,
 		] as $class_name) {
@@ -1023,6 +1026,7 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$field_nodes = $this->nodesByComponent($tree['contents']['rows'] ?? [], 'formEditorField');
 		$property_nodes = $this->nodesByComponent($tree['contents']['post_form_chrome'] ?? [], 'captureFieldProperties');
 
+		$this->assertSame('edit-widget-2__form', $tree['props']['editmode_form_target_id'] ?? null);
 		$this->assertCount(5, $insert_nodes);
 		$this->assertCount(4, $field_nodes);
 		$this->assertCount(4, $property_nodes);
@@ -1033,7 +1037,17 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame(4, $insert_nodes[4]['props']['insert_index'] ?? null);
 		$this->assertContains('textarea', array_column($insert_nodes[0]['props']['items'] ?? [], 'type'));
 		$this->assertSame('name_key', $field_nodes[0]['props']['field_key'] ?? null);
+		$this->assertMatchesRegularExpression('/^f_[a-z0-9]{16}$/', (string)($field_nodes[0]['props']['field_uid'] ?? ''));
+		$this->assertSame(
+			'edit-widget-2__field-' . $field_nodes[0]['props']['field_uid'],
+			$field_nodes[0]['props']['target_id'] ?? null,
+		);
 		$this->assertSame(FormCaptureFieldPropertyProvider::MODE_EDITMODE, $property_nodes[0]['props']['mode'] ?? null);
+		$this->assertSame($field_nodes[0]['props']['field_uid'] ?? null, $property_nodes[0]['props']['field_uid'] ?? null);
+		$this->assertSame(
+			'edit-widget-2__field-' . $field_nodes[0]['props']['field_uid'] . '__properties',
+			$property_nodes[0]['props']['panel_id'] ?? null,
+		);
 		$this->assertSame(Url::getUrl('form_editor.update_field'), $property_nodes[0]['props']['action'] ?? null);
 		$this->assertSame([], $this->nodesByComponent($tree['contents']['hidden_fields'] ?? [], 'editorInsert'));
 		$this->assertSame([], $this->nodesByComponent($tree['contents']['rows'] ?? [], 'captureFieldProperties'));
@@ -1062,6 +1076,31 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame([], $this->formRowEditorInsertNodes($form->buildTree()));
 	}
 
+	public function testEditableCaptureFormTreeRequiresWidgetConnectionTarget(): void
+	{
+		$this->impersonateAndRequireRole('admin_developer', RoleList::ROLE_CONTENT_ADMIN);
+		$definition_slug = 'capture-phase4-inline-insert-no-widget-target';
+		(new FormCaptureDefinitionRepository())->upsertPublishedDefinition($definition_slug, $this->descriptor(), $this->defaultSecurity(), 'db');
+		$resolution = FormDefinitionResolver::resolveForRender($definition_slug, ['structure_editable' => true]);
+
+		$this->assertInstanceOf(FormDefinitionResolution::class, $resolution);
+		$this->assertTrue($resolution->isStructureEditable());
+		$form = new CaptureForm(
+			$definition_slug,
+			'phase4_inline_insert_no_widget_target',
+			$this->treeContext(true),
+			'/capture-return',
+			[
+				'host_page_id' => 1,
+				'form_definition_resolution' => $resolution,
+			],
+		);
+		$tree = $form->buildTree();
+
+		$this->assertSame([], $this->formRowEditorInsertNodes($tree));
+		$this->assertSame([], $this->nodesByComponent($tree['contents']['post_form_chrome'] ?? [], 'captureFieldProperties'));
+	}
+
 	public function testInlineInsertUpdatesDraftWithoutChangingPublishedCaptureDescriptor(): void
 	{
 		$definition_slug = 'capture-phase4-inline-insert-draft';
@@ -1078,6 +1117,7 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertTrue($editable_resolution->isStructureEditable());
 		$this->assertNotSame($published->versionId(), $editable_resolution->versionId());
 		$this->assertSame('text', $editable_resolution->descriptor()['fields'][0]['name'] ?? null);
+		$this->assertMatchesRegularExpression('/^f_[a-z0-9]{16}$/', (string)($editable_resolution->descriptor()['fields'][0][FormCaptureFieldIdentity::DESCRIPTOR_KEY] ?? ''));
 		$this->assertSame('name', $editable_resolution->descriptor()['fields'][1]['name'] ?? null);
 	}
 
@@ -1113,6 +1153,100 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame('Sales', $field['values'][0]['label']['text'] ?? null);
 		$this->assertNotEmpty(array_filter($validators, static fn (array $validator): bool => ($validator['type'] ?? '') === 'required'));
 		$this->assertNotEmpty(array_filter($validators, static fn (array $validator): bool => ($validator['type'] ?? '') === 'enum' && ($validator['values'] ?? []) === ['sales', 'support']));
+	}
+
+	public function testInlineFieldPropertyUpdateCanTargetImmutableEditorUid(): void
+	{
+		$definition_slug = 'capture-phase4-inline-field-properties-uid';
+		(new FormCaptureDefinitionRepository())->upsertPublishedDefinition($definition_slug, $this->descriptor(), $this->defaultSecurity(), 'db');
+		$resolution = FormDefinitionResolver::resolveForRender($definition_slug, ['structure_editable' => true]);
+
+		$this->assertInstanceOf(FormDefinitionResolution::class, $resolution);
+		$field_uid = (string)($resolution->descriptor()['fields'][2][FormCaptureFieldIdentity::DESCRIPTOR_KEY] ?? '');
+		$this->assertMatchesRegularExpression('/^f_[a-z0-9]{16}$/', $field_uid);
+
+		$result = (new FormCaptureAuthoringService())->updateFieldPropertiesInDraft($definition_slug, 'not_the_current_key', -1, [
+			'field_label' => 'Immutable subject',
+			'field_name' => 'immutable_subject',
+			'field_key_new' => 'immutable_subject_key',
+			'field_required' => false,
+			'field_options' => "general=General\nsupport=Support",
+		], $field_uid);
+		$editable_resolution = FormDefinitionResolver::resolveForRender($definition_slug, ['structure_editable' => true]);
+
+		$this->assertSame('saved_draft', $result['action'] ?? null);
+		$this->assertSame($field_uid, $result['field_uid'] ?? null);
+		$this->assertInstanceOf(FormDefinitionResolution::class, $editable_resolution);
+		$field = $editable_resolution->descriptor()['fields'][2] ?? [];
+		$this->assertSame($field_uid, $field[FormCaptureFieldIdentity::DESCRIPTOR_KEY] ?? null);
+		$this->assertSame('immutable_subject', $field['name'] ?? null);
+		$this->assertSame('immutable_subject_key', $field['key'] ?? null);
+	}
+
+	public function testFormEditorUpdateEventReturnsEditModeMutationCommandForJsonClients(): void
+	{
+		$this->impersonateAndRequireRole('admin_developer', RoleList::ROLE_CONTENT_ADMIN);
+		$definition_slug = 'capture-phase4-inline-field-event-command';
+		(new FormCaptureDefinitionRepository())->upsertPublishedDefinition($definition_slug, $this->descriptor(), $this->defaultSecurity(), 'db');
+		$resolution = FormDefinitionResolver::resolveForRender($definition_slug, ['structure_editable' => true]);
+		$widget_connection_id = $this->createCaptureWidgetConnection($definition_slug);
+
+		$this->assertInstanceOf(FormDefinitionResolution::class, $resolution);
+		$field_uid = (string)($resolution->descriptor()['fields'][0][FormCaptureFieldIdentity::DESCRIPTOR_KEY] ?? '');
+		$this->assertMatchesRegularExpression('/^f_[a-z0-9]{16}$/', $field_uid);
+
+		$response = $this->runEditorEvent(new EventFormEditorUpdateField(), [
+			FormSubmitContext::FIELD_CSRF_TOKEN => FormSubmitContext::issueCsrfTokenForForm(FormBuilderEventHelper::CSRF_INLINE_FIELD_PROPERTIES_FORM_ID),
+			'definition_slug' => $definition_slug,
+			'host_page_id' => '1',
+			'widget_connection_id' => (string)$widget_connection_id,
+			'field_uid' => $field_uid,
+			'field_key' => 'name_key',
+			'field_index' => '0',
+			'field_label' => 'Command name',
+			'field_name' => 'command_name',
+			'field_key_new' => 'command_name_key',
+			'field_required' => '1',
+			'field_options' => '',
+		]);
+
+		$this->assertSame(200, $response['http_code']);
+		$this->assertTrue($response['body']['ok']);
+		$command = $response['body']['data']['commands'][0] ?? [];
+		$this->assertSame(EditModeMutationCommand::OPERATION_REPLACE, $command['operation'] ?? null);
+		$this->assertSame(EditModeMutationCommand::TARGET_FORM_FIELD, $command['target_type'] ?? null);
+		$this->assertSame('edit-widget-' . $widget_connection_id . '__field-' . $field_uid, $command['target_id'] ?? null);
+		$this->assertSame($widget_connection_id, $command['context']['widget_connection_id'] ?? null);
+		$this->assertSame($field_uid, $response['body']['data']['field_uid'] ?? null);
+	}
+
+	public function testFormEditorInsertEventReturnsFormMutationCommandForJsonClients(): void
+	{
+		$this->impersonateAndRequireRole('admin_developer', RoleList::ROLE_CONTENT_ADMIN);
+		$definition_slug = 'capture-phase4-inline-insert-event-command';
+		(new FormCaptureDefinitionRepository())->upsertPublishedDefinition($definition_slug, $this->descriptor(), $this->defaultSecurity(), 'db');
+		$widget_connection_id = $this->createCaptureWidgetConnection($definition_slug);
+		$payload = [
+			'definition_slug' => $definition_slug,
+			'host_page_id' => 1,
+			'widget_connection_id' => $widget_connection_id,
+			'field_type' => 'text',
+			'insert_index' => 1,
+			'csrf_token' => FormSubmitContext::issueCsrfTokenForForm(FormBuilderEventHelper::CSRF_INLINE_INSERT_FORM_ID),
+		];
+
+		$response = $this->runEditorEvent(new EventFormEditorInsertField(), [
+			'form_edit_insert' => base64_encode(json_encode($payload, JSON_THROW_ON_ERROR)),
+		]);
+
+		$this->assertSame(200, $response['http_code']);
+		$this->assertTrue($response['body']['ok']);
+		$command = $response['body']['data']['commands'][0] ?? [];
+		$this->assertSame(EditModeMutationCommand::OPERATION_REPLACE, $command['operation'] ?? null);
+		$this->assertSame(EditModeMutationCommand::TARGET_FORM, $command['target_type'] ?? null);
+		$this->assertSame('edit-widget-' . $widget_connection_id . '__form', $command['target_id'] ?? null);
+		$this->assertSame($widget_connection_id, $command['context']['widget_connection_id'] ?? null);
+		$this->assertMatchesRegularExpression('/^f_[a-z0-9]{16}$/', (string)($response['body']['data']['field_uid'] ?? ''));
 	}
 
 	public function testInlineInsertAddsOptionI18nKeysForKeyedCaptureDescriptors(): void
@@ -1991,6 +2125,60 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 			'body' => $ctx->capturedApiResponse,
 			'output' => $output,
 		];
+	}
+
+	/**
+	 * @param array<string, mixed> $post
+	 * @return array{http_code: int|null, body: array<string, mixed>|null, output: string}
+	 */
+	private function runEditorEvent(AbstractEvent $event, array $post): array
+	{
+		$current_user = RequestContextHolder::current()->currentUser;
+		$this->setRequestContext(
+			post: $post,
+			server: [
+				'HTTP_HOST' => 'localhost',
+				'REQUEST_URI' => '/?context=form_editor&event=update_field',
+				'REQUEST_METHOD' => 'POST',
+				'HTTP_ACCEPT' => 'application/json',
+			],
+		);
+
+		$ctx = RequestContextHolder::current();
+		$ctx->currentUser = $current_user;
+		$ctx->userSessionInitialized = true;
+		$ctx->apiResponseCaptureEnabled = true;
+
+		ob_start();
+		$event->run();
+		$output = (string)ob_get_clean();
+
+		return [
+			'http_code' => $ctx->capturedApiResponseHttpCode,
+			'body' => $ctx->capturedApiResponse,
+			'output' => $output,
+		];
+	}
+
+	private function createCaptureWidgetConnection(string $definition_slug): int
+	{
+		if (!ResourceAcl::canAccessResource(1, ResourceAcl::_ACL_EDIT)) {
+			self::markTestSkipped('Test page 1 is not editable for the current user.');
+		}
+
+		$connection_id = (int)DbHelper::insertHelper('widget_connections', [
+			'page_id' => 1,
+			'slot_name' => 'content',
+			'widget_name' => 'CaptureForm',
+			'seq' => 1000,
+		]);
+
+		AttributeHandler::addAttribute(
+			new AttributeResourceIdentifier(ResourceNames::WIDGET_CONNECTION, (string)$connection_id),
+			['definition_slug' => $definition_slug],
+		);
+
+		return $connection_id;
 	}
 
 	private function restoreAppSecret(): void

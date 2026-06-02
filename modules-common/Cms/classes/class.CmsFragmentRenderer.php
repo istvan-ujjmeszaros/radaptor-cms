@@ -35,6 +35,28 @@ class CmsFragmentRenderer
 	}
 
 	/**
+	 * @param list<string> $target_ids
+	 */
+	public function renderElementTargetsFromWidget(int $connection_id, array $target_ids): string
+	{
+		$target_ids = $this->normalizeElementTargetIds($target_ids);
+
+		if ($target_ids === []) {
+			return '<div hidden></div>';
+		}
+
+		$widget_tree = $this->buildWidgetTargetTree($connection_id);
+		$widget_html = $this->renderer->render($widget_tree);
+		$oob_html = '';
+
+		foreach ($target_ids as $target_id) {
+			$oob_html .= $this->extractElementTarget($widget_html, $target_id);
+		}
+
+		return '<div hidden></div>' . $oob_html . $this->renderAssetOobHtml();
+	}
+
+	/**
 	 * @param list<string> $targets
 	 */
 	public function renderTargets(array $targets): string
@@ -112,6 +134,37 @@ class CmsFragmentRenderer
 		return $normalized;
 	}
 
+	/**
+	 * @param list<string> $target_ids
+	 * @return list<string>
+	 */
+	private function normalizeElementTargetIds(array $target_ids): array
+	{
+		$normalized = [];
+
+		foreach ($target_ids as $target_id) {
+			$target_id = trim((string)$target_id);
+
+			if ($target_id === '') {
+				continue;
+			}
+
+			if (!preg_match('/^[A-Za-z][A-Za-z0-9_\\-:]*$/D', $target_id)) {
+				throw new InvalidArgumentException("Invalid element fragment target id: {$target_id}");
+			}
+
+			$normalized[] = $target_id;
+		}
+
+		$normalized = array_values(array_unique($normalized));
+
+		if (count($normalized) > self::MAX_TARGETS) {
+			throw new InvalidArgumentException('Too many element fragment targets requested.');
+		}
+
+		return $normalized;
+	}
+
 	private function buildSlotTargetTree(string $slot_name): array
 	{
 		if (!in_array($slot_name, $this->layout::getSlots(), true)) {
@@ -170,6 +223,39 @@ class CmsFragmentRenderer
 		}
 
 		return $html;
+	}
+
+	private function extractElementTarget(string $html, string $target_id): string
+	{
+		$document = new DOMDocument();
+		$previous = libxml_use_internal_errors(true);
+
+		try {
+			$document->loadHTML('<?xml encoding="UTF-8"><div id="radaptor-fragment-root">' . $html . '</div>', LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+			$element = $this->findElementById($document, $target_id);
+
+			if (!$element instanceof DOMElement) {
+				throw new RuntimeException("Element fragment target not found: {$target_id}");
+			}
+
+			$element->setAttribute('hx-swap-oob', 'outerHTML');
+
+			return (string)$document->saveHTML($element);
+		} finally {
+			libxml_clear_errors();
+			libxml_use_internal_errors($previous);
+		}
+	}
+
+	private function findElementById(DOMDocument $document, string $target_id): ?DOMElement
+	{
+		foreach ($document->getElementsByTagName('*') as $element) {
+			if ($element instanceof DOMElement && $element->getAttribute('id') === $target_id) {
+				return $element;
+			}
+		}
+
+		return null;
 	}
 
 	/**

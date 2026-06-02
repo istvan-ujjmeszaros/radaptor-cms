@@ -166,7 +166,11 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$this->assertStringContainsString('FormCaptureFieldPropertyProvider::MODE_BUILDER', $template_source);
 		$this->assertStringContainsString('FormCaptureFieldPropertyProvider::MODE_EDITMODE', $field_properties_template_source);
 		$this->assertStringContainsString('data-form-editor-field-toggle', $field_wrapper_template_source);
+		$this->assertStringContainsString('data-form-editor-field-uid', $field_wrapper_template_source);
 		$this->assertStringContainsString('data-form-editor-field-panel', $field_properties_template_source);
+		$this->assertStringContainsString('hx-post="<?= e($action) ?>"', $field_properties_template_source);
+		$this->assertStringContainsString('name="field_uid"', $field_properties_template_source);
+		$this->assertStringContainsString('data-form-editor-form-target', $so_admin_form_template_source);
 		$form_close_position = strpos($so_admin_form_template_source, '</form>');
 		$post_form_chrome_position = strpos($so_admin_form_template_source, "\$this->fetchContent('post_form_chrome')");
 		$this->assertIsInt($form_close_position);
@@ -190,15 +194,22 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 
 		foreach ([
 			'modules-common/Form/classes/class.FormSubmitContext.php',
+			'modules-common/Form/classes/class.FormCaptureFieldIdentity.php',
 			'modules-common/Form/classes/class.FormCaptureFieldPropertyProvider.php',
 			'modules-common/Form/classes/class.FormDefinitionResolver.php',
 			'modules-common/Form/classes/class.FormDefinitionResolution.php',
 			'modules-common/Form/classes/class.FormResponseEmitter.php',
 			'modules-common/Cms/classes/class.EditorInsertItem.php',
 			'modules-common/Cms/classes/class.EditorInsertSurfaceBuilder.php',
+			'modules-common/Cms/classes/class.EditModeMutationCommand.php',
+			'modules-common/Cms/classes/class.EditModeMutationResponder.php',
+			'modules-common/Cms/classes/class.CmsFragmentRenderer.php',
 			'modules-common/Form/events/Event.FormSubmit.php',
 			'modules-common/Form/events/Event.FormEditorInsertField.php',
 			'modules-common/Form/events/Event.FormEditorUpdateField.php',
+			'modules-common/Cms/events/Event.WidgetConnectionAdd.php',
+			'modules-common/Cms/events/Event.WidgetConnectionRemove.php',
+			'modules-common/Cms/events/Event.WidgetConnectionSwap.php',
 			'modules-common/Form/events/Event.FormBuilderEditorFragment.php',
 			'modules-common/Form/events/Event.FormBuilderLoadDraftVersion.php',
 			'modules-common/Form/events/Event.FormBuilderUpdateDraftNote.php',
@@ -208,6 +219,38 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		] as $path) {
 			$this->assertStringContainsString($path, $phpstan_source);
 		}
+	}
+
+	public function testEditModeMutationsUseSharedCommandResponderAndStableFieldIds(): void
+	{
+		$field_identity_source = $this->source('modules-common/Form/classes/class.FormCaptureFieldIdentity.php');
+		$validator_source = $this->source('modules-common/Form/classes/class.FormCaptureDescriptorSchemaValidator.php');
+		$abstract_form_source = $this->source('modules-common/Form/classes/class.AbstractForm.php');
+		$authoring_source = $this->source('modules-common/Form/classes/class.FormCaptureAuthoringService.php');
+		$responder_source = $this->source('modules-common/Cms/classes/class.EditModeMutationResponder.php');
+		$fragment_source = $this->source('modules-common/Cms/classes/class.CmsFragmentRenderer.php');
+		$insert_event_source = $this->source('modules-common/Form/events/Event.FormEditorInsertField.php');
+		$update_event_source = $this->source('modules-common/Form/events/Event.FormEditorUpdateField.php');
+		$widget_add_source = $this->source('modules-common/Cms/events/Event.WidgetConnectionAdd.php');
+		$widget_remove_source = $this->source('modules-common/Cms/events/Event.WidgetConnectionRemove.php');
+		$widget_swap_source = $this->source('modules-common/Cms/events/Event.WidgetConnectionSwap.php');
+		$editor_insert_source = $this->source('templates-common/default-SoAdmin/Cms/template.editorInsert.php');
+		$edit_bar_source = $this->source('templates-common/default-SoAdmin/Cms/template.editBar.common.php');
+
+		$this->assertStringContainsString("public const string DESCRIPTOR_KEY = 'editor_uid';", $field_identity_source);
+		$this->assertStringContainsString('ensureDescriptorFieldUids($normalized)', $validator_source);
+		$this->assertStringContainsString('FormCaptureFieldIdentity::formTargetId($this->editableWidgetConnectionId())', $abstract_form_source);
+		$this->assertStringContainsString('FormCaptureFieldIdentity::fieldTargetId($widget_connection_id, $field_uid)', $abstract_form_source);
+		$this->assertStringContainsString('FormCaptureFieldIdentity::generateUid($this->existingFieldUids($descriptor))', $authoring_source);
+		$this->assertStringContainsString('renderElementTargetsFromWidget', $fragment_source);
+		$this->assertStringContainsString('HX-Trigger', $responder_source);
+		$this->assertStringContainsString('EditModeMutationCommand::replaceForm($widget_connection_id)', $insert_event_source);
+		$this->assertStringContainsString('EditModeMutationCommand::replaceFormField($widget_connection_id, $field_uid)', $update_event_source);
+		$this->assertStringContainsString('EditModeMutationCommand::replaceSlot($slot_name)', $widget_add_source);
+		$this->assertStringContainsString('EditModeMutationCommand::replaceSlot($slot_name)', $widget_remove_source);
+		$this->assertStringContainsString('array_values($commands)', $widget_swap_source);
+		$this->assertStringContainsString('hx-vals="<?= e($hx_values) ?>"', $editor_insert_source);
+		$this->assertStringContainsString('hx-get="<?= event_url(\'widgetConnection.remove\'', $edit_bar_source);
 	}
 
 	private function source(string $relativePath): string

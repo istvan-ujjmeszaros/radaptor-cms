@@ -61,6 +61,7 @@ final class EventFormEditorUpdateField extends AbstractEvent implements iBrowser
 		}
 
 		$definition_slug = trim((string)Request::_POST('definition_slug', ''));
+		$field_uid = trim((string)Request::_POST('field_uid', ''));
 		$field_key = trim((string)Request::_POST('field_key', ''));
 		$field_index = (int)Request::_POST('field_index', -1);
 		$host_page_id = (int)Request::_POST('host_page_id', 0);
@@ -79,6 +80,7 @@ final class EventFormEditorUpdateField extends AbstractEvent implements iBrowser
 				'form_editor.update_field',
 				[
 					'definition_slug' => $definition_slug,
+					'field_uid' => $field_uid,
 					'field_key' => $field_key,
 					'field_index' => $field_index,
 				],
@@ -87,9 +89,16 @@ final class EventFormEditorUpdateField extends AbstractEvent implements iBrowser
 					$field_key,
 					$field_index,
 					$submitted,
+					$field_uid,
 				),
 			);
-			$this->succeed($result);
+			$field_uid = FormCaptureFieldIdentity::normalizeUid((string)($result['field_uid'] ?? $field_uid));
+			$this->responder()->succeed(
+				'form.field_edit.status_draft_updated',
+				$host_page_id,
+				[EditModeMutationCommand::replaceFormField($widget_connection_id, $field_uid)],
+				$result,
+			);
 		} catch (InvalidArgumentException) {
 			$this->fail('FORM_EDITOR_FIELD_INVALID', 'form.field_edit.error_invalid', 422);
 		} catch (UnexpectedValueException) {
@@ -100,32 +109,13 @@ final class EventFormEditorUpdateField extends AbstractEvent implements iBrowser
 		}
 	}
 
-	/**
-	 * @param array<string, mixed> $result
-	 */
-	private function succeed(array $result): void
-	{
-		if (Request::wantsNonHtmlResponse()) {
-			SystemMessages::flushAllMessages();
-			ApiResponse::renderSuccess($result);
-
-			return;
-		}
-
-		SystemMessages::_ok(t('form.field_edit.status_draft_updated'));
-		Kernel::redirectToReferer();
-	}
-
 	private function fail(string $code, string $message_key, int $http_code): void
 	{
-		if (Request::wantsNonHtmlResponse()) {
-			SystemMessages::flushAllMessages();
-			ApiResponse::renderErrorObj(new ApiError($code, t($message_key)), $http_code);
+		$this->responder()->fail($code, $message_key, $http_code);
+	}
 
-			return;
-		}
-
-		SystemMessages::_error(t($message_key));
-		Kernel::redirectToReferer();
+	private function responder(): EditModeMutationResponder
+	{
+		return new EditModeMutationResponder();
 	}
 }

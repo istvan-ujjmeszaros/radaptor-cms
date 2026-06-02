@@ -47,13 +47,39 @@ class EventWidgetConnectionSwap extends AbstractEvent implements iBrowserEventDo
 
 		$item_id = (int) Request::_GET('item_id', Request::DEFAULT_ERROR);
 		$swap_id = (int) Request::_GET('swap_id', Request::DEFAULT_ERROR);
+		$before = [
+			Widget::getConnectionData($item_id),
+			Widget::getConnectionData($swap_id),
+		];
 
 		if (DbHelper::swapHelper($table, $item_id, $swap_id)) {
 			foreach ([$item_id, $swap_id] as $connection_id) {
 				CmsRenderVersion::touchWidgetConnection($connection_id);
 			}
 
-			SystemMessages::_ok(t('cms.widget_connection.moved'));
+			$commands = [];
+			$page_id = 0;
+
+			foreach ($before as $connection_data) {
+				if (!is_array($connection_data)) {
+					continue;
+				}
+
+				$page_id = $page_id > 0 ? $page_id : (int)($connection_data['page_id'] ?? 0);
+				$slot_name = (string)($connection_data['slot_name'] ?? '');
+
+				if ($slot_name !== '') {
+					$commands[$slot_name] = EditModeMutationCommand::replaceSlot($slot_name);
+				}
+			}
+
+			(new EditModeMutationResponder())->succeed(
+				'cms.widget_connection.moved',
+				$page_id,
+				array_values($commands),
+			);
+
+			return;
 		}
 
 		Kernel::redirectToReferer();

@@ -42,8 +42,19 @@ class EventWidgetConnectionRemove extends AbstractEvent implements iBrowserEvent
 
 	public function run(): void
 	{
-		if (Widget::removeWidgetFromWebpage(Request::_GET('item_id', Request::DEFAULT_ERROR))) {
-			SystemMessages::_ok(t('cms.widget_connection.removed'));
+		$item_id = (int)Request::_GET('item_id', Request::DEFAULT_ERROR);
+		$connection_data = Widget::getConnectionData($item_id);
+		$page_id = (int)($connection_data['page_id'] ?? 0);
+		$slot_name = (string)($connection_data['slot_name'] ?? '');
+
+		if (Widget::removeWidgetFromWebpage($item_id)) {
+			(new EditModeMutationResponder())->succeed(
+				'cms.widget_connection.removed',
+				$page_id,
+				[EditModeMutationCommand::replaceSlot($slot_name)],
+			);
+
+			return;
 		}
 
 		Kernel::redirectToReferer();

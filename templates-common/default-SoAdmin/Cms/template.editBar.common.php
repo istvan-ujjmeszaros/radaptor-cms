@@ -25,7 +25,10 @@
 					<a style="display:block;margin-bottom:3px;" title="<?= e($this->strings['common.move_up']) ?>" href="<?= event_url('widgetConnection.swap', [
 						'item_id' => $this->getWidgetConnection()->connection_id,
 						'swap_id' => $this->getWidgetConnection()->previous()->connection_id,
-					]); ?>"><?= Icons::get(IconNames::WIDGET_UP); ?></a>
+					]); ?>" hx-get="<?= event_url('widgetConnection.swap', [
+						'item_id' => $this->getWidgetConnection()->connection_id,
+						'swap_id' => $this->getWidgetConnection()->previous()->connection_id,
+					]); ?>" hx-swap="none"><?= Icons::get(IconNames::WIDGET_UP); ?></a>
 				</td>
 			<?php endif; ?>
 			<?php if (!$this->getWidgetConnection()->isLast()): ?>
@@ -33,11 +36,14 @@
 					<a style="display:block;" title="<?= e($this->strings['common.move_down']) ?>" href="<?= event_url('widgetConnection.swap', [
 						'item_id' => $this->getWidgetConnection()->connection_id,
 						'swap_id' => $this->getWidgetConnection()->next()->connection_id,
-					]); ?>"><?= Icons::get(IconNames::WIDGET_DOWN); ?></a>
+					]); ?>" hx-get="<?= event_url('widgetConnection.swap', [
+						'item_id' => $this->getWidgetConnection()->connection_id,
+						'swap_id' => $this->getWidgetConnection()->next()->connection_id,
+					]); ?>" hx-swap="none"><?= Icons::get(IconNames::WIDGET_DOWN); ?></a>
 				</td>
 			<?php endif; ?>
 			<td>
-				<a title="<?= e($this->strings['cms.widget_connection.remove_from_webpage']) ?>" href="<?= event_url('widgetConnection.remove', ['item_id' => $this->getWidgetConnection()->connection_id]); ?>"><?= Icons::get(IconNames::WIDGET_REMOVE); ?></a>
+				<a title="<?= e($this->strings['cms.widget_connection.remove_from_webpage']) ?>" href="<?= event_url('widgetConnection.remove', ['item_id' => $this->getWidgetConnection()->connection_id]); ?>" hx-get="<?= event_url('widgetConnection.remove', ['item_id' => $this->getWidgetConnection()->connection_id]); ?>" hx-swap="none"><?= Icons::get(IconNames::WIDGET_REMOVE); ?></a>
 			</td>
 		<?php endif; ?>
 	</tr>

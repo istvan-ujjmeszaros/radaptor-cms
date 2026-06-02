@@ -3,15 +3,19 @@
 library('__ADMIN_EDIT_MODE');
 
 $panelId = (string)($this->props['panel_id'] ?? '');
+$targetId = (string)($this->props['target_id'] ?? '');
+$fieldUid = (string)($this->props['field_uid'] ?? '');
 $fieldKey = (string)($this->props['field_key'] ?? '');
 $fieldIndex = (int)($this->props['field_index'] ?? 0);
 $label = (string)($this->props['field_label'] ?? $fieldKey);
 $title = (string)($this->strings['form.field_edit.icon_title'] ?? '');
 ?>
 <div
+	<?= $targetId !== '' ? 'id="' . e($targetId) . '"' : '' ?>
 	class="form-editor-field"
 	data-form-editor-field
 	data-form-editor-field-panel-id="<?= e($panelId) ?>"
+	data-form-editor-field-uid="<?= e($fieldUid) ?>"
 	data-form-editor-field-key="<?= e($fieldKey) ?>"
 	data-form-editor-field-index="<?= e((string)$fieldIndex) ?>"
 >

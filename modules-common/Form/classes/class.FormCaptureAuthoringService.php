@@ -497,6 +497,7 @@ final class FormCaptureAuthoringService
 
 		return $result + [
 			'inserted_field' => $field,
+			'field_uid' => (string)($field[FormCaptureFieldIdentity::DESCRIPTOR_KEY] ?? ''),
 			'insert_index' => $insert_index,
 		];
 	}
@@ -505,7 +506,7 @@ final class FormCaptureAuthoringService
 	 * @param array<string, mixed> $submitted
 	 * @return array<string, mixed>
 	 */
-	public function updateFieldPropertiesInDraft(string $definition_slug, string $field_key, int $field_index, array $submitted): array
+	public function updateFieldPropertiesInDraft(string $definition_slug, string $field_key, int $field_index, array $submitted, string $field_uid = ''): array
 	{
 		$definition = $this->requireDbDefinition($definition_slug);
 		$version = $this->findActiveDraft((int)$definition->definition_id) ?? $this->findPublishedVersion($definition);
@@ -522,7 +523,7 @@ final class FormCaptureAuthoringService
 				$fields[] = $field;
 			}
 		}
-		$field_offset = $this->findFieldOffset($fields, $field_key, $field_index);
+		$field_offset = $this->findFieldOffset($fields, $field_uid, $field_key, $field_index);
 		$current_field = is_array($fields[$field_offset] ?? null) ? $fields[$field_offset] : [];
 		$fields[$field_offset] = (new FormCaptureFieldPropertyProvider())->applySubmittedValues(
 			$definition_slug,
@@ -537,6 +538,7 @@ final class FormCaptureAuthoringService
 
 		return $result + [
 			'updated_field' => $fields[$field_offset],
+			'field_uid' => (string)($fields[$field_offset][FormCaptureFieldIdentity::DESCRIPTOR_KEY] ?? ''),
 			'field_index' => $field_offset,
 		];
 	}
@@ -801,6 +803,7 @@ final class FormCaptureAuthoringService
 
 		$field = $item->defaults;
 		$field['type'] = $item->type;
+		$field[FormCaptureFieldIdentity::DESCRIPTOR_KEY] = FormCaptureFieldIdentity::generateUid($this->existingFieldUids($descriptor));
 		$default_name = trim((string)($field['name'] ?? $item->type));
 		$default_key = trim((string)($field['key'] ?? $default_name));
 		$existing_names = [];
@@ -945,10 +948,47 @@ final class FormCaptureAuthoringService
 	}
 
 	/**
+	 * @param array<string, mixed> $descriptor
+	 * @return array<string, true>
+	 */
+	private function existingFieldUids(array $descriptor): array
+	{
+		$existing = [];
+
+		foreach (($descriptor['fields'] ?? []) as $field) {
+			if (!is_array($field)) {
+				continue;
+			}
+
+			$uid = FormCaptureFieldIdentity::normalizeUid($field[FormCaptureFieldIdentity::DESCRIPTOR_KEY] ?? '');
+
+			if ($uid !== '') {
+				$existing[$uid] = true;
+			}
+		}
+
+		return $existing;
+	}
+
+	/**
 	 * @param list<array<string, mixed>> $fields
 	 */
-	private function findFieldOffset(array $fields, string $field_key, int $field_index): int
+	private function findFieldOffset(array $fields, string $field_uid, string $field_key, int $field_index): int
 	{
+		$field_uid = FormCaptureFieldIdentity::normalizeUid($field_uid);
+
+		if ($field_uid !== '') {
+			foreach ($fields as $offset => $field) {
+				if (!is_array($field)) {
+					continue;
+				}
+
+				if ($field_uid === FormCaptureFieldIdentity::normalizeUid($field[FormCaptureFieldIdentity::DESCRIPTOR_KEY] ?? '')) {
+					return $offset;
+				}
+			}
+		}
+
 		$field_key = trim($field_key);
 
 		if ($field_key !== '') {

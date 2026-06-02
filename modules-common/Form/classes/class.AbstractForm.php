@@ -395,6 +395,7 @@ abstract class AbstractForm implements iForm, iListable
 			'form',
 			[
 				'form_id' => $this->getFormId(),
+				'editmode_form_target_id' => $structure_editable ? FormCaptureFieldIdentity::formTargetId($this->editableWidgetConnectionId()) : '',
 				'form_instance_id' => $this->getFormInstanceId(),
 				'form_descriptor_id' => $this->getFormType(),
 				'form_name' => $this->getFormType(),
@@ -429,6 +430,7 @@ abstract class AbstractForm implements iForm, iListable
 		return $this->_tree_build_context->isEditable()
 			&& $resolution instanceof FormDefinitionResolution
 			&& $resolution->isStructureEditable()
+			&& $this->editableWidgetConnectionId() > 0
 			&& Roles::hasRole(RoleList::ROLE_CONTENT_ADMIN);
 	}
 
@@ -476,14 +478,26 @@ abstract class AbstractForm implements iForm, iListable
 	 */
 	private function buildEditableFieldTree(FormInput $input, array $input_tree, int $field_index): array
 	{
+		$resolution = $this->_render_context['form_definition_resolution'] ?? null;
+
+		if (!$resolution instanceof FormDefinitionResolution) {
+			Kernel::abort('Editable form field wrapper requested without a form definition resolution.');
+		}
+
+		$field = $this->findDescriptorFieldForInput($resolution->descriptor(), $input, $field_index);
+		$field_uid = FormCaptureFieldIdentity::normalizeUid($field[FormCaptureFieldIdentity::DESCRIPTOR_KEY] ?? '');
 		$field_key = $input->getKey();
-		$panel_id = $this->fieldPropertyPanelId($field_index, $field_key);
+		$widget_connection_id = $this->editableWidgetConnectionId();
+		$field_target_id = FormCaptureFieldIdentity::fieldTargetId($widget_connection_id, $field_uid);
+		$panel_id = FormCaptureFieldIdentity::panelTargetId($widget_connection_id, $field_uid);
 		$provider = new FormCaptureFieldPropertyProvider();
 
 		return SduiNode::create(
 			'formEditorField',
 			[
 				'form_id' => $this->getFormId(),
+				'target_id' => $field_target_id,
+				'field_uid' => $field_uid,
 				'field_key' => $field_key,
 				'field_index' => $field_index,
 				'field_label' => $input->label ?? $field_key,
@@ -509,7 +523,9 @@ abstract class AbstractForm implements iForm, iListable
 
 		$provider = new FormCaptureFieldPropertyProvider();
 		$field = $this->findDescriptorFieldForInput($resolution->descriptor(), $input, $field_index);
-		$panel_id = $this->fieldPropertyPanelId($field_index, $input->getKey());
+		$field_uid = FormCaptureFieldIdentity::normalizeUid($field[FormCaptureFieldIdentity::DESCRIPTOR_KEY] ?? '');
+		$widget_connection_id = $this->editableWidgetConnectionId();
+		$panel_id = FormCaptureFieldIdentity::panelTargetId($widget_connection_id, $field_uid);
 
 		return SduiNode::create(
 			'captureFieldProperties',
@@ -520,6 +536,7 @@ abstract class AbstractForm implements iForm, iListable
 				'values' => $provider->valuesForField($field),
 				'form_id' => $this->getFormId() . '_field_properties_' . $field_index,
 				'panel_id' => $panel_id,
+				'field_uid' => $field_uid,
 				'field_index' => $field_index,
 				'action' => Url::getUrl('form_editor.update_field'),
 				'target' => $this->buildEditableFormTarget($resolution),
@@ -578,11 +595,9 @@ abstract class AbstractForm implements iForm, iListable
 		];
 	}
 
-	private function fieldPropertyPanelId(int $field_index, string $field_key): string
+	private function editableWidgetConnectionId(): int
 	{
-		$safe_key = (string)preg_replace('/[^A-Za-z0-9_-]+/', '-', $field_key);
-
-		return $this->getFormId() . '-field-properties-' . $field_index . '-' . trim($safe_key, '-');
+		return (int)($this->_render_context['widget_connection_id'] ?? 0);
 	}
 
 	/**

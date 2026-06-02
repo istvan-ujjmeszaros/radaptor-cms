@@ -48,22 +48,44 @@ class EventWidgetConnectionAdd extends AbstractEvent implements iBrowserEventDoc
 	public function run(): void
 	{
 		$widget_name = Request::_POST('widget_name', '');
+		$page_id = (int)Request::_GET('pageid', Request::DEFAULT_ERROR);
+		$slot_name = (string)Request::_GET('slot_name', Request::DEFAULT_ERROR);
+		$seq_value = Request::_GET('seq', null);
+		$seq = $seq_value === null || $seq_value === '' ? null : (int)$seq_value;
 
 		if ($widget_name === '') {
-			SystemMessages::_warning(t('cms.widget_connection.select_widget_type'));
-			Kernel::redirectToReferer();
+			$this->fail('WIDGET_CONNECTION_ADD_EMPTY', 'cms.widget_connection.select_widget_type', 422);
+
+			return;
 		}
 
 		if (!Widget::checkWidgetExists($widget_name)) {
 			Kernel::abort(__FILE__ . ': line ' . __LINE__);
 		}
 
-		$slot_name = Request::_GET('slot_name', Request::DEFAULT_ERROR);
-
-		if (Widget::assignWidgetToWebpage(Request::_GET('pageid', Request::DEFAULT_ERROR), $slot_name, $widget_name, Request::_GET('seq'))) {
-			SystemMessages::_ok(t('cms.widget_connection.added'));
+		if (Widget::assignWidgetToWebpage($page_id, $slot_name, $widget_name, $seq) !== false) {
+			(new EditModeMutationResponder())->succeed(
+				'cms.widget_connection.added',
+				$page_id,
+				[EditModeMutationCommand::replaceSlot($slot_name)],
+			);
 		} else {
-			SystemMessages::_error(t('cms.widget_connection.duplicate_not_allowed'));
+			$this->fail('WIDGET_CONNECTION_DUPLICATE', 'cms.widget_connection.duplicate_not_allowed', 422);
+		}
+	}
+
+	private function fail(string $code, string $message_key, int $http_code): void
+	{
+		if ((Request::isHtmxRequest() && !Request::isHtmxBoostedRequest()) || Request::wantsNonHtmlResponse()) {
+			(new EditModeMutationResponder())->fail($code, $message_key, $http_code);
+
+			return;
+		}
+
+		if ($code === 'WIDGET_CONNECTION_ADD_EMPTY') {
+			SystemMessages::_warning(t($message_key));
+		} else {
+			SystemMessages::_error(t($message_key));
 		}
 
 		Kernel::redirectToReferer();

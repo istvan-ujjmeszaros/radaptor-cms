@@ -58,6 +58,8 @@ final class EventFormEditorInsertField extends AbstractEvent implements iBrowser
 			$definition_slug = trim((string)($payload['definition_slug'] ?? ''));
 			$field_type = trim((string)($payload['field_type'] ?? ''));
 			$insert_index = max(0, (int)($payload['insert_index'] ?? 0));
+			$host_page_id = (int)($payload['host_page_id'] ?? 0);
+			$widget_connection_id = (int)($payload['widget_connection_id'] ?? 0);
 			$result = CmsMutationAuditService::withContext(
 				'form_editor.insert_field',
 				[
@@ -72,7 +74,12 @@ final class EventFormEditorInsertField extends AbstractEvent implements iBrowser
 				),
 			);
 
-			$this->succeed($result);
+			$this->responder()->succeed(
+				'form.insert.status_draft_updated',
+				$host_page_id,
+				[EditModeMutationCommand::replaceForm($widget_connection_id)],
+				$result,
+			);
 		} catch (InvalidArgumentException) {
 			$this->fail('FORM_EDITOR_INSERT_INVALID', 'form.insert.error_invalid_type', 422);
 		} catch (UnexpectedValueException) {
@@ -120,32 +127,13 @@ final class EventFormEditorInsertField extends AbstractEvent implements iBrowser
 		FormBuilderEventHelper::assertEditableCaptureTarget($definition_slug, $host_page_id, $widget_connection_id);
 	}
 
-	/**
-	 * @param array<string, mixed> $result
-	 */
-	private function succeed(array $result): void
-	{
-		if (Request::wantsNonHtmlResponse()) {
-			SystemMessages::flushAllMessages();
-			ApiResponse::renderSuccess($result);
-
-			return;
-		}
-
-		SystemMessages::_ok(t('form.insert.status_draft_updated'));
-		Kernel::redirectToReferer();
-	}
-
 	private function fail(string $code, string $message_key, int $http_code): void
 	{
-		if (Request::wantsNonHtmlResponse()) {
-			SystemMessages::flushAllMessages();
-			ApiResponse::renderErrorObj(new ApiError($code, t($message_key)), $http_code);
+		$this->responder()->fail($code, $message_key, $http_code);
+	}
 
-			return;
-		}
-
-		SystemMessages::_error(t($message_key));
-		Kernel::redirectToReferer();
+	private function responder(): EditModeMutationResponder
+	{
+		return new EditModeMutationResponder();
 	}
 }

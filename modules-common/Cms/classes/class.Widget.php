@@ -499,13 +499,21 @@ class Widget extends WidgetList
 				}
 			}
 
+			$method = strtolower($command->method);
+			$properties_url = $command->properties_url;
+
+			if ($properties_url === '' && $method === 'get') {
+				$properties_url = Form::getEditorFragmentUrlFromSeoUrl($command->url);
+			}
+
 			$return[] = [
 				'title' => $command->title,
 				'url' => $command->url,
 				'icon' => $command->icon?->value,
-				'method' => strtolower($command->method),
+				'method' => $method,
 				'payload' => $payload,
 				'loader' => $command->loader,
+				'properties_url' => $properties_url,
 			];
 		}
 

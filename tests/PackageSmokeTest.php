@@ -144,6 +144,31 @@ final class PackageSmokeTest extends TestCase
 		$this->assertStringNotContainsString("'surfaces' => ['public']", $main_menu_source);
 	}
 
+	public function testEditBarFormCommandsExposeEditorFragmentUrls(): void
+	{
+		$root = dirname(__DIR__);
+		$form_source = (string) file_get_contents($root . '/modules-common/Form/classes/class.Form.php');
+		$event_source = (string) file_get_contents($root . '/modules-common/Form/events/Event.FormEditorFragment.php');
+		$widget_source = (string) file_get_contents($root . '/modules-common/Cms/classes/class.Widget.php');
+		$edit_bar_source = (string) file_get_contents($root . '/templates-common/default-SoAdmin/Cms/template.editBar.common.php');
+		$fragment_assets_source = (string) file_get_contents($root . '/modules-common/Cms/classes/class.HtmlFragmentAssetRenderer.php');
+		$fragment_template_source = (string) file_get_contents($root . '/modules-common/Cms/classes/class.HtmlFragmentTemplate.php');
+		$cms_fragment_source = (string) file_get_contents($root . '/modules-common/Cms/classes/class.CmsFragmentRenderer.php');
+
+		$this->assertStringContainsString("Url::getUrl('form.editor_fragment'", $form_source);
+		$this->assertStringContainsString('getEditorFragmentUrlFromSeoUrl', $form_source);
+		$this->assertStringContainsString("'event_name' => 'form.editor_fragment'", $event_source);
+		$this->assertStringContainsString('HtmlFragmentAssetRenderer::renderTemplatesFromRenderer($renderer)', $event_source);
+		$this->assertStringContainsString('template_class: HtmlFragmentTemplate::class', $event_source);
+		$this->assertStringContainsString('Form::getEditorFragmentUrlFromSeoUrl($command->url)', $widget_source);
+		$this->assertStringContainsString("'properties_url' => \$properties_url", $widget_source);
+		$this->assertStringContainsString('data-page-editor-properties-url', $edit_bar_source);
+		$this->assertStringContainsString('template data-radaptor-fragment-assets', $fragment_assets_source);
+		$this->assertStringContainsString('data-radaptor-fragment-asset', $fragment_assets_source);
+		$this->assertStringContainsString('return $content;', $fragment_template_source);
+		$this->assertStringContainsString('HtmlFragmentAssetRenderer::renderTemplatesFromRenderer($this->renderer)', $cms_fragment_source);
+	}
+
 	private function relativePath(string $path, string $root): string
 	{
 		return ltrim(str_replace($root, '', $path), '/');

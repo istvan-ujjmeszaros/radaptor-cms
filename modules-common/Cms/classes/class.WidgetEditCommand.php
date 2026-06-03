@@ -12,6 +12,7 @@ class WidgetEditCommand extends Struct
 		public string $method = 'get',
 		public array $payload = [],
 		public bool $loader = false,
+		public string $properties_url = '',
 	) {
 	}
 }

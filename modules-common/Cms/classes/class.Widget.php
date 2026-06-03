@@ -368,6 +368,8 @@ class Widget extends WidgetList
 			'form.widget_connection_settings.title' => t('form.widget_connection_settings.title'),
 			'common.move_up' => t('common.move_up'),
 			'common.move_down' => t('common.move_down'),
+			'common.delete' => t('common.delete'),
+			'common.cancel' => t('common.cancel'),
 			'cms.widget_connection.remove_from_webpage' => t('cms.widget_connection.remove_from_webpage'),
 		];
 	}
@@ -414,10 +416,21 @@ class Widget extends WidgetList
 		$return = [];
 
 		foreach ($commands as $command) {
+			$payload = [];
+
+			foreach ($command->payload as $name => $value) {
+				if (is_scalar($value) || $value === null) {
+					$payload[(string)$name] = $value;
+				}
+			}
+
 			$return[] = [
 				'title' => $command->title,
 				'url' => $command->url,
 				'icon' => $command->icon?->value,
+				'method' => strtolower($command->method),
+				'payload' => $payload,
+				'loader' => $command->loader,
 			];
 		}
 

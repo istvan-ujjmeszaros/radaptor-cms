@@ -35,14 +35,37 @@ class CmsFragmentRenderer
 	}
 
 	/**
+	 * @param list<string> $target_ids
+	 */
+	public function renderElementTargetsFromWidget(int $connection_id, array $target_ids): string
+	{
+		$target_ids = $this->normalizeElementTargetIds($target_ids);
+
+		if ($target_ids === []) {
+			return '<div hidden></div>';
+		}
+
+		$widget_tree = $this->buildWidgetTargetTree($connection_id);
+		$widget_html = $this->renderer->render($widget_tree);
+		$document = $this->loadElementTargetDocument($widget_html);
+		$oob_html = '';
+
+		foreach ($target_ids as $target_id) {
+			$oob_html .= $this->extractElementTarget($document, $target_id);
+		}
+
+		return '<div hidden></div>' . $oob_html . $this->renderAssetOobHtml();
+	}
+
+	/**
 	 * @param list<string> $targets
 	 */
 	public function renderTargets(array $targets): string
 	{
-		$this->assertPartialNavigableLayout();
 		$targets = $this->normalizeTargets($targets);
 
 		if ($targets === []) {
+			$this->assertPartialNavigableLayout();
 			$targets = $this->normalizeTargets($this->layout::getPageFragmentTargets());
 		}
 
@@ -50,6 +73,11 @@ class CmsFragmentRenderer
 
 		foreach ($targets as $target) {
 			[$type, $name] = explode(':', $target, 2);
+
+			if ($type === 'component') {
+				$this->assertPartialNavigableLayout();
+			}
+
 			$tree = match ($type) {
 				'slot' => $this->buildSlotTargetTree($name),
 				'widget' => $this->buildWidgetTargetTree((int)$name),
@@ -107,6 +135,37 @@ class CmsFragmentRenderer
 
 		if (count($normalized) > self::MAX_TARGETS) {
 			throw new InvalidArgumentException('Too many fragment targets requested.');
+		}
+
+		return $normalized;
+	}
+
+	/**
+	 * @param list<string> $target_ids
+	 * @return list<string>
+	 */
+	private function normalizeElementTargetIds(array $target_ids): array
+	{
+		$normalized = [];
+
+		foreach ($target_ids as $target_id) {
+			$target_id = trim((string)$target_id);
+
+			if ($target_id === '') {
+				continue;
+			}
+
+			if (!preg_match('/^[A-Za-z][A-Za-z0-9_\\-:]*$/D', $target_id)) {
+				throw new InvalidArgumentException("Invalid element fragment target id: {$target_id}");
+			}
+
+			$normalized[] = $target_id;
+		}
+
+		$normalized = array_values(array_unique($normalized));
+
+		if (count($normalized) > self::MAX_TARGETS) {
+			throw new InvalidArgumentException('Too many element fragment targets requested.');
 		}
 
 		return $normalized;
@@ -170,6 +229,45 @@ class CmsFragmentRenderer
 		}
 
 		return $html;
+	}
+
+	private function loadElementTargetDocument(string $html): DOMDocument
+	{
+		$document = new DOMDocument();
+		$previous = libxml_use_internal_errors(true);
+
+		try {
+			$document->loadHTML('<?xml encoding="UTF-8"><div id="radaptor-fragment-root">' . $html . '</div>', LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+		} finally {
+			libxml_clear_errors();
+			libxml_use_internal_errors($previous);
+		}
+
+		return $document;
+	}
+
+	private function extractElementTarget(DOMDocument $document, string $target_id): string
+	{
+		$element = $this->findElementById($document, $target_id);
+
+		if (!$element instanceof DOMElement) {
+			throw new RuntimeException("Element fragment target not found: {$target_id}");
+		}
+
+		$element->setAttribute('hx-swap-oob', 'outerHTML');
+
+		return (string)$document->saveHTML($element);
+	}
+
+	private function findElementById(DOMDocument $document, string $target_id): ?DOMElement
+	{
+		foreach ($document->getElementsByTagName('*') as $element) {
+			if ($element instanceof DOMElement && $element->getAttribute('id') === $target_id) {
+				return $element;
+			}
+		}
+
+		return null;
 	}
 
 	/**

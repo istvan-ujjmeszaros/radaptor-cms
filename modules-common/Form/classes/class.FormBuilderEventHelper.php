@@ -5,6 +5,10 @@ declare(strict_types=1);
 final class FormBuilderEventHelper
 {
 	public const string CSRF_FORM_ID = 'form_builder';
+	public const string CSRF_INLINE_INSERT_FORM_ID = 'form_inline_insert';
+	public const string CSRF_INLINE_FIELD_PROPERTIES_FORM_ID = 'form_inline_field_properties';
+	public const string CSRF_INLINE_FIELD_COMMAND_FORM_ID = 'form_inline_field_command';
+	public const string CSRF_INLINE_FORM_COMMAND_FORM_ID = 'form_inline_form_command';
 
 	public static function authorizeContentAdmin(PolicyContext $policyContext): PolicyDecision
 	{
@@ -43,6 +47,41 @@ final class FormBuilderEventHelper
 		$value = strtolower(trim((string)Request::_POST($key, '')));
 
 		return in_array($value, ['1', 'true', 'yes', 'on'], true);
+	}
+
+	public static function assertEditableCaptureTarget(string $definition_slug, int $host_page_id, int $widget_connection_id): void
+	{
+		if ($definition_slug === '' || $host_page_id <= 0 || $widget_connection_id <= 0) {
+			throw new UnexpectedValueException('Form editor target is incomplete.');
+		}
+
+		if (!ResourceAcl::canAccessResource($host_page_id, ResourceAcl::_ACL_EDIT)) {
+			throw new UnexpectedValueException('The current user cannot edit the host page.');
+		}
+
+		$connection_data = Widget::getConnectionData($widget_connection_id);
+
+		if (!is_array($connection_data) || (int)($connection_data['page_id'] ?? 0) !== $host_page_id) {
+			throw new UnexpectedValueException('Form editor widget target is invalid.');
+		}
+
+		if ((string)($connection_data['widget_name'] ?? '') !== 'CaptureForm') {
+			throw new UnexpectedValueException('Only capture form widgets are editable inline.');
+		}
+
+		$attributes = AttributeHandler::getAttributes(
+			new AttributeResourceIdentifier(ResourceNames::WIDGET_CONNECTION, (string)$widget_connection_id)
+		);
+
+		if ((string)($attributes['definition_slug'] ?? '') !== $definition_slug) {
+			throw new UnexpectedValueException('Form editor definition target does not match the widget.');
+		}
+
+		$resolution = FormDefinitionResolver::resolveForRender($definition_slug, ['structure_editable' => true]);
+
+		if (!$resolution instanceof FormDefinitionResolution || !$resolution->isStructureEditable()) {
+			throw new UnexpectedValueException('Capture form definition is not editable here.');
+		}
 	}
 
 	public static function renderCsrfError(ApiError $error): void

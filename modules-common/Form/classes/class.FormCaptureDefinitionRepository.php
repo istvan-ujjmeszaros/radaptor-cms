@@ -227,6 +227,69 @@ final class FormCaptureDefinitionRepository
 		);
 	}
 
+	public function findEditableResolution(string $definition_slug): ?FormDefinitionResolution
+	{
+		if (!FormCaptureDescriptorSchemaValidator::isCaptureSlug($definition_slug)) {
+			return null;
+		}
+
+		if (!$this->tableExists('form_definitions') || !$this->tableExists('form_definition_versions')) {
+			return null;
+		}
+
+		try {
+			FormCaptureDescriptorSchemaValidator::validateDefinitionSlug($definition_slug);
+		} catch (InvalidArgumentException) {
+			return null;
+		}
+
+		$definition = EntityFormDefinition::findBySlug($definition_slug);
+
+		if (!$definition instanceof EntityFormDefinition || (string)$definition->kind !== 'capture' || (string)$definition->source !== 'db') {
+			return null;
+		}
+
+		$definition_id = (int)$definition->definition_id;
+		$version = EntityFormDefinitionVersion::findFirst(
+			['definition_id' => $definition_id, 'status' => 'draft'],
+			'version_number DESC, version_id DESC',
+		);
+
+		if (!$version instanceof EntityFormDefinitionVersion && (int)($definition->published_version_id ?? 0) > 0) {
+			$version = EntityFormDefinitionVersion::findPublishedForDefinition($definition_id, (int)$definition->published_version_id);
+		}
+
+		if (!$version instanceof EntityFormDefinitionVersion) {
+			return null;
+		}
+
+		try {
+			$descriptor_json = (string)$version->descriptor_json;
+
+			if (!hash_equals((string)$version->descriptor_hash, hash('sha256', $descriptor_json))) {
+				throw new InvalidArgumentException('Capture form descriptor_hash does not match descriptor_json.');
+			}
+
+			$descriptor = FormCaptureDescriptorSchemaValidator::normalizeDescriptor(
+				self::decodeJsonObject($descriptor_json, 'descriptor_json'),
+			);
+			$field_keys = FormCaptureDescriptorSchemaValidator::validateDescriptor($descriptor);
+			$security = FormCaptureDescriptorSchemaValidator::normalizeSecurity((string)$definition->security_json, $field_keys);
+			FormCaptureDescriptorSchemaValidator::validateForDefinition($definition_slug, $descriptor, $security);
+		} catch (Throwable $exception) {
+			throw FormCaptureRuntimeException::invalidDescriptor($definition_slug, $exception);
+		}
+
+		return FormDefinitionResolution::capture(
+			$definition_slug,
+			$definition->dto(),
+			$version->dto(),
+			$descriptor,
+			$security,
+			true,
+		);
+	}
+
 	/**
 	 * @return array{definition: array<string, mixed>, version: array<string, mixed>}|null
 	 */

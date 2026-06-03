@@ -42,10 +42,37 @@ class EventWidgetConnectionRemove extends AbstractEvent implements iBrowserEvent
 
 	public function run(): void
 	{
-		if (Widget::removeWidgetFromWebpage(Request::_GET('item_id', Request::DEFAULT_ERROR))) {
-			SystemMessages::_ok(t('cms.widget_connection.removed'));
+		$item_id = (int)Request::_GET('item_id', Request::DEFAULT_ERROR);
+		$connection_data = Widget::getConnectionData($item_id);
+		$page_id = (int)($connection_data['page_id'] ?? 0);
+		$slot_name = (string)($connection_data['slot_name'] ?? '');
+
+		if (Widget::removeWidgetFromWebpage($item_id)) {
+			try {
+				(new EditModeMutationResponder())->succeed(
+					'cms.widget_connection.removed',
+					$page_id,
+					[EditModeMutationCommand::replaceSlot($slot_name)],
+				);
+			} catch (InvalidArgumentException|RuntimeException) {
+				$this->fail('WIDGET_CONNECTION_REMOVE_RENDER_FAILED', 'cms.widget_connection.remove_error', 500);
+			}
+
+			return;
 		}
 
+		$this->fail('WIDGET_CONNECTION_REMOVE_FAILED', 'cms.widget_connection.remove_error', 422);
+	}
+
+	private function fail(string $code, string $message_key, int $http_code): void
+	{
+		if ((Request::isHtmxRequest() && !Request::isHtmxBoostedRequest()) || Request::wantsNonHtmlResponse()) {
+			(new EditModeMutationResponder())->fail($code, $message_key, $http_code);
+
+			return;
+		}
+
+		SystemMessages::_error(t($message_key));
 		Kernel::redirectToReferer();
 	}
 }

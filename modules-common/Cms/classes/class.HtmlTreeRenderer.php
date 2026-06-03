@@ -589,6 +589,15 @@ class HtmlTreeRenderer implements iPageTreeRenderer, iHtmlTemplateRuntime
 
 		$template_name = HtmlComponentTemplateResolver::resolveTemplateName($node);
 
+		if ($template_name === '_missing') {
+			$props['_missing'] = [
+				'component' => (string)($node['component'] ?? ''),
+				'props' => $props,
+				'meta' => $meta,
+				'content_names' => array_keys($node['contents'] ?? []),
+			];
+		}
+
 		$template_class = $this->template_class;
 		$template = new $template_class(
 			$template_name,

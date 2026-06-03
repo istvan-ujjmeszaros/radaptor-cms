@@ -4,6 +4,7 @@ $this->registerLibrary('STIMULUS_LOADER');
 $this->registerLibrary('TIPPY');
 
 $form_id = (string)($this->props['form_id'] ?? '');
+$editmode_form_target_id = trim((string)($this->props['editmode_form_target_id'] ?? ''));
 $action = (string)($this->props['action'] ?? '');
 $method = (string)($this->props['method'] ?? 'post');
 $form_class = trim((string)($this->props['form_class'] ?? ''));
@@ -40,6 +41,9 @@ foreach ($html_attributes as $attribute_name => $attribute_value) {
 	$html_attributes_string .= ' ' . $attribute_name . '="' . e((string)$attribute_value) . '"';
 }
 ?>
+<?php if ($editmode_form_target_id !== ''): ?>
+	<div id="<?= e($editmode_form_target_id) ?>" data-form-editor-form-target>
+<?php endif; ?>
 <form id="<?= e($form_id) ?>" action="<?= e($action) ?>" method="<?= e($method) ?>" class="<?= e($form_classes) ?>"<?= !$autocomplete ? ' autocomplete="off"' : '' ?><?= $html_attributes_string ?>>
 	<?php if ($title !== ''): ?>
 		<div class="subheader">
@@ -76,6 +80,12 @@ foreach ($html_attributes as $attribute_name => $attribute_value) {
 	<div style="clear:both"></div>
 </form>
 
+<?= $this->fetchContent('post_form_chrome') ?>
+
+<?php if ($editmode_form_target_id !== ''): ?>
+	</div>
+<?php endif; ?>
+
 <?php if ($post_javascript_file !== ''): ?>
 	<script type="text/javascript" src="<?= Config::PATH_CDN->value(); ?>scripts_form/<?= e($post_javascript_file) ?>"></script>
 <?php endif; ?>
@@ -87,7 +97,7 @@ $(function() {
 		el.removeAttribute("title");
 	});
 	<?php if ($focusable): ?>
-	$("input:visible:enabled:first").focus();
+	$("input:visible:enabled:not([tabindex='-1']):first").focus();
 	<?php endif; ?>
 	$('.select-downarrow').bind("click", function () {
 		var input = $(this).prev();

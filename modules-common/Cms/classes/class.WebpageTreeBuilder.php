@@ -185,7 +185,7 @@ class WebpageTreeBuilder
 
 	private function shouldEmitStableContainers(): bool
 	{
-		return $this->view->getLayoutType() instanceof iPartialNavigableLayout;
+		return $this->view->isEditable() || $this->view->getLayoutType() instanceof iPartialNavigableLayout;
 	}
 
 	/**

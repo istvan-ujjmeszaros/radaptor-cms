@@ -66,14 +66,18 @@ class EventWidgetConnectionAdd extends AbstractEvent implements iBrowserEventDoc
 		$connection_id = Widget::assignWidgetToWebpage($page_id, $slot_name, $widget_name, $seq);
 
 		if ($connection_id !== false) {
-			(new EditModeMutationResponder())->succeed(
-				'cms.widget_connection.added',
-				$page_id,
-				[EditModeMutationCommand::replaceSlot($slot_name, 'edit-widget-' . (int)$connection_id)],
-				[
-					'connection_id' => (int)$connection_id,
-				],
-			);
+			try {
+				(new EditModeMutationResponder())->succeed(
+					'cms.widget_connection.added',
+					$page_id,
+					[EditModeMutationCommand::replaceSlot($slot_name, 'edit-widget-' . (int)$connection_id)],
+					[
+						'connection_id' => (int)$connection_id,
+					],
+				);
+			} catch (InvalidArgumentException|RuntimeException) {
+				$this->fail('WIDGET_CONNECTION_ADD_RENDER_FAILED', 'cms.widget_connection.add_error', 500);
+			}
 		} else {
 			$this->fail('WIDGET_CONNECTION_DUPLICATE', 'cms.widget_connection.duplicate_not_allowed', 422);
 		}

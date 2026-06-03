@@ -269,6 +269,11 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$this->assertStringContainsString('ensureDescriptorFieldUids($normalized)', $validator_source);
 		$this->assertStringContainsString('FormCaptureFieldIdentity::formTargetId($this->editableWidgetConnectionId())', $abstract_form_source);
 		$this->assertStringContainsString('FormCaptureFieldIdentity::fieldTargetId($widget_connection_id, $field_uid)', $abstract_form_source);
+		$hidden_input_guard_position = strpos($abstract_form_source, 'if ($input instanceof FormInputHidden) {');
+		$visible_insert_index_position = strpos($abstract_form_source, '++$visible_insert_index');
+		$this->assertIsInt($hidden_input_guard_position);
+		$this->assertIsInt($visible_insert_index_position);
+		$this->assertLessThan($visible_insert_index_position, $hidden_input_guard_position);
 		$this->assertStringContainsString('buildPublishCommand(WidgetConnection $connection)', $capture_widget_source);
 		$this->assertStringContainsString("Url::getUrl('form_editor.publish')", $capture_widget_source);
 		$this->assertStringContainsString('CSRF_INLINE_FORM_COMMAND_FORM_ID', $capture_widget_source);
@@ -305,6 +310,16 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$this->assertStringContainsString('EditModeMutationCommand::replaceSlot($slot_name, \'edit-widget-\' . (int)$connection_id)', $widget_add_source);
 		$this->assertStringContainsString('EditModeMutationCommand::replaceSlot($slot_name)', $widget_remove_source);
 		$this->assertStringContainsString('array_values($commands)', $widget_swap_source);
+		$this->assertStringContainsString('catch (InvalidArgumentException|RuntimeException)', $widget_add_source);
+		$this->assertStringContainsString('catch (InvalidArgumentException|RuntimeException)', $widget_remove_source);
+		$this->assertStringContainsString('catch (InvalidArgumentException|RuntimeException)', $widget_swap_source);
+		$this->assertStringContainsString('if (!is_array($before[0]) || !is_array($before[1])) {', $widget_swap_source);
+		$this->assertStringContainsString("'WIDGET_CONNECTION_REMOVE_FAILED'", $widget_remove_source);
+		$this->assertStringContainsString("'WIDGET_CONNECTION_SWAP_FAILED'", $widget_swap_source);
+		$this->assertStringContainsString('new EditModeMutationResponder())->fail', $widget_remove_source);
+		$this->assertStringContainsString('new EditModeMutationResponder())->fail', $widget_swap_source);
+		$this->assertStringContainsString('$document = $this->loadElementTargetDocument($widget_html);', $fragment_source);
+		$this->assertStringContainsString('$this->extractElementTarget($document, $target_id)', $fragment_source);
 		$this->assertStringContainsString("\$this->registerLibrary('__ADMIN_EDIT_MODE');", $editor_insert_source);
 		$this->assertStringContainsString("\$edit_mode_hx_swap = 'none show:none focus-scroll:false';", $editor_insert_source);
 		$this->assertStringContainsString("\$edit_mode_hx_swap = 'none show:none focus-scroll:false';", $edit_bar_source);

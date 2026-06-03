@@ -43,6 +43,8 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 			EditModeMutationCommand::class,
 			EditModeMutationResponder::class,
 			EventWidgetConnectionAdd::class,
+			EventWidgetConnectionRemove::class,
+			EventWidgetConnectionSwap::class,
 			FormCaptureFieldEditorCommandProvider::class,
 			FormCaptureFieldIdentity::class,
 			FormCaptureFieldPropertyProvider::class,
@@ -1486,6 +1488,26 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame('edit-widget-' . $connection_id, $command['context']['reveal_target_id'] ?? null);
 	}
 
+	public function testWidgetRemoveAndSwapFailuresReturnStructuredJsonForNonHtmlClients(): void
+	{
+		$this->impersonateAndRequireRole('admin_developer', RoleList::ROLE_CONTENT_ADMIN);
+
+		$remove_response = $this->runWidgetRemoveEvent([
+			'item_id' => '99999999',
+		]);
+		$swap_response = $this->runWidgetSwapEvent([
+			'item_id' => '99999998',
+			'swap_id' => '99999999',
+		]);
+
+		$this->assertSame(422, $remove_response['http_code']);
+		$this->assertFalse($remove_response['body']['ok']);
+		$this->assertSame('WIDGET_CONNECTION_REMOVE_FAILED', $remove_response['body']['error']['code'] ?? null);
+		$this->assertSame(422, $swap_response['http_code']);
+		$this->assertFalse($swap_response['body']['ok']);
+		$this->assertSame('WIDGET_CONNECTION_SWAP_FAILED', $swap_response['body']['error']['code'] ?? null);
+	}
+
 	public function testInlineInsertAddsOptionI18nKeysForKeyedCaptureDescriptors(): void
 	{
 		$definition_slug = 'capture-phase4-inline-insert-keyed';
@@ -2436,6 +2458,80 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 
 		try {
 			(new EventWidgetConnectionAdd())->run();
+		} finally {
+			$output = (string)ob_get_clean();
+		}
+
+		return [
+			'http_code' => $ctx->capturedApiResponseHttpCode,
+			'body' => $ctx->capturedApiResponse,
+			'output' => $output,
+		];
+	}
+
+	/**
+	 * @param array<string, mixed> $get
+	 * @return array{http_code: int|null, body: array<string, mixed>|null, output: string}
+	 */
+	private function runWidgetRemoveEvent(array $get): array
+	{
+		$current_user = RequestContextHolder::current()->currentUser;
+		$this->setRequestContext(
+			get: $get,
+			server: [
+				'HTTP_HOST' => 'localhost',
+				'REQUEST_URI' => '/?context=widgetConnection&event=remove',
+				'REQUEST_METHOD' => 'GET',
+				'HTTP_ACCEPT' => 'application/json',
+			],
+		);
+
+		$ctx = RequestContextHolder::current();
+		$ctx->currentUser = $current_user;
+		$ctx->userSessionInitialized = true;
+		$ctx->apiResponseCaptureEnabled = true;
+
+		ob_start();
+
+		try {
+			(new EventWidgetConnectionRemove())->run();
+		} finally {
+			$output = (string)ob_get_clean();
+		}
+
+		return [
+			'http_code' => $ctx->capturedApiResponseHttpCode,
+			'body' => $ctx->capturedApiResponse,
+			'output' => $output,
+		];
+	}
+
+	/**
+	 * @param array<string, mixed> $get
+	 * @return array{http_code: int|null, body: array<string, mixed>|null, output: string}
+	 */
+	private function runWidgetSwapEvent(array $get): array
+	{
+		$current_user = RequestContextHolder::current()->currentUser;
+		$this->setRequestContext(
+			get: $get,
+			server: [
+				'HTTP_HOST' => 'localhost',
+				'REQUEST_URI' => '/?context=widgetConnection&event=swap',
+				'REQUEST_METHOD' => 'GET',
+				'HTTP_ACCEPT' => 'application/json',
+			],
+		);
+
+		$ctx = RequestContextHolder::current();
+		$ctx->currentUser = $current_user;
+		$ctx->userSessionInitialized = true;
+		$ctx->apiResponseCaptureEnabled = true;
+
+		ob_start();
+
+		try {
+			(new EventWidgetConnectionSwap())->run();
 		} finally {
 			$output = (string)ob_get_clean();
 		}

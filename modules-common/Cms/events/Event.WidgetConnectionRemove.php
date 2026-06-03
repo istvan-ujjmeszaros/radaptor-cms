@@ -48,15 +48,31 @@ class EventWidgetConnectionRemove extends AbstractEvent implements iBrowserEvent
 		$slot_name = (string)($connection_data['slot_name'] ?? '');
 
 		if (Widget::removeWidgetFromWebpage($item_id)) {
-			(new EditModeMutationResponder())->succeed(
-				'cms.widget_connection.removed',
-				$page_id,
-				[EditModeMutationCommand::replaceSlot($slot_name)],
-			);
+			try {
+				(new EditModeMutationResponder())->succeed(
+					'cms.widget_connection.removed',
+					$page_id,
+					[EditModeMutationCommand::replaceSlot($slot_name)],
+				);
+			} catch (InvalidArgumentException|RuntimeException) {
+				$this->fail('WIDGET_CONNECTION_REMOVE_RENDER_FAILED', 'cms.widget_connection.remove_error', 500);
+			}
 
 			return;
 		}
 
+		$this->fail('WIDGET_CONNECTION_REMOVE_FAILED', 'cms.widget_connection.remove_error', 422);
+	}
+
+	private function fail(string $code, string $message_key, int $http_code): void
+	{
+		if ((Request::isHtmxRequest() && !Request::isHtmxBoostedRequest()) || Request::wantsNonHtmlResponse()) {
+			(new EditModeMutationResponder())->fail($code, $message_key, $http_code);
+
+			return;
+		}
+
+		SystemMessages::_error(t($message_key));
 		Kernel::redirectToReferer();
 	}
 }

@@ -47,10 +47,11 @@ class CmsFragmentRenderer
 
 		$widget_tree = $this->buildWidgetTargetTree($connection_id);
 		$widget_html = $this->renderer->render($widget_tree);
+		$document = $this->loadElementTargetDocument($widget_html);
 		$oob_html = '';
 
 		foreach ($target_ids as $target_id) {
-			$oob_html .= $this->extractElementTarget($widget_html, $target_id);
+			$oob_html .= $this->extractElementTarget($document, $target_id);
 		}
 
 		return '<div hidden></div>' . $oob_html . $this->renderAssetOobHtml();
@@ -230,26 +231,32 @@ class CmsFragmentRenderer
 		return $html;
 	}
 
-	private function extractElementTarget(string $html, string $target_id): string
+	private function loadElementTargetDocument(string $html): DOMDocument
 	{
 		$document = new DOMDocument();
 		$previous = libxml_use_internal_errors(true);
 
 		try {
 			$document->loadHTML('<?xml encoding="UTF-8"><div id="radaptor-fragment-root">' . $html . '</div>', LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-			$element = $this->findElementById($document, $target_id);
-
-			if (!$element instanceof DOMElement) {
-				throw new RuntimeException("Element fragment target not found: {$target_id}");
-			}
-
-			$element->setAttribute('hx-swap-oob', 'outerHTML');
-
-			return (string)$document->saveHTML($element);
 		} finally {
 			libxml_clear_errors();
 			libxml_use_internal_errors($previous);
 		}
+
+		return $document;
+	}
+
+	private function extractElementTarget(DOMDocument $document, string $target_id): string
+	{
+		$element = $this->findElementById($document, $target_id);
+
+		if (!$element instanceof DOMElement) {
+			throw new RuntimeException("Element fragment target not found: {$target_id}");
+		}
+
+		$element->setAttribute('hx-swap-oob', 'outerHTML');
+
+		return (string)$document->saveHTML($element);
 	}
 
 	private function findElementById(DOMDocument $document, string $target_id): ?DOMElement

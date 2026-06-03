@@ -52,6 +52,12 @@ class EventWidgetConnectionSwap extends AbstractEvent implements iBrowserEventDo
 			Widget::getConnectionData($swap_id),
 		];
 
+		if (!is_array($before[0]) || !is_array($before[1])) {
+			$this->fail('WIDGET_CONNECTION_SWAP_FAILED', 'cms.widget_connection.move_error', 422);
+
+			return;
+		}
+
 		if (DbHelper::swapHelper($table, $item_id, $swap_id)) {
 			foreach ([$item_id, $swap_id] as $connection_id) {
 				CmsRenderVersion::touchWidgetConnection($connection_id);
@@ -73,15 +79,31 @@ class EventWidgetConnectionSwap extends AbstractEvent implements iBrowserEventDo
 				}
 			}
 
-			(new EditModeMutationResponder())->succeed(
-				'cms.widget_connection.moved',
-				$page_id,
-				array_values($commands),
-			);
+			try {
+				(new EditModeMutationResponder())->succeed(
+					'cms.widget_connection.moved',
+					$page_id,
+					array_values($commands),
+				);
+			} catch (InvalidArgumentException|RuntimeException) {
+				$this->fail('WIDGET_CONNECTION_SWAP_RENDER_FAILED', 'cms.widget_connection.move_error', 500);
+			}
 
 			return;
 		}
 
+		$this->fail('WIDGET_CONNECTION_SWAP_FAILED', 'cms.widget_connection.move_error', 422);
+	}
+
+	private function fail(string $code, string $message_key, int $http_code): void
+	{
+		if ((Request::isHtmxRequest() && !Request::isHtmxBoostedRequest()) || Request::wantsNonHtmlResponse()) {
+			(new EditModeMutationResponder())->fail($code, $message_key, $http_code);
+
+			return;
+		}
+
+		SystemMessages::_error(t($message_key));
 		Kernel::redirectToReferer();
 	}
 }

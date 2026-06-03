@@ -305,6 +305,7 @@ final class FormRefactorPhase4SourceContractTest extends TestCase
 		$this->assertStringContainsString('EditModeMutationCommand::replaceSlot($slot_name, \'edit-widget-\' . (int)$connection_id)', $widget_add_source);
 		$this->assertStringContainsString('EditModeMutationCommand::replaceSlot($slot_name)', $widget_remove_source);
 		$this->assertStringContainsString('array_values($commands)', $widget_swap_source);
+		$this->assertStringContainsString("\$this->registerLibrary('__ADMIN_EDIT_MODE');", $editor_insert_source);
 		$this->assertStringContainsString("\$edit_mode_hx_swap = 'none show:none focus-scroll:false';", $editor_insert_source);
 		$this->assertStringContainsString("\$edit_mode_hx_swap = 'none show:none focus-scroll:false';", $edit_bar_source);
 		$this->assertStringContainsString('hx-vals="<?= e($hx_values) ?>"', $editor_insert_source);

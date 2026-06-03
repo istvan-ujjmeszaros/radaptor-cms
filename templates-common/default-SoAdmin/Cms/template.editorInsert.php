@@ -1,4 +1,5 @@
 <?php assert(isset($this) && $this instanceof Template); ?>
+<?php $this->registerLibrary('__ADMIN_EDIT_MODE'); ?>
 <?php
 $scope = (string)($this->props['scope'] ?? 'widget');
 $transport = (string)($this->props['transport'] ?? 'standalone_form');

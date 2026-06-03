@@ -6,7 +6,7 @@ class WidgetMainMenu extends AbstractWidget
 	public const array AUTHORING = [
 		'insert_mode' => 'manual',
 		'reuse' => 'repeatable',
-		'surfaces' => ['public'],
+		'surfaces' => ['admin'],
 		'group' => 'navigation',
 		'sort' => 10,
 	];

@@ -122,6 +122,28 @@ final class PackageSmokeTest extends TestCase
 		$this->assertStringContainsString('form,list.title,,de-DE', $form_de_seed);
 	}
 
+	public function testPageEditorIframeDoesNotBuildAdminDropdownChrome(): void
+	{
+		$root = dirname(__DIR__);
+		$view_source = (string) file_get_contents($root . '/modules-common/Cms/classes/class.AbstractWebpageViewBase.php');
+
+		$this->assertMatchesRegularExpression(
+			'/public function buildAdminDropdownTree\(\): \?array\s+\{\s+if \(CmsConfig::isPageEditorIframeRequest\(\)\) \{\s+return null;\s+\}/',
+			$view_source
+		);
+	}
+
+	public function testMenuAdministrationWidgetsAreAdminSurfaceOnly(): void
+	{
+		$root = dirname(__DIR__);
+		$main_menu_source = (string) file_get_contents($root . '/modules-common/MainMenu/widgets/Widget.MainMenu.php');
+		$admin_menu_source = (string) file_get_contents($root . '/modules-common/AdminMenu/widgets/Widget.AdminMenu.php');
+
+		$this->assertStringContainsString("'surfaces' => ['admin']", $main_menu_source);
+		$this->assertStringContainsString("'surfaces' => ['admin']", $admin_menu_source);
+		$this->assertStringNotContainsString("'surfaces' => ['public']", $main_menu_source);
+	}
+
 	private function relativePath(string $path, string $root): string
 	{
 		return ltrim(str_replace($root, '', $path), '/');

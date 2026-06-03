@@ -423,6 +423,25 @@ final class FormRefactorPhase2IntegrationTest extends TestCase
 		);
 	}
 
+	public function testAclFallbackLoginFormIgnoresRequestedPageFormIdQuery(): void
+	{
+		$login_page_id = ResourceTypeWebpage::getWebpageIdByFormType(FormList::USERLOGIN);
+
+		if (!is_int($login_page_id) || $login_page_id <= 0) {
+			self::markTestSkipped('Missing login page for ACL fallback login form coverage.');
+		}
+
+		$html = $this->renderWebpageForRequest(
+			$login_page_id,
+			'/?folder=%2F&resource=index.html&form_id=capture-contact-demo&referer=http%3A%2F%2Flocalhost%2F'
+		);
+
+		$this->assertStringContainsString('name="' . FormSubmitContext::htmlFieldName(FormSubmitContext::FIELD_FORM_ID) . '" value="' . FormList::USERLOGIN . '"', $html);
+		$this->assertStringContainsString('name="username"', $html);
+		$this->assertStringContainsString('name="password"', $html);
+		$this->assertStringNotContainsString('No form ID given', $html);
+	}
+
 	public function testCanonicalLoginPageStillRedirectsToRootAfterLogin(): void
 	{
 		$login_page_id = ResourceTypeWebpage::getWebpageIdByFormType(FormList::USERLOGIN);

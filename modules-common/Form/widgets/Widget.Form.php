@@ -42,11 +42,13 @@ class WidgetForm extends AbstractWidget implements iMockable
 
 	protected function buildAuthorizedTree(iTreeBuildContext $tree_build_context, WidgetConnection $connection, array $build_context = []): array
 	{
-		if (Request::_GET('form_id')) {
-			$form_type = Request::_GET('form_id');
-		} elseif ($connection->getExtraparam('form_id')) {
-			$form_type = $connection->getExtraparam('form_id');
-		} else {
+		$form_type = trim((string)$connection->getExtraparam('form_id'));
+
+		if ($form_type === '' && Request::_GET('form_id')) {
+			$form_type = trim((string)Request::_GET('form_id'));
+		}
+
+		if ($form_type === '') {
 			return $this->buildStatusTree([
 				'severity' => 'warning',
 				'message' => t('cms.form.no_id'),

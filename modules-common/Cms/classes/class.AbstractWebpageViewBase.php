@@ -559,6 +559,10 @@ abstract class AbstractWebpageViewBase implements iView, iWebpageComposer
 	 */
 	public function buildAdminDropdownTree(): ?array
 	{
+		if (CmsConfig::isPageEditorIframeRequest()) {
+			return null;
+		}
+
 		$page_id = $this->getPageId();
 
 		if ($page_id === null || !User::getCurrentUser()) {

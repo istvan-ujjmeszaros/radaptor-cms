@@ -101,6 +101,24 @@ abstract class AbstractWidget implements iWidget, iListable
 		return [];
 	}
 
+	/**
+	 * @return array<string, mixed>
+	 */
+	public static function getAuthoringPolicy(): array
+	{
+		$constant_name = static::class . '::AUTHORING';
+
+		if (defined($constant_name)) {
+			$policy = constant($constant_name);
+
+			if (is_array($policy)) {
+				return $policy;
+			}
+		}
+
+		return WidgetAuthoringPolicy::default();
+	}
+
 	public static function isCatcher(): bool
 	{
 		return false;

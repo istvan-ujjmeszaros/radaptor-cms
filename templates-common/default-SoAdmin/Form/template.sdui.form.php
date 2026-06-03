@@ -40,9 +40,15 @@ foreach ($html_attributes as $attribute_name => $attribute_value) {
 
 	$html_attributes_string .= ' ' . $attribute_name . '="' . e((string)$attribute_value) . '"';
 }
+$has_editmode_chrome = $editmode_form_target_id !== '';
+$editmode_chrome_attributes = '';
+
+if ($editmode_form_target_id !== '') {
+	$editmode_chrome_attributes .= ' id="' . e($editmode_form_target_id) . '" data-form-editor-form-target';
+}
 ?>
-<?php if ($editmode_form_target_id !== ''): ?>
-	<div id="<?= e($editmode_form_target_id) ?>" data-form-editor-form-target>
+<?php if ($has_editmode_chrome): ?>
+	<div<?= $editmode_chrome_attributes ?>>
 <?php endif; ?>
 <form id="<?= e($form_id) ?>" action="<?= e($action) ?>" method="<?= e($method) ?>" class="<?= e($form_classes) ?>"<?= !$autocomplete ? ' autocomplete="off"' : '' ?><?= $html_attributes_string ?>>
 	<?php if ($title !== ''): ?>
@@ -80,9 +86,9 @@ foreach ($html_attributes as $attribute_name => $attribute_value) {
 	<div style="clear:both"></div>
 </form>
 
-<?= $this->fetchContent('post_form_chrome') ?>
+	<?= $this->fetchContent('post_form_chrome') ?>
 
-<?php if ($editmode_form_target_id !== ''): ?>
+<?php if ($has_editmode_chrome): ?>
 	</div>
 <?php endif; ?>
 

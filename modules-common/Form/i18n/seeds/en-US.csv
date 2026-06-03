@@ -238,3 +238,5 @@ form,hooks.target.custom_https_webhook.description,,en-US,"Send capture submissi
 form,hooks.target.raw_form_data_email.name,,en-US,"Raw form data as email","Raw form data as email",0,0,"Raw form data as email"
 form,hooks.target.raw_form_data_email.description,,en-US,"Email the raw capture submission payload through the system email queue.","Email the raw capture submission payload through the system email queue.",0,0,"Email the raw capture submission payload through the system email queue."
 form,hooks.email.default_subject,,en-US,"Capture form submission: {form}","Capture form submission: {form}",0,0,"Capture form submission: {form}"
+form,editmode_readonly.system_defined,,en-US,"System-defined form · cannot be edited inline","System-defined form · cannot be edited inline",0,0,"System-defined form · cannot be edited inline"
+form,editmode_readonly.not_editable,,en-US,"This form cannot be edited inline.","This form cannot be edited inline.",0,0,"This form cannot be edited inline."

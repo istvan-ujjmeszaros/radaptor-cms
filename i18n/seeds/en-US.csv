@@ -714,3 +714,35 @@ form,field_edit.error_save_failed,,en-US,"Unable to update the form field draft.
 form,field_edit.status_draft_updated,,en-US,"Form field draft updated. Publish it from the form builder when ready.","Form field draft updated. Publish it from the form builder when ready.",0,0,"Form field draft updated. Publish it from the form builder when ready."
 admin,i18n.col.allow_source_match,,en-US,"Source match","Source match",0,0,"Source match"
 admin,i18n.allow_source_match.help,,en-US,"Allow only when the translation intentionally matches the source text.","Allow only when the translation intentionally matches the source text.",0,0,"Allow only when the translation intentionally matches the source text."
+widget,group.content,,en-US,Content,Content,0,0,Content
+widget,group.forms,,en-US,Forms,Forms,0,0,Forms
+widget,group.navigation,,en-US,Navigation,Navigation,0,0,Navigation
+widget,group.admin,,en-US,Administration,Administration,0,0,Administration
+widget,group.developer,,en-US,Developer,Developer,0,0,Developer
+cms,page_editor.title,,en-US,"Edit page","Edit page",0,0,"Edit page"
+cms,page_editor.editor_title,,en-US,"Edit page","Edit page",0,0,"Edit page"
+cms,page_editor.editor_loading,,en-US,"Loading page editor","Loading page editor",0,0,"Loading page editor"
+cms,page_editor.editor_load_failed,,en-US,"Unable to load the page editor.","Unable to load the page editor.",0,0,"Unable to load the page editor."
+cms,page_editor.page_loading,,en-US,"Loading page","Loading page",0,0,"Loading page"
+cms,page_editor.close,,en-US,Close,Close,0,0,Close
+cms,page_editor.palette,,en-US,Widgets,Widgets,0,0,Widgets
+cms,page_editor.preview,,en-US,Page,Page,0,0,Page
+cms,page_editor.properties,,en-US,Properties,Properties,0,0,Properties
+cms,page_editor.properties_loading,,en-US,"Loading properties","Loading properties",0,0,"Loading properties"
+cms,page_editor.properties_saving,,en-US,"Saving properties","Saving properties",0,0,"Saving properties"
+cms,page_editor.no_selection,,en-US,"Select a page item to edit its properties.","Select a page item to edit its properties.",0,0,"Select a page item to edit its properties."
+cms,page_editor.panel.form_input,,en-US,"Form input","Form input",0,0,"Form input"
+cms,page_editor.panel.widget,,en-US,Widget,Widget,0,0,Widget
+cms,page_editor.open_page,,en-US,"Open page","Open page",0,0,"Open page"
+cms,page_editor.drop_hint,,en-US,"Drag a widget onto an insert target in the page.","Drag a widget onto an insert target in the page.",0,0,"Drag a widget onto an insert target in the page."
+cms,page_editor.page_not_found,,en-US,"The selected page cannot be edited.","The selected page cannot be edited.",0,0,"The selected page cannot be edited."
+cms,page_editor.access_denied,,en-US,"You do not have permission to edit this page.","You do not have permission to edit this page.",0,0,"You do not have permission to edit this page."
+cms,page_editor.status.ready,,en-US,Ready,Ready,0,0,Ready
+cms,page_editor.status.saving,,en-US,Saving,Saving,0,0,Saving
+cms,page_editor.status.drop_ready,,en-US,"Drop onto a page insert target","Drop onto a page insert target",0,0,"Drop onto a page insert target"
+cms,page_editor.status.saved,,en-US,"Widget inserted","Widget inserted",0,0,"Widget inserted"
+cms,page_editor.status.error,,en-US,"Unable to update the page","Unable to update the page",0,0,"Unable to update the page"
+cms,widget_connection.not_allowed,,en-US,"This widget cannot be inserted here.","This widget cannot be inserted here.",0,0,"This widget cannot be inserted here."
+cms,widget_connection.wrong_surface,,en-US,"This widget is not available for this page type.","This widget is not available for this page type.",0,0,"This widget is not available for this page type."
+cms,widget_connection.once_per_domain_used,,en-US,"This widget is already used in this site.","This widget is already used in this site.",0,0,"This widget is already used in this site."
+resource,edit_page,,en-US,"Edit page","Edit page",0,0,"Edit page"

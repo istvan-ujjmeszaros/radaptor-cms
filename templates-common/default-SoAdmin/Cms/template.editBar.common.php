@@ -1,5 +1,12 @@
 <?php assert(isset($this) && $this instanceof Template); ?>
 <?php $edit_mode_hx_swap = 'none show:none focus-scroll:false'; ?>
+<?php $editmode_readonly_notice = trim((string)($this->props['editmode_readonly_notice'] ?? '')); ?>
+<?php if ($editmode_readonly_notice !== ''): ?>
+	<div class="editBar-readonly-notice" role="note">
+		<?= Icons::get(IconNames::INFO, $editmode_readonly_notice) ?>
+		<span><?= e($editmode_readonly_notice) ?></span>
+	</div>
+<?php endif; ?>
 <table class="editBar" hx-boost="false">
 		<tr>
 			<?php foreach ($this->props['widget_edit_commands'] as $widgetEditCommand): ?>

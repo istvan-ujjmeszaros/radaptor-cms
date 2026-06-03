@@ -34,6 +34,16 @@ interface iWidget
 	 */
 	public static function getDefaultPathForCreation(): array;
 
+	/**
+	 * Describe where and how this widget can be manually inserted by editors.
+	 *
+	 * The build:widgets generator reads the literal AUTHORING class constant to
+	 * build fast palette maps. This method exposes the same policy at runtime.
+	 *
+	 * @return array<string, mixed>
+	 */
+	public static function getAuthoringPolicy(): array;
+
 	public static function isCatcher(): bool;
 
 	/**

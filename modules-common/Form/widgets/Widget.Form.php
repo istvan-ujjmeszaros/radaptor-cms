@@ -3,6 +3,13 @@
 class WidgetForm extends AbstractWidget implements iMockable
 {
 	public const string ID = 'form';
+	public const array AUTHORING = [
+		'insert_mode' => 'manual',
+		'reuse' => 'repeatable',
+		'surfaces' => ['public', 'admin'],
+		'group' => 'forms',
+		'sort' => 20,
+	];
 
 	public static function getName(): string
 	{

@@ -62,8 +62,23 @@ abstract class AbstractWebpageViewBase implements iView, iWebpageComposer
 		$theme_name = Themes::getThemeNameForUser($this->getLayoutTypeName());
 
 		$this->_theme = ThemeBase::factory($theme_name);
+		$page_id = (int)$this->getPageId();
+		$can_edit = $page_id > 0 && ResourceAcl::canAccessResource($page_id, ResourceAcl::_ACL_EDIT);
 
-		if (is_null($editmode) && Request::_CONFIG(CmsConfig::EDITMODE, CmsConfig::EDITMODE_DEFAULTVALUE) == 1 && ResourceAcl::canAccessResource($this->getPageId(), ResourceAcl::_ACL_EDIT)) {
+		if ($editmode !== null) {
+			$this->_editMode = (bool)$editmode && $can_edit;
+
+			return;
+		}
+
+		if (CmsConfig::isPageEditorIframeRequest()) {
+			RequestContextHolder::disablePersistentCacheWrite();
+			$this->_editMode = $can_edit;
+
+			return;
+		}
+
+		if (Request::_CONFIG(CmsConfig::EDITMODE, CmsConfig::EDITMODE_DEFAULTVALUE) == 1 && $can_edit) {
 			$this->_editMode = true;
 		}
 	}
@@ -432,6 +447,12 @@ abstract class AbstractWebpageViewBase implements iView, iWebpageComposer
 			'cms.widget.insert.placeholder' => t('cms.widget.insert.placeholder'),
 			'cms.widget.insert.button' => t('cms.widget.insert.button'),
 			'cms.widget.insert_from_clipboard' => t('cms.widget.insert_from_clipboard'),
+			'widget.group.content' => t('widget.group.content'),
+			'widget.group.forms' => t('widget.group.forms'),
+			'widget.group.navigation' => t('widget.group.navigation'),
+			'widget.group.admin' => t('widget.group.admin'),
+			'widget.group.developer' => t('widget.group.developer'),
+			'cms.widget_connection.once_per_domain_used' => t('cms.widget_connection.once_per_domain_used'),
 		];
 	}
 
@@ -475,7 +496,16 @@ abstract class AbstractWebpageViewBase implements iView, iWebpageComposer
 	 */
 	public function buildWidgetInserterTree(string $slot_name, ?WidgetConnection $connection = null): array
 	{
-		$this->_visibleWidgets ??= Widget::getVisibleWidgetMetadataList();
+		try {
+			$placement_context = WidgetPlacementContext::fromPageId((int)$this->getPageId(), $slot_name, $connection?->seq());
+			$placement_service = new WidgetPlacementService();
+			$visible_widgets = $placement_service->getFlatPaletteItems($placement_context, false);
+			$widget_groups = $placement_service->getGroupedPalette($placement_context, false);
+		} catch (Throwable) {
+			$visible_widgets = [];
+			$widget_groups = [];
+		}
+
 		++$this->_widgetInsertCounter;
 
 		$strings = self::buildWidgetInserterStrings();
@@ -486,31 +516,41 @@ abstract class AbstractWebpageViewBase implements iView, iWebpageComposer
 			'seq' => $connection?->seq(),
 		];
 
-		return (new EditorInsertSurfaceBuilder())->build(
-			scope: EditorInsertSurfaceBuilder::SCOPE_WIDGET,
-			variant: EditorInsertSurfaceBuilder::VARIANT_WIDGET,
-			transport: EditorInsertSurfaceBuilder::TRANSPORT_STANDALONE_FORM,
-			items: array_map(static fn (array $widget): EditorInsertItem => EditorInsertItem::fromWidgetMetadata($widget), $this->_visibleWidgets),
-			target: $target,
-			insert_url: Url::getUrl('widgetConnection.add', $target),
-			counter: $this->_widgetInsertCounter,
+		$props = [
+			'slot_name' => $slot_name,
+			'counter' => $this->_widgetInsertCounter,
+			'visibleWidgets' => $visible_widgets,
+			'widgetGroups' => $widget_groups,
+			'clipboard' => $clipboard,
+			'clipboard_url' => $clipboard === null || $clipboard === false
+				? ''
+				: Url::getUrl('widgetConnection.add', array_replace($target, [
+					'widget_name' => $clipboard,
+				])),
+			'target' => $target,
+			'insert_url' => Url::getUrl('widgetConnection.add', $target),
+		];
+		$meta = [
+			'widget_connection' => WidgetConnection::toTreeMetadata($connection),
+		];
+
+		return SduiNode::create(
+			component: 'widgetInsert',
+			props: $props,
+			contents: [
+				'add_widget_from_list' => [
+					SduiNode::create(
+						component: 'addWidgetFromList',
+						props: $props,
+						type: SduiNode::TYPE_SUB,
+						meta: $meta,
+						strings: $strings,
+					),
+				],
+			],
+			type: SduiNode::TYPE_SUB,
+			meta: $meta,
 			strings: $strings,
-			extra_props: [
-				'slot_name' => $slot_name,
-				'visibleWidgets' => $this->_visibleWidgets,
-				'clipboard' => $clipboard,
-				'clipboard_url' => $clipboard === null || $clipboard === false
-					? ''
-					: Url::getUrl('widgetConnection.add', array_replace($target, [
-						'widget_name' => $clipboard,
-					])),
-				'item_payload_name' => 'widget_name',
-				'button_icon' => IconNames::WIDGET_ADD->value,
-				'clipboard_icon' => IconNames::WIDGET_INSERT->value,
-			],
-			meta: [
-				'widget_connection' => WidgetConnection::toTreeMetadata($connection),
-			],
 		);
 	}
 

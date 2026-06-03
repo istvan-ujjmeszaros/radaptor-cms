@@ -3,6 +3,13 @@
 class WidgetMainMenu extends AbstractWidget
 {
 	public const string ID = 'main_menu';
+	public const array AUTHORING = [
+		'insert_mode' => 'manual',
+		'reuse' => 'repeatable',
+		'surfaces' => ['public'],
+		'group' => 'navigation',
+		'sort' => 10,
+	];
 
 	public static function getName(): string
 	{

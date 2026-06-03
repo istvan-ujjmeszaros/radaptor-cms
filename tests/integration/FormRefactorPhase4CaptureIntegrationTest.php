@@ -1039,6 +1039,7 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$property_nodes = $this->nodesByComponent($tree['contents']['post_form_chrome'] ?? [], 'captureFieldProperties');
 
 		$this->assertSame('edit-widget-2__form', $tree['props']['editmode_form_target_id'] ?? null);
+		$this->assertSame('', $tree['props']['editmode_readonly_notice'] ?? null);
 		$this->assertFalse($tree['props']['focusable'] ?? true);
 		$this->assertCount(5, $insert_nodes);
 		$this->assertCount(4, $field_nodes);
@@ -1086,7 +1087,10 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 				'form_definition_resolution' => $editable_resolution,
 			],
 		);
-		$this->assertSame([], $this->formRowEditorInsertNodes($form->buildTree()));
+		$tree = $form->buildTree();
+
+		$this->assertSame([], $this->formRowEditorInsertNodes($tree));
+		$this->assertSame(t('form.editmode_readonly.system_defined'), $tree['props']['editmode_readonly_notice'] ?? null);
 	}
 
 	public function testEditableCaptureFormTreeRequiresWidgetConnectionTarget(): void
@@ -1112,6 +1116,7 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 
 		$this->assertSame([], $this->formRowEditorInsertNodes($tree));
 		$this->assertSame([], $this->nodesByComponent($tree['contents']['post_form_chrome'] ?? [], 'captureFieldProperties'));
+		$this->assertSame('', $tree['props']['editmode_readonly_notice'] ?? null);
 	}
 
 	public function testInlineInsertUpdatesDraftWithoutChangingPublishedCaptureDescriptor(): void
@@ -1463,8 +1468,7 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 	public function testWidgetAddEventReturnsRevealTargetForJsonClients(): void
 	{
 		$this->impersonateAndRequireRole('admin_developer', RoleList::ROLE_CONTENT_ADMIN);
-		$page_id = 1;
-		$widget_name = $this->availableWidgetForPage($page_id, 'content');
+		[$page_id, $widget_name] = $this->availableWidgetPlacementForSlot('content');
 
 		$response = $this->runWidgetAddEvent(
 			[
@@ -2545,13 +2549,54 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 
 	private function availableWidgetForPage(int $page_id, string $slot_name): string
 	{
+		$widget_name = $this->tryAvailableWidgetForPage($page_id, $slot_name);
+
+		if ($widget_name !== null) {
+			return $widget_name;
+		}
+
+		self::markTestSkipped('No available widget type found for widget add event reveal target test.');
+	}
+
+	/**
+	 * @return array{0: int, 1: string}
+	 */
+	private function availableWidgetPlacementForSlot(string $slot_name): array
+	{
+		foreach (DbHelper::selectMany('resource_tree', ['node_type' => 'webpage'], 100, 'node_id ASC') as $resource_data) {
+			$page_id = (int)($resource_data['node_id'] ?? 0);
+
+			if ($page_id <= 0 || !ResourceAcl::canAccessResource($page_id, ResourceAcl::_ACL_EDIT)) {
+				continue;
+			}
+
+			$widget_name = $this->tryAvailableWidgetForPage($page_id, $slot_name);
+
+			if ($widget_name !== null) {
+				return [$page_id, $widget_name];
+			}
+		}
+
+		self::markTestSkipped('No editable webpage found for widget add event reveal target test.');
+	}
+
+	private function tryAvailableWidgetForPage(int $page_id, string $slot_name): ?string
+	{
+		try {
+			$context = WidgetPlacementContext::fromPageId($page_id, $slot_name);
+		} catch (InvalidArgumentException) {
+			return null;
+		}
+
+		$placement_service = new WidgetPlacementService();
+
 		foreach (['PlainHtml', 'WidgetPreview', 'RuntimeDiagnostics', 'PhpInfoFrame', 'MailpitCatcher'] as $widget_name) {
-			if (Widget::checkWidgetExists($widget_name) && Widget::getWidgetConnectionId($page_id, $slot_name, $widget_name) === null) {
+			if (Widget::checkWidgetExists($widget_name) && $placement_service->canPlace($widget_name, $context)->isAllowed()) {
 				return $widget_name;
 			}
 		}
 
-		self::markTestSkipped('No available widget type found for widget add event reveal target test.');
+		return null;
 	}
 
 	private function createCaptureWidgetConnection(string $definition_slug): int

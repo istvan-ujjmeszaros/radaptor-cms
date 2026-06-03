@@ -337,6 +337,7 @@ abstract class AbstractForm implements iForm, iListable
 		$current_row_items = [];
 		$current_row_id = null;
 		$structure_editable = $this->canEditStructure();
+		$editmode_readonly_notice = $this->buildEditmodeReadonlyNotice($structure_editable);
 		$visible_field_count = $structure_editable ? $this->visibleEditableFieldCount() : 0;
 		$visible_insert_index = 0;
 		$insert_counter = 0;
@@ -401,6 +402,7 @@ abstract class AbstractForm implements iForm, iListable
 			[
 				'form_id' => $this->getFormId(),
 				'editmode_form_target_id' => $structure_editable ? FormCaptureFieldIdentity::formTargetId($this->editableWidgetConnectionId()) : '',
+				'editmode_readonly_notice' => $editmode_readonly_notice,
 				'form_instance_id' => $this->getFormInstanceId(),
 				'form_descriptor_id' => $this->getFormType(),
 				'form_name' => $this->getFormType(),
@@ -437,6 +439,23 @@ abstract class AbstractForm implements iForm, iListable
 			&& $resolution->isStructureEditable()
 			&& $this->editableWidgetConnectionId() > 0
 			&& Roles::hasRole(RoleList::ROLE_CONTENT_ADMIN);
+	}
+
+	private function buildEditmodeReadonlyNotice(bool $structure_editable): string
+	{
+		if ($structure_editable || !$this->_tree_build_context->isEditable() || $this->editableWidgetConnectionId() <= 0 || !Roles::hasRole(RoleList::ROLE_CONTENT_ADMIN)) {
+			return '';
+		}
+
+		$resolution = $this->_render_context['form_definition_resolution'] ?? null;
+
+		if (!$resolution instanceof FormDefinitionResolution || !$resolution->isCapture()) {
+			return '';
+		}
+
+		return $resolution->source() !== 'db'
+			? t('form.editmode_readonly.system_defined')
+			: t('form.editmode_readonly.not_editable');
 	}
 
 	/**

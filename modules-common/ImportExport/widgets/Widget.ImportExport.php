@@ -5,6 +5,13 @@ declare(strict_types=1);
 class WidgetImportExport extends AbstractWidget
 {
 	public const string ID = 'import_export';
+	public const array AUTHORING = [
+		'insert_mode' => 'system',
+		'reuse' => 'repeatable',
+		'surfaces' => ['admin'],
+		'group' => 'admin',
+		'sort' => 50,
+	];
 
 	public static function getName(): string
 	{

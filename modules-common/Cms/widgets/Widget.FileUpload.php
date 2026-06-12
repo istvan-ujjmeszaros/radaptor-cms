@@ -3,6 +3,13 @@
 class WidgetFileUpload extends AbstractWidget
 {
 	public const string ID = 'file_upload';
+	public const array AUTHORING = [
+		'insert_mode' => 'system',
+		'reuse' => 'repeatable',
+		'surfaces' => ['admin'],
+		'group' => 'admin',
+		'sort' => 60,
+	];
 
 	/**
 	 * @return array<string, string>

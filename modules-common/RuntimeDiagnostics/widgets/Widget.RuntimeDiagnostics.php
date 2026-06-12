@@ -5,6 +5,13 @@ declare(strict_types=1);
 class WidgetRuntimeDiagnostics extends AbstractWidget
 {
 	public const string ID = 'runtime_diagnostics';
+	public const array AUTHORING = [
+		'insert_mode' => 'system',
+		'reuse' => 'repeatable',
+		'surfaces' => ['admin'],
+		'group' => 'developer',
+		'sort' => 50,
+	];
 
 	public static function getName(): string
 	{

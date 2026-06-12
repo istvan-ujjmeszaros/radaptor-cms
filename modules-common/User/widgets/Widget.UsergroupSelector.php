@@ -3,6 +3,13 @@
 class WidgetUsergroupSelector extends AbstractWidget
 {
 	public const string ID = 'usergroup_selector';
+	public const array AUTHORING = [
+		'insert_mode' => 'system',
+		'reuse' => 'repeatable',
+		'surfaces' => ['admin'],
+		'group' => 'admin',
+		'sort' => 45,
+	];
 
 	public static function getName(): string
 	{

@@ -5,6 +5,13 @@ declare(strict_types=1);
 final class WidgetCaptureFormList extends AbstractWidget
 {
 	public const string ID = 'capture_form_list';
+	public const array AUTHORING = [
+		'insert_mode' => 'system',
+		'reuse' => 'repeatable',
+		'surfaces' => ['admin'],
+		'group' => 'forms',
+		'sort' => 30,
+	];
 
 	public static function getName(): string
 	{

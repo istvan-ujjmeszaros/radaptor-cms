@@ -3,6 +3,13 @@
 class WidgetGroupBeginning extends AbstractWidget
 {
 	public const string ID = 'group_beginning';
+	public const array AUTHORING = [
+		'insert_mode' => 'manual',
+		'reuse' => 'repeatable',
+		'surfaces' => ['public', 'admin'],
+		'group' => 'content',
+		'sort' => 90,
+	];
 
 	public static function editorPosition(): string
 	{
@@ -56,7 +63,7 @@ class WidgetGroupBeginning extends AbstractWidget
 			$class .= ' block-editable';
 		}
 
-		return $this->createComponentTree(TemplateList::WIDGETGROUPBEGINNING, [
+		return $this->createComponentTree('WidgetGroupBeginning', [
 			'class' => $class,
 		]);
 	}

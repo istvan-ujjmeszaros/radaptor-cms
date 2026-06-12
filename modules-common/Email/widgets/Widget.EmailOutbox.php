@@ -5,6 +5,13 @@ declare(strict_types=1);
 class WidgetEmailOutbox extends AbstractWidget
 {
 	public const string ID = 'email_outbox';
+	public const array AUTHORING = [
+		'insert_mode' => 'system',
+		'reuse' => 'repeatable',
+		'surfaces' => ['admin'],
+		'group' => 'admin',
+		'sort' => 90,
+	];
 
 	/**
 	 * @return array<string, string>

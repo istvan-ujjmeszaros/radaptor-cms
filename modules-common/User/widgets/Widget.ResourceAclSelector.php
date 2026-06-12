@@ -3,6 +3,13 @@
 class WidgetResourceAclSelector extends AbstractWidget
 {
 	public const string ID = 'resource_acl_selector';
+	public const array AUTHORING = [
+		'insert_mode' => 'system',
+		'reuse' => 'repeatable',
+		'surfaces' => ['admin'],
+		'group' => 'admin',
+		'sort' => 40,
+	];
 
 	/**
 	 * @return array<string, string>

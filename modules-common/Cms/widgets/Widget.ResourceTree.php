@@ -3,6 +3,13 @@
 class WidgetResourceTree extends AbstractWidget
 {
 	public const string ID = 'resource_tree';
+	public const array AUTHORING = [
+		'insert_mode' => 'system',
+		'reuse' => 'repeatable',
+		'surfaces' => ['admin'],
+		'group' => 'admin',
+		'sort' => 10,
+	];
 
 	public static function getName(): string
 	{

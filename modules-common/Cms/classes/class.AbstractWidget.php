@@ -108,15 +108,17 @@ abstract class AbstractWidget implements iWidget, iListable
 	{
 		$constant_name = static::class . '::AUTHORING';
 
-		if (defined($constant_name)) {
-			$policy = constant($constant_name);
-
-			if (is_array($policy)) {
-				return $policy;
-			}
+		if (!defined($constant_name)) {
+			throw new RuntimeException(static::class . ' is missing required AUTHORING policy.');
 		}
 
-		return WidgetAuthoringPolicy::default();
+		$policy = constant($constant_name);
+
+		if (!is_array($policy)) {
+			throw new RuntimeException(static::class . ' AUTHORING policy must be an array.');
+		}
+
+		return $policy;
 	}
 
 	public static function isCatcher(): bool

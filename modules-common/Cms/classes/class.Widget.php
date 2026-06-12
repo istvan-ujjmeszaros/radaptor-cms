@@ -65,7 +65,7 @@ class Widget extends WidgetList
 			return self::$_widgetAuthoring[$widget_name];
 		}
 
-		return WidgetAuthoringPolicy::default();
+		throw new RuntimeException("Widget '{$widget_name}' is missing generated AUTHORING policy. Run build:widgets.");
 	}
 
 	/**

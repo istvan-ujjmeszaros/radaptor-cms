@@ -3,6 +3,13 @@
 class WidgetUserList extends AbstractWidget
 {
 	public const string ID = 'user_list';
+	public const array AUTHORING = [
+		'insert_mode' => 'system',
+		'reuse' => 'repeatable',
+		'surfaces' => ['admin'],
+		'group' => 'admin',
+		'sort' => 10,
+	];
 
 	/**
 	 * @return array<string, string>

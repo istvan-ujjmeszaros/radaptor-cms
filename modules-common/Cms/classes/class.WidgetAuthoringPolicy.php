@@ -17,31 +17,6 @@ final class WidgetAuthoringPolicy
 	public const string GROUP_DEVELOPER = 'developer';
 	public const string ADMIN_ROOT_PATH = '/admin/';
 
-	private const array DEFAULT_POLICY = [
-		'insert_mode' => self::INSERT_MODE_SYSTEM,
-		'reuse' => self::REUSE_REPEATABLE,
-		'surfaces' => [
-			self::SURFACE_PUBLIC,
-			self::SURFACE_ADMIN,
-		],
-		'group' => self::GROUP_CONTENT,
-		'sort' => 100,
-	];
-
-	/**
-	 * @return array{
-	 *     insert_mode: string,
-	 *     reuse: string,
-	 *     surfaces: list<string>,
-	 *     group: string,
-	 *     sort: int
-	 * }
-	 */
-	public static function default(): array
-	{
-		return self::DEFAULT_POLICY;
-	}
-
 	/**
 	 * @return list<string>
 	 */

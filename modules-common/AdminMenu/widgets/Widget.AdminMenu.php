@@ -4,7 +4,7 @@ class WidgetAdminMenu extends AbstractWidget
 {
 	public const string ID = 'admin_menu';
 	public const array AUTHORING = [
-		'insert_mode' => 'manual',
+		'insert_mode' => 'system',
 		'reuse' => 'repeatable',
 		'surfaces' => ['admin'],
 		'group' => 'navigation',

@@ -5,6 +5,13 @@ declare(strict_types=1);
 class WidgetCLIRunner extends AbstractWidget
 {
 	public const string ID = 'cli_runner';
+	public const array AUTHORING = [
+		'insert_mode' => 'system',
+		'reuse' => 'repeatable',
+		'surfaces' => ['admin'],
+		'group' => 'developer',
+		'sort' => 40,
+	];
 
 	public static function getName(): string
 	{

@@ -3,6 +3,13 @@
 class Widget_WidgetError extends AbstractWidget
 {
 	public const string ID = 'widget_error';
+	public const array AUTHORING = [
+		'insert_mode' => 'system',
+		'reuse' => 'repeatable',
+		'surfaces' => ['public', 'admin'],
+		'group' => 'developer',
+		'sort' => 999,
+	];
 
 	public function __construct(private $_type = null)
 	{

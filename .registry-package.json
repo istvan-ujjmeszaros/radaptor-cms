@@ -2,7 +2,7 @@
     "package": "radaptor/core/cms",
     "type": "core",
     "id": "cms",
-    "version": "0.1.59",
+    "version": "0.1.60",
     "dependencies": {
         "radaptor/core/framework": "^0.1.36"
     },

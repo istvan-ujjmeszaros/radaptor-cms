@@ -44,9 +44,8 @@ final class EventFormBuilderEditorFragment extends AbstractEvent implements iBro
 
 		try {
 			WebpageView::header('Content-Type: text/html; charset=UTF-8');
-			echo (new FormCaptureAuthoringService())->renderBuilderFragment(
+			echo (new FormEditorAuthoringService())->renderEditorFragment(
 				(string)Request::_GET('definition_slug', ''),
-				(string)Request::_GET('panel', 'properties'),
 			);
 		} catch (Throwable) {
 			WebpageView::header('Content-Type: text/html; charset=UTF-8');

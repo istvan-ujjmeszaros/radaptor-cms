@@ -434,7 +434,10 @@ abstract class AbstractForm implements iForm, iListable
 	{
 		$resolution = $this->_render_context['form_definition_resolution'] ?? null;
 
+		// The page editor iframe edits widget placement only; form-field inserters render
+		// in the form editor scope and in global edit mode.
 		return $this->_tree_build_context->isEditable()
+			&& CmsConfig::editorScope() !== CmsConfig::EDITOR_SCOPE_PAGE
 			&& $resolution instanceof FormDefinitionResolution
 			&& $resolution->isStructureEditable()
 			&& $this->editableWidgetConnectionId() > 0

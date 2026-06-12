@@ -686,21 +686,23 @@ final class FormCaptureAuthoringService
 	}
 
 	/**
-	 * Replace the working draft with a stored version's descriptor. Recorded in the
-	 * session's edit history, so a restore is itself undoable.
+	 * Make a stored version the working state again by re-activating its row — no new
+	 * version row is created. The next modification branches a new version off it as
+	 * usual. Recorded in the session's edit history, so a restore is itself undoable.
 	 *
 	 * @return array<string, mixed>
 	 */
 	public function restoreVersionToDraft(string $definition_slug, int $version_id, string $session_token): array
 	{
 		$definition = $this->requireDbDefinition($definition_slug);
+		$definition_id = (int)$definition->definition_id;
 
 		if ($version_id <= 0) {
 			throw new InvalidArgumentException('Version id is required.');
 		}
 
 		$version = EntityFormDefinitionVersion::findFirst([
-			'definition_id' => (int)$definition->definition_id,
+			'definition_id' => $definition_id,
 			'version_id' => $version_id,
 		]);
 
@@ -708,11 +710,55 @@ final class FormCaptureAuthoringService
 			throw new InvalidArgumentException('Version does not exist.');
 		}
 
-		$current = $this->findActiveDraft((int)$definition->definition_id) ?? $this->findPublishedVersion($definition);
+		$current = $this->findActiveDraft($definition_id) ?? $this->findPublishedVersion($definition);
+
+		if ($current instanceof EntityFormDefinitionVersion && (int)$current->version_id === $version_id) {
+			return $this->loadDefinition($definition_slug) + [
+				'action' => 'restored_version',
+				'restored_version_id' => $version_id,
+			];
+		}
+
 		$baseline = $current instanceof EntityFormDefinitionVersion
 			? $this->descriptorFromVersion($definition, $current)
 			: $this->defaultDescriptor($definition_slug);
-		$result = $this->saveDraft($definition_slug, $this->descriptorFromVersion($definition, $version), '', true);
+		$descriptor = $this->descriptorFromVersion($definition, $version);
+		$pdo = Db::instance();
+		$started_transaction = !$pdo->inTransaction();
+
+		try {
+			if ($started_transaction) {
+				$pdo->beginTransaction();
+			}
+
+			$this->abandonDrafts($definition_id);
+
+			// Restoring the published version means the published state IS the working
+			// state again; any other version becomes the active draft row.
+			if ((string)$version->status !== self::STATUS_PUBLISHED) {
+				EntityFormDefinitionVersion::updateById($version_id, [
+					'status' => self::STATUS_DRAFT,
+					'published_at' => null,
+				]);
+			}
+
+			$this->syncDescriptorI18nRows($definition_slug, $descriptor);
+			EntityFormDefinition::updateById($definition_id, [
+				'status' => $definition->published_version_id === null ? self::STATUS_DRAFT : self::STATUS_PUBLISHED,
+			]);
+
+			if ($started_transaction) {
+				$pdo->commit();
+			}
+		} catch (Throwable $exception) {
+			if ($started_transaction && $pdo->inTransaction()) {
+				$pdo->rollBack();
+			}
+
+			throw $exception;
+		}
+
+		$result = $this->loadDefinition($definition_slug);
 		$history = $this->recordEditHistory($definition, $baseline, $result, $session_token);
 
 		return $result + $history + [
@@ -722,18 +768,21 @@ final class FormCaptureAuthoringService
 	}
 
 	/**
-	 * Compact editor-panel state: recent versions, usage, and the session's undo reach.
+	 * Compact editor-panel state: recent versions, the active (working-state) version,
+	 * usage, and the session's undo reach.
 	 *
-	 * @return array{versions: list<array<string, mixed>>, usage: list<array<string, mixed>>, can_undo: bool, can_redo: bool}
+	 * @return array{versions: list<array<string, mixed>>, active_version_id: int, usage: list<array<string, mixed>>, can_undo: bool, can_redo: bool}
 	 */
 	public function editorStateForDefinition(string $definition_slug, string $session_token): array
 	{
 		$definition = $this->requireDbDefinition($definition_slug);
 		$definition_id = (int)$definition->definition_id;
 		$cursor = $session_token === '' ? 0 : $this->editHistoryCursor($definition_id, $session_token);
+		$active = $this->findActiveDraft($definition_id) ?? $this->findPublishedVersion($definition);
 
 		return [
 			'versions' => array_slice($this->versionsForDefinition($definition_id), 0, self::EDITOR_STATE_VERSION_LIMIT),
+			'active_version_id' => $active instanceof EntityFormDefinitionVersion ? (int)$active->version_id : 0,
 			'usage' => $this->usageForDefinition($definition_slug),
 			'can_undo' => $cursor > 1 && $this->editHistorySeqExists($definition_id, $session_token, $cursor - 1),
 			'can_redo' => $cursor > 0 && $this->editHistorySeqExists($definition_id, $session_token, $cursor + 1),

@@ -696,3 +696,6 @@ widget,capture_form_builder.description,,de-DE,"Admin builder for DB-backed capt
 widget,capture_form_builder.name,,de-DE,"Form builder","Form builder",0,1,"Form builder"
 widget,capture_form_list.description,,de-DE,"Admin list for DB-backed and shipped capture forms.","Admin list for DB-backed and shipped capture forms.",0,1,"Admin list for DB-backed and shipped capture forms."
 widget,capture_form_list.name,,de-DE,"Form list","Form list",0,1,"Form list"
+form,editor.status_undone,,de-DE,"Form edit undone.","Formularänderung rückgängig gemacht.",0,0,"Formularänderung rückgängig gemacht."
+form,editor.status_redone,,de-DE,"Form edit redone.","Formularänderung wiederhergestellt.",0,0,"Formularänderung wiederhergestellt."
+form,editor.error_history_unavailable,,de-DE,"Nothing to undo or redo.","Nichts zum Rückgängigmachen oder Wiederherstellen.",0,0,"Nichts zum Rückgängigmachen oder Wiederherstellen."

@@ -682,3 +682,6 @@ locale_admin,message.invalid_locale,,zh-Hans-CN,"Invalid locale.","Invalid local
 locale_admin,message.service_unavailable,,zh-Hans-CN,"Locale administration is unavailable until the locale infrastructure is installed.","在安装 locale 基础设施之前，locale 管理不可用。",0,0,"在安装 locale 基础设施之前，locale 管理不可用。"
 admin,i18n.col.allow_source_match,,zh-Hans-CN,"Source match","Source match",0,1,"Source match"
 admin,i18n.allow_source_match.help,,zh-Hans-CN,"Allow only when the translation intentionally matches the source text.","Allow only when the translation intentionally matches the source text.",0,1,"Allow only when the translation intentionally matches the source text."
+form,editor.status_undone,,zh-Hans-CN,"Form edit undone.","已撤销表单编辑。",0,0,"已撤销表单编辑。"
+form,editor.status_redone,,zh-Hans-CN,"Form edit redone.","已重做表单编辑。",0,0,"已重做表单编辑。"
+form,editor.error_history_unavailable,,zh-Hans-CN,"Nothing to undo or redo.","没有可撤销或重做的操作。",0,0,"没有可撤销或重做的操作。"

@@ -682,3 +682,6 @@ locale_admin,message.invalid_locale,,ja-JP,"Invalid locale.","Invalid locale.",0
 locale_admin,message.service_unavailable,,ja-JP,"Locale administration is unavailable until the locale infrastructure is installed.",ロケール基盤がインストールされるまでロケール管理は利用できません。,0,0,ロケール基盤がインストールされるまでロケール管理は利用できません。
 admin,i18n.col.allow_source_match,,ja-JP,"Source match","Source match",0,1,"Source match"
 admin,i18n.allow_source_match.help,,ja-JP,"Allow only when the translation intentionally matches the source text.","Allow only when the translation intentionally matches the source text.",0,1,"Allow only when the translation intentionally matches the source text."
+form,editor.status_undone,,ja-JP,"Form edit undone.","フォームの編集を元に戻しました。",0,0,"フォームの編集を元に戻しました。"
+form,editor.status_redone,,ja-JP,"Form edit redone.","フォームの編集をやり直しました。",0,0,"フォームの編集をやり直しました。"
+form,editor.error_history_unavailable,,ja-JP,"Nothing to undo or redo.","元に戻すまたはやり直す操作はありません。",0,0,"元に戻すまたはやり直す操作はありません。"

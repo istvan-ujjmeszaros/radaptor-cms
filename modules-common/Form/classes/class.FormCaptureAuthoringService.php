@@ -9,6 +9,7 @@ final class FormCaptureAuthoringService
 	private const string STATUS_DRAFT = 'draft';
 	private const string STATUS_ABANDONED = 'abandoned';
 	private const string STATUS_PUBLISHED = 'published';
+	private const int EDIT_HISTORY_LIMIT = 75;
 
 	/**
 	 * @return array<string, mixed>
@@ -486,6 +487,7 @@ final class FormCaptureAuthoringService
 		}
 
 		$descriptor = $this->descriptorFromVersion($definition, $version);
+		$baseline = $descriptor;
 		$field = $this->newFieldDescriptorFromPalette($definition_slug, $descriptor, $field_type);
 		$descriptor['fields'] = $this->insertFieldAtVisibleIndex(
 			is_array($descriptor['fields'] ?? null) ? $descriptor['fields'] : [],
@@ -494,6 +496,7 @@ final class FormCaptureAuthoringService
 		);
 
 		$result = $this->saveDraft($definition_slug, $descriptor, (string)$version->descriptor_hash);
+		$this->recordEditHistory($definition, $baseline, $result);
 
 		return $result + [
 			'inserted_field' => $field,
@@ -516,6 +519,7 @@ final class FormCaptureAuthoringService
 		}
 
 		$descriptor = $this->descriptorFromVersion($definition, $version);
+		$baseline = $descriptor;
 		$fields = [];
 
 		foreach (($descriptor['fields'] ?? []) as $field) {
@@ -535,6 +539,7 @@ final class FormCaptureAuthoringService
 		);
 		$descriptor['fields'] = array_values($fields);
 		$result = $this->saveDraft($definition_slug, $descriptor, (string)$version->descriptor_hash);
+		$this->recordEditHistory($definition, $baseline, $result);
 
 		return $result + [
 			'updated_field' => $fields[$field_offset],
@@ -556,6 +561,7 @@ final class FormCaptureAuthoringService
 		}
 
 		$descriptor = $this->descriptorFromVersion($definition, $version);
+		$baseline = $descriptor;
 		$fields = $this->normalizedDescriptorFields($descriptor);
 		$field_offset = $this->findFieldOffset($fields, $field_uid, $field_key, $field_index);
 		$this->assertVisibleFieldOffset($fields, $field_offset);
@@ -568,6 +574,7 @@ final class FormCaptureAuthoringService
 		array_splice($fields, $field_offset, 1);
 		$descriptor['fields'] = array_values($fields);
 		$result = $this->saveDraft($definition_slug, $descriptor, (string)$version->descriptor_hash);
+		$this->recordEditHistory($definition, $baseline, $result);
 
 		return $result + [
 			'removed_field' => $removed_field,
@@ -595,6 +602,7 @@ final class FormCaptureAuthoringService
 		}
 
 		$descriptor = $this->descriptorFromVersion($definition, $version);
+		$baseline = $descriptor;
 		$fields = $this->normalizedDescriptorFields($descriptor);
 		$field_offset = $this->findFieldOffset($fields, $field_uid, $field_key, $field_index);
 		$visible_offsets = $this->visibleFieldOffsets($fields);
@@ -616,6 +624,7 @@ final class FormCaptureAuthoringService
 		$fields[$target_offset] = $moved_field;
 		$descriptor['fields'] = array_values($fields);
 		$result = $this->saveDraft($definition_slug, $descriptor, (string)$version->descriptor_hash);
+		$this->recordEditHistory($definition, $baseline, $result);
 
 		return $result + [
 			'moved_field' => $moved_field,
@@ -623,6 +632,178 @@ final class FormCaptureAuthoringService
 			'field_index' => $target_offset,
 			'direction' => $direction,
 		];
+	}
+
+	/**
+	 * @param array<string, mixed> $submitted title / description / submit_label texts
+	 * @return array<string, mixed>
+	 */
+	public function updateFormPropertiesInDraft(string $definition_slug, array $submitted): array
+	{
+		$definition = $this->requireDbDefinition($definition_slug);
+		$version = $this->findActiveDraft((int)$definition->definition_id) ?? $this->findPublishedVersion($definition);
+
+		if (!$version instanceof EntityFormDefinitionVersion) {
+			throw new InvalidArgumentException('No editable capture form version is available.');
+		}
+
+		$descriptor = $this->descriptorFromVersion($definition, $version);
+		$baseline = $descriptor;
+
+		foreach (['title', 'description', 'submit_label'] as $key) {
+			if (array_key_exists($key, $submitted)) {
+				$descriptor[$key] = $this->textDefinitionForDescriptor($descriptor, $key, (string)$submitted[$key]);
+			}
+		}
+
+		$result = $this->saveDraft($definition_slug, $descriptor, (string)$version->descriptor_hash);
+		$this->recordEditHistory($definition, $baseline, $result);
+
+		return $result + [
+			'updated_properties' => array_values(array_intersect(['title', 'description', 'submit_label'], array_keys($submitted))),
+		];
+	}
+
+	/**
+	 * Revert the working draft to the previous edit-history state.
+	 *
+	 * @return array<string, mixed>
+	 */
+	public function undoEdit(string $definition_slug): array
+	{
+		return $this->applyEditHistoryStep($definition_slug, -1);
+	}
+
+	/**
+	 * Advance the working draft to the next edit-history state.
+	 *
+	 * @return array<string, mixed>
+	 */
+	public function redoEdit(string $definition_slug): array
+	{
+		return $this->applyEditHistoryStep($definition_slug, 1);
+	}
+
+	/**
+	 * Records the edit order for server-backed undo/redo. The versions table dedupes
+	 * states by descriptor hash, so it cannot represent the sequence A -> B -> A; this
+	 * ring can. Mutations truncate the redo tail, and the ring is capped.
+	 *
+	 * @param array<string, mixed> $baseline_descriptor descriptor before the mutation
+	 * @param array<string, mixed> $save_result return value of saveDraft()
+	 */
+	private function recordEditHistory(EntityFormDefinition $definition, array $baseline_descriptor, array $save_result): void
+	{
+		if (($save_result['status'] ?? '') === 'conflict') {
+			return;
+		}
+
+		$definition_id = (int)$definition->definition_id;
+		$saved_descriptor = is_array($save_result['descriptor'] ?? null) ? $save_result['descriptor'] : null;
+
+		if ($saved_descriptor === null) {
+			return;
+		}
+
+		$cursor = $this->editHistoryCursor($definition_id);
+
+		if ($cursor === 0) {
+			DbHelper::prexecute(
+				'INSERT INTO form_definition_edit_history (definition_id, seq, descriptor_json) VALUES (?, ?, ?)',
+				[$definition_id, 1, json_encode($baseline_descriptor, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR)],
+			);
+			$cursor = 1;
+		}
+
+		DbHelper::prexecute(
+			'DELETE FROM form_definition_edit_history WHERE definition_id = ? AND seq > ?',
+			[$definition_id, $cursor],
+		);
+		DbHelper::prexecute(
+			'INSERT INTO form_definition_edit_history (definition_id, seq, descriptor_json) VALUES (?, ?, ?)',
+			[$definition_id, $cursor + 1, json_encode($saved_descriptor, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR)],
+		);
+		$this->setEditHistoryCursor($definition_id, $cursor + 1);
+		DbHelper::prexecute(
+			'DELETE FROM form_definition_edit_history WHERE definition_id = ? AND seq <= ?',
+			[$definition_id, $cursor + 1 - self::EDIT_HISTORY_LIMIT],
+		);
+	}
+
+	/**
+	 * @return array<string, mixed>
+	 */
+	private function applyEditHistoryStep(string $definition_slug, int $direction): array
+	{
+		$definition = $this->requireDbDefinition($definition_slug);
+		$definition_id = (int)$definition->definition_id;
+		$cursor = $this->editHistoryCursor($definition_id);
+		$target_seq = $cursor + $direction;
+		$descriptor_json = DbHelper::selectOneColumnFromQuery(
+			'SELECT descriptor_json FROM form_definition_edit_history WHERE definition_id = ? AND seq = ?',
+			[$definition_id, $target_seq],
+		);
+
+		if (!is_string($descriptor_json) || $descriptor_json === '') {
+			throw new InvalidArgumentException($direction < 0 ? 'Nothing to undo.' : 'Nothing to redo.');
+		}
+
+		$descriptor = json_decode($descriptor_json, true, 512, JSON_THROW_ON_ERROR);
+
+		if (!is_array($descriptor)) {
+			throw new UnexpectedValueException('Stored edit-history descriptor is invalid.');
+		}
+
+		$result = $this->saveDraft($definition_slug, $descriptor, '', true);
+		$this->setEditHistoryCursor($definition_id, $target_seq);
+
+		return $result + [
+			'action' => $direction < 0 ? 'undo' : 'redo',
+			'edit_history_seq' => $target_seq,
+			'can_undo' => $this->editHistorySeqExists($definition_id, $target_seq - 1),
+			'can_redo' => $this->editHistorySeqExists($definition_id, $target_seq + 1),
+		];
+	}
+
+	private function editHistoryCursor(int $definition_id): int
+	{
+		return (int)DbHelper::selectOneColumnFromQuery(
+			'SELECT edit_history_seq FROM form_definitions WHERE definition_id = ?',
+			[$definition_id],
+		);
+	}
+
+	private function setEditHistoryCursor(int $definition_id, int $seq): void
+	{
+		DbHelper::prexecute(
+			'UPDATE form_definitions SET edit_history_seq = ? WHERE definition_id = ?',
+			[$seq, $definition_id],
+		);
+	}
+
+	private function editHistorySeqExists(int $definition_id, int $seq): bool
+	{
+		return (int)DbHelper::selectOneColumnFromQuery(
+			'SELECT COUNT(*) FROM form_definition_edit_history WHERE definition_id = ? AND seq = ?',
+			[$definition_id, $seq],
+		) > 0;
+	}
+
+	/**
+	 * Keeps keyed text definitions ({key, text}) keyed while updating the default text;
+	 * literal-mode values stay plain strings.
+	 *
+	 * @param array<string, mixed> $descriptor
+	 */
+	private function textDefinitionForDescriptor(array $descriptor, string $key, string $text): array|string
+	{
+		$current = $descriptor[$key] ?? null;
+
+		if (is_array($current) && isset($current['key']) && is_string($current['key']) && trim($current['key']) !== '') {
+			return array_replace($current, ['text' => $text]);
+		}
+
+		return $text;
 	}
 
 	/**

@@ -682,3 +682,6 @@ locale_admin,message.invalid_locale,,ko-KR,"Invalid locale.","Invalid locale.",0
 locale_admin,message.service_unavailable,,ko-KR,"Locale administration is unavailable until the locale infrastructure is installed.","로케일 인프라가 설치될 때까지 로케일 관리를 사용할 수 없습니다.",0,0,"로케일 인프라가 설치될 때까지 로케일 관리를 사용할 수 없습니다."
 admin,i18n.col.allow_source_match,,ko-KR,"Source match","Source match",0,1,"Source match"
 admin,i18n.allow_source_match.help,,ko-KR,"Allow only when the translation intentionally matches the source text.","Allow only when the translation intentionally matches the source text.",0,1,"Allow only when the translation intentionally matches the source text."
+form,editor.status_undone,,ko-KR,"Form edit undone.","폼 편집을 실행 취소했습니다.",0,0,"폼 편집을 실행 취소했습니다."
+form,editor.status_redone,,ko-KR,"Form edit redone.","폼 편집을 다시 실행했습니다.",0,0,"폼 편집을 다시 실행했습니다."
+form,editor.error_history_unavailable,,ko-KR,"Nothing to undo or redo.","실행 취소하거나 다시 실행할 항목이 없습니다.",0,0,"실행 취소하거나 다시 실행할 항목이 없습니다."

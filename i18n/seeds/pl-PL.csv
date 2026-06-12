@@ -682,3 +682,6 @@ locale_admin,message.invalid_locale,,pl-PL,"Invalid locale.","Invalid locale.",0
 locale_admin,message.service_unavailable,,pl-PL,"Locale administration is unavailable until the locale infrastructure is installed.","Administracja lokalizacjami jest niedostępna, dopóki infrastruktura lokalizacji nie zostanie zainstalowana.",0,0,"Administracja lokalizacjami jest niedostępna, dopóki infrastruktura lokalizacji nie zostanie zainstalowana."
 admin,i18n.col.allow_source_match,,pl-PL,"Source match","Source match",0,1,"Source match"
 admin,i18n.allow_source_match.help,,pl-PL,"Allow only when the translation intentionally matches the source text.","Allow only when the translation intentionally matches the source text.",0,1,"Allow only when the translation intentionally matches the source text."
+form,editor.status_undone,,pl-PL,"Form edit undone.","Cofnięto edycję formularza.",0,0,"Cofnięto edycję formularza."
+form,editor.status_redone,,pl-PL,"Form edit redone.","Ponowiono edycję formularza.",0,0,"Ponowiono edycję formularza."
+form,editor.error_history_unavailable,,pl-PL,"Nothing to undo or redo.","Nie ma nic do cofnięcia ani ponowienia.",0,0,"Nie ma nic do cofnięcia ani ponowienia."

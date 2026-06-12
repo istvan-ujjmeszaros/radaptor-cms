@@ -682,3 +682,6 @@ locale_admin,message.invalid_locale,,es-ES,"Invalid locale.","Invalid locale.",0
 locale_admin,message.service_unavailable,,es-ES,"Locale administration is unavailable until the locale infrastructure is installed.","La administración de locales no está disponible hasta que la infraestructura de locales esté instalada.",0,0,"La administración de locales no está disponible hasta que la infraestructura de locales esté instalada."
 admin,i18n.col.allow_source_match,,es-ES,"Source match","Source match",0,1,"Source match"
 admin,i18n.allow_source_match.help,,es-ES,"Allow only when the translation intentionally matches the source text.","Allow only when the translation intentionally matches the source text.",0,1,"Allow only when the translation intentionally matches the source text."
+form,editor.status_undone,,es-ES,"Form edit undone.","Edición del formulario deshecha.",0,0,"Edición del formulario deshecha."
+form,editor.status_redone,,es-ES,"Form edit redone.","Edición del formulario rehecha.",0,0,"Edición del formulario rehecha."
+form,editor.error_history_unavailable,,es-ES,"Nothing to undo or redo.","No hay nada que deshacer o rehacer.",0,0,"No hay nada que deshacer o rehacer."

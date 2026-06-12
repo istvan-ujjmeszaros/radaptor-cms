@@ -682,3 +682,6 @@ locale_admin,message.invalid_locale,,ru-RU,"Invalid locale.","Invalid locale.",0
 locale_admin,message.service_unavailable,,ru-RU,"Locale administration is unavailable until the locale infrastructure is installed.","Управление локалями недоступно, пока не установлена инфраструктура локалей.",0,0,"Управление локалями недоступно, пока не установлена инфраструктура локалей."
 admin,i18n.col.allow_source_match,,ru-RU,"Source match","Source match",0,1,"Source match"
 admin,i18n.allow_source_match.help,,ru-RU,"Allow only when the translation intentionally matches the source text.","Allow only when the translation intentionally matches the source text.",0,1,"Allow only when the translation intentionally matches the source text."
+form,editor.status_undone,,ru-RU,"Form edit undone.","Изменение формы отменено.",0,0,"Изменение формы отменено."
+form,editor.status_redone,,ru-RU,"Form edit redone.","Изменение формы повторено.",0,0,"Изменение формы повторено."
+form,editor.error_history_unavailable,,ru-RU,"Nothing to undo or redo.","Нечего отменять или повторять.",0,0,"Нечего отменять или повторять."

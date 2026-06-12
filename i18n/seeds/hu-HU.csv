@@ -746,3 +746,6 @@ cms,widget_connection.not_allowed,,hu-HU,"This widget cannot be inserted here.",
 cms,widget_connection.wrong_surface,,hu-HU,"This widget is not available for this page type.","Ez a widget ehhez az oldaltípushoz nem érhető el.",0,0,"Ez a widget ehhez az oldaltípushoz nem érhető el."
 cms,widget_connection.once_per_domain_used,,hu-HU,"This widget is already used in this site.","Ez a widget már használatban van ezen a webhelyen.",0,0,"Ez a widget már használatban van ezen a webhelyen."
 resource,edit_page,,hu-HU,"Edit page","Oldal szerkesztése",0,0,"Oldal szerkesztése"
+form,editor.status_undone,,hu-HU,"Form edit undone.","Űrlapmódosítás visszavonva.",0,0,"Űrlapmódosítás visszavonva."
+form,editor.status_redone,,hu-HU,"Form edit redone.","Űrlapmódosítás megismételve.",0,0,"Űrlapmódosítás megismételve."
+form,editor.error_history_unavailable,,hu-HU,"Nothing to undo or redo.","Nincs visszavonható vagy megismételhető módosítás.",0,0,"Nincs visszavonható vagy megismételhető módosítás."

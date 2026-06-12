@@ -5,6 +5,13 @@ declare(strict_types=1);
 class WidgetPhpInfoFrame extends AbstractWidget
 {
 	public const string ID = 'phpinfo_frame';
+	public const array AUTHORING = [
+		'insert_mode' => 'system',
+		'reuse' => 'repeatable',
+		'surfaces' => ['admin'],
+		'group' => 'developer',
+		'sort' => 20,
+	];
 
 	/**
 	 * @return array<string, string>

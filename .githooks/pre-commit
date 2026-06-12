@@ -147,7 +147,7 @@ run_fixer_in_packages_dev_runtime() {
 	local container="${runtime%%|*}"
 	local container_repo_root="${runtime#*|}"
 
-	docker exec "$container" bash -lc \
+	docker exec -e HOME=/tmp "$container" bash -lc \
 		"cd '$container_repo_root' && php-cs-fixer fix --config=.php-cs-fixer.php --quiet --path-mode=intersection -- \"\$@\"" \
 		bash "${STAGED_FILES[@]}"
 }

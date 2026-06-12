@@ -16,9 +16,6 @@ class Template extends TemplateDebug
 	public const string MIME_JSON = 'application/json; charset=utf-8';
 	public const string MIME_XML = 'text/xml; charset=utf-8';
 
-	/** @var array<string, string|null> */
-	private static array $_dynamicTemplatePathCache = [];
-
 	protected string $_templatePath = '';
 	protected ?string $_content = null;
 	protected string $_mime = self::MIME_HTML;
@@ -82,26 +79,12 @@ class Template extends TemplateDebug
 	 */
 	protected static function lookupTemplateRenderer(string $templateName): string
 	{
-		if (TemplateList::hasTemplate($templateName)) {
-			return TemplateList::getRendererForTemplate($templateName);
-		}
-
-		$dynamic_path = self::findDynamicTemplatePath($templateName);
-
-		if ($dynamic_path === null) {
-			return TemplateList::getRendererForTemplate($templateName);
-		}
-
-		return match (true) {
-			str_ends_with($dynamic_path, '.blade.php') => TemplateRendererBlade::class,
-			str_ends_with($dynamic_path, '.twig') => TemplateRendererTwig::class,
-			default => TemplateRendererPhp::class,
-		};
+		return TemplateList::getRendererForTemplate($templateName);
 	}
 
 	protected static function lookupHasTemplate(string $templateName): bool
 	{
-		return TemplateList::hasTemplate($templateName) || self::findDynamicTemplatePath($templateName) !== null;
+		return TemplateList::hasTemplate($templateName);
 	}
 
 	public function getRenderer(): ?iHtmlTemplateRuntime
@@ -142,55 +125,7 @@ class Template extends TemplateDebug
 			return TemplateList::getPathForTemplate($templateName);
 		}
 
-		return self::findDynamicTemplatePath($templateName) ?? '';
-	}
-
-	private static function findDynamicTemplatePath(string $templateName): ?string
-	{
-		if (array_key_exists($templateName, self::$_dynamicTemplatePathCache)) {
-			return self::$_dynamicTemplatePathCache[$templateName];
-		}
-
-		$candidates = [
-			'template.' . $templateName . '.blade.php',
-			'template.' . $templateName . '.twig',
-			'template.' . $templateName . '.php',
-		];
-
-		foreach (PackagePathHelper::getScannableRoots() as $root) {
-			if (!is_dir($root)) {
-				continue;
-			}
-
-			$iterator = new RecursiveIteratorIterator(
-				new RecursiveDirectoryIterator($root, FilesystemIterator::SKIP_DOTS)
-			);
-
-			foreach ($iterator as $file) {
-				if (!$file instanceof SplFileInfo || !$file->isFile()) {
-					continue;
-				}
-
-				if (PackagePathHelper::shouldSkipPath($file->getPathname())) {
-					continue;
-				}
-
-				$basename = $file->getBasename();
-
-				if (!in_array($basename, $candidates, true)) {
-					continue;
-				}
-
-				$stored_path = PackagePathHelper::toStoragePath($file->getPathname());
-				self::$_dynamicTemplatePathCache[$templateName] = $stored_path;
-
-				return $stored_path;
-			}
-		}
-
-		self::$_dynamicTemplatePathCache[$templateName] = null;
-
-		return null;
+		return '';
 	}
 
 	// ── Page-metadata delegation to renderer ──────────────────────────────────

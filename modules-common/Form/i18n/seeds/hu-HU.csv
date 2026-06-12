@@ -238,3 +238,5 @@ form,hooks.target.custom_https_webhook.description,,hu-HU,"Send capture submissi
 form,hooks.target.raw_form_data_email.name,,hu-HU,"Raw form data as email","Nyers űrlapadatok emailben",0,0,"Nyers űrlapadatok emailben"
 form,hooks.target.raw_form_data_email.description,,hu-HU,"Email the raw capture submission payload through the system email queue.","A nyers capture beküldési payload elküldése a rendszer email queue-ján keresztül.",0,0,"A nyers capture beküldési payload elküldése a rendszer email queue-ján keresztül."
 form,hooks.email.default_subject,,hu-HU,"Capture form submission: {form}","Capture űrlap beküldés: {form}",0,0,"Capture űrlap beküldés: {form}"
+form,editmode_readonly.system_defined,,hu-HU,"System-defined form · cannot be edited inline","Rendszer által definiált űrlap · itt nem szerkeszthető",0,0,"Rendszer által definiált űrlap · itt nem szerkeszthető"
+form,editmode_readonly.not_editable,,hu-HU,"This form cannot be edited inline.","Ez az űrlap itt nem szerkeszthető.",0,0,"Ez az űrlap itt nem szerkeszthető."

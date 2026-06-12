@@ -3,6 +3,13 @@
 class WidgetPlainHtml extends AbstractWidget
 {
 	public const string ID = 'plain_html';
+	public const array AUTHORING = [
+		'insert_mode' => 'manual',
+		'reuse' => 'repeatable',
+		'surfaces' => ['public', 'admin'],
+		'group' => 'content',
+		'sort' => 10,
+	];
 
 	public static function getName(): string
 	{

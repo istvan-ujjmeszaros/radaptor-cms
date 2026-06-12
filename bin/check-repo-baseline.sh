@@ -153,21 +153,37 @@ run_php_cs_fixer_check_locally() {
 	return 1
 }
 
-run_php_cs_fixer_check_in_consumer_app() {
+# Discover the running php container by compose labels instead of `docker compose ps`, because
+# the project name differs between standalone mode and the workspace package-dev override
+# (COMPOSE_PROJECT_NAME=<app>-workspace-dev). The working_dir label is the app root in both modes;
+# keep this in sync with find_running_docker_container in the php-consumer-app pre-commit hook.
+find_consumer_app_container() {
 	local app_root="$1"
 	local docker_service="${RADAPTOR_DOCKER_PHP_SERVICE:-php}"
+
+	docker ps \
+		--filter "label=com.docker.compose.project.working_dir=$app_root" \
+		--filter "label=com.docker.compose.service=$docker_service" \
+		--format '{{.Names}}' | head -n 1
+}
+
+run_php_cs_fixer_check_in_consumer_app() {
+	local app_root="$1"
 	local repo_relative_path="${REPO_ROOT#"$app_root"}"
 	local container_repo_root="/app${repo_relative_path}"
+	local container
 
 	if ! command -v docker >/dev/null 2>&1; then
 		return 1
 	fi
 
-	if ! docker compose -f "$app_root/docker-compose-dev.yml" ps "$docker_service" 2>/dev/null | grep -q "Up"; then
+	container="$(find_consumer_app_container "$app_root")"
+
+	if [ -z "$container" ]; then
 		return 1
 	fi
 
-	docker compose -f "$app_root/docker-compose-dev.yml" exec -T "$docker_service" bash -lc \
+	docker exec -e HOME=/tmp "$container" bash -lc \
 		"cd '$container_repo_root' && php-cs-fixer fix --dry-run --diff --config=.php-cs-fixer.php"
 }
 
@@ -176,7 +192,7 @@ run_php_cs_fixer_check_in_packages_dev_runtime() {
 	local container="${runtime%%|*}"
 	local container_repo_root="${runtime#*|}"
 
-	docker exec "$container" bash -lc \
+	docker exec -e HOME=/tmp "$container" bash -lc \
 		"cd '$container_repo_root' && php-cs-fixer fix --dry-run --diff --config=.php-cs-fixer.php"
 }
 

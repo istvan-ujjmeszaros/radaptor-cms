@@ -91,6 +91,15 @@ final class FormRefactorPhase2SourceContractTest extends TestCase
 		$this->assertStringNotContainsString("'FormType' . ucwords", $widget_source);
 	}
 
+	public function testConfiguredFormWidgetIdIsNotOverriddenByRequestQuery(): void
+	{
+		$widget_source = $this->source('modules-common/Form/widgets/Widget.Form.php');
+
+		$this->assertStringContainsString("\$form_type = trim((string)\$connection->getExtraparam('form_id'));", $widget_source);
+		$this->assertStringContainsString("if (\$form_type === '' && Request::_GET('form_id'))", $widget_source);
+		$this->assertStringContainsString("\$form_type = trim((string)Request::_GET('form_id'));", $widget_source);
+	}
+
 	private function source(string $relativePath): string
 	{
 		$path = dirname(__DIR__) . '/' . $relativePath;

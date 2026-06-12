@@ -64,7 +64,13 @@ class EventResourceView extends AbstractEvent implements iBrowserEventDocumentab
 	public function run(): void
 	{
 		$resource = null;
-		$resource_id = ResourceTreeHandler::getResourceTreeEntryIdFromUrl();
+		// The domain_context override is honored only for authenticated users (the page
+		// editor preview iframe loads cross-context pages same-origin); anonymous visitors
+		// always resolve against the current site context. Per-resource ACL still applies.
+		$domain_context = User::getCurrentUser() !== null
+			? (trim((string) Request::_GET('domain_context')) ?: null)
+			: null;
+		$resource_id = ResourceTreeHandler::getResourceTreeEntryIdFromUrl($domain_context);
 		$request_resource_is_viewable = false;
 
 		self::redirectFolderResourceToCanonicalPath($resource_id);

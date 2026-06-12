@@ -3,6 +3,13 @@
 class WidgetRichText extends AbstractWidget
 {
 	public const string ID = 'rich_text';
+	public const array AUTHORING = [
+		'insert_mode' => 'manual',
+		'reuse' => 'repeatable',
+		'surfaces' => ['public', 'admin'],
+		'group' => 'content',
+		'sort' => 20,
+	];
 
 	public static function getName(): string
 	{

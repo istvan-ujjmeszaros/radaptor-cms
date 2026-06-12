@@ -3,6 +3,13 @@
 class WidgetJsTree extends AbstractWidget
 {
 	public const string ID = 'js_tree';
+	public const array AUTHORING = [
+		'insert_mode' => 'system',
+		'reuse' => 'repeatable',
+		'surfaces' => ['admin'],
+		'group' => 'admin',
+		'sort' => 120,
+	];
 	public const bool VISIBILITY = true;
 
 	public static function getName(): string

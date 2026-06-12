@@ -3,6 +3,13 @@
 class WidgetTagList extends AbstractWidget
 {
 	public const string ID = 'tag_list';
+	public const array AUTHORING = [
+		'insert_mode' => 'system',
+		'reuse' => 'repeatable',
+		'surfaces' => ['public'],
+		'group' => 'content',
+		'sort' => 100,
+	];
 	public const bool VISIBILITY = true;
 
 	/**

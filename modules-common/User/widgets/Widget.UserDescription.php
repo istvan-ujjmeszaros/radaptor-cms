@@ -3,6 +3,13 @@
 class WidgetUserDescription extends AbstractWidget
 {
 	public const string ID = 'user_description';
+	public const array AUTHORING = [
+		'insert_mode' => 'system',
+		'reuse' => 'repeatable',
+		'surfaces' => ['admin'],
+		'group' => 'admin',
+		'sort' => 25,
+	];
 
 	/**
 	 * @return array<string, string>

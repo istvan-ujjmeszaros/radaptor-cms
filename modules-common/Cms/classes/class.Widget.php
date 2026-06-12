@@ -45,7 +45,7 @@ class Widget extends WidgetList
 
 	public static function checkWidgetExists(string $widget_name): bool
 	{
-		return in_array($widget_name, self::$_widgetNames);
+		return in_array($widget_name, self::$_widgetNames, true);
 	}
 
 	/**
@@ -54,6 +54,68 @@ class Widget extends WidgetList
 	public static function getRegisteredWidgetNames(): array
 	{
 		return array_values(self::$_widgetNames);
+	}
+
+	/**
+	 * @return array<string, mixed>
+	 */
+	public static function getWidgetAuthoringPolicy(string $widget_name): array
+	{
+		if (property_exists(WidgetList::class, '_widgetAuthoring') && isset(self::$_widgetAuthoring[$widget_name]) && is_array(self::$_widgetAuthoring[$widget_name])) {
+			return self::$_widgetAuthoring[$widget_name];
+		}
+
+		throw new RuntimeException("Widget '{$widget_name}' is missing generated AUTHORING policy. Run build:widgets.");
+	}
+
+	/**
+	 * @return array<string, array<string>>
+	 */
+	public static function getPaletteWidgetNamesBySurfaceAndGroup(string $surface): array
+	{
+		if (
+			property_exists(WidgetList::class, '_paletteWidgetNamesBySurfaceAndGroup')
+			&& isset(self::$_paletteWidgetNamesBySurfaceAndGroup[$surface])
+			&& is_array(self::$_paletteWidgetNamesBySurfaceAndGroup[$surface])
+		) {
+			return self::$_paletteWidgetNamesBySurfaceAndGroup[$surface];
+		}
+
+		return [];
+	}
+
+	/**
+	 * @return list<string>
+	 */
+	public static function getOncePerDomainWidgetNames(): array
+	{
+		if (property_exists(WidgetList::class, '_oncePerDomainWidgetNames') && is_array(self::$_oncePerDomainWidgetNames)) {
+			return array_values(self::$_oncePerDomainWidgetNames);
+		}
+
+		return [];
+	}
+
+	/**
+	 * @return WidgetMetadata
+	 */
+	public static function getWidgetMetadata(string $widget_name): array
+	{
+		if (!self::checkWidgetExists($widget_name)) {
+			return [
+				'type_name' => $widget_name,
+				'name' => $widget_name,
+				'description' => '',
+			];
+		}
+
+		$widget = self::factory($widget_name);
+
+		return [
+			'type_name' => $widget->getTypeName(),
+			'name' => $widget->getName(),
+			'description' => $widget->getDescription(),
+		];
 	}
 
 	public static function getWidgetDescription(string $widget_name): string
@@ -328,6 +390,7 @@ class Widget extends WidgetList
 		};
 
 		$widget_edit_commands = self::normalizeEditCommands($connection->getWidget()->getEditableCommands($connection));
+		$editmode_readonly_notice = self::extractEditmodeReadonlyNotice($widget_tree);
 
 		$props = [
 			'widget_edit_commands' => $widget_edit_commands,
@@ -350,12 +413,24 @@ class Widget extends WidgetList
 				'edit_bar' => [
 					SduiNode::create('editBar.common', [
 						'widget_edit_commands' => $widget_edit_commands,
+						'editmode_readonly_notice' => $editmode_readonly_notice,
 					], strings: self::buildEditBarStrings()),
 				],
 				'widget_content' => [$widget_tree],
 			],
 			type: SduiNode::TYPE_SUB,
 		);
+	}
+
+	private static function extractEditmodeReadonlyNotice(array $widget_tree): string
+	{
+		$props = $widget_tree['props'] ?? [];
+
+		if (!is_array($props)) {
+			return '';
+		}
+
+		return trim((string)($props['editmode_readonly_notice'] ?? ''));
 	}
 
 	/**
@@ -424,13 +499,21 @@ class Widget extends WidgetList
 				}
 			}
 
+			$method = strtolower($command->method);
+			$properties_url = $command->properties_url;
+
+			if ($properties_url === '' && $method === 'get') {
+				$properties_url = Form::getEditorFragmentUrlFromSeoUrl($command->url);
+			}
+
 			$return[] = [
 				'title' => $command->title,
 				'url' => $command->url,
 				'icon' => $command->icon?->value,
-				'method' => strtolower($command->method),
+				'method' => $method,
 				'payload' => $payload,
 				'loader' => $command->loader,
+				'properties_url' => $properties_url,
 			];
 		}
 

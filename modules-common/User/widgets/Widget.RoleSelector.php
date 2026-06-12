@@ -3,6 +3,13 @@
 class WidgetRoleSelector extends AbstractWidget
 {
 	public const string ID = 'role_selector';
+	public const array AUTHORING = [
+		'insert_mode' => 'system',
+		'reuse' => 'repeatable',
+		'surfaces' => ['admin'],
+		'group' => 'admin',
+		'sort' => 35,
+	];
 
 	public static function getName(): string
 	{

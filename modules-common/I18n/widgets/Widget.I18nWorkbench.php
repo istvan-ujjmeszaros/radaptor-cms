@@ -3,6 +3,13 @@
 class WidgetI18nWorkbench extends AbstractWidget
 {
 	public const string ID = 'i18n_workbench';
+	public const array AUTHORING = [
+		'insert_mode' => 'system',
+		'reuse' => 'repeatable',
+		'surfaces' => ['admin'],
+		'group' => 'admin',
+		'sort' => 70,
+	];
 
 	public static function getName(): string
 	{

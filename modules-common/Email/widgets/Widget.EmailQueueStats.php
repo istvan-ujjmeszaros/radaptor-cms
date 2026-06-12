@@ -5,6 +5,13 @@ declare(strict_types=1);
 class WidgetEmailQueueStats extends AbstractWidget
 {
 	public const string ID = 'email_queue_stats';
+	public const array AUTHORING = [
+		'insert_mode' => 'system',
+		'reuse' => 'repeatable',
+		'surfaces' => ['admin'],
+		'group' => 'admin',
+		'sort' => 80,
+	];
 
 	/**
 	 * @return array<string, string>

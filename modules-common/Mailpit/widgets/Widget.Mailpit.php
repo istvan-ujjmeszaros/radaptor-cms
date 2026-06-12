@@ -5,6 +5,13 @@ declare(strict_types=1);
 class WidgetMailpit extends AbstractWidget
 {
 	public const string ID = 'mailpit';
+	public const array AUTHORING = [
+		'insert_mode' => 'system',
+		'reuse' => 'repeatable',
+		'surfaces' => ['admin'],
+		'group' => 'developer',
+		'sort' => 30,
+	];
 
 	private const array ROUTES = [
 		'' => 'mailpit.inbox',

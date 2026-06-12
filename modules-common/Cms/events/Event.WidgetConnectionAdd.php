@@ -63,6 +63,22 @@ class EventWidgetConnectionAdd extends AbstractEvent implements iBrowserEventDoc
 			Kernel::abort(__FILE__ . ': line ' . __LINE__);
 		}
 
+		try {
+			$placement_context = WidgetPlacementContext::fromPageId($page_id, $slot_name, $seq);
+		} catch (InvalidArgumentException) {
+			$this->fail('WIDGET_CONNECTION_ADD_BAD_TARGET', 'cms.widget_connection.not_allowed', 422);
+
+			return;
+		}
+
+		$placement_decision = (new WidgetPlacementService())->canPlace($widget_name, $placement_context);
+
+		if (!$placement_decision->isAllowed()) {
+			$this->fail($placement_decision->code(), $placement_decision->messageKey(), 422);
+
+			return;
+		}
+
 		$connection_id = Widget::assignWidgetToWebpage($page_id, $slot_name, $widget_name, $seq);
 
 		if ($connection_id !== false) {

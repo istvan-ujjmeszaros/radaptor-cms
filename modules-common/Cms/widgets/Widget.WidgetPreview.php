@@ -3,6 +3,13 @@
 class WidgetWidgetPreview extends AbstractWidget
 {
 	public const string ID = 'widget_preview';
+	public const array AUTHORING = [
+		'insert_mode' => 'system',
+		'reuse' => 'repeatable',
+		'surfaces' => ['admin'],
+		'group' => 'developer',
+		'sort' => 10,
+	];
 
 	/**
 	 * @return array<string, string>

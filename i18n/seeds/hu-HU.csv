@@ -714,3 +714,35 @@ form,field_edit.error_save_failed,,hu-HU,"Unable to update the form field draft.
 form,field_edit.status_draft_updated,,hu-HU,"Form field draft updated. Publish it from the form builder when ready.","Az űrlapmező piszkozata frissítve. Ha kész, tedd közzé az űrlapépítőből.",0,0,"Az űrlapmező piszkozata frissítve. Ha kész, tedd közzé az űrlapépítőből."
 admin,i18n.col.allow_source_match,,hu-HU,"Source match",Forrásegyezés,0,0,Forrásegyezés
 admin,i18n.allow_source_match.help,,hu-HU,"Allow only when the translation intentionally matches the source text.","Csak akkor engedélyezd, ha a fordítás szándékosan egyezik a forrásszöveggel.",0,0,"Csak akkor engedélyezd, ha a fordítás szándékosan egyezik a forrásszöveggel."
+widget,group.content,,hu-HU,Content,Tartalom,0,0,Tartalom
+widget,group.forms,,hu-HU,Forms,Űrlapok,0,0,Űrlapok
+widget,group.navigation,,hu-HU,Navigation,Navigáció,0,0,Navigáció
+widget,group.admin,,hu-HU,Administration,Adminisztráció,0,0,Adminisztráció
+widget,group.developer,,hu-HU,Developer,Fejlesztői,0,0,Fejlesztői
+cms,page_editor.title,,hu-HU,"Edit page","Oldal szerkesztése",0,0,"Oldal szerkesztése"
+cms,page_editor.editor_title,,hu-HU,"Edit page","Oldal szerkesztése",0,0,"Oldal szerkesztése"
+cms,page_editor.editor_loading,,hu-HU,"Loading page editor","Oldalszerkesztő betöltése",0,0,"Oldalszerkesztő betöltése"
+cms,page_editor.editor_load_failed,,hu-HU,"Unable to load the page editor.","Nem sikerült betölteni az oldalszerkesztőt.",0,0,"Nem sikerült betölteni az oldalszerkesztőt."
+cms,page_editor.page_loading,,hu-HU,"Loading page","Oldal betöltése",0,0,"Oldal betöltése"
+cms,page_editor.close,,hu-HU,Close,Bezárás,0,0,Bezárás
+cms,page_editor.palette,,hu-HU,Widgets,Widgetek,0,0,Widgetek
+cms,page_editor.preview,,hu-HU,Page,Oldal,0,0,Oldal
+cms,page_editor.properties,,hu-HU,Properties,Tulajdonságok,0,0,Tulajdonságok
+cms,page_editor.properties_loading,,hu-HU,"Loading properties","Tulajdonságok betöltése",0,0,"Tulajdonságok betöltése"
+cms,page_editor.properties_saving,,hu-HU,"Saving properties","Tulajdonságok mentése",0,0,"Tulajdonságok mentése"
+cms,page_editor.no_selection,,hu-HU,"Select a page item to edit its properties.","Válassz ki egy oldalelemet a tulajdonságai szerkesztéséhez.",0,0,"Válassz ki egy oldalelemet a tulajdonságai szerkesztéséhez."
+cms,page_editor.panel.form_input,,hu-HU,"Form input","Űrlapmező",0,0,"Űrlapmező"
+cms,page_editor.panel.widget,,hu-HU,Widget,Widget,0,0,Widget
+cms,page_editor.open_page,,hu-HU,"Open page","Oldal megnyitása",0,0,"Oldal megnyitása"
+cms,page_editor.drop_hint,,hu-HU,"Drag a widget onto an insert target in the page.","Húzz egy widgetet az oldalon látható beszúrási célpontra.",0,0,"Húzz egy widgetet az oldalon látható beszúrási célpontra."
+cms,page_editor.page_not_found,,hu-HU,"The selected page cannot be edited.","A kiválasztott oldal nem szerkeszthető.",0,0,"A kiválasztott oldal nem szerkeszthető."
+cms,page_editor.access_denied,,hu-HU,"You do not have permission to edit this page.","Nincs jogosultságod az oldal szerkesztéséhez.",0,0,"Nincs jogosultságod az oldal szerkesztéséhez."
+cms,page_editor.status.ready,,hu-HU,Ready,Kész,0,0,Kész
+cms,page_editor.status.saving,,hu-HU,Saving,Mentés,0,0,Mentés
+cms,page_editor.status.drop_ready,,hu-HU,"Drop onto a page insert target","Dobd egy oldalon lévő beszúrási célpontra",0,0,"Dobd egy oldalon lévő beszúrási célpontra"
+cms,page_editor.status.saved,,hu-HU,"Widget inserted","Widget beszúrva",0,0,"Widget beszúrva"
+cms,page_editor.status.error,,hu-HU,"Unable to update the page","Az oldal nem frissíthető",0,0,"Az oldal nem frissíthető"
+cms,widget_connection.not_allowed,,hu-HU,"This widget cannot be inserted here.","Ez a widget itt nem szúrható be.",0,0,"Ez a widget itt nem szúrható be."
+cms,widget_connection.wrong_surface,,hu-HU,"This widget is not available for this page type.","Ez a widget ehhez az oldaltípushoz nem érhető el.",0,0,"Ez a widget ehhez az oldaltípushoz nem érhető el."
+cms,widget_connection.once_per_domain_used,,hu-HU,"This widget is already used in this site.","Ez a widget már használatban van ezen a webhelyen.",0,0,"Ez a widget már használatban van ezen a webhelyen."
+resource,edit_page,,hu-HU,"Edit page","Oldal szerkesztése",0,0,"Oldal szerkesztése"

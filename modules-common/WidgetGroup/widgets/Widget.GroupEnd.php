@@ -3,6 +3,13 @@
 class WidgetGroupEnd extends AbstractWidget
 {
 	public const string ID = 'group_end';
+	public const array AUTHORING = [
+		'insert_mode' => 'system',
+		'reuse' => 'repeatable',
+		'surfaces' => ['public', 'admin'],
+		'group' => 'content',
+		'sort' => 91,
+	];
 
 	public static function editorPosition(): string
 	{
@@ -46,7 +53,7 @@ class WidgetGroupEnd extends AbstractWidget
 
 	protected function buildAuthorizedTree(iTreeBuildContext $tree_build_context, WidgetConnection $connection, array $build_context = []): array
 	{
-		return $this->createComponentTree(TemplateList::WIDGETGROUPEND);
+		return $this->createComponentTree('WidgetGroupEnd');
 	}
 
 	public function getEditableCommands(WidgetConnection $connection): array

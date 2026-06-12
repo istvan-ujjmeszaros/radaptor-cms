@@ -110,7 +110,16 @@ final class PageEditorAuthoringService
 	 */
 	private function buildPageUrl(int $page_id, array $resource_data): string
 	{
-		return Url::getSeoUrl($page_id, false) ?? Url::getUrl('resource.view', [
+		$seo_url = Url::getSeoUrl($page_id, false);
+
+		// The editor iframe must stay same-origin so the page editor JS can reach
+		// contentDocument; pages on another domain context get a host-qualified
+		// (protocol-relative) SEO URL, so those use the resource.view form instead.
+		if ($seo_url !== null && !str_starts_with($seo_url, '//')) {
+			return $seo_url;
+		}
+
+		return Url::getUrl('resource.view', [
 			'folder' => $resource_data['path'],
 			'resource' => $resource_data['resource_name'],
 			'domain_context' => ResourceTreeHandler::getDomainContextForResourceTreeEntryData($resource_data),

@@ -60,6 +60,8 @@ final class FormEditorAuthoringService
 					'host_page_id' => $host['page_id'],
 					'widget_connection_id' => $host['connection_id'],
 					'csrf_token' => FormSubmitContext::issueCsrfTokenForForm(FormBuilderEventHelper::CSRF_INLINE_INSERT_FORM_ID),
+					// form_builder.publish validates the builder-level CSRF form, not the inline one.
+					'publish_csrf_token' => FormSubmitContext::issueCsrfTokenForForm(FormBuilderEventHelper::CSRF_FORM_ID),
 					'urls' => [
 						'undo' => Url::getUrl('form_editor.undo'),
 						'redo' => Url::getUrl('form_editor.redo'),

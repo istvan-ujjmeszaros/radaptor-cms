@@ -21,11 +21,11 @@ class CmsConfig
 
 	public static function isEditorIframeRequest(): bool
 	{
-		if ((string)Request::_GET(self::EDITOR_IFRAME_PARAM, '') === self::EDITOR_IFRAME_VALUE) {
+		if (self::requestParam(self::EDITOR_IFRAME_PARAM) === self::EDITOR_IFRAME_VALUE) {
 			return true;
 		}
 
-		return (string)Request::_GET(self::PAGE_EDITOR_IFRAME_PARAM, '') === self::PAGE_EDITOR_IFRAME_VALUE;
+		return self::requestParam(self::PAGE_EDITOR_IFRAME_PARAM) === self::PAGE_EDITOR_IFRAME_VALUE;
 	}
 
 	/**
@@ -37,7 +37,7 @@ class CmsConfig
 			return '';
 		}
 
-		$scope = (string)Request::_GET(self::EDITOR_SCOPE_PARAM, '');
+		$scope = self::requestParam(self::EDITOR_SCOPE_PARAM);
 
 		if (in_array($scope, [self::EDITOR_SCOPE_PAGE, self::EDITOR_SCOPE_FORM], true)) {
 			return $scope;
@@ -50,5 +50,21 @@ class CmsConfig
 	public static function isPageEditorIframeRequest(): bool
 	{
 		return self::isEditorIframeRequest();
+	}
+
+	/**
+	 * Editor iframes propagate the marker on every htmx mutation request (POST body),
+	 * so mutation-rendered fragments keep the iframe markup variant. Query string wins
+	 * over the body copy.
+	 */
+	private static function requestParam(string $name): string
+	{
+		$value = (string)Request::_GET($name, '');
+
+		if ($value !== '') {
+			return $value;
+		}
+
+		return (string)Request::_POST($name, '');
 	}
 }

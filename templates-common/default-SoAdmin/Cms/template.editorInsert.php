@@ -10,8 +10,44 @@ $item_payload_name = (string)($this->props['item_payload_name'] ?? ($scope === '
 $button_label = $scope === 'form'
 	? (string)($this->strings['form.insert.button'] ?? '')
 	: (string)($this->strings['cms.widget.insert.button'] ?? '');
+$drop_target = !empty($this->props['drop_target']);
 $edit_mode_hx_swap = 'none show:none focus-scroll:false';
 ?>
+<?php if ($drop_target): ?>
+<div class="editor-insert editor-insert--<?= e($scope) ?><?= $scope === 'widget' ? ' widget-insert' : '' ?> editor-insert--drop-target"
+	data-editor-drop-target="<?= e($scope) ?>"
+	data-editor-insert-action="<?= e($insert_url) ?>"
+	data-editor-insert-param="<?= e($item_payload_name) ?>">
+	<?php if ($transport === EditorInsertSurfaceBuilder::TRANSPORT_INSIDE_FORM): ?>
+		<div class="editor-insert-drop-items" hidden>
+			<?php foreach ($items as $item): ?>
+				<?php if (!is_array($item) || trim((string)($item['type'] ?? '')) === '') {
+					continue;
+				} ?>
+				<?php
+				$payload = array_replace($target, [
+					'field_type' => (string)$item['type'],
+					'csrf_token' => (string)($this->props['csrf_token'] ?? ''),
+				]);
+				$encoded_payload = base64_encode(json_encode($payload, JSON_THROW_ON_ERROR));
+				$hx_values = json_encode([$item_payload_name => $encoded_payload], JSON_THROW_ON_ERROR);
+				?>
+				<button type="button"
+						class="editor-insert-menu-item"
+						data-editor-insert-item-type="<?= e((string)$item['type']) ?>"
+						name="<?= e($item_payload_name) ?>"
+						value="<?= e($encoded_payload) ?>"
+						hx-post="<?= e($insert_url) ?>"
+						hx-vals="<?= e($hx_values) ?>"
+						hx-params="<?= e($item_payload_name) ?>"
+						hx-swap="<?= e($edit_mode_hx_swap) ?>">
+					<?= e((string)($item['label'] ?? $item['type'])) ?>
+				</button>
+			<?php endforeach; ?>
+		</div>
+	<?php endif; ?>
+</div>
+<?php else: ?>
 <div class="editor-insert editor-insert--<?= e($scope) ?><?= $scope === 'widget' ? ' widget-insert' : '' ?>">
 	<?php if ($scope === 'widget' && !empty($this->props['clipboard'])): ?>
 		<a title="<?= e($this->strings['cms.widget.insert_from_clipboard'] ?? '') ?>" href="<?= e((string)($this->props['clipboard_url'] ?? '')) ?>">
@@ -62,3 +98,4 @@ $edit_mode_hx_swap = 'none show:none focus-scroll:false';
 		</ul>
 	</div>
 </div>
+<?php endif; ?>

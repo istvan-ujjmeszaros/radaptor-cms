@@ -43,12 +43,11 @@ of truth.
 ## Commit & PR
 
 - Do not commit without explicit maintainer approval.
-- Run Claude's internal review agents (e.g. `/code-review`) on the branch before requesting the
-  primary gate.
-- After opening or updating a GitHub PR, request the primary review gate by posting `@codex review`
-  on the PR. The gate is complete only after GitHub-hosted Codex posts findings or an explicit
-  no-findings result for the current HEAD. Use a local Codex CLI review worker only as a documented
-  fallback when the GitHub path is unavailable; `claudee` only on maintainer request.
+- Run Claude's internal review agents (e.g. `/code-review`) on the branch before the primary gate.
+- The primary review gate is a local Codex CLI review worker: run `codex exec review --base
+  origin/main` on the PR branch and post findings or an explicit no-findings result on the PR for
+  the current HEAD. A GitHub `@codex review` comment is an optional extra signal when quota
+  allows; `claudee` only on maintainer request.
 - Thread-aware review reads; resolve threads that pushed commits address; never resolve to clear
   the list. Re-check unresolved count before requesting another review, merging, or publishing.
 - Merge/publish only with a completed review result for the current HEAD, zero unresolved threads,

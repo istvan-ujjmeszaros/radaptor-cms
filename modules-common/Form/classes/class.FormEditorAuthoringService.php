@@ -47,7 +47,11 @@ final class FormEditorAuthoringService
 		$session_token = bin2hex(random_bytes(16));
 
 		$page_url = $this->hostPageUrl($host['page_id']);
-		$preview_url = $this->withFormEditorIframeParams($page_url, $session_token);
+		$preview_url = $this->withFormEditorIframeParams(
+			Url::getUrl('form_editor.canvas', ['definition_slug' => $definition_slug]),
+			$session_token,
+			$definition_slug,
+		);
 		$strings = self::buildStrings();
 
 		return SduiNode::create(
@@ -98,6 +102,78 @@ final class FormEditorAuthoringService
 	}
 
 	/**
+	 * The editing canvas: a minimal standalone document containing ONLY the target
+	 * form's widget, rendered through the host page's real widget pipeline so the
+	 * markup, fragment ids, and edit chrome match what the mutation responder swaps.
+	 */
+	public function renderEditorCanvas(string $definition_slug): string
+	{
+		$definition_slug = trim($definition_slug);
+		$capture = new FormCaptureAuthoringService();
+		$capture->loadDefinition($definition_slug);
+		$host = $this->resolveEditableHost($capture, $definition_slug);
+
+		if ($host === null) {
+			throw new InvalidArgumentException('Capture form definition has no editable host page.');
+		}
+
+		$resource = ResourceTypeFactory::Factory($host['page_id']);
+
+		if (!$resource instanceof ResourceTypeWebpage) {
+			throw new RuntimeException('Form editor host page is not a webpage.');
+		}
+
+		$view = $resource->getView();
+		$connection_data = Widget::getConnectionData($host['connection_id']);
+
+		if (!is_array($connection_data)) {
+			throw new RuntimeException('Form editor host widget connection not found.');
+		}
+
+		$widget_tree = null;
+
+		foreach (WidgetConnection::getWidgetsForSlot($host['page_id'], (string)$connection_data['slot_name']) as $connection) {
+			if ($connection->getConnectionId() === $host['connection_id']) {
+				$widget_tree = (new WebpageTreeBuilder($view))->buildWidgetTargetTree($connection);
+
+				break;
+			}
+		}
+
+		if ($widget_tree === null) {
+			throw new RuntimeException('Form editor host widget is not renderable.');
+		}
+
+		$renderer = new HtmlTreeRenderer(
+			theme: $view->getTheme(),
+			lang_id: $view->getLangId(),
+			page_id: $view->getPageId(),
+			title: $view->getTitle(),
+			description: $view->getRawDescription(),
+			pagedata: $view->getAllPagedata(),
+			is_editable: $view->isEditable(),
+		);
+		$html = $renderer->render($widget_tree);
+
+		return '<!doctype html>'
+			. '<html lang="' . e((string)$view->getLangId()) . '">'
+			. '<head>'
+			. '<meta charset="utf-8">'
+			. '<meta name="viewport" content="width=device-width, initial-scale=1">'
+			. '<meta name="robots" content="noindex">'
+			. '<title>' . e(t('form.editor.title')) . '</title>'
+			. $renderer->getCss()
+			. $renderer->getJsTop()
+			. '<style>body{margin:0;padding:16px}</style>'
+			. '</head>'
+			. '<body class="radaptor-editor-canvas">'
+			. $html
+			. $renderer->getJs()
+			. '</body>'
+			. '</html>';
+	}
+
+	/**
 	 * @return array<string, string>
 	 */
 	public static function buildStrings(): array
@@ -117,6 +193,10 @@ final class FormEditorAuthoringService
 			'form.editor.action_save_note' => t('form.editor.action_save_note'),
 			'form.editor.used_on_pages' => t('form.editor.used_on_pages'),
 			'form.builder.action.publish' => t('form.builder.action.publish'),
+			'form.builder.properties' => t('form.builder.properties'),
+			'form.builder.label.title' => t('form.builder.label.title'),
+			'form.builder.label.description' => t('form.builder.label.description'),
+			'form.builder.label.submit_label' => t('form.builder.label.submit_label'),
 		];
 	}
 
@@ -185,7 +265,7 @@ final class FormEditorAuthoringService
 		]);
 	}
 
-	private function withFormEditorIframeParams(string $url, string $session_token): string
+	private function withFormEditorIframeParams(string $url, string $session_token, string $definition_slug): string
 	{
 		$separator = str_contains($url, '?') ? '&' : '?';
 
@@ -193,6 +273,7 @@ final class FormEditorAuthoringService
 			CmsConfig::EDITOR_IFRAME_PARAM => CmsConfig::EDITOR_IFRAME_VALUE,
 			CmsConfig::EDITOR_SCOPE_PARAM => CmsConfig::EDITOR_SCOPE_FORM,
 			CmsConfig::EDITOR_SESSION_PARAM => $session_token,
+			CmsConfig::EDITOR_TARGET_PARAM => $definition_slug,
 		]);
 	}
 

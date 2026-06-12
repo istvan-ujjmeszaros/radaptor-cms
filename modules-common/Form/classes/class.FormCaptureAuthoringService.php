@@ -779,14 +779,35 @@ final class FormCaptureAuthoringService
 		$definition_id = (int)$definition->definition_id;
 		$cursor = $session_token === '' ? 0 : $this->editHistoryCursor($definition_id, $session_token);
 		$active = $this->findActiveDraft($definition_id) ?? $this->findPublishedVersion($definition);
+		$descriptor = $active instanceof EntityFormDefinitionVersion
+			? $this->descriptorFromVersion($definition, $active)
+			: $this->defaultDescriptor($definition_slug);
 
 		return [
 			'versions' => array_slice($this->versionsForDefinition($definition_id), 0, self::EDITOR_STATE_VERSION_LIMIT),
 			'active_version_id' => $active instanceof EntityFormDefinitionVersion ? (int)$active->version_id : 0,
+			'properties' => [
+				'title' => $this->textValueFromDefinition($descriptor['title'] ?? ''),
+				'description' => $this->textValueFromDefinition($descriptor['description'] ?? ''),
+				'submit_label' => $this->textValueFromDefinition($descriptor['submit_label'] ?? ''),
+			],
 			'usage' => $this->usageForDefinition($definition_slug),
 			'can_undo' => $cursor > 1 && $this->editHistorySeqExists($definition_id, $session_token, $cursor - 1),
 			'can_redo' => $cursor > 0 && $this->editHistorySeqExists($definition_id, $session_token, $cursor + 1),
 		];
+	}
+
+	/**
+	 * Editable text of a descriptor text definition: keyed mode stores {key, text},
+	 * literal mode a plain string.
+	 */
+	private function textValueFromDefinition(mixed $definition): string
+	{
+		if (is_array($definition)) {
+			return (string)($definition['text'] ?? '');
+		}
+
+		return is_string($definition) ? $definition : '';
 	}
 
 	/**

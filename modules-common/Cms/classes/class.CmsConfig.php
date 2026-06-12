@@ -20,6 +20,10 @@ class CmsConfig
 	// the same way as the iframe marker.
 	public const string EDITOR_SESSION_PARAM = 'radaptor_editor_session';
 
+	// The one definition a form editor edits: other forms on the host page render
+	// inert inside its iframe. Absent in global edit mode, where any form is editable.
+	public const string EDITOR_TARGET_PARAM = 'radaptor_editor_target';
+
 	// Legacy page-editor marker, kept as a page-scope alias during the migration.
 	public const string PAGE_EDITOR_IFRAME_PARAM = 'radaptor_page_editor_iframe';
 	public const string PAGE_EDITOR_IFRAME_VALUE = '1';
@@ -66,6 +70,16 @@ class CmsConfig
 		$token = self::requestParam(self::EDITOR_SESSION_PARAM);
 
 		return preg_match('/^[a-f0-9]{16,64}$/', $token) === 1 ? $token : '';
+	}
+
+	/**
+	 * The definition slug a form editor targets, or '' outside a targeted editor.
+	 */
+	public static function editorTargetSlug(): string
+	{
+		$slug = self::requestParam(self::EDITOR_TARGET_PARAM);
+
+		return preg_match('/^[a-z0-9][a-z0-9_-]{0,190}$/', $slug) === 1 ? $slug : '';
 	}
 
 	/**

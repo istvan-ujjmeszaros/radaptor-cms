@@ -15,6 +15,11 @@ class CmsConfig
 	public const string EDITOR_SCOPE_PAGE = 'page';
 	public const string EDITOR_SCOPE_FORM = 'form';
 
+	// Editing-session token: minted per editor open, scopes undo/redo history to the
+	// browser tab. Rides the editor iframe URL and propagates onto mutation requests
+	// the same way as the iframe marker.
+	public const string EDITOR_SESSION_PARAM = 'radaptor_editor_session';
+
 	// Legacy page-editor marker, kept as a page-scope alias during the migration.
 	public const string PAGE_EDITOR_IFRAME_PARAM = 'radaptor_page_editor_iframe';
 	public const string PAGE_EDITOR_IFRAME_VALUE = '1';
@@ -50,6 +55,17 @@ class CmsConfig
 	public static function isPageEditorIframeRequest(): bool
 	{
 		return self::isEditorIframeRequest();
+	}
+
+	/**
+	 * The editing-session token of the current request, or '' outside an editor session
+	 * (global edit mode edits are not undoable).
+	 */
+	public static function editorSessionToken(): string
+	{
+		$token = self::requestParam(self::EDITOR_SESSION_PARAM);
+
+		return preg_match('/^[a-f0-9]{16,64}$/', $token) === 1 ? $token : '';
 	}
 
 	/**

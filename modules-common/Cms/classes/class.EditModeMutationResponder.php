@@ -83,11 +83,21 @@ final class EditModeMutationResponder
 		SystemMessages::flushAllMessages();
 		WebpageView::header('Content-Type: text/html; charset=UTF-8');
 		WebpageView::header('HX-Reswap: none');
+		$trigger = [
+			'message' => (string)($payload['message'] ?? ''),
+			'commands' => is_array($payload['commands'] ?? null) ? $payload['commands'] : [],
+		];
+
+		// Session-scoped undo reach, when the mutation recorded edit history. Only these
+		// scalars ride the header; panel data (versions, usage) goes through form_editor.state.
+		foreach (['can_undo', 'can_redo'] as $key) {
+			if (is_bool($payload[$key] ?? null)) {
+				$trigger[$key] = $payload[$key];
+			}
+		}
+
 		WebpageView::header('HX-Trigger: ' . json_encode([
-			'editModeMutation' => [
-				'message' => (string)($payload['message'] ?? ''),
-				'commands' => is_array($payload['commands'] ?? null) ? $payload['commands'] : [],
-			],
+			'editModeMutation' => $trigger,
 		], JSON_THROW_ON_ERROR));
 		echo $this->renderFragments($page_id, $commands);
 	}

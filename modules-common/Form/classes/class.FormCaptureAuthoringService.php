@@ -10,6 +10,7 @@ final class FormCaptureAuthoringService
 	private const string STATUS_ABANDONED = 'abandoned';
 	private const string STATUS_PUBLISHED = 'published';
 	private const int EDIT_HISTORY_LIMIT = 75;
+	private const int EDITOR_STATE_VERSION_LIMIT = 20;
 
 	/**
 	 * @return array<string, mixed>
@@ -496,9 +497,9 @@ final class FormCaptureAuthoringService
 		);
 
 		$result = $this->saveDraft($definition_slug, $descriptor, (string)$version->descriptor_hash);
-		$this->recordEditHistory($definition, $baseline, $result);
+		$history = $this->recordEditHistory($definition, $baseline, $result);
 
-		return $result + [
+		return $result + $history + [
 			'inserted_field' => $field,
 			'field_uid' => (string)($field[FormCaptureFieldIdentity::DESCRIPTOR_KEY] ?? ''),
 			'insert_index' => $insert_index,
@@ -539,9 +540,9 @@ final class FormCaptureAuthoringService
 		);
 		$descriptor['fields'] = array_values($fields);
 		$result = $this->saveDraft($definition_slug, $descriptor, (string)$version->descriptor_hash);
-		$this->recordEditHistory($definition, $baseline, $result);
+		$history = $this->recordEditHistory($definition, $baseline, $result);
 
-		return $result + [
+		return $result + $history + [
 			'updated_field' => $fields[$field_offset],
 			'field_uid' => (string)($fields[$field_offset][FormCaptureFieldIdentity::DESCRIPTOR_KEY] ?? ''),
 			'field_index' => $field_offset,
@@ -574,9 +575,9 @@ final class FormCaptureAuthoringService
 		array_splice($fields, $field_offset, 1);
 		$descriptor['fields'] = array_values($fields);
 		$result = $this->saveDraft($definition_slug, $descriptor, (string)$version->descriptor_hash);
-		$this->recordEditHistory($definition, $baseline, $result);
+		$history = $this->recordEditHistory($definition, $baseline, $result);
 
-		return $result + [
+		return $result + $history + [
 			'removed_field' => $removed_field,
 			'field_uid' => (string)($removed_field[FormCaptureFieldIdentity::DESCRIPTOR_KEY] ?? ''),
 			'field_index' => $field_offset,
@@ -624,9 +625,9 @@ final class FormCaptureAuthoringService
 		$fields[$target_offset] = $moved_field;
 		$descriptor['fields'] = array_values($fields);
 		$result = $this->saveDraft($definition_slug, $descriptor, (string)$version->descriptor_hash);
-		$this->recordEditHistory($definition, $baseline, $result);
+		$history = $this->recordEditHistory($definition, $baseline, $result);
 
-		return $result + [
+		return $result + $history + [
 			'moved_field' => $moved_field,
 			'field_uid' => (string)($moved_field[FormCaptureFieldIdentity::DESCRIPTOR_KEY] ?? ''),
 			'field_index' => $target_offset,
@@ -657,91 +658,181 @@ final class FormCaptureAuthoringService
 		}
 
 		$result = $this->saveDraft($definition_slug, $descriptor, (string)$version->descriptor_hash);
-		$this->recordEditHistory($definition, $baseline, $result);
+		$history = $this->recordEditHistory($definition, $baseline, $result);
 
-		return $result + [
+		return $result + $history + [
 			'updated_properties' => array_values(array_intersect(['title', 'description', 'submit_label'], array_keys($submitted))),
 		];
 	}
 
 	/**
-	 * Revert the working draft to the previous edit-history state.
+	 * Revert the working draft to the previous edit-history state of the session.
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function undoEdit(string $definition_slug): array
+	public function undoEdit(string $definition_slug, string $session_token): array
 	{
-		return $this->applyEditHistoryStep($definition_slug, -1);
+		return $this->applyEditHistoryStep($definition_slug, -1, $session_token);
 	}
 
 	/**
-	 * Advance the working draft to the next edit-history state.
+	 * Advance the working draft to the next edit-history state of the session.
 	 *
 	 * @return array<string, mixed>
 	 */
-	public function redoEdit(string $definition_slug): array
+	public function redoEdit(string $definition_slug, string $session_token): array
 	{
-		return $this->applyEditHistoryStep($definition_slug, 1);
+		return $this->applyEditHistoryStep($definition_slug, 1, $session_token);
 	}
 
 	/**
-	 * Records the edit order for server-backed undo/redo. The versions table dedupes
-	 * states by descriptor hash, so it cannot represent the sequence A -> B -> A; this
-	 * ring can. Mutations truncate the redo tail, and the ring is capped.
+	 * Replace the working draft with a stored version's descriptor. Recorded in the
+	 * session's edit history, so a restore is itself undoable.
+	 *
+	 * @return array<string, mixed>
+	 */
+	public function restoreVersionToDraft(string $definition_slug, int $version_id, string $session_token): array
+	{
+		$definition = $this->requireDbDefinition($definition_slug);
+
+		if ($version_id <= 0) {
+			throw new InvalidArgumentException('Version id is required.');
+		}
+
+		$version = EntityFormDefinitionVersion::findFirst([
+			'definition_id' => (int)$definition->definition_id,
+			'version_id' => $version_id,
+		]);
+
+		if (!$version instanceof EntityFormDefinitionVersion) {
+			throw new InvalidArgumentException('Version does not exist.');
+		}
+
+		$current = $this->findActiveDraft((int)$definition->definition_id) ?? $this->findPublishedVersion($definition);
+		$baseline = $current instanceof EntityFormDefinitionVersion
+			? $this->descriptorFromVersion($definition, $current)
+			: $this->defaultDescriptor($definition_slug);
+		$result = $this->saveDraft($definition_slug, $this->descriptorFromVersion($definition, $version), '', true);
+		$history = $this->recordEditHistory($definition, $baseline, $result, $session_token);
+
+		return $result + $history + [
+			'action' => 'restored_version',
+			'restored_version_id' => $version_id,
+		];
+	}
+
+	/**
+	 * Compact editor-panel state: recent versions, usage, and the session's undo reach.
+	 *
+	 * @return array{versions: list<array<string, mixed>>, usage: list<array<string, mixed>>, can_undo: bool, can_redo: bool}
+	 */
+	public function editorStateForDefinition(string $definition_slug, string $session_token): array
+	{
+		$definition = $this->requireDbDefinition($definition_slug);
+		$definition_id = (int)$definition->definition_id;
+		$cursor = $session_token === '' ? 0 : $this->editHistoryCursor($definition_id, $session_token);
+
+		return [
+			'versions' => array_slice($this->versionsForDefinition($definition_id), 0, self::EDITOR_STATE_VERSION_LIMIT),
+			'usage' => $this->usageForDefinition($definition_slug),
+			'can_undo' => $cursor > 1 && $this->editHistorySeqExists($definition_id, $session_token, $cursor - 1),
+			'can_redo' => $cursor > 0 && $this->editHistorySeqExists($definition_id, $session_token, $cursor + 1),
+		];
+	}
+
+	/**
+	 * Drop editing sessions (and their history rings) that have been idle for a week.
+	 * Called opportunistically when an editor opens; no scheduler needed.
+	 */
+	public function purgeStaleEditorSessions(): void
+	{
+		if (!$this->tableExists('form_editor_sessions')) {
+			return;
+		}
+
+		DbHelper::prexecute(
+			'DELETE h FROM form_definition_edit_history h
+				INNER JOIN form_editor_sessions s
+					ON s.session_token = h.session_token AND s.definition_id = h.definition_id
+				WHERE s.updated_at < DATE_SUB(NOW(), INTERVAL 7 DAY)',
+		);
+		DbHelper::prexecute(
+			'DELETE FROM form_editor_sessions WHERE updated_at < DATE_SUB(NOW(), INTERVAL 7 DAY)',
+		);
+	}
+
+	/**
+	 * Records the edit order for server-backed, session-scoped undo/redo. The versions
+	 * table dedupes states by descriptor hash, so it cannot represent the sequence
+	 * A -> B -> A; this ring can. Mutations truncate the redo tail, and the ring is
+	 * capped. Outside an editing session (no token) nothing is recorded.
 	 *
 	 * @param array<string, mixed> $baseline_descriptor descriptor before the mutation
 	 * @param array<string, mixed> $save_result return value of saveDraft()
+	 * @param string|null $session_token null reads the request's editing-session token
+	 * @return array{}|array{can_undo: bool, can_redo: bool}
 	 */
-	private function recordEditHistory(EntityFormDefinition $definition, array $baseline_descriptor, array $save_result): void
+	private function recordEditHistory(EntityFormDefinition $definition, array $baseline_descriptor, array $save_result, ?string $session_token = null): array
 	{
-		if (($save_result['status'] ?? '') === 'conflict') {
-			return;
+		$session_token ??= CmsConfig::editorSessionToken();
+
+		if ($session_token === '' || ($save_result['status'] ?? '') === 'conflict') {
+			return [];
 		}
 
 		$definition_id = (int)$definition->definition_id;
 		$saved_descriptor = is_array($save_result['descriptor'] ?? null) ? $save_result['descriptor'] : null;
 
 		if ($saved_descriptor === null) {
-			return;
+			return [];
 		}
 
-		$cursor = $this->editHistoryCursor($definition_id);
+		$cursor = $this->editHistoryCursor($definition_id, $session_token);
 
 		if ($cursor === 0) {
 			DbHelper::prexecute(
-				'INSERT INTO form_definition_edit_history (definition_id, seq, descriptor_json) VALUES (?, ?, ?)',
-				[$definition_id, 1, json_encode($baseline_descriptor, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR)],
+				'INSERT INTO form_definition_edit_history (definition_id, session_token, seq, descriptor_json) VALUES (?, ?, ?, ?)',
+				[$definition_id, $session_token, 1, json_encode($baseline_descriptor, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR)],
 			);
 			$cursor = 1;
 		}
 
 		DbHelper::prexecute(
-			'DELETE FROM form_definition_edit_history WHERE definition_id = ? AND seq > ?',
-			[$definition_id, $cursor],
+			'DELETE FROM form_definition_edit_history WHERE definition_id = ? AND session_token = ? AND seq > ?',
+			[$definition_id, $session_token, $cursor],
 		);
 		DbHelper::prexecute(
-			'INSERT INTO form_definition_edit_history (definition_id, seq, descriptor_json) VALUES (?, ?, ?)',
-			[$definition_id, $cursor + 1, json_encode($saved_descriptor, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR)],
+			'INSERT INTO form_definition_edit_history (definition_id, session_token, seq, descriptor_json) VALUES (?, ?, ?, ?)',
+			[$definition_id, $session_token, $cursor + 1, json_encode($saved_descriptor, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR)],
 		);
-		$this->setEditHistoryCursor($definition_id, $cursor + 1);
+		$this->setEditHistoryCursor($definition_id, $session_token, $cursor + 1);
 		DbHelper::prexecute(
-			'DELETE FROM form_definition_edit_history WHERE definition_id = ? AND seq <= ?',
-			[$definition_id, $cursor + 1 - self::EDIT_HISTORY_LIMIT],
+			'DELETE FROM form_definition_edit_history WHERE definition_id = ? AND session_token = ? AND seq <= ?',
+			[$definition_id, $session_token, $cursor + 1 - self::EDIT_HISTORY_LIMIT],
 		);
+
+		return [
+			'can_undo' => true,
+			'can_redo' => false,
+		];
 	}
 
 	/**
 	 * @return array<string, mixed>
 	 */
-	private function applyEditHistoryStep(string $definition_slug, int $direction): array
+	private function applyEditHistoryStep(string $definition_slug, int $direction, string $session_token): array
 	{
+		if ($session_token === '') {
+			throw new InvalidArgumentException('Edit history requires an editing session.');
+		}
+
 		$definition = $this->requireDbDefinition($definition_slug);
 		$definition_id = (int)$definition->definition_id;
-		$cursor = $this->editHistoryCursor($definition_id);
+		$cursor = $this->editHistoryCursor($definition_id, $session_token);
 		$target_seq = $cursor + $direction;
 		$descriptor_json = DbHelper::selectOneColumnFromQuery(
-			'SELECT descriptor_json FROM form_definition_edit_history WHERE definition_id = ? AND seq = ?',
-			[$definition_id, $target_seq],
+			'SELECT descriptor_json FROM form_definition_edit_history WHERE definition_id = ? AND session_token = ? AND seq = ?',
+			[$definition_id, $session_token, $target_seq],
 		);
 
 		if (!is_string($descriptor_json) || $descriptor_json === '') {
@@ -755,37 +846,38 @@ final class FormCaptureAuthoringService
 		}
 
 		$result = $this->saveDraft($definition_slug, $descriptor, '', true);
-		$this->setEditHistoryCursor($definition_id, $target_seq);
+		$this->setEditHistoryCursor($definition_id, $session_token, $target_seq);
 
 		return $result + [
 			'action' => $direction < 0 ? 'undo' : 'redo',
 			'edit_history_seq' => $target_seq,
-			'can_undo' => $this->editHistorySeqExists($definition_id, $target_seq - 1),
-			'can_redo' => $this->editHistorySeqExists($definition_id, $target_seq + 1),
+			'can_undo' => $this->editHistorySeqExists($definition_id, $session_token, $target_seq - 1),
+			'can_redo' => $this->editHistorySeqExists($definition_id, $session_token, $target_seq + 1),
 		];
 	}
 
-	private function editHistoryCursor(int $definition_id): int
+	private function editHistoryCursor(int $definition_id, string $session_token): int
 	{
 		return (int)DbHelper::selectOneColumnFromQuery(
-			'SELECT edit_history_seq FROM form_definitions WHERE definition_id = ?',
-			[$definition_id],
+			'SELECT edit_cursor FROM form_editor_sessions WHERE session_token = ? AND definition_id = ?',
+			[$session_token, $definition_id],
 		);
 	}
 
-	private function setEditHistoryCursor(int $definition_id, int $seq): void
+	private function setEditHistoryCursor(int $definition_id, string $session_token, int $seq): void
 	{
 		DbHelper::prexecute(
-			'UPDATE form_definitions SET edit_history_seq = ? WHERE definition_id = ?',
-			[$seq, $definition_id],
+			'INSERT INTO form_editor_sessions (session_token, definition_id, edit_cursor) VALUES (?, ?, ?)
+				ON DUPLICATE KEY UPDATE edit_cursor = VALUES(edit_cursor), updated_at = CURRENT_TIMESTAMP',
+			[$session_token, $definition_id, $seq],
 		);
 	}
 
-	private function editHistorySeqExists(int $definition_id, int $seq): bool
+	private function editHistorySeqExists(int $definition_id, string $session_token, int $seq): bool
 	{
 		return (int)DbHelper::selectOneColumnFromQuery(
-			'SELECT COUNT(*) FROM form_definition_edit_history WHERE definition_id = ? AND seq = ?',
-			[$definition_id, $seq],
+			'SELECT COUNT(*) FROM form_definition_edit_history WHERE definition_id = ? AND session_token = ? AND seq = ?',
+			[$definition_id, $session_token, $seq],
 		) > 0;
 	}
 

@@ -37,13 +37,21 @@ final class FormEditorHistoryEventHelper
 			$widget_connection_id = (int)($payload['widget_connection_id'] ?? 0);
 			FormBuilderEventHelper::assertEditableCaptureTarget($definition_slug, $host_page_id, $widget_connection_id);
 
+			$session_token = CmsConfig::editorSessionToken();
+
+			if ($session_token === '') {
+				$responder->fail('FORM_EDITOR_HISTORY_NO_SESSION', 'form.editor.error_history_unavailable', 422);
+
+				return;
+			}
+
 			$service = new FormCaptureAuthoringService();
 			$result = CmsMutationAuditService::withContext(
 				'form_editor.' . $direction,
 				['definition_slug' => $definition_slug],
 				static fn (): array => $direction === 'undo'
-					? $service->undoEdit($definition_slug)
-					: $service->redoEdit($definition_slug),
+					? $service->undoEdit($definition_slug, $session_token)
+					: $service->redoEdit($definition_slug, $session_token),
 			);
 
 			$responder->succeed(
@@ -68,23 +76,6 @@ final class FormEditorHistoryEventHelper
 	 */
 	private static function payloadFromPost(): array
 	{
-		$encoded = trim((string)Request::_POST('form_edit_history', ''));
-		$json = $encoded !== '' ? base64_decode($encoded, true) : false;
-
-		if ($json === false) {
-			throw new InvalidArgumentException('Form editor history payload is invalid.');
-		}
-
-		try {
-			$payload = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
-		} catch (JsonException $exception) {
-			throw new InvalidArgumentException('Form editor history payload must be valid JSON.', 0, $exception);
-		}
-
-		if (!is_array($payload)) {
-			throw new InvalidArgumentException('Form editor history payload must decode to an object.');
-		}
-
-		return $payload;
+		return FormBuilderEventHelper::decodeBase64JsonPayload((string)Request::_POST('form_edit_history', ''));
 	}
 }

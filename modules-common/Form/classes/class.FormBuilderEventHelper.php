@@ -23,6 +23,33 @@ final class FormBuilderEventHelper
 	}
 
 	/**
+	 * Decodes the base64-wrapped JSON object payloads used by the unified editor events.
+	 *
+	 * @return array<string, mixed>
+	 */
+	public static function decodeBase64JsonPayload(string $encoded): array
+	{
+		$encoded = trim($encoded);
+		$json = $encoded !== '' ? base64_decode($encoded, true) : false;
+
+		if ($json === false) {
+			throw new InvalidArgumentException('Editor payload is invalid.');
+		}
+
+		try {
+			$payload = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
+		} catch (JsonException $exception) {
+			throw new InvalidArgumentException('Editor payload must be valid JSON.', 0, $exception);
+		}
+
+		if (!is_array($payload)) {
+			throw new InvalidArgumentException('Editor payload must decode to an object.');
+		}
+
+		return $payload;
+	}
+
+	/**
 	 * @return array<string, mixed>
 	 */
 	public static function descriptorFromPost(): array

@@ -40,8 +40,14 @@ final class FormEditorAuthoringService
 			]);
 		}
 
+		// Undo/redo scope: one token per editor open. It rides the iframe URL, the
+		// editor controller propagates it onto every mutation request, and a reload
+		// starts a clean session. Stale sessions are swept opportunistically here.
+		$capture->purgeStaleEditorSessions();
+		$session_token = bin2hex(random_bytes(16));
+
 		$page_url = $this->hostPageUrl($host['page_id']);
-		$preview_url = $this->withFormEditorIframeParams($page_url);
+		$preview_url = $this->withFormEditorIframeParams($page_url, $session_token);
 		$strings = self::buildStrings();
 
 		return SduiNode::create(
@@ -59,16 +65,24 @@ final class FormEditorAuthoringService
 					'definition_slug' => $definition_slug,
 					'host_page_id' => $host['page_id'],
 					'widget_connection_id' => $host['connection_id'],
+					'session_token' => $session_token,
+					'session_param' => CmsConfig::EDITOR_SESSION_PARAM,
 					'csrf_token' => FormSubmitContext::issueCsrfTokenForForm(FormBuilderEventHelper::CSRF_INLINE_INSERT_FORM_ID),
-					// form_builder.publish validates the builder-level CSRF form, not the inline one.
+					// form_builder.publish and form_builder.update_draft_note validate the
+					// builder-level CSRF form, not the inline one.
 					'publish_csrf_token' => FormSubmitContext::issueCsrfTokenForForm(FormBuilderEventHelper::CSRF_FORM_ID),
 					'urls' => [
 						'undo' => Url::getUrl('form_editor.undo'),
 						'redo' => Url::getUrl('form_editor.redo'),
 						'update_form' => Url::getUrl('form_editor.update_form'),
 						'publish' => Url::getUrl('form_builder.publish'),
+						'restore_version' => Url::getUrl('form_editor.restore_version'),
+						'update_draft_note' => Url::getUrl('form_builder.update_draft_note'),
+						'state' => Url::getUrl('form_editor.state'),
 					],
+					'published_version_id' => (int)($state['definition']['published_version_id'] ?? 0),
 				],
+				'editor_state' => $capture->editorStateForDefinition($definition_slug, $session_token),
 				'strings' => $strings,
 			],
 			type: SduiNode::TYPE_WIDGET,
@@ -94,6 +108,14 @@ final class FormEditorAuthoringService
 			'form.editor.no_host_page' => t('form.editor.no_host_page'),
 			'form.editor.action_undo' => t('form.editor.action_undo'),
 			'form.editor.action_redo' => t('form.editor.action_redo'),
+			'form.editor.versions' => t('form.editor.versions'),
+			'form.editor.no_versions' => t('form.editor.no_versions'),
+			'form.editor.action_restore' => t('form.editor.action_restore'),
+			'form.editor.version_published' => t('form.editor.version_published'),
+			'form.editor.version_draft' => t('form.editor.version_draft'),
+			'form.editor.note_placeholder' => t('form.editor.note_placeholder'),
+			'form.editor.action_save_note' => t('form.editor.action_save_note'),
+			'form.editor.used_on_pages' => t('form.editor.used_on_pages'),
 			'form.builder.action.publish' => t('form.builder.action.publish'),
 		];
 	}
@@ -163,13 +185,14 @@ final class FormEditorAuthoringService
 		]);
 	}
 
-	private function withFormEditorIframeParams(string $url): string
+	private function withFormEditorIframeParams(string $url, string $session_token): string
 	{
 		$separator = str_contains($url, '?') ? '&' : '?';
 
 		return $url . $separator . http_build_query([
 			CmsConfig::EDITOR_IFRAME_PARAM => CmsConfig::EDITOR_IFRAME_VALUE,
 			CmsConfig::EDITOR_SCOPE_PARAM => CmsConfig::EDITOR_SCOPE_FORM,
+			CmsConfig::EDITOR_SESSION_PARAM => $session_token,
 		]);
 	}
 

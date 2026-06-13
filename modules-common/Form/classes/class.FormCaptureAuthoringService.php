@@ -544,17 +544,32 @@ final class FormCaptureAuthoringService
 		$descriptor = $this->descriptorFromVersion($definition, $version);
 		$baseline = $descriptor;
 
+		$changed_properties = [];
+
 		foreach (['title', 'description', 'submit_label'] as $key) {
-			if (array_key_exists($key, $submitted)) {
-				$descriptor[$key] = $this->textDefinitionForDescriptor($descriptor, $key, (string)$submitted[$key], $definition_slug);
+			if (!array_key_exists($key, $submitted)) {
+				continue;
 			}
+
+			$submitted_text = (string)$submitted[$key];
+
+			// The panel submits all three properties on every save; a value equal to
+			// the current resolved text is unchanged and must not rewrite a shared
+			// key-only definition (e.g. the default submit label's form.capture.submit)
+			// into a re-keyed/literal value.
+			if ($submitted_text === $this->textValueFromDefinition($descriptor[$key] ?? '')) {
+				continue;
+			}
+
+			$descriptor[$key] = $this->textDefinitionForDescriptor($descriptor, $key, $submitted_text, $definition_slug);
+			$changed_properties[] = $key;
 		}
 
 		$result = $this->saveDraft($definition_slug, $descriptor, (string)$version->descriptor_hash);
 		$history = $this->recordEditHistory($definition, $baseline, $result, null, (int)$version->version_id);
 
 		return $result + $history + [
-			'updated_properties' => array_values(array_intersect(['title', 'description', 'submit_label'], array_keys($submitted))),
+			'updated_properties' => $changed_properties,
 		];
 	}
 

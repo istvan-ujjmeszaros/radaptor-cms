@@ -1840,6 +1840,26 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame(t('form.capture.submit'), (string)$properties['submit_label']);
 	}
 
+	public function testEditingTitleKeepsTheSharedSubmitLabelKey(): void
+	{
+		$definition_slug = 'capture-phase4j-title-edit-keeps-submit-key';
+		$service = new FormCaptureAuthoringService();
+		$service->createDefinition($definition_slug, 'Title edit submit key');
+		$properties = $service->editorStateForDefinition($definition_slug, '')['properties'] ?? [];
+
+		// The panel resubmits every property; an unchanged submit_label (its resolved
+		// shared-key text) must not rewrite the key-only definition into a literal value.
+		$service->updateFormPropertiesInDraft($definition_slug, [
+			'title' => 'A new title',
+			'description' => (string)($properties['description'] ?? ''),
+			'submit_label' => (string)($properties['submit_label'] ?? ''),
+		]);
+
+		$descriptor = $service->loadDefinition($definition_slug)['descriptor'];
+		$this->assertSame('form.capture.submit', $descriptor['submit_label']['key'] ?? null);
+		$this->assertSame('A new title', $descriptor['title']['text'] ?? $descriptor['title'] ?? null);
+	}
+
 	public function testBuilderDraftNotePersistsAndIsReturnedInVersionHistory(): void
 	{
 		$definition_slug = 'capture-phase4j-builder-draft-note';

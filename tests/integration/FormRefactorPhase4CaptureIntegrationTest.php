@@ -1799,6 +1799,47 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame('abandoned', (string)EntityFormDefinitionVersion::findFirst(['version_id' => $second_draft_id])?->status);
 	}
 
+	public function testRestoringAnOlderPublishedVersionActivatesItAsTheWorkingState(): void
+	{
+		$definition_slug = 'capture-phase4j-restore-old-published';
+		$service = new FormCaptureAuthoringService();
+		$created = $service->createDefinition($definition_slug, 'Restore old published');
+
+		// Publish version one, then publish a second version. The first version row
+		// keeps status 'published' but is no longer the definition's current published
+		// version.
+		$first_draft = $service->saveDraft($definition_slug, $this->descriptorWithTitle('First published'), (string)$created['base_server_hash']);
+		$first_published = $service->publishDraft($definition_slug);
+		$first_version_id = (int)($first_published['published_version']['version_id'] ?? 0);
+		$second_draft = $service->saveDraft($definition_slug, $this->descriptorWithTitle('Second published'), (string)$first_published['base_server_hash']);
+		$service->publishDraft($definition_slug);
+
+		$this->assertSame('published', (string)EntityFormDefinitionVersion::findFirst(['version_id' => $first_version_id])?->status);
+
+		$restored = $service->restoreVersionToDraft($definition_slug, $first_version_id, '');
+
+		// The older published version becomes the working state, not the newer one.
+		$this->assertSame($first_version_id, (int)($restored['active_version_id'] ?? $restored['active_draft']['version_id'] ?? 0));
+		$state = $service->loadDefinition($definition_slug);
+		$this->assertSame($first_version_id, (int)($state['active_draft']['version_id'] ?? 0));
+		$this->assertSame('First published', $state['descriptor']['title']['text'] ?? null);
+	}
+
+	public function testEditorStateResolvesKeyOnlySubmitLabelToTranslatedFallback(): void
+	{
+		$definition_slug = 'capture-phase4j-editor-state-submit-label';
+		$service = new FormCaptureAuthoringService();
+		$service->createDefinition($definition_slug, 'Editor state submit label');
+
+		$properties = $service->editorStateForDefinition($definition_slug, '')['properties'] ?? [];
+
+		// The default submit label is a key-only definition ({key: form.capture.submit});
+		// the editor must surface its translated fallback, not a blank value.
+		$this->assertArrayHasKey('submit_label', $properties);
+		$this->assertNotSame('', (string)$properties['submit_label']);
+		$this->assertSame(t('form.capture.submit'), (string)$properties['submit_label']);
+	}
+
 	public function testBuilderDraftNotePersistsAndIsReturnedInVersionHistory(): void
 	{
 		$definition_slug = 'capture-phase4j-builder-draft-note';

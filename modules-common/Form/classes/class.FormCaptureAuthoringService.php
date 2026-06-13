@@ -652,7 +652,11 @@ final class FormCaptureAuthoringService
 
 			$this->abandonDrafts($definition_id);
 
-			if ((string)$version->status !== self::STATUS_PUBLISHED) {
+			// Only the definition's CURRENT published version is the working state
+			// without a draft row; any other version (including stale rows still
+			// labelled 'published' from earlier publishes) must become the active
+			// draft, or loadDefinition() would keep resolving the newer published one.
+			if ((int)$version->version_id !== (int)($definition->published_version_id ?? 0)) {
 				EntityFormDefinitionVersion::updateById((int)$version->version_id, [
 					'status' => self::STATUS_DRAFT,
 					'published_at' => null,
@@ -708,15 +712,33 @@ final class FormCaptureAuthoringService
 
 	/**
 	 * Editable text of a descriptor text definition: keyed mode stores {key, text},
-	 * literal mode a plain string.
+	 * literal mode a plain string. A key-only definition (e.g. the default submit
+	 * label's {key: form.capture.submit}) resolves through the translation catalog so
+	 * the editor shows the rendered fallback instead of a blank field that would
+	 * overwrite the default on save.
 	 */
 	private function textValueFromDefinition(mixed $definition): string
 	{
-		if (is_array($definition)) {
-			return (string)($definition['text'] ?? '');
+		if (!is_array($definition)) {
+			return is_string($definition) ? $definition : '';
 		}
 
-		return is_string($definition) ? $definition : '';
+		$text = (string)($definition['text'] ?? '');
+
+		if ($text !== '') {
+			return $text;
+		}
+
+		$key = is_string($definition['key'] ?? null) ? trim((string)$definition['key']) : '';
+
+		if ($key === '') {
+			return '';
+		}
+
+		$params = is_array($definition['params'] ?? null) ? $definition['params'] : [];
+		$resolved = t($key, $params);
+
+		return $resolved !== $key ? $resolved : '';
 	}
 
 	/**

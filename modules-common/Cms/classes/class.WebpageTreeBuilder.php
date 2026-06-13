@@ -125,16 +125,20 @@ class WebpageTreeBuilder
 	private function buildWidgetTrees(string $slot_name, array $connections, array $build_context): array
 	{
 		$slot_trees = [];
+		// The form editor iframe edits form structure only; widget inserters render in
+		// the page editor scope and in global edit mode.
+		$widget_inserters_enabled = $this->view->isEditable()
+			&& CmsConfig::editorScope() !== CmsConfig::EDITOR_SCOPE_FORM;
 
 		foreach ($connections as $connection) {
-			if ($this->view->isEditable()) {
+			if ($widget_inserters_enabled) {
 				$slot_trees[] = $this->view->buildWidgetInserterTree($slot_name, $connection);
 			}
 
 			$slot_trees[] = $this->buildWrappedWidgetTree($slot_name, $connection, $build_context);
 		}
 
-		if ($this->view->isEditable()) {
+		if ($widget_inserters_enabled) {
 			$slot_trees[] = $this->view->buildWidgetInserterTree($slot_name);
 		}
 

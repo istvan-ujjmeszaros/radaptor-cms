@@ -21,6 +21,13 @@ if (is_object($this->getWidgetConnection()) && $this->getWidgetConnection()->get
 	}
 }
 ?>
+<?php if (!empty($this->props['drop_target'])): ?>
+<div style="clear:both"></div>
+<div class="widget-insert editor-insert--drop-target"
+	data-editor-drop-target="widget"
+	data-editor-insert-action="<?= e((string)($this->props['insert_url'] ?? '')) ?>"
+	data-editor-insert-param="widget_name"></div>
+<?php else: ?>
 <?php $this->props['clipboard'] = WidgetConnection::getClipboard(); ?>
 <div style="clear:both"></div>
 <div class="widget-insert">
@@ -34,3 +41,4 @@ if (is_object($this->getWidgetConnection()) && $this->getWidgetConnection()->get
 	<?php endif; ?>
 	<?= $this->fetchContent('add_widget_from_list'); ?>
 </div>
+<?php endif; ?>

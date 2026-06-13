@@ -28,10 +28,7 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 			FormCaptureAuthoringService::class,
 			EventFormSubmit::class,
 			EventFormBuilderCreate::class,
-			EventFormBuilderPreviewRender::class,
-			EventFormBuilderSaveDraft::class,
 			EventFormBuilderPublish::class,
-			EventFormBuilderLoadDraftVersion::class,
 			EventFormBuilderUpdateDraftNote::class,
 			EventFormEditorInsertField::class,
 			EventFormEditorMoveField::class,
@@ -951,33 +948,6 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame(t('form.capture.error_unavailable'), $tree['props']['message'] ?? null);
 	}
 
-	public function testBuilderPreviewUsesStoredDefinitionSecurity(): void
-	{
-		$definition_slug = 'capture-phase4j-builder-preview-security';
-		$security = array_replace_recursive($this->defaultSecurity(), [
-			'honeypot' => [
-				'field_name' => 'preview_security_probe',
-			],
-		]);
-		$published = (new FormCaptureDefinitionRepository())->upsertPublishedDefinition($definition_slug, $this->descriptor(), $security, 'db');
-		$preview = (new FormCaptureAuthoringService())->renderPreview($definition_slug, $published->descriptor());
-
-		$this->assertStringContainsString('name="preview_security_probe"', (string)($preview['html'] ?? ''));
-		$this->assertStringNotContainsString('name="company_website"', (string)($preview['html'] ?? ''));
-	}
-
-	public function testBuilderPreviewDoesNotIssueCaptureRenderState(): void
-	{
-		$definition_slug = 'capture-phase4j-builder-preview-render-state';
-		$published = (new FormCaptureDefinitionRepository())->upsertPublishedDefinition($definition_slug, $this->descriptor(), $this->defaultSecurity(), 'db');
-		Request::saveSessionData([FormSubmitContext::SESSION_KEY_RENDER_STATES], []);
-
-		$preview = (new FormCaptureAuthoringService())->renderPreview($definition_slug, $published->descriptor());
-
-		$this->assertIsString($preview['html'] ?? null);
-		$this->assertSame([], Request::_SESSION(FormSubmitContext::SESSION_KEY_RENDER_STATES, []));
-	}
-
 	public function testBuilderAuthoringCreatesSavesOneActiveDraftAndPublishes(): void
 	{
 		$definition_slug = 'capture-phase4j-builder-lifecycle';
@@ -1807,7 +1777,7 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame([2, 1], array_column($state['versions'], 'version_number'));
 	}
 
-	public function testBuilderCanLoadOlderDraftVersionAndRestoreItAsActiveDraft(): void
+	public function testBuilderCanRestoreOlderVersionAsActiveDraftWithoutNewRow(): void
 	{
 		$definition_slug = 'capture-phase4j-builder-draft-load';
 		$service = new FormCaptureAuthoringService();
@@ -1816,22 +1786,78 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$first_draft_id = (int)($first['active_draft']['version_id'] ?? 0);
 		$second = $service->saveDraft($definition_slug, $this->descriptorWithTitle('Second active draft'), (string)$first['base_server_hash']);
 		$second_draft_id = (int)($second['active_draft']['version_id'] ?? 0);
+		$versions_before = count($service->loadDefinition($definition_slug)['versions']);
 
-		$loaded = $service->loadDraftVersion($definition_slug, $first_draft_id);
+		$restored = $service->restoreVersionToDraft($definition_slug, $first_draft_id, '');
 
-		$this->assertSame('loaded_draft_version', $loaded['action'] ?? null);
-		$this->assertSame('First recoverable draft', $loaded['descriptor']['title']['text'] ?? null);
-		$this->assertSame('Second active draft', $loaded['server_descriptor']['title']['text'] ?? null);
-		$this->assertSame($first_draft_id, (int)($loaded['loaded_version']['version_id'] ?? 0));
-		$this->assertSame($second_draft_id, (int)($loaded['active_draft']['version_id'] ?? 0));
-		$this->assertSame((string)$second['base_server_hash'], (string)$loaded['base_server_hash']);
-
-		$restored = $service->saveDraft($definition_slug, $loaded['descriptor'], (string)$loaded['base_server_hash']);
-
-		$this->assertSame('saved_draft', $restored['action'] ?? null);
+		// Re-activates the stored row instead of minting a new version.
+		$this->assertSame('restored_version', $restored['action'] ?? null);
+		$this->assertSame($first_draft_id, (int)($restored['restored_version_id'] ?? 0));
 		$this->assertSame($first_draft_id, (int)($restored['active_draft']['version_id'] ?? 0));
 		$this->assertSame('First recoverable draft', $restored['descriptor']['title']['text'] ?? null);
+		$this->assertCount($versions_before, $restored['versions']);
 		$this->assertSame('abandoned', (string)EntityFormDefinitionVersion::findFirst(['version_id' => $second_draft_id])?->status);
+	}
+
+	public function testRestoringAnOlderPublishedVersionActivatesItAsTheWorkingState(): void
+	{
+		$definition_slug = 'capture-phase4j-restore-old-published';
+		$service = new FormCaptureAuthoringService();
+		$created = $service->createDefinition($definition_slug, 'Restore old published');
+
+		// Publish version one, then publish a second version. The first version row
+		// keeps status 'published' but is no longer the definition's current published
+		// version.
+		$first_draft = $service->saveDraft($definition_slug, $this->descriptorWithTitle('First published'), (string)$created['base_server_hash']);
+		$first_published = $service->publishDraft($definition_slug);
+		$first_version_id = (int)($first_published['published_version']['version_id'] ?? 0);
+		$second_draft = $service->saveDraft($definition_slug, $this->descriptorWithTitle('Second published'), (string)$first_published['base_server_hash']);
+		$service->publishDraft($definition_slug);
+
+		$this->assertSame('published', (string)EntityFormDefinitionVersion::findFirst(['version_id' => $first_version_id])?->status);
+
+		$restored = $service->restoreVersionToDraft($definition_slug, $first_version_id, '');
+
+		// The older published version becomes the working state, not the newer one.
+		$this->assertSame($first_version_id, (int)($restored['active_version_id'] ?? $restored['active_draft']['version_id'] ?? 0));
+		$state = $service->loadDefinition($definition_slug);
+		$this->assertSame($first_version_id, (int)($state['active_draft']['version_id'] ?? 0));
+		$this->assertSame('First published', $state['descriptor']['title']['text'] ?? null);
+	}
+
+	public function testEditorStateResolvesKeyOnlySubmitLabelToTranslatedFallback(): void
+	{
+		$definition_slug = 'capture-phase4j-editor-state-submit-label';
+		$service = new FormCaptureAuthoringService();
+		$service->createDefinition($definition_slug, 'Editor state submit label');
+
+		$properties = $service->editorStateForDefinition($definition_slug, '')['properties'] ?? [];
+
+		// The default submit label is a key-only definition ({key: form.capture.submit});
+		// the editor must surface its translated fallback, not a blank value.
+		$this->assertArrayHasKey('submit_label', $properties);
+		$this->assertNotSame('', (string)$properties['submit_label']);
+		$this->assertSame(t('form.capture.submit'), (string)$properties['submit_label']);
+	}
+
+	public function testEditingTitleKeepsTheSharedSubmitLabelKey(): void
+	{
+		$definition_slug = 'capture-phase4j-title-edit-keeps-submit-key';
+		$service = new FormCaptureAuthoringService();
+		$service->createDefinition($definition_slug, 'Title edit submit key');
+		$properties = $service->editorStateForDefinition($definition_slug, '')['properties'] ?? [];
+
+		// The panel resubmits every property; an unchanged submit_label (its resolved
+		// shared-key text) must not rewrite the key-only definition into a literal value.
+		$service->updateFormPropertiesInDraft($definition_slug, [
+			'title' => 'A new title',
+			'description' => (string)($properties['description'] ?? ''),
+			'submit_label' => (string)($properties['submit_label'] ?? ''),
+		]);
+
+		$descriptor = $service->loadDefinition($definition_slug)['descriptor'];
+		$this->assertSame('form.capture.submit', $descriptor['submit_label']['key'] ?? null);
+		$this->assertSame('A new title', $descriptor['title']['text'] ?? $descriptor['title'] ?? null);
 	}
 
 	public function testBuilderDraftNotePersistsAndIsReturnedInVersionHistory(): void
@@ -1959,7 +1985,7 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 		$this->assertSame('draft', (string)$second_version?->status);
 	}
 
-	public function testBuilderDraftHistoryEventsLoadVersionAndUpdateNote(): void
+	public function testBuilderDraftNoteEventUpdatesNote(): void
 	{
 		$definition_slug = 'capture-phase4j-builder-event-drafts';
 		$service = new FormCaptureAuthoringService();
@@ -1972,39 +1998,24 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 			'version_id' => (string)$draft_id,
 			'author_note' => 'Works before campaign launch.',
 		]);
-		$load_response = $this->runBuilderEvent(new EventFormBuilderLoadDraftVersion(), [
-			'definition_slug' => $definition_slug,
-			'version_id' => (string)$draft_id,
-		]);
 
 		$this->assertSame(200, $note_response['http_code']);
 		$this->assertTrue($note_response['body']['ok']);
 		$this->assertSame('updated_draft_note', $note_response['body']['data']['action'] ?? null);
 		$this->assertSame('Works before campaign launch.', $note_response['body']['data']['updated_version']['author_note'] ?? null);
-		$this->assertSame(200, $load_response['http_code']);
-		$this->assertTrue($load_response['body']['ok']);
-		$this->assertSame('loaded_draft_version', $load_response['body']['data']['action'] ?? null);
-		$this->assertSame($draft_id, (int)($load_response['body']['data']['loaded_version']['version_id'] ?? 0));
 	}
 
-	public function testBuilderDraftHistoryEventsMapMissingVersionToNotFound(): void
+	public function testBuilderDraftNoteEventMapsMissingVersionToNotFound(): void
 	{
 		$definition_slug = 'capture-phase4j-builder-event-missing-draft';
 		(new FormCaptureAuthoringService())->createDefinition($definition_slug, 'Builder event missing draft');
 
-		$load_response = $this->runBuilderEvent(new EventFormBuilderLoadDraftVersion(), [
-			'definition_slug' => $definition_slug,
-			'version_id' => '99999999',
-		]);
 		$note_response = $this->runBuilderEvent(new EventFormBuilderUpdateDraftNote(), [
 			'definition_slug' => $definition_slug,
 			'version_id' => '99999999',
 			'author_note' => 'Missing',
 		]);
 
-		$this->assertSame(404, $load_response['http_code']);
-		$this->assertFalse($load_response['body']['ok']);
-		$this->assertSame('FORM_BUILDER_LOAD_DRAFT_INVALID', $load_response['body']['error']['code'] ?? null);
 		$this->assertSame(404, $note_response['http_code']);
 		$this->assertFalse($note_response['body']['ok']);
 		$this->assertSame('FORM_BUILDER_DRAFT_NOTE_INVALID', $note_response['body']['error']['code'] ?? null);
@@ -2014,10 +2025,7 @@ final class FormRefactorPhase4CaptureIntegrationTest extends TestCase
 	{
 		$events = [
 			new EventFormBuilderCreate(),
-			new EventFormBuilderPreviewRender(),
-			new EventFormBuilderSaveDraft(),
 			new EventFormBuilderPublish(),
-			new EventFormBuilderLoadDraftVersion(),
 			new EventFormBuilderUpdateDraftNote(),
 			new EventFormEditorInsertField(),
 			new EventFormEditorUpdateField(),

@@ -15,6 +15,8 @@ parameters:
 		- modules-common/Form/classes/class.FormCaptureDescriptorSchemaValidator.php
 		- modules-common/Form/classes/class.FormCaptureDescriptorSpecLoader.php
 		- modules-common/Form/classes/class.FormCaptureAuthoringService.php
+		- modules-common/Form/classes/class.FormEditorAuthoringService.php
+		- modules-common/Form/classes/class.FormEditorHistoryEventHelper.php
 		- modules-common/Form/classes/class.FormCaptureDraftGarbageCollector.php
 		- modules-common/Form/classes/class.FormCaptureEditorPaletteProvider.php
 		- modules-common/Form/classes/class.FormCaptureFieldEditorCommandProvider.php
@@ -22,7 +24,6 @@ parameters:
 		- modules-common/Form/classes/class.FormCaptureFieldPropertyProvider.php
 		- modules-common/Form/classes/class.FormEditorFieldCommand.php
 		- modules-common/Form/classes/class.FormEditorFieldCommandContext.php
-		- modules-common/Form/classes/class.FormCapturePreviewTreeContext.php
 		- modules-common/Form/classes/class.FormCaptureSubmissionService.php
 		- modules-common/Form/classes/class.FormBuilderEventHelper.php
 		- modules-common/Form/classes/class.FormDefinitionResolution.php
@@ -56,16 +57,19 @@ parameters:
 		- modules-common/Form/events/Event.FormSubmit.php
 		- modules-common/Form/events/Event.FormBuilderCreate.php
 		- modules-common/Form/events/Event.FormBuilderEditorFragment.php
-		- modules-common/Form/events/Event.FormBuilderLoadDraftVersion.php
-		- modules-common/Form/events/Event.FormBuilderPreviewRender.php
 		- modules-common/Form/events/Event.FormBuilderPublish.php
-		- modules-common/Form/events/Event.FormBuilderSaveDraft.php
 		- modules-common/Form/events/Event.FormBuilderUpdateDraftNote.php
 		- modules-common/Form/events/Event.FormEditorInsertField.php
 		- modules-common/Form/events/Event.FormEditorMoveField.php
 		- modules-common/Form/events/Event.FormEditorRemoveField.php
 		- modules-common/Form/events/Event.FormEditorPublish.php
 		- modules-common/Form/events/Event.FormEditorUpdateField.php
+		- modules-common/Form/events/Event.FormEditorUpdateForm.php
+		- modules-common/Form/events/Event.FormEditorUndo.php
+		- modules-common/Form/events/Event.FormEditorRedo.php
+		- modules-common/Form/events/Event.FormEditorRestoreVersion.php
+		- modules-common/Form/events/Event.FormEditorState.php
+		- modules-common/Form/events/Event.FormEditorCanvas.php
 		- modules-common/Form/events/Event.FormHookDelete.php
 		- modules-common/Form/events/Event.FormHookDeliveries.php
 		- modules-common/Form/events/Event.FormHookSave.php

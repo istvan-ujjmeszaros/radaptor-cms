@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-final class EventFormBuilderEditorFragment extends AbstractEvent implements iBrowserEventDocumentable
+final class EventFormEditorCanvas extends AbstractEvent implements iBrowserEventDocumentable
 {
 	public function authorize(PolicyContext $policyContext): PolicyDecision
 	{
@@ -12,15 +12,16 @@ final class EventFormBuilderEditorFragment extends AbstractEvent implements iBro
 	public static function describeBrowserEvent(): array
 	{
 		return [
-			'event_name' => 'form_builder.editor_fragment',
+			'event_name' => 'form_editor.canvas',
 			'group' => 'CMS Authoring',
-			'name' => 'Render capture form builder editor fragment',
-			'summary' => 'Renders the capture form builder chrome for insertion into the admin forms modal.',
+			'name' => 'Form editor canvas document',
+			'summary' => 'Renders the standalone editing canvas containing only the target capture form.',
 			'request' => [
 				'method' => 'GET',
 				'params' => [
 					BrowserEventDocumentationHelper::param('definition_slug', 'query', 'string', true, 'Capture definition slug.'),
-					BrowserEventDocumentationHelper::param('panel', 'query', 'string', false, 'Initial editor panel.'),
+					BrowserEventDocumentationHelper::param(CmsConfig::EDITOR_IFRAME_PARAM, 'query', 'string', false, 'Editor iframe marker.'),
+					BrowserEventDocumentationHelper::param(CmsConfig::EDITOR_SESSION_PARAM, 'query', 'string', false, 'Editing-session token.'),
 				],
 			],
 			'response' => [
@@ -37,17 +38,18 @@ final class EventFormBuilderEditorFragment extends AbstractEvent implements iBro
 	public function run(): void
 	{
 		if (Request::getMethod() !== 'GET') {
-			FormBuilderEventHelper::renderFailure('FORM_BUILDER_METHOD_NOT_ALLOWED', 'response_error.access_denied', 405);
+			FormBuilderEventHelper::renderFailure('FORM_EDITOR_CANVAS_METHOD_NOT_ALLOWED', 'response_error.access_denied', 405);
 
 			return;
 		}
 
 		try {
 			WebpageView::header('Content-Type: text/html; charset=UTF-8');
-			echo (new FormEditorAuthoringService())->renderEditorFragment(
+			echo (new FormEditorAuthoringService())->renderEditorCanvas(
 				(string)Request::_GET('definition_slug', ''),
 			);
-		} catch (Throwable) {
+		} catch (Throwable $exception) {
+			Kernel::logException($exception, 'Form editor canvas render failed');
 			WebpageView::header('Content-Type: text/html; charset=UTF-8');
 			http_response_code(422);
 			echo '<div class="alert alert-danger m-3" role="alert">' . e(t('form.list.editor_load_failed')) . '</div>';

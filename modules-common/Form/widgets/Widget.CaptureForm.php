@@ -96,6 +96,17 @@ class WidgetCaptureForm extends AbstractWidget
 		$settings->icon = IconNames::CHOOSE;
 
 		$commands = [$settings];
+
+		// Inside the targeted form editor, the editor shell handles this marker URL and
+		// shows the version history in its properties pane.
+		if (CmsConfig::editorTargetSlug() !== ''
+			&& CmsConfig::editorTargetSlug() === trim((string)$connection->getExtraparam('definition_slug'))) {
+			$versions = new WidgetEditCommand();
+			$versions->title = t('form.editor.versions');
+			$versions->url = '#page-editor-versions';
+			$versions->icon = IconNames::VERSIONS;
+			$commands[] = $versions;
+		}
 		$publish = $this->buildPublishCommand($connection);
 
 		if ($publish instanceof WidgetEditCommand) {

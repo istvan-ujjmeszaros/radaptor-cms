@@ -39,6 +39,9 @@ final class EditorInsertSurfaceBuilder
 			'target' => $target,
 			'insert_url' => $insert_url,
 			'counter' => $counter,
+			// Editor iframes get bare drop targets; the dropdown inserter chrome is
+			// for browsing edit mode only.
+			'drop_target' => CmsConfig::isEditorIframeRequest(),
 		]);
 
 		return SduiNode::create(

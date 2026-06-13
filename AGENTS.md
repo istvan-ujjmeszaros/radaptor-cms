@@ -20,14 +20,14 @@
 ## GitHub PR Review Workflow
 
 - Do not commit without explicit maintainer/user approval.
-- After opening or updating a GitHub PR, request the primary review gate by posting `@codex review` on the PR before merging, publishing, releasing, or treating the PR as approved dependency input. Treat the gate as complete only after GitHub-hosted Codex posts findings or an explicit no-findings result for the current HEAD.
-- Claude-driven sessions should run Claude's internal review agents (for example `/code-review`) on the branch before requesting `@codex review`, so obvious findings are fixed before the primary gate runs.
+- The primary review gate is a local Codex CLI review worker: after opening or updating a GitHub PR, run `codex exec review --base origin/main` (or `--commit <sha>` for follow-up passes) on the PR branch before merging, publishing, releasing, or treating the PR as approved dependency input. The worker is review-only: no edits, commits, pushes, or merges.
+- Claude-driven sessions should run Claude's internal review agents (for example `/code-review`) on the branch before the Codex pass, so obvious findings are fixed before the primary gate runs.
 - Review results must be visible on the PR, using inline comments for line-tied findings when possible and a top-level PR comment otherwise. A no-findings result must also be posted for the reviewed HEAD.
-- Use a local Codex CLI review worker only as a fallback when the GitHub `@codex review` path is quota-limited, rate-limited, unavailable, or fails to produce a usable result. Document the fallback reason, keep the worker review-only (no edits, commits, pushes, or merges), and re-try GitHub review on later passes because its reset window is opaque.
-- If the maintainer asks for Claude review, use `claudee` from the CLI for one PR at a time. If `claudee` is unavailable or fails, report that and fall back through GitHub `@codex review` first; use a local Codex review worker only if the GitHub path is unavailable.
+- A GitHub-hosted `@codex review` comment is an optional extra signal when account quota allows; it is not required for merge. If the local Codex CLI is unavailable or fails to produce a usable result, fall back to GitHub `@codex review` and document the reason on the PR.
+- If the maintainer asks for Claude review, use `claudee` from the CLI for one PR at a time.
 - When addressing review feedback, use a thread-aware read of GitHub review threads; flat comment lists are not enough because they lose resolved/outdated state.
 - After implementing, validating, committing, and pushing a fix, always mark every review thread resolved that the pushed commit actually addresses.
-- If the fresh review pass posts any actionable finding, fix it, validate, push, re-read thread-aware state, resolve only addressed threads, and request another fresh `@codex review` pass. Repeat until the current HEAD has an explicit no-findings result.
+- If the fresh review pass posts any actionable finding, fix it, validate, push, re-read thread-aware state, resolve only addressed threads, and run another fresh local Codex review pass. Repeat until the current HEAD has an explicit no-findings result posted on the PR.
 - Never resolve a thread just to clear the list. If a thread remains unresolved intentionally, say why and include the next concrete fix.
 - Before requesting a fresh review pass, merging, or publishing, re-check unresolved review threads and report the count. Before merging or publishing, also verify that the latest review result was posted for the current HEAD.
 - Merge and publish only after the relevant PR has a completed Codex review result for the current HEAD, no unresolved review threads, required checks are green or explicitly accepted, any dependent lockfile/runtime update plan is clear, and the maintainer explicitly approves the merge/publish step.

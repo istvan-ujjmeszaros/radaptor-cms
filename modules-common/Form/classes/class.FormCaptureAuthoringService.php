@@ -9,82 +9,8 @@ final class FormCaptureAuthoringService
 	private const string STATUS_DRAFT = 'draft';
 	private const string STATUS_ABANDONED = 'abandoned';
 	private const string STATUS_PUBLISHED = 'published';
-
-	/**
-	 * @return array<string, mixed>
-	 */
-	public function buildBuilderState(?string $definition_slug = null): array
-	{
-		$definition_slug = trim((string)$definition_slug);
-		$definitions = $this->listDefinitions();
-		$selected = $definition_slug !== '' ? $definition_slug : (string)($definitions[0]['definition_slug'] ?? '');
-		$state = $selected !== '' ? $this->loadDefinition($selected) : $this->emptyDefinitionState();
-		$provider = new FormCaptureEditorPaletteProvider();
-		$selected_slug = (string)($state['definition']['definition_slug'] ?? $selected);
-		$selected_descriptor = is_array($state['descriptor'] ?? null) ? $state['descriptor'] : [];
-		$locales = I18nRuntime::getAvailableLocaleCodes();
-
-		return [
-			'definitions' => $definitions,
-			'selected' => $state,
-			'palette' => array_map(static fn (EditorPaletteItem $item): array => $item->toArray(), $provider->getPaletteItems()),
-			'drop_targets' => array_map(static fn (EditorDropTarget $target): array => $target->toArray(), $provider->getDropTargets()),
-			'i18n_available' => count($locales) > 1,
-			'default_locale' => LocaleService::getDefaultLocale(),
-			'i18n_workbench_url' => $this->i18nWorkbenchUrl(),
-			'translation_url' => (string)($state['translation_url'] ?? $this->translationUrlForDefinition($selected_slug, $selected_descriptor)),
-		];
-	}
-
-	/**
-	 * @return array<string, mixed>
-	 */
-	public function buildBuilderTree(?string $definition_slug = null, string $panel = 'properties'): array
-	{
-		$state = $this->buildBuilderState($definition_slug);
-		$selected = is_array($state['selected'] ?? null) ? $state['selected'] : [];
-		$descriptor = is_array($selected['descriptor'] ?? null) ? $selected['descriptor'] : [];
-		$preview = $this->renderPreview(
-			(string)($selected['definition']['definition_slug'] ?? 'capture-preview'),
-			$descriptor,
-		);
-
-		return SduiNode::create(
-			component: 'captureFormBuilder',
-			props: [
-				'state' => $state,
-				'initial_panel' => in_array($panel, ['usage', 'hooks'], true) ? $panel : 'properties',
-				'initial_preview' => $preview,
-				'initial_preview_html' => $preview['html'] ?? '',
-				'csrf_token' => FormSubmitContext::issueCsrfTokenForForm(FormBuilderEventHelper::CSRF_FORM_ID),
-				'urls' => [
-					'create' => Url::getUrl('form_builder.create'),
-					'preview_render' => Url::getUrl('form_builder.preview_render'),
-					'save_draft' => Url::getUrl('form_builder.save_draft'),
-					'publish' => Url::getUrl('form_builder.publish'),
-					'load_draft_version' => Url::getUrl('form_builder.load_draft_version'),
-					'update_draft_note' => Url::getUrl('form_builder.update_draft_note'),
-					'hook_targets' => Url::getUrl('form_hook.targets'),
-					'hook_save' => Url::getUrl('form_hook.save'),
-					'hook_delete' => Url::getUrl('form_hook.delete'),
-					'hook_deliveries' => Url::getUrl('form_hook.deliveries'),
-					'hooks_list' => Url::getUrl('form_hooks.list'),
-					'hooks_save' => Url::getUrl('form_hooks.save'),
-					'hooks_delete' => Url::getUrl('form_hooks.delete'),
-					'hooks_deliveries' => Url::getUrl('form_hooks.deliveries'),
-				],
-			],
-			type: SduiNode::TYPE_WIDGET,
-			strings: WidgetCaptureFormBuilder::buildStrings(),
-		);
-	}
-
-	public function renderBuilderFragment(?string $definition_slug = null, string $panel = 'properties'): string
-	{
-		$renderer = new HtmlTreeRenderer(theme: $this->currentAdminTheme(), lang_id: Kernel::getLocale(), is_editable: false);
-
-		return $renderer->render($this->buildBuilderTree($definition_slug, $panel));
-	}
+	private const int EDIT_HISTORY_LIMIT = 75;
+	private const int EDITOR_STATE_VERSION_LIMIT = 20;
 
 	/**
 	 * @return array<string, mixed>
@@ -254,37 +180,6 @@ final class FormCaptureAuthoringService
 			'i18n_workbench_url' => $this->i18nWorkbenchUrl(),
 			'translation_url' => $this->translationUrlForDefinition($definition_slug, $translation_descriptor),
 		];
-	}
-
-	/**
-	 * @return array<string, mixed>
-	 */
-	public function loadDraftVersion(string $definition_slug, int $version_id): array
-	{
-		$definition = $this->requireDbDefinition($definition_slug);
-
-		if ($version_id <= 0) {
-			throw new InvalidArgumentException('Draft version id is required.');
-		}
-
-		$version = EntityFormDefinitionVersion::findFirst([
-			'definition_id' => (int)$definition->definition_id,
-			'version_id' => $version_id,
-		]);
-
-		if (!$version instanceof EntityFormDefinitionVersion) {
-			throw new InvalidArgumentException('Draft version does not exist.');
-		}
-
-		$current = $this->loadDefinition($definition_slug);
-		$descriptor = $this->descriptorForBuilder($this->descriptorFromVersion($definition, $version), false);
-
-		return array_replace($current, [
-			'action' => 'loaded_draft_version',
-			'descriptor' => $descriptor,
-			'server_descriptor' => is_array($current['descriptor'] ?? null) ? $current['descriptor'] : $descriptor,
-			'loaded_version' => $version->dto(),
-		]);
 	}
 
 	/**
@@ -486,6 +381,7 @@ final class FormCaptureAuthoringService
 		}
 
 		$descriptor = $this->descriptorFromVersion($definition, $version);
+		$baseline = $descriptor;
 		$field = $this->newFieldDescriptorFromPalette($definition_slug, $descriptor, $field_type);
 		$descriptor['fields'] = $this->insertFieldAtVisibleIndex(
 			is_array($descriptor['fields'] ?? null) ? $descriptor['fields'] : [],
@@ -494,8 +390,9 @@ final class FormCaptureAuthoringService
 		);
 
 		$result = $this->saveDraft($definition_slug, $descriptor, (string)$version->descriptor_hash);
+		$history = $this->recordEditHistory($definition, $baseline, $result, null, (int)$version->version_id);
 
-		return $result + [
+		return $result + $history + [
 			'inserted_field' => $field,
 			'field_uid' => (string)($field[FormCaptureFieldIdentity::DESCRIPTOR_KEY] ?? ''),
 			'insert_index' => $insert_index,
@@ -516,6 +413,7 @@ final class FormCaptureAuthoringService
 		}
 
 		$descriptor = $this->descriptorFromVersion($definition, $version);
+		$baseline = $descriptor;
 		$fields = [];
 
 		foreach (($descriptor['fields'] ?? []) as $field) {
@@ -535,8 +433,9 @@ final class FormCaptureAuthoringService
 		);
 		$descriptor['fields'] = array_values($fields);
 		$result = $this->saveDraft($definition_slug, $descriptor, (string)$version->descriptor_hash);
+		$history = $this->recordEditHistory($definition, $baseline, $result, null, (int)$version->version_id);
 
-		return $result + [
+		return $result + $history + [
 			'updated_field' => $fields[$field_offset],
 			'field_uid' => (string)($fields[$field_offset][FormCaptureFieldIdentity::DESCRIPTOR_KEY] ?? ''),
 			'field_index' => $field_offset,
@@ -556,6 +455,7 @@ final class FormCaptureAuthoringService
 		}
 
 		$descriptor = $this->descriptorFromVersion($definition, $version);
+		$baseline = $descriptor;
 		$fields = $this->normalizedDescriptorFields($descriptor);
 		$field_offset = $this->findFieldOffset($fields, $field_uid, $field_key, $field_index);
 		$this->assertVisibleFieldOffset($fields, $field_offset);
@@ -568,8 +468,9 @@ final class FormCaptureAuthoringService
 		array_splice($fields, $field_offset, 1);
 		$descriptor['fields'] = array_values($fields);
 		$result = $this->saveDraft($definition_slug, $descriptor, (string)$version->descriptor_hash);
+		$history = $this->recordEditHistory($definition, $baseline, $result, null, (int)$version->version_id);
 
-		return $result + [
+		return $result + $history + [
 			'removed_field' => $removed_field,
 			'field_uid' => (string)($removed_field[FormCaptureFieldIdentity::DESCRIPTOR_KEY] ?? ''),
 			'field_index' => $field_offset,
@@ -595,6 +496,7 @@ final class FormCaptureAuthoringService
 		}
 
 		$descriptor = $this->descriptorFromVersion($definition, $version);
+		$baseline = $descriptor;
 		$fields = $this->normalizedDescriptorFields($descriptor);
 		$field_offset = $this->findFieldOffset($fields, $field_uid, $field_key, $field_index);
 		$visible_offsets = $this->visibleFieldOffsets($fields);
@@ -616,13 +518,436 @@ final class FormCaptureAuthoringService
 		$fields[$target_offset] = $moved_field;
 		$descriptor['fields'] = array_values($fields);
 		$result = $this->saveDraft($definition_slug, $descriptor, (string)$version->descriptor_hash);
+		$history = $this->recordEditHistory($definition, $baseline, $result, null, (int)$version->version_id);
 
-		return $result + [
+		return $result + $history + [
 			'moved_field' => $moved_field,
 			'field_uid' => (string)($moved_field[FormCaptureFieldIdentity::DESCRIPTOR_KEY] ?? ''),
 			'field_index' => $target_offset,
 			'direction' => $direction,
 		];
+	}
+
+	/**
+	 * @param array<string, mixed> $submitted title / description / submit_label texts
+	 * @return array<string, mixed>
+	 */
+	public function updateFormPropertiesInDraft(string $definition_slug, array $submitted): array
+	{
+		$definition = $this->requireDbDefinition($definition_slug);
+		$version = $this->findActiveDraft((int)$definition->definition_id) ?? $this->findPublishedVersion($definition);
+
+		if (!$version instanceof EntityFormDefinitionVersion) {
+			throw new InvalidArgumentException('No editable capture form version is available.');
+		}
+
+		$descriptor = $this->descriptorFromVersion($definition, $version);
+		$baseline = $descriptor;
+
+		$changed_properties = [];
+
+		foreach (['title', 'description', 'submit_label'] as $key) {
+			if (!array_key_exists($key, $submitted)) {
+				continue;
+			}
+
+			$submitted_text = (string)$submitted[$key];
+
+			// The panel submits all three properties on every save; a value equal to
+			// the current resolved text is unchanged and must not rewrite a shared
+			// key-only definition (e.g. the default submit label's form.capture.submit)
+			// into a re-keyed/literal value.
+			if ($submitted_text === $this->textValueFromDefinition($descriptor[$key] ?? '')) {
+				continue;
+			}
+
+			$descriptor[$key] = $this->textDefinitionForDescriptor($descriptor, $key, $submitted_text, $definition_slug);
+			$changed_properties[] = $key;
+		}
+
+		$result = $this->saveDraft($definition_slug, $descriptor, (string)$version->descriptor_hash);
+		$history = $this->recordEditHistory($definition, $baseline, $result, null, (int)$version->version_id);
+
+		return $result + $history + [
+			'updated_properties' => $changed_properties,
+		];
+	}
+
+	/**
+	 * Revert the working draft to the previous edit-history state of the session.
+	 *
+	 * @return array<string, mixed>
+	 */
+	public function undoEdit(string $definition_slug, string $session_token): array
+	{
+		return $this->applyEditHistoryStep($definition_slug, -1, $session_token);
+	}
+
+	/**
+	 * Advance the working draft to the next edit-history state of the session.
+	 *
+	 * @return array<string, mixed>
+	 */
+	public function redoEdit(string $definition_slug, string $session_token): array
+	{
+		return $this->applyEditHistoryStep($definition_slug, 1, $session_token);
+	}
+
+	/**
+	 * Make a stored version the working state again by re-activating its row — no new
+	 * version row is created. The next modification branches a new version off it as
+	 * usual. Recorded in the session's edit history, so a restore is itself undoable.
+	 *
+	 * @return array<string, mixed>
+	 */
+	public function restoreVersionToDraft(string $definition_slug, int $version_id, string $session_token): array
+	{
+		$definition = $this->requireDbDefinition($definition_slug);
+		$definition_id = (int)$definition->definition_id;
+
+		if ($version_id <= 0) {
+			throw new InvalidArgumentException('Version id is required.');
+		}
+
+		$version = EntityFormDefinitionVersion::findFirst([
+			'definition_id' => $definition_id,
+			'version_id' => $version_id,
+		]);
+
+		if (!$version instanceof EntityFormDefinitionVersion) {
+			throw new InvalidArgumentException('Version does not exist.');
+		}
+
+		$current = $this->findActiveDraft($definition_id) ?? $this->findPublishedVersion($definition);
+
+		if ($current instanceof EntityFormDefinitionVersion && (int)$current->version_id === $version_id) {
+			return $this->loadDefinition($definition_slug) + [
+				'action' => 'restored_version',
+				'restored_version_id' => $version_id,
+			];
+		}
+
+		$baseline = $current instanceof EntityFormDefinitionVersion
+			? $this->descriptorFromVersion($definition, $current)
+			: $this->defaultDescriptor($definition_slug);
+		$this->activateVersionRow($definition, $version, $this->descriptorFromVersion($definition, $version));
+
+		$result = $this->loadDefinition($definition_slug);
+		$history = $this->recordEditHistory(
+			$definition,
+			$baseline,
+			$result,
+			$session_token,
+			$current instanceof EntityFormDefinitionVersion ? (int)$current->version_id : 0,
+		);
+
+		return $result + $history + [
+			'action' => 'restored_version',
+			'restored_version_id' => $version_id,
+		];
+	}
+
+	/**
+	 * Make a stored version row the working state: the current draft is abandoned and
+	 * the row becomes the active draft (the published row simply stays the working
+	 * state). Used by restore and by undo/redo steps linked to a version row.
+	 *
+	 * @param array<string, mixed> $descriptor the row's validated descriptor
+	 */
+	private function activateVersionRow(EntityFormDefinition $definition, EntityFormDefinitionVersion $version, array $descriptor): void
+	{
+		$definition_id = (int)$definition->definition_id;
+		$pdo = Db::instance();
+		$started_transaction = !$pdo->inTransaction();
+
+		try {
+			if ($started_transaction) {
+				$pdo->beginTransaction();
+			}
+
+			$this->abandonDrafts($definition_id);
+
+			// Only the definition's CURRENT published version is the working state
+			// without a draft row; any other version (including stale rows still
+			// labelled 'published' from earlier publishes) must become the active
+			// draft, or loadDefinition() would keep resolving the newer published one.
+			if ((int)$version->version_id !== (int)($definition->published_version_id ?? 0)) {
+				EntityFormDefinitionVersion::updateById((int)$version->version_id, [
+					'status' => self::STATUS_DRAFT,
+					'published_at' => null,
+				]);
+			}
+
+			$this->syncDescriptorI18nRows((string)$definition->definition_slug, $descriptor);
+			EntityFormDefinition::updateById($definition_id, [
+				'status' => $definition->published_version_id === null ? self::STATUS_DRAFT : self::STATUS_PUBLISHED,
+			]);
+
+			if ($started_transaction) {
+				$pdo->commit();
+			}
+		} catch (Throwable $exception) {
+			if ($started_transaction && $pdo->inTransaction()) {
+				$pdo->rollBack();
+			}
+
+			throw $exception;
+		}
+	}
+
+	/**
+	 * Compact editor-panel state: recent versions, the active (working-state) version,
+	 * usage, and the session's undo reach.
+	 *
+	 * @return array{versions: list<array<string, mixed>>, active_version_id: int, usage: list<array<string, mixed>>, can_undo: bool, can_redo: bool}
+	 */
+	public function editorStateForDefinition(string $definition_slug, string $session_token): array
+	{
+		$definition = $this->requireDbDefinition($definition_slug);
+		$definition_id = (int)$definition->definition_id;
+		$cursor = $session_token === '' ? 0 : $this->editHistoryCursor($definition_id, $session_token);
+		$active = $this->findActiveDraft($definition_id) ?? $this->findPublishedVersion($definition);
+		$descriptor = $active instanceof EntityFormDefinitionVersion
+			? $this->descriptorFromVersion($definition, $active)
+			: $this->defaultDescriptor($definition_slug);
+
+		return [
+			'versions' => array_slice($this->versionsForDefinition($definition_id), 0, self::EDITOR_STATE_VERSION_LIMIT),
+			'active_version_id' => $active instanceof EntityFormDefinitionVersion ? (int)$active->version_id : 0,
+			'properties' => [
+				'title' => $this->textValueFromDefinition($descriptor['title'] ?? ''),
+				'description' => $this->textValueFromDefinition($descriptor['description'] ?? ''),
+				'submit_label' => $this->textValueFromDefinition($descriptor['submit_label'] ?? ''),
+			],
+			'usage' => $this->usageForDefinition($definition_slug),
+			'can_undo' => $cursor > 1 && $this->editHistorySeqExists($definition_id, $session_token, $cursor - 1),
+			'can_redo' => $cursor > 0 && $this->editHistorySeqExists($definition_id, $session_token, $cursor + 1),
+		];
+	}
+
+	/**
+	 * Editable text of a descriptor text definition: keyed mode stores {key, text},
+	 * literal mode a plain string. A key-only definition (e.g. the default submit
+	 * label's {key: form.capture.submit}) resolves through the translation catalog so
+	 * the editor shows the rendered fallback instead of a blank field that would
+	 * overwrite the default on save.
+	 */
+	private function textValueFromDefinition(mixed $definition): string
+	{
+		if (!is_array($definition)) {
+			return is_string($definition) ? $definition : '';
+		}
+
+		$text = (string)($definition['text'] ?? '');
+
+		if ($text !== '') {
+			return $text;
+		}
+
+		$key = is_string($definition['key'] ?? null) ? trim((string)$definition['key']) : '';
+
+		if ($key === '') {
+			return '';
+		}
+
+		$params = is_array($definition['params'] ?? null) ? $definition['params'] : [];
+		$resolved = t($key, $params);
+
+		return $resolved !== $key ? $resolved : '';
+	}
+
+	/**
+	 * Drop editing sessions (and their history rings) that have been idle for a week.
+	 * Called opportunistically when an editor opens; no scheduler needed.
+	 */
+	public function purgeStaleEditorSessions(): void
+	{
+		if (!$this->tableExists('form_editor_sessions')) {
+			return;
+		}
+
+		DbHelper::prexecute(
+			'DELETE h FROM form_definition_edit_history h
+				INNER JOIN form_editor_sessions s
+					ON s.session_token = h.session_token AND s.definition_id = h.definition_id
+				WHERE s.updated_at < DATE_SUB(NOW(), INTERVAL 7 DAY)',
+		);
+		DbHelper::prexecute(
+			'DELETE FROM form_editor_sessions WHERE updated_at < DATE_SUB(NOW(), INTERVAL 7 DAY)',
+		);
+	}
+
+	/**
+	 * Records the edit order for server-backed, session-scoped undo/redo. The versions
+	 * table dedupes states by descriptor hash, so it cannot represent the sequence
+	 * A -> B -> A; this ring can. Mutations truncate the redo tail, and the ring is
+	 * capped. Outside an editing session (no token) nothing is recorded.
+	 *
+	 * @param array<string, mixed> $baseline_descriptor descriptor before the mutation
+	 * @param array<string, mixed> $save_result return value of saveDraft()
+	 * @param string|null $session_token null reads the request's editing-session token
+	 * @param int $baseline_version_id version row that held the baseline state, when known
+	 * @return array{}|array{can_undo: bool, can_redo: bool}
+	 */
+	private function recordEditHistory(EntityFormDefinition $definition, array $baseline_descriptor, array $save_result, ?string $session_token = null, int $baseline_version_id = 0): array
+	{
+		$session_token ??= CmsConfig::editorSessionToken();
+
+		if ($session_token === '' || ($save_result['status'] ?? '') === 'conflict') {
+			return [];
+		}
+
+		$definition_id = (int)$definition->definition_id;
+		$saved_descriptor = is_array($save_result['descriptor'] ?? null) ? $save_result['descriptor'] : null;
+
+		if ($saved_descriptor === null) {
+			return [];
+		}
+
+		$saved_version_id = (int)($save_result['draft_version_id']
+			?? $save_result['matched_version_id']
+			?? $save_result['active_draft']['version_id']
+			?? $save_result['published_version']['version_id']
+			?? 0);
+		$cursor = $this->editHistoryCursor($definition_id, $session_token);
+
+		if ($cursor === 0) {
+			DbHelper::prexecute(
+				'INSERT INTO form_definition_edit_history (definition_id, session_token, version_id, seq, descriptor_json) VALUES (?, ?, ?, ?, ?)',
+				[$definition_id, $session_token, $baseline_version_id > 0 ? $baseline_version_id : null, 1, json_encode($baseline_descriptor, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR)],
+			);
+			$cursor = 1;
+		}
+
+		DbHelper::prexecute(
+			'DELETE FROM form_definition_edit_history WHERE definition_id = ? AND session_token = ? AND seq > ?',
+			[$definition_id, $session_token, $cursor],
+		);
+		DbHelper::prexecute(
+			'INSERT INTO form_definition_edit_history (definition_id, session_token, version_id, seq, descriptor_json) VALUES (?, ?, ?, ?, ?)',
+			[$definition_id, $session_token, $saved_version_id > 0 ? $saved_version_id : null, $cursor + 1, json_encode($saved_descriptor, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR)],
+		);
+		$this->setEditHistoryCursor($definition_id, $session_token, $cursor + 1);
+		DbHelper::prexecute(
+			'DELETE FROM form_definition_edit_history WHERE definition_id = ? AND session_token = ? AND seq <= ?',
+			[$definition_id, $session_token, $cursor + 1 - self::EDIT_HISTORY_LIMIT],
+		);
+
+		return [
+			'can_undo' => true,
+			'can_redo' => false,
+		];
+	}
+
+	/**
+	 * @return array<string, mixed>
+	 */
+	private function applyEditHistoryStep(string $definition_slug, int $direction, string $session_token): array
+	{
+		if ($session_token === '') {
+			throw new InvalidArgumentException('Edit history requires an editing session.');
+		}
+
+		$definition = $this->requireDbDefinition($definition_slug);
+		$definition_id = (int)$definition->definition_id;
+		$cursor = $this->editHistoryCursor($definition_id, $session_token);
+		$target_seq = $cursor + $direction;
+		$entry = DbHelper::selectOneFromQuery(
+			'SELECT descriptor_json, version_id FROM form_definition_edit_history WHERE definition_id = ? AND session_token = ? AND seq = ?',
+			[$definition_id, $session_token, $target_seq],
+		);
+		$descriptor_json = is_array($entry) ? (string)($entry['descriptor_json'] ?? '') : '';
+
+		if ($descriptor_json === '') {
+			throw new InvalidArgumentException($direction < 0 ? 'Nothing to undo.' : 'Nothing to redo.');
+		}
+
+		$descriptor = json_decode($descriptor_json, true, 512, JSON_THROW_ON_ERROR);
+
+		if (!is_array($descriptor)) {
+			throw new UnexpectedValueException('Stored edit-history descriptor is invalid.');
+		}
+
+		// Steps linked to a still-existing version row re-activate that row, so undo
+		// never duplicates versions; descriptor replay through the autosave path is
+		// the fallback for unlinked or since-deleted rows.
+		$linked_version = ((int)($entry['version_id'] ?? 0)) > 0
+			? EntityFormDefinitionVersion::findFirst([
+				'definition_id' => $definition_id,
+				'version_id' => (int)$entry['version_id'],
+			])
+			: null;
+
+		if ($linked_version instanceof EntityFormDefinitionVersion) {
+			$this->activateVersionRow($definition, $linked_version, $this->descriptorFromVersion($definition, $linked_version));
+			$result = $this->loadDefinition($definition_slug);
+		} else {
+			$result = $this->saveDraft($definition_slug, $descriptor, '', true);
+		}
+
+		$this->setEditHistoryCursor($definition_id, $session_token, $target_seq);
+
+		return $result + [
+			'action' => $direction < 0 ? 'undo' : 'redo',
+			'edit_history_seq' => $target_seq,
+			'can_undo' => $this->editHistorySeqExists($definition_id, $session_token, $target_seq - 1),
+			'can_redo' => $this->editHistorySeqExists($definition_id, $session_token, $target_seq + 1),
+		];
+	}
+
+	private function editHistoryCursor(int $definition_id, string $session_token): int
+	{
+		return (int)DbHelper::selectOneColumnFromQuery(
+			'SELECT edit_cursor FROM form_editor_sessions WHERE session_token = ? AND definition_id = ?',
+			[$session_token, $definition_id],
+		);
+	}
+
+	private function setEditHistoryCursor(int $definition_id, string $session_token, int $seq): void
+	{
+		DbHelper::prexecute(
+			'INSERT INTO form_editor_sessions (session_token, definition_id, edit_cursor) VALUES (?, ?, ?)
+				ON DUPLICATE KEY UPDATE edit_cursor = VALUES(edit_cursor), updated_at = CURRENT_TIMESTAMP',
+			[$session_token, $definition_id, $seq],
+		);
+	}
+
+	private function editHistorySeqExists(int $definition_id, string $session_token, int $seq): bool
+	{
+		return (int)DbHelper::selectOneColumnFromQuery(
+			'SELECT COUNT(*) FROM form_definition_edit_history WHERE definition_id = ? AND session_token = ? AND seq = ?',
+			[$definition_id, $session_token, $seq],
+		) > 0;
+	}
+
+	/**
+	 * Keeps definition-owned keyed text definitions ({key, text}) keyed while updating
+	 * the default text. Values keyed to a SHARED catalog key (e.g. the default submit
+	 * label's form.capture.submit) must not keep that key, or the rendered text keeps
+	 * resolving the shared translation and the edit never shows: keyed-mode forms re-key
+	 * to the definition's own key, literal-mode forms fall back to a plain string.
+	 *
+	 * @param array<string, mixed> $descriptor
+	 */
+	private function textDefinitionForDescriptor(array $descriptor, string $key, string $text, string $definition_slug): array|string
+	{
+		$current = $descriptor[$key] ?? null;
+
+		if (is_array($current) && isset($current['key']) && is_string($current['key']) && trim($current['key']) !== '') {
+			$own_prefix = FormCaptureDescriptorSchemaValidator::i18nKeyPrefixForDefinition($definition_slug) . '.';
+
+			if (str_starts_with(trim($current['key']), $own_prefix)) {
+				return array_replace($current, ['text' => $text]);
+			}
+
+			if (($descriptor['i18n_mode'] ?? FormCaptureDescriptorSchemaValidator::I18N_MODE_LITERAL) === FormCaptureDescriptorSchemaValidator::I18N_MODE_KEYED) {
+				return ['key' => $own_prefix . $key, 'text' => $text];
+			}
+
+			return $text;
+		}
+
+		return $text;
 	}
 
 	/**
@@ -698,103 +1023,6 @@ final class FormCaptureAuthoringService
 		return $this->loadDefinition($definition_slug) + [
 			'action' => 'published',
 			'published_version_id' => (int)$version->version_id,
-		];
-	}
-
-	/**
-	 * @param array<string, mixed> $descriptor
-	 * @return array<string, mixed>
-	 */
-	public function renderPreview(string $definition_slug, array $descriptor): array
-	{
-		$definition_slug = trim($definition_slug) !== '' ? trim($definition_slug) : 'capture-preview';
-		$prepared = $this->prepareDescriptor($definition_slug, $descriptor, $this->securityForPreview($definition_slug));
-		$resolution = FormDefinitionResolution::capture(
-			$definition_slug,
-			[
-				'definition_id' => 0,
-				'definition_slug' => $definition_slug,
-				'kind' => 'capture',
-				'source' => self::SOURCE_DB,
-				'status' => self::STATUS_DRAFT,
-				'owner_user_id' => null,
-				'security_json' => $prepared['security_json'],
-				'published_version_id' => null,
-			],
-			[
-				'version_id' => 1,
-				'definition_id' => 0,
-				'version_number' => 1,
-				'status' => self::STATUS_DRAFT,
-				'descriptor_hash' => $prepared['descriptor_hash'],
-				'published_at' => null,
-			],
-			$prepared['descriptor'],
-			$prepared['security'],
-		);
-		$theme = $this->currentAdminTheme();
-		$tree_context = new FormCapturePreviewTreeContext($theme);
-		$form = new CaptureForm(
-			$definition_slug,
-			'form_builder_preview',
-			$tree_context,
-			'',
-			[
-				'form_definition_resolution' => $resolution,
-				'return_target' => '',
-				FormSubmitContext::RENDER_CONTEXT_ISSUE_RENDER_STATE => false,
-			],
-		);
-		$renderer = new HtmlTreeRenderer(theme: $theme, lang_id: Kernel::getLocale(), is_editable: false);
-		$html = $renderer->render($form->buildTree());
-
-		return [
-			'descriptor' => $prepared['descriptor'],
-			'descriptor_hash' => $prepared['descriptor_hash'],
-			'html' => $html,
-			'css' => $renderer->getCss(),
-			'js_top' => $renderer->getJsTop(),
-			'js' => $renderer->getJs(),
-		];
-	}
-
-	private function securityForPreview(string $definition_slug): string|null
-	{
-		if (!$this->tablesInstalled()) {
-			return null;
-		}
-
-		$definition = EntityFormDefinition::findBySlug($definition_slug);
-
-		if (!$definition instanceof EntityFormDefinition || (string)$definition->kind !== 'capture') {
-			return null;
-		}
-
-		return (string)$definition->security_json;
-	}
-
-	/**
-	 * @return array<string, mixed>
-	 */
-	private function emptyDefinitionState(): array
-	{
-		$descriptor = $this->defaultDescriptor('capture-new');
-
-		return [
-			'definition' => null,
-			'descriptor' => $descriptor,
-			'server_descriptor' => $descriptor,
-			'security' => FormCaptureDescriptorSchemaValidator::normalizeSecurity(null, ['name']),
-			'active_draft' => null,
-			'published_version' => null,
-			'versions' => [],
-			'usage' => [],
-			'base_server_hash' => '',
-			'loaded_version' => null,
-			'read_only' => false,
-			'status' => 'new',
-			'i18n_workbench_url' => $this->i18nWorkbenchUrl(),
-			'translation_url' => $this->translationUrlForDefinition('capture-new'),
 		];
 	}
 
@@ -1313,6 +1541,22 @@ final class FormCaptureAuthoringService
 				);
 			}
 		}
+
+		// Catalogs are build artifacts, so keyed-label edits normally go live on the
+		// next i18n:build. Editor mutations rebuild the editing admin's locale inline
+		// so the canvas reflects the edit immediately.
+		if (CmsConfig::editorSessionToken() !== '') {
+			try {
+				I18nCatalogBuilder::build(Kernel::getLocale());
+				// The fragment render later in this request must see the new file
+				// mtime, or the runtime keeps serving the cached catalog.
+				clearstatcache();
+			} catch (Throwable $exception) {
+				Kernel::logException($exception, 'Editor i18n catalog rebuild failed', [
+					'definition_slug' => $definition_slug,
+				]);
+			}
+		}
 	}
 
 	private function findI18nTranslation(string $domain, string $key, string $context, string $locale): ?EntityI18n_translation
@@ -1488,13 +1732,6 @@ final class FormCaptureAuthoringService
 			'domain' => $domain,
 			'search' => $prefix . '.',
 		];
-	}
-
-	private function currentAdminTheme(): ?AbstractThemeData
-	{
-		$theme_name = Themes::getThemeNameForUser('admin_default');
-
-		return $theme_name !== '' ? ThemeBase::factory($theme_name) : null;
 	}
 
 	private function assertTablesInstalled(): void

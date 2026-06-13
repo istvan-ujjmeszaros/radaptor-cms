@@ -529,6 +529,9 @@ abstract class AbstractWebpageViewBase implements iView, iWebpageComposer
 				])),
 			'target' => $target,
 			'insert_url' => Url::getUrl('widgetConnection.add', $target),
+			// Editor iframes get bare drop targets; the dropdown inserter chrome is
+			// for browsing edit mode only.
+			'drop_target' => CmsConfig::isEditorIframeRequest(),
 		];
 		$meta = [
 			'widget_connection' => WidgetConnection::toTreeMetadata($connection),

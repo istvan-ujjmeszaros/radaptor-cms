@@ -434,11 +434,23 @@ abstract class AbstractForm implements iForm, iListable
 	{
 		$resolution = $this->_render_context['form_definition_resolution'] ?? null;
 
+		// The page editor iframe edits widget placement only; form-field inserters render
+		// in the form editor scope and in global edit mode. A targeted form editor edits
+		// exactly one definition — other forms stay inert inside its iframe.
 		return $this->_tree_build_context->isEditable()
+			&& CmsConfig::editorScope() !== CmsConfig::EDITOR_SCOPE_PAGE
 			&& $resolution instanceof FormDefinitionResolution
+			&& $this->isEditorTargetForm($resolution)
 			&& $resolution->isStructureEditable()
 			&& $this->editableWidgetConnectionId() > 0
 			&& Roles::hasRole(RoleList::ROLE_CONTENT_ADMIN);
+	}
+
+	private function isEditorTargetForm(FormDefinitionResolution $resolution): bool
+	{
+		$target = CmsConfig::editorTargetSlug();
+
+		return $target === '' || $resolution->definitionSlug() === $target;
 	}
 
 	private function buildEditmodeReadonlyNotice(bool $structure_editable): string
@@ -450,6 +462,11 @@ abstract class AbstractForm implements iForm, iListable
 		$resolution = $this->_render_context['form_definition_resolution'] ?? null;
 
 		if (!$resolution instanceof FormDefinitionResolution || !$resolution->isCapture()) {
+			return '';
+		}
+
+		// Forms outside a targeted editor's scope are intentionally inert, not read-only.
+		if (!$this->isEditorTargetForm($resolution)) {
 			return '';
 		}
 

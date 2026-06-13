@@ -138,6 +138,14 @@ abstract class AbstractWidget implements iWidget, iListable
 
 	public static function defaultEditCommandsAreEnabled(): bool
 	{
+		// The targeted form editor canvas edits the form definition, not the host page,
+		// so the default page-level widget commands (move/remove/align/width) must not
+		// render there — they would mutate or remove the host placement. The widget's
+		// own commands (e.g. the form's Select/Versions/Publish) still render.
+		if (CmsConfig::editorScope() === CmsConfig::EDITOR_SCOPE_FORM) {
+			return false;
+		}
+
 		return true;
 	}
 

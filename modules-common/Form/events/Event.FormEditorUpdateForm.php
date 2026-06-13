@@ -78,8 +78,9 @@ final class EventFormEditorUpdateForm extends AbstractEvent implements iBrowserE
 				'form.insert.status_draft_updated',
 				$host_page_id,
 				[
-					EditModeMutationCommand::replaceForm($widget_connection_id),
-					EditModeMutationCommand::replaceWidgetToolbar($widget_connection_id),
+					// Form-level properties (the title) render in the widget chrome around the
+					// form, so the whole widget fragment is replaced, not just the form.
+					EditModeMutationCommand::replaceWidget($widget_connection_id),
 				],
 				$result,
 			);

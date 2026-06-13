@@ -7,75 +7,12 @@ $field = is_array($this->props['field'] ?? null) ? $this->props['field'] : [];
 $values = is_array($this->props['values'] ?? null) ? $this->props['values'] : $provider->valuesForField($field);
 $strings = array_replace($provider->getStrings(), $this->strings);
 $readOnly = (bool)($this->props['read_only'] ?? false);
-$isBuilder = $mode === FormCaptureFieldPropertyProvider::MODE_BUILDER;
 $isEditmode = $mode === FormCaptureFieldPropertyProvider::MODE_EDITMODE;
 
 $labelFor = static function (array $property) use ($strings): string {
 	$key = (string)($property['label_key'] ?? '');
 
 	return (string)($strings[$key] ?? $key);
-};
-
-$translationLink = static function (array $property, string $extraClass = '') use ($strings): string {
-	$target = (string)($property['i18n_target'] ?? '');
-
-	if ($target === '') {
-		return '';
-	}
-
-	$class = trim('form-builder__i18n-property-link ' . $extraClass);
-
-	return '<a'
-		. ' class="' . e($class) . '"'
-		. ' data-form-builder-target="' . e($target) . '"'
-		. ' data-action="click->form-builder#stopPropertyLinkClick"'
-		. ' href="#"'
-		. ' target="_blank"'
-		. ' rel="noopener"'
-		. ' aria-label="' . e((string)($strings['form.builder.action.open_translations'] ?? '')) . '"'
-		. ' title="' . e((string)($strings['form.builder.action.open_translations'] ?? '')) . '"'
-		. ' hidden'
-		. '><i class="bi bi-translate" aria-hidden="true"></i></a>';
-};
-
-$renderBuilderControl = static function (array $property) use ($labelFor, $translationLink): void {
-	$id = (string)($property['id'] ?? '');
-	$control = (string)($property['control'] ?? 'text');
-	$target = (string)($property['builder_target'] ?? '');
-	$action = (string)($property['builder_action'] ?? '');
-	$groupTarget = (string)($property['builder_group_target'] ?? '');
-	$attrs = ' data-form-builder-target="' . e($target) . '" data-action="' . e($action) . '"';
-
-	if ($control === 'checkbox') {
-		?>
-		<label class="form-check form-builder__checkbox">
-			<input type="checkbox" class="form-check-input"<?= $attrs ?>>
-			<span><?= e($labelFor($property)) ?></span>
-			<?= $translationLink($property, 'ms-auto') ?>
-		</label>
-		<?php
-
-		return;
-	}
-
-	$labelAttrs = 'class="form-label w-100' . ($id === 'options' ? ' mb-0' : '') . '"';
-
-	if ($groupTarget !== '') {
-		$labelAttrs .= ' data-form-builder-target="' . e($groupTarget) . '"';
-	}
-	?>
-	<label <?= $labelAttrs ?>>
-		<span class="form-builder__property-label">
-			<span><?= e($labelFor($property)) ?></span>
-			<?= $translationLink($property) ?>
-		</span>
-		<?php if ($control === 'textarea'): ?>
-			<textarea rows="<?= e((string)($property['rows'] ?? 5)) ?>" class="form-control form-control-sm"<?= $attrs ?>></textarea>
-		<?php else: ?>
-			<input type="text" class="form-control form-control-sm"<?= $attrs ?>>
-		<?php endif; ?>
-	</label>
-	<?php
 };
 
 $renderEditmodeControl = static function (array $property) use ($labelFor, $values, $readOnly, $provider, $field): void {
@@ -108,15 +45,7 @@ $renderEditmodeControl = static function (array $property) use ($labelFor, $valu
 	<?php
 };
 ?>
-<?php if ($isBuilder): ?>
-	<div data-form-builder-target="fieldProperties" hidden>
-		<?php foreach ($properties as $property): ?>
-			<?php if (is_array($property)) {
-				$renderBuilderControl($property);
-			} ?>
-		<?php endforeach; ?>
-	</div>
-<?php elseif ($isEditmode): ?>
+<?php if ($isEditmode): ?>
 	<?php
 	library('__ADMIN_EDIT_MODE');
 	$formId = (string)($this->props['form_id'] ?? '');

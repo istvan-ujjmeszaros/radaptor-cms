@@ -49,26 +49,6 @@ final class FormBuilderEventHelper
 		return $payload;
 	}
 
-	/**
-	 * @return array<string, mixed>
-	 */
-	public static function descriptorFromPost(): array
-	{
-		$descriptor_json = (string)Request::_POST('descriptor_json', '');
-
-		try {
-			$descriptor = json_decode($descriptor_json, true, 512, JSON_THROW_ON_ERROR);
-		} catch (JsonException $exception) {
-			throw new InvalidArgumentException('Descriptor JSON is invalid.', 0, $exception);
-		}
-
-		if (!is_array($descriptor)) {
-			throw new InvalidArgumentException('Descriptor JSON must decode to an object.');
-		}
-
-		return $descriptor;
-	}
-
 	public static function boolPost(string $key): bool
 	{
 		$value = strtolower(trim((string)Request::_POST($key, '')));

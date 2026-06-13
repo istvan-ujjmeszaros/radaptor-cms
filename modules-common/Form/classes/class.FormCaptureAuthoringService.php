@@ -546,7 +546,7 @@ final class FormCaptureAuthoringService
 
 		foreach (['title', 'description', 'submit_label'] as $key) {
 			if (array_key_exists($key, $submitted)) {
-				$descriptor[$key] = $this->textDefinitionForDescriptor($descriptor, $key, (string)$submitted[$key]);
+				$descriptor[$key] = $this->textDefinitionForDescriptor($descriptor, $key, (string)$submitted[$key], $definition_slug);
 			}
 		}
 
@@ -884,17 +884,30 @@ final class FormCaptureAuthoringService
 	}
 
 	/**
-	 * Keeps keyed text definitions ({key, text}) keyed while updating the default text;
-	 * literal-mode values stay plain strings.
+	 * Keeps definition-owned keyed text definitions ({key, text}) keyed while updating
+	 * the default text. Values keyed to a SHARED catalog key (e.g. the default submit
+	 * label's form.capture.submit) must not keep that key, or the rendered text keeps
+	 * resolving the shared translation and the edit never shows: keyed-mode forms re-key
+	 * to the definition's own key, literal-mode forms fall back to a plain string.
 	 *
 	 * @param array<string, mixed> $descriptor
 	 */
-	private function textDefinitionForDescriptor(array $descriptor, string $key, string $text): array|string
+	private function textDefinitionForDescriptor(array $descriptor, string $key, string $text, string $definition_slug): array|string
 	{
 		$current = $descriptor[$key] ?? null;
 
 		if (is_array($current) && isset($current['key']) && is_string($current['key']) && trim($current['key']) !== '') {
-			return array_replace($current, ['text' => $text]);
+			$own_prefix = FormCaptureDescriptorSchemaValidator::i18nKeyPrefixForDefinition($definition_slug) . '.';
+
+			if (str_starts_with(trim($current['key']), $own_prefix)) {
+				return array_replace($current, ['text' => $text]);
+			}
+
+			if (($descriptor['i18n_mode'] ?? FormCaptureDescriptorSchemaValidator::I18N_MODE_LITERAL) === FormCaptureDescriptorSchemaValidator::I18N_MODE_KEYED) {
+				return ['key' => $own_prefix . $key, 'text' => $text];
+			}
+
+			return $text;
 		}
 
 		return $text;
@@ -1682,13 +1695,6 @@ final class FormCaptureAuthoringService
 			'domain' => $domain,
 			'search' => $prefix . '.',
 		];
-	}
-
-	private function currentAdminTheme(): ?AbstractThemeData
-	{
-		$theme_name = Themes::getThemeNameForUser('admin_default');
-
-		return $theme_name !== '' ? ThemeBase::factory($theme_name) : null;
 	}
 
 	private function assertTablesInstalled(): void

@@ -16,6 +16,7 @@ if (!class_exists('AutoloaderFromGeneratedMap', false)) {
 
 require_once dirname(__DIR__) . '/modules-common/Form/classes/class.FormSubmitContext.php';
 require_once dirname(__DIR__) . '/modules-common/Form/classes/class.FormClassResolver.php';
+require_once dirname(__DIR__) . '/modules-common/Form/classes/class.FormCaptureFieldIdentity.php';
 require_once dirname(__DIR__) . '/modules-common/Form/classes/class.FormCaptureDescriptorSchemaValidator.php';
 require_once dirname(__DIR__) . '/modules-common/Form/classes/class.I18nReferenceAuditService.php';
 

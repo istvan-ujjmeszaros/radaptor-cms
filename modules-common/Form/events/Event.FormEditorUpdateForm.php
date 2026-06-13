@@ -44,7 +44,7 @@ final class EventFormEditorUpdateForm extends AbstractEvent implements iBrowserE
 		}
 
 		try {
-			$payload = $this->payloadFromPost();
+			$payload = FormBuilderEventHelper::decodeBase64JsonPayload((string)Request::_POST('form_edit_update_form', ''));
 			$csrf_error = FormSubmitContext::validateCsrfTokenForForm(
 				FormBuilderEventHelper::CSRF_INLINE_INSERT_FORM_ID,
 				$payload['csrf_token'] ?? null,
@@ -90,30 +90,5 @@ final class EventFormEditorUpdateForm extends AbstractEvent implements iBrowserE
 			Kernel::logException($exception, 'Capture form property update failed');
 			$responder->fail('FORM_EDITOR_UPDATE_FORM_FAILED', 'form.insert.error_save_failed', 422);
 		}
-	}
-
-	/**
-	 * @return array<string, mixed>
-	 */
-	private function payloadFromPost(): array
-	{
-		$encoded = trim((string)Request::_POST('form_edit_update_form', ''));
-		$json = $encoded !== '' ? base64_decode($encoded, true) : false;
-
-		if ($json === false) {
-			throw new InvalidArgumentException('Form editor update payload is invalid.');
-		}
-
-		try {
-			$payload = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
-		} catch (JsonException $exception) {
-			throw new InvalidArgumentException('Form editor update payload must be valid JSON.', 0, $exception);
-		}
-
-		if (!is_array($payload)) {
-			throw new InvalidArgumentException('Form editor update payload must decode to an object.');
-		}
-
-		return $payload;
 	}
 }

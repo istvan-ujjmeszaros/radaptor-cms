@@ -20,9 +20,9 @@
 ## GitHub PR Review Workflow
 
 - Do not commit without explicit maintainer/user approval.
-- The primary review gate is a local Codex CLI review worker: after opening or updating a GitHub PR, run `codex exec review --base origin/main` (or `--commit <sha>` for follow-up passes) on the PR branch before merging, publishing, releasing, or treating the PR as approved dependency input. The worker is review-only: no edits, commits, pushes, or merges.
+- The primary review gate is a local Codex CLI review worker: after opening or updating a GitHub PR, run `codex --dangerously-bypass-approvals-and-sandbox exec review --base origin/main` (or `--commit <sha>` for follow-up passes) on the PR branch before merging, publishing, releasing, or treating the PR as approved dependency input. The worker is review-only: no edits, commits, pushes, or merges.
 - Claude-driven sessions should run Claude's internal review agents (for example `/code-review`) on the branch before the Codex pass, so obvious findings are fixed before the primary gate runs.
-- Review results must be visible on the PR, using inline comments for line-tied findings when possible and a top-level PR comment otherwise. A no-findings result must also be posted for the reviewed HEAD.
+- Review results must be visible on the PR, using inline comments for line-tied findings when possible and a top-level PR comment otherwise. A no-findings result must also be posted for the reviewed HEAD. The worker streams no output until it finishes and can take 20–40+ minutes, so run it with a long timeout and never kill it early; the `--dangerously-bypass-approvals-and-sandbox` flag is required or it blocks on an approval prompt and produces nothing.
 - A GitHub-hosted `@codex review` comment is an optional extra signal when account quota allows; it is not required for merge. If the local Codex CLI is unavailable or fails to produce a usable result, fall back to GitHub `@codex review` and document the reason on the PR.
 - If the maintainer asks for Claude review, use `claudee` from the CLI for one PR at a time.
 - When addressing review feedback, use a thread-aware read of GitHub review threads; flat comment lists are not enough because they lose resolved/outdated state.

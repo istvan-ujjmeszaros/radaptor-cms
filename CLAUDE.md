@@ -44,9 +44,9 @@ of truth.
 
 - Do not commit without explicit maintainer approval.
 - Run Claude's internal review agents (e.g. `/code-review`) on the branch before the primary gate.
-- The primary review gate is a local Codex CLI review worker: run `codex exec review --base
+- The primary review gate is a local Codex CLI review worker: run `codex --dangerously-bypass-approvals-and-sandbox exec review --base
   origin/main` on the PR branch and post findings or an explicit no-findings result on the PR for
-  the current HEAD. A GitHub `@codex review` comment is an optional extra signal when quota
+  the current HEAD. The worker streams no output until it finishes and can take 20–40+ minutes, so run it with a long timeout and never kill it early; the `--dangerously-bypass-approvals-and-sandbox` flag is required or it blocks on an approval prompt and produces nothing. A GitHub `@codex review` comment is an optional extra signal when quota
   allows; `claudee` only on maintainer request.
 - Thread-aware review reads; resolve threads that pushed commits address; never resolve to clear
   the list. Re-check unresolved count before requesting another review, merging, or publishing.
